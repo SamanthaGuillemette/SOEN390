@@ -36,6 +36,19 @@ This project is a part of SOEN 390 - Software Engineering Team Design Project - 
 
 <br />
 
+## Software Testing
+
+1. [Jest](https://jestjs.io/) - Unit testing framework.
+2. [Cypress](https://www.cypress.io/) - End to end testing framework.
+3. [Travis CI](https://travis-ci.org/) - Continuous integration & deployment service. <br />
+   It runs tests automatically on every push to the repository.
+
+<br />
+
 ## Project Wiki:
 
-Project meeting journal & tutorial videos can be found [here](https://github.com/SamanthaGuillemette/SOEN390/wiki).
+- Project meeting journal is stored [here](https://github.com/SamanthaGuillemette/SOEN390/wiki/Meeting-minutes).
+- Project tutorial videos can be found [here](https://github.com/SamanthaGuillemette/SOEN390/wiki).
+- Software Architecture Document (SAD) can be found [here](<https://github.com/SamanthaGuillemette/SOEN390/wiki/Software-Architecture-(SAD)>).
+- Running instructions can be found [here](https://github.com/SamanthaGuillemette/SOEN390/wiki/Running-instructions).
+- Sprint retrospective document is stored [here](https://github.com/SamanthaGuillemette/SOEN390/wiki/Sprint-retrospective).
