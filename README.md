@@ -2,6 +2,15 @@
 
 This project is a part of SOEN 390 - Software Engineering Team Design Project - at Concordia University. The project aims to build a system that could facilitate the tracking of COVID-19 patients' status in Canada. In addtion, the system also allow healthcare professionals to give advice to patients regarding the status of their symptoms.
 
+<br />
+
+## Core functionalities:
+
+- **Function1**: update later.
+- **Function2**: update later.
+
+<br />
+
 ## Team 14 - members:
 
 | Name                 | Student ID | GitHub Page                                                   |
@@ -16,9 +25,17 @@ This project is a part of SOEN 390 - Software Engineering Team Design Project - 
 | Marwa Khalid         | 40155098   | [MarwaKhalid](https://github.com/MarwaKhalid)                 |
 | Steven Markandu      | 23740137   | [smarkandu](https://github.com/smarkandu)                     |
 
+<br />
+
 ## Libaries / Technologies we planned to use:
 
 1. [Material UI](https://mui.com/) - React component library
 2. [Semantic UI](https://semantic-ui.com/) - CSS library
 3. [Redux](https://redux.js.org/) - State management library
 4. [Firebase](https://firebase.google.com/) - Our backend
+
+<br />
+
+## Project Wiki:
+
+Project meeting journal & tutorial videos can be found [here](https://github.com/SamanthaGuillemette/SOEN390/wiki).
