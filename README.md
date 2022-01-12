@@ -1,6 +1,6 @@
 # COVID-19 Tracking App
 
-This project is a part of SOEN 390 - Software Engineering Team Design Project - at Concordia University. The project aims to build a system that could facilitate the tracking of COVID-19 patients' status in Canada. In addtion, the system also allow healthcare professionals to give advice to patients regarding the status of their symptoms.
+This project is a part of SOEN 390 - Software Engineering Team Design Project - at Concordia University. The project aims to build a system that could facilitate the tracking of COVID-19 patients' status in Canada. In addition, the system also allow healthcare professionals to give advice to patients regarding the status of their symptoms.
 
 <br />
 
