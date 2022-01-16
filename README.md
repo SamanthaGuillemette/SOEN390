@@ -4,6 +4,22 @@ This project is a part of SOEN 390 - Software Engineering Team Design Project - 
 
 <br />
 
+# Sprint 1 
+```diff
+- Please arragne links to deliverables (google doc excel), so that I can give comments on them easily. --- by TA
+- You may need to movie some wiki here. 
+```
+1. User Stories Backlog (USB)
+3. Release Plan (Sprint #2 planning)
+4. Software Architecture Document (SAD)
+5. Risk Assessment & Risk Management Plan (RMP)
+6. UI prototypes for Sprint #2 user stories
+7. Testing Plan
+8. Running prototype
+9. Short sprint retrospective
+
+<br />
+
 ## Core functionalities:
 
 - **Function1**: update later.
