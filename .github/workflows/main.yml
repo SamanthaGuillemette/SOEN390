@@ -7,7 +7,7 @@ jobs:
     steps:
       - uses: primer/figma-action@v1.0.0-alpha.3
         with:
-          args: "format=svg outputDir=./build/"
+          args: "format=svg outputDir=./wiki_docs/UI_Prototypes/"
         env:
           FIGMA_FILE_URL: "https://www.figma.com/file/2E8RHKkew671OOEtugHdyL/Covid-19-Tracker?node-id=0%3A1"
           FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
