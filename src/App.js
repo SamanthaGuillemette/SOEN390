@@ -1,30 +1,22 @@
-// This is a starting point (driver) of our app
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Dashboard from "./components/Dashboard";
+import Profile from "./components/Profile";
+import Notification from "./components/Notification";
+import SignIn from "./components/SignIn";
+import SignUp from "./components/SignUp";
 
 function App() {
-  // ======================================================================
-  //
-  // All the code logic will stay in this section.
-  //
-  // ======================================================================
-
-
   return (
-    // ==================================================================
-    //
-    // Evrything inside 'return' will be rendered out as HTML.
-    // But the code below is actually called JSX.
-    //
-    <div>
-      <h1>Hello React</h1>
-      <p>This is a dummy piece of text</p>
-    </div>
-    //
-    //
-    // ==================================================================
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/notification" element={<Notification />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
-
-// By default, JS will make this file private, so we need to export it in order
-// to use in (by import) in other files.
 export default App;
