@@ -10,7 +10,7 @@ This project is a part of SOEN 390 - Software Engineering Team Design Project - 
 2. [ Release Plan (Sprint #2 planning) ](https://github.com/users/SamanthaGuillemette/projects/1/views/1)
 3. [ Software Architecture Document (SAD) ](<https://github.com/SamanthaGuillemette/SOEN390/wiki/Software-Architecture-(SAD)>)
 4. [ Risk Assessment & Risk Management Plan (RMP) ](<https://github.com/SamanthaGuillemette/SOEN390/wiki/Risk-Management-Plan-(RMP)>)
-5. UI prototypes for Sprint #2 user stories
+5. [ UI prototypes for Sprint #2 user stories ](<https://github.com/SamanthaGuillemette/SOEN390/wiki/UI-Prototypes>)
 6. [ Testing Plan ](https://github.com/SamanthaGuillemette/SOEN390/wiki/Testing-plan)
 7. Running prototype
 8. Short sprint retrospective
@@ -56,5 +56,6 @@ This project is a part of SOEN 390 - Software Engineering Team Design Project - 
 - Project meeting journal is stored [here](https://github.com/SamanthaGuillemette/SOEN390/wiki/Meeting-minutes).
 - Project tutorial videos can be found [here](https://github.com/SamanthaGuillemette/SOEN390/wiki).
 - Software Architecture Document (SAD) can be found [here](<https://github.com/SamanthaGuillemette/SOEN390/wiki/Software-Architecture-(SAD)>).
+- Project UI Prototypes [here](<https://github.com/SamanthaGuillemette/SOEN390/wiki/UI-Prototypes>)
 - Running instructions can be found [here](https://github.com/SamanthaGuillemette/SOEN390/wiki/Running-instructions).
 - Sprint retrospective document is stored [here](https://github.com/SamanthaGuillemette/SOEN390/wiki/Sprint-retrospective).
