@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
+import Profile from "./components/Profile";
 import AppBody from "./components/AppBody";
 import Notification from "./components/Notification";
 import SignIn from "./components/SignIn";
@@ -11,6 +12,7 @@ function App() {
       <AppBody>
         <Routes>
           <Route path="/" element={<Dashboard />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/notification" element={<Notification />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
