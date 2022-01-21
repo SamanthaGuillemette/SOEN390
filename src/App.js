@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./screens/Dashboard";
 import Profile from "./components/Profile";
 
 import AppBody from "./components/AppBody";
