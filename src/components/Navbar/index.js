@@ -184,7 +184,7 @@ function Navbar() {
       <AppBar
         position="absolute"
         open={open}
-        style={{ backgroundColor: "midnightBlue" }}
+        style={{ backgroundColor: "#981E32" }}
       >
         <Toolbar
           sx={{
