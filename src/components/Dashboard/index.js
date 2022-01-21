@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled';
 import { styled } from '@mui/system';
 import Image from './COVID.jpg';
+import Image2 from './Events.png';
 
 const ButtonRoot = React.forwardRef(function ButtonRoot(props, ref) {
   const { children, ...other } = props;
@@ -25,8 +26,13 @@ ButtonRoot.propTypes = {
 const styles = {
   svgButton: {
       backgroundImage: `url(${Image})`,
-      borderRadius:5
-  }
+      borderRadius: 5
+  },
+
+  svgButton2: {
+    backgroundImage: `url(${Image2})`,
+    borderRadius: 5
+}
 };
 
 const blue = {
@@ -90,8 +96,9 @@ const CustomButtonRoot = styled(ButtonRoot)(
 
   &:focus,
   &.${buttonUnstyledClasses.focusVisible} {
-    outline: 2px solid ${theme.palette.mode === 'dark' ? blue[400] : blue[200]};
-    outline-offset: 2px;
+    outline: 1px solid;
+    color: red;
+    box-shadow: 0 0 5px 2px red;
   }
 
   &.${buttonUnstyledClasses.active} { 
@@ -104,7 +111,7 @@ const CustomButtonRoot = styled(ButtonRoot)(
     pointer-events: none;
 
     & .content {
-      font-size: 1.20rem;
+      font-size: 2.0rem;
       font-family: IBM Plex Sans, sans-serif;
       font-weight: bold;
       line-height: 1.5;
@@ -127,11 +134,16 @@ const SvgButton = React.forwardRef(function SvgButton(props, ref) {
   return <ButtonUnstyled {...props} component={CustomButtonRoot} ref={ref} />;
 });
 
+const SvgButton2 = React.forwardRef(function SvgButton(props, ref) {
+  return <ButtonUnstyled {...props} component={CustomButtonRoot} ref={ref} />;
+});
+
 const Dashboard = () => {
   return (
     <div>
       <h1>Dashboard page</h1>
       <SvgButton style={styles.svgButton}>COVID-19 News</SvgButton>
+      <SvgButton2 style={styles.svgButton2}>Upcoming Events</SvgButton2>
     </div>
   );
 };
