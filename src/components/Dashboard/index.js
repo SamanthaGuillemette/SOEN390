@@ -4,6 +4,7 @@ import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled'
 import { styled } from '@mui/system';
 import Image from './COVID.jpg';
 import Image2 from './Events.png';
+import Slideshow from '../Slideshow';
 
 const ButtonRoot = React.forwardRef(function ButtonRoot(props, ref) {
   const { children, ...other } = props;
@@ -140,11 +141,17 @@ const SvgButton2 = React.forwardRef(function SvgButton(props, ref) {
 
 const Dashboard = () => {
   return (
+    
     <div>
       <h1>Dashboard page</h1>
-      <SvgButton style={styles.svgButton}>COVID-19 News</SvgButton>
-      <SvgButton2 style={styles.svgButton2}>Upcoming Events</SvgButton2>
+      <SvgButton style={styles.svgButton}>COVID-19 News</SvgButton> <br/>
+      <SvgButton2 style={styles.svgButton2}>Upcoming Events</SvgButton2> 
+      <Slideshow></Slideshow>
     </div>
+   
+    
+
+    
   );
 };
 
