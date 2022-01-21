@@ -1,0 +1,30 @@
+div.Login {
+    margin-top:130px;
+    margin-left:180px;
+    position: absolute;
+    top: 2%;
+    padding: 20px;
+    width: 45%;
+    height: 60%;
+    background-color: rgba(233, 229, 229, 0.6);
+    border-radius: 10px;
+    text-align: center;
+    font-family:serif;
+  }
+  div.LoginForm {
+    position: absolute;
+    top: 30%;
+    height: 40%;
+    width: 90%;
+    font-size: larger;
+  }
+  a:link {
+    color:rgb(82, 86, 87);
+    text-decoration: none;
+  }
+  a:hover {
+    color: rgb(132, 124, 124);
+    text-decoration: none;
+    padding: 4px 10px;
+    border-radius: 5px;
+  }
