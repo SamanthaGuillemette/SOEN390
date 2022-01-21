@@ -56,7 +56,7 @@ const SignUp = () => {
           <br /><br />
           <Button variant="contained">SignUp</Button>
           <br />
-          <p>Already have an account? <a href="#"> SignUp here!</a> </p>
+          <p>Already have an account? <a href="#"> SignIn here!</a> </p>
         </form>
       </div>
     </div>
