@@ -2,6 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled';
 import { styled } from '@mui/system';
+import Image from './COVID.jpg';
 
 const ButtonRoot = React.forwardRef(function ButtonRoot(props, ref) {
   const { children, ...other } = props;
@@ -19,6 +20,13 @@ const ButtonRoot = React.forwardRef(function ButtonRoot(props, ref) {
 
 ButtonRoot.propTypes = {
   children: PropTypes.node,
+};
+
+const styles = {
+  svgButton: {
+      backgroundImage: `url(${Image})`,
+      borderRadius:5
+  }
 };
 
 const blue = {
@@ -51,16 +59,23 @@ const CustomButtonRoot = styled(ButtonRoot)(
   & .bg {
     stroke: var(--main-color);
     stroke-width: 1;
+    
     filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.1));
     fill: transparent;
+    
+  }
+
+  & .border{
+    color: var(--main-color);
   }
 
   & .borderEffect {
     stroke: var(--main-color);
-    stroke-width: 2;
+    stroke-width: 1;
     stroke-dasharray: 150 600;
     stroke-dashoffset: 150;
     fill: transparent;
+    
   }
 
   &:hover,
@@ -70,7 +85,6 @@ const CustomButtonRoot = styled(ButtonRoot)(
     }
 
     .bg {
-      fill: var(--hover-color);
     }
   }
 
@@ -82,7 +96,6 @@ const CustomButtonRoot = styled(ButtonRoot)(
 
   &.${buttonUnstyledClasses.active} { 
     & .bg {
-      fill: var(--active-color);
       transition: fill 300ms ease-out;
     }
   }
@@ -91,21 +104,19 @@ const CustomButtonRoot = styled(ButtonRoot)(
     pointer-events: none;
 
     & .content {
-      font-size: 0.875rem;
+      font-size: 1.20rem;
       font-family: IBM Plex Sans, sans-serif;
-      font-weight: 500;
+      font-weight: bold;
       line-height: 1.5;
       height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--main-color);
-      text-transform: uppercase;
+      color: white;
     }
 
     & svg {
       margin: 0 5px;
-      fontSize: 
       
     }
 
@@ -120,7 +131,7 @@ const Dashboard = () => {
   return (
     <div>
       <h1>Dashboard page</h1>
-      <SvgButton>COVID NEWS</SvgButton>
+      <SvgButton style={styles.svgButton}>COVID-19 News</SvgButton>
     </div>
   );
 };
