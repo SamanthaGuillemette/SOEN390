@@ -8,13 +8,11 @@ export const drawerSlice = createSlice({
   name: "drawer",
   initialState,
 
+  // --------------- Reducers -------------------
   reducers: {
     openDrawer: (state) => {
       state.open = !state.open;
     },
-    // incrementByAmount: (state, action) => {
-    //   state.value += action.payload;
-    // },
   },
 });
 
