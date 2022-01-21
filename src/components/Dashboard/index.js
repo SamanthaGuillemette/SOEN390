@@ -7,10 +7,10 @@ const ButtonRoot = React.forwardRef(function ButtonRoot(props, ref) {
   const { children, ...other } = props;
 
   return (
-    <svg width="150" height="50" {...other} ref={ref}>
-      <polygon points="0,50 0,0 150,0 150,50" className="bg" />
-      <polygon points="0,50 0,0 150,0 150,50" className="borderEffect" />
-      <foreignObject x="0" y="0" width="150" height="50">
+    <svg width="300" height="100" {...other} ref={ref}>
+      <polygon points="0,100 0,0 300,0 300,100" className="bg" />
+      <polygon points="0,100 0,0 300,0 300,100" className="borderEffect" />
+      <foreignObject x="0" y="0" width="300" height="100">
         <div className="content">{children}</div>
       </foreignObject>
     </svg>
@@ -39,11 +39,13 @@ const CustomButtonRoot = styled(ButtonRoot)(
   --main-color: ${theme.palette.mode === 'light' ? blue[600] : blue[100]};
   --hover-color: ${theme.palette.mode === 'light' ? blue[50] : blue[900]};
   --active-color: ${theme.palette.mode === 'light' ? blue[100] : blue[800]};
+  
 
   & polygon {
     fill: transparent;
     transition: all 800ms ease;
     pointer-events: none;
+
   }
   
   & .bg {
@@ -103,7 +105,10 @@ const CustomButtonRoot = styled(ButtonRoot)(
 
     & svg {
       margin: 0 5px;
+      fontSize: 
+      
     }
+
   }`,
 );
 
@@ -115,7 +120,7 @@ const Dashboard = () => {
   return (
     <div>
       <h1>Dashboard page</h1>
-      <SvgButton>Button</SvgButton>;
+      <SvgButton>COVID NEWS</SvgButton>
     </div>
   );
 };
