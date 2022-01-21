@@ -1,9 +1,7 @@
 #avatar{
-    /* height: 100%; */
-    /* width: auto !important; */
-    /* margin-top: 2%; */
-}
-
-#container{
-    /* margin-top: 10%; */
+    size: 100%;
+    height: auto;
+    width: 15%;
+    margin-top: 2%;
+    margin-bottom: 7%;
 }
