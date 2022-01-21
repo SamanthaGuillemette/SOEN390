@@ -1,10 +1,12 @@
-const Profile = () => {
-    return (
-      <div>
-        <h1>Profile page</h1>
-      </div>
-    );
-  };
-  
-  export default Profile;
-  
+import "./profile.css";
+import * as React from 'react';
+import Avatar from '@mui/material/Avatar';
+
+function Profile() {
+
+  return (
+    <Avatar id="avatar" src="/broken-image.jpg" />
+  );
+}
+
+export default Profile;
