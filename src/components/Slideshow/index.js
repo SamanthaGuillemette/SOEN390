@@ -9,15 +9,13 @@ const styles = {
         fontSize:45,
         marginLeft:440,
         color: "blue",
-        
+        marginTop: 150
 
     },
 
     Image:{
         position: "absolute",
         marginLeft:225,
-     
-
     }
 }
 
@@ -25,7 +23,7 @@ function Slideshow()  {
   return (
     <div>
     <br/>
-    <h2 style={styles.Title}>Our top donators</h2>
+    <h2 style={styles.Title}>Our Top Donators</h2>
       <SimpleImageSlider style={styles.Image}
         width={796}
         height={404}

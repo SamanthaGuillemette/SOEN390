@@ -26,13 +26,17 @@ ButtonRoot.propTypes = {
 
 const styles = {
   svgButton: {
+      position: "absolute",
       backgroundImage: `url(${Image})`,
       borderRadius: 5
   },
 
   svgButton2: {
+    position: "absolute",
     backgroundImage: `url(${Image2})`,
-    borderRadius: 5
+    borderRadius: 5,
+    marginLeft: 325,
+    marginTop: -20,
 }
 };
 
