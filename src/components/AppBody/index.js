@@ -9,7 +9,6 @@ function AppBody(props) {
   return (
     <Box sx={{ display: "flex" }}>
       <Sidebar />
-
       <Box
         component="main"
         sx={{
@@ -23,7 +22,6 @@ function AppBody(props) {
         }}
       >
         <Navbar />
-
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           <Grid container spacing={3} padding={2}>
