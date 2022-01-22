@@ -5,6 +5,7 @@ import { styled } from '@mui/system';
 import Image from './COVID.jpg';
 import Image2 from './Events.png';
 import Slideshow from '../Slideshow';
+import { Link } from "react-router-dom";
 
 const ButtonRoot = React.forwardRef(function ButtonRoot(props, ref) {
   const { children, ...other } = props;
@@ -136,7 +137,9 @@ const CustomButtonRoot = styled(ButtonRoot)(
 );
 
 const SvgButton = React.forwardRef(function SvgButton(props, ref) {
-  return <ButtonUnstyled {...props} component={CustomButtonRoot} ref={ref} />;
+  return <Link {...props} to="news">
+    <ButtonUnstyled {...props} component={CustomButtonRoot} ref={ref} />
+  </Link>;
 });
 
 const SvgButton2 = React.forwardRef(function SvgButton(props, ref) {
