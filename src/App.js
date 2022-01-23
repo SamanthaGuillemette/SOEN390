@@ -7,6 +7,7 @@ import AppBody from "./components/AppBody";
 import Appointments from "./screens/Appointments";
 import Patients from "./screens/Patients";
 import Inbox from "./screens/Inbox";
+import Notifications from "./components/Notifications";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/appointments" element={<Appointments />} />
           <Route path="/patients" element={<Patients />} />
           <Route path="/inbox" element={<Inbox />} />
+          <Route path="/testing" element={<Notifications />} />
 
         </Routes>
       </AppBody>
