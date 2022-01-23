@@ -3,6 +3,7 @@ import Grid from "@mui/material/Grid";
 import "./Dashboard.css";
 import DoughnutChart from "../../components/Charts/DoughnutChart";
 import LineChart from "../../components/Charts/LineChart";
+import COVID19Button from "../../components/COVID-19 Button/index"
 
 const Dashboard = () => {
   return (
@@ -19,11 +20,8 @@ const Dashboard = () => {
           </div>
         </Grid>
 
-        <Grid item xs={4}>
-          <h2 style={{ backgroundColor: "lightGray", height: "100px" }}>
-            Three
-          </h2>
-        </Grid>
+        <COVID19Button></COVID19Button>
+       
         <Grid item xs={4}>
           <h2 style={{ backgroundColor: "lightPink", height: "100px" }}>
             Four
@@ -34,6 +32,7 @@ const Dashboard = () => {
             Five
           </h2>
         </Grid>
+      
       </Grid>
     </Container>
   );

@@ -1,0 +1,21 @@
+
+.button{
+    background-image: url(../../components/Dashboard/COVID.jpg);
+    text-align: center;
+    height: 80px;
+    margin-top:25px;
+    margin-left:25px;
+
+}
+
+.content{
+    color:white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+    width:349px;
+    justify-content: center;
+    
+    
+}
+
