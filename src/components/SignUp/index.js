@@ -16,6 +16,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {firebaseAuth} from  '../../backend/AuthProvider'
+import Stack from '@mui/material/Stack';
 
 function Copyright(props) {
   return (
@@ -35,7 +36,7 @@ const theme = createTheme();
 export default function SignUp(props) {
   
   //const {handleSignup, inputs, setInputs, errors} = React.useContext(firebaseAuth);
-  const [value, setValue] = React.useState(new Date());
+  const [value, setValue] = React.useState(null);
   
   const handleSubmit = async(event) => {
     event.preventDefault();
@@ -92,22 +93,6 @@ export default function SignUp(props) {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <DatePicker wrapperClassName="datepicker"
-                    required
-                    fullWidth
-                    openTo="year"
-                    views={['year', 'month', 'day']}
-                    label="Date of Birth"
-                    value={value}
-                    onChange={(newValue) => {
-                      setValue(newValue);
-                    }}
-                    renderInput={(params) => <TextField {...params} helperText={null} />}
-                    />
-                </LocalizationProvider>
-              </Grid>
-              <Grid item xs={12} sm={6}>
                 <TextField 
                   required
                   fullWidth
@@ -117,7 +102,7 @@ export default function SignUp(props) {
                   autoComplete="street-address"
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} sm={6}>
                 <TextField 
                   required
                   fullWidth
@@ -146,6 +131,21 @@ export default function SignUp(props) {
                   name="Postal Code"
                   autoComplete="postal-code"
                 />
+              </Grid>
+              <Grid item xs={12}>
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <Stack spacing={3}>
+                  <DatePicker
+                    label="Date of Birth"
+                    readOnly
+                    value={value}
+                    onChange={(newValue) => {
+                    setValue(newValue);
+                  }}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+               </Stack>
+             </LocalizationProvider>
               </Grid>
               <Grid item xs={12}>
               <FormControlLabel
