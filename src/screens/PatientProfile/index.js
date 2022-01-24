@@ -49,7 +49,21 @@ function PatientProfile() {
         </CardActionArea>
       </Card>
     </Grid>
-    
+    <Grid item xs={6} lg={6} >
+    <Card>
+       <CardActionArea >
+         <CardContent>
+         <Typography gutterBottom variant="h5" component="div">
+              Status
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              <br></br>Status: 
+              <a class="ui red label">Positive</a>
+            </Typography>
+         </CardContent>
+        </CardActionArea>
+      </Card>
+    </Grid>
     <Grid item xs={12} lg={10}>
   
   <TableContainer component={Paper}><h3>&nbsp;&nbsp;&nbsp;&nbsp;Details List</h3>
