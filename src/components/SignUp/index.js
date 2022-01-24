@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {useState} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -15,8 +15,16 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import {firebaseAuth} from  '../../backend/AuthProvider'
 import Stack from '@mui/material/Stack';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import {useAuthState} from 'react-firebase-hooks/auth';
+import {auth} from '../../backend/firebase';
+import {db} from '../../backend/firebase';
+import { doc, setDoc } from "firebase/firestore"; 
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 function Copyright(props) {
   return (
@@ -35,20 +43,55 @@ const theme = createTheme();
 
 export default function SignUp(props) {
   
-  //const {handleSignup, inputs, setInputs, errors} = React.useContext(firebaseAuth);
-  const [value, setValue] = React.useState(null);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [address, setAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [province, setProvince] = useState('');
+  const [postalCode, setPostalCode] = useState('');
+  const [dob, setDOB] = useState(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  
+  const [
+    user,
+    loading,
+    error,
+  ] = useAuthState(auth);
   
   const handleSubmit = async(event) => {
     event.preventDefault();
-    // await handleSignup()
-    props.history.push('/')
+    const dobValue = dob.$D + "/" + (dob.$M + 1) + "/" + dob.$y;
+    await setDoc(doc(db, "Users", email), { 
+      firstName: firstName,
+      lastName: lastName,
+      address: address,
+      postalCode: postalCode,
+      city: city,
+      province: province,
+      dob: dobValue,
+      email: email
+    });
+    createUserWithEmailAndPassword(auth, email, password);
   }
 
-  const handleChange = e => {
-    const {name, value} = e.target
-    // setInputs(prev => ({ ...prev, [name]: value}))
+  if (error) {
+    return (
+      <div>
+        <p>Error: {error.message}</p>
+      </div>
+    );
   }
-
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+  if (user) {
+    return (
+      <div>
+        <p>Registered User: {user.email}</p>
+      </div>
+    );
+  }
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -77,8 +120,9 @@ export default function SignUp(props) {
                   fullWidth
                   id="firstName"
                   label="First Name"
-                  // value={inputs.fistName}
+                  value={firstName}
                   autoFocus
+                  onChange={(e) => setFirstName(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -89,7 +133,8 @@ export default function SignUp(props) {
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
-                  // value={inputs.lastName}
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -100,6 +145,8 @@ export default function SignUp(props) {
                   label ="Address"
                   name="Address"
                   autoComplete="street-address"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -110,17 +157,33 @@ export default function SignUp(props) {
                   label="City"
                   name="City"
                   autoComplete="address-level3"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <TextField 
-                  required
-                  fullWidth
-                  id="province"
-                  label="Province"
-                  name="Province"
-                  autoComplete="address-level2"
-                />
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Province</InputLabel>
+                    <Select
+                      required
+                      labelId="province"
+                      id="province"
+                      label="province"
+                      value={province}
+                      onChange={(e) => setProvince(e.target.value)}
+                    >
+                    <MenuItem value={"Alberta"}>Alberta</MenuItem>
+                    <MenuItem value={"British Columbia"}>British Columbia</MenuItem>
+                    <MenuItem value={"Manitoba"}>Manitoba</MenuItem>
+                    <MenuItem value={"New Brunswic"}>New Brunswick</MenuItem>
+                    <MenuItem value={"Newfoundland and Labrador"}>Newfoundland and Labrador</MenuItem>
+                    <MenuItem value={"Nova Scotia"}>Nova Scotia</MenuItem>
+                    <MenuItem value={"Ontario"}>Ontario</MenuItem>
+                    <MenuItem value={"Prince Edward Island"}>Prince Edward Island</MenuItem>
+                    <MenuItem value={"Quebec"}>Quebec</MenuItem>
+                    <MenuItem value={"Saskatchewan"}>Saskatchewan</MenuItem>
+                  </Select>
+                </FormControl>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField 
@@ -130,6 +193,8 @@ export default function SignUp(props) {
                   label ="Postal Code"
                   name="Postal Code"
                   autoComplete="postal-code"
+                  value={postalCode}
+                  onChange={(e) => setPostalCode(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -137,11 +202,8 @@ export default function SignUp(props) {
                 <Stack spacing={3}>
                   <DatePicker
                     label="Date of Birth"
-                    readOnly
-                    value={value}
-                    onChange={(newValue) => {
-                    setValue(newValue);
-                  }}
+                    value={dob}
+                    onChange={(e) => {setDOB(e)}}
                     renderInput={(params) => <TextField {...params} />}
                   />
                </Stack>
@@ -162,7 +224,8 @@ export default function SignUp(props) {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
-                  // value={inputs.email}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -174,7 +237,8 @@ export default function SignUp(props) {
                   type="password"
                   id="password"
                   autoComplete="new-password"
-                  // value={inputs.password}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </Grid>
             </Grid>
@@ -186,9 +250,9 @@ export default function SignUp(props) {
             >
               Sign Up
             </Button>
-            <Grid container justifyContent="flex-end">
+            <Grid container justifyContent="center">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/signin" variant="body2">
                   Already have an account? Sign in
                 </Link> 
               </Grid>

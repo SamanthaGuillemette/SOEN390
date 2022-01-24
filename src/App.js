@@ -6,23 +6,42 @@ import SignUp from "./components/SignUp";
 import Appointments from "./screens/Appointments";
 import Patients from "./screens/Patients";
 import Inbox from "./screens/Inbox";
-import './App.css';
+import {useAuthState} from 'react-firebase-hooks/auth';
+import {auth} from './backend/firebase';
 
 function App() {
+  const [
+    user,
+    loading,
+    error,
+  ] = useAuthState(auth);
+
+  // if(!user){
+  //   return(
+  //     <BrowserRouter>
+  //        <Routes>
+  //          <Route path="/" element={<SignIn />} />
+  //          <Route path="/signup" element={<SignUp />} />
+  //        </Routes>
+  //    </BrowserRouter>
+  //   )
+  // }else{
+    
+  // }
   return (
-     <BrowserRouter>
-       <AppBody>
-         <Routes>
-           <Route path="/signin" element={<SignIn />} />
-           <Route path="/signup" element={<SignUp />} />
-           <Route path="/" element={<Dashboard />} />
-           <Route path="/appointments" element={<Appointments />} />
-           <Route path="/patients" element={<Patients />} />
-           <Route path="/inbox" element={<Inbox />} />
-         </Routes>
-       </AppBody>
-     </BrowserRouter>
-  );
+    <BrowserRouter>
+      <AppBody>
+        <Routes>
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/appointments" element={<Appointments />} />
+          <Route path="/patients" element={<Patients />} />
+          <Route path="/inbox" element={<Inbox />} />
+        </Routes>
+      </AppBody>
+    </BrowserRouter>
+ );
 }
 
 export default App;
