@@ -1,15 +1,25 @@
-// import NewsList from "./NewsList";
+import NewsList from "./NewsList";
+import { useEffect, useState } from "react";
 
 const News = () => {
-  // const { error, isPending, data: news } = useFetch('http://localhost:8000/news')
+  const [news, setNews] = useState(null);
+
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/posts')
+    .then(res => {return res.json()})
+    .then(data => {
+      setNews(data);
+    })
+  }, [])
 
   return (
-      
       <div>
         <h1>News page</h1>
-        {/* <NewsList news={news} /> */}
+        <br />
+        <br />
+        {news && <NewsList news={news} />}
       </div>
     );
-  };
+  }
   
   export default News;
