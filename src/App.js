@@ -5,6 +5,7 @@ import Appointments from "./screens/Appointments";
 import Patients from "./screens/Patients";
 import Inbox from "./screens/Inbox";
 import Notifications from "./components/Notifications";
+import PatientList from "./components/Patient-Page";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/patients" element={<Patients />} />
           <Route path="/inbox" element={<Inbox />} />
           <Route path="/testing" element={<Notifications />} />
+          <Route path="/patient-list" element={<PatientList />} />
         </Routes>
       </AppBody>
     </BrowserRouter>
