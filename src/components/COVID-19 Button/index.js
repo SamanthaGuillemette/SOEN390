@@ -5,7 +5,7 @@ import './CovidButton.css'
 function COVID19Button() {
     return(
         <div className="button">
-        <Button variant="text"><p className="content">COVID-19</p></Button>
+        <Button><p className="content">COVID-19 News</p></Button>
         </div>
     );
 
