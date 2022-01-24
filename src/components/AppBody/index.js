@@ -4,22 +4,9 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Sidebar from "../Sidebar";
 import Navbar from "../Navbar";
-import {useLocation} from 'react-router-dom';
-import SignIn from "../../components/SignIn";
-import SignUp from "../../components/SignUp";
 
 function AppBody(props) {
-  const location = useLocation().pathname;
 
-  if(location === '/signup'){
-    return (
-      <SignUp />
-    )
-  }else if (location === '/signin'){ 
-    return (
-      <SignIn />
-    )
-  }else{
     return (
       <Box sx={{ display: "flex" }}>
         <Sidebar />
@@ -45,8 +32,6 @@ function AppBody(props) {
         </Box>
       </Box>
     );
-  }
-
   
 }
 

@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../backend/firebase';
 import {useAuthState} from 'react-firebase-hooks/auth';
+import { Navigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -54,13 +55,13 @@ export default function SignIn() {
     }
     if (user) {
       return (
-        <div>
-          <p>Signed In User: {user.email}</p>
-        </div>
+        <Navigate to="/" replace={true}/>
       );
     }
     if (loading) {
-      return <p>Loading...</p>;
+      return (
+        <p>loading</p>
+        );
     }
   
     return (

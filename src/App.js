@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./screens/Dashboard";
 import AppBody from "./components/AppBody";
 import SignIn from "./components/SignIn";
@@ -17,32 +17,34 @@ function App() {
     error,
   ] = useAuthState(auth);
 
-  // if(!user){
-  //   return(
-  //     <BrowserRouter>
-  //        <Routes>
-  //          <Route path="/" element={<SignIn />} />
-  //          <Route path="/signup" element={<SignUp />} />
-  //        </Routes>
-  //    </BrowserRouter>
-  //   )
-  // }else{
-    
-  // }
   return (
-    <BrowserRouter>
-      <AppBody>
+    <div>
+      {user && (
+        <BrowserRouter>
+          <AppBody>
+              <Routes>
+                  <Route path="/signin" element={<SignIn />} />
+                  <Route path="/signup" element={<SignUp />} />   
+                  <Route path="/" element={<Dashboard />} />
+                  <Route path="/appointments" element={<Appointments />} />
+                  <Route path="/patients" element={<Patients />} />
+                  <Route path="/inbox" element={<Inbox />} />
+                  <Route path="/testing" element={<Notifications />} />
+                  <Route path="*" element={<Navigate to='/' />} />
+              </Routes>
+          </AppBody>
+      </BrowserRouter>
+      )}
+      {!user && (
+      <BrowserRouter>
         <Routes>
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/appointments" element={<Appointments />} />
-          <Route path="/patients" element={<Patients />} />
-          <Route path="/inbox" element={<Inbox />} />
-          <Route path="/testing" element={<Notifications />} />
+          <Route path="*" element={<Navigate to='/signin' />} />
         </Routes>
-      </AppBody>
-    </BrowserRouter>
+      </BrowserRouter>
+      )}
+    </div>
  );
 }
 

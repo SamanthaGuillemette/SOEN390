@@ -25,6 +25,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { Navigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -88,7 +89,8 @@ export default function SignUp(props) {
   if (user) {
     return (
       <div>
-        <p>Registered User: {user.email}</p>
+        {console.log('Registered the user: ' + user.email)}
+        {<Navigate to="/" replace={true}/>}
       </div>
     );
   }
