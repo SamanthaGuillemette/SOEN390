@@ -10,6 +10,8 @@ function PatientList() {
         <p className="status">Status</p>
         <p className="upcomingapt">Upcoming Appointment</p>
         </Box>
+        <span class="label-positive">positive</span>
+        <span class="label-negative">negative</span>
         </div>
     );
 }
