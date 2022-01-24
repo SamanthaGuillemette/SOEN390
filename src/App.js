@@ -8,6 +8,7 @@ import Patients from "./screens/Patients";
 import Inbox from "./screens/Inbox";
 import {useAuthState} from 'react-firebase-hooks/auth';
 import {auth} from './backend/firebase';
+import Notifications from "./components/Notifications";
 
 function App() {
   const [
@@ -38,6 +39,7 @@ function App() {
           <Route path="/appointments" element={<Appointments />} />
           <Route path="/patients" element={<Patients />} />
           <Route path="/inbox" element={<Inbox />} />
+          <Route path="/testing" element={<Notifications />} />
         </Routes>
       </AppBody>
     </BrowserRouter>

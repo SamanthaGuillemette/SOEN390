@@ -47,12 +47,12 @@ export const mainListItems = (
       </ListItem>
     </Link>
 
-    <Link to="#">
+    <Link to="testing">
       <ListItem button>
         <ListItemIcon>
           <LayersIcon />
         </ListItemIcon>
-        <ListItemText primary="Integrations" />
+        <ListItemText primary="Test Component" />
       </ListItem>
     </Link>
   </div>
