@@ -1,8 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 import Dashboard from "./screens/Dashboard";
-import Profile from "./components/Profile";
-
+import PatientProfile from "./screens/PatientProfile";
 import AppBody from "./components/AppBody";
 import Appointments from "./screens/Appointments";
 import Patients from "./screens/Patients";
@@ -16,9 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Dashboard />} />
 
-          <Route path="/profile" element={<Profile />} />
-      
-
+          <Route path="/patientprofile" element={<PatientProfile />} />
           <Route path="/appointments" element={<Appointments />} />
           <Route path="/patients" element={<Patients />} />
           <Route path="/inbox" element={<Inbox />} />
