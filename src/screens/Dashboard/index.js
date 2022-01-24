@@ -5,6 +5,8 @@ import DoughnutChart from "../../components/Charts/DoughnutChart";
 import LineChart from "../../components/Charts/LineChart";
 import COVID19Button from "../../components/COVID-19 Button/index"
 import EventButton from "../../components/Event Button/index";
+import ContactButton from "../../components/Contact/index";
+// import SlideShow from "../../components/Slideshow/index";
 
 const Dashboard = () => {
   return (
@@ -23,12 +25,7 @@ const Dashboard = () => {
 
         <COVID19Button></COVID19Button>
         <EventButton></EventButton>
-        <Grid item xs={4}>
-          <h2 style={{ backgroundColor: "lightBlue", height: "100px" }}>
-            Five
-          </h2>
-        </Grid>
-      
+        <ContactButton></ContactButton>
       </Grid>
     </Container>
   );
