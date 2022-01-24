@@ -1,6 +1,5 @@
-
-.button{
-    background-image: url(../../components/Dashboard/COVID.jpg);
+.eventButton{
+    background-image: url(../../components/Dashboard/Events.png);
     text-align: center;
     margin-top:25px;
     margin-left:35px;
@@ -12,11 +11,11 @@
 
 }
 
-.button:hover{
+.eventButton:hover{
     transition: all .3s;
     opacity: 0.9;
     transform: translateY(10px);
-    border-color:red;
+    border-color:blue;
     box-shadow: 0 0 20px;
     
 }
