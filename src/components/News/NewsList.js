@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 
 const NewsList = ({news}) => {
     console.log(news);
+    var todayDate = new Date();
+    var date = (todayDate.getMonth()+1)+'/'+todayDate.getDate()+'/'+todayDate.getFullYear();
 
     return (
         <div className="news-list">
@@ -9,7 +11,11 @@ const NewsList = ({news}) => {
                 <div className="news-item" key={newsItem.id}>
                     <Link to={`/news/${newsItem.id}`}>
                         <h2>{ newsItem.title}</h2>
-                        <p>{ Date.now().toString() } </p>
+                        <p> 
+                            { 
+                            date 
+                            }
+                        </p> 
                         <p> { newsItem.body}</p>
                         <br />
                     </Link>
