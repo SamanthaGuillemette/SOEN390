@@ -1,16 +1,8 @@
 import NewsList from "./NewsList";
-import { useEffect, useState } from "react";
+import useFetch from "./useFetch";
 
 const News = () => {
-  const [news, setNews] = useState(null);
-
-  useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/posts')
-    .then(res => {return res.json()})
-    .then(data => {
-      setNews(data);
-    })
-  }, [])
+  const { data: news } = useFetch('https://jsonplaceholder.typicode.com/posts')
 
   return (
       <div>
