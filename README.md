@@ -27,16 +27,20 @@ This project is a part of SOEN 390 - Software Engineering Team Design Project - 
    - Please finish a SAD according to the template required by the course 
    - Our TAs still DO NOT know how to evaluate your work. One of our TAs has asked Prof this question.
    - As for me, I will evalute your work according to the "Evaluation scheme" in the course plan. 
-   - Your work on the tool is one part and the document is another part.
-   - My suggestion is that, please finish your docs (word or excel sheet) complete like the SAD example.pdf (iCare System Architecture Design).
-   - At least, the cover page for the word is needed. 
+   - Your work on the tool is one part and the document is another part (I will evaluate both of them).
+   - My suggestion is that, please finish your docs (word or excel sheet) COMPLETE like the SAD example.pdf (iCare System Architecture Design).
+   - At least, a cover page for the word is needed. 
    ```
    [Template of SAD, SAD example.pdf (iCare System Architecture Design)]https://drive.google.com/drive/folders/1H62zNZX2YFFCfa6naJNAwh4GuzvnNKgN
 6. [ Risk Assessment & Risk Management Plan (RMP) ](<https://github.com/SamanthaGuillemette/SOEN390/wiki/Risk-Management-Plan-(RMP)>)
 7. [ UI prototypes for Sprint #2 user stories ](<https://github.com/SamanthaGuillemette/SOEN390/wiki/UI-Prototypes>)
 8. [ Testing Plan ](https://github.com/SamanthaGuillemette/SOEN390/wiki/Testing-plan)
-9. Running prototype
-10. Short sprint retrospective
+   ```diff
+   - Perhaps you can refer to the template required by the course, focusing on Unit tests  Integration tests    System tests 
+   ```
+   [Template of Testing Plan] (https://docs.google.com/document/d/1rwZLNrffPLlp2o82MiON2kDL1zex4aiWizAepjX3ndU/edit#heading=h.q61tknz3n74y)
+10. Running prototype
+11. Short sprint retrospective
 
 <br />
 
