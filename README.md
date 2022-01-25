@@ -7,9 +7,14 @@ This project is a part of SOEN 390 - Software Engineering Team Design Project - 
 # Sprint 1
 
 1. [ User Stories Backlog (USB) ](https://github.com/users/SamanthaGuillemette/projects/1/views/8)
-2. [ Release Plan (Sprint #2 planning) ](https://github.com/users/SamanthaGuillemette/projects/1/views/1)
    ```diff
-   - Please finish a release plan according to the template required by the course --- by TA
+   - The login signup fuctions are assigned in Sprint2. However they are in progressing right now.
+   - Perhaps you can move login signup to sprint1. So that the runable app for sprint1 is a complete syste.
+   - We will check whether the document and runable app is consistent with the user sotries. (The backend code and database is not needed in sprint1)
+   ```
+3. [ Release Plan (Sprint #2 planning) ](https://github.com/users/SamanthaGuillemette/projects/1/views/1)
+   ```diff
+   - Please finish a release plan according to the template required by the course 
    - Our TAs still DO NOT know how students are to submit their documentations. One of our TAs has asked Prof this question.
    - I GUESS the professor will ask for docs in excel sheet or word which are easy to save and transfer.
    - So, it would be much better if your team provides excell sheet or word docs for USB, Release plan, SAD, RMP, testing plan. 
@@ -19,7 +24,7 @@ This project is a part of SOEN 390 - Software Engineering Team Design Project - 
    [Template of Release Plan] (https://docs.google.com/spreadsheets/d/1HuCr-nyLHccn3jnK_sapIxNwEqcwcgVE/edit#gid=1685357941)
 4. [ Software Architecture Document (SAD) ](<https://github.com/SamanthaGuillemette/SOEN390/wiki/Software-Architecture-(SAD)>)
       ```diff
-   - Please finish a SAD according to the template required by the course --- by TA
+   - Please finish a SAD according to the template required by the course 
    - Our TAs still DO NOT know how to evaluate your work. One of our TAs has asked Prof this question.
    - As for me, I will evalute your work according to the "Evaluation scheme" in the course plan. 
    - Your work on the tool is one part and the document is another part.
