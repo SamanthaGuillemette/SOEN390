@@ -16,13 +16,22 @@ This project is a part of SOEN 390 - Software Engineering Team Design Project - 
    - For UI prototypes, maybe you can also copy/export them to a word after you finished them.
    - In a word, Prof. MAY ask for docs in excel or word for all diliverables if possible.
    ```
-   [Template] (https://docs.google.com/spreadsheets/d/1HuCr-nyLHccn3jnK_sapIxNwEqcwcgVE/edit#gid=1685357941)
+   [Template of Release Plan] (https://docs.google.com/spreadsheets/d/1HuCr-nyLHccn3jnK_sapIxNwEqcwcgVE/edit#gid=1685357941)
 4. [ Software Architecture Document (SAD) ](<https://github.com/SamanthaGuillemette/SOEN390/wiki/Software-Architecture-(SAD)>)
-5. [ Risk Assessment & Risk Management Plan (RMP) ](<https://github.com/SamanthaGuillemette/SOEN390/wiki/Risk-Management-Plan-(RMP)>)
-6. [ UI prototypes for Sprint #2 user stories ](<https://github.com/SamanthaGuillemette/SOEN390/wiki/UI-Prototypes>)
-7. [ Testing Plan ](https://github.com/SamanthaGuillemette/SOEN390/wiki/Testing-plan)
-8. Running prototype
-9. Short sprint retrospective
+      ```diff
+   - Please finish a SAD according to the template required by the course --- by TA
+   - Our TAs still DO NOT know how to evaluate your work. One of our TAs has asked Prof this question.
+   - As for me, I will evalute your work according to the "Evaluation scheme" in the course plan. 
+   - Your work on the tool is one part and the document is another part.
+     My suggestion is that, please finish your docs (word or excel sheet) complete like the SAD example.pdf (iCare System Architecture Design).
+     At least, the cover page for the word is needed. 
+   ```
+   [Template of SAD, SAD example.pdf (iCare System Architecture Design)]https://drive.google.com/drive/folders/1H62zNZX2YFFCfa6naJNAwh4GuzvnNKgN
+6. [ Risk Assessment & Risk Management Plan (RMP) ](<https://github.com/SamanthaGuillemette/SOEN390/wiki/Risk-Management-Plan-(RMP)>)
+7. [ UI prototypes for Sprint #2 user stories ](<https://github.com/SamanthaGuillemette/SOEN390/wiki/UI-Prototypes>)
+8. [ Testing Plan ](https://github.com/SamanthaGuillemette/SOEN390/wiki/Testing-plan)
+9. Running prototype
+10. Short sprint retrospective
 
 <br />
 
