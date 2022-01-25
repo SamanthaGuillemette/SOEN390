@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./screens/Dashboard";
 import AppBody from "./components/AppBody";
-import Notification from "./components/Notification";
-import SignIn from "./components/SignIn";
-import SignUp from "./components/SignUp";
-import News from "./components/News";
+import Appointments from "./screens/Appointments";
+import Patients from "./screens/Patients";
+import Inbox from "./screens/Inbox";
+import Notifications from "./components/Notifications";
 
 function App() {
   return (
@@ -12,10 +12,10 @@ function App() {
       <AppBody>
         <Routes>
           <Route path="/" element={<Dashboard />} />
-          <Route path="/notification" element={<Notification />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/news" element={<News />} />
+          <Route path="/appointments" element={<Appointments />} />
+          <Route path="/patients" element={<Patients />} />
+          <Route path="/inbox" element={<Inbox />} />
+          <Route path="/testing" element={<Notifications />} />
         </Routes>
       </AppBody>
     </BrowserRouter>
