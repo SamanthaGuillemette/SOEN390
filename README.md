@@ -8,12 +8,21 @@ This project is a part of SOEN 390 - Software Engineering Team Design Project - 
 
 1. [ User Stories Backlog (USB) ](https://github.com/users/SamanthaGuillemette/projects/1/views/8)
 2. [ Release Plan (Sprint #2 planning) ](https://github.com/users/SamanthaGuillemette/projects/1/views/1)
-3. [ Software Architecture Document (SAD) ](<https://github.com/SamanthaGuillemette/SOEN390/wiki/Software-Architecture-(SAD)>)
-4. [ Risk Assessment & Risk Management Plan (RMP) ](<https://github.com/SamanthaGuillemette/SOEN390/wiki/Risk-Management-Plan-(RMP)>)
-5. [ UI prototypes for Sprint #2 user stories ](<https://github.com/SamanthaGuillemette/SOEN390/wiki/UI-Prototypes>)
-6. [ Testing Plan ](https://github.com/SamanthaGuillemette/SOEN390/wiki/Testing-plan)
-7. Running prototype
-8. Short sprint retrospective
+   ```diff
+   - Please finish a release plan according to the template required by the course --- by TA
+   - Our TAs still DO NOT know how students are to submit their documentations. One of our TAs has asked Prof this question.
+   - I GUESS the professor will ask for docs in excel sheet or word which are easy to save and transfer.
+   - So, it would be much better if your team provides excell sheet or word docs for USB, Release plan, SAD, RMP, testing plan. 
+   - For UI prototypes, maybe you can also copy/export them to a word after you finished them.
+   - In a word, Prof. MAY ask for docs in excel or word for all diliverables if possible.
+   ```
+   [Template] (https://docs.google.com/spreadsheets/d/1HuCr-nyLHccn3jnK_sapIxNwEqcwcgVE/edit#gid=1685357941)
+4. [ Software Architecture Document (SAD) ](<https://github.com/SamanthaGuillemette/SOEN390/wiki/Software-Architecture-(SAD)>)
+5. [ Risk Assessment & Risk Management Plan (RMP) ](<https://github.com/SamanthaGuillemette/SOEN390/wiki/Risk-Management-Plan-(RMP)>)
+6. [ UI prototypes for Sprint #2 user stories ](<https://github.com/SamanthaGuillemette/SOEN390/wiki/UI-Prototypes>)
+7. [ Testing Plan ](https://github.com/SamanthaGuillemette/SOEN390/wiki/Testing-plan)
+8. Running prototype
+9. Short sprint retrospective
 
 <br />
 
