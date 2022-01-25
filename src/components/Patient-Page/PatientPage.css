@@ -1,40 +1,66 @@
 .PatientBox {
     background-color: white;
-    width: 5000px;
-    height: 500px;
-    padding: 50px;
-    margin: 20px;
+    width: 100%;
+    height: 100%;
+    padding: 3%;
     box-shadow: 0px 0px 10px rgb(173, 171, 171);
     border-radius: 10px;
+    margin: auto;
+    margin-top: 5%;
+    white-space: nowrap;
+    overflow: auto;
+}
+
+::selection {
+    color: white;
+    background: #3399FF;
+}
+
+.header {
+    color: rgb(123, 128, 154);
+    text-transform: uppercase;
+    font-size: 0.80rem;
+    opacity: 0.7;
+    font-weight: 700;
+    overflow: auto;
 }
 
 .name {
-    color: rgb(123, 128, 154);
-    text-transform: Uppercase;
-    font-size: 0.80rem;
-    opacity: 0.7;
-    font-family: sans-serif;
-    display: inline-block;
+    float: left;
 }
 
-.status {
-    color: rgb(123, 128, 154);
-    text-transform: uppercase;
-    font-size: 0.80rem;
-    opacity: 0.7;
-    font-family: sans-serif;
-    display: inline-block;
-    padding-left: 100px;
+.id {
+    float: left;
+    margin-left: 25%;
 }
 
-.upcomingapt {
+.header-right {
+    float: left;
+    margin-left: 6%;
+}
+
+hr {
+    border-top: 0px solid #ccc;
+    opacity: 0.1;
+    margin-bottom: 10;
+    margin-top: 2%;
+}
+
+.patient {
+    color: rgb(52, 71, 103);
+    font-weight: 600;
+}
+
+.ID-data {
     color: rgb(123, 128, 154);
-    text-transform: uppercase;
-    font-size: 0.80rem;
-    opacity: 0.7;
-    font-family: sans-serif;
     display: inline-block;
-    padding-left: 100px;
+    margin-left: 30.5%;
+}
+
+.date {
+    color: rgb(123, 128, 154);
+    display: inline-block;
+    margin-left: 7.5%;
 }
 
 .label-positive {
@@ -45,6 +71,7 @@
     font-weight: 700;
     border-radius: 0.375rem;
     padding: 0.55em 0.9em;
+    margin-left: 4.5%;
 }
 
 .label-negative {
@@ -55,4 +82,5 @@
     font-weight: 700;
     border-radius: 0.375rem;
     padding: 0.55em 0.9em;
+    white-space: pre-wrap;
 }
