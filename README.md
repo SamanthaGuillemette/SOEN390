@@ -23,8 +23,8 @@ This project is a part of SOEN 390 - Software Engineering Team Design Project - 
    - Our TAs still DO NOT know how to evaluate your work. One of our TAs has asked Prof this question.
    - As for me, I will evalute your work according to the "Evaluation scheme" in the course plan. 
    - Your work on the tool is one part and the document is another part.
-     My suggestion is that, please finish your docs (word or excel sheet) complete like the SAD example.pdf (iCare System Architecture Design).
-     At least, the cover page for the word is needed. 
+   - My suggestion is that, please finish your docs (word or excel sheet) complete like the SAD example.pdf (iCare System Architecture Design).
+   - At least, the cover page for the word is needed. 
    ```
    [Template of SAD, SAD example.pdf (iCare System Architecture Design)]https://drive.google.com/drive/folders/1H62zNZX2YFFCfa6naJNAwh4GuzvnNKgN
 6. [ Risk Assessment & Risk Management Plan (RMP) ](<https://github.com/SamanthaGuillemette/SOEN390/wiki/Risk-Management-Plan-(RMP)>)
