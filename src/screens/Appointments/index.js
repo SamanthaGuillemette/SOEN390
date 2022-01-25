@@ -1,7 +1,10 @@
+import Calendar from "../../components/Calendar";
+
 const Appointments = () => {
   return (
-    <div>
-      <h1>Appointment Screen</h1>
+    <div className="ui container statItem">
+      <h1>Appointments</h1>
+      <Calendar />
     </div>
   );
 };
