@@ -9,7 +9,7 @@ This project is a part of SOEN 390 - Software Engineering Team Design Project - 
 1. [ User Stories Backlog (USB) ](https://github.com/users/SamanthaGuillemette/projects/1/views/8)
    ```diff
    - The login signup fuctions are assigned in Sprint2. However they are in progressing right now.
-   - Perhaps you can move login signup to sprint1. So that the runable app for sprint1 is a complete syste.
+   - Perhaps you can move login signup to sprint1. So that the runable app for sprint1 is a complete system.
    - We will check whether the document and runable app is consistent with the user sotries. (The backend code and database is not needed in sprint1)
    ```
 3. [ Release Plan (Sprint #2 planning) ](https://github.com/users/SamanthaGuillemette/projects/1/views/1)
