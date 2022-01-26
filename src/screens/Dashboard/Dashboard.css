@@ -10,3 +10,75 @@
   padding: 15px;
   height: 100%;
 }
+
+.cardShape{
+  max-width: 30vh;
+  border-radius:8px;
+  height:28vh;
+  margin-top: 100px;
+  box-shadow: 0px 0px 12px 5px rgb(0 0 0 / 5%);
+  margin-left:80px;
+}
+
+.cardTitle{
+  margin: 0 0 1rem;
+    color: #231F20;
+    font-size: 1.5rem;
+    line-height: 1.5625rem;
+    font-weight: bold;
+    font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+.card-details {
+  color: #74767B;
+  font-size: .875rem;
+  line-height: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .0625rem;
+  font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+
+}
+.card-details::before{
+content: '';
+  display: inline-block;
+  width: 1.25rem;
+  height: 0.4rem;
+  margin-right: 0.75rem;
+  padding: 0 1rem 0 0.5rem;
+  border-radius: 0.25rem;
+  background: linear-gradient(
+270deg
+, #0617afc9 0%, #0617afc9 100%);
+  box-shadow: 0 1px 4px 1px rgb(2 125 114 / 50%);
+}
+
+.title{
+  font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-weight: bold;
+  margin-top:50px;
+  text-align: center;
+  margin-left: 600px;
+}
+
+.textContent{
+  font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+.listTitle{
+  font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  border-bottom: 1px solid black;
+
+}
+
+.patientList{
+        border-radius: 8px;
+        box-shadow: 0px 0px 12px 5px rgb(0 0 0 / 5%);
+
+}
+.patientList ul{
+  padding: 0
+}
