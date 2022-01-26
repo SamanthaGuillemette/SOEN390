@@ -25,7 +25,7 @@ const QR = () => {
     <div>
        <Box
         component="span"
-        sx={{ justifyContent:"center" , width: 1000, display: 'inline-block', mx: '30px', transform: 'scale(0.8)' }}
+        sx={{ width: 1000, display: 'inline-block', mx: '30px', transform: 'scale(0.8)' }}
       >
          <Card >
         <CardContent sx={{ justifyContent:"center", fontSize: 20 }}>
