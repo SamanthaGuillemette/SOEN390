@@ -6,33 +6,33 @@ import Sidebar from "../Sidebar";
 import Navbar from "../Navbar";
 
 function AppBody(props) {
-  return (
-    <Box sx={{ display: "flex" }}>
-      <Sidebar />
 
-      <Box
-        component="main"
-        sx={{
-          backgroundColor: (theme) =>
-            theme.palette.mode === "light"
-              ? theme.palette.grey[100]
-              : theme.palette.grey[900],
-          flexGrow: 1,
-          height: "100vh",
-          overflow: "auto",
-        }}
-      >
-        <Navbar />
-
-        <Toolbar />
-        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          <Grid container spacing={3} padding={2}>
-            {props.children}
-          </Grid>
-        </Container>
+    return (
+      <Box sx={{ display: "flex" }}>
+        <Sidebar />
+        <Box
+          component="main"
+          sx={{
+            backgroundColor: (theme) =>
+              theme.palette.mode === "light"
+                ? theme.palette.grey[100]
+                : theme.palette.grey[900],
+            flexGrow: 1,
+            height: "100vh",
+            overflow: "auto",
+          }}
+        >
+          <Navbar />
+          <Toolbar />
+          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+            <Grid container spacing={3} padding={2}>
+              {props.children}
+            </Grid>
+          </Container>
+        </Box>
       </Box>
-    </Box>
-  );
+    );
+  
 }
 
 export default AppBody;

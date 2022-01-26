@@ -1,25 +1,51 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./screens/Dashboard";
 import AppBody from "./components/AppBody";
+import SignIn from "./components/SignIn";
+import SignUp from "./components/SignUp";
 import Appointments from "./screens/Appointments";
 import Patients from "./screens/Patients";
 import Inbox from "./screens/Inbox";
+import {useAuthState} from 'react-firebase-hooks/auth';
+import {auth} from './backend/firebase';
 import Notifications from "./components/Notifications";
 
 function App() {
+  const [
+    user,
+    loading,
+    error,
+  ] = useAuthState(auth);
+
   return (
-    <BrowserRouter>
-      <AppBody>
+    <div>
+      {user && (
+        <BrowserRouter>
+          <AppBody>
+              <Routes>
+                  <Route path="/signin" element={<SignIn />} />
+                  <Route path="/signup" element={<SignUp />} />   
+                  <Route path="/" element={<Dashboard />} />
+                  <Route path="/appointments" element={<Appointments />} />
+                  <Route path="/patients" element={<Patients />} />
+                  <Route path="/inbox" element={<Inbox />} />
+                  <Route path="/testing" element={<Notifications />} />
+                  <Route path="*" element={<Navigate to='/' />} />
+              </Routes>
+          </AppBody>
+      </BrowserRouter>
+      )}
+      {!user && (
+      <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/appointments" element={<Appointments />} />
-          <Route path="/patients" element={<Patients />} />
-          <Route path="/inbox" element={<Inbox />} />
-          <Route path="/testing" element={<Notifications />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="*" element={<Navigate to='/signin' />} />
         </Routes>
-      </AppBody>
-    </BrowserRouter>
-  );
+      </BrowserRouter>
+      )}
+    </div>
+ );
 }
 
 export default App;
