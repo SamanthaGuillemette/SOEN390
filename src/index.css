@@ -3,6 +3,7 @@
   padding: 0;
   font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell",
     "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-size: 16px; /* Base font-size - you can scale it up using 'rem' unit */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
