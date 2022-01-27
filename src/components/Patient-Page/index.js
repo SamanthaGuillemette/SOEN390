@@ -4,7 +4,6 @@ import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
@@ -48,14 +47,12 @@ function Row(props) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell component="th" scope="row">
-          {row.name}
-        </TableCell>
-        <TableCell align="right">{row.id}</TableCell>
-        <TableCell align="right">{row.status}</TableCell>
-        <TableCell align="right">{row.appointment}</TableCell>
-        <TableCell align="right">{row.doctor}</TableCell>
-        <TableCell align="right">{row.priority}</TableCell>
+        <TableCell className="patient-name">{row.name}</TableCell>
+        <TableCell align="right" className="data">{row.id}</TableCell>
+        <TableCell align="right" className="data">{row.status}</TableCell>
+        <TableCell align="right" className="data">{row.appointment}</TableCell>
+        <TableCell align="right" className="data">{row.doctor}</TableCell>
+        <TableCell align="right" className="data">{row.priority}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -64,15 +61,15 @@ function Row(props) {
               <Typography variant="h6" gutterBottom component="div">Symptoms</Typography>
               <Table className="symptoms-table" size="small">
                   <TableRow>
-                    <TableCell className="data">Temperature</TableCell>
-                    <TableCell className="data">Weight</TableCell>
-                    <TableCell className="data">Height</TableCell>
+                    <TableCell className="symptoms-data">Temperature</TableCell>
+                    <TableCell className="symptoms-data">Weight</TableCell>
+                    <TableCell className="symptoms-data">Height</TableCell>
                   </TableRow>
                   {row.symptoms.map((symptomsRow) => (
                     <TableRow>
-                      <TableCell className="data">{symptomsRow.temperature}</TableCell>
-                      <TableCell className="data">{symptomsRow.weight}</TableCell>
-                      <TableCell className="data">{symptomsRow.height}</TableCell>
+                      <TableCell className="symptoms-data">{symptomsRow.temperature}</TableCell>
+                      <TableCell className="symptoms-data">{symptomsRow.weight}</TableCell>
+                      <TableCell className="symptoms-data">{symptomsRow.height}</TableCell>
                     </TableRow>
                   ))}
               </Table>
@@ -86,9 +83,9 @@ function Row(props) {
 
 const rows = [
   createData("Jane Doe", 1476, 
-  <span class="positive">positive</span>, "23/05/22", "Allyson Richards", <label><input type="checkbox"/></label>, "90°C", "150 lbs", "5'9"),
+  <span class="label-positive">positive</span>, "23/05/22", "Allyson Richards", <label><input type="checkbox"/></label>, "90°C", "150 lbs", "5'9"),
   createData("John Smith", 1009,
-  <span class="negative">negative</span>, "05/02/22", "Charles Ludwig", <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
+  <span class="label-negative">negative</span>, "05/02/22", "Charles Ludwig", <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
 ];
 
 function PatientList() {
@@ -101,12 +98,12 @@ function PatientList() {
         <TableHead>
           <TableRow>
             <TableCell />
-            <TableCell>Patient Name</TableCell>
-            <TableCell align="right">ID</TableCell>
-            <TableCell align="right">Status</TableCell>
-            <TableCell align="right">Upcoming Appointment</TableCell>
-            <TableCell align="right">Assigned Doctor</TableCell>
-            <TableCell align="right">Flagged Priority</TableCell>
+            <TableCell className="header">Patient Name</TableCell>
+            <TableCell align="right" className="header">ID</TableCell>
+            <TableCell align="right" className="header">Status</TableCell>
+            <TableCell align="right" className="header">Upcoming Appointment</TableCell>
+            <TableCell align="right" className="header">Assigned Doctor</TableCell>
+            <TableCell align="right" className="header">Flagged Priority</TableCell>
           </TableRow>
         </TableHead>
           {rows.map((row) => (
