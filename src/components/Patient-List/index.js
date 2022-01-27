@@ -1,18 +1,18 @@
 import * as React from "react";
-import Grid from '@mui/material/Grid';
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import "./PatientPage.css";
-import DoctorList from "../../components/Doctor-List/index";
+import "./Patient-List.css";
 
 function createData(name, id, status, appointment, doctor, priority, temperature, weight, height) {
   return {
@@ -26,7 +26,7 @@ function createData(name, id, status, appointment, doctor, priority, temperature
       {
         temperature,
         weight,
-        height,
+        height
       }
     ]
   };
@@ -48,31 +48,41 @@ function Row(props) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell className="patient-name">{row.name}</TableCell>
-        <TableCell align="right" className="data">{row.id}</TableCell>
-        <TableCell align="right" className="data">{row.status}</TableCell>
-        <TableCell align="right" className="data">{row.appointment}</TableCell>
-        <TableCell align="right" className="data">{row.doctor}</TableCell>
-        <TableCell align="right" className="data">{row.priority}</TableCell>
+        <TableCell className="patient-name" component="th" scope="row">
+          {row.name}
+        </TableCell>
+        <TableCell className="data" align="right">{row.id}</TableCell>
+        <TableCell className="data" align="right">{row.status}</TableCell>
+        <TableCell className="data" align="right">{row.appointment}</TableCell>
+        <TableCell className="data" align="right">{row.doctor}</TableCell>
+        <TableCell className="data" align="right">{row.priority}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1 }}>
-              <Typography variant="h6" gutterBottom component="div">Symptoms</Typography>
-              <Table className="symptoms-table" size="small">
+            <Box sx={{ margin: 1}}>
+              <Typography variant="h6" gutterBottom component="div">
+                Symptoms
+              </Typography>
+              <Table className="symptoms-table" size="small" aria-label="purchases">
+                <TableHead>
                   <TableRow>
                     <TableCell className="symptoms-data">Temperature</TableCell>
                     <TableCell className="symptoms-data">Weight</TableCell>
-                    <TableCell className="symptoms-data">Height</TableCell>
+                    <TableCell className="symptoms-data" align="right">Height</TableCell>
                   </TableRow>
+                </TableHead>
+                <TableBody>
                   {row.symptoms.map((symptomsRow) => (
-                    <TableRow>
-                      <TableCell className="symptoms-data">{symptomsRow.temperature}</TableCell>
+                    <TableRow key={symptomsRow.date}>
+                      <TableCell className="symptoms-data" component="th" scope="row">
+                        {symptomsRow.temperature}
+                      </TableCell>
                       <TableCell className="symptoms-data">{symptomsRow.weight}</TableCell>
-                      <TableCell className="symptoms-data">{symptomsRow.height}</TableCell>
+                      <TableCell className="symptoms-data" align="right">{symptomsRow.height}</TableCell>
                     </TableRow>
                   ))}
+                </TableBody>
               </Table>
             </Box>
           </Collapse>
@@ -89,31 +99,28 @@ const rows = [
   <span class="label-negative">negative</span>, "05/02/22", "Charles Ludwig", <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
 ];
 
-function PatientList() {
+
+export default function CollapsibleTable() {
   return (
-    <Grid container spacing={2} maxWidth="lg" alignItems="flex-end">
-    <Grid item xs={8} lg={12}></Grid>
-    <div className="title">Patient List</div>
-    <TableContainer>
-      <Table className="patient-list">
+    <TableContainer className="patient-list" component={Paper}>
+      <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
             <TableCell />
             <TableCell className="header">Patient Name</TableCell>
-            <TableCell align="right" className="header">ID</TableCell>
-            <TableCell align="right" className="header">Status</TableCell>
-            <TableCell align="right" className="header">Upcoming Appointment</TableCell>
-            <TableCell align="right" className="header">Assigned Doctor</TableCell>
-            <TableCell align="right" className="header">Flagged Priority</TableCell>
+            <TableCell className="header" align="right">ID</TableCell>
+            <TableCell className="header" align="right">status</TableCell>
+            <TableCell className="header" align="right">Upcoming Appointment</TableCell>
+            <TableCell className="header" align="right">Assigned Doctor</TableCell>
+            <TableCell className="header" align="right">Flagged Priority</TableCell>
           </TableRow>
         </TableHead>
+        <TableBody>
           {rows.map((row) => (
             <Row key={row.name} row={row} />
           ))}
+        </TableBody>
       </Table>
     </TableContainer>
-    </Grid>
   );
 }
-
-export default PatientList;
