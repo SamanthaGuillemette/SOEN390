@@ -4,7 +4,7 @@
     height: 20%;
     padding: 2%;
     box-shadow: 0px 0px 10px rgb(173, 171, 171);
-    border-radius: 10px;
+    border-radius: 0.5rem;
     color: white;
     font-size: 18px;
     font-weight: 700;
@@ -73,6 +73,14 @@
 }
 
 /*
+
+.test {
+    height: 85vh;
+    border-radius: 15px;
+    background: rgb(102, 187, 106);
+    background-color: linear-gradient(180deg, white, rgb(35, 196, 129));
+}
+
 .PatientBox {
     background-color: white;
     width: 100%;

@@ -1,0 +1,15 @@
+.doctor-list {
+    background-color:rgba(60, 131, 115, 0.87);
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px rgb(173, 171, 171);
+}
+
+.doctor-data {
+    color: white;
+    font-weight: 600 !important;
+}
+
+.heading {
+    color: white;
+    display: inline-block;
+}

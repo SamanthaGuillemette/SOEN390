@@ -11,7 +11,8 @@ import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import PatientPage from "./PatientPage.css";
+import "./PatientPage.css";
+import DoctorList from "../../components/Doctor-List/index";
 
 function createData(name, id, status, appointment, doctor, priority, temperature, weight, height) {
   return {
