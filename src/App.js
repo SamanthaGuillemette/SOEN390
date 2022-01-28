@@ -9,6 +9,7 @@ import Inbox from "./screens/Inbox";
 // import { useAuthState } from "react-firebase-hooks/auth";
 // import { auth } from "./backend/firebase";
 import Notifications from "./components/Notifications";
+import QR from "./components/QR";
 
 function App() {
   // const [user] = useAuthState(auth);
@@ -27,6 +28,7 @@ function App() {
               <Route path="/patients" element={<Patients />} />
               <Route path="/inbox" element={<Inbox />} />
               <Route path="/testing" element={<Notifications />} />
+              <Route path="/qr" element={<QR />} />
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </AppBody>
