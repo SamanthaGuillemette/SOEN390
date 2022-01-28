@@ -7,7 +7,7 @@ import PatientList from "../../components/Patient-List/index";
 
 const PatientListPage = () => {
   return (
-    <Container maxWidth="xl">
+    <Container className="container" maxWidth="xl">
       <Grid container spacing={2} maxWidth="lg" alignItems="flex-end">
         <Grid item xs={8} lg={12}></Grid>
           <Box className="title">Patient List</Box>

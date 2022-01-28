@@ -13,10 +13,12 @@ import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import "./Patient-List.css";
+import TablePagination from '@mui/material/TablePagination';
 
-function createData(name, id, status, appointment, doctor, priority, temperature, weight, height) {
+
+function createData(patientname, id, status, appointment, doctor, priority, temperature, weight, height) {
   return {
-    name,
+    patientname,
     id,
     status,
     appointment,
@@ -49,7 +51,7 @@ function Row(props) {
           </IconButton>
         </TableCell>
         <TableCell className="patient-name" component="th" scope="row">
-          {row.name}
+          {row.patientname}
         </TableCell>
         <TableCell className="data" align="right">{row.id}</TableCell>
         <TableCell className="data" align="right">{row.status}</TableCell>
@@ -99,8 +101,19 @@ const rows = [
   <span class="label-negative">negative</span>, "05/02/22", "Charles Ludwig", <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
 ];
 
+function CollapsibleTable() {
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
 
-export default function CollapsibleTable() {
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
   return (
     <TableContainer className="patient-list" component={Paper}>
       <Table aria-label="collapsible table">
@@ -116,11 +129,25 @@ export default function CollapsibleTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <Row key={row.name} row={row} />
+          {(rowsPerPage > 0
+            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            : rows
+          ).map((row) => (
+            <Row key={row.patientname} row={row}></Row>
           ))}
         </TableBody>
       </Table>
+      <TablePagination
+          rowsPerPageOptions={[5, 10, { label: 'All', value: -1 }]}
+          component="div"
+          count={rows.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
     </TableContainer>
   );
 }
+
+export default CollapsibleTable;
