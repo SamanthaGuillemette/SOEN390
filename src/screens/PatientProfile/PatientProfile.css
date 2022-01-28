@@ -1,14 +1,12 @@
 #avatar{
     width: 200px;
-    height: 230px;
+    height: 233px;
     margin-left: 18%;
     border-radius: 3;
     align-items: center;
     text-align:center;
-    border-style:outset;
-    border: 3px solid black;
+    border: 1px solid black;
     position:relative;
-    
 }
 
 .text{

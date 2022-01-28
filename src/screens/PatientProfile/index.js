@@ -14,8 +14,17 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Link } from 'react-router-dom';
+import Divider from '@mui/material/Divider';
+import Stack from '@mui/material/Stack';
+import { styled } from '@mui/material/styles';
 
 
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(0.5),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
 function PatientProfile() {
 
@@ -42,7 +51,6 @@ function PatientProfile() {
             <Typography className = "text" variant="body2" color="text.secondary">
               <br></br>Age: 50
               <br></br>Birthday: 1 July 1971
-              <br></br>Weight: 150 lb
               <br></br>Address: 101 Brooke, Montreal L5L 9T9
             </Typography>
           </CardContent>
@@ -51,43 +59,51 @@ function PatientProfile() {
     </Grid>
 
     <Grid container spacing={2} item rowSpacing={2} direction='column' xs={6}>
-      <Grid item >
-      <Card>
-        <CardActionArea >
-          <CardContent>
-          <Typography gutterBottom variant='button' component="div">
+      <Grid item>
+        <Card>
+          <CardActionArea >
+            <CardContent>
+              <Typography gutterBottom variant='button' component="div">
                 Status
-              </Typography>
+              </Typography> <br></br>
               <Typography variant="body2" color="text.secondary">
-                <br></br>Status: 
-                <a class="ui red label">Positive</a>
+                <div>
+                  <Stack
+                  direction="row"
+                  divider={<Divider orientation="vertical" flexItem />}
+                  spacing={2}>
+                    <div class="ui red label">Positive</div>
+                    <Item>Temperature: 39 °C</Item>
+                    <Item>Weight: 150 lbs</Item>
+                  </Stack>
+                </div>
               </Typography>
-           </CardContent>
+            </CardContent>
           </CardActionArea>
         </Card>
       </Grid>
     
       <Grid item >
-      <Card>
-        <CardActionArea >
-          <CardContent>
-          <Typography gutterBottom variant='button' component="div">
-                Assigned Doctor
+        <Card>
+          <CardActionArea >
+            <CardContent>
+              <Typography gutterBottom variant='button' component="div">
+                  Assigned Doctor
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                <div>
-                  <br></br>Name: 
-				          <Link to='/doctor'> Michael Scott</Link>
-		            </div>
+                  <div>
+                    <br></br>Name: 
+                    <Link to='/doctor'> Michael Scott</Link>
+                  </div>
               </Typography>
-           </CardContent>
+            </CardContent>
           </CardActionArea>
         </Card>
       </Grid>
     </Grid>
 
     <Grid item xs={12} lg={10}>
-      <TableContainer component={Paper}><h5><br></br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DETAILS LIST</h5>
+      <TableContainer component={Paper}><h5><br></br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SYMPTOM DETAILS</h5>
           <Table sx={{ minWidth: 650}} aria-label="collapsable table">
             <TableHead>
               <TableRow>
