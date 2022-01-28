@@ -3,7 +3,6 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useDocumentOnce } from "react-firebase-hooks/firestore";
 import { auth, db } from "../../backend/firebase";
 import { doc } from "firebase/firestore";
-import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -13,12 +12,7 @@ import Box from "@mui/material/Box";
 const QR = () => {
   const [user, loading] = useAuthState(auth);
   const [value] = useDocumentOnce(doc(db, "Users", user.email));
-  const text = user.email;
-  const [qrCode, setQrCode] = useState("");
-
-  useEffect(() => {
-    setQrCode(`http://api.qrserver.com/v1/create-qr-code/?data=${text}`);
-  }, [text]);
+  const qrCode = `http://api.qrserver.com/v1/create-qr-code/?data=${user.email}`;
 
   return (
     <>
