@@ -26,6 +26,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
+
 function PatientProfile() {
 
   function createData(Date, Fever, Cough, RunnyNose, MuscleAche, Tiredness, SmellLoss, TasteLoss) {
@@ -82,8 +83,9 @@ function PatientProfile() {
           </CardActionArea>
         </Card>
       </Grid>
-    
-      <Grid item >
+
+    <Grid container spacing={2} item rowSpacing={2} direction='row'> 
+      <Grid item xs={6}>
         <Card>
           <CardActionArea >
             <CardContent>
@@ -92,18 +94,34 @@ function PatientProfile() {
               </Typography>
               <Typography variant="body2" color="text.secondary">
                   <div>
-                    <br></br>Name: 
-                    <Link to='/doctor'> Michael Scott</Link>
+                  <br />Name: 
+                    <Link to='/doctor'> Michael Scott </Link>
                   </div>
               </Typography>
             </CardContent>
           </CardActionArea>
         </Card>
       </Grid>
+
+      <Grid item xs={6}>
+        <Card>
+          <CardActionArea >
+            <CardContent>
+              <Typography gutterBottom variant='button' component="div">
+                  Status Review
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                <br/>Review Completed:
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Card>
+      </Grid>
     </Grid>
+  </Grid>
 
     <Grid item xs={12} lg={10}>
-      <TableContainer component={Paper}><h5><br></br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SYMPTOM DETAILS</h5>
+      <TableContainer component={Paper}><h5><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SYMPTOM DETAILS</h5>
           <Table sx={{ minWidth: 650}} aria-label="collapsable table">
             <TableHead>
               <TableRow>
@@ -148,16 +166,14 @@ function PatientProfile() {
               Patient Diary
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              <br></br>
-              <br></br>
-              <br></br>
-              <br></br>
-              <br></br>
-              <br></br>
-              <br></br>
-              <br></br>
-              <br></br>
-              <br></br>
+              <br/>
+              <br/>
+              <br/>
+              <br/>
+              <br/>
+              <br/>
+              <br/>
+              <br/>
                            
             </Typography>
          </CardContent>
