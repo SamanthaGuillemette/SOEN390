@@ -3,9 +3,33 @@
   padding: 0;
   font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell",
     "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-size: 16px; /* Base font-size - you can scale it up using 'rem' unit */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.datepicker {
-  width: 100%;
+
+:root {
+  --primary-light: #42a5f5;
+  --primary-main: #1976d2;
+  --primary-dark: #1565c0;
+
+  --secondary-light: #ba68c8;
+  --secondary-main: #9c27b0;
+  --secondary-dark: #7b1fa2;
+
+  --error-light: #ef5350;
+  --error-main: #d32f2f;
+  --error-dark: #c62828;
+
+  --warning-light: #ff9800;
+  --warning-main: #ed6c02;
+  --warning-dark: #e65100;
+
+  --info-light: #03a9f4;
+  --info-main: #0288d1;
+  --info-dark: #01579b;
+
+  --success-light: #4caf50;
+  --success-main: #2e7d32;
+  --success-dark: #1b5e20;
 }
