@@ -36,7 +36,7 @@ This project is a part of SOEN 390 - Software Engineering Team Design Project - 
 7. [ UI prototypes for Sprint #2 user stories ](<https://github.com/SamanthaGuillemette/SOEN390/wiki/UI-Prototypes>)
 8. [ Testing Plan ](https://github.com/SamanthaGuillemette/SOEN390/wiki/Testing-plan)
    ```diff
-   - Perhaps you can refer to the template required by the course, focusing on Unit tests  Integration tests    System tests 
+   - Perhaps you can refer to the template required by the course, adding Integration tests    System tests 
    ```
    [Template of Testing Plan] (https://docs.google.com/document/d/1rwZLNrffPLlp2o82MiON2kDL1zex4aiWizAepjX3ndU/edit#heading=h.q61tknz3n74y)
 10. Running prototype
