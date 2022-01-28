@@ -21,61 +21,65 @@ const QR = () => {
   }, [text]);
 
   return (
-    <div>
-      <Box
-        component="span"
-        sx={{
-          width: 1000,
-          display: "inline-block",
-          mx: "30px",
-          transform: "scale(0.8)",
-        }}
-      >
-        <Card>
-          <CardContent sx={{ justifyContent: "center", fontSize: 20 }}>
-            <Typography
-              sx={{ mx: "30px", pb: "30px", textAlign: "center" }}
-              color="text.secondary"
-              variant="h3"
-            >
-              Patient Details
-            </Typography>
-            <Typography
-              sx={{ mx: "360px", justifyContent: "center", fontSize: 14 }}
-              variant="body2"
-            >
-              <strong>First Name: </strong>
-              {value && value.data().firstName}
-              {loading && "loading..."}
-              <br />
-              <br />
-              <strong>Last Name: </strong>
-              {loading && "loading..."}
-              {value && value.data().lastName}
-              <br />
-              <br />
-              <strong>Email: </strong>
-              {value && value.data().email}
-              <br />
-              <br />
-            </Typography>
-            <Typography sx={{ mx: "350px" }}>
-              <img alt="QRCode" src={qrCode} />
-              <br /> <br />
-            </Typography>
-            <div>
-              <Stack direction="row" justifyContent="center" spacing={2}>
-                <a href={qrCode} download="QRCode">
-                  <Button variant="contained" color="success">
-                    Download QR Code
-                  </Button>
-                </a>
-              </Stack>
-            </div>
-          </CardContent>
-        </Card>
-      </Box>
-    </div>
+    <>
+      <Card sx={{ m: "30px" }}>
+        <CardContent
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            p: "30px",
+            mb: "20px",
+          }}
+        >
+          <Typography
+            sx={{
+              mx: "30px",
+              pb: "30px",
+              textAlign: "center",
+              fontWeight: "800",
+            }}
+            color="text.secondary"
+            variant="h5"
+          >
+            Patient Details
+          </Typography>
+          <Typography
+            sx={{ mx: "360px", justifyContent: "center", fontSize: 14 }}
+            variant="body2"
+          >
+            <strong>First Name: </strong>
+            {value && value.data().firstName}
+            {loading && "loading..."}
+            <br />
+            <br />
+            <strong>Last Name: </strong>
+            {loading && "loading..."}
+            {value && value.data().lastName}
+            <br />
+            <br />
+            <strong>Email: </strong>
+            {value && value.data().email}
+            <br />
+            <br />
+          </Typography>
+
+          <Box sx={{ mx: "350px", mb: "30px" }}>
+            <img alt="QRCode" src={qrCode} />
+          </Box>
+
+          <Button
+            href={qrCode}
+            target="_blank"
+            variant="contained"
+            color="success"
+            sx={{ ":hover": { color: "white" } }}
+          >
+            Download QR Code
+          </Button>
+        </CardContent>
+      </Card>
+    </>
   );
 };
 
