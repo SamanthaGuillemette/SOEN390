@@ -6,14 +6,14 @@ import SignUp from "./components/SignUp";
 import Appointments from "./screens/Appointments";
 import Patients from "./screens/Patients";
 import Inbox from "./screens/Inbox";
-// import { useAuthState } from "react-firebase-hooks/auth";
-// import { auth } from "./backend/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "./backend/firebase";
 import Notifications from "./components/Notifications";
 import QR from "./components/QR";
 
 function App() {
-  // const [user] = useAuthState(auth);
-  const user = true; // FIXME: Just to bypass login, delete later
+  const [user] = useAuthState(auth);
+  // const user = true; // FIXME: Just to bypass login, delete later
 
   return (
     <div>
