@@ -17,6 +17,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useSelector, useDispatch } from "react-redux";
 import { openDrawer, openState } from "../../store/drawerSlice";
 import { useState } from "react";
+import { signOut } from 'firebase/auth';
+import { auth } from '../../backend/firebase';
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -106,6 +108,14 @@ function Navbar() {
   };
 
   const menuId = "primary-search-account-menu";
+
+  const logout = async(e) => {
+    e.preventDefault();
+    signOut(auth);
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  }
+
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
@@ -115,8 +125,10 @@ function Navbar() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Sign Out</MenuItem>
+      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={logout}>Signout</MenuItem>
     </Menu>
+
   );
 
   const mobileMenuId = "primary-search-account-menu-mobile";
