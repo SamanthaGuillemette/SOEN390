@@ -10,8 +10,8 @@ import "./Doctor-List.css";
 function DoctorList() {
   return (
     <List className="doctor-list"sx={{ width: "100%", maxWidth: 300 }}>
-      <Typography className="heading" variant="h6">Doctors</Typography>
-      <Typography className="heading" variant="h6">Number of Patients</Typography>
+      <Typography className="doctors" variant="h6">Doctors</Typography>
+      <Typography className="numOfPatients" variant="h6">Patient No.</Typography>
       <ListItem>
         <ListItemAvatar>
           <Avatar></Avatar>

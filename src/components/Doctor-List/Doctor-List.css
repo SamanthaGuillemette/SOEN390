@@ -9,7 +9,14 @@
     font-weight: 600 !important;
 }
 
-.heading {
+.doctors {
     color: white;
     display: inline-block;
+    margin-left: 5% !important;
+}
+
+.numOfPatients {
+    color: white;
+    display: inline-block;
+    margin-left: 40% !important;
 }
