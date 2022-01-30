@@ -14,11 +14,11 @@
 .cardShape2{
   max-width: lg;
   border-radius:8px;
-  height:45vh;
+  height:60vh;
   width:30%;
   margin-top: 120px;
   box-shadow: 0px 0px 12px 5px rgb(0 0 0 / 5%);
-  margin-left:25px;
+  margin-left:22px;
   margin-right:10px;
   
 
@@ -26,11 +26,11 @@
 .cardShape1{
   max-width: lg;
   border-radius:8px;
-  height:45vh;
+  height:60vh;
   width:30%;
   margin-top: 120px;
   box-shadow: 0px 0px 12px 5px rgb(0 0 0 / 5%);
-  margin-left:-130px;
+  margin-left:-575px;
   margin-right:10px;
 
 }
@@ -38,12 +38,12 @@
 .cardShape3{
   max-width: lg;
   border-radius:8px;
-  height:45vh;
+  height:60vh;
   width:30%;
   margin-top: 120px;
   box-shadow: 0px 0px 12px 5px rgb(0 0 0 / 5%);
-  margin-left:25px;
-  margin-right:18px;
+  margin-left:20px;
+  margin-right:25px;
   
 
 }
@@ -54,15 +54,15 @@
     color: #231F20;
     font-size: 1.5rem;
     line-height: 1.5625rem;
-    font-weight: bold;
+    font-weight: bold !important;
     font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
 .card-details {
   color: #74767B;
-  font-size: .875rem;
+  font-size: .875rem !important;
   line-height: 1.25rem;
-  font-weight: 700;
+  font-weight: bold !important;
   text-transform: uppercase;
   letter-spacing: .0625rem;
   font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
@@ -84,23 +84,24 @@ content: '';
 
 .title{
   font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  font-weight: bold;
-  margin-top:50px;
-  text-align: center;
-  margin-left: 600px;
+  font-weight: bold !important;
+  font-size: 21px !important;
+  margin-top:50px !important;
+  text-align: center !important;
+  margin-left: 450px !important;
 }
 
 .textContent{
   font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  font-size:20px;
-  font-weight: bold;
+  font-size:12px !important;
+  font-weight: bold italic !important;
 }
 
 .listTitle{
   font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  text-align: center;
+  text-align: center !important;
   font-size: 16px;
-  font-weight: bold;
+  font-weight: bold !important;
   border-bottom: 1px solid black;
 
 }
@@ -108,8 +109,9 @@ content: '';
 .patientList{
         border-radius: 8px;
         box-shadow: 0px 0px 12px 5px rgb(0 0 0 / 5%);
-        height:20vh;
+        height:30vh !important;
         margin-top:-500px;
+        width: 40vh !important;
 
 }
 
@@ -118,9 +120,10 @@ content: '';
 .infoGrid{
   width: 120%;
   padding-bottom: 20px;
-  margin-top: 69px;
+  margin-top: 69px !important;
   border-radius:8px;
   border:4px solid black;
   padding-left: -10px;
-  height: 120%;
+  height: 140% !important;
+  padding-bottom:40px !important;
 }
