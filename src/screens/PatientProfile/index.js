@@ -93,10 +93,7 @@ function PatientProfile() {
                   Assigned Doctor
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                  <div>
-                  <br />Name: 
-                    <Link to='/doctor'> Michael Scott </Link>
-                  </div>
+                <br/>Name: <Link to='/doctor' className="link"> Michael Scott </Link>
               </Typography>
             </CardContent>
           </CardActionArea>
@@ -156,31 +153,10 @@ function PatientProfile() {
           </TableBody>
         </Table>
       </TableContainer>
-    </Grid>
-
-    <Grid item xs={6} lg={4} >
-      <Card>
-       <CardActionArea >
-         <CardContent>
-         <Typography gutterBottom variant="h5" component="div">
-              Patient Diary
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-                           
-            </Typography>
-         </CardContent>
-        </CardActionArea> 
-      </Card>
-    </Grid>
-    
+      <br/>
+      <br/>
+      <br/>
+    </Grid>    
   </Grid>
   );
 }
