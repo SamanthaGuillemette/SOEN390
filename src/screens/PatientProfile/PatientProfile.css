@@ -22,3 +22,9 @@
 .link{
     font-size: 12.5px;
 }
+
+#addButton{
+    position: relative; 
+    left: 73%;
+    color: black;
+}

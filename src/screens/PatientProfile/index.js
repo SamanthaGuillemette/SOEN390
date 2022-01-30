@@ -21,6 +21,8 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import NativeSelect from '@mui/material/NativeSelect';
 import Checkbox from '@mui/material/Checkbox';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import Button from '@mui/material/Button';
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -55,6 +57,7 @@ function PatientProfile() {
 
   const rows = [
     createData("Jan 25", "No", "Yes", "No", "Yes", "Yes", "No", "No"),
+    createData("Jan 26", "No", "Yes", "No", "No", "No", "No", "No")
   ];
 
   return (
@@ -178,6 +181,7 @@ function PatientProfile() {
           <h5>
             <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SYMPTOM DETAILS
+            <Button id="addButton"><AddCircleIcon></AddCircleIcon></Button>
           </h5>
           <Table sx={{ minWidth: 650 }} aria-label="collapsable table">
             <TableHead>
