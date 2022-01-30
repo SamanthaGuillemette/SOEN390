@@ -17,11 +17,9 @@ import { Link } from "react-router-dom";
 import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
-
 import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+import NativeSelect from '@mui/material/NativeSelect';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -52,11 +50,7 @@ function PatientProfile() {
       TasteLoss,
     };
   }
-  const [confirmation, setAge] = React.useState("");
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
   const rows = [
     createData("Nov 10", "No", "Yes", "No", "Yes", "Yes", "No", "No"),
   ];
@@ -101,8 +95,9 @@ function PatientProfile() {
               <CardContent>
                 <Typography gutterBottom variant="button" component="div">
                   Status
-                </Typography>{" "}
-                <br></br>
+                  <br></br>
+                  <br></br>
+                </Typography>
                 <Typography variant="body2" color="text.secondary">
                   <div>
                     <Stack
@@ -111,24 +106,23 @@ function PatientProfile() {
                       spacing={1}
                       alignItems="baseline"
                     >
-                      <div class="ui label red">Positive</div>
-
-                      <FormControl sx={{ minWidth: 120 }}>
-                        <InputLabel id="demo-simple-select-label">
+                      
+                      <FormControl sx={{width: 100}} >
+                        <InputLabel variant="standard" htmlFor="uncontrolled-native">
                           Confirmation
                         </InputLabel>
-                        <Select
-                          labelId="demo-simple-select-label"
-                          id="demo-simple-select"
-                          value={confirmation}
-                          label="Confirmation"
-                          onChange={handleChange}
-                        >
-                          <MenuItem value={0}>confirmed</MenuItem>
-                          <MenuItem value={1}>unconfirmed</MenuItem>
-                        </Select>
+                        <NativeSelect
+                          size="small"
+                          defaultValue={20}
+                          inputProps={{
+                            name: 'confirmation',
+                            id: 'uncontrolled-native',
+                          }}>
+                          <option value={10}>Confirmed</option>
+                          <option value={20}>Unconfirmed</option>
+                        </NativeSelect>
                       </FormControl>
-
+                      {' '}<div className="ui label red">Positive</div>
                       <Item>Temperature: 39 °C</Item>
                       <Item>Weight: 150 lbs</Item>
                     </Stack>
