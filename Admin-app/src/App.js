@@ -22,8 +22,6 @@ function App() {
         <BrowserRouter>
           <AppBody>
             <Routes>
-              <Route path="/signin" element={<SignIn />} />
-              <Route path="/signup" element={<SignUp />} />
               <Route path="/" element={<Dashboard />} />
               <Route path="/appointments" element={<Appointments />} />
               <Route path="/patients" element={<Patients />} />
