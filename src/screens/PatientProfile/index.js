@@ -20,6 +20,8 @@ import { styled } from "@mui/material/styles";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import NativeSelect from '@mui/material/NativeSelect';
+import Checkbox from '@mui/material/Checkbox';
+
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -52,7 +54,7 @@ function PatientProfile() {
   }
 
   const rows = [
-    createData("Nov 10", "No", "Yes", "No", "Yes", "Yes", "No", "No"),
+    createData("Jan 25", "No", "Yes", "No", "Yes", "Yes", "No", "No"),
   ];
 
   return (
@@ -107,7 +109,7 @@ function PatientProfile() {
                       alignItems="baseline"
                     >
                       
-                      <FormControl sx={{width: 100}} >
+                      <FormControl sx={{width: 115}} >
                         <InputLabel variant="standard" htmlFor="uncontrolled-native">
                           Confirmation
                         </InputLabel>
@@ -142,12 +144,12 @@ function PatientProfile() {
                     Assigned Doctor
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    <br />
                     Name:{" "}
                     <Link to="/doctor" className="link">
                       {" "}
-                      Michael Scott{" "}
+                      Michael Scott
                     </Link>
+                    <Checkbox size="small" style ={{color: "white"}}/>
                   </Typography>
                 </CardContent>
               </CardActionArea>
@@ -162,8 +164,7 @@ function PatientProfile() {
                     Status Review
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    <br />
-                    Review Completed:
+                    Review Completed: <Checkbox size="small"/>
                   </Typography>
                 </CardContent>
               </CardActionArea>
