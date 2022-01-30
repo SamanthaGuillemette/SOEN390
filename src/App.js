@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./screens/Dashboard";
+import PatientProfile from "./screens/PatientProfile";
 import AppBody from "./components/AppBody";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
@@ -26,6 +27,7 @@ function App() {
               <Route path="/" element={<Dashboard />} />
               <Route path="/appointments" element={<Appointments />} />
               <Route path="/patients" element={<Patients />} />
+              <Route path="/patientprofile" element={<PatientProfile />} />
               <Route path="/inbox" element={<Inbox />} />
               <Route path="/testing" element={<Notifications />} />
               <Route path="/qr" element={<QR />} />
