@@ -95,10 +95,21 @@ function Row(props) {
 }
 
 const rows = [
-  createData("Jane Doe", 1476, 
+  createData("John Doe", 1476, 
   <span class="label-positive">positive</span>, "23/05/22", "Allyson Richards", <label><input type="checkbox"/></label>, "90°C", "150 lbs", "5'9"),
-  createData("John Smith", 1009,
+  createData("Jane Smith", 159,
+  <span class="label-positive">positive</span>, "05/02/22", "Charles Ludwig", <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
+  createData("William Hill", 1666, 
+  <span class="label-positive">positive</span>, "23/05/22", "Allyson Richards", <label><input type="checkbox"/></label>, "90°C", "150 lbs", "5'9"),
+  createData("Maria Smith", 1200,
   <span class="label-negative">negative</span>, "05/02/22", "Charles Ludwig", <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
+  createData("Liam Hill", 233, 
+  <span class="label-positive">positive</span>, "23/05/22", "Allyson Richards", <label><input type="checkbox"/></label>, "90°C", "150 lbs", "5'9"),
+  createData("Connor Jackson", 2893,
+  <span class="label-negative">negative</span>, "05/02/22", "Charles Ludwig", <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
+  createData("Connor Jackson", 2896,
+  <span class="label-negative">negative</span>, "05/02/22", "Charles Ludwig", <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
+
 ];
 
 function CollapsibleTable() {
@@ -133,7 +144,7 @@ function CollapsibleTable() {
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
           ).map((row) => (
-            <Row key={row.patientname} row={row}></Row>
+            <Row key={row.id} row={row}></Row>
           ))}
         </TableBody>
       </Table>
