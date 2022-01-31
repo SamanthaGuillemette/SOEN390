@@ -8,6 +8,7 @@ import PeopleIcon from "@mui/icons-material/People";
 import LayersIcon from "@mui/icons-material/Layers";
 import EventIcon from "@mui/icons-material/Event";
 import { Link } from "react-router-dom";
+import QrCodeIcon from '@mui/icons-material/QrCode'
 
 export const mainListItems = (
   <div>
@@ -53,6 +54,15 @@ export const mainListItems = (
           <LayersIcon />
         </ListItemIcon>
         <ListItemText primary="Test Component" />
+      </ListItem>
+    </Link>
+
+    <Link to="QR">
+      <ListItem button>
+        <ListItemIcon>
+          <QrCodeIcon />
+        </ListItemIcon>
+        <ListItemText primary="QR Code" />
       </ListItem>
     </Link>
   </div>

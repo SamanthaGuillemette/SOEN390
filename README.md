@@ -6,13 +6,15 @@ This project is a part of SOEN 390 - Software Engineering Team Design Project - 
 
 # Sprint 1
 
-1. [ User Stories Backlog (USB) ](https://github.com/users/SamanthaGuillemette/projects/1/views/8)
+[Sprint 1 Report](https://docs.google.com/document/d/1esurqtZa8eODruQXJ0F_BawF2JGl0_qDkZ_lG9hPVZQ/edit?usp=sharing)
+
+1. [ User Stories Backlog (USB) ](https://docs.google.com/spreadsheets/d/1v1IFZS3l6tXjasTQJg2tO4MBA1YRNO6LSYgqzRlajYo/edit?usp=sharing)
    ```diff
    - The login signup fuctions are assigned in Sprint2. However they are in progressing right now.
    - Perhaps you can move login signup to sprint1. So that the runable app for sprint1 is a complete system.
    - We will check whether the document and runable app is consistent with the user sotries. (The backend code and database is not needed in sprint1)
    ```
-3. [ Release Plan (Sprint #2 planning) ](https://github.com/users/SamanthaGuillemette/projects/1/views/1)
+3. [ Release Plan (Sprint #2 planning) ](https://docs.google.com/spreadsheets/d/1-6o-qoXKSxPfk3hd5cQIkJZPj7nSLO8m/edit?usp=sharing&ouid=100930122855963616065&rtpof=true&sd=true)
    ```diff
    - Please finish a release plan according to the template required by the course 
    - Our TAs still DO NOT know how students are to submit their documentations. One of our TAs has asked Prof this question.
@@ -21,8 +23,8 @@ This project is a part of SOEN 390 - Software Engineering Team Design Project - 
    - For UI prototypes, maybe you can also copy/export them to a word after you finished them.
    - In a word, Prof. MAY ask for docs in excel or word for all diliverables if possible.
    ```
-   [Template of Release Plan] (https://docs.google.com/spreadsheets/d/1HuCr-nyLHccn3jnK_sapIxNwEqcwcgVE/edit#gid=1685357941)
-4. [ Software Architecture Document (SAD) ](<https://github.com/SamanthaGuillemette/SOEN390/wiki/Software-Architecture-(SAD)>)
+   
+4. [ Software Architecture Document (SAD) ](https://docs.google.com/document/d/1GY1IvEYwWEVAVs94CYUvV-9cpSw9zaF6/edit?usp=sharing&ouid=100930122855963616065&rtpof=true&sd=true)
       ```diff
    - Please finish a SAD according to the template required by the course 
    - Our TAs still DO NOT know how to evaluate your work. One of our TAs has asked Prof this question.
@@ -31,16 +33,15 @@ This project is a part of SOEN 390 - Software Engineering Team Design Project - 
    - My suggestion is that, please finish your docs (word or excel sheet) COMPLETE like the SAD example.pdf (iCare System Architecture Design).
    - At least, a cover page for the word is needed. 
    ```
-   [Template of SAD, SAD example.pdf (iCare System Architecture Design)]https://drive.google.com/drive/folders/1H62zNZX2YFFCfa6naJNAwh4GuzvnNKgN
-6. [ Risk Assessment & Risk Management Plan (RMP) ](<https://github.com/SamanthaGuillemette/SOEN390/wiki/Risk-Management-Plan-(RMP)>)
-7. [ UI prototypes for Sprint #2 user stories ](<https://github.com/SamanthaGuillemette/SOEN390/wiki/UI-Prototypes>)
-8. [ Testing Plan ](https://github.com/SamanthaGuillemette/SOEN390/wiki/Testing-plan)
+6. [ Risk Assessment & Risk Management Plan (RMP) ](https://docs.google.com/document/d/1Tr58mNbqXFFOhFGgnD9QGHmayu5E5UyHH6LLJU4rsLs/edit?usp=sharing)
+7. [ UI prototypes for Sprint #1 user stories ](https://docs.google.com/document/d/12F48g3i9PrInDxi2yPRtwrGK0BIoro0truHeUCBA2d0/edit?usp=sharing)
+8. [ UI prototypes for Sprint #2 user stories ](https://docs.google.com/document/d/1DHCCrolacNqB2C1Mpdj-T9oV7lA_ipSG-RzfCWPDmc4/edit?usp=sharing)
+9. [ Testing Plan ](https://docs.google.com/document/d/1ovvP88xteLDiQRNbb2w0wcBpEpWnV1AVWGxh_Ru4iE4/edit?usp=sharing)
    ```diff
-   - Perhaps you can refer to the template required by the course, focusing on Unit tests  Integration tests    System tests 
+   - Perhaps you can refer to the template required by the course, adding Integration tests    System tests 
    ```
-   [Template of Testing Plan] (https://docs.google.com/document/d/1rwZLNrffPLlp2o82MiON2kDL1zex4aiWizAepjX3ndU/edit#heading=h.q61tknz3n74y)
 10. Running prototype
-11. Short sprint retrospective
+11. [Short sprint retrospective](https://docs.google.com/document/d/1sg9QDdt1fvJrNXfMh8-ttxDEAh3bc8M40J7GePWBHow/edit?usp=sharing)
 
 <br />
 
