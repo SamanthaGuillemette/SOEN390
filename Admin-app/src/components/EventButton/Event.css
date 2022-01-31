@@ -1,14 +1,12 @@
 .eventButton{
-    background-image: url(../../components/Dashboard/Events.png);
+
     text-align: center;
     margin-top:25px;
     margin-left:35px;
     width:auto;
     height: 10vh;
     border-radius:8px;
-    border:4px solid red;
-    border-style: outset none repeat;
-
+    background-color: #7b1fa2;
 }
 
 .eventButton:hover{
@@ -22,7 +20,7 @@
 
 .content{
     color:white;
-    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-family:"Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
     font-weight: bold;
     font-size: 20px;
     width:300px;
