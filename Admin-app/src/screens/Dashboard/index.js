@@ -11,8 +11,8 @@ import LineChart from "../../components/Charts/LineChart";
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import COVID19Button from "../../components/COVID-19 Button/index"
-import EventButton from "../../components/Event Button/index";
+import COVID19Button from "../../components/COVID-19Button/index"
+import EventButton from "../../components/EventButton/index";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
