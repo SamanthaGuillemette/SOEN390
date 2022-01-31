@@ -10,12 +10,8 @@ import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
 
 import DoughnutChart from "../../components/Charts/DoughnutChart";
 import LineChart from "../../components/Charts/LineChart";
-<<<<<<< HEAD
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import COVID19Button from "../../components/COVID-19 Button/index"
 import EventButton from "../../components/Event Button/index";
@@ -24,16 +20,12 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
 
-=======
 import SmallStatBox from "../../components/SmallStatBox";
->>>>>>> main
 
 const Dashboard = () => {
   return (
     <Container maxWidth="xl">
-<<<<<<< HEAD
       <Grid container spacing={2} className="statContainer">
-=======
       <Grid container spacing={3} className="statContainer">
         <Grid item xs={6} md={3}>
           <Card className="statItem">
@@ -76,7 +68,6 @@ const Dashboard = () => {
       </Grid>
 
       <Grid container spacing={3} className="statContainer">
->>>>>>> main
         <Grid item xs={12} md={8}>
           <Card className="statItem">
             <LineChart />
@@ -85,8 +76,7 @@ const Dashboard = () => {
         <Grid item xs={12} md={4}>
           <Card className="statItem">
             <DoughnutChart />
-<<<<<<< HEAD
-          </div>
+         </Card>
         </Grid>
 
         <COVID19Button style ={{marginLeft:100}}></COVID19Button>
@@ -185,10 +175,8 @@ const Dashboard = () => {
 </CardContent>
 </Card>
       </Grid>
-=======
-          </Card>
+          
         </Grid>
->>>>>>> main
       </Grid>
     </Container>
   );

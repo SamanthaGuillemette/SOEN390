@@ -18,6 +18,8 @@
   box-shadow: 0px 0px 12px 5px rgb(0 0 0 / 5%);
   margin-left:22px;
   margin-right:10px;
+  background-color: black !important;
+
   
 
 }
@@ -30,6 +32,8 @@
   box-shadow: 0px 0px 12px 5px rgb(0 0 0 / 5%);
   margin-left:-575px;
   margin-right:10px;
+  background-color: black !important;
+
 
 }
 
@@ -42,6 +46,7 @@
   box-shadow: 0px 0px 12px 5px rgb(0 0 0 / 5%);
   margin-left:20px;
   margin-right:25px;
+  background-color: black !important;
   
 
 }
@@ -93,6 +98,7 @@ content: '';
   font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size:12px !important;
   font-weight: bold italic !important;
+  color:white !important
 }
 
 .listTitle{
@@ -109,7 +115,7 @@ content: '';
         box-shadow: 0px 0px 12px 5px rgb(0 0 0 / 5%);
         height:30vh !important;
         margin-top:-500px;
-        width: 40vh !important;
+        width: 50vh !important;
 
 }
 
@@ -117,11 +123,9 @@ content: '';
 
 .infoGrid{
   width: 120%;
-  padding-bottom: 20px;
   margin-top: 69px !important;
   border-radius:8px;
   border:4px solid black;
   padding-left: -10px;
-  height: 140% !important;
-  padding-bottom:40px !important;
+  height: 50% !important;
 }
