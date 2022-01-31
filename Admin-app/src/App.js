@@ -11,6 +11,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./backend/firebase";
 import Notifications from "./components/Notifications";
 import QR from "./components/QR";
+import News from "./components/News";
+import NewsDetails from "./components/News/NewsDetails";
 
 function App() {
   const [user] = useAuthState(auth);
@@ -29,7 +31,8 @@ function App() {
               <Route path="/inbox" element={<Inbox />} />
               <Route path="/testing" element={<Notifications />} />
               <Route path="/qr" element={<QR />} />
-              <Route path="*" element={<Navigate to="/" />} />
+              <Route path="/news" element={<News />} />
+              <Route path="/news/:id" element={<NewsDetails />} />              <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </AppBody>
         </BrowserRouter>
