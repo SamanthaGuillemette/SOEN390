@@ -1,0 +1,10 @@
+.statContainer {
+  display: flex;
+  padding-top: 25px;
+}
+
+.statItem {
+  background-color: white;
+  padding: 15px;
+  height: 100%;
+}
