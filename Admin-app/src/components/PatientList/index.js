@@ -13,7 +13,8 @@ import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import TablePagination from '@mui/material/TablePagination';
-import "./Patient-List.css";
+import {Link } from "react-router-dom";
+import "./PatientList.css";
 
 function createData(patientname, id, status, appointment, doctor, priority, temperature, weight, height) {
   return {
@@ -94,7 +95,7 @@ function Row(props) {
 }
 
 const rows = [
-  createData("John Doe", 1476, 
+  createData(<Link className="patient-name" to="/patientprofile">John Doe</Link>, 1476, 
   <span class="label-positive">positive</span>, "23/05/22", "Allyson Richards", <label><input type="checkbox"/></label>, "90°C", "150 lbs", "5'9"),
   createData("Jane Smith", 159,
   <span class="label-positive">positive</span>, "05/02/22", "Charles Ludwig", <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
@@ -108,10 +109,9 @@ const rows = [
   <span class="label-negative">negative</span>, "31/01/22", "Allyson Richards", <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
   createData("Connor Jackson", 2896,
   <span class="label-negative">negative</span>, "01/02/22", "Charles Ludwig", <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
-
 ];
 
-function CollapsibleTable() {
+function PatientList() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   
@@ -131,7 +131,8 @@ function CollapsibleTable() {
         <TableHead>
           <TableRow>
             <TableCell />
-            <TableCell className="header">Patient Name</TableCell>
+            <TableCell className="header">Patient Name
+            </TableCell>
             <TableCell className="header" align="right">ID</TableCell>
             <TableCell className="header" align="right">status</TableCell>
             <TableCell className="header" align="right">Upcoming Appointment</TableCell>
@@ -155,10 +156,10 @@ function CollapsibleTable() {
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
+          onRowsPerPageChange={handleChangeRowsPerPage} 
         />
     </TableContainer>
   );
 }
 
-export default CollapsibleTable;
+export default PatientList;
