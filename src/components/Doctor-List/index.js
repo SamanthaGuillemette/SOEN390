@@ -1,72 +1,62 @@
-import React from "react";
-import { List, ListItem, makeStyles, Divider, Box } from "@material-ui/core";
-import Avatar from "@material-ui/core/Avatar";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Pagination from "@material-ui/lab/Pagination";
-import Typography from "@mui/material/Typography";
-import "./Doctor-List.css";
+import * as React from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Pagination from "@mui/material/Pagination";
+import Avatar from '@material-ui/core/Avatar';
+import "./Doctor-List.css"
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: "100%",
-    backgroundColor: theme.palette.background.paper
-  },
-  item: {
-    padding: theme.spacing(1.2)
-  },
-  avatar: { marginRight: theme.spacing(5) },
-  paginator: {
-    justifyContent: "center",
-    padding: "10px"
-  }
-}));
+function createData(doctor_name, patient_num) {
+  return { doctor_name, patient_num };
+}
 
-function DoctorList(props) {
-  const classes = useStyles();
+const rows = [
+  createData("Allyson Richards", "4/10"),
+  createData("Charles Ludwig", "3/10"),
+  /*createData("Eclair", 262),
+  createData("Cupcake", 305),
+  createData("Gingerbread", 356)*/
+];
+
+export default function BasicTable() {
   const itemsPerPage = 5;
   const [page, setPage] = React.useState(1);
-  const [noOfPages] = React.useState(
-Math.ceil(projectsList.length / itemsPerPage)
-  );
+  const [noOfPages] = React.useState(Math.ceil(rows.length / itemsPerPage));
 
   const handleChange = (event, value) => {
     setPage(value);
   };
 
   return (
-      <List className="doctor-list" dense compoent="span">
-      <Typography className="doctors" variant="h6">Doctors</Typography>
-      <Typography className="numOfPatients" variant="h6">Patient No.</Typography>
-        {projectsList
-          .slice((page - 1) * itemsPerPage, page * itemsPerPage)
-          .map(projectItem => {
-            const labelId = `list-secondary-label-${projectItem.projectName}`;
-            return (
-              <ListItem
-                key={projectItem.projectID}
-                button
-                onClick={() => console.log("")}
-              >
-                <ListItemAvatar>
-                  <Avatar src={projectItem.projectImage} />
-                </ListItemAvatar>
-                <ListItemText
-                  className="doctor-data"
-                  id={labelId}
-                  primary={projectItem.doctorname}
-                />
-                <ListItemText
-                  className="doctor-data"
-                  id={labelId}
-                  primary={projectItem.numOfPatients}
-                  align = "right"
-                />
-              </ListItem>
-            );
-          })}
-
-      <Pagination
+    <TableContainer>
+      <Table className="doctor-table">
+        <TableHead>
+          <TableRow>
+            <TableCell className="doctor-list-heading">Doctor</TableCell>
+            <TableCell></TableCell>
+            <TableCell className="doctor-list-heading" align="right">Patient No.</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.map((row) => (
+            <TableRow
+              key={row.name}
+              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+            >
+              <TableCell><Avatar></Avatar></TableCell>
+              <TableCell className="doctor-data" component="th" scope="row">
+                {row.doctor_name}
+              </TableCell>
+              <TableCell className="doctor-data" align="right">
+                {row.patient_num}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+        <Pagination
           count={noOfPages}
           page={page}
           onChange={handleChange}
@@ -74,23 +64,8 @@ Math.ceil(projectsList.length / itemsPerPage)
           size="small"
           showFirstButton
           showLastButton
-          classes={{ ul: classes.paginator }}
         />
-      </List>
+      </Table>
+    </TableContainer>
   );
-};
-
-export default DoctorList;
-
-const projectsList = [
-  {
-    projectID: 1,
-    doctorname: "Allyson Richards",
-    numOfPatients: "4/10"
-  },
-  {
-    projectID: 2,
-    doctorname: "Charles Ludwig",
-    numOfPatients: "3/10"
-  }
-];
+}

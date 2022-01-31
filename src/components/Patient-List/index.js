@@ -99,15 +99,15 @@ const rows = [
   createData("Jane Smith", 159,
   <span class="label-positive">positive</span>, "05/02/22", "Charles Ludwig", <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
   createData("William Hill", 1666, 
-  <span class="label-positive">positive</span>, "23/05/22", "Allyson Richards", <label><input type="checkbox"/></label>, "90°C", "150 lbs", "5'9"),
+  <span class="label-positive">positive</span>, "06/05/22", "Allyson Richards", <label><input type="checkbox"/></label>, "90°C", "150 lbs", "5'9"),
   createData("Maria Sánchez", 1200,
-  <span class="label-negative">negative</span>, "05/02/22", "Charles Ludwig", <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
+  <span class="label-negative">negative</span>, "06/02/22", "Charles Ludwig", <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
   createData("Liam Hill", 233, 
-  <span class="label-positive">positive</span>, "23/05/22", "Allyson Richards", <label><input type="checkbox"/></label>, "90°C", "150 lbs", "5'9"),
+  <span class="label-positive">positive</span>, "22/03/22", "Allyson Richards", <label><input type="checkbox"/></label>, "90°C", "150 lbs", "5'9"),
   createData("Connor Jackson", 2893,
-  <span class="label-negative">negative</span>, "05/02/22", "Allyson Richards", <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
+  <span class="label-negative">negative</span>, "31/01/22", "Allyson Richards", <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
   createData("Connor Jackson", 2896,
-  <span class="label-negative">negative</span>, "05/02/22", "Charles Ludwig", <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
+  <span class="label-negative">negative</span>, "01/02/22", "Charles Ludwig", <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
 
 ];
 
@@ -126,6 +126,7 @@ function CollapsibleTable() {
 
   return (
     <TableContainer className="patient-list" component={Paper}>
+     <Box className="label">Patient List</Box>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
