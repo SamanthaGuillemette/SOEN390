@@ -117,7 +117,7 @@ const Dashboard = () => {
             <Typography className="title" gutterBottom variant="h5">
               Important Links
             </Typography>
-            <Card className="cardShape1">
+            <Card variant="contained" className="cardShape1">
               <CardMedia
                 component="img"
                 height="220"
@@ -136,7 +136,7 @@ const Dashboard = () => {
               </CardContent>
             </Card>
 
-            <Card className="cardShape2">
+            <Card variant="contained" className="cardShape2">
               <CardMedia
                 component="img"
                 height="220"
@@ -154,7 +154,7 @@ const Dashboard = () => {
               </CardContent>
             </Card>
 
-            <Card className="cardShape3">
+            <Card variant="contained" className="cardShape3">
               <CardMedia
                 component="img"
                 height="220"

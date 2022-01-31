@@ -18,7 +18,7 @@
   box-shadow: 0px 0px 12px 5px rgb(0 0 0 / 5%);
   margin-left:22px;
   margin-right:10px;
-  background-color: black !important;
+  background-color: white !important;
 
   
 
@@ -32,7 +32,7 @@
   box-shadow: 0px 0px 12px 5px rgb(0 0 0 / 5%);
   margin-left:-575px;
   margin-right:10px;
-  background-color: black !important;
+  background-color: white !important;
 
 
 }
@@ -46,7 +46,7 @@
   box-shadow: 0px 0px 12px 5px rgb(0 0 0 / 5%);
   margin-left:20px;
   margin-right:25px;
-  background-color: black !important;
+  background-color: white !important;
   
 
 }
@@ -98,7 +98,7 @@ content: '';
   font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size:12px !important;
   font-weight: bold italic !important;
-  color:white !important
+  color:black !important
 }
 
 .listTitle{

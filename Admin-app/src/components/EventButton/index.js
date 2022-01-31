@@ -5,7 +5,7 @@ import './Event.css';
 function EventButton() {
     return(
         <div className="eventButton">
-        <Button><p className="content">Upcoming Events</p></Button>
+        <Button variant= "contained"><p className="content">Upcoming Events</p></Button>
         </div>
     );
 
