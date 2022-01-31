@@ -9,9 +9,14 @@
     position: relative;
 }
 
-.label-positive {
-    font-size: 0.78rem !important;
-    padding: 0.50em 1em !important;
+.label-pos {
+    text-transform: uppercase;
+    color: white;
+    background: linear-gradient(rgb(233, 61, 61), rgb(241, 11, 11));
+    font-size: 0.78rem;
+    font-weight: 700;
+    border-radius: 0.375rem;
+    padding: 0.50em 1em;
 }
 
 .text{

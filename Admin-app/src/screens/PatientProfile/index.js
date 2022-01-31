@@ -127,7 +127,7 @@ function PatientProfile() {
                           <option value={20}>Unconfirmed</option>
                         </NativeSelect>
                       </FormControl>
-                      <Item class="label-positive">positive</Item>
+                      <Item class="label-pos">positive</Item>
                       <Item>Temperature: 39 °C</Item>
                       <Item>Weight: 150 lbs</Item>
                     </Stack>
