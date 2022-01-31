@@ -1,0 +1,81 @@
+.patient-list {
+    box-shadow: 0px 0px 10px rgb(173, 171, 171) !important;
+    border-radius: 10px !important;
+}
+
+.label {
+    background: linear-gradient(260deg, rgb(151, 133, 231), rgb(25, 2, 128));
+    width: 100%;
+    height: 7vh;
+    padding: 1.8%;
+    box-shadow: 0px 0px 10px rgb(173, 171, 171);
+    border-radius: 10px;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.header {
+    color: rgb(123, 128, 154) !important;
+    text-transform: uppercase;
+    opacity: 0.7;
+    font-weight: 900 !important;
+}
+
+.symptoms-table {
+    background-color: rgb(62, 185, 144);
+    border-radius: 10px;
+    width: 55% !important;
+}
+
+.symptoms-data {
+    color: white !important;
+    font-weight: 500 !important;
+}
+
+.data {
+    color: rgb(123, 128, 154) !important;
+    font-weight: 600 !important;
+}
+
+.patient-name {
+    color: rgb(52, 71, 103) !important;
+    font-weight: 600 !important;
+    font-size: 0.875rem;
+}
+
+.label-positive {
+    text-transform: uppercase;
+    color: white;
+    background: linear-gradient(rgb(233, 61, 61), rgb(241, 11, 11));
+    font-size: 0.7rem;
+    font-weight: 700;
+    border-radius: 0.375rem;
+    padding: 0.55em 0.9em;
+}
+
+.label-negative {
+    text-transform: uppercase;
+    color: white;
+    background: linear-gradient(rgb(102, 187, 106), rgb(67, 160, 71));
+    font-size: 0.7rem;
+    font-weight: 700;
+    border-radius: 0.375rem;
+    padding: 0.55em 0.9em;
+}
+
+::selection {
+    color: white;
+    background: rgb(25, 2, 128);
+}
+
+/*
+.flag {
+    color: rgb(123, 128, 154);
+    font-size: 25px;
+}
+
+.flag:hover {
+    color: rgb(52, 71, 103);
+    cursor: pointer;
+}*/

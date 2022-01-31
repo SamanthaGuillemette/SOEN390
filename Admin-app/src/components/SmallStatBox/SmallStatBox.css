@@ -1,0 +1,14 @@
+.statDetailGroup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.statTextContainer {
+  margin-left: 15px;
+}
+
+.statDesc {
+  margin-top: -12px;
+}

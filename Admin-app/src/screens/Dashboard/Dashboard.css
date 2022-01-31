@@ -1,0 +1,130 @@
+.statContainer {
+  display: flex;
+  padding-top: 25px;
+}
+
+.statItem {
+  background-color: white;
+  padding: 15px;
+  height: 100%;
+}
+
+.cardShape2{
+  max-width: lg;
+  border-radius:8px;
+  height:60vh;
+  width:30%;
+  margin-top: 120px;
+  box-shadow: 0px 0px 12px 5px rgb(0 0 0 / 5%);
+  margin-left:22px;
+  margin-right:10px;
+  background-color: white !important;
+
+  
+
+}
+.cardShape1{
+  max-width: lg;
+  border-radius:8px;
+  height:60vh;
+  width:30%;
+  margin-top: 120px;
+  box-shadow: 0px 0px 12px 5px rgb(0 0 0 / 5%);
+  margin-left:-575px;
+  margin-right:10px;
+  background-color: white !important;
+
+
+}
+
+.cardShape3{
+  max-width: lg;
+  border-radius:8px;
+  height:60vh;
+  width:30%;
+  margin-top: 120px;
+  box-shadow: 0px 0px 12px 5px rgb(0 0 0 / 5%);
+  margin-left:20px;
+  margin-right:25px;
+  background-color: white !important;
+  
+
+}
+
+
+.cardTitle{
+  margin: 0 0 1rem;
+    color: #231F20;
+    font-size: 1.5rem;
+    line-height: 1.5625rem;
+    font-weight: bold !important;
+    font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+.card-details {
+  color: #74767B;
+  font-size: .875rem !important;
+  line-height: 1.25rem;
+  font-weight: bold !important;
+  text-transform: uppercase;
+  letter-spacing: .0625rem;
+  font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+
+}
+.card-details::before{
+content: '';
+  display: inline-block;
+  width: 1.25rem;
+  height: 0.4rem;
+  margin-right: 0.75rem;
+  padding: 0 1rem 0 0.5rem;
+  border-radius: 0.25rem;
+  background: linear-gradient(
+270deg
+, #0617afc9 0%, #0617afc9 100%);
+  box-shadow: 0 1px 4px 1px rgb(2 125 114 / 50%);
+}
+
+.title{
+  font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-weight: bold !important;
+  font-size: 21px !important;
+  margin-top:50px !important;
+  text-align: center !important;
+  margin-left: 450px !important;
+}
+
+.textContent{
+  font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-size:12px !important;
+  font-weight: bold italic !important;
+  color:black !important
+}
+
+.listTitle{
+  font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  text-align: center !important;
+  font-size: 16px;
+  font-weight: bold !important;
+  border-bottom: 1px solid black;
+
+}
+
+.patientList{
+        border-radius: 8px;
+        box-shadow: 0px 0px 12px 5px rgb(0 0 0 / 5%);
+        height:30vh !important;
+        margin-top:-500px;
+        width: 50vh !important;
+
+}
+
+
+
+.infoGrid{
+  width: 120%;
+  margin-top: 69px !important;
+  border-radius:8px;
+  padding-left: -10px;
+  height: 50% !important;
+}
