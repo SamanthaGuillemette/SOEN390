@@ -6,17 +6,27 @@
     align-items: center;
     text-align:center;
     border: 1px solid black;
-    position:relative;
+    position: relative;
+}
+
+.label-pos {
+    text-transform: uppercase;
+    color: white;
+    background: linear-gradient(rgb(233, 61, 61), rgb(241, 11, 11));
+    font-size: 0.78rem;
+    font-weight: 700;
+    border-radius: 0.375rem;
+    padding: 0.50em 1em;
 }
 
 .text{
     text-align: center;
-    font-size: 12.5px;
+    font-size: 12.5px !important;
 }
 
-.title{
+.title {
     text-align: center;
-    font-weight: bold;
+    font-weight: bold !important;
 }
 
 .link{
