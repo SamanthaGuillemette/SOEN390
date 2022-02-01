@@ -7,15 +7,31 @@ import SignUp from "./components/SignUp";
 import Appointments from "./screens/Appointments";
 import Patients from "./screens/Patients";
 import Inbox from "./screens/Inbox";
-import { useAuthState } from "react-firebase-hooks/auth";
+// import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./backend/firebase";
 import Notifications from "./components/Notifications";
 import QR from "./components/QR";
 import News from "./components/News";
 import NewsDetails from "./components/News/NewsDetails";
+import { useDispatch, useSelector } from "react-redux";
+import { onAuthStateChanged } from "firebase/auth";
+import { saveUser } from "./store/authSlice";
+import { useEffect } from "react";
 
 function App() {
-  const [user] = useAuthState(auth);
+  // const [user] = useAuthState(auth);
+  const user = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        dispatch(saveUser(user.refreshToken));
+      } else {
+        dispatch(saveUser(undefined));
+      }
+    });
+  }, [dispatch]);
 
   return (
     <div>
