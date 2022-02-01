@@ -71,7 +71,7 @@ function PatientProfile() {
             />
             <CardContent>
               <Typography
-                className="title"
+                className="profile-name"
                 gutterBottom
                 variant="button"
                 fontSize="1.2rem"
