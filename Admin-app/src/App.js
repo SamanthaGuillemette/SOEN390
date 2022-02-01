@@ -20,13 +20,13 @@ import { useEffect } from "react";
 
 function App() {
   // const [user] = useAuthState(auth);
-  const user = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.auth.userToken);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        dispatch(saveUser(user.refreshToken));
+    onAuthStateChanged(auth, (userObj) => {
+      if (userObj) {
+        dispatch(saveUser(userObj.refreshToken));
       } else {
         dispatch(saveUser(undefined));
       }
