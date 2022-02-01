@@ -33,36 +33,64 @@ function App() {
     });
   }, [dispatch]);
 
-  return (
-    <div>
-      {user && (
-        <BrowserRouter>
-          <AppBody>
-            <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/appointments" element={<Appointments />} />
-              <Route path="/patients" element={<Patients />} />
-              <Route path="/patientprofile" element={<PatientProfile />} />
-              <Route path="/inbox" element={<Inbox />} />
-              <Route path="/testing" element={<Notifications />} />
-              <Route path="/qr" element={<QR />} />
-              <Route path="/news" element={<News />} />
-              <Route path="/news/:id" element={<NewsDetails />} />{" "}
-              <Route path="*" element={<Navigate to="/" />} />
-            </Routes>
-          </AppBody>
-        </BrowserRouter>
-      )}
-      {!user && (
-        <BrowserRouter>
+  const renderIfLoggedIn = () => {
+    if (user) {
+      return (
+        <AppBody>
           <Routes>
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="*" element={<Navigate to="/signin" />} />
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/appointments" element={<Appointments />} />
+            <Route path="/patients" element={<Patients />} />
+            <Route path="/patientprofile" element={<PatientProfile />} />
+            <Route path="/inbox" element={<Inbox />} />
+            <Route path="/testing" element={<Notifications />} />
+            <Route path="/qr" element={<QR />} />
+            <Route path="/news" element={<News />} />
+            <Route path="/news/:id" element={<NewsDetails />} />{" "}
+            <Route path="*" element={<Dashboard />} />
           </Routes>
-        </BrowserRouter>
-      )}
-    </div>
+        </AppBody>
+      );
+    } else {
+      return (
+        <Routes>
+          <Route path="*" element={<SignIn />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+        </Routes>
+      );
+    }
+  };
+
+  return (
+    <BrowserRouter>
+      {/* {user && (
+        <AppBody>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/appointments" element={<Appointments />} />
+            <Route path="/patients" element={<Patients />} />
+            <Route path="/patientprofile" element={<PatientProfile />} />
+            <Route path="/inbox" element={<Inbox />} />
+            <Route path="/testing" element={<Notifications />} />
+            <Route path="/qr" element={<QR />} />
+            <Route path="/news" element={<News />} />
+            <Route path="/news/:id" element={<NewsDetails />} />{" "}
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        </AppBody>
+      )} */}
+
+      {/* {!user && (
+        <Routes>
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="*" element={<Navigate to="/signin" />} />
+        </Routes>
+      )} */}
+
+      {renderIfLoggedIn()}
+    </BrowserRouter>
   );
 }
 
