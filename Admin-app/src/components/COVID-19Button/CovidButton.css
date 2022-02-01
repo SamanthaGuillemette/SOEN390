@@ -1,0 +1,36 @@
+
+.button{
+    text-align: center;
+    margin-top:25px;
+    margin-left:35px;
+    width:auto;
+    height:10vh;
+    border-radius:8px;
+    border-style: outset none repeat;
+    background-color:#1565c0;
+
+}
+
+.button:hover{
+    transition: all .3s;
+    opacity: 0.9;
+    transform: translateY(10px);
+    border-color:red;
+    box-shadow: 0 0 20px;
+    
+}
+
+.content{
+    color:white;
+    font-family:"Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
+    font-weight: bold !important;
+    font-size: 25px !important;
+    padding-top:10px !important;
+    width:300px;
+    height: 10vh;
+    margin-top:50px;
+    margin-bottom: 20px;
+    text-transform: none;
+    
+    
+}

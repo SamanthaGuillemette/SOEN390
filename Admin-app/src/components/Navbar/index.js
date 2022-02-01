@@ -180,7 +180,7 @@ function Navbar() {
       <AppBar
         position="absolute"
         open={open}
-        style={{ backgroundColor: "midnightBlue" }}
+        style={{ backgroundColor: "midnightblue" }}
       >
         <Toolbar
           sx={{

@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./screens/Dashboard";
-import PatientProfile from "./screens/PatientProfile";
+import PatientProfile from "./components/PatientProfile";
 import AppBody from "./components/AppBody";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
@@ -11,10 +11,11 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./backend/firebase";
 import Notifications from "./components/Notifications";
 import QR from "./components/QR";
+import News from "./components/News";
+import NewsDetails from "./components/News/NewsDetails";
 
 function App() {
   const [user] = useAuthState(auth);
-  // const user = true; // FIXME: Just to bypass login, delete later
 
   return (
     <div>
@@ -29,6 +30,8 @@ function App() {
               <Route path="/inbox" element={<Inbox />} />
               <Route path="/testing" element={<Notifications />} />
               <Route path="/qr" element={<QR />} />
+              <Route path="/news" element={<News />} />
+              <Route path="/news/:id" element={<NewsDetails />} />{" "}
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </AppBody>

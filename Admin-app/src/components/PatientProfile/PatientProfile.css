@@ -1,0 +1,40 @@
+#avatar{
+    width: 200px;
+    height: 233px;
+    margin-left: 18%;
+    border-radius: 3;
+    align-items: center;
+    text-align:center;
+    border: 1px solid black;
+    position: relative;
+}
+
+.label-pos {
+    text-transform: uppercase;
+    color: white;
+    background: linear-gradient(rgb(233, 61, 61), rgb(241, 11, 11));
+    font-size: 0.78rem;
+    font-weight: 700;
+    border-radius: 0.375rem;
+    padding: 0.50em 1em;
+}
+
+.text{
+    text-align: center;
+    font-size: 12.5px !important;
+}
+
+.profile-name {
+    text-align: center;
+    font-weight: bold !important;
+}
+
+.link{
+    font-size: 12.5px;
+}
+
+#addButton{
+    position: relative; 
+    left: 73%;
+    color: black;
+}

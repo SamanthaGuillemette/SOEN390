@@ -71,7 +71,7 @@ function PatientProfile() {
             />
             <CardContent>
               <Typography
-                className="title"
+                className="profile-name"
                 gutterBottom
                 variant="button"
                 fontSize="1.2rem"
@@ -127,7 +127,7 @@ function PatientProfile() {
                           <option value={20}>Unconfirmed</option>
                         </NativeSelect>
                       </FormControl>
-                      {' '}<div className="ui label red">Positive</div>
+                      <Item class="label-pos">positive</Item>
                       <Item>Temperature: 39 °C</Item>
                       <Item>Weight: 150 lbs</Item>
                     </Stack>
