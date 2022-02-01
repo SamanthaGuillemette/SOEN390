@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./screens/Dashboard";
-import PatientProfile from "./screens/PatientProfile";
+import PatientProfile from "./components/PatientProfile";
 import AppBody from "./components/AppBody";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
@@ -16,7 +16,6 @@ import NewsDetails from "./components/News/NewsDetails";
 
 function App() {
   const [user] = useAuthState(auth);
-  // const user = true; // FIXME: Just to bypass login, delete later
 
   return (
     <div>
@@ -32,7 +31,8 @@ function App() {
               <Route path="/testing" element={<Notifications />} />
               <Route path="/qr" element={<QR />} />
               <Route path="/news" element={<News />} />
-              <Route path="/news/:id" element={<NewsDetails />} />              <Route path="*" element={<Navigate to="/" />} />
+              <Route path="/news/:id" element={<NewsDetails />} />{" "}
+              <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </AppBody>
         </BrowserRouter>

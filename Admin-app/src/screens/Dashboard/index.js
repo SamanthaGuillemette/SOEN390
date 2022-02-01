@@ -8,15 +8,15 @@ import CoronavirusIcon from "@mui/icons-material/Coronavirus";
 import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
 import DoughnutChart from "../../components/Charts/DoughnutChart";
 import LineChart from "../../components/Charts/LineChart";
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import COVID19Button from "../../components/COVID-19Button/index"
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import COVID19Button from "../../components/COVID-19Button/index";
 import EventButton from "../../components/EventButton/index";
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import ListSubheader from "@mui/material/ListSubheader";
 import SmallStatBox from "../../components/SmallStatBox";
 
 const Dashboard = () => {
@@ -79,21 +79,20 @@ const Dashboard = () => {
           <COVID19Button style={{ marginLeft: 100 }}></COVID19Button>
           <EventButton style={{ marginLeft: 100 }}></EventButton>
 
-
-
-          <List className="patientList"
+          <List
+            className="patientList"
             sx={{
-              width: '28vh',
-              maxWidth: 'xl',
-              bgcolor: 'background.paper',
-              overflow: 'auto',
-              maxHeight: '30vh',
+              width: "28vh",
+              maxWidth: "xl",
+              bgcolor: "background.paper",
+              overflow: "auto",
+              maxHeight: "30vh",
               marginTop: 3,
               marginLeft: 5,
-              '& ul': { padding: 0 },
+              "& ul": { padding: 0 },
             }}
-
-            subheader={<li />} >
+            subheader={<li />}
+          >
             <Typography className="listTitle" gutterBottom variant="h5">
               Patient's list
             </Typography>
@@ -111,8 +110,6 @@ const Dashboard = () => {
             ))}
           </List>
 
-
-
           <Grid className="infoGrid" container spacing={2}>
             <Typography className="title" gutterBottom variant="h5">
               Important Links
@@ -126,12 +123,27 @@ const Dashboard = () => {
               />
               <CardContent>
                 <p className="card-details">Info</p>
-                <Typography className="cardTitle" gutterBottom variant="h5" component="div"><a target="_blank" href="https://www.ciussswestcentral.ca/health-alerts/coronavirus-covid-19/covid-19-testing-clinics/">
-                  Covid-19 Testing Policies
-                </a>
+                <Typography
+                  className="cardTitle"
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                >
+                  <a
+                    target="_blank"
+                    rel="noreferrer"
+                    href="https://www.ciussswestcentral.ca/health-alerts/coronavirus-covid-19/covid-19-testing-clinics/"
+                  >
+                    Covid-19 Testing Policies
+                  </a>
                 </Typography>
-                <Typography className="textContent" variant="body2" color="text.secondary">
-                  Find out how you could get tested if you develop any symptoms to the virus.
+                <Typography
+                  className="textContent"
+                  variant="body2"
+                  color="text.secondary"
+                >
+                  Find out how you could get tested if you develop any symptoms
+                  to the virus.
                 </Typography>
               </CardContent>
             </Card>
@@ -145,11 +157,29 @@ const Dashboard = () => {
               />
               <CardContent>
                 <p className="card-details">Info</p>
-                <Typography className="cardTitle" gutterBottom variant="h5" component="div">
-                  <a target="_blank" href="https://www.quebec.ca/en/health/health-issues/a-z/2019-coronavirus/situation-coronavirus-in-quebec">Data of COVID-19 in Quebec</a>
+                <Typography
+                  className="cardTitle"
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                >
+                  <a
+                    target="_blank"
+                    rel="noreferrer"
+                    href="https://www.quebec.ca/en/health/health-issues/a-z/2019-coronavirus/situation-coronavirus-in-quebec"
+                  >
+                    Data of COVID-19 in Quebec
+                  </a>
                 </Typography>
-                <Typography className="textContent" variant="body2" color="text.secondary">
-                  Most people who fall sick with COVID-19 will experience mild to moderate symptoms and recover without special treatment. However, some will become seriously ill and require medical attention.
+                <Typography
+                  className="textContent"
+                  variant="body2"
+                  color="text.secondary"
+                >
+                  Most people who fall sick with COVID-19 will experience mild
+                  to moderate symptoms and recover without special treatment.
+                  However, some will become seriously ill and require medical
+                  attention.
                 </Typography>
               </CardContent>
             </Card>
@@ -163,16 +193,31 @@ const Dashboard = () => {
               />
               <CardContent>
                 <p className="card-details">Info</p>
-                <Typography className="cardTitle" gutterBottom variant="h5" component="div">
-                  <a target="_blank" href="https://portal3.clicsante.ca/">Appointment for vaccination</a>
+                <Typography
+                  className="cardTitle"
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                >
+                  <a
+                    target="_blank"
+                    rel="noreferrer"
+                    href="https://portal3.clicsante.ca/"
+                  >
+                    Appointment for vaccination
+                  </a>
                 </Typography>
-                <Typography className="textContent" variant="body2" color="text.secondary">
-                  To book a appointment for the vaccination, as well as check eligibilty, click on this link for more info.
+                <Typography
+                  className="textContent"
+                  variant="body2"
+                  color="text.secondary"
+                >
+                  To book a appointment for the vaccination, as well as check
+                  eligibilty, click on this link for more info.
                 </Typography>
               </CardContent>
             </Card>
           </Grid>
-
         </Grid>
       </Grid>
     </Container>
