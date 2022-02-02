@@ -1,8 +1,8 @@
 import NewsList from "./NewsList";
-import useFetch from "./useFetch";
+import useFetchData from "../../useFetchData";
 
 const News = () => {
-  const { data: news } = useFetch('https://jsonplaceholder.typicode.com/posts')
+  const { data: news } = useFetchData('https://jsonplaceholder.typicode.com/posts')
 
   return (
       <div>

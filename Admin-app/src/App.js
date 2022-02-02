@@ -13,6 +13,8 @@ import Notifications from "./components/Notifications";
 import QR from "./components/QR";
 import News from "./components/News";
 import NewsDetails from "./components/News/NewsDetails";
+import Event from "./components/Event";
+import EventDetails from "./components/Event/EventDetails";
 
 function App() {
   const [user] = useAuthState(auth);
@@ -32,6 +34,8 @@ function App() {
               <Route path="/qr" element={<QR />} />
               <Route path="/news" element={<News />} />
               <Route path="/news/:id" element={<NewsDetails />} />{" "}
+              <Route path="/event" element={<Event />} />
+              <Route path="/event/:id" element={<EventDetails />} />{" "}
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </AppBody>
