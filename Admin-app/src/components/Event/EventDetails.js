@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
-import useFetch from "../../useFetch";
+import useFetchData from "../../useFetchData";
 
 const EventDetails = () => {
     const { id } = useParams();
-    const { data: event } = useFetch('https://jsonplaceholder.typicode.com/posts/' + id);
+    const { data: event } = useFetchData('https://jsonplaceholder.typicode.com/posts/' + id);
 
 
     return (

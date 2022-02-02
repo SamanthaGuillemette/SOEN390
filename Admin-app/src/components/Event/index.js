@@ -1,8 +1,8 @@
 import EventList from "./EventList";
-import useFetch from "../../useFetch";
+import useFetchData from "../../useFetchData";
 
 const Event = () => {
-  const { data: events } = useFetch('https://jsonplaceholder.typicode.com/posts')
+  const { data: events } = useFetchData('https://jsonplaceholder.typicode.com/posts')
 
   return (
       <div>
