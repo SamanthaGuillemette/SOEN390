@@ -4,7 +4,7 @@
     margin-top:25px;
     margin-left:35px;
     width:auto;
-    height:10vh;
+    height:8.75vh !important;
     border-radius:8px;
     border-style: outset none repeat;
     background-color:#1565c0;
@@ -16,7 +16,7 @@
     opacity: 0.9;
     transform: translateY(10px);
     border-color:red;
-    box-shadow: 0 0 20px;
+    box-shadow: 0 0 30px;
     
 }
 

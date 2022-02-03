@@ -110,7 +110,7 @@ const Dashboard = () => {
             ))}
           </List>
 
-          <Grid className="infoGrid" container spacing={2}>
+          <Grid className="infoGrid" container spacing={2} xs ={12}>
             <Typography className="title" gutterBottom variant="h5">
               Important Links
             </Typography>
