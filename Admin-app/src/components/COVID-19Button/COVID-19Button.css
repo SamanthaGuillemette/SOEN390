@@ -1,25 +1,26 @@
-.button{
-    margin-top:25px;
-    margin-left:35px;
+.news-button-div {
+    margin-top:20px;
+    display: inline-block;
+    margin-left: 20px;
 }
 
-.button:hover{
+.news-button-div:hover{
     transition: all .3s;
     opacity: 0.9;
     transform: translateY(5px);
 }
 
-.btn {
-    background-color: #171717 !important;
+.news-btn {
+    background: #8bc3eb !important;
     border-radius: 20px !important;
 }
 
 .content{
     font-family:"Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
     font-weight: bold !important;
-    font-size: 25px !important;
+    font-size: 20px !important;
     padding-top:18px !important;
-    width:300px;
-    height: 5vh;
+    width:200px;
+    height: 4vh;
     text-transform: none; 
 }

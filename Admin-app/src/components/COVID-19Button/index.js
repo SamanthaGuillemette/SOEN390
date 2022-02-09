@@ -1,13 +1,13 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
-import './Button.css'
 import { Link } from "react-router-dom";
+import './COVID-19Button.css'
 
 function COVID19Button() {
     return(
-        <div className="button">
+        <div className="news-button-div">
             <Link to="news">
-                <Button variant= "contained" className="btn"><p className="content">COVID-19 News</p></Button>
+                <Button variant= "contained" className="news-btn"><p className="content">COVID-19 News</p></Button>
             </Link>
         </div>
     );

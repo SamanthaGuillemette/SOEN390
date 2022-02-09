@@ -1,7 +1,6 @@
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-import "./Dashboard.css";
 import PersonIcon from "@mui/icons-material/Person";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import CoronavirusIcon from "@mui/icons-material/Coronavirus";
@@ -18,6 +17,8 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
 import SmallStatBox from "../../components/SmallStatBox";
+import "./Dashboard.css";
+import UpcomingEvents from "../../components/UpcomingEvents";
 
 const Dashboard = () => {
   return (
@@ -76,9 +77,6 @@ const Dashboard = () => {
             </Card>
           </Grid>
 
-          <COVID19Button style={{ marginLeft: 100 }}></COVID19Button>
-          <EventButton style={{ marginLeft: 100 }}></EventButton>
-
           <List
             className="patientList"
             sx={{
@@ -110,6 +108,8 @@ const Dashboard = () => {
               </li>
             ))}
           </List>
+
+          <UpcomingEvents></UpcomingEvents>
 
           <Grid className="infoGrid" container spacing={2} xs ={12}>
             <Typography className="title" gutterBottom variant="h5">
