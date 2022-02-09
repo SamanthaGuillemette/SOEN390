@@ -14,7 +14,14 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import TablePagination from '@mui/material/TablePagination';
 import {Link } from "react-router-dom";
 import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
+import { makeStyles } from "@material-ui/core/styles";
 import "./PatientList.css";
+
+const useStyles = makeStyles((theme) => ({
+  color: {
+    color: "#767676"
+  }
+}));
 
 function createData(patientname, id, status, appointment, doctor, priority, temperature, weight, height) {
   return {
@@ -41,7 +48,7 @@ function Row(props) {
   return (
     <React.Fragment>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
-        <TableCell>
+        <TableCell sx={{borderColor: "transparent"}}>
           <IconButton
             aria-label="expand row"
             size="small"
@@ -50,38 +57,38 @@ function Row(props) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell className="patient-name" component="th" scope="row">
+        <TableCell sx={{borderColor: "#1e1e1e"}} className="patient-name" component="th" scope="row">
           {row.patientname}
         </TableCell>
-        <TableCell className="data" align="right">{row.id}</TableCell>
-        <TableCell className="data" align="right">{row.status}</TableCell>
-        <TableCell className="data" align="right">{row.appointment}</TableCell>
-        <TableCell className="data" align="right">{row.doctor}</TableCell>
-        <TableCell className="data" align="right">{row.priority}</TableCell>
+        <TableCell sx={{borderColor: "#1e1e1e"}} className="data" align="right">{row.id}</TableCell>
+        <TableCell sx={{borderColor: "#1e1e1e"}} className="data" align="right">{row.status}</TableCell>
+        <TableCell sx={{borderColor: "#1e1e1e"}} className="data" align="right">{row.appointment}</TableCell>
+        <TableCell sx={{borderColor: "#1e1e1e"}} className="data" align="right">{row.doctor}</TableCell>
+        <TableCell sx={{borderColor: "#1e1e1e"}} className="data" align="right">{row.priority}</TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+        <TableCell sx={{borderColor: "#1e1e1e"}} style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1}}>
-              <Typography variant="h6" gutterBottom component="div">
+              <Typography variant="h6" gutterBottom component="div" color="#767676">
                 Symptoms
               </Typography>
               <Table className="symptoms-table" size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell className="symptoms-data">Temperature</TableCell>
-                    <TableCell className="symptoms-data">Weight</TableCell>
-                    <TableCell className="symptoms-data" align="right">Height</TableCell>
+                    <TableCell sx={{borderColor: "#171717"}} className="symptoms-data">Temperature</TableCell>
+                    <TableCell sx={{borderColor: "#171717"}} className="symptoms-data">Weight</TableCell>
+                    <TableCell sx={{borderColor: "#171717"}} className="symptoms-data" align="right">Height</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {row.symptoms.map((symptomsRow) => (
                     <TableRow key={symptomsRow.date}>
-                      <TableCell className="symptoms-data" component="th" scope="row">
+                      <TableCell sx={{borderColor: "transparent"}} className="symptoms-data" component="th" scope="row">
                         {symptomsRow.temperature}
                       </TableCell>
-                      <TableCell className="symptoms-data">{symptomsRow.weight}</TableCell>
-                      <TableCell className="symptoms-data" align="right">{symptomsRow.height}</TableCell>
+                      <TableCell sx={{borderColor: "transparent"}} className="symptoms-data">{symptomsRow.weight}</TableCell>
+                      <TableCell sx={{borderColor: "transparent"}} className="symptoms-data" align="right">{symptomsRow.height}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -112,6 +119,7 @@ const rows = [
 ];
 
 function PatientList() {
+  const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   
@@ -133,14 +141,14 @@ function PatientList() {
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
-            <TableCell />
-            <TableCell className="header">Patient Name
+            <TableCell sx={{borderColor: "#1e1e1e"}}/>
+            <TableCell sx={{borderColor: "#1e1e1e"}} className="header">Patient Name
             </TableCell>
-            <TableCell className="header" align="right">ID</TableCell>
-            <TableCell className="header" align="right">status</TableCell>
-            <TableCell className="header" align="right">Upcoming Appointment</TableCell>
-            <TableCell className="header" align="right">Assigned Doctor</TableCell>
-            <TableCell className="header" align="right">Flagged Priority</TableCell>
+            <TableCell sx={{borderColor: "#1e1e1e"}} className="header" align="right">ID</TableCell>
+            <TableCell sx={{borderColor: "#1e1e1e"}} className="header" align="right">status</TableCell>
+            <TableCell sx={{borderColor: "#1e1e1e"}} className="header" align="right">Upcoming Appointment</TableCell>
+            <TableCell sx={{borderColor: "#1e1e1e"}} className="header" align="right">Assigned Doctor</TableCell>
+            <TableCell sx={{borderColor: "#1e1e1e"}} className="header" align="right">Flagged Priority</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -153,6 +161,9 @@ function PatientList() {
         </TableBody>
       </Table>
       <TablePagination
+          classes={{
+            root: classes.color
+          }}
           rowsPerPageOptions={[5, 10, { label: 'All', value: -1 }]}
           component="div"
           count={rows.length}

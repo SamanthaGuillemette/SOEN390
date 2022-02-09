@@ -45,27 +45,28 @@ function DoctorList() {
     <TableContainer component={Paper}>
       <Table className="doctor-table">
         <TableBody>
-          <TableCell className="doctor-table-heading">Doctor</TableCell>
-          <TableCell className="doctor-table-heading" align="right">Patient No.</TableCell>
+          <TableCell sx={{borderColor: "transparent"}} className="doctor-table-heading">Doctor</TableCell>
+          <TableCell sx={{borderColor: "transparent"}} className="doctor-table-heading" align="right">Patient No.</TableCell>
           {(rowsPerPage > 0
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
           ).map((row) => (
             <TableRow key={row.doctorname}>
-              <TableCell className="doctor-data" component="th" scope="row">
+              <TableCell sx={{borderColor: "transparent"}} className="doctor-data" component="th" scope="row">
               <CardHeader
               avatar={
               <Avatar src=""/>
               }
               title={row.doctorname}
               /></TableCell>
-              <TableCell className="doctor-data" style={{ width: 160 }} align="right">{row.numOfPatients}</TableCell>
+              <TableCell sx={{borderColor: "transparent"}} className="doctor-data" style={{ width: 160 }} align="right">{row.numOfPatients}</TableCell>
             </TableRow>
           ))}
         </TableBody>
         <TableFooter>
-          <TableRow>
+          <TableRow> 
             <TablePagination
+            sx={{borderColor: "transparent"}}
               classes={{
                 root: classes.color
               }}

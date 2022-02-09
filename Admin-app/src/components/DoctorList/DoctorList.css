@@ -1,7 +1,6 @@
 .doctor-table {
-    background-color:rgba(60, 131, 115, 0.87);
+    background: linear-gradient(to right bottom, #8bc3eb, #949be2);
     border-radius: 20px;
-    box-shadow: 0px 0px 10px rgb(173, 171, 171);
     position: fixed !important;
     width: 13% !important;
     top: 9.4%;
