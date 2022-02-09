@@ -1,0 +1,16 @@
+.fc {
+    background-color: #1e1e1e !important;
+    color: white;
+}
+
+.fc-day-today {
+    background: #767676 !important;
+}
+
+.fc-day {
+    border-color: #1e1e1e !important;
+}
+
+.fc-event {
+    background: linear-gradient(to right,#8bc3eb, #949be2)!important;
+}

@@ -22,10 +22,10 @@ import { auth } from '../../backend/firebase';
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  color: "#767676",
+  backgroundColor: "#171717", 
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    color: "white",
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
@@ -180,7 +180,7 @@ function Navbar() {
       <AppBar
         position="absolute"
         open={open}
-        style={{ backgroundColor: "midnightblue" }}
+        style={{ backgroundColor: "#1e1e1e" }}
       >
         <Toolbar
           sx={{
@@ -202,7 +202,7 @@ function Navbar() {
           <Typography
             component="h1"
             variant="h6"
-            color="inherit"
+            color="white"
             noWrap
             sx={{ flexGrow: 1 }}
           >
@@ -224,7 +224,15 @@ function Navbar() {
               aria-label="show 4 new mails"
               color="inherit"
             >
-              <Badge badgeContent={4} color="error">
+              <Badge
+                badgeContent={4}
+                sx={{
+                  "& .MuiBadge-badge": {
+                    color: "#1e1e1e",
+                    backgroundColor: "#8bc3eb"
+                  }
+                }}
+              >
                 <MailIcon />
               </Badge>
             </IconButton>
@@ -233,7 +241,15 @@ function Navbar() {
               aria-label="show 17 new notifications"
               color="inherit"
             >
-              <Badge badgeContent={17} color="error">
+              <Badge
+                badgeContent={17}
+                sx={{
+                  "& .MuiBadge-badge": {
+                    color: "#1e1e1e",
+                    backgroundColor: "#8bc3eb"
+                  }
+                }}
+              >
                 <NotificationsIcon />
               </Badge>
             </IconButton>

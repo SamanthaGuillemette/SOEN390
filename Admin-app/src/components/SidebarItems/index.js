@@ -15,7 +15,7 @@ export const mainListItems = (
     <Link to="/">
       <ListItem button>
         <ListItemIcon>
-          <DashboardIcon />
+          <DashboardIcon sx={{color: "#767676"}}/>
         </ListItemIcon>
         <ListItemText primary="Dashboard" />
       </ListItem>
@@ -24,7 +24,7 @@ export const mainListItems = (
     <Link to="/appointments">
       <ListItem button>
         <ListItemIcon>
-          <EventIcon />
+          <EventIcon sx={{color: "#767676"}}/>
         </ListItemIcon>
         <ListItemText primary="Appointments" />
       </ListItem>
@@ -33,7 +33,7 @@ export const mainListItems = (
     <Link to="/patients">
       <ListItem button>
         <ListItemIcon>
-          <PeopleIcon />
+          <PeopleIcon sx={{color: "#767676"}}/>
         </ListItemIcon>
         <ListItemText primary="Patients" />
       </ListItem>
@@ -42,7 +42,7 @@ export const mainListItems = (
     <Link to="inbox">
       <ListItem button>
         <ListItemIcon>
-          <MailIcon />
+          <MailIcon sx={{color: "#767676"}}/>
         </ListItemIcon>
         <ListItemText primary="Inbox" />
       </ListItem>
@@ -51,7 +51,7 @@ export const mainListItems = (
     <Link to="testing">
       <ListItem button>
         <ListItemIcon>
-          <LayersIcon />
+          <LayersIcon sx={{color: "#767676"}}/>
         </ListItemIcon>
         <ListItemText primary="Test Component" />
       </ListItem>
@@ -60,7 +60,7 @@ export const mainListItems = (
     <Link to="QR">
       <ListItem button>
         <ListItemIcon>
-          <QrCodeIcon />
+          <QrCodeIcon sx={{color: "#767676"}}/>
         </ListItemIcon>
         <ListItemText primary="QR Code" />
       </ListItem>

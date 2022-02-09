@@ -9,11 +9,11 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import TablePagination from '@mui/material/TablePagination';
 import {Link } from "react-router-dom";
+import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
 import "./PatientList.css";
 
 function createData(patientname, id, status, appointment, doctor, priority, temperature, weight, height) {
@@ -125,8 +125,11 @@ function PatientList() {
   };
 
   return (
-    <TableContainer className="patient-list" component={Paper}>
-     <Box className="label">Patient List</Box>
+    <TableContainer className="patient-list">
+     <Box className="label">
+       <HealthAndSafetyIcon></HealthAndSafetyIcon>
+       Patient List
+     </Box>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
@@ -157,7 +160,7 @@ function PatientList() {
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage} 
-        />
+      />
     </TableContainer>
   );
 }
