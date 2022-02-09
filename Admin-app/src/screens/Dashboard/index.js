@@ -25,19 +25,19 @@ const Dashboard = () => {
       <Grid container spacing={2} className="statContainer">
         <Grid container spacing={3} className="statContainer">
           <Grid item xs={6} md={3}>
-            <Card className="statItem">
+            <Card className="statItem" sx={{backgroundColor: "#171717", color: "#767676"}}>
               <SmallStatBox
-                icon={<PersonIcon fontSize="large" color="primary" />}
+                icon={<PersonIcon fontSize="large" sx={{color: "white"}} />}
                 number="1523"
                 description="Patients"
               />
             </Card>
           </Grid>
           <Grid item xs={6} md={3}>
-            <Card className="statItem">
+            <Card className="statItem" sx={{backgroundColor: "#171717", color: "#767676"}}>
               <SmallStatBox
                 icon={
-                  <SupervisedUserCircleIcon fontSize="large" color="primary" />
+                  <SupervisedUserCircleIcon fontSize="large" sx={{color: "white"}} />
                 }
                 number="1523"
                 description="Doctors"
@@ -45,18 +45,18 @@ const Dashboard = () => {
             </Card>
           </Grid>
           <Grid item xs={6} md={3}>
-            <Card className="statItem">
+            <Card className="statItem" sx={{backgroundColor: "#171717", color: "#767676"}}>
               <SmallStatBox
-                icon={<CoronavirusIcon fontSize="large" color="primary" />}
+                icon={<CoronavirusIcon fontSize="large" sx={{color: "white"}} />}
                 number="1523"
                 description="Active cases"
               />
             </Card>
           </Grid>
           <Grid item xs={6} md={3}>
-            <Card className="statItem">
+            <Card className="statItem" sx={{backgroundColor: "#171717", color: "#767676"}}>
               <SmallStatBox
-                icon={<VerifiedUserIcon fontSize="large" color="primary" />}
+                icon={<VerifiedUserIcon fontSize="large" sx={{color: "white"}} />}
                 number="1523"
                 description="Recovered"
               />
@@ -66,12 +66,12 @@ const Dashboard = () => {
 
         <Grid container spacing={3} className="statContainer">
           <Grid item xs={12} md={8}>
-            <Card className="statItem">
-              <LineChart />
+            <Card className="statItem" sx={{backgroundColor: "inherit"}}>
+              <LineChart/>
             </Card>
           </Grid>
           <Grid item xs={12} md={4}>
-            <Card className="statItem">
+            <Card className="statItem" sx={{background: 'linear-gradient(to right bottom, #8bc3eb, #949be2)'}}>
               <DoughnutChart />
             </Card>
           </Grid>
@@ -84,7 +84,7 @@ const Dashboard = () => {
             sx={{
               width: "28vh",
               maxWidth: "xl",
-              bgcolor: "background.paper",
+              bgcolor: "#171717",
               overflow: "auto",
               maxHeight: "30vh",
               marginTop: 3,
@@ -93,15 +93,16 @@ const Dashboard = () => {
             }}
             subheader={<li />}
           >
-            <Typography className="listTitle" gutterBottom variant="h5">
+            <Typography className="listTitle" gutterBottom variant="h5" sx={{color: "white"}}>
               Patient's list
             </Typography>
             {[0, 1, 2, 3, 4].map((sectionId) => (
               <li key={`section-${sectionId}`}>
                 <ul>
-                  <ListSubheader>{`I'm sticky ${sectionId}`}</ListSubheader>
+                  <ListSubheader sx={{bgcolor: "#171717", color: "#767676"}}>
+                    {`I'm sticky ${sectionId}`}</ListSubheader>
                   {[0, 1, 2].map((item) => (
-                    <ListItem key={`item-${sectionId}-${item}`}>
+                    <ListItem sx={{color: "#767676"}} key={`item-${sectionId}-${item}`}>
                       <ListItemText primary={`Item ${item}`} />
                     </ListItem>
                   ))}
