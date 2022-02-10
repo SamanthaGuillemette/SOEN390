@@ -23,6 +23,8 @@ import NativeSelect from '@mui/material/NativeSelect';
 import Checkbox from '@mui/material/Checkbox';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Button from '@mui/material/Button';
+import FlagIcon from '@mui/icons-material/Flag';
+import { useState } from "react";
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -33,6 +35,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function PatientProfile() {
+  
   function createData(
     Date,
     Fever,
@@ -59,7 +62,16 @@ function PatientProfile() {
     createData("Jan 25", "No", "Yes", "No", "Yes", "Yes", "No", "No"),
     createData("Jan 26", "No", "Yes", "No", "No", "No", "No", "No")
   ];
+  
+  const [priorityFlag, setpriorityFlag] = useState(false);
 
+
+  function priorityAlert(){
+    if(priorityFlag === false)
+      alert("This patient's updates will now be prioritized.")
+  }
+
+  
   return (
     <Grid container spacing={2} maxWidth="lg" alignItems="flex-end">
       <Grid item xs={8} lg={4}>
@@ -99,7 +111,9 @@ function PatientProfile() {
             <CardActionArea>
               <CardContent>
                 <Typography gutterBottom variant="button" component="div">
-                  Status
+                  Status  <FlagIcon onClick={() => {priorityFlag ? setpriorityFlag(false) : setpriorityFlag(true); priorityAlert()}}
+                  className={priorityFlag ? "priorityFlag clicked" : "priorityFlag"}>
+                  </FlagIcon>
                   <br></br>
                   <br></br>
                 </Typography>

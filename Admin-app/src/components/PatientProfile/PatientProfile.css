@@ -38,3 +38,11 @@
     left: 73%;
     color: black;
 }
+
+.priorityFlag {
+    color: black;
+}
+  
+.priorityFlag.clicked {
+    color: red;
+}
