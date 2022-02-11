@@ -24,7 +24,7 @@ import Checkbox from '@mui/material/Checkbox';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Button from '@mui/material/Button';
 import FlagIcon from '@mui/icons-material/Flag';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -63,13 +63,18 @@ function PatientProfile() {
     createData("Jan 26", "No", "Yes", "No", "No", "No", "No", "No")
   ];
   
-  const [priorityFlag, setpriorityFlag] = useState(false);
+  const [priorityFlag, setPriorityFlag] = useState();
 
+  useEffect(() => {
+    const data = localStorage.getItem("priorityFlag");
+    if (data){
+      setPriorityFlag(JSON.parse(data));
+    }
+  }, []);
 
-  function priorityAlert(){
-    if(priorityFlag === false)
-      alert("This patient's updates will now be prioritized.")
-  }
+  useEffect(() => {
+    localStorage.setItem("priorityFlag", JSON.stringify(priorityFlag));
+  });
 
   
   return (
@@ -105,14 +110,14 @@ function PatientProfile() {
         </Card>
       </Grid>
 
-      <Grid container spacing={2} item rowSpacing={2} direction="column" xs={6}>
+      <Grid container spacing={2} item rowSpacing={2} direction="column" xs={6.1}>
         <Grid item>
-          <Card>
+          <Card className={priorityFlag ? "status-card clicked" : "status-card"}>
             <CardActionArea>
               <CardContent>
                 <Typography gutterBottom variant="button" component="div">
-                  Status  <FlagIcon onClick={() => {priorityFlag ? setpriorityFlag(false) : setpriorityFlag(true); priorityAlert()}}
-                  className={priorityFlag ? "priorityFlag clicked" : "priorityFlag"}>
+                  Status  <FlagIcon onClick={() => {priorityFlag ? setPriorityFlag(false) : setPriorityFlag(true)}}
+                  className={priorityFlag ? "priority-flag clicked" : "priority-flag"}>
                   </FlagIcon>
                   <br></br>
                   <br></br>
@@ -190,12 +195,12 @@ function PatientProfile() {
         </Grid>
       </Grid>
 
-      <Grid item xs={12} lg={10}>
+      <Grid item xs={12} lg={10.1}>
         <TableContainer component={Paper}>
           <h5>
             <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SYMPTOM DETAILS
-            <Button id="addButton"><AddCircleIcon></AddCircleIcon></Button>
+            <Button id="add-button"><AddCircleIcon></AddCircleIcon></Button>
           </h5>
           <Table sx={{ minWidth: 650 }} aria-label="collapsable table">
             <TableHead>

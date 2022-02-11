@@ -33,16 +33,25 @@
     font-size: 12.5px;
 }
 
-#addButton{
+#add-button{
     position: relative; 
-    left: 73%;
+    left: 75%;
     color: black;
 }
 
-.priorityFlag {
+.priority-flag {
     color: black;
 }
   
-.priorityFlag.clicked {
+.priority-flag.clicked {
     color: red;
+}
+
+.status-card{
+    border-style: none;
+}
+
+.status-card.clicked{
+    border-style: double;
+    border-color: red;
 }
