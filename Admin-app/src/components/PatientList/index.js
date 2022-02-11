@@ -15,15 +15,15 @@ import TablePagination from '@mui/material/TablePagination';
 import {Link } from "react-router-dom";
 import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
 import { makeStyles } from "@material-ui/core/styles";
+import DropdownStatus from "./../DropdownStatus";
+import DropdownDoctor from "./../DropdownDoctor";
 import "./PatientList.css";
 
 const useStyles = makeStyles({
-  table: {
-    minWidth: 500
-  },
   paper: {
-    background: "inherit",
-    color: "#767676"
+    background: "#171717",
+    color: "#767676",
+    borderRadius: "10px",
   },
   color: {
     color: "#767676"
@@ -111,19 +111,19 @@ function Row(props) {
 
 const rows = [
   createData(<Link className="data" to="/patientprofile">John Doe</Link>, 1476, 
-  <span class="label-positive">positive</span>, "23/05/22", "Allyson Richards", <label><input type="checkbox"/></label>, "90°C", "150 lbs", "5'9"),
+  <DropdownStatus></DropdownStatus>, "23/05/22", <DropdownDoctor></DropdownDoctor>, <label><input type="checkbox"/></label>, "90°C", "150 lbs", "5'9"),
   createData("Jane Smith", 159,
-  <span class="label-positive">positive</span>, "05/02/22", "Charles Ludwig", <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
+  <DropdownStatus></DropdownStatus>, "05/02/22", <DropdownDoctor></DropdownDoctor>, <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
   createData("William Hill", 1666, 
-  <span class="label-positive">positive</span>, "06/05/22", "Allyson Richards", <label><input type="checkbox"/></label>, "90°C", "150 lbs", "5'9"),
+  <DropdownStatus></DropdownStatus>, "06/05/22", <DropdownDoctor></DropdownDoctor>, <label><input type="checkbox"/></label>, "90°C", "150 lbs", "5'9"),
   createData("Maria Sánchez", 1200,
-  <span class="label-negative">negative</span>, "06/02/22", "Charles Ludwig", <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
+  <DropdownStatus></DropdownStatus>, "06/02/22", <DropdownDoctor></DropdownDoctor>, <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
   createData("Liam Hill", 233, 
-  <span class="label-positive">positive</span>, "22/03/22", "Allyson Richards", <label><input type="checkbox"/></label>, "90°C", "150 lbs", "5'9"),
+  <DropdownStatus></DropdownStatus>, "22/03/22", <DropdownDoctor></DropdownDoctor>, <label><input type="checkbox"/></label>, "90°C", "150 lbs", "5'9"),
   createData("Connor Jackson", 2893,
-  <span class="label-negative">negative</span>, "31/01/22", "Allyson Richards", <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
+  <DropdownStatus></DropdownStatus>, "31/01/22", <DropdownDoctor></DropdownDoctor>, <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
   createData("Connor Jackson", 2896,
-  <span class="label-negative">negative</span>, "01/02/22", "Charles Ludwig", <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
+  <DropdownStatus></DropdownStatus>, "01/02/22", <DropdownDoctor></DropdownDoctor>, <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
 ];
 
 function PatientList() {
@@ -146,7 +146,7 @@ function PatientList() {
        <HealthAndSafetyIcon className="patients-icon"></HealthAndSafetyIcon>
        Patient List
      </Box>
-      <Table aria-label="collapsible table">
+      <Table size="small" aria-label="collapsible table">
         <TableHead>
           <TableRow>
             <TableCell sx={{borderColor: "#1e1e1e"}}/>
@@ -179,7 +179,14 @@ function PatientList() {
           page={page}
           SelectProps={{
             inputProps: { "aria-label": "rows per page" },
-            MenuProps: { classes: { paper: classes.paper } }
+            MenuProps: {
+              classes: { paper: classes.paper },
+              sx: {
+                "&& .Mui-selected": {
+                  backgroundColor: "#1e1e1e"
+                }
+              },
+            }
           }}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage} 

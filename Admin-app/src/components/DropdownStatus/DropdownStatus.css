@@ -1,0 +1,19 @@
+.label-positive {
+    text-transform: uppercase;
+    color: white;
+    background: #0584be;
+    font-size: 0.7rem;
+    font-weight: 700;
+    border-radius: 0.375rem;
+    padding: 0.55em 0.9em;
+}
+
+.label-negative {
+    text-transform: uppercase;
+    color: white;
+    background: #434db8;
+    font-size: 0.7rem;
+    font-weight: 700;
+    border-radius: 0.375rem;
+    padding: 0.55em 0.9em;
+}
