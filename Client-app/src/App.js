@@ -1,12 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { onAuthStateChanged } from "firebase/auth";
-import { saveUser } from "./store/authSlice";
-import { useEffect } from "react";
-import { auth } from "./backend/firebase";
+// import { useDispatch, useSelector } from "react-redux";
+// import { onAuthStateChanged } from "firebase/auth";
+// import { saveUser } from "./store/authSlice";
+// import { useEffect } from "react";
+// import { auth } from "./backend/firebase";
 import Dashboard from "./components/Dashboard";
-import SignIn from "./components/SignIn";
-import SignUp from "./components/SignUp";
+// import SignIn from "./components/SignIn";
+// import SignUp from "./components/SignUp";
 
 function App() {
   // const user = useSelector((state) => state.auth.userToken);
