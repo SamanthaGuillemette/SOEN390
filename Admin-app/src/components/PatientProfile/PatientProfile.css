@@ -1,18 +1,19 @@
 #avatar{
     width: 200px;
     height: 233px;
-    margin-left: 18%;
+    margin-left: 90px;
+    margin-top: 15px;
     border-radius: 3;
     align-items: center;
     text-align:center;
-    border: 1px solid black;
+    border: 1px solid inherit;
     position: relative;
 }
 
 .label-pos {
     text-transform: uppercase;
     color: white;
-    background: linear-gradient(rgb(233, 61, 61), rgb(241, 11, 11));
+    background: #8cb3eb !important;
     font-size: 0.78rem;
     font-weight: 700;
     border-radius: 0.375rem;
@@ -22,11 +23,13 @@
 .text{
     text-align: center;
     font-size: 12.5px !important;
+    color: white;
 }
 
 .profile-name {
     text-align: center;
     font-weight: bold !important;
+    color: white;
 }
 
 .link{

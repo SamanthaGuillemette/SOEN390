@@ -17,11 +17,18 @@ import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
 import { makeStyles } from "@material-ui/core/styles";
 import "./PatientList.css";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
+  table: {
+    minWidth: 500
+  },
+  paper: {
+    background: "inherit",
+    color: "#767676"
+  },
   color: {
     color: "#767676"
   }
-}));
+});
 
 function createData(patientname, id, status, appointment, doctor, priority, temperature, weight, height) {
   return {
@@ -48,16 +55,17 @@ function Row(props) {
   return (
     <React.Fragment>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
-        <TableCell sx={{borderColor: "transparent"}}>
+        <TableCell sx={{borderColor: "#1e1e1e"}}>
           <IconButton
             aria-label="expand row"
             size="small"
             onClick={() => setOpen(!open)}
+            sx = {{color: "#767676"}}
           >
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell sx={{borderColor: "#1e1e1e"}} className="patient-name" component="th" scope="row">
+        <TableCell sx={{borderColor: "#1e1e1e"}} className="data" component="th" scope="row">
           {row.patientname}
         </TableCell>
         <TableCell sx={{borderColor: "#1e1e1e"}} className="data" align="right">{row.id}</TableCell>
@@ -102,7 +110,7 @@ function Row(props) {
 }
 
 const rows = [
-  createData(<Link className="patient-name" to="/patientprofile">John Doe</Link>, 1476, 
+  createData(<Link className="data" to="/patientprofile">John Doe</Link>, 1476, 
   <span class="label-positive">positive</span>, "23/05/22", "Allyson Richards", <label><input type="checkbox"/></label>, "90°C", "150 lbs", "5'9"),
   createData("Jane Smith", 159,
   <span class="label-positive">positive</span>, "05/02/22", "Charles Ludwig", <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
@@ -133,9 +141,9 @@ function PatientList() {
   };
 
   return (
-    <TableContainer className="patient-list">
+    <TableContainer className="patient-doctor-list">
      <Box className="label">
-       <HealthAndSafetyIcon></HealthAndSafetyIcon>
+       <HealthAndSafetyIcon className="patients-icon"></HealthAndSafetyIcon>
        Patient List
      </Box>
       <Table aria-label="collapsible table">
@@ -169,6 +177,10 @@ function PatientList() {
           count={rows.length}
           rowsPerPage={rowsPerPage}
           page={page}
+          SelectProps={{
+            inputProps: { "aria-label": "rows per page" },
+            MenuProps: { classes: { paper: classes.paper } }
+          }}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage} 
       />

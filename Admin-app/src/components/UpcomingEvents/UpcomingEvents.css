@@ -63,3 +63,9 @@
     font-weight: bold;
     margin-left: 130px;
 }
+
+.arrow {
+    position: relative;
+    top: 5px;
+    left: 5px;
+}

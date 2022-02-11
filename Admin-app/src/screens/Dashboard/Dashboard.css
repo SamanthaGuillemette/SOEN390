@@ -11,35 +11,39 @@
 
 .cardShape2{
   max-width: lg;
-  border-radius:8px;
-  height:37vh;
+  border-radius:20px !important;
+  height:50vh;
   width:300px;
   margin-top: 120px;
   margin-left:20px;
   margin-right:10px;
-  background-color: white !important;
+  background-color: #171717 !important;
+}
+
+a {
+  color: white;
 }
 
 .cardShape1{
   max-width: lg;
-  border-radius:8px;
-  height:37vh;
+  border-radius:20px !important;
+  height:50vh;
   width:300px;
   margin-top: 120px;
   margin-left:-590px;
   margin-right:10px;
-  background-color: white !important;
+  background-color: #171717 !important;
 }
 
 .cardShape3{
   max-width: lg;
-  border-radius:8px;
-  height:37vh;
+  border-radius:20px !important;
+  height:50vh;
   width:300px;
   margin-top: 120px;
   margin-left:20px;
   margin-right:25px;
-  background-color: white !important;
+  background-color: #171717 !important;
 }
 
 .cardTitle{
@@ -69,7 +73,7 @@
   margin-right: 0.75rem;
   padding: 0 1rem 0 0.5rem;
   border-radius: 0.25rem;
-  background: #0617afc9;
+  background: #8bc3eb;
   box-shadow: 0 1px 4px 1px rgb(2 125 114 / 50%);
 }
 
@@ -86,7 +90,7 @@
   font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size:16px !important;
   font-weight: bold italic !important;
-  color:black !important
+  color:#767676 !important
 }
 
 .listTitle{
@@ -95,7 +99,7 @@
   font-size: 16px;
   font-weight: bold !important;
   border-bottom: 1px solid black;
-
+  margin-top: 10px !important;
 }
 
 .patientList{

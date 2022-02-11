@@ -10,8 +10,6 @@ import LineChart from "../../components/Charts/LineChart";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import COVID19Button from "../../components/COVID-19Button/index";
-import EventButton from "../../components/EventButton/index";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
@@ -91,7 +89,7 @@ const Dashboard = () => {
             }}
             subheader={<li />}
           >
-            <Typography className="listTitle" gutterBottom variant="h5" sx={{color: "white"}}>
+            <Typography className="listTitle" gutterBottom variant="h5" sx={{color: "white", border: "transparent"}}>
               Patient's list
             </Typography>
             {[0, 1, 2, 3, 4].map((sectionId) => (
@@ -112,7 +110,7 @@ const Dashboard = () => {
           <UpcomingEvents></UpcomingEvents>
 
           <Grid className="infoGrid" container spacing={2} xs ={12}>
-            <Typography className="title" gutterBottom variant="h5">
+            <Typography sx={{color: "white"}} className="title" gutterBottom variant="h5">
               Important Links
             </Typography>
             <Card variant="contained" className="cardShape1">

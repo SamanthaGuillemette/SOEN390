@@ -3,23 +3,30 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableFooter from '@mui/material/TableFooter';
-import TablePagination from '@mui/material/TablePagination';
+import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import { makeStyles } from "@material-ui/core/styles";
-import { CardHeader } from '@mui/material';
-import Avatar from "@material-ui/core/Avatar";
-import "./DoctorList.css";
+import TablePagination from '@mui/material/TablePagination';
+import Box from "@mui/material/Box";
+import HealingIcon from '@mui/icons-material/Healing';
+import Paper from "@material-ui/core/Paper";
+import "./../PatientList/PatientList.css";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
+  table: {
+    minWidth: 500
+  },
+  paper: {
+    background: "inherit",
+    color: "#767676"
+  },
   color: {
-    color: "white"
+    color: "#767676"
   }
-}));
+});
 
-function createData(doctorname, numOfPatients) {
-  return {doctorname, numOfPatients};
+function createData(doctorName, numOfPatients) {
+  return {doctorName, numOfPatients};
 }
 
 const rows = [
@@ -28,61 +35,61 @@ const rows = [
 ];
 
 function DoctorList() {
-  const classes = useStyles();
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
+    const classes = useStyles();
+    const [page, setPage] = React.useState(0);
+    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  
+    const handleChangePage = (event, newPage) => {
+      setPage(newPage);
+    };
+  
+    const handleChangeRowsPerPage = (event) => {
+      setRowsPerPage(parseInt(event.target.value, 10));
+      setPage(0);
+    };
 
   return (
-    <TableContainer component={Paper}>
-      <Table className="doctor-table">
+    <TableContainer className="patient-doctor-list">
+      <Box className="label">
+        <HealingIcon className="patients-icon"></HealingIcon>
+       Doctor List
+     </Box>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell className="header" sx={{borderColor: "rgb(148, 155, 226, 0.5)"}}>Doctor Name</TableCell>
+            <TableCell className="header" sx={{borderColor: "rgb(148, 155, 226, 0.5)"}} align="right">patient number</TableCell>
+          </TableRow>
+        </TableHead>
         <TableBody>
-          <TableCell sx={{borderColor: "transparent"}} className="doctor-table-heading">Doctor</TableCell>
-          <TableCell sx={{borderColor: "transparent"}} className="doctor-table-heading" align="right">Patient No.</TableCell>
-          {(rowsPerPage > 0
-            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : rows
-          ).map((row) => (
-            <TableRow key={row.doctorname}>
-              <TableCell sx={{borderColor: "transparent"}} className="doctor-data" component="th" scope="row">
-              <CardHeader
-              avatar={
-              <Avatar src=""/>
-              }
-              title={row.doctorname}
-              /></TableCell>
-              <TableCell sx={{borderColor: "transparent"}} className="doctor-data" style={{ width: 160 }} align="right">{row.numOfPatients}</TableCell>
+          {rows.map((row) => (
+            <TableRow
+              key={row.name}
+            >
+              <TableCell className="data" sx={{borderColor: "rgb(139, 195, 235, 0.5)"}}>
+                {row.doctorName}
+              </TableCell>
+              <TableCell className="data" sx={{borderColor: "rgb(139, 195, 235, 0.5)"}} align="right">{row.numOfPatients}</TableCell>
             </TableRow>
           ))}
         </TableBody>
-        <TableFooter>
-          <TableRow> 
-            <TablePagination
-            sx={{borderColor: "transparent"}}
-              classes={{
-                root: classes.color
-              }}
-              backIconButtonProps={{ className: classes.color }}
-              nextIconButtonProps={{ className: classes.color }} 
-              rowsPerPageOptions={[5]}
-              colSpan={3}
-              count={rows.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-          </TableRow>
-        </TableFooter>
       </Table>
+      <TablePagination
+          classes={{
+              root: classes.color
+          }}
+          rowsPerPageOptions={[5, 10, { label: 'All', value: -1 }]}
+          component="div"
+          count={rows.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          SelectProps={{
+            inputProps: { "aria-label": "rows per page" },
+            MenuProps: { classes: { paper: classes.paper } }
+          }}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage} 
+      />
     </TableContainer>
   );
 }

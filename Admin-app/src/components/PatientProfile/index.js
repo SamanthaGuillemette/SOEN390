@@ -61,9 +61,9 @@ function PatientProfile() {
   ];
 
   return (
-    <Grid container spacing={2} maxWidth="lg" alignItems="flex-end">
+    <Grid container spacing={2} maxWidth="lg" alignItems="flex-end" sx={{marginTop: "25px"}}>
       <Grid item xs={8} lg={4}>
-        <Card>
+        <Card sx={{background: 'linear-gradient(to right bottom, #8bc3eb, #949be2)', borderRadius: "20px"}}>
           <CardActionArea>
             <Avatar
               id="avatar"
@@ -82,7 +82,6 @@ function PatientProfile() {
               <Typography
                 className="text"
                 variant="body2"
-                color="text.secondary"
               >
                 <br></br>Age: 50
                 <br></br>Birthday: 1 July 1971
@@ -95,10 +94,10 @@ function PatientProfile() {
 
       <Grid container spacing={2} item rowSpacing={2} direction="column" xs={6}>
         <Grid item>
-          <Card>
+          <Card sx={{bgcolor: "#171717", borderRadius: "20px"}}>
             <CardActionArea>
               <CardContent>
-                <Typography gutterBottom variant="button" component="div">
+                <Typography gutterBottom variant="button" component="div" color="#767676">
                   Status
                   <br></br>
                   <br></br>
@@ -113,7 +112,7 @@ function PatientProfile() {
                     >
                       
                       <FormControl sx={{width: 115}} >
-                        <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                        <InputLabel variant="standard" htmlFor="uncontrolled-native" sx={{color: "#767676", fontSize: "18px"}}>
                           Confirmation
                         </InputLabel>
                         <NativeSelect
@@ -123,13 +122,13 @@ function PatientProfile() {
                             name: 'confirmation',
                             id: 'uncontrolled-native',
                           }}>
-                          <option value={10}>Confirmed</option>
+                          <option value={10} sx={{color: "secondary"}}>Confirmed</option>
                           <option value={20}>Unconfirmed</option>
                         </NativeSelect>
                       </FormControl>
                       <Item class="label-pos">positive</Item>
-                      <Item>Temperature: 39 °C</Item>
-                      <Item>Weight: 150 lbs</Item>
+                      <Item sx={{bgcolor: "inherit", color:"white"}}>Temperature: 39 °C</Item>
+                      <Item sx={{bgcolor: "inherit", color:"white"}}>Weight: 150 lbs</Item>
                     </Stack>
                   </div>
                 </Typography>
@@ -140,13 +139,13 @@ function PatientProfile() {
 
         <Grid container spacing={2} item rowSpacing={2} direction="row">
           <Grid item xs={6}>
-            <Card>
+            <Card sx={{bgcolor: "#171717", borderRadius: "20px"}}>
               <CardActionArea>
                 <CardContent>
-                  <Typography gutterBottom variant="button" component="div">
+                  <Typography gutterBottom variant="button" component="div" color="#767676">
                     Assigned Doctor
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography variant="body2" color="white">
                     Name:{" "}
                     <Link to="/doctor" className="link">
                       {" "}
@@ -160,13 +159,13 @@ function PatientProfile() {
           </Grid>
 
           <Grid item xs={6}>
-            <Card>
+            <Card sx={{bgcolor: "#171717", borderRadius: "20px"}}>
               <CardActionArea>
                 <CardContent>
-                  <Typography gutterBottom variant="button" component="div">
+                  <Typography gutterBottom variant="button" component="div" color="#767676">
                     Status Review
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography variant="body2" color="white">
                     Review Completed: <Checkbox size="small"/>
                   </Typography>
                 </CardContent>
@@ -177,23 +176,23 @@ function PatientProfile() {
       </Grid>
 
       <Grid item xs={12} lg={10}>
-        <TableContainer component={Paper}>
+        <TableContainer sx={{bgcolor: "#171717", borderRadius: "20px"}} component={Paper}>
           <h5>
             <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SYMPTOM DETAILS
-            <Button id="addButton"><AddCircleIcon></AddCircleIcon></Button>
+            <Button id="addButton"><AddCircleIcon sx={{color: "white"}}></AddCircleIcon></Button>
           </h5>
           <Table sx={{ minWidth: 650 }} aria-label="collapsable table">
             <TableHead>
               <TableRow>
-                <TableCell>Date</TableCell>
-                <TableCell align="right">Fever</TableCell>
-                <TableCell align="right">Cough</TableCell>
-                <TableCell align="right">Runny Nose</TableCell>
-                <TableCell align="right">Muscle Ache</TableCell>
-                <TableCell align="right">Tiredness</TableCell>
-                <TableCell align="right">Smell Loss</TableCell>
-                <TableCell align="right">Taste Loss</TableCell>
+                <TableCell sx={{borderColor: "#1e1e1e", color: "#767676"}}>Date</TableCell>
+                <TableCell sx={{borderColor: "#1e1e1e", color: "#767676"}}align="right">Fever</TableCell>
+                <TableCell sx={{borderColor: "#1e1e1e", color: "#767676"}}align="right">Cough</TableCell>
+                <TableCell sx={{borderColor: "#1e1e1e", color: "#767676"}}align="right">Runny Nose</TableCell>
+                <TableCell sx={{borderColor: "#1e1e1e", color: "#767676"}}align="right">Muscle Ache</TableCell>
+                <TableCell sx={{borderColor: "#1e1e1e", color: "#767676"}}align="right">Tiredness</TableCell>
+                <TableCell sx={{borderColor: "#1e1e1e", color: "#767676"}}align="right">Smell Loss</TableCell>
+                <TableCell sx={{borderColor: "#1e1e1e", color: "#767676"}}align="right">Taste Loss</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -202,16 +201,16 @@ function PatientProfile() {
                   key={row.Date}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  <TableCell component="th" scope="row">
+                  <TableCell sx={{borderColor: "#1e1e1e", color: "white"}} component="th" scope="row">
                     {row.Date}
                   </TableCell>
-                  <TableCell align="right">{row.Fever}</TableCell>
-                  <TableCell align="right">{row.Cough}</TableCell>
-                  <TableCell align="right">{row.RunnyNose}</TableCell>
-                  <TableCell align="right">{row.MuscleAche}</TableCell>
-                  <TableCell align="right">{row.Tiredness}</TableCell>
-                  <TableCell align="right">{row.SmellLoss}</TableCell>
-                  <TableCell align="right">{row.TasteLoss}</TableCell>
+                  <TableCell sx={{borderColor: "#1e1e1e", color: "white"}} align="right">{row.Fever}</TableCell>
+                  <TableCell sx={{borderColor: "#1e1e1e", color: "white"}} align="right">{row.Cough}</TableCell>
+                  <TableCell sx={{borderColor: "#1e1e1e", color: "white"}} align="right">{row.RunnyNose}</TableCell>
+                  <TableCell sx={{borderColor: "#1e1e1e", color: "white"}} align="right">{row.MuscleAche}</TableCell>
+                  <TableCell sx={{borderColor: "#1e1e1e", color: "white"}} align="right">{row.Tiredness}</TableCell>
+                  <TableCell sx={{borderColor: "#1e1e1e", color: "white"}} align="right">{row.SmellLoss}</TableCell>
+                  <TableCell sx={{borderColor: "#1e1e1e", color: "white"}} align="right">{row.TasteLoss}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
