@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./screens/Dashboard";
 import PatientProfile from "./components/PatientProfile";
 import AppBody from "./components/AppBody";
@@ -51,7 +51,7 @@ function App() {
             <Route path="/news/:id" element={<NewsDetails />} />{" "}
             <Route path="/event" element={<Event />} />
             <Route path="/event/:id" element={<EventDetails />} />{" "}
-            <Route path="*" element={<Navigate to="/" />} />
+            <Route path="*" element={<Dashboard />} />
           </Routes>
         </AppBody>
       )}
