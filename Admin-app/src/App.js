@@ -17,6 +17,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
 import { saveUser } from "./store/authSlice";
 import { useEffect } from "react";
+import Event from "./components/Event";
+import EventDetails from "./components/Event/EventDetails";
 
 function App() {
   // const [user] = useAuthState(auth);
@@ -64,7 +66,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* {user && (
+      {user && (
         <AppBody>
           <Routes>
             <Route path="/" element={<Dashboard />} />
@@ -76,20 +78,21 @@ function App() {
             <Route path="/qr" element={<QR />} />
             <Route path="/news" element={<News />} />
             <Route path="/news/:id" element={<NewsDetails />} />{" "}
+            <Route path="/event" element={<Event />} />
+            <Route path="/event/:id" element={<EventDetails />} />{" "}
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </AppBody>
-      )} */}
-
-      {/* {!user && (
+      )}
+      {!user && (
         <Routes>
+          <Route path="*" element={<SignIn />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="*" element={<Navigate to="/signin" />} />
         </Routes>
-      )} */}
+      )}
 
-      {renderIfLoggedIn()}
+      {/* {renderIfLoggedIn()} */}
     </BrowserRouter>
   );
 }

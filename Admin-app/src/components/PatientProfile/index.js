@@ -23,6 +23,8 @@ import NativeSelect from '@mui/material/NativeSelect';
 import Checkbox from '@mui/material/Checkbox';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Button from '@mui/material/Button';
+import FlagIcon from '@mui/icons-material/Flag';
+import { useState, useEffect } from "react";
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -33,6 +35,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function PatientProfile() {
+  
   function createData(
     Date,
     Fever,
@@ -59,7 +62,21 @@ function PatientProfile() {
     createData("Jan 25", "No", "Yes", "No", "Yes", "Yes", "No", "No"),
     createData("Jan 26", "No", "Yes", "No", "No", "No", "No", "No")
   ];
+  
+  const [priorityFlag, setPriorityFlag] = useState();
 
+  useEffect(() => {
+    const data = localStorage.getItem("priorityFlag");
+    if (data){
+      setPriorityFlag(JSON.parse(data));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("priorityFlag", JSON.stringify(priorityFlag));
+  });
+
+  
   return (
     <Grid container spacing={2} maxWidth="lg" alignItems="flex-end">
       <Grid item xs={8} lg={4}>
@@ -71,7 +88,7 @@ function PatientProfile() {
             />
             <CardContent>
               <Typography
-                className="title"
+                className="profile-name"
                 gutterBottom
                 variant="button"
                 fontSize="1.2rem"
@@ -93,13 +110,15 @@ function PatientProfile() {
         </Card>
       </Grid>
 
-      <Grid container spacing={2} item rowSpacing={2} direction="column" xs={6}>
+      <Grid container spacing={2} item rowSpacing={2} direction="column" xs={6.1}>
         <Grid item>
-          <Card>
+          <Card className={priorityFlag ? "status-card clicked" : "status-card"}>
             <CardActionArea>
               <CardContent>
                 <Typography gutterBottom variant="button" component="div">
-                  Status
+                  Status  <FlagIcon onClick={() => {priorityFlag ? setPriorityFlag(false) : setPriorityFlag(true)}}
+                  className={priorityFlag ? "priority-flag clicked" : "priority-flag"}>
+                  </FlagIcon>
                   <br></br>
                   <br></br>
                 </Typography>
@@ -176,12 +195,12 @@ function PatientProfile() {
         </Grid>
       </Grid>
 
-      <Grid item xs={12} lg={10}>
+      <Grid item xs={12} lg={10.1}>
         <TableContainer component={Paper}>
           <h5>
             <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SYMPTOM DETAILS
-            <Button id="addButton"><AddCircleIcon></AddCircleIcon></Button>
+            <Button id="add-button"><AddCircleIcon></AddCircleIcon></Button>
           </h5>
           <Table sx={{ minWidth: 650 }} aria-label="collapsable table">
             <TableHead>
