@@ -25,6 +25,27 @@ This project is a part of SOEN 390 - Software Engineering Team Design Project - 
 
 <br />
 
+
+# Sprint 2
+
+[Sprint 2 Report](https://docs.google.com/document/d/14unTftGvLbxCVN173bsorxm2BUaxr3SabFkWFxGsgWs/edit?usp=sharing)
+
+1. User Stories Backlog (USB) 
+
+3. Release Plan (Sprint #3 planning) 
+   
+4. Software Architecture Document (SAD) (See Sprint 2 Report)
+
+6. Risk Assessment & Risk Management Plan (RMP) (See Sprint 2 Report)
+7. 
+8. [ UI prototypes for Sprint #3 user stories ](https://github.com/SamanthaGuillemette/SOEN390/tree/main/wiki_docs/UI_Prototypes/Sprint%202)
+9. Testing Plan (See Sprint 2 Report)
+
+10. Running prototype
+11. Short sprint retrospective
+
+<br/>
+
 ## Team 14 - members:
 
 | Name                 | Student ID | GitHub Page                                                   |
