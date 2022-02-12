@@ -15,13 +15,13 @@ This project is a part of SOEN 390 - Software Engineering Team Design Project - 
    
 4. Software Architecture Document (SAD) (See Sprint 1 Report)
 
-6. Risk Assessment & Risk Management Plan (RMP) (See Sprint 1 Report)
-7. [ UI prototypes for Sprint #1 user stories ](https://github.com/SamanthaGuillemette/SOEN390/tree/main/wiki_docs/UI_Prototypes/Sprint%201/Admin)
-8. [ UI prototypes for Sprint #2 user stories ](https://github.com/SamanthaGuillemette/SOEN390/tree/main/wiki_docs/UI_Prototypes/Sprint%202)
-9. Testing Plan (See Sprint 1 Report)
+5. Risk Assessment & Risk Management Plan (RMP) (See Sprint 1 Report)
+6. [ UI prototypes for Sprint #1 user stories ](https://github.com/SamanthaGuillemette/SOEN390/tree/main/wiki_docs/UI_Prototypes/Sprint%201/Admin)
+7. [ UI prototypes for Sprint #2 user stories ](https://github.com/SamanthaGuillemette/SOEN390/tree/main/wiki_docs/UI_Prototypes/Sprint%202)
+8. Testing Plan (See Sprint 1 Report)
 
-10. Running prototype
-11. [Short sprint retrospective](https://github.com/SamanthaGuillemette/SOEN390/blob/main/wiki_docs/Sprint_Retrospectives/Team14_ShortSprint1Retrospective.pdf)
+9. Running prototype
+10. [Short sprint retrospective](https://github.com/SamanthaGuillemette/SOEN390/blob/main/wiki_docs/Sprint_Retrospectives/Team14_ShortSprint1Retrospective.pdf)
 
 <br />
 
@@ -36,13 +36,12 @@ This project is a part of SOEN 390 - Software Engineering Team Design Project - 
    
 4. Software Architecture Document (SAD) (See Sprint 2 Report)
 
-6. Risk Assessment & Risk Management Plan (RMP) (See Sprint 2 Report)
-7. 
-8. [ UI prototypes for Sprint #3 user stories ](https://github.com/SamanthaGuillemette/SOEN390/tree/main/wiki_docs/UI_Prototypes/Sprint%202)
-9. Testing Plan (See Sprint 2 Report)
+5. Risk Assessment & Risk Management Plan (RMP) (See Sprint 2 Report)
+6. [ UI prototypes for Sprint #3 user stories ](https://github.com/SamanthaGuillemette/SOEN390/tree/main/wiki_docs/UI_Prototypes/Sprint%203)
+7. Testing Plan (See Sprint 2 Report)
 
-10. Running prototype
-11. Short sprint retrospective
+9. Running prototype
+10. Short sprint retrospective
 
 <br/>
 
