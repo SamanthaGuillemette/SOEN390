@@ -19,7 +19,7 @@ import DropdownStatus from "./../DropdownStatus";
 import DropdownDoctor from "./../DropdownDoctor";
 import "./PatientList.css";
 
-const useStyles = makeStyles({
+const dropdownStyle = makeStyles({
   paper: {
     background: "#171717",
     color: "#767676",
@@ -27,7 +27,15 @@ const useStyles = makeStyles({
   },
   color: {
     color: "#767676"
-  }
+  },
+  select: {
+    "&:after": {
+      borderBottomColor: "#767676",
+    },
+    "& .MuiSvgIcon-root": {
+      color: "#767676",
+    },
+  },
 });
 
 function createData(patientname, id, status, appointment, doctor, priority, temperature, weight, height) {
@@ -127,7 +135,7 @@ const rows = [
 ];
 
 function PatientList() {
-  const classes = useStyles();
+  const classes = dropdownStyle();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   
@@ -177,6 +185,7 @@ function PatientList() {
           count={rows.length}
           rowsPerPage={rowsPerPage}
           page={page}
+          className={classes.select}
           SelectProps={{
             inputProps: { "aria-label": "rows per page" },
             MenuProps: {

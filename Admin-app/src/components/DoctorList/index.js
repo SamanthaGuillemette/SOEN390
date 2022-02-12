@@ -16,7 +16,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import TableHead from '@mui/material/TableHead';
 import "./../PatientList/PatientList.css";
 
-const useStyles = makeStyles({
+const dropdownStyle = makeStyles({
   paper: {
     background: "#171717",
     color: "#767676",
@@ -24,7 +24,15 @@ const useStyles = makeStyles({
   },
   color: {
     color: "#767676"
-  }
+  },
+  select: {
+    "&:after": {
+      borderBottomColor: "#767676",
+    },
+    "& .MuiSvgIcon-root": {
+      color: "#767676",
+    },
+  },
 });
 
 function createData(doctorName, numOfPatients) {
@@ -69,7 +77,7 @@ function TablePaginationActions(props) {
 }
 
 function DoctorList() {
-  const classes = useStyles();
+  const classes = dropdownStyle();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -122,6 +130,7 @@ function DoctorList() {
               count={rows.length}
               rowsPerPage={rowsPerPage}
               page={page}
+              className={classes.select}
               SelectProps={{
                 inputProps: { "aria-label": "rows per page" },
                 MenuProps: {

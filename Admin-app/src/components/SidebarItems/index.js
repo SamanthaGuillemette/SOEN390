@@ -17,7 +17,7 @@ export const mainListItems = (
         <ListItemIcon>
           <DashboardIcon sx={{color: "#767676"}}/>
         </ListItemIcon>
-        <ListItemText primary="Dashboard" />
+        <ListItemText sx={{color: "#767676"}} primary="Dashboard" />
       </ListItem>
     </Link>
 
@@ -26,7 +26,7 @@ export const mainListItems = (
         <ListItemIcon>
           <EventIcon sx={{color: "#767676"}}/>
         </ListItemIcon>
-        <ListItemText primary="Appointments" />
+        <ListItemText sx={{color: "#767676"}} primary="Appointments" />
       </ListItem>
     </Link>
 
@@ -35,7 +35,7 @@ export const mainListItems = (
         <ListItemIcon>
           <PeopleIcon sx={{color: "#767676"}}/>
         </ListItemIcon>
-        <ListItemText primary="Patients" />
+        <ListItemText sx={{color: "#767676"}} primary="Patients" />
       </ListItem>
     </Link>
 
@@ -44,7 +44,7 @@ export const mainListItems = (
         <ListItemIcon>
           <MailIcon sx={{color: "#767676"}}/>
         </ListItemIcon>
-        <ListItemText primary="Inbox" />
+        <ListItemText sx={{color: "#767676"}} primary="Inbox" />
       </ListItem>
     </Link>
 
@@ -53,7 +53,7 @@ export const mainListItems = (
         <ListItemIcon>
           <LayersIcon sx={{color: "#767676"}}/>
         </ListItemIcon>
-        <ListItemText primary="Test Component" />
+        <ListItemText sx={{color: "#767676"}} primary="Test Component" />
       </ListItem>
     </Link>
 
@@ -62,7 +62,7 @@ export const mainListItems = (
         <ListItemIcon>
           <QrCodeIcon sx={{color: "#767676"}}/>
         </ListItemIcon>
-        <ListItemText primary="QR Code" />
+        <ListItemText sx={{color: "#767676"}} primary="QR Code" />
       </ListItem>
     </Link>
   </div>

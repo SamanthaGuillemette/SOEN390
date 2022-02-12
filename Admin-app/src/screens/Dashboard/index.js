@@ -65,7 +65,7 @@ const Dashboard = () => {
 
         <Grid container spacing={3} className="statContainer">
           <Grid item xs={12} md={8}>
-            <Card className="statItem" sx={{backgroundColor: "inherit"}}>
+            <Card className="statItem" sx={{backgroundColor: "inherit", boxShadow: "none"}}>
               <LineChart/>
             </Card>
           </Grid>

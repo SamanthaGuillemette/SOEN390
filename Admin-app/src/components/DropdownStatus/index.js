@@ -7,7 +7,7 @@ import Select from '@mui/material/Select';
 import { makeStyles } from "@material-ui/core/styles";
 import "./DropdownStatus.css";
 
-const useStyles = makeStyles({
+const dropdownStyle = makeStyles({
   paper: {
     background: "#171717",
     borderRadius: "10px",
@@ -15,7 +15,7 @@ const useStyles = makeStyles({
 });
 
 function DropdownStatus() {
-  const classes = useStyles();
+  const classes = dropdownStyle();
   const [status, setStatus] = React.useState('');
 
   const handleChange = (event) => {

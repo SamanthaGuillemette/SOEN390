@@ -1,4 +1,4 @@
-import { styled, alpha } from "@mui/material/styles";
+import { styled} from "@mui/material/styles";
 import MuiAppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -19,6 +19,17 @@ import { openDrawer, openState } from "../../store/drawerSlice";
 import { useState } from "react";
 import { signOut } from 'firebase/auth';
 import { auth } from '../../backend/firebase';
+import { makeStyles } from "@material-ui/core/styles";
+
+const dropdownStyle = makeStyles(() => ({
+  menu: {
+    "& .MuiPaper-root": {
+      backgroundColor: "#171717",
+      color: "#767676",
+      borderRadius: "10px",
+    }
+  }
+}));
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -81,6 +92,7 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 function Navbar() {
+  const classes = dropdownStyle();
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
@@ -123,6 +135,7 @@ function Navbar() {
       keepMounted
       open={isMenuOpen}
       onClose={handleMenuClose}
+      className={classes.menu}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
@@ -180,11 +193,11 @@ function Navbar() {
       <AppBar
         position="absolute"
         open={open}
-        style={{ backgroundColor: "#1e1e1e" }}
       >
         <Toolbar
           sx={{
             pr: "24px", // keep right padding when drawer closed
+            backgroundColor: "#1e1e1e"
           }}
         >
           <IconButton

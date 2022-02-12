@@ -7,15 +7,15 @@ import Select from '@mui/material/Select';
 import { makeStyles } from "@material-ui/core/styles";
 import "./DropdownDoctor.css";
 
-const useStyles = makeStyles({
+const dropdownStyle = makeStyles({
   paper: {
     background: "#171717",
     borderRadius: "10px",
-  }
+  },
 });
 
 function DropdownDoctor() {
-  const classes = useStyles();
+  const classes = dropdownStyle();
   const [doctorName, setDoctorName] = React.useState('');
 
   const handleChange = (event) => {
@@ -34,6 +34,7 @@ function DropdownDoctor() {
           value={doctorName}
           onChange={handleChange}
           input={<OutlinedInput label="Doctor" />}
+          
           MenuProps={{
             sx: {
               "&& .Mui-selected": {

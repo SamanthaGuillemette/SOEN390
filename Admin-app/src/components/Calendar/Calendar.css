@@ -1,16 +1,32 @@
 .fc {
-    background-color: #1e1e1e !important;
+    background-color: #171717 !important;
     color: white;
+    border-radius: 20px;
+    padding: 20px;
 }
 
 .fc-day-today {
-    background: #767676 !important;
-}
-
-.fc-day {
-    border-color: #1e1e1e !important;
+    background: #1e1e1e !important;
 }
 
 .fc-event {
     background: linear-gradient(to right,#8bc3eb, #949be2)!important;
+}
+
+.fc-button {
+    background-color: transparent !important;
+    border-color: transparent !important;
+    box-shadow:none !important;
+}
+
+.fc-button:focus {
+    background-color: #949be2 !important;
+}
+
+.fc *, .fc *:before, .fc *:after {
+    border-color: transparent !important;
+}
+
+.fc a:hover {
+    color: #8bc3eb !important;
 }
