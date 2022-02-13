@@ -59,7 +59,7 @@ function Sidebar() {
         }}
       >
         {/* <IconButton onClick={toggleDrawer}> */}
-        <IconButton onClick={() => dispatch(openDrawer())}>
+        <IconButton sx={{color: "#767676"}} onClick={() => dispatch(openDrawer())}>
           {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
         </IconButton>
       </Toolbar>

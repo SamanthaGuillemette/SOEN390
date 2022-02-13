@@ -4,7 +4,6 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { makeStyles } from "@material-ui/core/styles";
-import "./DropdownDoctor.css";
 
 const dropdownStyle = makeStyles({
   paper: {
@@ -16,24 +15,24 @@ const dropdownStyle = makeStyles({
   },
 });
 
-function DropdownDoctor() {
+function DropdownConfirmation() {
   const classes = dropdownStyle();
-  const [doctorName, setDoctorName] = React.useState('');
+  const [confirmation, setConfirmation] = React.useState('');
 
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
-    setDoctorName(
+    setConfirmation(
       typeof value === 'string' ? value.split(',') : value,
     );
   };
 
   return (
-      <FormControl sx={{minWidth: 130}}>
-        <InputLabel className="data" shrink={false}>{doctorName === '' && 'Assign Doctor'}</InputLabel>
+      <FormControl sx={{minWidth: 140}}>
+        <InputLabel className="data" shrink={false}>{confirmation === '' && 'Confirm Status'}</InputLabel>
         <Select className="data"
-          value={doctorName}
+          value={confirmation}
           onChange={handleChange}
           inputProps={{
             classes: {
@@ -51,11 +50,10 @@ function DropdownDoctor() {
             }
           }}
         >
-        <MenuItem className="data" value="1">Allyson Richards</MenuItem>
-        <MenuItem className="data" value="2">Charles Ludwig</MenuItem>
+        <MenuItem className="data" value="1">Confirmed</MenuItem>
         </Select>
       </FormControl>
   );
 }
 
-export default DropdownDoctor;
+export default DropdownConfirmation;

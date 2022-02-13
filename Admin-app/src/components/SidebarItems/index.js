@@ -9,60 +9,61 @@ import LayersIcon from "@mui/icons-material/Layers";
 import EventIcon from "@mui/icons-material/Event";
 import { Link } from "react-router-dom";
 import QrCodeIcon from '@mui/icons-material/QrCode'
+import "./SidebarItems.css";
 
 export const mainListItems = (
   <div>
-    <Link to="/">
-      <ListItem button>
+    <Link className="sidebar-link" to="/">
+      <ListItem button sx={{color: "transparent"}}>
         <ListItemIcon>
           <DashboardIcon sx={{color: "#767676"}}/>
         </ListItemIcon>
-        <ListItemText sx={{color: "#767676"}} primary="Dashboard" />
+        <ListItemText className="sidebar-text" primary="Dashboard" />
       </ListItem>
     </Link>
 
-    <Link to="/appointments">
-      <ListItem button>
+    <Link className="sidebar-link" to="/appointments">
+      <ListItem button sx={{color: "transparent"}}>
         <ListItemIcon>
           <EventIcon sx={{color: "#767676"}}/>
         </ListItemIcon>
-        <ListItemText sx={{color: "#767676"}} primary="Appointments" />
+        <ListItemText className="sidebar-text" primary="Appointments" />
       </ListItem>
     </Link>
 
-    <Link to="/patients">
-      <ListItem button>
+    <Link className="sidebar-link" to="/patients">
+      <ListItem button sx={{color: "transparent"}}>
         <ListItemIcon>
           <PeopleIcon sx={{color: "#767676"}}/>
         </ListItemIcon>
-        <ListItemText sx={{color: "#767676"}} primary="Patients" />
+        <ListItemText className="sidebar-text" primary="Patients" />
       </ListItem>
     </Link>
 
-    <Link to="inbox">
-      <ListItem button>
+    <Link className="sidebar-link" to="inbox">
+      <ListItem button sx={{color: "transparent"}}>
         <ListItemIcon>
           <MailIcon sx={{color: "#767676"}}/>
         </ListItemIcon>
-        <ListItemText sx={{color: "#767676"}} primary="Inbox" />
+        <ListItemText className="sidebar-text" primary="Inbox" />
       </ListItem>
     </Link>
 
-    <Link to="testing">
-      <ListItem button>
+    <Link className="sidebar-link" to="testing">
+      <ListItem button sx={{color: "transparent"}}>
         <ListItemIcon>
           <LayersIcon sx={{color: "#767676"}}/>
         </ListItemIcon>
-        <ListItemText sx={{color: "#767676"}} primary="Test Component" />
+        <ListItemText className="sidebar-text" primary="Test Component" />
       </ListItem>
     </Link>
 
-    <Link to="QR">
-      <ListItem button>
+    <Link className="sidebar-link" to="QR">
+      <ListItem button sx={{color: "transparent"}}>
         <ListItemIcon>
           <QrCodeIcon sx={{color: "#767676"}}/>
         </ListItemIcon>
-        <ListItemText sx={{color: "#767676"}} primary="QR Code" />
+        <ListItemText className="sidebar-text" primary="QR Code" />
       </ListItem>
     </Link>
   </div>

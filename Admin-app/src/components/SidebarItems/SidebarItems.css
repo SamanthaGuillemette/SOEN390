@@ -1,0 +1,11 @@
+.sidebar-link:hover {
+    color: transparent !important;
+}
+
+.sidebar-text:hover {
+    color: white !important;
+}
+
+.sidebar-text {
+    color: #767676 !important;
+}

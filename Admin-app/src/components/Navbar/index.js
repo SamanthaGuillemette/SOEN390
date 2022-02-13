@@ -137,9 +137,18 @@ function Navbar() {
       onClose={handleMenuClose}
       className={classes.menu}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem onClick={logout}>Signout</MenuItem>
+      <MenuItem 
+      onMouseEnter={(e) => e.target.style.color = '#ffffff'}
+      onMouseLeave={(e) => e.target.style.color = '#767676'}
+      onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem 
+      onMouseEnter={(e) => e.target.style.color = '#ffffff'}
+      onMouseLeave={(e) => e.target.style.color = '#767676'}
+      onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem 
+      onMouseEnter={(e) => e.target.style.color = '#ffffff'}
+      onMouseLeave={(e) => e.target.style.color = '#767676'}
+      onClick={logout}>Signout</MenuItem>
     </Menu>
 
   );

@@ -11,17 +11,20 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {ThemeProvider } from '@mui/material/styles';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../backend/firebase';
 import {useAuthState} from 'react-firebase-hooks/auth';
 import { Navigate } from "react-router-dom";
+import {createMuiTheme } from "@material-ui/core/styles";
+import { inputLabelClasses } from "@mui/material/InputLabel";
+import "./SignIn.css";
 
 function Copyright(props) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+    <Typography variant="body2" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
+      <Link className="link-signin" sx={{fontSize: "12px", textDecoration: 'none'}} color="inherit">
         Your Website
       </Link>{' '}
       {new Date().getFullYear()}
@@ -30,10 +33,19 @@ function Copyright(props) {
   );
 }
 
-const theme = createTheme();
+const theme = createMuiTheme({
+  palette: {
+    background: {
+      default: "#1e1e1e"
+    },
+    text: {
+      primary: "#ffffff"
+    }
+  }
+});
 
 export default function SignIn() {
-  
+  console.log(inputLabelClasses);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -66,17 +78,17 @@ export default function SignIn() {
   
     return (
       <ThemeProvider theme={theme}>
-        <Container component="main" maxWidth="xs">
+        <Container sx={{bgcolor: "#171717", borderRadius: "20px"}} component="main" maxWidth="xs">
           <CssBaseline />
           <Box
             sx={{
-              marginTop: 8,
+              marginTop: 10,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <Avatar sx={{ m: 2, bgcolor: '#949be2' }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
@@ -94,6 +106,14 @@ export default function SignIn() {
                 autoFocus
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                InputLabelProps={{
+                  sx: {
+                    color: "white",
+                    [`&.${inputLabelClasses.shrink}`]: {
+                      color: "#8bc3eb"
+                    }
+                  }
+                }}
               />
               <TextField
                 margin="normal"
@@ -106,27 +126,39 @@ export default function SignIn() {
                 autoComplete="current-password"
                 value = {password}
                 onChange={(e) => setPassword(e.target.value)}
+                InputLabelProps={{
+                  sx: {
+                    color: "white",
+                    [`&.${inputLabelClasses.shrink}`]: {
+                      color: "#8bc3eb"
+                    }
+                  }
+                }}
               />
               <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
+                control={<Checkbox style={{color: "white"}} value="remember" />}
                 label="Remember me"
               />
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ 
+                  mt: 3, 
+                  mb: 2,
+                  background: 'linear-gradient(to right, #8bc3eb, #949be2)'
+                }}
               >
                 Sign In
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
+                  <Link className="link-signin" sx={{color: "#8bc3eb", textDecoration: 'none'}} href="#" variant="body2">
                     Forgot password?
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="/signup" variant="body2">
+                  <Link className="link-signin" sx={{color: "#8bc3eb", textDecoration: 'none'}} href="/signup" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>

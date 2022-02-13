@@ -1,5 +1,4 @@
 import * as React from 'react';
-import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -11,7 +10,10 @@ const dropdownStyle = makeStyles({
   paper: {
     background: "#171717",
     borderRadius: "10px",
-  }
+  },
+  icon: {
+    fill: '#767676',
+  },
 });
 
 function DropdownStatus() {
@@ -28,12 +30,16 @@ function DropdownStatus() {
   };
 
   return (
-      <FormControl sx={{minWidth: 116 }}>
+      <FormControl sx={{minWidth: 130 }}>
         <InputLabel className="data" shrink={false}>{status === '' && 'Select Status'}</InputLabel>
         <Select
           value={status}
           onChange={handleChange}
-          input={<OutlinedInput label="Doctor" />}
+          inputProps={{
+            classes: {
+                icon: classes.icon,
+            },
+          }}
           MenuProps={{
             sx: {
               "&& .Mui-selected": {

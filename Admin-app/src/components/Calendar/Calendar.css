@@ -9,6 +9,10 @@
     background: #1e1e1e !important;
 }
 
+.fc-day-today:hover, .fc-day-past:hover, .fc-day-future:hover{
+    background-color: rgb(139, 195, 235, 0.5) !important;
+}
+
 .fc-event {
     background: linear-gradient(to right,#8bc3eb, #949be2)!important;
 }
@@ -28,5 +32,5 @@
 }
 
 .fc a:hover {
-    color: #8bc3eb !important;
+    color: white !important;
 }
