@@ -63,7 +63,7 @@ function PatientProfile() {
     createData("Jan 26", "No", "Yes", "No", "No", "No", "No", "No")
   ];
   
-  const [priorityFlag, setPriorityFlag] = useState();
+  const [priorityFlag, setPriorityFlag] = useState(false);
 
   useEffect(() => {
     const data = localStorage.getItem("priorityFlag");
