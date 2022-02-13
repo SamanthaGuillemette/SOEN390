@@ -11,7 +11,7 @@ on:
 
 defaults:
   run:
-    working-directory: ./Admin-app
+    working-directory: Admin-app
 
 jobs:
   build:
