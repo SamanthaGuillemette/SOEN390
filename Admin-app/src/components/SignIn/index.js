@@ -24,7 +24,7 @@ function Copyright(props) {
   return (
     <Typography variant="body2" align="center" {...props}>
       {'Copyright © '}
-      <Link className="link-signin" sx={{fontSize: "12px", textDecoration: 'none'}} color="inherit">
+      <Link className="link-sign" sx={{fontSize: "12px", textDecoration: 'none'}} color="inherit">
         Your Website
       </Link>{' '}
       {new Date().getFullYear()}
@@ -153,12 +153,12 @@ export default function SignIn() {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link className="link-signin" sx={{color: "#8bc3eb", textDecoration: 'none'}} href="#" variant="body2">
+                  <Link className="link-sign" sx={{color: "#8bc3eb", textDecoration: 'none'}} href="#" variant="body2">
                     Forgot password?
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link className="link-signin" sx={{color: "#8bc3eb", textDecoration: 'none'}} href="/signup" variant="body2">
+                  <Link className="link-sign" sx={{color: "#8bc3eb", textDecoration: 'none'}} href="/signup" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>

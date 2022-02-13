@@ -14,7 +14,7 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {ThemeProvider } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import {useAuthState} from 'react-firebase-hooks/auth';
@@ -24,14 +24,18 @@ import { doc, setDoc } from "firebase/firestore";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
+import {createMuiTheme } from "@material-ui/core/styles";
+import { inputLabelClasses } from "@mui/material/InputLabel";
 import Select from '@mui/material/Select';
 import { Navigate } from "react-router-dom";
+import "./../SignIn";
+import "./SignUp.css";
 
 function Copyright(props) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+    <Typography variant="body2" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
+      <Link className="link-sign" sx={{fontSize: "12px", textDecoration: 'none'}} color="inherit">
         Your Website
       </Link>{' '}
       {new Date().getFullYear()}
@@ -40,10 +44,35 @@ function Copyright(props) {
   );
 }
 
-const theme = createTheme();
+const theme = createMuiTheme({
+  palette: {
+    background: {
+      default: "#1e1e1e"
+    },
+    text: {
+      primary: "#ffffff"
+    }
+  },
+  components: {
+    MuiIconButton: {
+      styleOverrides: {
+        sizeMedium: {
+          color: "#767676"
+        }
+      }
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          color: "yellow"
+        }
+      }
+    },
+  },
+});
 
 export default function SignUp(props) {
-  
+  console.log(inputLabelClasses);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [address, setAddress] = useState('');
@@ -96,17 +125,17 @@ export default function SignUp(props) {
   }
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container sx={{bgcolor: "#171717", borderRadius: "20px"}} component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 10,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 2, bgcolor: '#949be2' }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -125,6 +154,14 @@ export default function SignUp(props) {
                   value={firstName}
                   autoFocus
                   onChange={(e) => setFirstName(e.target.value)}
+                  InputLabelProps={{
+                    sx: {
+                      color: "white",
+                      [`&.${inputLabelClasses.shrink}`]: {
+                        color: "#8bc3eb"
+                      }
+                    }
+                  }}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -137,6 +174,14 @@ export default function SignUp(props) {
                   autoComplete="family-name"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
+                  InputLabelProps={{
+                    sx: {
+                      color: "white",
+                      [`&.${inputLabelClasses.shrink}`]: {
+                        color: "#8bc3eb"
+                      }
+                    }
+                  }}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -149,6 +194,14 @@ export default function SignUp(props) {
                   autoComplete="street-address"
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
+                  InputLabelProps={{
+                    sx: {
+                      color: "white",
+                      [`&.${inputLabelClasses.shrink}`]: {
+                        color: "#8bc3eb"
+                      }
+                    }
+                  }}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -161,6 +214,14 @@ export default function SignUp(props) {
                   autoComplete="address-level3"
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
+                  InputLabelProps={{
+                    sx: {
+                      color: "white",
+                      [`&.${inputLabelClasses.shrink}`]: {
+                        color: "#8bc3eb"
+                      }
+                    }
+                  }}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -197,6 +258,14 @@ export default function SignUp(props) {
                   autoComplete="postal-code"
                   value={postalCode}
                   onChange={(e) => setPostalCode(e.target.value)}
+                  InputLabelProps={{
+                    sx: {
+                      color: "white",
+                      [`&.${inputLabelClasses.shrink}`]: {
+                        color: "#8bc3eb"
+                      }
+                    }
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -206,7 +275,16 @@ export default function SignUp(props) {
                     label="Date of Birth"
                     value={dob}
                     onChange={(e) => {setDOB(e)}}
-                    renderInput={(params) => <TextField {...params} />}
+                    renderInput={(params) => <TextField {...params} 
+                    InputLabelProps={{
+                      sx: {
+                        color: "white",
+                        [`&.${inputLabelClasses.shrink}`]: {
+                          color: "#8bc3eb"
+                        }
+                      }
+                    }}
+                    />}
                   />
                </Stack>
              </LocalizationProvider>
@@ -214,7 +292,7 @@ export default function SignUp(props) {
               <Grid item xs={12}>
               <FormControlLabel
                   required
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
+                  control={<Checkbox className="signup-checkbox" value="allowExtraEmails" />}
                   label="I confirm my data above is correct."
                 />
               </Grid>
@@ -228,6 +306,14 @@ export default function SignUp(props) {
                   autoComplete="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  InputLabelProps={{
+                    sx: {
+                      color: "white",
+                      [`&.${inputLabelClasses.shrink}`]: {
+                        color: "#8bc3eb"
+                      }
+                    }
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -241,6 +327,14 @@ export default function SignUp(props) {
                   autoComplete="new-password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  InputLabelProps={{
+                    sx: {
+                      color: "white",
+                      [`&.${inputLabelClasses.shrink}`]: {
+                        color: "#8bc3eb"
+                      }
+                    }
+                  }}
                 />
               </Grid>
             </Grid>
@@ -248,13 +342,17 @@ export default function SignUp(props) {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{
+                mt: 3,
+                mb: 2,
+                background: 'linear-gradient(to right, #8bc3eb, #949be2)'
+              }}
             >
               Sign Up
             </Button>
             <Grid container justifyContent="center">
               <Grid item>
-                <Link href="/signin" variant="body2">
+                <Link className="link-sign" sx={{textDecoration: 'none', color: "#8bc3eb"}} href="/signin" variant="body2">
                   Already have an account? Sign in
                 </Link> 
               </Grid>
