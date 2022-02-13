@@ -9,13 +9,16 @@ on:
   pull_request:
     branches: [main]
 
-
 jobs:
   build:
+    defaults:
+      run:
+        working-directory: Admin-app
+
     runs-on: ubuntu-latest
 
     strategy:
-      matrix: { dir: ['Admin-app', 'Client-app'] }
+      matrix:
         node-version: [12.x, 14.x, 16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
