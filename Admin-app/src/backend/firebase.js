@@ -1,7 +1,8 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
-import { collection, doc, getDocs  } from "firebase/firestore";
+import { collection, doc, getDocs, setDoc  } from "firebase/firestore";
+import patientData from "../data/patients.json";
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAXeBgqncd708qRswIsQR858CV_mKJecyw',
@@ -23,5 +24,12 @@ const getPatients = async () => {
   return returnValue;
 };
 
-export { db, auth, provider, getPatients };
+const populatePatients = () => {
+  const patientsRef = collection(db, "Patients");
+
+  patientData.map((patientData) =>
+    setDoc(doc(patientsRef, patientData.email), patientData));
+}
+
+export { db, auth, provider, getPatients, populatePatients };
 

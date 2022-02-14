@@ -106,12 +106,10 @@ function PatientList() {
     .then((data) => {
       let results = [];
       data.forEach(doc => {
-        console.log(doc);
         results.push(createData(<Link className="{patient-name}" to="/patientprofile">{doc.name}</Link>, doc.id, 
         <span class="label-positive">{doc.status}</span>, doc.upcomingAppointment, doc.assignedDoctor, <label><input type="checkbox"/></label>, 
         doc.temperature + "°C", doc.weight + " lbs", doc.heightFeet + "' " + doc.heightInches + "\""));
       })
-      console.log(results)
       setPatientsList(results)
     })
   }, [])
