@@ -106,8 +106,10 @@ function PatientList() {
     .then((data) => {
       let results = [];
       data.forEach(doc => {
+        // Find status of patient from DB at set variable to appropriate class name
+        let statusLabel = doc.status === "POSITIVE"?"label-positive":"label-negative";
         results.push(createData(<Link className="{patient-name}" to="/patientprofile">{doc.name}</Link>, doc.id, 
-        <span class="label-positive">{doc.status}</span>, doc.upcomingAppointment, doc.assignedDoctor, <label><input type="checkbox"/></label>, 
+        <span class={statusLabel}>{doc.status}</span>, doc.upcomingAppointment, doc.assignedDoctor, <label><input type="checkbox"/></label>, 
         doc.temperature + "°C", doc.weight + " lbs", doc.heightFeet + "' " + doc.heightInches + "\""));
       })
       setPatientsList(results)
