@@ -63,17 +63,17 @@ function PatientProfile() {
     createData("Jan 26", "No", "Yes", "No", "No", "No", "No", "No")
   ];
   
-  const [priorityFlag, setPriorityFlag] = useState();
+  const [priorityFlag, setPriorityFlag] = useState(false);
 
   useEffect(() => {
-    const data = localStorage.getItem("priorityFlag");
+    const data = localStorage.getItem('priorityFlag');
     if (data){
       setPriorityFlag(JSON.parse(data));
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("priorityFlag", JSON.stringify(priorityFlag));
+    localStorage.setItem('priorityFlag', JSON.stringify(priorityFlag));
   });
 
   
