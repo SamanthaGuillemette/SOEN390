@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
+import { collection, doc, getDocs  } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAXeBgqncd708qRswIsQR858CV_mKJecyw',
@@ -16,4 +17,11 @@ const db = getFirestore();
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
-export { db, auth, provider };
+const getPatients = async () => {
+  const querySnapshot = await getDocs(collection(db, "Patients"));
+  const returnValue = querySnapshot.docs.map((patient) => patient.data());
+  return returnValue;
+};
+
+export { db, auth, provider, getPatients };
+

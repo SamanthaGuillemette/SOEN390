@@ -15,8 +15,8 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import TablePagination from '@mui/material/TablePagination';
 import {Link } from "react-router-dom";
 import "./PatientList.css";
-import { db } from "../../backend/firebase";
-import { collection, doc, getDocs  } from "firebase/firestore";
+import { getPatients } from "../../backend/firebase";
+import { useEffect, useState } from "react";
 
 function createData(patientname, id, status, appointment, doctor, priority, temperature, weight, height) {
   return {
@@ -96,47 +96,25 @@ function Row(props) {
   );
 }
 
-const RowsList = async () => {
-  const returnValue = [];
-  const querySnapshot = await getDocs(collection(db, "Patients"));
-  querySnapshot.forEach((doc) => {
-    // doc.data() is never undefined for query doc snapshots
-    returnValue.push(createData(<Link className="patient-name" to="/patientprofile">John Doe</Link>, 1476, 
-    <span class="label-positive">positive</span>, "23/05/22", "Allyson Richards", <label><input type="checkbox"/></label>, "90°C", "150 lbs", "5'9"));
-  });
-  console.log(returnValue);
-
-  return returnValue;
-};
-
-//async function PatientList() {
 function PatientList() {
-    const [page, setPage] = React.useState(0);
+  const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const rows = [];
-  rows.push(createData(<Link className="patient-name" to="/patientprofile">John Doe</Link>, 1476, 
-  <span class="label-positive">positive</span>, "23/05/22", "Allyson Richards", <label><input type="checkbox"/></label>, "90°C", "150 lbs", "5'9"));
-/*   const rows = [
-    createData(<Link className="patient-name" to="/patientprofile">John Doe</Link>, 1476, 
-    <span class="label-positive">positive</span>, "23/05/22", "Allyson Richards", <label><input type="checkbox"/></label>, "90°C", "150 lbs", "5'9"),
-    createData("Jane Smith", 159,
-    <span class="label-positive">positive</span>, "05/02/22", "Charles Ludwig", <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
-    createData("William Hill", 1666, 
-    <span class="label-positive">positive</span>, "06/05/22", "Allyson Richards", <label><input type="checkbox"/></label>, "90°C", "150 lbs", "5'9"),
-    createData("Maria Sánchez", 1200,
-    <span class="label-negative">negative</span>, "06/02/22", "Charles Ludwig", <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
-    createData("Liam Hill", 233, 
-    <span class="label-positive">positive</span>, "22/03/22", "Allyson Richards", <label><input type="checkbox"/></label>, "90°C", "150 lbs", "5'9"),
-    createData("Connor Jackson", 2893,
-    <span class="label-negative">negative</span>, "31/01/22", "Allyson Richards", <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
-    createData("Connor Jackson", 2896,
-    <span class="label-negative">negative</span>, "01/02/22", "Charles Ludwig", <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
-  ]; */
-  
- // console.log(rows);
+  const [patientsList, setPatientsList] = useState(null); 
 
-  //const rows2 = RowsList(getDocs(collection(db, "Patients")));
-  //const rows2 = await RowsList();
+  useEffect(() => {
+    getPatients()
+    .then((data) => {
+      let results = [];
+      data.forEach(doc => {
+        console.log(doc);
+        results.push(createData(<Link className="{patient-name}" to="/patientprofile">{doc.name}</Link>, doc.id, 
+        <span class="label-positive">{doc.status}</span>, doc.upcomingAppointment, doc.assignedDoctor, <label><input type="checkbox"/></label>, 
+        doc.temperature + "°C", doc.weight + " lbs", doc.heightFeet + "' " + doc.heightInches + "\""));
+      })
+      console.log(results)
+      setPatientsList(results)
+    })
+  }, [])
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -164,23 +142,27 @@ function PatientList() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {(rowsPerPage > 0
-            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : rows
+          {
+          patientsList &&
+          (rowsPerPage > 0
+            ? patientsList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            : patientsList
           ).map((row) => (
             <Row key={row.id} row={row}></Row>
           ))}
         </TableBody>
       </Table>
-      <TablePagination
+        {patientsList &&
+          <TablePagination
           rowsPerPageOptions={[5, 10, { label: 'All', value: -1 }]}
           component="div"
-          count={rows.length}
+          count={patientsList.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage} 
         />
+      }
     </TableContainer>
   );
 }
