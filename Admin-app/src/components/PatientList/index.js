@@ -14,6 +14,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import TablePagination from '@mui/material/TablePagination';
 import {Link } from "react-router-dom";
+import FlagIcon from '@mui/icons-material/Flag';
 import "./PatientList.css";
 import { getPatients } from "../../backend/firebase";
 import { useEffect, useState } from "react";
@@ -106,10 +107,8 @@ function PatientList() {
     .then((data) => {
       let results = [];
       data.forEach(doc => {
-        // Find status of patient from DB at set variable to appropriate class name
-        let statusLabel = doc.status === "POSITIVE"?"label-positive":"label-negative";
         results.push(createData(<Link className="{patient-name}" to="/patientprofile">{doc.name}</Link>, doc.id, 
-        <span class={statusLabel}>{doc.status}</span>, doc.upcomingAppointment, doc.assignedDoctor, <label><input type="checkbox"/></label>, 
+        <span className={doc.status === "POSITIVE"?"label-positive":"label-negative"}>{doc.status}</span>, doc.upcomingAppointment, doc.assignedDoctor, <FlagIcon className={doc.flaggedPriority === "0" ? "priority-flag" : "priority-flag clicked"}></FlagIcon>, 
         doc.temperature + "°C", doc.weight + " lbs", doc.heightFeet + "' " + doc.heightInches + "\""));
       })
       setPatientsList(results)
