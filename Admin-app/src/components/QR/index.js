@@ -1,70 +1,80 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import QrReader from "react-qr-reader";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../backend/firebase";
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 // Source: https://reactjsexample.com/react-component-for-reading-qr-codes-from-webcam/
 
-class Scanner extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      scanResult: "No code scanned yet!"
-    };
-    this.handleScan = this.handleScan.bind(this);
-  }
-  handleScan(QRScan) {
+function Scanner() {
+
+  const QRScan = "";
+  const [scanned, setScanned] = useState("Not scanned yet!");
+  const [displayQR, setDisplay] = useState(false);
+  const [patient, setPatient] = useState(false);
+  const [notPatient, setNotPatient] = useState(false);
+
+  async function handleScan(QRScan) {
     if (QRScan) {
-      this.setState({
-        scanResult: QRScan
-      });
+      console.log(QRScan);
+      setScanned("Scanned successfully!");
+      const docRef = doc(db, "Patients", `${QRScan}`);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setDisplay(true);
+        setPatient(true);
+      } else {
+        setNotPatient(true);
+      }
     }
   }
-  handleError(err) {
-    console.error(err);
-  }
-  render() {
-    return (
-      <>
-        <Card sx={{ m: "30px" }}>
-          <CardContent
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              p: "30px",
-              mb: "20px",
-            }}
+
+  return (
+    <>
+      <Card sx={{ m: "5px" }}>
+        <CardContent
+          sx={{ display: "flex", flexDirection: "column", alignItems: "center", p: "30px", mb: "20px" }}
+        >
+          <Typography
+            sx={{ mx: "30px", pb: "30px", textAlign: "center", fontWeight: "700" }}
+            color="text.secondary"
+            variant="h6"
           >
-            <Typography
-              sx={{
-                mx: "30px",
-                pb: "30px",
-                textAlign: "center",
-                fontWeight: "800",
-              }}
-              color="text.secondary"
-              variant="h8"
-            >
-              Scan a QR Code to Generate User's Profile
-            </Typography>
-            <QrReader
-              onError={this.handleError}
-              onScan={this.handleScan}
-              style={{ width: "70%" }}
-            />
-            <p>{this.state.scanResult}</p>
-            <Box sx={{ mx: "350px", mb: "30px" }}>
-              <img alt="QRCode" src={`http://api.qrserver.com/v1/create-qr-code/?data=${this.state.scanResult}`} />
+            Scan a QR Code to Generate User's Profile
+          </Typography>
+          <QrReader
+            onScan={handleScan}
+            onError={(err) => console.log(err)}
+            style={{ width: "300px" }}
+          />
+          <br />
+          <p>{scanned}</p>
+          {displayQR &&
+            <Box sx={{ mx: "300px", mb: "30px" }}>
+              <img alt="QRCode" src={`http://api.qrserver.com/v1/create-qr-code/?data=${QRScan}`} />
             </Box>
-          </CardContent>
-        </Card>
-      </>
-    );
-  }
+          }
+          {notPatient &&
+            <Stack sx={{ width: '100%' }} spacing={2}>
+              <Alert severity="warning">The patient is not registered, No profile was found.</Alert>
+            </Stack>
+          }
+          {patient &&
+            <Stack sx={{ width: '100%' }} spacing={2}>
+              <Alert severity="success">The patient profile was found successfully!</Alert>
+            </Stack>
+          }
+        </CardContent>
+      </Card>
+    </>
+  );
 }
 export default Scanner;
+
 
 ////////////////////////////////////////////////////////////////////////
 //////////////SHOULD BE MOVED TO THE CLIENT SIDE////////////////////////
