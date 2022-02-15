@@ -20,6 +20,8 @@ function Scanner() {
 
   async function handleScan(QRScan) {
     if (QRScan) {
+      setPatient(false);
+      setNotPatient(false);
       console.log(QRScan);
       setScanned("Scanned successfully!");
       const docRef = doc(db, "Patients", `${QRScan}`);
@@ -35,12 +37,12 @@ function Scanner() {
 
   return (
     <>
-      <Card sx={{ m: "5px" }}>
+      <Card sx={{ m: "30px", width: "1" }}>
         <CardContent
           sx={{ display: "flex", flexDirection: "column", alignItems: "center", p: "30px", mb: "20px" }}
         >
           <Typography
-            sx={{ mx: "30px", pb: "30px", textAlign: "center", fontWeight: "700" }}
+            sx={{ mx: "30px", pb: "30px", textAlign: "center", fontWeight: "800" }}
             color="text.secondary"
             variant="h6"
           >
@@ -60,7 +62,7 @@ function Scanner() {
           }
           {notPatient &&
             <Stack sx={{ width: '100%' }} spacing={2}>
-              <Alert severity="warning">The patient is not registered, No profile was found.</Alert>
+              <Alert severity="warning">The patient is not registered, no profile was found.</Alert>
             </Stack>
           }
           {patient &&
