@@ -122,8 +122,6 @@ function PatientProfile() {
                   <br></br>
                   <br></br>
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  <div>
                     <Stack
                       direction="row"
                       divider={<Divider orientation="vertical" />}
@@ -146,12 +144,10 @@ function PatientProfile() {
                           <option value={20}>Unconfirmed</option>
                         </NativeSelect>
                       </FormControl>
-                      <Item class="label-pos">positive</Item>
+                      <span className="label-positive">positive</span>
                       <Item>Temperature: 39 °C</Item>
                       <Item>Weight: 150 lbs</Item>
                     </Stack>
-                  </div>
-                </Typography>
               </CardContent>
             </CardActionArea>
           </Card>
