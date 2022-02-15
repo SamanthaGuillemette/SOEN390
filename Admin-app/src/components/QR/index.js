@@ -10,9 +10,8 @@ import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 // Source: https://reactjsexample.com/react-component-for-reading-qr-codes-from-webcam/
 
-function Scanner() {
+const Scanner = () => {
 
-  const QRScan = "";
   const [scanned, setScanned] = useState("Not scanned yet!");
   const [displayQR, setDisplay] = useState(false);
   const [patient, setPatient] = useState(false);
@@ -24,7 +23,6 @@ function Scanner() {
       setPatient(false);
       setNotPatient(false);
       setDisplay(false);
-      console.log(QRScan);
       setScanned("Scanned successfully!");
       const docRef = doc(db, "Patients", `${QRScan}`);
       const docSnap = await getDoc(docRef);
