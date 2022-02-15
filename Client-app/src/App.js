@@ -9,9 +9,12 @@ import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./backend/firebase";
+import Chat from "./components/Chat";
+import Loading from "./components/Loading";
+import Navbar from "./components/Navbar";
 
 function App() {
-  const [user] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   // const user = useSelector((state) => state.auth.userToken);
   // const dispatch = useDispatch();
 
@@ -25,6 +28,13 @@ function App() {
   //   });
   // }, [dispatch]);
 
+  if(loading){
+    return(
+      <div>
+        <Loading />
+      </div>
+    )
+  }
   return (
     // <BrowserRouter>
     //   {/* {user && ( */}
@@ -48,6 +58,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="*" element={<Dashboard />} />
+          <Route path="chat" element={<Chat />} />
         </Routes>
       )}
       {!user && (
