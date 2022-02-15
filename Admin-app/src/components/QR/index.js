@@ -17,6 +17,7 @@ function Scanner() {
   const [displayQR, setDisplay] = useState(false);
   const [patient, setPatient] = useState(false);
   const [notPatient, setNotPatient] = useState(false);
+  const [qr, setQR] = useState("");
 
   async function handleScan(QRScan) {
     if (QRScan) {
@@ -27,6 +28,7 @@ function Scanner() {
       const docRef = doc(db, "Patients", `${QRScan}`);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
+        setQR(`http://api.qrserver.com/v1/create-qr-code/?data=${QRScan}`);
         setDisplay(true);
         setPatient(true);
       } else {
@@ -57,7 +59,7 @@ function Scanner() {
           <p>{scanned}</p>
           {displayQR &&
             <Box sx={{ mx: "300px", mb: "30px" }}>
-              <img alt="QRCode" src={`http://api.qrserver.com/v1/create-qr-code/?data=${QRScan}`} />
+              <img alt="QRCode" src={qr} />
             </Box>
           }
           {notPatient &&
