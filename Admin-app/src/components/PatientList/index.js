@@ -98,7 +98,7 @@ function Row(props) {
 function PatientList() {
   const flag = localStorage.getItem('priorityFlag');
   const rows = [
-    createData(<Link className="patient-name" to="/patientprofile">John Doe</Link>, 1476, 
+    createData(<a href="/patientprofile">John Doe</a>, 1476, 
     <span className="label-positive">positive</span>, "23/05/22", "Allyson Richards", <FlagIcon className={JSON.parse(flag) ? "priority-flag clicked" : "priority-flag"}></FlagIcon>, "90°C", "150 lbs", "5'9"),
     createData("Jane Smith", 159,
     <span className="label-positive">positive</span>, "05/02/22", "Charles Ludwig", <FlagIcon className={flag ? "priority-flag" : "priority-flag clicked"}></FlagIcon>, "65°C", "120lbs", "5'5"),
