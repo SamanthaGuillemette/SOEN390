@@ -23,6 +23,7 @@ function Scanner() {
     if (QRScan) {
       setPatient(false);
       setNotPatient(false);
+      setDisplay(false);
       console.log(QRScan);
       setScanned("Scanned successfully!");
       const docRef = doc(db, "Patients", `${QRScan}`);
