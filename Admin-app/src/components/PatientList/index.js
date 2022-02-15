@@ -77,7 +77,7 @@ function Row(props) {
                 </TableHead>
                 <TableBody>
                   {row.symptoms.map((symptomsRow) => (
-                    <TableRow key={symptomsRow.date}>
+                    <TableRow key={symptomsRow}>
                       <TableCell className="symptoms-data" component="th" scope="row">
                         {symptomsRow.temperature}
                       </TableCell>
@@ -99,19 +99,19 @@ function PatientList() {
   const flag = localStorage.getItem('priorityFlag');
   const rows = [
     createData(<Link className="patient-name" to="/patientprofile">John Doe</Link>, 1476, 
-    <span class="label-positive">positive</span>, "23/05/22", "Allyson Richards", <FlagIcon className={JSON.parse(flag) ? "priority-flag clicked" : "priority-flag"}></FlagIcon>, "90°C", "150 lbs", "5'9"),
+    <span className="label-positive">positive</span>, "23/05/22", "Allyson Richards", <FlagIcon className={JSON.parse(flag) ? "priority-flag clicked" : "priority-flag"}></FlagIcon>, "90°C", "150 lbs", "5'9"),
     createData("Jane Smith", 159,
-    <span class="label-positive">positive</span>, "05/02/22", "Charles Ludwig", <FlagIcon className={flag ? "priority-flag" : "priority-flag clicked"}></FlagIcon>, "65°C", "120lbs", "5'5"),
+    <span className="label-positive">positive</span>, "05/02/22", "Charles Ludwig", <FlagIcon className={flag ? "priority-flag" : "priority-flag clicked"}></FlagIcon>, "65°C", "120lbs", "5'5"),
     createData("William Hill", 1666, 
-    <span class="label-positive">positive</span>, "06/05/22", "Allyson Richards", <FlagIcon className={flag ? "priority-flag" : "priority-flag clicked"}></FlagIcon>, "90°C", "150 lbs", "5'9"),
+    <span className="label-positive">positive</span>, "06/05/22", "Allyson Richards", <FlagIcon className={flag ? "priority-flag" : "priority-flag clicked"}></FlagIcon>, "90°C", "150 lbs", "5'9"),
     createData("Maria Sánchez", 1200,
-    <span class="label-negative">negative</span>, "06/02/22", "Charles Ludwig", <FlagIcon className={flag ? "priority-flag" : "priority-flag clicked"}></FlagIcon>, "65°C", "120lbs", "5'5"),
+    <span className="label-negative">negative</span>, "06/02/22", "Charles Ludwig", <FlagIcon className={flag ? "priority-flag" : "priority-flag clicked"}></FlagIcon>, "65°C", "120lbs", "5'5"),
     createData("Liam Hill", 233, 
-    <span class="label-positive">positive</span>, "22/03/22", "Allyson Richards", <FlagIcon className={flag ? "priority-flag" : "priority-flag clicked"}></FlagIcon>, "90°C", "150 lbs", "5'9"),
+    <span className="label-positive">positive</span>, "22/03/22", "Allyson Richards", <FlagIcon className={flag ? "priority-flag" : "priority-flag clicked"}></FlagIcon>, "90°C", "150 lbs", "5'9"),
     createData("Connor Jackson", 2893,
-    <span class="label-negative">negative</span>, "31/01/22", "Allyson Richards", <FlagIcon className={flag ? "priority-flag" : "priority-flag clicked"}></FlagIcon>, "65°C", "120lbs", "5'5"),
+    <span className="label-negative">negative</span>, "31/01/22", "Allyson Richards", <FlagIcon className={flag ? "priority-flag" : "priority-flag clicked"}></FlagIcon>, "65°C", "120lbs", "5'5"),
     createData("Connor Jackson", 2896,
-    <span class="label-negative">negative</span>, "01/02/22", "Charles Ludwig", <FlagIcon className={flag ? "priority-flag" : "priority-flag clicked"}></FlagIcon>, "65°C", "120lbs", "5'5"),
+    <span className="label-negative">negative</span>, "01/02/22", "Charles Ludwig", <FlagIcon className={flag ? "priority-flag" : "priority-flag clicked"}></FlagIcon>, "65°C", "120lbs", "5'5"),
   ];
 
   const [page, setPage] = React.useState(0);
