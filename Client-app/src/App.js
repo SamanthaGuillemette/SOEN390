@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import { useEffect } from "react";
 // import { auth } from "./backend/firebase";
 import Dashboard from "./components/Dashboard";
+import ClientProfile from "./components/ClientProfile";
 // import SignIn from "./components/SignIn";
 // import SignUp from "./components/SignUp";
 
@@ -29,6 +30,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="*" element={<Dashboard />} />
+        <Route path="/ClientProfile" element={<ClientProfile />} />
       </Routes>
 
       {/* )}
