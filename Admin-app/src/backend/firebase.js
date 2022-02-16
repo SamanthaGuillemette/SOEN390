@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
-import { collection, doc, getDocs, setDoc  } from "firebase/firestore";
+import { collection, doc, getDocs, getDoc, setDoc  } from "firebase/firestore";
 import patientData from "../data/patients.json";
 
 const firebaseConfig = {
@@ -19,10 +19,27 @@ const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
 const getPatients = async () => {
+  console.log("getPatients Called");
   const querySnapshot = await getDocs(collection(db, "Patients"));
   const returnValue = querySnapshot.docs.map((patient) => patient.data());
   return returnValue;
 };
+
+const getPatient = async (id) => {
+  // Do call to firebase
+  const docRef = doc(db, "Patients", id);
+  const docSnapShot = await getDoc(docRef);
+  
+  // If file exists, return it
+  if (docSnapShot.exists()) {
+    console.log("Patient document Found!");
+    return docSnapShot.data();
+  } 
+  else {
+    // If not found, write to console.
+    console.log("Patient document not found");
+  }
+  };
 
 const populatePatients = () => {
   const patientsRef = collection(db, "Patients");
@@ -31,5 +48,5 @@ const populatePatients = () => {
     setDoc(doc(patientsRef, patientData.email), patientData));
 }
 
-export { db, auth, provider, getPatients, populatePatients };
+export { db, auth, provider, getPatients, getPatient, populatePatients };
 

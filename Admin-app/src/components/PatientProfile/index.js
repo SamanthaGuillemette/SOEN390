@@ -25,7 +25,8 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Button from '@mui/material/Button';
 import FlagIcon from '@mui/icons-material/Flag';
 import { useState, useEffect } from "react";
-
+import { useParams } from "react-router-dom";
+import { getPatient } from "../../backend/firebase";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -33,6 +34,32 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   color: theme.palette.text.secondary,
 }));
+
+function getAge(dobStr)
+{
+  // First get today's date
+  var todaysDate = new Date();
+
+  // Convert date of birth string to a date objects
+  var dob = new Date(dobStr);
+
+  // Calculate age based on year alone
+  var returnValue = todaysDate.getYear() - dob.getYear();
+
+  // Check month in case it has an effect on the age
+  if (dob.getMonth() > todaysDate.getMonth())
+  {
+    returnValue += 1;
+  }
+  // If dob same month as today, check day in case it has an effect on the age
+  else if (dob.getMonth() === todaysDate.getMonth() && dob.getDay() > todaysDate.getDay())
+  {
+    returnValue += 1;
+  }
+
+
+  return returnValue;
+}
 
 function PatientProfile() {
   
@@ -62,8 +89,10 @@ function PatientProfile() {
     createData("Jan 25", "No", "Yes", "No", "Yes", "Yes", "No", "No"),
     createData("Jan 26", "No", "Yes", "No", "No", "No", "No", "No")
   ];
-  
+
   const [priorityFlag, setPriorityFlag] = useState(false);
+  const { id } = useParams();
+  const [patientInfo, setPatientInfo] = useState(null); 
 
   useEffect(() => {
     const data = localStorage.getItem('priorityFlag');
@@ -76,7 +105,14 @@ function PatientProfile() {
     localStorage.setItem('priorityFlag', JSON.stringify(priorityFlag));
   });
 
-  
+  // Get Patient Info each time page refreshes
+  useEffect(() => {
+    //console.log("id" + id);
+    getPatient(id).then((data) => {
+      setPatientInfo(data); 
+    });
+  }, [id])
+
   return (
     <Grid container spacing={2} maxWidth="lg" alignItems="flex-end">
       <Grid item xs={8} lg={4}>
@@ -94,16 +130,16 @@ function PatientProfile() {
                 fontSize="1.2rem"
                 component="div"
               >
-                John Doe
+              {patientInfo && patientInfo.name}
               </Typography>
               <Typography
                 className="text"
                 variant="body2"
                 color="text.secondary"
               >
-                <br></br>Age: 50
-                <br></br>Birthday: 1 July 1971
-                <br></br>Address: 101 Brooke, Montreal L5L 9T9
+                <br></br>Age: {patientInfo && getAge(patientInfo.dob)}
+                <br></br>Birthday: {patientInfo && patientInfo.dob}
+                <br></br>{patientInfo && patientInfo.address}
               </Typography>
             </CardContent>
           </CardActionArea>
@@ -117,6 +153,8 @@ function PatientProfile() {
               <CardContent>
                 <Typography gutterBottom variant="button" component="div">
                   Status  <FlagIcon onClick={() => {priorityFlag ? setPriorityFlag(false) : setPriorityFlag(true)}}
+//                Commented for now SMD - Will eventually need to be reactivated in order to read value from DB     
+//                  className={patientInfo && patientInfo.flaggedPriority === "1" ? "priority-flag clicked" : "priority-flag"}>
                   className={priorityFlag ? "priority-flag clicked" : "priority-flag"}>
                   </FlagIcon>
                   <br></br>
@@ -146,9 +184,9 @@ function PatientProfile() {
                           <option value={20}>Unconfirmed</option>
                         </NativeSelect>
                       </FormControl>
-                      <Item class="label-pos">positive</Item>
-                      <Item>Temperature: 39 °C</Item>
-                      <Item>Weight: 150 lbs</Item>
+                      <Item className={patientInfo && patientInfo.status === "POSITIVE"?"label-positive":"label-negative"}>{patientInfo && patientInfo.status}</Item>
+                      <Item>Temperature: {patientInfo && patientInfo.temperature} °C</Item>
+                      <Item>Weight: {patientInfo && patientInfo.weight} lbs</Item>
                     </Stack>
                   </div>
                 </Typography>
@@ -169,7 +207,7 @@ function PatientProfile() {
                     Name:{" "}
                     <Link to="/doctor" className="link">
                       {" "}
-                      Michael Scott
+                      {patientInfo && patientInfo.assignedDoctor}
                     </Link>
                     <Checkbox size="small" style ={{color: "white"}}/>
                   </Typography>
