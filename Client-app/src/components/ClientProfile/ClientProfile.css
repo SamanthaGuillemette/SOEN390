@@ -1,7 +1,11 @@
+* {
+  justify-content: center;
+}
+
 #avatar {
   width: 200px;
   height: 233px;
-  margin-left: 18%;
+  margin: 0 auto;
   border-radius: 3;
   align-items: center;
   text-align: center;
@@ -9,7 +13,7 @@
   position: relative;
 }
 
-.label-pos {
+.label-positive {
   text-transform: uppercase;
   color: white;
   background: linear-gradient(rgb(233, 61, 61), rgb(241, 11, 11));

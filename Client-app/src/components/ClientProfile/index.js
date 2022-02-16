@@ -56,10 +56,10 @@ function ClientProfile() {
     };
   }
 
-  const rows = [
-    createData("Jan 25", "No", "Yes", "No", "Yes", "Yes", "No", "No"),
-    createData("Jan 26", "No", "Yes", "No", "No", "No", "No", "No"),
-  ];
+  // const rows = [
+  //   createData("Jan 25", "No", "Yes", "No", "Yes", "Yes", "No", "No"),
+  //   createData("Jan 26", "No", "Yes", "No", "No", "No", "No", "No"),
+  // ];
 
   const [priorityFlag, setPriorityFlag] = useState(false);
 
@@ -75,13 +75,14 @@ function ClientProfile() {
   });
 
   return (
-    <Grid container spacing={2} maxWidth="lg" alignItems="flex-end">
-      <Grid item xs={8} lg={4}>
+    <Grid container spacing={2}>
+      <Grid item xs={8} lg={9} margin={5}>
         <Card>
           <CardActionArea>
             <Avatar
+              align="center"
               id="avatar"
-              src="https://upload.wikimedia.org/wikipedia/commons/5/5a/John_Doe%2C_born_John_Nommensen_Duchac.jpg"
+              src="https://cdn.discordapp.com/attachments/943266123393142804/943303072300548156/Stevie.png"
             />
             <CardContent>
               <Typography
@@ -91,7 +92,7 @@ function ClientProfile() {
                 fontSize="1.2rem"
                 component="div"
               >
-                John Doe
+                Jane Doe
               </Typography>
               <Typography
                 className="text"
@@ -170,7 +171,7 @@ function ClientProfile() {
           </Card>
         </Grid>
 
-        <Grid container spacing={2} item rowSpacing={2} direction="row">
+        {/* <Grid container spacing={2} item rowSpacing={2} direction="row">
           <Grid item xs={6}>
             <Card>
               <CardActionArea>
@@ -250,7 +251,7 @@ function ClientProfile() {
               ))}
             </TableBody>
           </Table>
-        </TableContainer>
+        </TableContainer> */}
         <br />
         <br />
         <br />
