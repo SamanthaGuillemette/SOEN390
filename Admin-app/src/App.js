@@ -7,7 +7,7 @@ import SignUp from "./components/SignUp";
 import Appointments from "./screens/Appointments";
 import Patients from "./screens/Patients";
 import Inbox from "./screens/Inbox";
-// import { useAuthState } from "react-firebase-hooks/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./backend/firebase";
 import Notifications from "./components/Notifications";
 import QR from "./components/QR";
@@ -21,8 +21,8 @@ import Event from "./components/Event";
 import EventDetails from "./components/Event/EventDetails";
 
 function App() {
-  // const [user] = useAuthState(auth);
-  const user = useSelector((state) => state.auth.userToken);
+  const [user, loading] = useAuthState(auth);
+  // const user = useSelector((state) => state.auth.userToken);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -35,6 +35,9 @@ function App() {
     });
   }, [dispatch]);
 
+  if(loading){
+    return ('loading')
+  }
   return (
     <BrowserRouter>
       {user && (
