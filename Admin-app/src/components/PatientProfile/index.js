@@ -120,7 +120,7 @@ function PatientProfile() {
           <CardActionArea>
             <Avatar
               id="avatar"
-              src="https://upload.wikimedia.org/wikipedia/commons/5/5a/John_Doe%2C_born_John_Nommensen_Duchac.jpg"
+              src={patientInfo && patientInfo.profileImage}
             />
             <CardContent>
               <Typography

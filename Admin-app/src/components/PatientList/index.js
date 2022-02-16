@@ -107,7 +107,7 @@ function PatientList() {
     .then((data) => {
       let results = [];
       data.forEach(doc => {
-        results.push(createData(<Link className="{patient-name}" to={`/patientprofile/${doc.email}`}>{doc.name}</Link>, doc.id, 
+        results.push(createData(<Link className="{patient-name}" to={`/patientprofile/${doc.id}`}>{doc.name}</Link>, doc.id, 
         <span className={doc.status === "POSITIVE"?"label-positive":"label-negative"}>{doc.status}</span>, doc.upcomingAppointment, doc.assignedDoctor, <FlagIcon className={doc.flaggedPriority === "0" ? "priority-flag" : "priority-flag clicked"}></FlagIcon>, 
         doc.temperature + "°C", doc.weight + " lbs", doc.heightFeet + "' " + doc.heightInches + "\""));
       })

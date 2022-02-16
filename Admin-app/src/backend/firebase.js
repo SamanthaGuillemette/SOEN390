@@ -41,11 +41,15 @@ const getPatient = async (id) => {
   }
   };
 
+/**
+ * This function populates the Patient table in firebase given a JSON file
+ * imported at the beginning of this file
+ */  
 const populatePatients = () => {
   const patientsRef = collection(db, "Patients");
 
   patientData.map((patientData) =>
-    setDoc(doc(patientsRef, patientData.email), patientData));
+    setDoc(doc(patientsRef, patientData.id), patientData));
 }
 
 export { db, auth, provider, getPatients, getPatient, populatePatients };
