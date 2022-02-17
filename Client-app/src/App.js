@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
+import QR from "./components/QR";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./backend/firebase";
 import Loading from "./components/Loading";
@@ -56,6 +57,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="*" element={<Dashboard />} />
+          <Route path="/qr" element={<QR />} />
         </Routes>
       )}
       {!user && (
