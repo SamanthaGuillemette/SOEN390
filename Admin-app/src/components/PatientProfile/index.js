@@ -63,17 +63,17 @@ function PatientProfile() {
     createData("Jan 26", "No", "Yes", "No", "No", "No", "No", "No")
   ];
   
-  const [priorityFlag, setPriorityFlag] = useState();
+  const [priorityFlag, setPriorityFlag] = useState(false);
 
   useEffect(() => {
-    const data = localStorage.getItem("priorityFlag");
+    const data = localStorage.getItem('priorityFlag');
     if (data){
       setPriorityFlag(JSON.parse(data));
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("priorityFlag", JSON.stringify(priorityFlag));
+    localStorage.setItem('priorityFlag', JSON.stringify(priorityFlag));
   });
 
   
@@ -122,8 +122,6 @@ function PatientProfile() {
                   <br></br>
                   <br></br>
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  <div>
                     <Stack
                       direction="row"
                       divider={<Divider orientation="vertical" />}
@@ -146,12 +144,10 @@ function PatientProfile() {
                           <option value={20}>Unconfirmed</option>
                         </NativeSelect>
                       </FormControl>
-                      <Item class="label-pos">positive</Item>
+                      <span className="label-positive">positive</span>
                       <Item>Temperature: 39 °C</Item>
                       <Item>Weight: 150 lbs</Item>
                     </Stack>
-                  </div>
-                </Typography>
               </CardContent>
             </CardActionArea>
           </Card>
@@ -166,11 +162,7 @@ function PatientProfile() {
                     Assigned Doctor
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Name:{" "}
-                    <Link to="/doctor" className="link">
-                      {" "}
-                      Michael Scott
-                    </Link>
+                    Name: Michael Scott
                     <Checkbox size="small" style ={{color: "white"}}/>
                   </Typography>
                 </CardContent>
