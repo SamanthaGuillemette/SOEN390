@@ -9,9 +9,10 @@ import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./backend/firebase";
+import Loading from "./components/Loading";
 
 function App() {
-  const [user] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   // const user = useSelector((state) => state.auth.userToken);
   // const dispatch = useDispatch();
 
@@ -25,6 +26,12 @@ function App() {
   //   });
   // }, [dispatch]);
 
+  if(loading){
+    return (
+      <Loading />
+    )
+  }
+  
   return (
     // <BrowserRouter>
     //   {/* {user && ( */}
@@ -43,6 +50,7 @@ function App() {
     //   </Routes>
     //   )} */}
     // </BrowserRouter>
+
     <BrowserRouter>
       {user && (
         <Routes>
