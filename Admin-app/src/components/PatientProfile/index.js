@@ -162,11 +162,7 @@ function PatientProfile() {
                     Assigned Doctor
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Name:{" "}
-                    <Link to="/doctor" className="link">
-                      {" "}
-                      Michael Scott
-                    </Link>
+                    Name: Michael Scott
                     <Checkbox size="small" style ={{color: "white"}}/>
                   </Typography>
                 </CardContent>

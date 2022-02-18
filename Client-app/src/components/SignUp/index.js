@@ -1,3 +1,4 @@
+import * as React from 'react';
 import {useState} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -18,14 +19,14 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import {useAuthState} from 'react-firebase-hooks/auth';
-import {auth} from '../../backend/firebase';
-import {db} from '../../backend/firebase';
-import { doc, setDoc } from "firebase/firestore"; 
+import { db, auth } from "../../backend/firebase";
+import { doc, setDoc, getDoc } from "firebase/firestore"; 
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Navigate } from "react-router-dom";
+import Modal from '@mui/material/Modal';
 
 function Copyright(props) {
   return (
@@ -42,6 +43,18 @@ function Copyright(props) {
 
 const theme = createTheme();
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
 export default function SignUp(props) {
   
   const [firstName, setFirstName] = useState('');
@@ -53,6 +66,8 @@ export default function SignUp(props) {
   const [dob, setDOB] = useState(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => setOpen(false);
   
   const [
     user,
@@ -62,8 +77,14 @@ export default function SignUp(props) {
   
   const handleSubmit = async(event) => {
     event.preventDefault();
-    const dobValue = dob.$D + "/" + (dob.$M + 1) + "/" + dob.$y;
-    await setDoc(doc(db, "Users", email), { 
+    const docRef = doc(db, "Admin", email);
+    const docSnap = await getDoc(docRef);
+
+    if(docSnap.exists()){
+      setOpen(true);
+    }else{
+      const dobValue = dob.$D + "/" + (dob.$M + 1) + "/" + dob.$y;
+      await setDoc(doc(db, "Client", email), { 
       firstName: firstName,
       lastName: lastName,
       address: address,
@@ -74,6 +95,7 @@ export default function SignUp(props) {
       email: email
     });
     createUserWithEmailAndPassword(auth, email, password);
+    }
   }
 
   if (error) {
@@ -252,6 +274,21 @@ export default function SignUp(props) {
             >
               Sign Up
             </Button>
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+            <Box sx={style}>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                Error
+              </Typography>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                This email has already been used for the Admin Application. Please use another email. 
+              </Typography>
+            </Box>
+            </Modal>
             <Grid container justifyContent="center">
               <Grid item>
                 <Link href="/signin" variant="body2">
