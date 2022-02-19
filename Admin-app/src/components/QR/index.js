@@ -18,26 +18,30 @@ const Scanner = () => {
   const [notPatient, setNotPatient] = useState(false);
   const [qr, setQR] = useState("");
 
-  function handleError (err) {
+  function handleError(err) {
     console.error(err)
-  } 
+  }
 
   async function handleScan(QRScan) {
-    if (QRScan) {
-      console.log(QRScan);
-      setPatient(false);
-      setNotPatient(false);
-      setDisplay(false);
-      setScanned("Scanned successfully!");
-      const docRef = doc(db, "Patients", `${QRScan}`);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        setQR(`http://api.qrserver.com/v1/create-qr-code/?data=${QRScan}`);
-        setDisplay(true);
-        setPatient(true);
-      } else {
-        setNotPatient(true);
+    try {
+      if (QRScan) {
+        console.log(QRScan);
+        setPatient(false);
+        setNotPatient(false);
+        setDisplay(false);
+        setScanned("Scanned successfully!");
+        const docRef = doc(db, "Patients", `${QRScan}`);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setQR(`http://api.qrserver.com/v1/create-qr-code/?data=${QRScan}`);
+          setDisplay(true);
+          setPatient(true);
+        } else {
+          setNotPatient(true);
+        }
       }
+    } catch (e) {
+      console.log(e);
     }
   }
 
@@ -55,14 +59,7 @@ const Scanner = () => {
             Scan a QR Code to Generate User's Profile
           </Typography>
           <QrReader
-            onResult={(result, error) => {
-              if (!!result) {
-                setScanned(result?.text);
-              }
-              if (!!error) {
-                console.info(error);
-              }
-            }}
+            facingMode={"environment"}
             delay={300}
             onError={handleError}
             onScan={handleScan}
