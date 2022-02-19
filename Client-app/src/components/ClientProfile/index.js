@@ -6,23 +6,13 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Link } from "react-router-dom";
 import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import NativeSelect from "@mui/material/NativeSelect";
-import Checkbox from "@mui/material/Checkbox";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import Button from "@mui/material/Button";
 import FlagIcon from "@mui/icons-material/Flag";
 import { useState, useEffect } from "react";
 
@@ -34,32 +24,6 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function ClientProfile() {
-  function createData(
-    Date,
-    Fever,
-    Cough,
-    RunnyNose,
-    MuscleAche,
-    Tiredness,
-    SmellLoss,
-    TasteLoss
-  ) {
-    return {
-      Date,
-      Fever,
-      Cough,
-      RunnyNose,
-      MuscleAche,
-      Tiredness,
-      SmellLoss,
-      TasteLoss,
-    };
-  }
-
-  // const rows = [
-  //   createData("Jan 25", "No", "Yes", "No", "Yes", "Yes", "No", "No"),
-  //   createData("Jan 26", "No", "Yes", "No", "No", "No", "No", "No"),
-  // ];
 
   const [priorityFlag, setPriorityFlag] = useState(false);
 
@@ -170,91 +134,6 @@ function ClientProfile() {
             </CardActionArea>
           </Card>
         </Grid>
-
-        {/* <Grid container spacing={2} item rowSpacing={2} direction="row">
-          <Grid item xs={6}>
-            <Card>
-              <CardActionArea>
-                <CardContent>
-                  <Typography gutterBottom variant="button" component="div">
-                    Assigned Doctor
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Name:{" "}
-                    <Link to="/doctor" className="link">
-                      {" "}
-                      Michael Scott
-                    </Link>
-                    <Checkbox size="small" style={{ color: "white" }} />
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </Grid>
-
-          <Grid item xs={6}>
-            <Card>
-              <CardActionArea>
-                <CardContent>
-                  <Typography gutterBottom variant="button" component="div">
-                    Status Review
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Review Completed: <Checkbox size="small" />
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </Grid>
-        </Grid>
-      </Grid>
-
-      <Grid item xs={12} lg={10.1}>
-        <TableContainer component={Paper}>
-          <h5>
-            <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SYMPTOM DETAILS
-            <Button id="add-button">
-              <AddCircleIcon></AddCircleIcon>
-            </Button>
-          </h5>
-          <Table sx={{ minWidth: 650 }} aria-label="collapsable table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Date</TableCell>
-                <TableCell align="right">Fever</TableCell>
-                <TableCell align="right">Cough</TableCell>
-                <TableCell align="right">Runny Nose</TableCell>
-                <TableCell align="right">Muscle Ache</TableCell>
-                <TableCell align="right">Tiredness</TableCell>
-                <TableCell align="right">Smell Loss</TableCell>
-                <TableCell align="right">Taste Loss</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                <TableRow
-                  key={row.Date}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    {row.Date}
-                  </TableCell>
-                  <TableCell align="right">{row.Fever}</TableCell>
-                  <TableCell align="right">{row.Cough}</TableCell>
-                  <TableCell align="right">{row.RunnyNose}</TableCell>
-                  <TableCell align="right">{row.MuscleAche}</TableCell>
-                  <TableCell align="right">{row.Tiredness}</TableCell>
-                  <TableCell align="right">{row.SmellLoss}</TableCell>
-                  <TableCell align="right">{row.TasteLoss}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer> */}
-        <br />
-        <br />
-        <br />
       </Grid>
     </Grid>
   );
