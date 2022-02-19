@@ -25,7 +25,7 @@ import Button from "@mui/material/Button";
 import FlagIcon from "@mui/icons-material/Flag";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getPatient } from "../../backend/firebase";
+import { getPatient } from "../../backend/firebaseUtilities";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,

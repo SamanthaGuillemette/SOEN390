@@ -16,7 +16,7 @@ import TablePagination from '@mui/material/TablePagination';
 import {Link } from "react-router-dom";
 import FlagIcon from '@mui/icons-material/Flag';
 import "./PatientList.css";
-import { getPatients } from "../../backend/firebase";
+import { getPatients } from "../../backend/firebaseUtilities";
 import { useEffect, useState } from "react";
 
 function createData(patientname, id, status, appointment, doctor, priority, temperature, weight, height) {
