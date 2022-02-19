@@ -1,10 +1,11 @@
 import "./PatientProfile.css";
 import * as React from "react";
+import Avatar from "@mui/material/Avatar";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { Box, CardActionArea } from "@mui/material";
+import { CardActionArea } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -18,11 +19,11 @@ import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
-import NativeSelect from "@mui/material/NativeSelect";
-import Checkbox from "@mui/material/Checkbox";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import Button from "@mui/material/Button";
-import FlagIcon from "@mui/icons-material/Flag";
+import NativeSelect from '@mui/material/NativeSelect';
+import Checkbox from '@mui/material/Checkbox';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import Button from '@mui/material/Button';
+import FlagIcon from '@mui/icons-material/Flag';
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getPatient } from "../../backend/firebaseUtilities";
@@ -60,6 +61,7 @@ function getAge(dobStr) {
 }
 
 function PatientProfile() {
+  
   function createData(
     Date,
     Fever,
@@ -84,10 +86,11 @@ function PatientProfile() {
 
   const rows = [
     createData("Jan 25", "No", "Yes", "No", "Yes", "Yes", "No", "No"),
-    createData("Jan 26", "No", "Yes", "No", "No", "No", "No", "No"),
+    createData("Jan 26", "No", "Yes", "No", "No", "No", "No", "No")
   ];
-
+  
   const [priorityFlag, setPriorityFlag] = useState(false);
+
   const { id } = useParams();
   const [patientInfo, setPatientInfo] = useState(null);
 
@@ -99,38 +102,40 @@ function PatientProfile() {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("priorityFlag", JSON.stringify(priorityFlag));
+    const data = localStorage.getItem('priorityFlag');
+    if (data){
+      setPriorityFlag(JSON.parse(data));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('priorityFlag', JSON.stringify(priorityFlag));
   });
 
-  // Get Patient Info each time page refreshes
-  useEffect(() => {
-    //console.log("id" + id);
-    getPatient(id)
-      .then((data) => {
-        setPatientInfo(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [id]);
-
+    // Get Patient Info each time page refreshes
+    useEffect(() => {
+      //console.log("id" + id);
+      getPatient(id)
+        .then((data) => {
+          setPatientInfo(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, [id]);
+  
   return (
-    <Grid container spacing={2} maxWidth="lg" margin={2}>
-      <Grid item xs={12} lg={4}>
+    <Grid container spacing={2} maxWidth="lg" alignItems="flex-end">
+      <Grid item xs={8} lg={4}>
         <Card>
           <CardActionArea>
-            <Box
-              sx={{ display: "flex", justifyContent: "center", marginTop: 3 }}
-            >
-              <img
-                alt={patientInfo ? patientInfo.name : "Patient"}
-                className="patientProfile-avatar"
-                src={patientInfo && patientInfo.profileImage}
-              />
-            </Box>
+            <Avatar
+              id="avatar"
+              src={patientInfo && patientInfo.profileImage}
+            />
             <CardContent>
               <Typography
-                className="patientProfile-name"
+                className="profile-name"
                 gutterBottom
                 variant="button"
                 fontSize="1.2rem"
@@ -138,98 +143,62 @@ function PatientProfile() {
               >
                 {patientInfo && patientInfo.name}
               </Typography>
-              <Box className="patientProfile-metaData">
-                <Typography className="patientProfile-metaData_text">
-                  Age:{patientInfo && getAge(patientInfo.dob)}
-                </Typography>
-                <Typography className="patientProfile-metaData_text">
-                  Birthday: {patientInfo && patientInfo.dob}
-                </Typography>
-                <Typography className="patientProfile-metaData_text">
-                  {patientInfo && patientInfo.address}
-                </Typography>
-              </Box>
+              <Typography
+                className="text"
+                variant="body2"
+                color="text.secondary"
+              >
+                <br></br>Age: {patientInfo && getAge(patientInfo.dob)}
+                <br></br>Birthday: {patientInfo && patientInfo.dob}
+                <br></br>Address: {patientInfo && patientInfo.address}
+              </Typography>
             </CardContent>
           </CardActionArea>
         </Card>
       </Grid>
 
-      <Grid
-        container
-        spacing={2}
-        item
-        rowSpacing={2}
-        direction="column"
-        xs={12}
-        lg={8}
-      >
+      <Grid container spacing={2} item rowSpacing={2} direction="column" xs={6.1}>
         <Grid item>
-          <Card
-            className={priorityFlag ? "status-card clicked" : "status-card"}
-          >
+          <Card className={priorityFlag ? "status-card clicked" : "status-card"}>
             <CardActionArea>
               <CardContent>
-                <Typography
-                  gutterBottom
-                  variant="button"
-                  component="div"
-                  className="patientProfile-statusFlag"
-                >
-                  Status
-                  <FlagIcon
-                    onClick={() => {
-                      priorityFlag
-                        ? setPriorityFlag(false)
-                        : setPriorityFlag(true);
-                    }}
-                    //                Commented for now SMD - Will eventually need to be reactivated in order to read value from DB
-                    //                  className={patientInfo && patientInfo.flaggedPriority === "1" ? "priority-flag clicked" : "priority-flag"}>
-                    className={
-                      priorityFlag ? "priority-flag clicked" : "priority-flag"
-                    }
-                  ></FlagIcon>
+                <Typography gutterBottom variant="button" component="div">
+                  Status  <FlagIcon onClick={() => {priorityFlag ? setPriorityFlag(false) : setPriorityFlag(true)}}
+                  className={priorityFlag ? "priority-flag clicked" : "priority-flag"}>
+                  </FlagIcon>
+                  <br></br>
+                  <br></br>
                 </Typography>
-                <Box>
-                  <Stack
-                    direction="row"
-                    divider={<Divider orientation="vertical" />}
-                    spacing={1}
-                    alignItems="baseline"
-                  >
-                    <FormControl sx={{ width: 115 }}>
-                      <InputLabel
-                        variant="standard"
-                        htmlFor="uncontrolled-native"
-                      >
-                        Confirmation
-                      </InputLabel>
-                      <NativeSelect
-                        size="small"
-                        defaultValue={20}
-                        inputProps={{
-                          name: "confirmation",
-                          id: "uncontrolled-native",
-                        }}
-                      >
-                        <option value={10}>Confirmed</option>
-                        <option value={20}>Unconfirmed</option>
-                      </NativeSelect>
-                    </FormControl>
-                    <Item
-                      className={
+                    <Stack
+                      direction="row"
+                      divider={<Divider orientation="vertical" />}
+                      spacing={1}
+                      alignItems="baseline"
+                    >
+                      
+                      <FormControl sx={{width: 115}} >
+                        <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                          Confirmation
+                        </InputLabel>
+                        <NativeSelect
+                          size="small"
+                          defaultValue={20}
+                          inputProps={{
+                            name: 'confirmation',
+                            id: 'uncontrolled-native',
+                          }}>
+                          <option value={10}>Confirmed</option>
+                          <option value={20}>Unconfirmed</option>
+                        </NativeSelect>
+                      </FormControl>
+                      <span className={
                         patientInfo && patientInfo.status === "POSITIVE"
                           ? "label-positive"
                           : "label-negative"
-                      }
-                    >
-                      {patientInfo && patientInfo.status}
-                    </Item>
-                    <Item>
-                      Temperature: {patientInfo && patientInfo.temperature} °C
-                    </Item>
-                    <Item>Weight: {patientInfo && patientInfo.weight} lbs</Item>
-                  </Stack>
-                </Box>
+                      }>{patientInfo && patientInfo.status}</span>
+                      <Item>Temperature: {patientInfo && patientInfo.temperature} °C</Item>
+                      <Item>Weight: {patientInfo && patientInfo.weight} lbs</Item>
+                    </Stack>
               </CardContent>
             </CardActionArea>
           </Card>
@@ -244,10 +213,8 @@ function PatientProfile() {
                     Assigned Doctor
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    {/* Name: <Link to="/doctor" className="link">{" "} */}
-                    {patientInfo && patientInfo.assignedDoctor}
-                    {/* </Link> */}
-                    <Checkbox size="small" style={{ color: "white" }} />
+                    Name: {patientInfo && patientInfo.assignedDoctor}
+                    <Checkbox size="small" style ={{color: "white"}}/>
                   </Typography>
                 </CardContent>
               </CardActionArea>
@@ -262,7 +229,7 @@ function PatientProfile() {
                     Status Review
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Review Completed: <Checkbox size="small" />
+                    Review Completed: <Checkbox size="small"/>
                   </Typography>
                 </CardContent>
               </CardActionArea>
@@ -271,14 +238,12 @@ function PatientProfile() {
         </Grid>
       </Grid>
 
-      <Grid item xs={12}>
+      <Grid item xs={12} lg={10.1}>
         <TableContainer component={Paper}>
           <h5>
             <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SYMPTOM DETAILS
-            <Button id="add-button">
-              <AddCircleIcon></AddCircleIcon>
-            </Button>
+            <Button id="add-button"><AddCircleIcon></AddCircleIcon></Button>
           </h5>
           <Table sx={{ minWidth: 650 }} aria-label="collapsable table">
             <TableHead>
