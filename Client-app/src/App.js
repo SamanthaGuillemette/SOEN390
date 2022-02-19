@@ -7,9 +7,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
-import ClientProfile from "./components/ClientProfile"
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./backend/firebase";
+import ClientProfile from "./components/ClientProfile";
 
 function App() {
   const [user] = useAuthState(auth);
@@ -49,7 +49,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="*" element={<Dashboard />} />
-          <Route path="/ClientProfile" element={<ClientProfile />} />
+          <Route path="/clientprofile" element={<ClientProfile />} />
         </Routes>
       )}
       {!user && (

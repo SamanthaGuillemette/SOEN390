@@ -1,5 +1,6 @@
 import "./ClientProfile.css";
 import * as React from "react";
+import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -24,7 +25,6 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function ClientProfile() {
-
   const [priorityFlag, setPriorityFlag] = useState(false);
 
   useEffect(() => {
@@ -43,11 +43,18 @@ function ClientProfile() {
       <Grid item xs={8} lg={9} margin={5}>
         <Card>
           <CardActionArea>
-            <Avatar
-              align="center"
-              id="avatar"
-              src="https://cdn.discordapp.com/attachments/943266123393142804/943303072300548156/Stevie.png"
-            />
+            <Grid
+              container
+              columnSpacing={7}
+              direction="column"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Avatar
+                id="avatar"
+                src="https://cdn.discordapp.com/attachments/943266123393142804/943303072300548156/Stevie.png"
+              />
+            </Grid>
             <CardContent>
               <Typography
                 className="profile-name"
@@ -63,9 +70,9 @@ function ClientProfile() {
                 variant="body2"
                 color="text.secondary"
               >
-                <br></br>Age: 50
-                <br></br>Birthday: 1 July 1971
-                <br></br>Address: 101 Brooke, Montreal L5L 9T9
+                <Box>Age: 50</Box>
+                <Box>Birthday: 1 July 1971</Box>
+                <Box>Address: 101 Brooke, Montreal L5L 9T9</Box>
               </Typography>
             </CardContent>
           </CardActionArea>
@@ -74,6 +81,8 @@ function ClientProfile() {
 
       <Grid
         container
+        justifyContent="center"
+        alignItems="center"
         spacing={2}
         item
         rowSpacing={2}
@@ -98,8 +107,6 @@ function ClientProfile() {
                       priorityFlag ? "priority-flag clicked" : "priority-flag"
                     }
                   ></FlagIcon>
-                  <br></br>
-                  <br></br>
                 </Typography>
                 <Stack
                   direction="row"
@@ -127,6 +134,9 @@ function ClientProfile() {
                     </NativeSelect>
                   </FormControl>
                   <span className="label-positive">positive</span>
+                </Stack>
+                <Box />
+                <Stack spacing={1}>
                   <Item>Temperature: 39 °C</Item>
                   <Item>Weight: 150 lbs</Item>
                 </Stack>

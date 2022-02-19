@@ -13,7 +13,7 @@ const BottomNav = () => {
         <HomeRoundedIcon sx={{ color: "white" }} />
         <p className="bottomNav-iconTitle">Home</p>
       </IconButton>
-      <Link className="client-profile" to="/ClientProfile">
+      <Link className="client-profile" to="../ClientProfile">
         <IconButton size="large" className="bottomNav-button">
           <AccountCircleRoundedIcon sx={{ color: "white" }} />
           <p className="bottomNav-iconTitle">Profile</p>
