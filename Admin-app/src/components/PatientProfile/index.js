@@ -102,13 +102,6 @@ function PatientProfile() {
   }, []);
 
   useEffect(() => {
-    const data = localStorage.getItem('priorityFlag');
-    if (data){
-      setPriorityFlag(JSON.parse(data));
-    }
-  }, []);
-
-  useEffect(() => {
     localStorage.setItem('priorityFlag', JSON.stringify(priorityFlag));
   });
 
