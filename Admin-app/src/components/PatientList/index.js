@@ -11,9 +11,9 @@ import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import TablePagination from '@mui/material/TablePagination';
-import {Link } from "react-router-dom";
-import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
+import TablePagination from "@mui/material/TablePagination";
+import { Link } from "react-router-dom";
+import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
 import { makeStyles } from "@material-ui/core/styles";
 import DropdownStatus from "./../DropdownStatus";
 import DropdownDoctor from "./../DropdownDoctor";
@@ -26,7 +26,7 @@ const dropdownStyle = makeStyles({
     borderRadius: "10px",
   },
   color: {
-    color: "#767676"
+    color: "#767676",
   },
   select: {
     "&:after": {
@@ -38,7 +38,17 @@ const dropdownStyle = makeStyles({
   },
 });
 
-function createData(patientname, id, status, appointment, doctor, priority, temperature, weight, height) {
+function createData(
+  patientname,
+  id,
+  status,
+  appointment,
+  doctor,
+  priority,
+  temperature,
+  weight,
+  height
+) {
   return {
     patientname,
     id,
@@ -50,9 +60,9 @@ function createData(patientname, id, status, appointment, doctor, priority, temp
       {
         temperature,
         weight,
-        height
-      }
-    ]
+        height,
+      },
+    ],
   };
 }
 
@@ -63,48 +73,128 @@ function Row(props) {
   return (
     <React.Fragment>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
-        <TableCell sx={{borderColor: "#1e1e1e"}}>
+        <TableCell sx={{ borderColor: "#1e1e1e" }}>
           <IconButton
             aria-label="expand row"
             size="small"
             onClick={() => setOpen(!open)}
-            sx = {{color: "#767676"}}
+            sx={{ color: "#767676" }}
           >
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell sx={{borderColor: "#1e1e1e"}} className="data" component="th" scope="row">
+        <TableCell
+          sx={{ borderColor: "#1e1e1e" }}
+          className="data"
+          component="th"
+          scope="row"
+        >
           {row.patientname}
         </TableCell>
-        <TableCell sx={{borderColor: "#1e1e1e"}} className="data" align="right">{row.id}</TableCell>
-        <TableCell sx={{borderColor: "#1e1e1e"}} className="data" align="right">{row.status}</TableCell>
-        <TableCell sx={{borderColor: "#1e1e1e"}} className="data" align="right">{row.appointment}</TableCell>
-        <TableCell sx={{borderColor: "#1e1e1e"}} className="data" align="right">{row.doctor}</TableCell>
-        <TableCell sx={{borderColor: "#1e1e1e"}} className="data" align="right">{row.priority}</TableCell>
+        <TableCell
+          sx={{ borderColor: "#1e1e1e" }}
+          className="data"
+          align="right"
+        >
+          {row.id}
+        </TableCell>
+        <TableCell
+          sx={{ borderColor: "#1e1e1e" }}
+          className="data"
+          align="right"
+        >
+          {row.status}
+        </TableCell>
+        <TableCell
+          sx={{ borderColor: "#1e1e1e" }}
+          className="data"
+          align="right"
+        >
+          {row.appointment}
+        </TableCell>
+        <TableCell
+          sx={{ borderColor: "#1e1e1e" }}
+          className="data"
+          align="right"
+        >
+          {row.doctor}
+        </TableCell>
+        <TableCell
+          sx={{ borderColor: "#1e1e1e" }}
+          className="data"
+          align="right"
+        >
+          {row.priority}
+        </TableCell>
       </TableRow>
       <TableRow>
-        <TableCell sx={{borderColor: "#1e1e1e"}} style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+        <TableCell
+          sx={{ borderColor: "#1e1e1e" }}
+          style={{ paddingBottom: 0, paddingTop: 0 }}
+          colSpan={6}
+        >
           <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1}}>
-              <Typography variant="h6" gutterBottom component="div" color="#767676">
+            <Box sx={{ margin: 1 }}>
+              <Typography
+                variant="h6"
+                gutterBottom
+                component="div"
+                color="#767676"
+              >
                 Symptoms
               </Typography>
-              <Table className="symptoms-table" size="small" aria-label="purchases">
+              <Table
+                className="symptoms-table"
+                size="small"
+                aria-label="purchases"
+              >
                 <TableHead>
                   <TableRow>
-                    <TableCell sx={{borderColor: "#171717"}} className="symptoms-data">Temperature</TableCell>
-                    <TableCell sx={{borderColor: "#171717"}} className="symptoms-data">Weight</TableCell>
-                    <TableCell sx={{borderColor: "#171717"}} className="symptoms-data" align="right">Height</TableCell>
+                    <TableCell
+                      sx={{ borderColor: "rgb(139, 195, 235, 0.5)" }}
+                      className="symptoms-data"
+                    >
+                      Temperature
+                    </TableCell>
+                    <TableCell
+                      sx={{ borderColor: "rgb(139, 195, 235, 0.5)" }}
+                      className="symptoms-data"
+                    >
+                      Weight
+                    </TableCell>
+                    <TableCell
+                      sx={{ borderColor: "rgb(139, 195, 235, 0.5)" }}
+                      className="symptoms-data"
+                      align="right"
+                    >
+                      Height
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {row.symptoms.map((symptomsRow) => (
                     <TableRow key={symptomsRow.date}>
-                      <TableCell sx={{borderColor: "transparent"}} className="symptoms-data" component="th" scope="row">
+                      <TableCell
+                        sx={{ borderColor: "transparent" }}
+                        className="symptoms-data"
+                        component="th"
+                        scope="row"
+                      >
                         {symptomsRow.temperature}
                       </TableCell>
-                      <TableCell sx={{borderColor: "transparent"}} className="symptoms-data">{symptomsRow.weight}</TableCell>
-                      <TableCell sx={{borderColor: "transparent"}} className="symptoms-data" align="right">{symptomsRow.height}</TableCell>
+                      <TableCell
+                        sx={{ borderColor: "transparent" }}
+                        className="symptoms-data"
+                      >
+                        {symptomsRow.weight}
+                      </TableCell>
+                      <TableCell
+                        sx={{ borderColor: "transparent" }}
+                        className="symptoms-data"
+                        align="right"
+                      >
+                        {symptomsRow.height}
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -118,27 +208,106 @@ function Row(props) {
 }
 
 const rows = [
-  createData(<Link className="data" to="/patientprofile">John Doe</Link>, 1476, 
-  <DropdownStatus></DropdownStatus>, "23/05/22", <DropdownDoctor></DropdownDoctor>, <label><input type="checkbox"/></label>, "90°C", "150 lbs", "5'9"),
-  createData("Jane Smith", 159,
-  <DropdownStatus></DropdownStatus>, "05/02/22", <DropdownDoctor></DropdownDoctor>, <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
-  createData("William Hill", 1666, 
-  <DropdownStatus></DropdownStatus>, "06/05/22", <DropdownDoctor></DropdownDoctor>, <label><input type="checkbox"/></label>, "90°C", "150 lbs", "5'9"),
-  createData("Maria Sánchez", 1200,
-  <DropdownStatus></DropdownStatus>, "06/02/22", <DropdownDoctor></DropdownDoctor>, <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
-  createData("Liam Hill", 233, 
-  <DropdownStatus></DropdownStatus>, "22/03/22", <DropdownDoctor></DropdownDoctor>, <label><input type="checkbox"/></label>, "90°C", "150 lbs", "5'9"),
-  createData("Connor Jackson", 2893,
-  <DropdownStatus></DropdownStatus>, "31/01/22", <DropdownDoctor></DropdownDoctor>, <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
-  createData("Connor Jackson", 2896,
-  <DropdownStatus></DropdownStatus>, "01/02/22", <DropdownDoctor></DropdownDoctor>, <label><input type="checkbox"/></label>, "65°C", "120lbs", "5'5"),
+  createData(
+    <Link className="data" to="/patientprofile">
+      John Doe
+    </Link>,
+    1476,
+    <DropdownStatus></DropdownStatus>,
+    "23/05/22",
+    <DropdownDoctor></DropdownDoctor>,
+    <label>
+      <input type="checkbox" />
+    </label>,
+    "90°C",
+    "150 lbs",
+    "5'9"
+  ),
+  createData(
+    "Jane Smith",
+    159,
+    <DropdownStatus></DropdownStatus>,
+    "05/02/22",
+    <DropdownDoctor></DropdownDoctor>,
+    <label>
+      <input type="checkbox" />
+    </label>,
+    "65°C",
+    "120lbs",
+    "5'5"
+  ),
+  createData(
+    "William Hill",
+    1666,
+    <DropdownStatus></DropdownStatus>,
+    "06/05/22",
+    <DropdownDoctor></DropdownDoctor>,
+    <label>
+      <input type="checkbox" />
+    </label>,
+    "90°C",
+    "150 lbs",
+    "5'9"
+  ),
+  createData(
+    "Maria Sánchez",
+    1200,
+    <DropdownStatus></DropdownStatus>,
+    "06/02/22",
+    <DropdownDoctor></DropdownDoctor>,
+    <label>
+      <input type="checkbox" />
+    </label>,
+    "65°C",
+    "120lbs",
+    "5'5"
+  ),
+  createData(
+    "Liam Hill",
+    233,
+    <DropdownStatus></DropdownStatus>,
+    "22/03/22",
+    <DropdownDoctor></DropdownDoctor>,
+    <label>
+      <input type="checkbox" />
+    </label>,
+    "90°C",
+    "150 lbs",
+    "5'9"
+  ),
+  createData(
+    "Connor Jackson",
+    2893,
+    <DropdownStatus></DropdownStatus>,
+    "31/01/22",
+    <DropdownDoctor></DropdownDoctor>,
+    <label>
+      <input type="checkbox" />
+    </label>,
+    "65°C",
+    "120lbs",
+    "5'5"
+  ),
+  createData(
+    "Connor Jackson",
+    2896,
+    <DropdownStatus></DropdownStatus>,
+    "01/02/22",
+    <DropdownDoctor></DropdownDoctor>,
+    <label>
+      <input type="checkbox" />
+    </label>,
+    "65°C",
+    "120lbs",
+    "5'5"
+  ),
 ];
 
 function PatientList() {
   const classes = dropdownStyle();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -150,21 +319,52 @@ function PatientList() {
 
   return (
     <TableContainer className="patient-doctor-list">
-     <Box className="label">
-       <HealthAndSafetyIcon className="patients-icon"></HealthAndSafetyIcon>
-       Patient List
-     </Box>
+      <Box className="label">
+        <HealthAndSafetyIcon className="patients-icon"></HealthAndSafetyIcon>
+        Patient List
+      </Box>
       <Table size="small" aria-label="collapsible table">
         <TableHead>
           <TableRow>
-            <TableCell sx={{borderColor: "#1e1e1e"}}/>
-            <TableCell sx={{borderColor: "#1e1e1e"}} className="header">Patient Name
+            <TableCell sx={{ borderColor: "#1e1e1e" }} />
+            <TableCell sx={{ borderColor: "#1e1e1e" }} className="header">
+              Patient Name
             </TableCell>
-            <TableCell sx={{borderColor: "#1e1e1e"}} className="header" align="right">ID</TableCell>
-            <TableCell sx={{borderColor: "#1e1e1e"}} className="header" align="right">status</TableCell>
-            <TableCell sx={{borderColor: "#1e1e1e"}} className="header" align="right">Upcoming Appointment</TableCell>
-            <TableCell sx={{borderColor: "#1e1e1e"}} className="header" align="right">Assigned Doctor</TableCell>
-            <TableCell sx={{borderColor: "#1e1e1e"}} className="header" align="right">Flagged Priority</TableCell>
+            <TableCell
+              sx={{ borderColor: "#1e1e1e" }}
+              className="header"
+              align="right"
+            >
+              ID
+            </TableCell>
+            <TableCell
+              sx={{ borderColor: "#1e1e1e" }}
+              className="header"
+              align="right"
+            >
+              status
+            </TableCell>
+            <TableCell
+              sx={{ borderColor: "#1e1e1e" }}
+              className="header"
+              align="right"
+            >
+              Upcoming Appointment
+            </TableCell>
+            <TableCell
+              sx={{ borderColor: "#1e1e1e" }}
+              className="header"
+              align="right"
+            >
+              Assigned Doctor
+            </TableCell>
+            <TableCell
+              sx={{ borderColor: "#1e1e1e" }}
+              className="header"
+              align="right"
+            >
+              Flagged Priority
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -177,28 +377,28 @@ function PatientList() {
         </TableBody>
       </Table>
       <TablePagination
-          classes={{
-            root: classes.color
-          }}
-          rowsPerPageOptions={[5, 10, { label: 'All', value: -1 }]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          className={classes.select}
-          SelectProps={{
-            inputProps: { "aria-label": "rows per page" },
-            MenuProps: {
-              classes: { paper: classes.paper },
-              sx: {
-                "&& .Mui-selected": {
-                  backgroundColor: "#1e1e1e"
-                }
+        classes={{
+          root: classes.color,
+        }}
+        rowsPerPageOptions={[5, 10, { label: "All", value: -1 }]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        className={classes.select}
+        SelectProps={{
+          inputProps: { "aria-label": "rows per page" },
+          MenuProps: {
+            classes: { paper: classes.paper },
+            sx: {
+              "&& .Mui-selected": {
+                backgroundColor: "#1e1e1e",
               },
-            }
-          }}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage} 
+            },
+          },
+        }}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </TableContainer>
   );
