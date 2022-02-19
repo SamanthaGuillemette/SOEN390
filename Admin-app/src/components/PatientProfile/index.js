@@ -95,8 +95,8 @@ function PatientProfile() {
   const [patientInfo, setPatientInfo] = useState(null);
 
   useEffect(() => {
-    const data = localStorage.getItem("priorityFlag");
-    if (data) {
+    const data = localStorage.getItem('priorityFlag');
+    if (data){
       setPriorityFlag(JSON.parse(data));
     }
   }, []);
