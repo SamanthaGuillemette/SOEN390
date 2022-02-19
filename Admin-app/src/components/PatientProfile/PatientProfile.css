@@ -1,65 +1,57 @@
-.patientProfile-avatar {
-  width: 150px;
-  /* height: 233px; */
-  border-radius: 50%;
-  box-shadow: 2px 2px 12px 5px rgba(0, 0, 0, 0.12);
+#avatar{
+    width: 200px;
+    height: 233px;
+    margin-left: 18%;
+    border-radius: 3;
+    align-items: center;
+    text-align:center;
+    border: 1px solid black;
+    position: relative;
 }
 
 .label-pos {
-  text-transform: uppercase;
-  color: white;
-  background: linear-gradient(rgb(233, 61, 61), rgb(241, 11, 11));
-  font-size: 0.78rem;
-  font-weight: 700;
-  border-radius: 0.375rem;
-  padding: 0.5em 1em;
+    text-transform: uppercase;
+    color: white;
+    background: linear-gradient(rgb(233, 61, 61), rgb(241, 11, 11));
+    font-size: 0.78rem;
+    font-weight: 700;
+    border-radius: 0.375rem;
+    padding: 0.50em 1em;
 }
 
-.patientProfile-metaData {
-  text-align: center;
+.text{
+    text-align: center;
+    font-size: 12.5px !important;
 }
 
-.patientProfile-metaData_text {
-  font-size: 12.5px !important;
-  color: rgba(0, 0, 0, 0.6);
+.profile-name {
+    text-align: center;
+    font-weight: bold !important;
 }
 
-.patientProfile-name {
-  text-align: center;
-  font-weight: bold !important;
+.link{
+    font-size: 12.5px;
 }
 
-.link {
-  font-size: 12.5px;
-}
-
-#add-button {
-  position: relative;
-  left: 75%;
-  color: black;
-}
-
-.patientProfile-statusFlag {
-  margin-bottom: 20px !important;
+#add-button{
+    position: relative; 
+    left: 75%;
+    color: black;
 }
 
 .priority-flag {
-  color: black;
-  margin-left: 5px;
-  margin-bottom: -5px;
+    color: black;
 }
-
+  
 .priority-flag.clicked {
-  color: red;
-  margin-left: 5px;
-  margin-bottom: -5px;
+    color: red;
 }
 
-.status-card {
-  border-style: none;
+.status-card{
+    border-style: none;
 }
 
-.status-card.clicked {
-  border-style: double;
-  border-color: red;
+.status-card.clicked{
+    border-style: double;
+    border-color: red;
 }
