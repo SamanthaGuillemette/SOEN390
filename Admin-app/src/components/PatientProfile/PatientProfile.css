@@ -35,11 +35,11 @@ h5.symptomsTitle {
 }
 
 .priority-flag {
-  color: black;
+  color: var(--text-primary) !important;
 }
 
 .priority-flag.clicked {
-  color: red;
+  color: var(--error-main);
 }
 
 .status-card{
@@ -48,5 +48,5 @@ h5.symptomsTitle {
 
 .status-card.clicked{
   border-style: double;
-  border-color: red;
+  border-color: var(--error-main);
 }

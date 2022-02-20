@@ -73,10 +73,10 @@ function UpcomingEvents() {
                 >
                     <Box sx={style}>
                     <Typography className="events-modal-h" id="modal-modal-title" variant="h6" component="h2">
-                        Blood Donations
+                        Vaccine Available for People 12+
                     </Typography>
                     <Typography className="events-modal-sec" id="modal-modal-description" sx={{ mt: 2 }}>
-                        As of Feb 08, anyone over the age of 12 can get their second dose of Moderna or Pfizer. NOTE: Pfizer is recommended for ages under 40. Moderna carries serious risks.
+                        NOTE: Pfizer is recommended for ages under 40. Moderna carries serious risks.
                     </Typography>
                     </Box>
                 </Modal>

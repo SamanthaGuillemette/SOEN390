@@ -116,10 +116,10 @@ function PatientProfile() {
 
       <Grid container spacing={2} item rowSpacing={2} direction="column" xs={6.1}>
         <Grid item>
-          <Card className={priorityFlag ? "status-card clicked" : "status-card"}>
+          <Card sx={{bgcolor: "var(--background-main)", borderRadius:"20px"}} className={priorityFlag ? "status-card clicked" : "status-card"}>
             <CardActionArea>
               <CardContent>
-                <Typography gutterBottom variant="button" component="div">
+                <Typography className="header" gutterBottom variant="button" component="div">
                   Status  <FlagIcon onClick={() => {priorityFlag ? setPriorityFlag(false) : setPriorityFlag(true)}}
                   className={priorityFlag ? "priority-flag clicked" : "priority-flag"}>
                   </FlagIcon>
