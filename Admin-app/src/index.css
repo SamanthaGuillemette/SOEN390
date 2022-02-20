@@ -17,6 +17,10 @@
   --secondary-main: rgb(148, 155, 226) !important;
   --secondary-dark: rgb(67, 77, 184) !important;
 
+  --info-border: rgb(251, 73, 233, 0.3) !important;
+  --info-main: rgb(253, 135, 241) !important;
+  --info-background: rgb(251, 73, 233, 0.18) !important;
+
   --background-main: #171717 !important;
   --background-secondary: #1e1e1e !important;
 
