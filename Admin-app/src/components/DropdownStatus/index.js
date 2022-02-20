@@ -43,7 +43,7 @@ function DropdownStatus() {
           MenuProps={{
             sx: {
               "&& .Mui-selected": {
-                backgroundColor: "transparent"
+                backgroundColor: "transparent !important"
               }
             },
             classes: {
