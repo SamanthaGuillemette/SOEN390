@@ -17,11 +17,10 @@ import { Link } from "react-router-dom";
 import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
-import Checkbox from '@mui/material/Checkbox';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import Button from '@mui/material/Button';
+import Checkbox from "@mui/material/Checkbox";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import Button from "@mui/material/Button";
 import DropdownConfirmation from "./../DropdownConfirmation";
-
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -55,13 +54,24 @@ function PatientProfile() {
 
   const rows = [
     createData("Jan 25", "No", "Yes", "No", "Yes", "Yes", "No", "No"),
-    createData("Jan 26", "No", "Yes", "No", "No", "No", "No", "No")
+    createData("Jan 26", "No", "Yes", "No", "No", "No", "No", "No"),
   ];
 
   return (
-    <Grid container spacing={2} maxWidth="lg" alignItems="flex-end" sx={{marginTop: "25px"}}>
+    <Grid
+      container
+      spacing={2}
+      maxWidth="lg"
+      alignItems="flex-end"
+      sx={{ marginTop: "25px" }}
+    >
       <Grid item xs={6} xl={4}>
-        <Card sx={{background: 'linear-gradient(to right bottom, #8bc3eb, #949be2)', borderRadius: "20px"}}>
+        <Card
+          sx={{
+            background: "linear-gradient(to right bottom, #8bc3eb, #949be2)",
+            borderRadius: "20px",
+          }}
+        >
           <CardActionArea>
             <Avatar
               id="avatar"
@@ -77,10 +87,7 @@ function PatientProfile() {
               >
                 John Doe
               </Typography>
-              <Typography
-                className="text"
-                variant="body2"
-              >
+              <Typography className="text" variant="body2">
                 <br></br>Age: 50
                 <br></br>Birthday: 1 July 1971
                 <br></br>Address: 101 Brooke, Montreal L5L 9T9
@@ -92,10 +99,15 @@ function PatientProfile() {
 
       <Grid container spacing={2} item rowSpacing={2} direction="column" xs={6}>
         <Grid item>
-          <Card sx={{bgcolor: "#171717", borderRadius: "20px"}}>
+          <Card sx={{ bgcolor: "#171717", borderRadius: "20px" }}>
             <CardActionArea>
               <CardContent>
-                <Typography className="header" gutterBottom variant="button" component="div">
+                <Typography
+                  className="header"
+                  gutterBottom
+                  variant="button"
+                  component="div"
+                >
                   Status
                   <br></br>
                   <br></br>
@@ -110,8 +122,18 @@ function PatientProfile() {
                     >
                       <DropdownConfirmation></DropdownConfirmation>
                       <Item class="label-positive">positive</Item>
-                      <Item className="data" sx={{bgcolor: "inherit", boxShadow: "none"}}>Temperature: 39 °C</Item>
-                      <Item className = "data" sx={{bgcolor: "inherit", boxShadow: "none"}}>Weight: 150 lbs</Item>
+                      <Item
+                        className="data"
+                        sx={{ bgcolor: "inherit", boxShadow: "none" }}
+                      >
+                        Temperature: 39 °C
+                      </Item>
+                      <Item
+                        className="data"
+                        sx={{ bgcolor: "inherit", boxShadow: "none" }}
+                      >
+                        Weight: 150 lbs
+                      </Item>
                     </Stack>
                   </div>
                 </Typography>
@@ -122,10 +144,15 @@ function PatientProfile() {
 
         <Grid container spacing={2} item rowSpacing={2} direction="row">
           <Grid item xs={6}>
-            <Card sx={{bgcolor: "#171717", borderRadius: "20px"}}>
+            <Card sx={{ bgcolor: "#171717", borderRadius: "20px" }}>
               <CardActionArea>
                 <CardContent>
-                  <Typography className="header" gutterBottom variant="button" component="div">
+                  <Typography
+                    className="header"
+                    gutterBottom
+                    variant="button"
+                    component="div"
+                  >
                     Assigned Doctor
                   </Typography>
                   <Typography className="data" variant="body2">
@@ -134,7 +161,7 @@ function PatientProfile() {
                       {" "}
                       Michael Scott
                     </Link>
-                    <Checkbox size="small" style={{color: "white"}}/>
+                    <Checkbox size="small" style={{ color: "white" }} />
                   </Typography>
                 </CardContent>
               </CardActionArea>
@@ -142,14 +169,20 @@ function PatientProfile() {
           </Grid>
 
           <Grid item xs={6}>
-            <Card sx={{bgcolor: "#171717", borderRadius: "20px"}}>
+            <Card sx={{ bgcolor: "#171717", borderRadius: "20px" }}>
               <CardActionArea>
                 <CardContent>
-                  <Typography className="header" gutterBottom variant="button" component="div">
+                  <Typography
+                    className="header"
+                    gutterBottom
+                    variant="button"
+                    component="div"
+                  >
                     Status Review
                   </Typography>
                   <Typography className="data" variant="body2">
-                    Review Completed: <Checkbox size="small" style ={{color: "white"}}/>
+                    Review Completed:{" "}
+                    <Checkbox size="small" style={{ color: "white" }} />
                   </Typography>
                 </CardContent>
               </CardActionArea>
@@ -159,23 +192,72 @@ function PatientProfile() {
       </Grid>
 
       <Grid item xs={12} lg={10}>
-        <TableContainer sx={{bgcolor: "#171717", borderRadius: "20px"}} component={Paper}>
-          <h5>
-            <br/>
+        <TableContainer
+          sx={{ bgcolor: "#171717", borderRadius: "20px" }}
+          component={Paper}
+        >
+          <h5 className="symptomsTitle">
+            <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SYMPTOM DETAILS
-            <Button id="addButton"><AddCircleIcon sx={{color: "white"}}></AddCircleIcon></Button>
+            <Button id="addButton">
+              <AddCircleIcon sx={{ color: "white" }}></AddCircleIcon>
+            </Button>
           </h5>
           <Table sx={{ minWidth: 650 }} aria-label="collapsable table">
             <TableHead>
               <TableRow>
-                <TableCell className="header" sx={{borderColor: "#1e1e1e"}}>Date</TableCell>
-                <TableCell className="header" sx={{borderColor: "#1e1e1e"}}align="right">Fever</TableCell>
-                <TableCell className="header" sx={{borderColor: "#1e1e1e"}}align="right">Cough</TableCell>
-                <TableCell className="header" sx={{borderColor: "#1e1e1e"}}align="right">Runny Nose</TableCell>
-                <TableCell className="header" sx={{borderColor: "#1e1e1e"}}align="right">Muscle Ache</TableCell>
-                <TableCell className="header" sx={{borderColor: "#1e1e1e"}}align="right">Tiredness</TableCell>
-                <TableCell className="header" sx={{borderColor: "#1e1e1e"}}align="right">Smell Loss</TableCell>
-                <TableCell className="header" sx={{borderColor: "#1e1e1e"}}align="right">Taste Loss</TableCell>
+                <TableCell className="header" sx={{ borderColor: "#1e1e1e" }}>
+                  Date
+                </TableCell>
+                <TableCell
+                  className="header"
+                  sx={{ borderColor: "#1e1e1e" }}
+                  align="right"
+                >
+                  Fever
+                </TableCell>
+                <TableCell
+                  className="header"
+                  sx={{ borderColor: "#1e1e1e" }}
+                  align="right"
+                >
+                  Cough
+                </TableCell>
+                <TableCell
+                  className="header"
+                  sx={{ borderColor: "#1e1e1e" }}
+                  align="right"
+                >
+                  Runny Nose
+                </TableCell>
+                <TableCell
+                  className="header"
+                  sx={{ borderColor: "#1e1e1e" }}
+                  align="right"
+                >
+                  Muscle Ache
+                </TableCell>
+                <TableCell
+                  className="header"
+                  sx={{ borderColor: "#1e1e1e" }}
+                  align="right"
+                >
+                  Tiredness
+                </TableCell>
+                <TableCell
+                  className="header"
+                  sx={{ borderColor: "#1e1e1e" }}
+                  align="right"
+                >
+                  Smell Loss
+                </TableCell>
+                <TableCell
+                  className="header"
+                  sx={{ borderColor: "#1e1e1e" }}
+                  align="right"
+                >
+                  Taste Loss
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -184,16 +266,63 @@ function PatientProfile() {
                   key={row.Date}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  <TableCell className="data" sx={{borderColor: "#1e1e1e"}} component="th" scope="row">
+                  <TableCell
+                    className="data"
+                    sx={{ borderColor: "#1e1e1e" }}
+                    component="th"
+                    scope="row"
+                  >
                     {row.Date}
                   </TableCell>
-                  <TableCell className="data" sx={{borderColor: "#1e1e1e"}} align="right">{row.Fever}</TableCell>
-                  <TableCell className="data" sx={{borderColor: "#1e1e1e"}} align="right">{row.Cough}</TableCell>
-                  <TableCell className="data" sx={{borderColor: "#1e1e1e"}} align="right">{row.RunnyNose}</TableCell>
-                  <TableCell className="data" sx={{borderColor: "#1e1e1e"}} align="right">{row.MuscleAche}</TableCell>
-                  <TableCell className="data" sx={{borderColor: "#1e1e1e"}} align="right">{row.Tiredness}</TableCell>
-                  <TableCell className="data" sx={{borderColor: "#1e1e1e"}} align="right">{row.SmellLoss}</TableCell>
-                  <TableCell className="data" sx={{borderColor: "#1e1e1e"}} align="right">{row.TasteLoss}</TableCell>
+                  <TableCell
+                    className="data"
+                    sx={{ borderColor: "#1e1e1e" }}
+                    align="right"
+                  >
+                    {row.Fever}
+                  </TableCell>
+                  <TableCell
+                    className="data"
+                    sx={{ borderColor: "#1e1e1e" }}
+                    align="right"
+                  >
+                    {row.Cough}
+                  </TableCell>
+                  <TableCell
+                    className="data"
+                    sx={{ borderColor: "#1e1e1e" }}
+                    align="right"
+                  >
+                    {row.RunnyNose}
+                  </TableCell>
+                  <TableCell
+                    className="data"
+                    sx={{ borderColor: "#1e1e1e" }}
+                    align="right"
+                  >
+                    {row.MuscleAche}
+                  </TableCell>
+                  <TableCell
+                    className="data"
+                    sx={{ borderColor: "#1e1e1e" }}
+                    align="right"
+                  >
+                    {row.Tiredness}
+                  </TableCell>
+                  <TableCell
+                    className="data"
+                    sx={{ borderColor: "#1e1e1e" }}
+                    align="right"
+                  >
+                    {row.SmellLoss}
+                  </TableCell>
+                  <TableCell
+                    className="data"
+                    sx={{ borderColor: "#1e1e1e" }}
+                    align="right"
+                  >
+                    {row.TasteLoss}
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
