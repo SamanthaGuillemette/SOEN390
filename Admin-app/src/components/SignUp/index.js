@@ -21,12 +21,10 @@ import {useAuthState} from 'react-firebase-hooks/auth';
 import {auth} from '../../backend/firebase';
 import {db} from '../../backend/firebase';
 import { doc, setDoc } from "firebase/firestore"; 
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import {createMuiTheme } from "@material-ui/core/styles";
 import { inputLabelClasses } from "@mui/material/InputLabel";
-import Select from '@mui/material/Select';
 import { Navigate } from "react-router-dom";
 import "./../SignIn";
 import "./SignUp.css";
@@ -219,14 +217,22 @@ export default function SignUp(props) {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">Province</InputLabel>
-                    <Select
+                    <TextField
                       required
                       labelId="province"
                       id="province"
-                      label="province"
+                      label="Province"
                       value={province}
                       onChange={(e) => setProvince(e.target.value)}
+                      select
+                      InputLabelProps={{
+                        sx: {
+                          color: "var(--text-primary)",
+                          [`&.${inputLabelClasses.shrink}`]: {
+                            color: "var(--primary-main)"
+                          }
+                        }
+                      }}
                     >
                     <MenuItem value={"Alberta"}>Alberta</MenuItem>
                     <MenuItem value={"British Columbia"}>British Columbia</MenuItem>
@@ -238,7 +244,7 @@ export default function SignUp(props) {
                     <MenuItem value={"Prince Edward Island"}>Prince Edward Island</MenuItem>
                     <MenuItem value={"Quebec"}>Quebec</MenuItem>
                     <MenuItem value={"Saskatchewan"}>Saskatchewan</MenuItem>
-                  </Select>
+                  </TextField>
                 </FormControl>
               </Grid>
               <Grid item xs={12} sm={6}>

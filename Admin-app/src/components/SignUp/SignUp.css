@@ -3,10 +3,6 @@
   margin-left: 10px !important;
 }
 
-#demo-simple-select-label {
-  color: red !important;
-}
-
 .MuiList-root {
   background-color: var(--background-main) !important;
 }
