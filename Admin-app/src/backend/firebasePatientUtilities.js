@@ -3,11 +3,13 @@ import { collection, doc, getDocs, getDoc, setDoc, updateDoc } from "firebase/fi
 import patientData from "../data/patients.json";
 import { db } from "./firebase";
 
+const tableName = "Patients";
+
 const getPatients = async () => {
   try
   {
     console.log("getPatients Called");
-    const querySnapshot = await getDocs(collection(db, "Patients"));
+    const querySnapshot = await getDocs(collection(db, tableName));
     const returnValue = querySnapshot.docs.map((patient) => patient.data());
     return returnValue;
   }
@@ -21,7 +23,7 @@ const getPatients = async () => {
     try
     {
       // Do call to firebase
-      const docRef = doc(db, "Patients", id);
+      const docRef = doc(db, tableName, id);
       const docSnapShot = await getDoc(docRef);
       
       // If file exists, return it
@@ -44,7 +46,7 @@ const getPatients = async () => {
     try
     {
       // Get Patient
-      const docRef = doc(db, "Patients", id);
+      const docRef = doc(db, tableName, id);
       let patientInfo = await getPatient(id);
 
       // Set priorityFlag value 
@@ -86,7 +88,7 @@ const getPatients = async () => {
   const populatePatients = () => {
     try
     {
-      const patientsRef = collection(db, "Patients");
+      const patientsRef = collection(db, tableName);
   
       patientData.map((patientData) =>
         setDoc(doc(patientsRef, patientData.id), patientData));
