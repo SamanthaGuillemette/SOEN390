@@ -26,7 +26,7 @@ import Button from '@mui/material/Button';
 import FlagIcon from '@mui/icons-material/Flag';
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getPatient, togglePriorityFlag } from "../../backend/firebaseUtilities";
+import { getPatient, togglePriorityFlag } from "../../backend/firebasePatientUtilities";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
