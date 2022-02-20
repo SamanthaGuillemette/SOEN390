@@ -8,11 +8,11 @@ import "./DropdownStatus.css";
 
 const dropdownStyle = makeStyles({
   paper: {
-    background: "#171717",
+    background: "var(--background-main)",
     borderRadius: "10px",
   },
   icon: {
-    fill: '#767676',
+    fill: 'var(--text-inactive)',
   },
 });
 

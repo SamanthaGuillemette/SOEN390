@@ -3,7 +3,7 @@ import Calendar from "../../components/Calendar";
 
 const Appointments = () => {
   return (
-    <Card className="ui container statItem" sx={{bgcolor: "#1e1e1e", boxShadow: "none", color: "#767676"}}>
+    <Card className="ui container statItem" sx={{bgcolor: "var(--background-secondary)", boxShadow: "none", color: "var(--text-inactive)"}}>
       <h1>Appointments</h1>
       <Calendar />
     </Card>

@@ -1,45 +1,49 @@
 .signup-checkbox {
-  color: white !important;
+  color: var(--text-primary) !important;
   margin-left: 10px !important;
 }
 
 #demo-simple-select-label {
-  color: #8bc3eb !important;
+  color: red !important;
 }
 
 .MuiList-root {
-  background-color: #171717 !important;
+  background-color: var(--background-main) !important;
 }
 
 .Mui-selected {
-  background-color: #1e1e1e !important;
+  background-color: var(--background-secondary) !important;
 }
 
 .MuiPickersDay-root.Mui-selected {
-  background: linear-gradient(to right, #8bc3eb, #949be2) !important;
+  background: var(--gradient-to-right) !important;
   border: none !important;
 }
 
 .MuiCalendarPicker-root {
-  background-color: #171717 !important;
+  background-color: var(--background-main) !important;
 }
 
 .MuiPickersDay-root.MuiButtonBase-root,
 .PrivatePickersYear-yearButton {
-  background-color: #1e1e1e !important;
-  border: solid 0.5px #767676 !important;
+  background-color: var(--background-secondary) !important;
+  border: solid 0.5px var(--text-inactive) !important;
 }
 
 .MuiPickersDay-root:hover,
 .PrivatePickersYear-yearButton:hover {
-  background-color: #8bc3eb !important;
+  background-color: var(--primary-main) !important;
   border: none !important;
 }
 
 .MuiCalendarPicker-root .MuiSvgIcon-root {
-  color: #767676 !important;
+  color: var(--text-inactive) !important;
+}
+
+.MuiSelect-icon {
+  color: var(--text-inactive) !important;
 }
 
 .MuiCalendarPicker-root span.MuiTypography-caption {
-  color: #8bc3eb !important;
+  color: var(--text-primary) !important;
 }

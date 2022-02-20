@@ -14,6 +14,6 @@
 }
 
 h2.statNumber {
-  color: white !important;
+  color: var(--text-primary) !important;
   opacity: 1;
 }

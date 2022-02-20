@@ -9,26 +9,27 @@
 .text {
   text-align: center;
   font-size: 13px !important;
-  color: white;
+  color: var(--text-primary);
 }
 
 .profile-name {
   text-align: center;
   font-weight: bold !important;
-  color: white;
+  color: var(--text-primary);
 }
 
 #addButton {
   position: relative;
   left: 73%;
-  color: #767676;
+  color: var(--text-inactive);
   border-radius: 100px;
 }
 
 #addButton:hover {
   background-color: transparent;
 }
+
 h5.symptomsTitle {
-  color: white;
+  color: var(--text-primary);
   font-weight: 900 !important;
 }

@@ -4,14 +4,14 @@
 }
 
 .outer-layer {
-    background-color: #171717;
+    background-color: var(--background-main);
     width: 110%;
     height: 38%;
     border-radius: 20px;
 }
 
 .outer-layer-2 {
-    background-color: #171717;
+    background-color: var(--background-main);
     width: 110%;
     height: 38%;
     margin-top: 35px;
@@ -19,8 +19,8 @@
 }
 
 .event {
-    background: linear-gradient(to right, #8bc3eb, #949be2);
-    color: white;
+    background: var(--gradient-to-right);
+    color: var(--text-primary);
     width: 90px;
     height: 90px;
     text-align: center;
@@ -42,7 +42,7 @@
 }
 
 .eventTitle {
-    color: white;
+    color: var(--text-primary);
     font-weight: bold;
     margin-left: 130px;
     font-size: 20px;
@@ -50,7 +50,7 @@
 }
 
 .eventTime {
-    color: #767676;
+    color: var(--text-inactive);
     font-weight: bold;
     margin-left: 130px;
     font-size:  15px;
@@ -58,14 +58,30 @@
 }
 
 .viewMore {
-    color: #767676;
-    font-size: 15px;
-    font-weight: bold;
-    margin-left: 130px;
+    color: var(--text-inactive) !important;
+    font-size: 15px !important;
+    font-weight: bold !important;
+    margin-left: 123px !important;
 }
 
-.arrow {
+.events-arrow {
     position: relative;
-    top: 5px;
     left: 5px;
+    bottom: 1px;
+}
+
+.events-modal-h {
+    color: var(--text-primary);
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.events-modal-sec {
+    color: var(--text-primary);
+    font-size: 15px;
+}
+
+.viewMore:hover {
+    background-color: transparent !important;
+    color: var(--primary-main) !important;
 }

@@ -24,8 +24,8 @@ import { makeStyles } from "@material-ui/core/styles";
 const dropdownStyle = makeStyles(() => ({
   menu: {
     "& .MuiPaper-root": {
-      backgroundColor: "#171717",
-      color: "#767676",
+      backgroundColor: "var(--background-main)",
+      color: "var(--text-inactive)",
       borderRadius: "10px",
     }
   }
@@ -33,10 +33,10 @@ const dropdownStyle = makeStyles(() => ({
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
-  color: "#767676",
-  backgroundColor: "#171717", 
+  color: "var(--text-inactive)",
+  backgroundColor: "var(--background-main)", 
   "&:hover": {
-    color: "white",
+    color: "var(--text-primary)",
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
@@ -138,16 +138,16 @@ function Navbar() {
       className={classes.menu}
     >
       <MenuItem 
-      onMouseEnter={(e) => e.target.style.color = '#ffffff'}
-      onMouseLeave={(e) => e.target.style.color = '#767676'}
+      onMouseEnter={(e) => e.target.style.color = 'var(--text-primary)'}
+      onMouseLeave={(e) => e.target.style.color = 'var(--text-inactive)'}
       onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem 
-      onMouseEnter={(e) => e.target.style.color = '#ffffff'}
-      onMouseLeave={(e) => e.target.style.color = '#767676'}
+      onMouseEnter={(e) => e.target.style.color = 'var(--text-primary)'}
+      onMouseLeave={(e) => e.target.style.color = 'var(--text-inactive)'}
       onClick={handleMenuClose}>My account</MenuItem>
       <MenuItem 
-      onMouseEnter={(e) => e.target.style.color = '#ffffff'}
-      onMouseLeave={(e) => e.target.style.color = '#767676'}
+      onMouseEnter={(e) => e.target.style.color = 'var(--text-primary)'}
+      onMouseLeave={(e) => e.target.style.color = 'var(--text-inactive)'}
       onClick={logout}>Signout</MenuItem>
     </Menu>
 
@@ -206,7 +206,7 @@ function Navbar() {
         <Toolbar
           sx={{
             pr: "24px", // keep right padding when drawer closed
-            backgroundColor: "#1e1e1e"
+            backgroundColor: "var(--background-secondary)"
           }}
         >
           <IconButton
@@ -224,7 +224,7 @@ function Navbar() {
           <Typography
             component="h1"
             variant="h6"
-            color="white"
+            color="var(--text-primary)"
             noWrap
             sx={{ flexGrow: 1 }}
           >
@@ -250,8 +250,8 @@ function Navbar() {
                 badgeContent={4}
                 sx={{
                   "& .MuiBadge-badge": {
-                    color: "#1e1e1e",
-                    backgroundColor: "#8bc3eb"
+                    color: "var(--background-secondary)",
+                    backgroundColor: "var(--primary-main)"
                   }
                 }}
               >
@@ -267,8 +267,8 @@ function Navbar() {
                 badgeContent={17}
                 sx={{
                   "& .MuiBadge-badge": {
-                    color: "#1e1e1e",
-                    backgroundColor: "#8bc3eb"
+                    color: 'var(--background-secondary)',
+                    backgroundColor: "var(--primary-main)"
                   }
                 }}
               >

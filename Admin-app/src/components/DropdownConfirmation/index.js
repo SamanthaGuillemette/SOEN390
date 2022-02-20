@@ -7,11 +7,11 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const dropdownStyle = makeStyles({
   paper: {
-    background: "#171717",
+    background: "var(--background-main)",
     borderRadius: "10px",
   },
   icon: {
-    fill: '#767676',
+    fill: 'var(--text-inactive)',
   },
 });
 
@@ -42,7 +42,7 @@ function DropdownConfirmation() {
           MenuProps={{
             sx: {
               "&& .Mui-selected": {
-                backgroundColor: "#1e1e1e"
+                backgroundColor: "var(--background-secondary)"
               }
             },
             classes: {

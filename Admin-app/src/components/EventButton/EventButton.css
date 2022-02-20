@@ -10,6 +10,6 @@
 }
 
 .event-btn {
-    background: #171717 !important;
+    background: var(--background-main) !important;
     border-radius: 20px !important;
 }

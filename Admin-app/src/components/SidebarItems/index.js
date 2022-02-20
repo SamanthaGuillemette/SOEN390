@@ -16,7 +16,7 @@ export const mainListItems = (
     <Link className="sidebar-link" to="/">
       <ListItem button sx={{color: "transparent"}}>
         <ListItemIcon>
-          <DashboardIcon sx={{color: "#767676"}}/>
+          <DashboardIcon sx={{color: "var(--text-inactive)"}}/>
         </ListItemIcon>
         <ListItemText className="sidebar-text" primary="Dashboard" />
       </ListItem>
@@ -25,7 +25,7 @@ export const mainListItems = (
     <Link className="sidebar-link" to="/appointments">
       <ListItem button sx={{color: "transparent"}}>
         <ListItemIcon>
-          <EventIcon sx={{color: "#767676"}}/>
+          <EventIcon sx={{color: "var(--text-inactive)"}}/>
         </ListItemIcon>
         <ListItemText className="sidebar-text" primary="Appointments" />
       </ListItem>
@@ -34,7 +34,7 @@ export const mainListItems = (
     <Link className="sidebar-link" to="/patients">
       <ListItem button sx={{color: "transparent"}}>
         <ListItemIcon>
-          <PeopleIcon sx={{color: "#767676"}}/>
+          <PeopleIcon sx={{color: "var(--text-inactive)"}}/>
         </ListItemIcon>
         <ListItemText className="sidebar-text" primary="Patients" />
       </ListItem>
@@ -43,7 +43,7 @@ export const mainListItems = (
     <Link className="sidebar-link" to="inbox">
       <ListItem button sx={{color: "transparent"}}>
         <ListItemIcon>
-          <MailIcon sx={{color: "#767676"}}/>
+          <MailIcon sx={{color: "var(--text-inactive)"}}/>
         </ListItemIcon>
         <ListItemText className="sidebar-text" primary="Inbox" />
       </ListItem>
@@ -52,7 +52,7 @@ export const mainListItems = (
     <Link className="sidebar-link" to="testing">
       <ListItem button sx={{color: "transparent"}}>
         <ListItemIcon>
-          <LayersIcon sx={{color: "#767676"}}/>
+          <LayersIcon sx={{color: "var(--text-inactive)"}}/>
         </ListItemIcon>
         <ListItemText className="sidebar-text" primary="Test Component" />
       </ListItem>
@@ -61,7 +61,7 @@ export const mainListItems = (
     <Link className="sidebar-link" to="QR">
       <ListItem button sx={{color: "transparent"}}>
         <ListItemIcon>
-          <QrCodeIcon sx={{color: "#767676"}}/>
+          <QrCodeIcon sx={{color: "var(--text-inactive)"}}/>
         </ListItemIcon>
         <ListItemText className="sidebar-text" primary="QR Code" />
       </ListItem>

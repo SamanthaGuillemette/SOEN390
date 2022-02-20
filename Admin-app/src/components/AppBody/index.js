@@ -13,7 +13,7 @@ function AppBody(props) {
         <Box
           component="main"
           sx={{
-            backgroundColor: "#1e1e1e",
+            backgroundColor: "var(--background-secondary)",
             flexGrow: 1,
             height: "100vh",
             overflow: "auto",

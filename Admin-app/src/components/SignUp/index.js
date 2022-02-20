@@ -47,7 +47,7 @@ function Copyright(props) {
 const theme = createMuiTheme({
   palette: {
     background: {
-      default: "#1e1e1e"
+      default: "var(--background-secondary)"
     },
     text: {
       primary: "#ffffff"
@@ -57,14 +57,7 @@ const theme = createMuiTheme({
     MuiIconButton: {
       styleOverrides: {
         sizeMedium: {
-          color: "#767676"
-        }
-      }
-    },
-    MuiInputLabel: {
-      styleOverrides: {
-        root: {
-          color: "yellow"
+          color: "var(--text-inactive)"
         }
       }
     },
@@ -125,7 +118,7 @@ export default function SignUp(props) {
   }
   return (
     <ThemeProvider theme={theme}>
-      <Container sx={{bgcolor: "#171717", borderRadius: "20px"}} component="main" maxWidth="xs">
+      <Container sx={{bgcolor: "var(--background-main)", borderRadius: "20px"}} component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
@@ -135,7 +128,7 @@ export default function SignUp(props) {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 2, bgcolor: '#949be2' }}>
+          <Avatar sx={{ m: 2, bgcolor: 'var(--secondary-main)' }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -156,9 +149,9 @@ export default function SignUp(props) {
                   onChange={(e) => setFirstName(e.target.value)}
                   InputLabelProps={{
                     sx: {
-                      color: "white",
+                      color: "var(--text-primary)",
                       [`&.${inputLabelClasses.shrink}`]: {
-                        color: "#8bc3eb"
+                        color: "var(--primary-main)"
                       }
                     }
                   }}
@@ -176,9 +169,9 @@ export default function SignUp(props) {
                   onChange={(e) => setLastName(e.target.value)}
                   InputLabelProps={{
                     sx: {
-                      color: "white",
+                      color: "var(--text-primary)",
                       [`&.${inputLabelClasses.shrink}`]: {
-                        color: "#8bc3eb"
+                        color: "var(--primary-main)"
                       }
                     }
                   }}
@@ -196,9 +189,9 @@ export default function SignUp(props) {
                   onChange={(e) => setAddress(e.target.value)}
                   InputLabelProps={{
                     sx: {
-                      color: "white",
+                      color: "var(--text-primary)",
                       [`&.${inputLabelClasses.shrink}`]: {
-                        color: "#8bc3eb"
+                        color: "var(--primary-main)"
                       }
                     }
                   }}
@@ -216,9 +209,9 @@ export default function SignUp(props) {
                   onChange={(e) => setCity(e.target.value)}
                   InputLabelProps={{
                     sx: {
-                      color: "white",
+                      color: "var(--text-primary)",
                       [`&.${inputLabelClasses.shrink}`]: {
-                        color: "#8bc3eb"
+                        color: "var(--primary-main)"
                       }
                     }
                   }}
@@ -260,9 +253,9 @@ export default function SignUp(props) {
                   onChange={(e) => setPostalCode(e.target.value)}
                   InputLabelProps={{
                     sx: {
-                      color: "white",
+                      color: "var(--text-primary)",
                       [`&.${inputLabelClasses.shrink}`]: {
-                        color: "#8bc3eb"
+                        color: "var(--primary-main)"
                       }
                     }
                   }}
@@ -278,9 +271,9 @@ export default function SignUp(props) {
                     renderInput={(params) => <TextField {...params} 
                     InputLabelProps={{
                       sx: {
-                        color: "white",
+                        color: "var(--text-primary)",
                         [`&.${inputLabelClasses.shrink}`]: {
-                          color: "#8bc3eb"
+                          color: "var(--primary-main)"
                         }
                       }
                     }}
@@ -308,9 +301,9 @@ export default function SignUp(props) {
                   onChange={(e) => setEmail(e.target.value)}
                   InputLabelProps={{
                     sx: {
-                      color: "white",
+                      color: "var(--text-primary)",
                       [`&.${inputLabelClasses.shrink}`]: {
-                        color: "#8bc3eb"
+                        color: "var(--primary-main)"
                       }
                     }
                   }}
@@ -329,9 +322,9 @@ export default function SignUp(props) {
                   onChange={(e) => setPassword(e.target.value)}
                   InputLabelProps={{
                     sx: {
-                      color: "white",
+                      color: "var(--text-primary)",
                       [`&.${inputLabelClasses.shrink}`]: {
-                        color: "#8bc3eb"
+                        color: "var(--primary-main)"
                       }
                     }
                   }}
@@ -345,14 +338,14 @@ export default function SignUp(props) {
               sx={{
                 mt: 3,
                 mb: 2,
-                background: 'linear-gradient(to right, #8bc3eb, #949be2)'
+                background: 'var(--gradient-to-right)'
               }}
             >
               Sign Up
             </Button>
             <Grid container justifyContent="center">
               <Grid item>
-                <Link className="link-sign" sx={{textDecoration: 'none', color: "#8bc3eb"}} href="/signin" variant="body2">
+                <Link className="link-sign" sx={{textDecoration: 'none', color: "var(--primary-main)"}} href="/signin" variant="body2">
                   Already have an account? Sign in
                 </Link> 
               </Grid>

@@ -68,7 +68,7 @@ function PatientProfile() {
       <Grid item xs={6} xl={4}>
         <Card
           sx={{
-            background: "linear-gradient(to right bottom, #8bc3eb, #949be2)",
+            background: "var(--gradient-to-right-btm)",
             borderRadius: "20px",
           }}
         >
@@ -99,7 +99,7 @@ function PatientProfile() {
 
       <Grid container spacing={2} item rowSpacing={2} direction="column" xs={6}>
         <Grid item>
-          <Card sx={{ bgcolor: "#171717", borderRadius: "20px" }}>
+          <Card sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }}>
             <CardActionArea>
               <CardContent>
                 <Typography
@@ -144,7 +144,7 @@ function PatientProfile() {
 
         <Grid container spacing={2} item rowSpacing={2} direction="row">
           <Grid item xs={6}>
-            <Card sx={{ bgcolor: "#171717", borderRadius: "20px" }}>
+            <Card sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }}>
               <CardActionArea>
                 <CardContent>
                   <Typography
@@ -161,7 +161,7 @@ function PatientProfile() {
                       {" "}
                       Michael Scott
                     </Link>
-                    <Checkbox size="small" style={{ color: "white" }} />
+                    <Checkbox size="small" style={{ color: "var(--text-primary)" }} />
                   </Typography>
                 </CardContent>
               </CardActionArea>
@@ -169,7 +169,7 @@ function PatientProfile() {
           </Grid>
 
           <Grid item xs={6}>
-            <Card sx={{ bgcolor: "#171717", borderRadius: "20px" }}>
+            <Card sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }}>
               <CardActionArea>
                 <CardContent>
                   <Typography
@@ -182,7 +182,7 @@ function PatientProfile() {
                   </Typography>
                   <Typography className="data" variant="body2">
                     Review Completed:{" "}
-                    <Checkbox size="small" style={{ color: "white" }} />
+                    <Checkbox size="small" style={{ color: "var(--text-primary)" }} />
                   </Typography>
                 </CardContent>
               </CardActionArea>
@@ -193,67 +193,67 @@ function PatientProfile() {
 
       <Grid item xs={12} lg={10}>
         <TableContainer
-          sx={{ bgcolor: "#171717", borderRadius: "20px" }}
+          sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }}
           component={Paper}
         >
           <h5 className="symptomsTitle">
             <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SYMPTOM DETAILS
             <Button id="addButton">
-              <AddCircleIcon sx={{ color: "white" }}></AddCircleIcon>
+              <AddCircleIcon sx={{ color: "var(--text-primary)" }}></AddCircleIcon>
             </Button>
           </h5>
           <Table sx={{ minWidth: 650 }} aria-label="collapsable table">
             <TableHead>
               <TableRow>
-                <TableCell className="header" sx={{ borderColor: "#1e1e1e" }}>
+                <TableCell className="header" sx={{ borderColor: "var(--background-secondary)" }}>
                   Date
                 </TableCell>
                 <TableCell
                   className="header"
-                  sx={{ borderColor: "#1e1e1e" }}
+                  sx={{ borderColor: "var(--background-secondary)" }}
                   align="right"
                 >
                   Fever
                 </TableCell>
                 <TableCell
                   className="header"
-                  sx={{ borderColor: "#1e1e1e" }}
+                  sx={{ borderColor: "var(--background-secondary)" }}
                   align="right"
                 >
                   Cough
                 </TableCell>
                 <TableCell
                   className="header"
-                  sx={{ borderColor: "#1e1e1e" }}
+                  sx={{ borderColor: "var(--background-secondary)" }}
                   align="right"
                 >
                   Runny Nose
                 </TableCell>
                 <TableCell
                   className="header"
-                  sx={{ borderColor: "#1e1e1e" }}
+                  sx={{ borderColor: "var(--background-secondary)" }}
                   align="right"
                 >
                   Muscle Ache
                 </TableCell>
                 <TableCell
                   className="header"
-                  sx={{ borderColor: "#1e1e1e" }}
+                  sx={{ borderColor: "var(--background-secondary)" }}
                   align="right"
                 >
                   Tiredness
                 </TableCell>
                 <TableCell
                   className="header"
-                  sx={{ borderColor: "#1e1e1e" }}
+                  sx={{ borderColor: "var(--background-secondary)" }}
                   align="right"
                 >
                   Smell Loss
                 </TableCell>
                 <TableCell
                   className="header"
-                  sx={{ borderColor: "#1e1e1e" }}
+                  sx={{ borderColor: "var(--background-secondary)" }}
                   align="right"
                 >
                   Taste Loss
@@ -268,7 +268,7 @@ function PatientProfile() {
                 >
                   <TableCell
                     className="data"
-                    sx={{ borderColor: "#1e1e1e" }}
+                    sx={{ borderColor: "var(--background-secondary)" }}
                     component="th"
                     scope="row"
                   >
@@ -276,49 +276,49 @@ function PatientProfile() {
                   </TableCell>
                   <TableCell
                     className="data"
-                    sx={{ borderColor: "#1e1e1e" }}
+                    sx={{ borderColor: "var(--background-secondary)" }}
                     align="right"
                   >
                     {row.Fever}
                   </TableCell>
                   <TableCell
                     className="data"
-                    sx={{ borderColor: "#1e1e1e" }}
+                    sx={{ borderColor: "var(--background-secondary)" }}
                     align="right"
                   >
                     {row.Cough}
                   </TableCell>
                   <TableCell
                     className="data"
-                    sx={{ borderColor: "#1e1e1e" }}
+                    sx={{ borderColor: "var(--background-secondary)" }}
                     align="right"
                   >
                     {row.RunnyNose}
                   </TableCell>
                   <TableCell
                     className="data"
-                    sx={{ borderColor: "#1e1e1e" }}
+                    sx={{ borderColor: "var(--background-secondary)" }}
                     align="right"
                   >
                     {row.MuscleAche}
                   </TableCell>
                   <TableCell
                     className="data"
-                    sx={{ borderColor: "#1e1e1e" }}
+                    sx={{ borderColor: "var(--background-secondary)" }}
                     align="right"
                   >
                     {row.Tiredness}
                   </TableCell>
                   <TableCell
                     className="data"
-                    sx={{ borderColor: "#1e1e1e" }}
+                    sx={{ borderColor: "var(--background-secondary)" }}
                     align="right"
                   >
                     {row.SmellLoss}
                   </TableCell>
                   <TableCell
                     className="data"
-                    sx={{ borderColor: "#1e1e1e" }}
+                    sx={{ borderColor: "var(--background-secondary)" }}
                     align="right"
                   >
                     {row.TasteLoss}

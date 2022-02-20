@@ -1,7 +1,7 @@
 .label-positive {
     text-transform: uppercase;
-    color: white;
-    background: #0584be;
+    color: var(--text-primary);
+    background: var(--primary-dark);
     font-size: 0.7rem;
     font-weight: 700;
     border-radius: 0.375rem;
@@ -12,8 +12,8 @@
 
 .label-negative {
     text-transform: uppercase;
-    color: white;
-    background: #434db8;
+    color: var(--text-primary);
+    background: var(--secondary-dark);
     font-size: 0.7rem;
     font-weight: 700;
     border-radius: 0.375rem;

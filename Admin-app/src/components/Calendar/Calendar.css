@@ -1,20 +1,20 @@
 .fc {
-    background-color: #171717 !important;
-    color: white;
+    background-color: var(--background-main) !important;
+    color: var(--text-primary);
     border-radius: 20px;
     padding: 20px;
 }
 
 .fc-day-today {
-    background: #1e1e1e !important;
+    background: var(--background-secondary) !important;
 }
 
 .fc-day-today:hover, .fc-day-past:hover, .fc-day-future:hover{
-    background-color: rgb(139, 195, 235, 0.5) !important;
+    background-color: var(--primary-light) !important;
 }
 
 .fc-event {
-    background: linear-gradient(to right,#8bc3eb, #949be2)!important;
+    background: var(--gradient-to-right) !important;
 }
 
 .fc-button {
@@ -24,7 +24,7 @@
 }
 
 .fc-button:focus {
-    background-color: #949be2 !important;
+    background-color: var(--secondary-main) !important;
 }
 
 .fc *, .fc *:before, .fc *:after {
@@ -32,5 +32,5 @@
 }
 
 .fc a:hover {
-    color: white !important;
+    color: var(--text-primary) !important;
 }

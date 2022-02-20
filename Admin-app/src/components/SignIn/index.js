@@ -36,7 +36,7 @@ function Copyright(props) {
 const theme = createMuiTheme({
   palette: {
     background: {
-      default: "#1e1e1e"
+      default: "var(--background-secondary)"
     },
     text: {
       primary: "#ffffff"
@@ -78,7 +78,7 @@ export default function SignIn() {
   
     return (
       <ThemeProvider theme={theme}>
-        <Container sx={{bgcolor: "#171717", borderRadius: "20px"}} component="main" maxWidth="xs">
+        <Container sx={{bgcolor: "var(--background-main)", borderRadius: "20px"}} component="main" maxWidth="xs">
           <CssBaseline />
           <Box
             sx={{
@@ -88,7 +88,7 @@ export default function SignIn() {
               alignItems: 'center',
             }}
           >
-            <Avatar sx={{ m: 2, bgcolor: '#949be2' }}>
+            <Avatar sx={{ m: 2, bgcolor: 'var(--secondary-main)' }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
@@ -108,9 +108,9 @@ export default function SignIn() {
                 onChange={(e) => setEmail(e.target.value)}
                 InputLabelProps={{
                   sx: {
-                    color: "white",
+                    color: "var(--text-primary)",
                     [`&.${inputLabelClasses.shrink}`]: {
-                      color: "#8bc3eb"
+                      color: "var(--primary-main)"
                     }
                   }
                 }}
@@ -128,15 +128,15 @@ export default function SignIn() {
                 onChange={(e) => setPassword(e.target.value)}
                 InputLabelProps={{
                   sx: {
-                    color: "white",
+                    color: "var(--text-primary)",
                     [`&.${inputLabelClasses.shrink}`]: {
-                      color: "#8bc3eb"
+                      color: "var(--primary-main)"
                     }
                   }
                 }}
               />
               <FormControlLabel
-                control={<Checkbox style={{color: "white"}} value="remember" />}
+                control={<Checkbox style={{color: "var(--text-primary)"}} value="remember" />}
                 label="Remember me"
               />
               <Button
@@ -146,19 +146,19 @@ export default function SignIn() {
                 sx={{ 
                   mt: 3, 
                   mb: 2,
-                  background: 'linear-gradient(to right, #8bc3eb, #949be2)'
+                  background: 'var(--gradient-to-right)'
                 }}
               >
                 Sign In
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link className="link-sign" sx={{color: "#8bc3eb", textDecoration: 'none'}} href="#" variant="body2">
+                  <Link className="link-sign" sx={{color: "var(--primary-main)", textDecoration: 'none'}} href="#" variant="body2">
                     Forgot password?
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link className="link-sign" sx={{color: "#8bc3eb", textDecoration: 'none'}} href="/signup" variant="body2">
+                  <Link className="link-sign" sx={{color: "var(--primary-main)", textDecoration: 'none'}} href="/signup" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>

@@ -15,7 +15,7 @@ const QR = () => {
 
   return (
     <>
-      <Card sx={{ m: "30px", background: 'linear-gradient(to right bottom, #8bc3eb, #949be2)', borderRadius: "20px"}}>
+      <Card sx={{ m: "30px", background: 'var(--gradient-to-right-btm)', borderRadius: "20px"}}>
         <CardContent
           sx={{
             display: "flex",
@@ -23,7 +23,7 @@ const QR = () => {
             alignItems: "center",
             p: "30px",
             mb: "20px",
-            background: 'linear-gradient(to right bottom, #8bc3eb, #949be2)',
+            background: 'var(--gradient-to-right-btm)',
           }}
         >
           <Typography
@@ -33,13 +33,13 @@ const QR = () => {
               textAlign: "center",
               fontWeight: "800",
             }}
-            color="white"
+            color="var(--text-primary)"
             variant="h5"
           >
             Patient Details
           </Typography>
           <Typography
-            sx={{ mx: "360px", justifyContent: "center", fontSize: 14, color: "white" }}
+            sx={{ mx: "360px", justifyContent: "center", fontSize: 14, color: "var(--text-primary)" }}
             variant="body2"
           >
             <strong>First Name: </strong>
@@ -67,9 +67,9 @@ const QR = () => {
             target="_blank"
             variant="contained"
             sx={{ 
-              bgcolor: "#1e1e1e",
+              bgcolor: "var(--background-secondary)",
               borderRadius: "10px",
-              ":hover": { color: "white", bgcolor: "#949be2"} }}
+              ":hover": { color: "var(--text-primary)", bgcolor: "var(--secondary-main)"} }}
           >
             Download QR Code
           </Button>

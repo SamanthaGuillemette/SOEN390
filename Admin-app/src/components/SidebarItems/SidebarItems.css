@@ -3,9 +3,9 @@
 }
 
 .sidebar-text:hover {
-    color: white !important;
+    color: var(--text-primary) !important;
 }
 
 .sidebar-text {
-    color: #767676 !important;
+    color: var(--text-inactive) !important;
 }

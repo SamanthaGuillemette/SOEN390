@@ -11,7 +11,7 @@
 }
 
 .news-btn {
-    background: #8bc3eb !important;
+    background: var(--primary-main) !important;
     border-radius: 20px !important;
 }
 

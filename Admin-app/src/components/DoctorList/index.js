@@ -18,19 +18,19 @@ import "./../PatientList/PatientList.css";
 
 const dropdownStyle = makeStyles({
   paper: {
-    background: "#171717",
-    color: "#767676",
+    background: "var(--background-main)",
+    color: "var(--text-inactive)",
     borderRadius: "10px",
   },
   color: {
-    color: "#767676"
+    color: "var(--text-inactive)"
   },
   select: {
     "&:after": {
-      borderBottomColor: "#767676",
+      borderBottomColor: "var(--text-inactive)",
     },
     "& .MuiSvgIcon-root": {
-      color: "#767676",
+      color: "var(--text-inactive)",
     },
   },
 });
@@ -99,8 +99,8 @@ function DoctorList() {
       <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
       <TableHead>
           <TableRow>
-            <TableCell className="header" sx={{borderColor: "rgb(148, 155, 226, 0.5)"}}>Doctor Name</TableCell>
-            <TableCell className="header" sx={{borderColor: "rgb(148, 155, 226, 0.5)"}} align="right">patient number</TableCell>
+            <TableCell className="header" sx={{borderColor: "var(--secondary-light)"}}>Doctor Name</TableCell>
+            <TableCell className="header" sx={{borderColor: "var(--secondary-light)"}} align="right">patient number</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -109,10 +109,10 @@ function DoctorList() {
             : rows
           ).map((row) => (
             <TableRow key={row.name}>
-              <TableCell className="data" sx={{borderColor: "rgb(139, 195, 235, 0.5)"}} component="th" scope="row">
+              <TableCell className="data" sx={{borderColor: "var(--primary-light)"}} component="th" scope="row">
                 {row.doctorName}
               </TableCell>
-              <TableCell className="data" sx={{borderColor: "rgb(139, 195, 235, 0.5)"}} style={{ width: 160 }} align="right">
+              <TableCell className="data" sx={{borderColor: "var(--primary-light)"}} style={{ width: 160 }} align="right">
                 {row.numOfPatients}
               </TableCell>
             </TableRow>
@@ -137,7 +137,7 @@ function DoctorList() {
                   classes: { paper: classes.paper },
                   sx: {
                     "&& .Mui-selected": {
-                      backgroundColor: "#1e1e1e"
+                      backgroundColor: "var(--background-secondary)"
                     }
                   },
                 }

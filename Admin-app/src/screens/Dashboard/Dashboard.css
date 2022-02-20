@@ -17,11 +17,11 @@
   margin-top: 120px;
   margin-left:20px;
   margin-right:10px;
-  background-color: #171717 !important;
+  background-color: var(--background-main) !important;
 }
 
 a {
-  color: white;
+  color: var(--text-primary);
 }
 
 .cardShape1{
@@ -32,7 +32,7 @@ a {
   margin-top: 120px;
   margin-left:-590px;
   margin-right:10px;
-  background-color: #171717 !important;
+  background-color: var(--background-main) !important;
 }
 
 .cardShape3{
@@ -43,7 +43,7 @@ a {
   margin-top: 120px;
   margin-left:20px;
   margin-right:25px;
-  background-color: #171717 !important;
+  background-color: var(--background-main) !important;
 }
 
 .cardTitle{
@@ -73,7 +73,7 @@ a {
   margin-right: 0.75rem;
   padding: 0 1rem 0 0.5rem;
   border-radius: 0.25rem;
-  background: #8bc3eb;
+  background: var(--primary-main);
   box-shadow: 0 1px 4px 1px rgb(2 125 114 / 50%);
 }
 
@@ -90,7 +90,7 @@ a {
   font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size:16px !important;
   font-weight: bold italic !important;
-  color:#767676 !important
+  color:var(--text-inactive) !important
 }
 
 .listTitle{

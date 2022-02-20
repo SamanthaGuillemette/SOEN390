@@ -21,19 +21,19 @@ import "./PatientList.css";
 
 const dropdownStyle = makeStyles({
   paper: {
-    background: "#171717",
-    color: "#767676",
+    background: "var(--background-main)",
+    color: "var(--text-inactive)",
     borderRadius: "10px",
   },
   color: {
-    color: "#767676",
+    color: "var(--text-inactive)",
   },
   select: {
     "&:after": {
-      borderBottomColor: "#767676",
+      borderBottomColor: "var(--text-inactive)",
     },
     "& .MuiSvgIcon-root": {
-      color: "#767676",
+      color: "var(--text-inactive)",
     },
   },
 });
@@ -73,18 +73,18 @@ function Row(props) {
   return (
     <React.Fragment>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
-        <TableCell sx={{ borderColor: "#1e1e1e" }}>
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }}>
           <IconButton
             aria-label="expand row"
             size="small"
             onClick={() => setOpen(!open)}
-            sx={{ color: "#767676" }}
+            sx={{ color: "var(--text-inactive)" }}
           >
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
         <TableCell
-          sx={{ borderColor: "#1e1e1e" }}
+          sx={{ borderColor: "var(--background-secondary)" }}
           className="data"
           component="th"
           scope="row"
@@ -92,35 +92,35 @@ function Row(props) {
           {row.patientname}
         </TableCell>
         <TableCell
-          sx={{ borderColor: "#1e1e1e" }}
+          sx={{ borderColor: "var(--background-secondary)" }}
           className="data"
           align="right"
         >
           {row.id}
         </TableCell>
         <TableCell
-          sx={{ borderColor: "#1e1e1e" }}
+          sx={{ borderColor: "var(--background-secondary)" }}
           className="data"
           align="right"
         >
           {row.status}
         </TableCell>
         <TableCell
-          sx={{ borderColor: "#1e1e1e" }}
+          sx={{ borderColor: "var(--background-secondary)" }}
           className="data"
           align="right"
         >
           {row.appointment}
         </TableCell>
         <TableCell
-          sx={{ borderColor: "#1e1e1e" }}
+          sx={{ borderColor: "var(--background-secondary)" }}
           className="data"
           align="right"
         >
           {row.doctor}
         </TableCell>
         <TableCell
-          sx={{ borderColor: "#1e1e1e" }}
+          sx={{ borderColor: "var(--background-secondary)" }}
           className="data"
           align="right"
         >
@@ -129,7 +129,7 @@ function Row(props) {
       </TableRow>
       <TableRow>
         <TableCell
-          sx={{ borderColor: "#1e1e1e" }}
+          sx={{ borderColor: "var(--background-secondary)" }}
           style={{ paddingBottom: 0, paddingTop: 0 }}
           colSpan={6}
         >
@@ -139,7 +139,7 @@ function Row(props) {
                 variant="h6"
                 gutterBottom
                 component="div"
-                color="#767676"
+                color="var(--text-inactive)"
               >
                 Symptoms
               </Typography>
@@ -151,19 +151,19 @@ function Row(props) {
                 <TableHead>
                   <TableRow>
                     <TableCell
-                      sx={{ borderColor: "rgb(139, 195, 235, 0.5)" }}
+                      sx={{ borderColor: "var(--primary-light)" }}
                       className="symptoms-data"
                     >
                       Temperature
                     </TableCell>
                     <TableCell
-                      sx={{ borderColor: "rgb(139, 195, 235, 0.5)" }}
+                      sx={{ borderColor: "var(--primary-light)" }}
                       className="symptoms-data"
                     >
                       Weight
                     </TableCell>
                     <TableCell
-                      sx={{ borderColor: "rgb(139, 195, 235, 0.5)" }}
+                      sx={{ borderColor: "var(--primary-light)" }}
                       className="symptoms-data"
                       align="right"
                     >
@@ -326,40 +326,40 @@ function PatientList() {
       <Table size="small" aria-label="collapsible table">
         <TableHead>
           <TableRow>
-            <TableCell sx={{ borderColor: "#1e1e1e" }} />
-            <TableCell sx={{ borderColor: "#1e1e1e" }} className="header">
+            <TableCell sx={{ borderColor: "var(--background-secondary)" }} />
+            <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="header">
               Patient Name
             </TableCell>
             <TableCell
-              sx={{ borderColor: "#1e1e1e" }}
+              sx={{ borderColor: "var(--background-secondary)" }}
               className="header"
               align="right"
             >
               ID
             </TableCell>
             <TableCell
-              sx={{ borderColor: "#1e1e1e" }}
+              sx={{ borderColor: "var(--background-secondary)" }}
               className="header"
               align="right"
             >
               status
             </TableCell>
             <TableCell
-              sx={{ borderColor: "#1e1e1e" }}
+              sx={{ borderColor: "var(--background-secondary)" }}
               className="header"
               align="right"
             >
               Upcoming Appointment
             </TableCell>
             <TableCell
-              sx={{ borderColor: "#1e1e1e" }}
+              sx={{ borderColor: "var(--background-secondary)" }}
               className="header"
               align="right"
             >
               Assigned Doctor
             </TableCell>
             <TableCell
-              sx={{ borderColor: "#1e1e1e" }}
+              sx={{ borderColor: "var(--background-secondary)" }}
               className="header"
               align="right"
             >
@@ -392,7 +392,7 @@ function PatientList() {
             classes: { paper: classes.paper },
             sx: {
               "&& .Mui-selected": {
-                backgroundColor: "#1e1e1e",
+                backgroundColor: "var(--background-secondary)",
               },
             },
           },
