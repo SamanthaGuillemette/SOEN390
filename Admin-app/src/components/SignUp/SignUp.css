@@ -39,3 +39,7 @@
 .MuiCalendarPicker-root .MuiSvgIcon-root {
   color: #767676 !important;
 }
+
+.MuiCalendarPicker-root span.MuiTypography-caption {
+  color: #8bc3eb !important;
+}
