@@ -21,6 +21,10 @@
   --info-main: rgb(253, 135, 241) !important;
   --info-background: rgb(251, 73, 233, 0.18) !important;
 
+  --success-border: rgb(154, 241, 145, 0.3) !important;
+  --success-main: rgb(156, 241, 147) !important;
+  --success-background: rgb(154, 241, 145, 0.18) !important;
+
   --background-main: #171717 !important;
   --background-secondary: #1e1e1e !important;
 
