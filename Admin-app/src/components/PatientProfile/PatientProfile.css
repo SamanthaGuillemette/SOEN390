@@ -33,3 +33,20 @@ h5.symptomsTitle {
   color: var(--text-primary);
   font-weight: 900 !important;
 }
+
+.priority-flag {
+  color: black;
+}
+
+.priority-flag.clicked {
+  color: red;
+}
+
+.status-card{
+  border-style: none;
+}
+
+.status-card.clicked{
+  border-style: double;
+  border-color: red;
+}

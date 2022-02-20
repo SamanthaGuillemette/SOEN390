@@ -21,6 +21,8 @@ import Checkbox from "@mui/material/Checkbox";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Button from "@mui/material/Button";
 import DropdownConfirmation from "./../DropdownConfirmation";
+import FlagIcon from '@mui/icons-material/Flag';
+import { useState, useEffect } from "react";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -30,6 +32,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function PatientProfile() {
+  
   function createData(
     Date,
     Fever,
@@ -56,7 +59,21 @@ function PatientProfile() {
     createData("Jan 25", "No", "Yes", "No", "Yes", "Yes", "No", "No"),
     createData("Jan 26", "No", "Yes", "No", "No", "No", "No", "No"),
   ];
+  
+  const [priorityFlag, setPriorityFlag] = useState(false);
 
+  useEffect(() => {
+    const data = localStorage.getItem('priorityFlag');
+    if (data){
+      setPriorityFlag(JSON.parse(data));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('priorityFlag', JSON.stringify(priorityFlag));
+  });
+
+  
   return (
     <Grid
       container
@@ -97,23 +114,18 @@ function PatientProfile() {
         </Card>
       </Grid>
 
-      <Grid container spacing={2} item rowSpacing={2} direction="column" xs={6}>
+      <Grid container spacing={2} item rowSpacing={2} direction="column" xs={6.1}>
         <Grid item>
-          <Card sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }}>
+          <Card className={priorityFlag ? "status-card clicked" : "status-card"}>
             <CardActionArea>
               <CardContent>
-                <Typography
-                  className="header"
-                  gutterBottom
-                  variant="button"
-                  component="div"
-                >
-                  Status
+                <Typography gutterBottom variant="button" component="div">
+                  Status  <FlagIcon onClick={() => {priorityFlag ? setPriorityFlag(false) : setPriorityFlag(true)}}
+                  className={priorityFlag ? "priority-flag clicked" : "priority-flag"}>
+                  </FlagIcon>
                   <br></br>
                   <br></br>
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  <div>
                     <Stack
                       direction="row"
                       divider={<Divider orientation="vertical" />}
@@ -135,8 +147,6 @@ function PatientProfile() {
                         Weight: 150 lbs
                       </Item>
                     </Stack>
-                  </div>
-                </Typography>
               </CardContent>
             </CardActionArea>
           </Card>
@@ -156,11 +166,7 @@ function PatientProfile() {
                     Assigned Doctor
                   </Typography>
                   <Typography className="data" variant="body2">
-                    Name:{" "}
-                    <Link className="data" to="/doctor">
-                      {" "}
-                      Michael Scott
-                    </Link>
+                    Name: Michael Scott
                     <Checkbox size="small" style={{ color: "var(--text-primary)" }} />
                   </Typography>
                 </CardContent>
@@ -191,7 +197,7 @@ function PatientProfile() {
         </Grid>
       </Grid>
 
-      <Grid item xs={12} lg={10}>
+      <Grid item xs={12} lg={10.1}>
         <TableContainer
           sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }}
           component={Paper}

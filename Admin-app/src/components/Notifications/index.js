@@ -11,7 +11,12 @@ const Notifications = () => {
           <i className="large github middle aligned icon"></i>
           <div className="content">
             <div className="header">Semantic-Org/Semantic-UI</div>
-            <div className="description">Updated 10 mins ago</div>
+            <div
+              className="description"
+              data-testid="notification-statusUpdate"
+            >
+              Updated 10 mins ago
+            </div>
           </div>
         </div>
         <div className="item">
