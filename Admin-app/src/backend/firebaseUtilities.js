@@ -1,5 +1,5 @@
 
-import { collection, doc, getDocs, getDoc, setDoc  } from "firebase/firestore";
+import { collection, doc, getDocs, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import patientData from "../data/patients.json";
 import { db } from "./firebase";
 
@@ -39,6 +39,45 @@ const getPatients = async () => {
       console.log("[getPatient]" + error);  
     }
   };
+
+  const togglePriorityFlag = async (id) => {
+    try
+    {
+      // Get Patient
+      const docRef = doc(db, "Patients", id);
+      let patientInfo = await getPatient(id);
+
+      // Set priorityFlag value 
+      let priorityFlag;
+
+      if (patientInfo)
+      {
+        if (patientInfo.flaggedPriority === '0')
+        {
+          priorityFlag = "1";
+        }
+        else
+        {
+          priorityFlag = "0";
+        }
+      }
+
+      // Update DB with new value
+      docRef && await updateDoc(docRef, "flaggedPriority", priorityFlag);
+
+      // Get updated patient
+      patientInfo = await getPatient(id);      
+
+      return patientInfo;
+    }
+
+    catch(error)
+    {
+      console.log("[togglePriorityFlag]" + error);  
+    }
+  };
+
+
   
   /**
    * This function populates the Patient table in firebase given a JSON file
@@ -58,5 +97,5 @@ const getPatients = async () => {
     }
   }
 
-  export { getPatients, getPatient, populatePatients };
+  export { getPatients, getPatient, populatePatients, togglePriorityFlag };
   

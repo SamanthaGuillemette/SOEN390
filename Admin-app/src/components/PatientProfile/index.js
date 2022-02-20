@@ -26,7 +26,7 @@ import Button from '@mui/material/Button';
 import FlagIcon from '@mui/icons-material/Flag';
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getPatient } from "../../backend/firebaseUtilities";
+import { getPatient, togglePriorityFlag } from "../../backend/firebaseUtilities";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -83,6 +83,12 @@ function PatientProfile() {
       TasteLoss,
     };
   }
+
+  function onFlagClick(id)
+  {
+    togglePriorityFlag(id)
+    .then((newPatientInfo) => newPatientInfo && setPriorityFlag(newPatientInfo.flaggedPriority === "1"));
+  }  
 
   const rows = [
     createData("Jan 25", "No", "Yes", "No", "Yes", "Yes", "No", "No"),
@@ -156,7 +162,7 @@ function PatientProfile() {
             <CardActionArea>
               <CardContent>
                 <Typography gutterBottom variant="button" component="div">
-                  Status  <FlagIcon onClick={() => {priorityFlag ? setPriorityFlag(false) : setPriorityFlag(true)}}
+                  Status  <FlagIcon onClick={() => { (  onFlagClick(id));}}
                   className={priorityFlag ? "priority-flag clicked" : "priority-flag"}>
                   </FlagIcon>
                   <br></br>
