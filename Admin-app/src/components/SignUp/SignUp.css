@@ -1,4 +1,36 @@
 .signup-checkbox {
-    color: white !important;
-    margin-left: 10px !important;
+  color: white !important;
+  margin-left: 10px !important;
+}
+
+#demo-simple-select-label {
+  color: #8bc3eb !important;
+}
+.MuiList-root {
+  background-color: #171717 !important;
+}
+
+.Mui-selected {
+  background: linear-gradient(to right, #8bc3eb, #949be2) !important;
+  border: none !important;
+}
+
+.MuiCalendarPicker-root {
+  background-color: #171717 !important;
+}
+
+.MuiPickersDay-root.MuiButtonBase-root,
+.PrivatePickersYear-yearButton {
+  background-color: #1e1e1e !important;
+  border: solid rgb(139, 195, 235, 0.5) !important;
+}
+
+.MuiPickersDay-root:hover,
+.PrivatePickersYear-yearButton:hover {
+  opacity: 0.6;
+  border-color: rgb(139, 195, 235, 1) !important;
+}
+
+.MuiCalendarPicker-root .MuiSvgIcon-root {
+  color: rgb(139, 195, 235, 1) !important;
 }
