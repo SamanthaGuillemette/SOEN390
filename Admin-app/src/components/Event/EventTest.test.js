@@ -12,11 +12,11 @@ render(<MemoryRouter><EventButton /></MemoryRouter>);
 
 });
 
-// test("should render event list", () => {
-// render(<MemoryRouter><EventList /></MemoryRouter>);
+test("should render event list", () => {
+render(<MemoryRouter><EventList /></MemoryRouter>);
 
 
-// });
+ });
 
 test("should render event details", () => {
 render(<MemoryRouter><EventDetails /></MemoryRouter>);
