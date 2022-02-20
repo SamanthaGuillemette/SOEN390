@@ -11,6 +11,10 @@
   background-color: #171717 !important;
 }
 
+.Mui-selected {
+  background-color: #1e1e1e !important;
+}
+
 .MuiPickersDay-root.Mui-selected {
   background: linear-gradient(to right, #8bc3eb, #949be2) !important;
   border: none !important;
@@ -23,11 +27,13 @@
 .MuiPickersDay-root.MuiButtonBase-root,
 .PrivatePickersYear-yearButton {
   background-color: #1e1e1e !important;
+  border: solid 0.5px #767676 !important;
 }
 
 .MuiPickersDay-root:hover,
 .PrivatePickersYear-yearButton:hover {
   background-color: #8bc3eb !important;
+  border: none !important;
 }
 
 .MuiCalendarPicker-root .MuiSvgIcon-root {
