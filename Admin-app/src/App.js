@@ -13,7 +13,7 @@ import Notifications from "./components/Notifications";
 import QR from "./components/QR";
 import News from "./components/News";
 import NewsDetails from "./components/News/NewsDetails";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
 import { saveUser } from "./store/authSlice";
 import { useEffect } from "react";

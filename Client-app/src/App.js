@@ -11,6 +11,7 @@ import QR from "./components/QR";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./backend/firebase";
 import Loading from "./components/Loading";
+import ClientProfile from "./components/ClientProfile";
 
 function App() {
   const [user, loading] = useAuthState(auth);
@@ -27,12 +28,10 @@ function App() {
   //   });
   // }, [dispatch]);
 
-  if(loading){
-    return (
-      <Loading />
-    )
+  if (loading) {
+    return <Loading />;
   }
-  
+
   return (
     // <BrowserRouter>
     //   {/* {user && ( */}
@@ -58,6 +57,7 @@ function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="*" element={<Dashboard />} />
           <Route path="/qr" element={<QR />} />
+          <Route path="/clientprofile" element={<ClientProfile />} />
         </Routes>
       )}
       {!user && (

@@ -1,0 +1,87 @@
+.outline {
+    margin-left: 5%;
+    margin-top: 4%;
+}
+
+.outer-layer {
+    background-color: var(--background-main);
+    width: 110%;
+    height: 38%;
+    border-radius: 20px;
+}
+
+.outer-layer-2 {
+    background-color: var(--background-main);
+    width: 110%;
+    height: 38%;
+    margin-top: 35px;
+    border-radius: 20px;
+}
+
+.event {
+    background: var(--gradient-to-right);
+    color: var(--text-primary);
+    width: 90px;
+    height: 90px;
+    text-align: center;
+    border-radius: 15px;
+    position: relative;
+    bottom: 20px;
+    padding: 1.5rem;
+    margin-left: 20px;
+}
+
+.eventDate {
+    padding: 0.8rem 0.5rem;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.eventMonth {
+    font-size: 20px;
+}
+
+.eventTitle {
+    color: var(--text-primary);
+    font-weight: bold;
+    margin-left: 130px;
+    font-size: 20px;
+    margin-top: -70px;
+}
+
+.eventTime {
+    color: var(--text-inactive);
+    font-weight: bold;
+    margin-left: 130px;
+    font-size:  15px;
+    margin-top: 10px;
+}
+
+.viewMore {
+    color: var(--text-inactive) !important;
+    font-size: 15px !important;
+    font-weight: bold !important;
+    margin-left: 123px !important;
+}
+
+.events-arrow {
+    position: relative;
+    left: 5px;
+    bottom: 1px;
+}
+
+.events-modal-h {
+    color: var(--text-primary);
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.events-modal-sec {
+    color: var(--text-primary);
+    font-size: 15px;
+}
+
+.viewMore:hover {
+    background-color: transparent !important;
+    color: var(--primary-main) !important;
+}

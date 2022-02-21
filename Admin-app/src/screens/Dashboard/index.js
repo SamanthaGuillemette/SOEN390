@@ -16,6 +16,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
 import SmallStatBox from "../../components/SmallStatBox";
 import "./Dashboard.css";
+import UpcomingEvents from "../../components/UpcomingEvents/index"
 
 const Dashboard = () => {
   return (
@@ -105,6 +106,8 @@ const Dashboard = () => {
               </li>
             ))}
           </List>
+
+          <UpcomingEvents></UpcomingEvents>
 
           <Grid className="infoGrid" container spacing={2} xs ={12}>
             <Typography sx={{color: "var(--text-primary)"}} className="title" gutterBottom variant="h5">
