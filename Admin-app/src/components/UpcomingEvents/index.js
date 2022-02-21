@@ -27,12 +27,12 @@ function UpcomingEvents() {
     const handleClose = () => setOpen(false);
 
     return (
-        <Box className="outline">
-            <Box className="outer-layer">
-            <Box className="event">
+        <div className="outline">
+            <div className="outer-layer">
+            <div className="event">
                 <div className="eventMonth">Feb</div>    
                 <div className="eventDate" >04</div>
-                </Box>
+                </div>
                 <div className="eventTitle" >Blood Donations</div>
                 <div className="eventTime">6:00 PM</div>
                 <div>
@@ -54,12 +54,12 @@ function UpcomingEvents() {
                     </Box>
                 </Modal>
                 </div>
-            </Box>
-            <Box className="outer-layer-2">
-                <Box className="event">
+            </div>
+            <div className="outer-layer-2">
+                <div className="event">
                 <div className="eventMonth">Feb</div>    
                 <div className="eventDate" >08</div>
-                </Box>
+                </div>
                 <div className="eventTitle" >Vaccine Available for People 12+</div>
                 <div className="eventTime">12:00 PM</div>
                 <div>
@@ -81,10 +81,10 @@ function UpcomingEvents() {
                     </Box>
                 </Modal>
                 </div>
-            </Box>
+            </div>
             <EventButton></EventButton>
             <COVID19Button></COVID19Button>
-        </Box>
+        </div>
     );
 }
 
