@@ -152,7 +152,7 @@ export default function SignIn() {
                 Error
               </Typography>
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                You are currently in the Administration Application, please sign in using this email on the Client App.                
+                You are currently in the Client Application, please sign in using this email on the Administration App.                
               </Typography>
             </Box>
             </Modal>
