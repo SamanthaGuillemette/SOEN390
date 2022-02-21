@@ -17,6 +17,7 @@ import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
 import { makeStyles } from "@material-ui/core/styles";
 import DropdownStatus from "./../DropdownStatus";
 import DropdownDoctor from "./../DropdownDoctor";
+import Paper from "@mui/material/Paper";
 import FlagIcon from '@mui/icons-material/Flag';
 import "./PatientList.css";
 import { useEffect, useState } from "react";
@@ -342,28 +343,27 @@ function PatientListNew() {
 }
 
 function PatientListOld() {
-  const classes = dropdownStyle();
   const flag = localStorage.getItem('priorityFlag');
   const rows = [
     createData(<a href="/patientprofile">John Doe</a>, 1476, 
-    <DropdownStatus></DropdownStatus>, "23/05/22", <DropdownDoctor></DropdownDoctor>, <FlagIcon className={JSON.parse(flag) ? "priority-flag clicked" : "priority-flag"}></FlagIcon>, "90°C", "150 lbs", "5'9"),
+    <span className="label-positive">positive</span>, "23/05/22", "Allyson Richards", <FlagIcon className={JSON.parse(flag) ? "priority-flag clicked" : "priority-flag"}></FlagIcon>, "90°C", "150 lbs", "5'9"),
     createData("Jane Smith", 159,
-    <DropdownStatus></DropdownStatus>, "05/02/22", <DropdownDoctor></DropdownDoctor>, <FlagIcon className={flag ? "priority-flag" : "priority-flag clicked"}></FlagIcon>, "65°C", "120lbs", "5'5"),
+    <span className="label-positive">positive</span>, "05/02/22", "Charles Ludwig", <FlagIcon className={flag ? "priority-flag" : "priority-flag clicked"}></FlagIcon>, "65°C", "120lbs", "5'5"),
     createData("William Hill", 1666, 
-    <DropdownStatus></DropdownStatus>, "06/05/22", <DropdownDoctor></DropdownDoctor>, <FlagIcon className={flag ? "priority-flag" : "priority-flag clicked"}></FlagIcon>, "90°C", "150 lbs", "5'9"),
+    <span className="label-positive">positive</span>, "06/05/22", "Allyson Richards", <FlagIcon className={flag ? "priority-flag" : "priority-flag clicked"}></FlagIcon>, "90°C", "150 lbs", "5'9"),
     createData("Maria Sánchez", 1200,
-    <DropdownStatus></DropdownStatus>, "06/02/22", <DropdownDoctor></DropdownDoctor>, <FlagIcon className={flag ? "priority-flag" : "priority-flag clicked"}></FlagIcon>, "65°C", "120lbs", "5'5"),
+    <span className="label-negative">negative</span>, "06/02/22", "Charles Ludwig", <FlagIcon className={flag ? "priority-flag" : "priority-flag clicked"}></FlagIcon>, "65°C", "120lbs", "5'5"),
     createData("Liam Hill", 233, 
-    <DropdownStatus></DropdownStatus>, "22/03/22", <DropdownDoctor></DropdownDoctor>, <FlagIcon className={flag ? "priority-flag" : "priority-flag clicked"}></FlagIcon>, "90°C", "150 lbs", "5'9"),
+    <span className="label-positive">positive</span>, "22/03/22", "Allyson Richards", <FlagIcon className={flag ? "priority-flag" : "priority-flag clicked"}></FlagIcon>, "90°C", "150 lbs", "5'9"),
     createData("Connor Jackson", 2893,
-    <DropdownStatus></DropdownStatus>, "31/01/22", <DropdownDoctor></DropdownDoctor>, <FlagIcon className={flag ? "priority-flag" : "priority-flag clicked"}></FlagIcon>, "65°C", "120lbs", "5'5"),
+    <span className="label-negative">negative</span>, "31/01/22", "Allyson Richards", <FlagIcon className={flag ? "priority-flag" : "priority-flag clicked"}></FlagIcon>, "65°C", "120lbs", "5'5"),
     createData("Connor Jackson", 2896,
-    <DropdownStatus></DropdownStatus>, "01/02/22", <DropdownDoctor></DropdownDoctor>, <FlagIcon className={flag ? "priority-flag" : "priority-flag clicked"}></FlagIcon>, "65°C", "120lbs", "5'5"),
+    <span className="label-negative">negative</span>, "01/02/22", "Charles Ludwig", <FlagIcon className={flag ? "priority-flag" : "priority-flag clicked"}></FlagIcon>, "65°C", "120lbs", "5'5"),
   ];
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
+  
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -374,53 +374,19 @@ function PatientListOld() {
   };
 
   return (
-    <TableContainer className="patient-doctor-list">
-      <Box className="label">
-        <HealthAndSafetyIcon className="patients-icon"></HealthAndSafetyIcon>
-        Patient List
-      </Box>
-      <Table size="small" aria-label="collapsible table">
+    <TableContainer className="patient-list" component={Paper}>
+     <Box className="label">Patient List</Box>
+      <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
-            <TableCell sx={{ borderColor: "var(--background-secondary)" }} />
-            <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="header">
-              Patient Name
+            <TableCell />
+            <TableCell className="header">Patient Name
             </TableCell>
-            <TableCell
-              sx={{ borderColor: "var(--background-secondary)" }}
-              className="header"
-              align="right"
-            >
-              ID
-            </TableCell>
-            <TableCell
-              sx={{ borderColor: "var(--background-secondary)" }}
-              className="header"
-              align="right"
-            >
-              status
-            </TableCell>
-            <TableCell
-              sx={{ borderColor: "var(--background-secondary)" }}
-              className="header"
-              align="right"
-            >
-              Upcoming Appointment
-            </TableCell>
-            <TableCell
-              sx={{ borderColor: "var(--background-secondary)" }}
-              className="header"
-              align="right"
-            >
-              Assigned Doctor
-            </TableCell>
-            <TableCell
-              sx={{ borderColor: "var(--background-secondary)" }}
-              className="header"
-              align="right"
-            >
-              Flagged Priority
-            </TableCell>
+            <TableCell className="header" align="right">ID</TableCell>
+            <TableCell className="header" align="right">status</TableCell>
+            <TableCell className="header" align="right">Upcoming Appointment</TableCell>
+            <TableCell className="header" align="right">Assigned Doctor</TableCell>
+            <TableCell className="header" align="right">Flagged Priority</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -433,33 +399,16 @@ function PatientListOld() {
         </TableBody>
       </Table>
       <TablePagination
-        classes={{
-          root: classes.color,
-        }}
-        rowsPerPageOptions={[5, 10, { label: "All", value: -1 }]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        className={classes.select}
-        SelectProps={{
-          inputProps: { "aria-label": "rows per page" },
-          MenuProps: {
-            classes: { paper: classes.paper },
-            sx: {
-              "&& .Mui-selected": {
-                backgroundColor: "var(--background-secondary)",
-              },
-            },
-          },
-        }}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
+          rowsPerPageOptions={[5, 10, { label: 'All', value: -1 }]}
+          component="div"
+          count={rows.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage} 
+        />
     </TableContainer>
   );
 }
-
-
 
 export default PatientList;

@@ -24,6 +24,9 @@ import DropdownConfirmation from "./../DropdownConfirmation";
 import FlagIcon from '@mui/icons-material/Flag';
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import NativeSelect from '@mui/material/NativeSelect';
 import { getPatient, togglePriorityFlag, useOld } from "../../backend/firebasePatientUtilities";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -280,6 +283,7 @@ function PatientProfileNew() {
   );
 }
 
+
 function PatientProfileOld() {
   
   function createData(
@@ -306,7 +310,7 @@ function PatientProfileOld() {
 
   const rows = [
     createData("Jan 25", "No", "Yes", "No", "Yes", "Yes", "No", "No"),
-    createData("Jan 26", "No", "Yes", "No", "No", "No", "No", "No"),
+    createData("Jan 26", "No", "Yes", "No", "No", "No", "No", "No")
   ];
   
   const [priorityFlag, setPriorityFlag] = useState(false);
@@ -324,20 +328,9 @@ function PatientProfileOld() {
 
   
   return (
-    <Grid
-      container
-      spacing={2}
-      maxWidth="lg"
-      alignItems="flex-end"
-      sx={{ marginTop: "25px" }}
-    >
-      <Grid item xs={6} xl={4}>
-        <Card
-          sx={{
-            background: "var(--gradient-to-right-btm)",
-            borderRadius: "20px",
-          }}
-        >
+    <Grid container spacing={2} maxWidth="lg" alignItems="flex-end">
+      <Grid item xs={8} lg={4}>
+        <Card>
           <CardActionArea>
             <Avatar
               id="avatar"
@@ -353,7 +346,11 @@ function PatientProfileOld() {
               >
                 John Doe
               </Typography>
-              <Typography className="text" variant="body2">
+              <Typography
+                className="text"
+                variant="body2"
+                color="text.secondary"
+              >
                 <br></br>Age: 50
                 <br></br>Birthday: 1 July 1971
                 <br></br>Address: 101 Brooke, Montreal L5L 9T9
@@ -365,10 +362,10 @@ function PatientProfileOld() {
 
       <Grid container spacing={2} item rowSpacing={2} direction="column" xs={6.1}>
         <Grid item>
-          <Card sx={{bgcolor: "var(--background-main)", borderRadius:"20px"}} className={priorityFlag ? "status-card clicked" : "status-card"}>
+          <Card className={priorityFlag ? "status-card clicked" : "status-card"}>
             <CardActionArea>
               <CardContent>
-                <Typography className="header" gutterBottom variant="button" component="div">
+                <Typography gutterBottom variant="button" component="div">
                   Status  <FlagIcon onClick={() => {priorityFlag ? setPriorityFlag(false) : setPriorityFlag(true)}}
                   className={priorityFlag ? "priority-flag clicked" : "priority-flag"}>
                   </FlagIcon>
@@ -381,20 +378,25 @@ function PatientProfileOld() {
                       spacing={1}
                       alignItems="baseline"
                     >
-                      <DropdownConfirmation></DropdownConfirmation>
-                      <Item class="label-positive">positive</Item>
-                      <Item
-                        className="data"
-                        sx={{ bgcolor: "inherit", boxShadow: "none" }}
-                      >
-                        Temperature: 39 °C
-                      </Item>
-                      <Item
-                        className="data"
-                        sx={{ bgcolor: "inherit", boxShadow: "none" }}
-                      >
-                        Weight: 150 lbs
-                      </Item>
+                      
+                      <FormControl sx={{width: 115}} >
+                        <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                          Confirmation
+                        </InputLabel>
+                        <NativeSelect
+                          size="small"
+                          defaultValue={20}
+                          inputProps={{
+                            name: 'confirmation',
+                            id: 'uncontrolled-native',
+                          }}>
+                          <option value={10}>Confirmed</option>
+                          <option value={20}>Unconfirmed</option>
+                        </NativeSelect>
+                      </FormControl>
+                      <span className="label-positive">positive</span>
+                      <Item>Temperature: 39 °C</Item>
+                      <Item>Weight: 150 lbs</Item>
                     </Stack>
               </CardContent>
             </CardActionArea>
@@ -403,20 +405,15 @@ function PatientProfileOld() {
 
         <Grid container spacing={2} item rowSpacing={2} direction="row">
           <Grid item xs={6}>
-            <Card sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }}>
+            <Card>
               <CardActionArea>
                 <CardContent>
-                  <Typography
-                    className="header"
-                    gutterBottom
-                    variant="button"
-                    component="div"
-                  >
+                  <Typography gutterBottom variant="button" component="div">
                     Assigned Doctor
                   </Typography>
-                  <Typography className="data" variant="body2">
+                  <Typography variant="body2" color="text.secondary">
                     Name: Michael Scott
-                    <Checkbox size="small" style={{ color: "var(--text-primary)" }} />
+                    <Checkbox size="small" style ={{color: "white"}}/>
                   </Typography>
                 </CardContent>
               </CardActionArea>
@@ -424,20 +421,14 @@ function PatientProfileOld() {
           </Grid>
 
           <Grid item xs={6}>
-            <Card sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }}>
+            <Card>
               <CardActionArea>
                 <CardContent>
-                  <Typography
-                    className="header"
-                    gutterBottom
-                    variant="button"
-                    component="div"
-                  >
+                  <Typography gutterBottom variant="button" component="div">
                     Status Review
                   </Typography>
-                  <Typography className="data" variant="body2">
-                    Review Completed:{" "}
-                    <Checkbox size="small" style={{ color: "var(--text-primary)" }} />
+                  <Typography variant="body2" color="text.secondary">
+                    Review Completed: <Checkbox size="small"/>
                   </Typography>
                 </CardContent>
               </CardActionArea>
@@ -447,72 +438,23 @@ function PatientProfileOld() {
       </Grid>
 
       <Grid item xs={12} lg={10.1}>
-        <TableContainer
-          sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }}
-          component={Paper}
-        >
-          <h5 className="symptomsTitle">
+        <TableContainer component={Paper}>
+          <h5>
             <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SYMPTOM DETAILS
-            <Button id="addButton">
-              <AddCircleIcon sx={{ color: "var(--text-primary)" }}></AddCircleIcon>
-            </Button>
+            <Button id="add-button"><AddCircleIcon></AddCircleIcon></Button>
           </h5>
           <Table sx={{ minWidth: 650 }} aria-label="collapsable table">
             <TableHead>
               <TableRow>
-                <TableCell className="header" sx={{ borderColor: "var(--background-secondary)" }}>
-                  Date
-                </TableCell>
-                <TableCell
-                  className="header"
-                  sx={{ borderColor: "var(--background-secondary)" }}
-                  align="right"
-                >
-                  Fever
-                </TableCell>
-                <TableCell
-                  className="header"
-                  sx={{ borderColor: "var(--background-secondary)" }}
-                  align="right"
-                >
-                  Cough
-                </TableCell>
-                <TableCell
-                  className="header"
-                  sx={{ borderColor: "var(--background-secondary)" }}
-                  align="right"
-                >
-                  Runny Nose
-                </TableCell>
-                <TableCell
-                  className="header"
-                  sx={{ borderColor: "var(--background-secondary)" }}
-                  align="right"
-                >
-                  Muscle Ache
-                </TableCell>
-                <TableCell
-                  className="header"
-                  sx={{ borderColor: "var(--background-secondary)" }}
-                  align="right"
-                >
-                  Tiredness
-                </TableCell>
-                <TableCell
-                  className="header"
-                  sx={{ borderColor: "var(--background-secondary)" }}
-                  align="right"
-                >
-                  Smell Loss
-                </TableCell>
-                <TableCell
-                  className="header"
-                  sx={{ borderColor: "var(--background-secondary)" }}
-                  align="right"
-                >
-                  Taste Loss
-                </TableCell>
+                <TableCell>Date</TableCell>
+                <TableCell align="right">Fever</TableCell>
+                <TableCell align="right">Cough</TableCell>
+                <TableCell align="right">Runny Nose</TableCell>
+                <TableCell align="right">Muscle Ache</TableCell>
+                <TableCell align="right">Tiredness</TableCell>
+                <TableCell align="right">Smell Loss</TableCell>
+                <TableCell align="right">Taste Loss</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -521,63 +463,16 @@ function PatientProfileOld() {
                   key={row.Date}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  <TableCell
-                    className="data"
-                    sx={{ borderColor: "var(--background-secondary)" }}
-                    component="th"
-                    scope="row"
-                  >
+                  <TableCell component="th" scope="row">
                     {row.Date}
                   </TableCell>
-                  <TableCell
-                    className="data"
-                    sx={{ borderColor: "var(--background-secondary)" }}
-                    align="right"
-                  >
-                    {row.Fever}
-                  </TableCell>
-                  <TableCell
-                    className="data"
-                    sx={{ borderColor: "var(--background-secondary)" }}
-                    align="right"
-                  >
-                    {row.Cough}
-                  </TableCell>
-                  <TableCell
-                    className="data"
-                    sx={{ borderColor: "var(--background-secondary)" }}
-                    align="right"
-                  >
-                    {row.RunnyNose}
-                  </TableCell>
-                  <TableCell
-                    className="data"
-                    sx={{ borderColor: "var(--background-secondary)" }}
-                    align="right"
-                  >
-                    {row.MuscleAche}
-                  </TableCell>
-                  <TableCell
-                    className="data"
-                    sx={{ borderColor: "var(--background-secondary)" }}
-                    align="right"
-                  >
-                    {row.Tiredness}
-                  </TableCell>
-                  <TableCell
-                    className="data"
-                    sx={{ borderColor: "var(--background-secondary)" }}
-                    align="right"
-                  >
-                    {row.SmellLoss}
-                  </TableCell>
-                  <TableCell
-                    className="data"
-                    sx={{ borderColor: "var(--background-secondary)" }}
-                    align="right"
-                  >
-                    {row.TasteLoss}
-                  </TableCell>
+                  <TableCell align="right">{row.Fever}</TableCell>
+                  <TableCell align="right">{row.Cough}</TableCell>
+                  <TableCell align="right">{row.RunnyNose}</TableCell>
+                  <TableCell align="right">{row.MuscleAche}</TableCell>
+                  <TableCell align="right">{row.Tiredness}</TableCell>
+                  <TableCell align="right">{row.SmellLoss}</TableCell>
+                  <TableCell align="right">{row.TasteLoss}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
