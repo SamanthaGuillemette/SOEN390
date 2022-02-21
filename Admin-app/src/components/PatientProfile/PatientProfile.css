@@ -35,18 +35,18 @@ h5.symptomsTitle {
 }
 
 .priority-flag {
-  color: var(--text-primary) !important;
+  color: var(--text-primary);
 }
 
 .priority-flag.clicked {
   color: var(--error-main);
 }
 
-.status-card{
+.status-card {
   border-style: none;
 }
 
-.status-card.clicked{
+.status-card.clicked {
   border-style: double;
   border-color: var(--error-main);
 }
