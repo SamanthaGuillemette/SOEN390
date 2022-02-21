@@ -93,7 +93,7 @@ const Dashboard = () => {
             }}
             subheader={<li />}
           >
-            <Typography className="listTitle" gutterBottom variant="h5">
+            <Typography data-testid="patientlist" className="listTitle" gutterBottom variant="h5">
               Patient's list
             </Typography>
             {[0, 1, 2, 3, 4].map((sectionId) => (

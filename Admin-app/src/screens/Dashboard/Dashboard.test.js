@@ -25,6 +25,10 @@ test("should get the dashboard" ,() =>{
     expect(card3).toHaveTextContent(/^InfoAppointment for vaccinationTo book a appointment for the vaccination, as well as check eligibilty, click on this link for more info.$/);
     expect(card3).toHaveClass('cardShape3');
 
+    const plist = screen.getByTestId("patientlist");
+    expect(plist).toBeInTheDocument();
+    expect(plist).toHaveTextContent(/^Patient's list$/);
+    expect(plist).toHaveClass('listTitle');
 
 
 });
