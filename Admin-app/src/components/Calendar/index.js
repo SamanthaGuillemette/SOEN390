@@ -3,30 +3,27 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import resourceTimeGridPlugin from "@fullcalendar/resource-timegrid";
+import "./Calendar.css";
 
 const events = [
-  { title: "event 1", date: "2022-01-02" },
+  { date: "2022-01-02"},
   {
-    title: "event 2",
     start: "2022-01-21",
     end: "2022-01-22",
     allDay: true,
     HostName: "William",
   },
   {
-    title: "event 3",
     start: "2022-01-19",
     end: "2022-01-19",
     allDay: true,
   },
   {
-    title: "event 4",
     start: "2022-01-05",
     end: "2022-01-07",
     allDay: true,
   },
   {
-    title: "event 5",
     start: "2022-01-13",
     end: "2022-01-15",
     allDay: true,

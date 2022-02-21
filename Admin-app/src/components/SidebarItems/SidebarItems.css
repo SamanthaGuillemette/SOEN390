@@ -1,0 +1,11 @@
+.sidebar-link:hover {
+    color: transparent !important;
+}
+
+.sidebar-text:hover {
+    color: var(--text-primary) !important;
+}
+
+.sidebar-text {
+    color: var(--text-inactive) !important;
+}
