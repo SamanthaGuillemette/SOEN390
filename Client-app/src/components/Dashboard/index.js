@@ -1,7 +1,7 @@
 import { Box, Grid, IconButton } from "@mui/material";
 import BottomNav from "../BottomNav";
 import Navbar from "../Navbar";
-import Link from '@mui/material/Link';
+import { Link } from "react-router-dom";
 import "./Dashboard.css";
 
 const Dashboard = () => {
@@ -28,15 +28,15 @@ const Dashboard = () => {
           </Grid>
 
           <Grid item xs={6}>
-          <Link to='/test'>
-            <div className="dashboard-card__container">
-              <img
-                className="dashboard-card__img"
-                src="https://www.svgrepo.com/show/39290/virus.svg"
-                alt="Appointment"
-              />
-              <p className="dashboard-card__title">Symptoms</p>
-            </div>
+            <Link to="../symptoms">
+              <div className="dashboard-card__container">
+                <img
+                  className="dashboard-card__img"
+                  src="https://www.svgrepo.com/show/39290/virus.svg"
+                  alt="Appointment"
+                />
+                <p className="dashboard-card__title">Symptoms</p>
+              </div>
             </Link>
           </Grid>
 
