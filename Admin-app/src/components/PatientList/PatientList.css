@@ -50,3 +50,13 @@
     color: var(--primary-main);
     background: transparent;
 }
+
+.patient-name {
+    color: var(--text-primary) !important;
+    font-weight: 500 !important;
+    font-size: 1rem !important;
+}
+
+.patient-name:hover {
+    color: var(--primary-main) !important;
+}

@@ -1,7 +1,8 @@
 .label-positive {
     text-transform: uppercase;
-    color: var(--text-primary);
-    background: var(--primary-dark);
+    color: var(--secondary-main);
+    background: rgba(58, 74, 240, 0.18);
+    border: 1px solid rgba(109, 120, 236, 0.3);
     font-size: 0.7rem;
     font-weight: 700;
     border-radius: 0.375rem;
@@ -12,8 +13,9 @@
 
 .label-negative {
     text-transform: uppercase;
-    color: var(--text-primary);
-    background: var(--secondary-dark);
+    color: var(--primary-main);
+    background: rgba(7, 181, 235, 0.18);
+    border: 1px solid rgba(74, 207, 248, 0.3);
     font-size: 0.7rem;
     font-weight: 700;
     border-radius: 0.375rem;

@@ -20,7 +20,7 @@
 
 #addButton {
   position: relative;
-  left: 73%;
+  bottom: 3px;
   color: var(--text-inactive);
   border-radius: 100px;
 }
@@ -39,7 +39,7 @@ h5.symptomsTitle {
 }
 
 .priority-flag.clicked {
-  color: var(--error-main);
+  color: var(--info-main);
 }
 
 .status-card {
@@ -47,6 +47,5 @@ h5.symptomsTitle {
 }
 
 .status-card.clicked {
-  border-style: double;
-  border-color: var(--error-main);
+  border: 1px solid var(--info-border);
 }
