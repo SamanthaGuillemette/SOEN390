@@ -43,3 +43,7 @@
 .MuiCalendarPicker-root span.MuiTypography-caption {
   color: var(--text-primary) !important;
 }
+
+fieldset{
+  border: none !important;
+}
