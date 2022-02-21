@@ -148,7 +148,7 @@ const Dashboard = () => {
               </CardContent>
             </Card>
 
-            <Card variant="contained" className="cardShape2">
+            <Card data-testid="card1" variant="contained" className="cardShape2">
               <CardMedia
                 component="img"
                 height="220"
