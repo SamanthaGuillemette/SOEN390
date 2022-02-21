@@ -19,6 +19,8 @@ import DropdownStatus from "./../DropdownStatus";
 import DropdownDoctor from "./../DropdownDoctor";
 import FlagIcon from '@mui/icons-material/Flag';
 import "./PatientList.css";
+import { useEffect, useState } from "react";
+import { getPatients, useOld } from "../../backend/firebasePatientUtilities";
 
 const dropdownStyle = makeStyles({
   paper: {
@@ -174,13 +176,12 @@ function Row(props) {
                 </TableHead>
                 <TableBody>
                   {row.symptoms.map((symptomsRow) => (
-                    <TableRow key={symptomsRow}>
+                    <TableRow key={symptomsRow.date}>
                       <TableCell
                         sx={{ borderColor: "transparent" }}
                         className="symptoms-data"
                         component="th"
-                        scope="row"
-                      >
+                        scope="row">
                         {symptomsRow.temperature}
                       </TableCell>
                       <TableCell
@@ -208,7 +209,139 @@ function Row(props) {
   );
 }
 
-function PatientList() {
+function PatientList()
+{
+  if (!useOld)
+  {
+    return PatientListNew();
+  }
+  else
+  {
+    return PatientListOld();
+  }
+}
+
+
+function PatientListNew() {
+  const classes = dropdownStyle();
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [patientsList, setPatientsList] = useState(null); 
+
+  useEffect(() => {
+    getPatients()
+    .then((data) => {
+      let results = [];
+      data.forEach(doc => {
+        results.push(createData(<Link className="patient-name" to={`/patientprofile/${doc.id}`}>{doc.name}</Link>, doc.id, 
+        <span className={doc.status === "POSITIVE"?"label-positive":"label-negative"}>{doc.status}</span>, doc.upcomingAppointment, doc.assignedDoctor, <FlagIcon className={doc.flaggedPriority === "0" ? "priority-flag" : "priority-flag clicked"}></FlagIcon>, 
+        doc.temperature + "°C", doc.weight + " lbs", doc.heightFeet + "' " + doc.heightInches + "\""));
+      })
+      setPatientsList(results)
+    })
+  }, [])
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  return (
+    <TableContainer className="patient-doctor-list">
+      <Box className="label">
+        <HealthAndSafetyIcon className="patients-icon"></HealthAndSafetyIcon>
+        Patient List
+      </Box>
+      <Table aria-label="collapsible table">
+        <TableHead>
+          <TableRow>
+          <TableCell sx={{ borderColor: "var(--background-secondary)" }} />
+            <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="header">
+              Patient Name
+            </TableCell>
+            <TableCell
+              sx={{ borderColor: "var(--background-secondary)" }}
+              className="header"
+              align="right"
+            >
+              ID
+            </TableCell>
+            <TableCell
+              sx={{ borderColor: "var(--background-secondary)" }}
+              className="header"
+              align="right"
+            >
+              status
+            </TableCell>
+            <TableCell
+              sx={{ borderColor: "var(--background-secondary)" }}
+              className="header"
+              align="right"
+            >
+              Upcoming Appointment
+            </TableCell>
+            <TableCell
+              sx={{ borderColor: "var(--background-secondary)" }}
+              className="header"
+              align="right"
+            >
+              Assigned Doctor
+            </TableCell>
+            <TableCell
+              sx={{ borderColor: "var(--background-secondary)" }}
+              className="header"
+              align="right"
+            >
+              Flagged Priority
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {
+          patientsList &&
+          (rowsPerPage > 0
+            ? patientsList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            : patientsList
+          ).map((row) => (
+            <Row key={row.id} row={row}></Row>
+          ))}
+        </TableBody>
+      </Table>
+        {patientsList &&
+          <TablePagination
+          classes={{
+            root: classes.color,
+          }}
+          rowsPerPageOptions={[5, 10, { label: 'All', value: -1 }]}
+          component="div"
+          count={patientsList.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage} 
+          className={classes.select}
+          SelectProps={{
+            inputProps: { "aria-label": "rows per page" },
+            MenuProps: {
+              classes: { paper: classes.paper },
+              sx: {
+                "&& .Mui-selected": {
+                  backgroundColor: "var(--background-secondary)",
+                },
+              },
+            },
+          }}
+        />
+      }
+    </TableContainer>
+  );
+}
+
+function PatientListOld() {
   const classes = dropdownStyle();
   const flag = localStorage.getItem('priorityFlag');
   const rows = [
@@ -326,5 +459,7 @@ function PatientList() {
     </TableContainer>
   );
 }
+
+
 
 export default PatientList;
