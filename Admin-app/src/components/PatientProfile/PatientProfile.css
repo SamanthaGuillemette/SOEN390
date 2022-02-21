@@ -34,8 +34,7 @@
 }
 
 #add-button{
-    position: relative; 
-    left: 75%;
+    float: right;
     color: black;
 }
 

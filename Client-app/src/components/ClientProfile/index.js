@@ -15,6 +15,8 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import NativeSelect from "@mui/material/NativeSelect";
 import FlagIcon from "@mui/icons-material/Flag";
+import EditIcon from "@mui/icons-material/Edit";
+import Fab from '@mui/material/Fab';
 import { useState, useEffect } from "react";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -41,8 +43,10 @@ function ClientProfile() {
   return (
     <Grid container spacing={2}>
       <Grid item xs={8} lg={9} margin={5}>
-        <Card>
-          <CardActionArea>
+        <Card className="avatar-card">
+          <CardActionArea className="avatar-card">
+            <Fab color="primary" aria-label="edit" className="edit-icon"><EditIcon />
+            </Fab>
             <Grid
               container
               columnSpacing={7}

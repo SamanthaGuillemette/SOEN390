@@ -13,6 +13,12 @@
   position: relative;
 }
 
+.edit-icon{
+  float: right;
+  margin-top: 2% !important;
+  margin-right: 3% !important;
+}
+
 .label-positive {
   text-transform: uppercase;
   color: white;
