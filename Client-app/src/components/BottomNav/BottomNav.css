@@ -6,7 +6,7 @@
   height: auto;
   position: fixed;
   bottom: 0;
-  background-color: var(--primary-main);
+  background-color: var(--background-main);
   margin-bottom: -8px;
   padding-top: 5px;
 }

@@ -11,7 +11,7 @@ const Dashboard = () => {
         sx={{
           padding: 4,
           paddingBottom: "120px",
-          backgroundColor: "",
+          backgroundColor: "var(--background-secondary)",
         }}
       >
         <Grid container spacing={3}>
