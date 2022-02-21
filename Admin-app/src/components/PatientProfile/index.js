@@ -13,7 +13,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Link } from "react-router-dom";
 import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
@@ -27,6 +26,7 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import NativeSelect from '@mui/material/NativeSelect';
 import { getPatient, togglePriorityFlag, useOld } from "../../backend/firebasePatientUtilities";
+import DropdownConfirmation from "../DropdownConfirmation/index";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -155,7 +155,7 @@ function PatientProfileNew() {
                 {patientInfo && patientInfo.name}
               </Typography>
               <Typography
-                className="text"
+                className="avatar-text"
                 variant="body2"
               >
                 <br></br>Age: {patientInfo && getAge(patientInfo.dob)}
@@ -167,7 +167,7 @@ function PatientProfileNew() {
         </Card>
       </Grid>
 
-      <Grid container spacing={2} item rowSpacing={2} direction="column" xs={6.1}>
+      <Grid container spacing={2} item rowSpacing={2} direction="column" xs={6.51}>
         <Grid item>
           <Card sx={{bgcolor: "var(--background-main)", borderRadius:"20px"}} className={priorityFlag ? "status-card clicked" : "status-card"}>
             <CardActionArea>
@@ -185,29 +185,14 @@ function PatientProfileNew() {
                       spacing={1}
                       alignItems="baseline"
                     >
-                      
-                      <FormControl sx={{width: 115}} >
-                        <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                          Confirmation
-                        </InputLabel>
-                        <NativeSelect
-                          size="small"
-                          defaultValue={20}
-                          inputProps={{
-                            name: 'confirmation',
-                            id: 'uncontrolled-native',
-                          }}>
-                          <option value={10}>Confirmed</option>
-                          <option value={20}>Unconfirmed</option>
-                        </NativeSelect>
-                      </FormControl>
+                      <DropdownConfirmation className="profile-data"></DropdownConfirmation>
                       <span className={
                         patientInfo && patientInfo.status === "POSITIVE"
                           ? "label-positive"
                           : "label-negative"
                       }>{patientInfo && patientInfo.status}</span>
-                      <Item className="data" sx={{ bgcolor: "inherit", boxShadow: "none" }}>Temperature: {patientInfo && patientInfo.temperature} °C</Item>
-                      <Item className="data" sx={{ bgcolor: "inherit", boxShadow: "none" }}>Weight: {patientInfo && patientInfo.weight} lbs</Item>
+                      <Item className="profile-data" sx={{ bgcolor: "inherit", boxShadow: "none" }}>Temperature: {patientInfo && patientInfo.temperature} °C</Item>
+                      <Item className="profile-data" sx={{ bgcolor: "inherit", boxShadow: "none" }}>Weight: {patientInfo && patientInfo.weight} lbs</Item>
                     </Stack>
               </CardContent>
             </CardActionArea>
@@ -222,7 +207,7 @@ function PatientProfileNew() {
                   <Typography className="header" gutterBottom variant="button" component="div">
                     Assigned Doctor
                   </Typography>
-                  <Typography className="data" variant="body2">
+                  <Typography className="profile-data" variant="body2">
                     Name: {patientInfo && patientInfo.assignedDoctor}
                     <Checkbox size="small" style={{ color: "var(--text-primary)" }}/>
                   </Typography>
@@ -238,7 +223,7 @@ function PatientProfileNew() {
                   <Typography className="header" gutterBottom variant="button" component="div">
                     Status Review
                   </Typography>
-                  <Typography className="data" variant="body2">
+                  <Typography className="profile-data" variant="body2">
                     Review Completed: <Checkbox size="small" style={{ color: "var(--text-primary)" }}/>
                   </Typography>
                 </CardContent>
@@ -248,7 +233,7 @@ function PatientProfileNew() {
         </Grid>
       </Grid>
 
-      <Grid item xs={12} lg={10.1}>
+      <Grid item xs={12} lg={10.51}>
         <TableContainer sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }} component={Paper}>
           <h5 className="symptomsTitle">
             <br />

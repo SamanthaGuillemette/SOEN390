@@ -6,7 +6,7 @@
   border: 1px solid inherit;
 }
 
-.text {
+.avatar-text {
   text-align: center;
   font-size: 13px !important;
   color: var(--text-primary);
@@ -48,4 +48,10 @@ h5.symptomsTitle {
 
 .status-card.clicked {
   border: 1px solid var(--info-border);
+}
+
+.profile-data {
+  color: var(--text-primary) !important;
+  font-weight: 500 !important;
+  font-size: 0.96rem !important;
 }
