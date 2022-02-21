@@ -1,57 +1,51 @@
-#avatar{
-    width: 200px;
-    height: 233px;
-    margin-left: 18%;
-    border-radius: 3;
-    align-items: center;
-    text-align:center;
-    border: 1px solid black;
-    position: relative;
+#avatar {
+  width: 200px;
+  height: 233px;
+  margin: auto;
+  margin-top: 15px;
+  border: 1px solid inherit;
 }
 
-.label-pos {
-    text-transform: uppercase;
-    color: white;
-    background: linear-gradient(rgb(233, 61, 61), rgb(241, 11, 11));
-    font-size: 0.78rem;
-    font-weight: 700;
-    border-radius: 0.375rem;
-    padding: 0.50em 1em;
-}
-
-.text{
-    text-align: center;
-    font-size: 12.5px !important;
+.text {
+  text-align: center;
+  font-size: 13px !important;
+  color: var(--text-primary);
 }
 
 .profile-name {
-    text-align: center;
-    font-weight: bold !important;
+  text-align: center;
+  font-weight: bold !important;
+  color: var(--text-primary);
 }
 
-.link{
-    font-size: 12.5px;
+#addButton {
+  position: relative;
+  bottom: 3px;
+  color: var(--text-inactive);
+  border-radius: 100px;
 }
 
-#add-button{
-    position: relative; 
-    left: 75%;
-    color: black;
+#addButton:hover {
+  background-color: transparent;
+}
+
+h5.symptomsTitle {
+  color: var(--text-primary);
+  font-weight: 900 !important;
 }
 
 .priority-flag {
-    color: black;
+  color: var(--text-primary);
 }
-  
+
 .priority-flag.clicked {
-    color: red;
+  color: var(--info-main);
 }
 
-.status-card{
-    border-style: none;
+.status-card {
+  border-style: none;
 }
 
-.status-card.clicked{
-    border-style: double;
-    border-color: red;
+.status-card.clicked {
+  border: 1px solid var(--info-border);
 }

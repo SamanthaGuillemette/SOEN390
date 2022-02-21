@@ -19,6 +19,7 @@ const Drawer = styled(MuiDrawer, {
     position: "relative",
     whiteSpace: "nowrap",
     width: drawerWidth,
+    backgroundColor: "var(--background-main)",
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -58,7 +59,7 @@ function Sidebar() {
         }}
       >
         {/* <IconButton onClick={toggleDrawer}> */}
-        <IconButton onClick={() => dispatch(openDrawer())}>
+        <IconButton sx={{color: "var(--text-inactive)"}} onClick={() => dispatch(openDrawer())}>
           {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
         </IconButton>
       </Toolbar>
