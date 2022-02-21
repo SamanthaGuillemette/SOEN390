@@ -9,4 +9,9 @@ test("should render simple upcoming events test", () =>{
     expect(upevents).toBeInTheDocument();
     expect(upevents).toHaveTextContent(/^Blood Donations$/);
     expect(upevents).toHaveClass('eventTitle');
-})
+});
+
+afterEach(() =>{
+    cleanup();
+}
+)
