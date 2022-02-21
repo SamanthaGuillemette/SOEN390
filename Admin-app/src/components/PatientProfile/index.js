@@ -20,7 +20,6 @@ import { styled } from "@mui/material/styles";
 import Checkbox from "@mui/material/Checkbox";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Button from "@mui/material/Button";
-import DropdownConfirmation from "./../DropdownConfirmation";
 import FlagIcon from '@mui/icons-material/Flag';
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -186,7 +185,22 @@ function PatientProfileNew() {
                       spacing={1}
                       alignItems="baseline"
                     >
-                      <DropdownConfirmation></DropdownConfirmation>
+                      
+                      <FormControl sx={{width: 115}} >
+                        <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                          Confirmation
+                        </InputLabel>
+                        <NativeSelect
+                          size="small"
+                          defaultValue={20}
+                          inputProps={{
+                            name: 'confirmation',
+                            id: 'uncontrolled-native',
+                          }}>
+                          <option value={10}>Confirmed</option>
+                          <option value={20}>Unconfirmed</option>
+                        </NativeSelect>
+                      </FormControl>
                       <span className={
                         patientInfo && patientInfo.status === "POSITIVE"
                           ? "label-positive"

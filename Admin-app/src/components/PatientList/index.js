@@ -15,8 +15,6 @@ import TablePagination from "@mui/material/TablePagination";
 import { Link } from "react-router-dom";
 import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
 import { makeStyles } from "@material-ui/core/styles";
-import DropdownStatus from "./../DropdownStatus";
-import DropdownDoctor from "./../DropdownDoctor";
 import Paper from "@mui/material/Paper";
 import FlagIcon from '@mui/icons-material/Flag';
 import "./PatientList.css";
