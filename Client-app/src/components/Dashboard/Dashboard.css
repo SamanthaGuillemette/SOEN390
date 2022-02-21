@@ -12,7 +12,6 @@
 .dashboard-card__img {
   width: 50px;
   margin-bottom: 10px;
-  background: var(--text-primary) !important;
 }
 
 .dashboard-card__title {
