@@ -33,7 +33,7 @@ function UpcomingEvents() {
                 <div className="eventMonth">Feb</div>    
                 <div className="eventDate" >04</div>
                 </div>
-                <div className="eventTitle" >Blood Donations</div>
+                <div data-testid = "up-events" className="eventTitle" >Blood Donations</div>
                 <div className="eventTime">6:00 PM</div>
                 <div>
                 <Button className="viewMore" onClick={handleOpen}>View more
