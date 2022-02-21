@@ -1,4 +1,4 @@
-import { styled, alpha } from "@mui/material/styles";
+import { styled} from "@mui/material/styles";
 import MuiAppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -19,13 +19,24 @@ import { openDrawer, openState } from "../../store/drawerSlice";
 import { useState } from "react";
 import { signOut } from 'firebase/auth';
 import { auth } from '../../backend/firebase';
+import { makeStyles } from "@material-ui/core/styles";
+
+const dropdownStyle = makeStyles(() => ({
+  menu: {
+    "& .MuiPaper-root": {
+      backgroundColor: "var(--background-main)",
+      color: "var(--text-inactive)",
+      borderRadius: "10px",
+    }
+  }
+}));
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  color: "var(--text-inactive)",
+  backgroundColor: "var(--background-main)", 
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    color: "var(--text-primary)",
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
@@ -81,6 +92,7 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 function Navbar() {
+  const classes = dropdownStyle();
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
@@ -123,10 +135,20 @@ function Navbar() {
       keepMounted
       open={isMenuOpen}
       onClose={handleMenuClose}
+      className={classes.menu}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem onClick={logout}>Signout</MenuItem>
+      <MenuItem 
+      onMouseEnter={(e) => e.target.style.color = 'var(--text-primary)'}
+      onMouseLeave={(e) => e.target.style.color = 'var(--text-inactive)'}
+      onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem 
+      onMouseEnter={(e) => e.target.style.color = 'var(--text-primary)'}
+      onMouseLeave={(e) => e.target.style.color = 'var(--text-inactive)'}
+      onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem 
+      onMouseEnter={(e) => e.target.style.color = 'var(--text-primary)'}
+      onMouseLeave={(e) => e.target.style.color = 'var(--text-inactive)'}
+      onClick={logout}>Signout</MenuItem>
     </Menu>
 
   );
@@ -180,11 +202,11 @@ function Navbar() {
       <AppBar
         position="absolute"
         open={open}
-        style={{ backgroundColor: "midnightblue" }}
       >
         <Toolbar
           sx={{
             pr: "24px", // keep right padding when drawer closed
+            backgroundColor: "var(--background-secondary)"
           }}
         >
           <IconButton
@@ -202,7 +224,7 @@ function Navbar() {
           <Typography
             component="h1"
             variant="h6"
-            color="inherit"
+            color="var(--text-primary)"
             noWrap
             sx={{ flexGrow: 1 }}
           >
@@ -224,7 +246,15 @@ function Navbar() {
               aria-label="show 4 new mails"
               color="inherit"
             >
-              <Badge badgeContent={4} color="error">
+              <Badge
+                badgeContent={4}
+                sx={{
+                  "& .MuiBadge-badge": {
+                    color: "var(--background-secondary)",
+                    backgroundColor: "var(--primary-main)"
+                  }
+                }}
+              >
                 <MailIcon />
               </Badge>
             </IconButton>
@@ -233,7 +263,15 @@ function Navbar() {
               aria-label="show 17 new notifications"
               color="inherit"
             >
-              <Badge badgeContent={17} color="error">
+              <Badge
+                badgeContent={17}
+                sx={{
+                  "& .MuiBadge-badge": {
+                    color: 'var(--background-secondary)',
+                    backgroundColor: "var(--primary-main)"
+                  }
+                }}
+              >
                 <NotificationsIcon />
               </Badge>
             </IconButton>

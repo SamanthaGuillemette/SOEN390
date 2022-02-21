@@ -1,7 +1,6 @@
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-import "./Dashboard.css";
 import PersonIcon from "@mui/icons-material/Person";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import CoronavirusIcon from "@mui/icons-material/Coronavirus";
@@ -11,14 +10,13 @@ import LineChart from "../../components/Charts/LineChart";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import COVID19Button from "../../components/COVID-19Button/index";
-import EventButton from "../../components/EventButton/index";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
 import SmallStatBox from "../../components/SmallStatBox";
-import UpcomingEvents from "../../components/UpcomingEvents";
+import "./Dashboard.css";
+import UpcomingEvents from "../../components/UpcomingEvents/index"
 
 const Dashboard = () => {
   return (
@@ -26,19 +24,19 @@ const Dashboard = () => {
       <Grid container spacing={2} className="statContainer">
         <Grid container spacing={3} className="statContainer">
           <Grid item xs={6} md={3}>
-            <Card className="statItem">
+            <Card className="statItem" sx={{backgroundColor: "var(--background-main)", color: "var(--text-inactive)"}}>
               <SmallStatBox
-                icon={<PersonIcon fontSize="large" color="primary" />}
+                icon={<PersonIcon fontSize="large" sx={{color: "var(--text-primary)"}} />}
                 number="1523"
                 description="Patients"
               />
             </Card>
           </Grid>
           <Grid item xs={6} md={3}>
-            <Card className="statItem">
+            <Card className="statItem" sx={{backgroundColor: "var(--background-main)", color: "var(--text-inactive)"}}>
               <SmallStatBox
                 icon={
-                  <SupervisedUserCircleIcon fontSize="large" color="primary" />
+                  <SupervisedUserCircleIcon fontSize="large" sx={{color: "var(--text-primary)"}} />
                 }
                 number="1523"
                 description="Doctors"
@@ -46,18 +44,18 @@ const Dashboard = () => {
             </Card>
           </Grid>
           <Grid item xs={6} md={3}>
-            <Card className="statItem">
+            <Card className="statItem" sx={{backgroundColor: "var(--background-main)", color: "var(--text-inactive)"}}>
               <SmallStatBox
-                icon={<CoronavirusIcon fontSize="large" color="primary" />}
+                icon={<CoronavirusIcon fontSize="large" sx={{color: "var(--text-primary)"}} />}
                 number="1523"
                 description="Active cases"
               />
             </Card>
           </Grid>
           <Grid item xs={6} md={3}>
-            <Card className="statItem">
+            <Card className="statItem" sx={{backgroundColor: "var(--background-main)", color: "var(--text-inactive)"}}>
               <SmallStatBox
-                icon={<VerifiedUserIcon fontSize="large" color="primary" />}
+                icon={<VerifiedUserIcon fontSize="large" sx={{color: "var(--text-primary)"}} />}
                 number="1523"
                 description="Recovered"
               />
@@ -67,25 +65,22 @@ const Dashboard = () => {
 
         <Grid container spacing={3} className="statContainer">
           <Grid item xs={12} md={8}>
-            <Card className="statItem">
-              <LineChart />
+            <Card className="statItem" sx={{backgroundColor: "inherit", boxShadow: "none"}}>
+              <LineChart/>
             </Card>
           </Grid>
           <Grid item xs={12} md={4}>
-            <Card className="statItem">
+            <Card className="statItem" sx={{background: 'var(--gradient-to-right-btm)'}}>
               <DoughnutChart />
             </Card>
           </Grid>
-
-          <COVID19Button style={{ marginLeft: 100 }}></COVID19Button>
-          <EventButton style={{ marginLeft: 100 }}></EventButton>
 
           <List
             className="patientList"
             sx={{
               width: "28vh",
               maxWidth: "xl",
-              bgcolor: "background.paper",
+              bgcolor: "var(--background-main)",
               overflow: "auto",
               maxHeight: "30vh",
               marginTop: 3,
@@ -94,15 +89,16 @@ const Dashboard = () => {
             }}
             subheader={<li />}
           >
-            <Typography className="listTitle" gutterBottom variant="h5">
+            <Typography className="listTitle" gutterBottom variant="h5" sx={{color: "var(--text-primary)", border: "transparent"}}>
               Patient's list
             </Typography>
             {[0, 1, 2, 3, 4].map((sectionId) => (
               <li key={`section-${sectionId}`}>
                 <ul>
-                  <ListSubheader>{`I'm sticky ${sectionId}`}</ListSubheader>
+                  <ListSubheader sx={{bgcolor: "var(--background-main)", color: "var(--text-inactive)"}}>
+                    {`I'm sticky ${sectionId}`}</ListSubheader>
                   {[0, 1, 2].map((item) => (
-                    <ListItem key={`item-${sectionId}-${item}`}>
+                    <ListItem sx={{color: "var(--text-inactive)"}} key={`item-${sectionId}-${item}`}>
                       <ListItemText primary={`Item ${item}`} />
                     </ListItem>
                   ))}
@@ -114,7 +110,7 @@ const Dashboard = () => {
           <UpcomingEvents></UpcomingEvents>
 
           <Grid className="infoGrid" container spacing={2} xs ={12}>
-            <Typography className="title" gutterBottom variant="h5">
+            <Typography sx={{color: "var(--text-primary)"}} className="title" gutterBottom variant="h5">
               Important Links
             </Typography>
             <Card variant="contained" className="cardShape1">
