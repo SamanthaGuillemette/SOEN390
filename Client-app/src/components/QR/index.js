@@ -6,6 +6,18 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import {createMuiTheme } from "@material-ui/core/styles";
+import {ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import "./QR.css";
+
+const theme = createMuiTheme({
+  palette: {
+    background: {
+      default: "var(--background-secondary)"
+    },
+  },
+});
 
 const QR = () => {
   // const [user, loading] = useAuthState(auth);
@@ -15,7 +27,10 @@ const QR = () => {
 
   return (
     <>
-      <Card sx={{ m: "30px", bgcolor: 'rgb(67, 77, 184, 0.05)', border: '1px solid var(--secondary-dark)', borderRadius: "20px" }}>
+    <ThemeProvider theme={theme}>
+      <div className="container">
+      <CssBaseline />
+      <Card className="QR-box">
         <CardContent
           sx={{
             display: "flex",
@@ -65,16 +80,14 @@ const QR = () => {
             href={qrCode}
             target="_blank"
             variant="contained"
-            color="success"
-            sx={{ 
-              bgcolor: "var(--background-secondary)",
-              borderRadius: "10px",
-              ":hover": { color: "var(--text-primary)", bgcolor: "var(--secondary-main)"} }}
+            className="download-QR"
           >
             Download QR Code
           </Button>
         </CardContent>
       </Card>
+      </div>
+    </ThemeProvider>
     </>
   );
 };
