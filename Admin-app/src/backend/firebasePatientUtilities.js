@@ -4,6 +4,8 @@ import patientData from "../data/patients.json";
 import { db } from "./firebase";
 
 const tableName = "Patients";
+const useOld = false; // In case we want to use the non-DB version for patients
+console.log(`[useOld]: ${useOld}`);
 
 const getPatients = async () => {
   try
@@ -99,5 +101,5 @@ const getPatients = async () => {
     }
   }
 
-  export { getPatients, getPatient, populatePatients, togglePriorityFlag };
+  export { getPatients, getPatient, populatePatients, togglePriorityFlag, useOld };
   

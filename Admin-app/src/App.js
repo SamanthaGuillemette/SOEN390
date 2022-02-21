@@ -19,6 +19,7 @@ import { saveUser } from "./store/authSlice";
 import { useEffect } from "react";
 import Event from "./components/Event";
 import EventDetails from "./components/Event/EventDetails";
+import { useOld } from "./backend/firebasePatientUtilities";
 
 function App() {
   const [user, loading] = useAuthState(auth);
@@ -46,7 +47,14 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/appointments" element={<Appointments />} />
             <Route path="/patients" element={<Patients />} />
-            <Route path="/patientprofile/:id" element={<PatientProfile />} />
+            if (!useOld)
+            {
+              <Route path="/patientprofile/:id" element={<PatientProfile />} />
+            }
+            else
+            {
+              <Route path="/patientprofile" element={<PatientProfile />} />
+            }
             <Route path="/inbox" element={<Inbox />} />
             <Route path="/testing" element={<Notifications />} />
             <Route path="/qr" element={<QR />} />
