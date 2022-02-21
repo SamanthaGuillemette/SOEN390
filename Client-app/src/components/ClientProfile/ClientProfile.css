@@ -1,22 +1,25 @@
-* {
-  justify-content: center;
+.clientProfile-container {
+  height: 100vh;
+  background-color: #f5f5f5;
 }
 
-#avatar {
-  width: 200px;
-  height: 233px;
-  margin: 0 auto;
-  border-radius: 3;
-  align-items: center;
-  text-align: center;
-  border: 1px solid black;
+.clientProfile-profileCard {
+  padding-top: 15px !important;
   position: relative;
 }
 
-.edit-icon{
-  float: right;
-  margin-top: 2% !important;
-  margin-right: 3% !important;
+#clientProfile-avatar {
+  width: 180px;
+  height: 180px;
+  box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.12);
+}
+
+.clientProfile-editIcon {
+  position: absolute !important;
+  top: 10px;
+  right: 10px;
+  width: 35px !important;
+  height: 35px !important;
 }
 
 .label-positive {
@@ -29,9 +32,14 @@
   padding: 0.5em 1em;
 }
 
-.text {
+.clientProfile-text {
   text-align: center;
-  font-size: 12.5px !important;
+}
+
+.clientProfile-textDetail {
+  font-size: 1rem;
+  margin: 2px 0;
+  color: var(--text-secondary);
 }
 
 .profile-name {
@@ -39,22 +47,20 @@
   font-weight: bold !important;
 }
 
-.link {
-  font-size: 12.5px;
+.clientProfile-statusBox {
+  margin-bottom: 15px;
 }
 
-#add-button {
-  position: relative;
-  left: 75%;
+.clientProfile-priority-flag {
   color: black;
+  padding-left: 5px;
+  margin-bottom: -5px;
 }
 
-.priority-flag {
-  color: black;
-}
-
-.priority-flag.clicked {
+.clientProfile-priority-flag.clicked {
   color: red;
+  padding-left: 5px;
+  margin-bottom: -5px;
 }
 
 .status-card {
