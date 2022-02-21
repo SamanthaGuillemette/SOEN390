@@ -10,7 +10,7 @@ import Box from "@mui/material/Box";
 const QR = () => {
   // const [user, loading] = useAuthState(auth);
   const user = auth.currentUser;
-  const [value] = useDocumentOnce(doc(db, "Users", user?.email));
+  const [value] = useDocumentOnce(doc(db, "Client", user?.email));
   const qrCode = `http://api.qrserver.com/v1/create-qr-code/?data=${user?.email}`;
 
   return (
