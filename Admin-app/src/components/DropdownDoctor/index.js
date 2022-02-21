@@ -32,7 +32,7 @@ function DropdownDoctor() {
   return (
       <FormControl sx={{minWidth: 130}}>
         <InputLabel className="data" shrink={false}>{doctorName === '' && 'Assign Doctor'}</InputLabel>
-        <Select className="data"
+        <Select data-testid="select2" className="data"
           value={doctorName}
           onChange={handleChange}
           inputProps={{
