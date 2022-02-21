@@ -31,7 +31,7 @@ function DropdownConfirmation() {
   return (
       <FormControl sx={{minWidth: 140}}>
         <InputLabel className="data" shrink={false}>{confirmation === '' && 'Confirm Status'}</InputLabel>
-        <Select className="data"
+        <Select data-testid = "select1" className="data"
           value={confirmation}
           onChange={handleChange}
           inputProps={{
