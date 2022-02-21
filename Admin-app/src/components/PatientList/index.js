@@ -14,6 +14,8 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import TablePagination from '@mui/material/TablePagination';
 import {Link } from "react-router-dom";
+import DropdownStatus from "./../DropdownStatus";
+import DropdownDoctor from "./../DropdownDoctor";
 import FlagIcon from '@mui/icons-material/Flag';
 import "./PatientList.css";
 import { useEffect, useState } from "react";
