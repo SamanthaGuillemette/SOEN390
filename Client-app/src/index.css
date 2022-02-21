@@ -28,6 +28,12 @@
   --background-main: #171717 !important;
   --background-secondary: #1e1e1e !important;
 
+  --success-light: #4caf50;
+  --success-main: #2e7d32;
+  --success-dark: #1b5e20;
+
+  --text-secondary: rgba(29, 31, 32, 0.7);
+  --text-disabled: rgba(29, 31, 32, 0.5);
   --text-primary: white !important;
   --text-inactive: #767676 !important;
 

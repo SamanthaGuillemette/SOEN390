@@ -9,6 +9,7 @@ import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./backend/firebase";
+import ClientProfile from "./components/ClientProfile";
 
 function App() {
   const [user] = useAuthState(auth);
@@ -48,6 +49,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="*" element={<Dashboard />} />
+          <Route path="/clientprofile" element={<ClientProfile />} />
         </Routes>
       )}
       {!user && (
