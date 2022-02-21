@@ -1,0 +1,53 @@
+.signup-checkbox {
+    color: var(--text-primary) !important;
+    margin-left: 10px !important;
+  }
+  
+  .MuiList-root {
+    background-color: var(--background-main) !important;
+  }
+  
+  .Mui-selected {
+    background-color: var(--background-secondary) !important;
+  }
+  
+  .MuiPickersDay-root.Mui-selected {
+    background: var(--gradient-to-right) !important;
+    border: none !important;
+  }
+  
+  .MuiCalendarPicker-root {
+    background-color: var(--background-main) !important;
+  }
+  
+  .MuiPickersDay-root.MuiButtonBase-root,
+  .PrivatePickersYear-yearButton {
+    background-color: var(--background-secondary) !important;
+    border: solid 0.5px var(--text-inactive) !important;
+  }
+  
+  .MuiPickersDay-root:hover,
+  .PrivatePickersYear-yearButton:hover {
+    background-color: var(--primary-main) !important;
+    border: none !important;
+  }
+  
+  .MuiCalendarPicker-root .MuiSvgIcon-root {
+    color: var(--text-inactive) !important;
+  }
+  
+  .MuiSelect-icon {
+    color: var(--text-inactive) !important;
+  }
+  
+  .MuiCalendarPicker-root span.MuiTypography-caption {
+    color: var(--text-primary) !important;
+  }
+  
+  fieldset{
+    border: none !important;
+  }
+
+  .link-sign:hover {
+    color: var(--text-primary) !important;
+}

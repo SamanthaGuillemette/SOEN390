@@ -27,7 +27,6 @@ import {createMuiTheme } from "@material-ui/core/styles";
 import { inputLabelClasses } from "@mui/material/InputLabel";
 import { Navigate } from "react-router-dom";
 import Modal from '@mui/material/Modal';
-import "./../SignIn";
 import "./SignUp.css";
 
 const style = {

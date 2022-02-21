@@ -11,13 +11,16 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import {ThemeProvider } from "@mui/material/styles";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth , db} from "../../backend/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Navigate } from "react-router-dom";
 import Modal from '@mui/material/Modal';
+import {createMuiTheme } from "@material-ui/core/styles";
+import { inputLabelClasses } from "@mui/material/InputLabel";
+import "./../SignUp/SignUp.css";
 
 const style = {
   position: 'absolute',
@@ -33,14 +36,9 @@ const style = {
 
 function Copyright(props) {
   return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
+    <Typography variant="body2" align="center" {...props}>
+      {'Copyright © '}
+      <Link className="link-sign" sx={{fontSize: "12px", textDecoration: 'none'}} color="inherit">
         Your Website
       </Link>{" "}
       {new Date().getFullYear()}
@@ -49,9 +47,19 @@ function Copyright(props) {
   );
 }
 
-const theme = createTheme();
+const theme = createMuiTheme({
+  palette: {
+    background: {
+      default: "var(--background-secondary)"
+    },
+    text: {
+      primary: "#ffffff"
+    }
+  }
+});
 
 export default function SignIn() {
+  console.log(inputLabelClasses);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [open, setOpen] = useState(false);
@@ -88,17 +96,17 @@ export default function SignIn() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container sx={{bgcolor: "var(--background-main)", borderRadius: "20px"}} component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 10,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <Avatar sx={{ m: 2, bgcolor: 'var(--secondary-main)'}}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -116,6 +124,14 @@ export default function SignIn() {
               autoFocus
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              InputLabelProps={{
+                sx: {
+                  color: "var(--text-primary)",
+                  [`&.${inputLabelClasses.shrink}`]: {
+                    color: "var(--primary-main)"
+                  }
+                }
+              }}
             />
             <TextField
               margin="normal"
@@ -128,16 +144,28 @@ export default function SignIn() {
               autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              InputLabelProps={{
+                sx: {
+                  color: "var(--text-primary)",
+                  [`&.${inputLabelClasses.shrink}`]: {
+                    color: "var(--primary-main)"
+                  }
+                }
+              }}
             />
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
+              control={<Checkbox style={{color: "var(--text-primary)"}} value="remember" color="primary" />}
               label="Remember me"
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ 
+                mt: 3, 
+                mb: 2,
+                background: 'var(--gradient-to-right)'
+              }}
             >
               Sign In
             </Button>
@@ -158,12 +186,12 @@ export default function SignIn() {
             </Modal>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link className="link-sign" href="#" sx={{color: "var(--primary-main)", textDecoration: 'none'}} variant="body2">
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/signup" variant="body2">
+                <Link href="/signup" sx={{color: "var(--primary-main)", textDecoration: 'none'}} variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
