@@ -5,7 +5,8 @@ import UpcomingEvents from "./index";
 
 test("should render simple upcoming events test", () =>{
     render(<MemoryRouter><UpcomingEvents/></MemoryRouter>);
-    // const upevents = screen.getByTestId('up-events');
-    // expect(upevents).toBeInTheDocument();
-    // expect(upevents).toHaveTextContent()
+    const upevents = screen.getByTestId('up-events');
+    expect(upevents).toBeInTheDocument();
+    expect(upevents).toHaveTextContent(/^Blood Donations$/);
+    expect(upevents).toHaveClass('eventTitle');
 })
