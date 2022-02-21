@@ -27,6 +27,7 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import NativeSelect from '@mui/material/NativeSelect';
 import { getPatient, togglePriorityFlag, useOld } from "../../backend/firebasePatientUtilities";
+import DropdownConfirmation from "../DropdownConfirmation/index";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -185,22 +186,7 @@ function PatientProfileNew() {
                       spacing={1}
                       alignItems="baseline"
                     >
-                      
-                      <FormControl sx={{width: 115}} >
-                        <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                          Confirmation
-                        </InputLabel>
-                        <NativeSelect
-                          size="small"
-                          defaultValue={20}
-                          inputProps={{
-                            name: 'confirmation',
-                            id: 'uncontrolled-native',
-                          }}>
-                          <option value={10}>Confirmed</option>
-                          <option value={20}>Unconfirmed</option>
-                        </NativeSelect>
-                      </FormControl>
+                      <DropdownConfirmation></DropdownConfirmation>
                       <span className={
                         patientInfo && patientInfo.status === "POSITIVE"
                           ? "label-positive"
