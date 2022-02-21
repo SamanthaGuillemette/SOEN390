@@ -8,10 +8,24 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../backend/firebase";
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
+import { makeStyles } from "@material-ui/core/styles";
 // Source: https://reactjsexample.com/react-component-for-reading-qr-codes-from-webcam/
 
-const Scanner = () => {
+const useStyles = makeStyles({
+  failureAlert: {
+    "& .MuiAlert-icon": {
+      color: "rgb(231, 167, 5)"
+    }
+  },
+  successAlert: {
+    "& .MuiAlert-icon": {
+      color: "var(--success-main)"
+    }
+  }
+});
 
+const Scanner = () => {
+  const classes = useStyles();
   const [scanned, setScanned] = useState("Not scanned yet!");
   const [displayQR, setDisplay] = useState(false);
   const [patient, setPatient] = useState(false);
@@ -47,13 +61,12 @@ const Scanner = () => {
 
   return (
     <>
-      <Card sx={{ m: "30px", width: "1" }}>
+      <Card sx={{ m: "30px", width: "1", bgcolor: "var(--background-main)", borderRadius: "10px" }}>
         <CardContent
-          sx={{ display: "flex", flexDirection: "column", alignItems: "center", p: "30px", mb: "20px" }}
+          sx={{ display: "flex", flexDirection: "column", alignItems: "center", p: "30px", mb: "20px", fontWeight: "600", color: "var(--text-inactive)"}}
         >
           <Typography
-            sx={{ mx: "30px", pb: "30px", textAlign: "center", fontWeight: "800" }}
-            color="text.secondary"
+            sx={{ mx: "30px", pb: "30px", textAlign: "center", fontWeight: "600", color: "var(--text-primary)" }}
             variant="h6"
           >
             Scan a QR Code to Generate User's Profile
@@ -64,6 +77,7 @@ const Scanner = () => {
             onError={handleError}
             onScan={handleScan}
             style={{ width: '300px' }}
+            
           />
           <br />
           <p>{scanned}</p>
@@ -74,12 +88,12 @@ const Scanner = () => {
           }
           {notPatient &&
             <Stack sx={{ width: '100%' }} spacing={2}>
-              <Alert severity="warning">The patient is not registered, no profile was found.</Alert>
+              <Alert severity="warning" className={classes.failureAlert} sx={{ bgcolor: 'rgb(156, 113, 3, 0.18)', color: 'rgb(231, 167, 5)', border: '1px solid rgb(231, 167, 5, 0.3)', borderRadius: "30px"}}>The patient is not registered, no profile was found.</Alert>
             </Stack>
           }
           {patient &&
             <Stack sx={{ width: '100%' }} spacing={2}>
-              <Alert severity="success">The patient profile was found successfully!</Alert>
+              <Alert severity="success" className={classes.successAlert} sx={{ bgcolor: 'var(--success-background)', color: 'var(--success-main)', border: '1px solid var(--success-border)', borderRadius: "30px"}}>The patient profile was found successfully!</Alert>
             </Stack>
           }
         </CardContent>

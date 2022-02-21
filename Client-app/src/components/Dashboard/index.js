@@ -2,6 +2,14 @@ import { Box, Grid, IconButton } from "@mui/material";
 import BottomNav from "../BottomNav";
 import Navbar from "../Navbar";
 import "./Dashboard.css";
+import NewspaperIcon from "../../assets/newspaper-sharp-white.svg";
+import CalendarIcon from "../../assets/calendar-page.svg";
+import VirusIcon from "../../assets/virus.svg";
+import NoteIcon from "../../assets/note.svg";
+import MessageIcon from "../../assets/message.svg";
+import QRCodeIcon from "../../assets/qr-codes.svg";
+import DoctorIcon from "../../assets/doctor.svg";
+import HealthCareIcon from "../../assets/health-care.svg";
 
 const Dashboard = () => {
   return (
@@ -11,7 +19,7 @@ const Dashboard = () => {
         sx={{
           padding: 4,
           paddingBottom: "120px",
-          backgroundColor: "",
+          backgroundColor: "var(--background-secondary)",
         }}
       >
         <Grid container spacing={3}>
@@ -19,7 +27,7 @@ const Dashboard = () => {
             <div className="dashboard-card__container">
               <img
                 className="dashboard-card__img"
-                src="https://www.svgrepo.com/show/110710/calendar-page.svg"
+                src={CalendarIcon}
                 alt="Appointment"
               />
               <p className="dashboard-card__title">Appointment</p>
@@ -30,8 +38,8 @@ const Dashboard = () => {
             <div className="dashboard-card__container">
               <img
                 className="dashboard-card__img"
-                src="https://www.svgrepo.com/show/39290/virus.svg"
-                alt="Appointment"
+                src={VirusIcon}
+                alt="Symptoms"
               />
               <p className="dashboard-card__title">Symptoms</p>
             </div>
@@ -39,11 +47,7 @@ const Dashboard = () => {
 
           <Grid item xs={6}>
             <div className="dashboard-card__container">
-              <img
-                className="dashboard-card__img"
-                src="https://www.svgrepo.com/show/73583/note.svg"
-                alt="Appointment"
-              />
+              <img className="dashboard-card__img" src={NoteIcon} alt="Diary" />
               <p className="dashboard-card__title">Diary</p>
             </div>
           </Grid>
@@ -51,8 +55,8 @@ const Dashboard = () => {
             <div className="dashboard-card__container">
               <img
                 className="dashboard-card__img"
-                src="https://www.svgrepo.com/show/110910/message.svg"
-                alt="Appointment"
+                src={MessageIcon}
+                alt="Send message"
               />
               <p className="dashboard-card__title">Send Message</p>
             </div>
@@ -61,8 +65,8 @@ const Dashboard = () => {
             <div className="dashboard-card__container">
               <img
                 className="dashboard-card__img"
-                src="https://www.svgrepo.com/show/145685/qr-codes.svg"
-                alt="Appointment"
+                src={QRCodeIcon}
+                alt="QR code"
               />
               <p className="dashboard-card__title">QR Code</p>
             </div>
@@ -71,8 +75,8 @@ const Dashboard = () => {
             <div className="dashboard-card__container">
               <img
                 className="dashboard-card__img"
-                src="https://www.svgrepo.com/show/327133/newspaper-sharp.svg"
-                alt="Appointment"
+                src={NewspaperIcon}
+                alt="News"
               />
               <p className="dashboard-card__title">News</p>
             </div>
@@ -81,8 +85,8 @@ const Dashboard = () => {
             <div className="dashboard-card__container">
               <img
                 className="dashboard-card__img"
-                src="https://www.svgrepo.com/show/15254/health-care.svg"
-                alt="Appointment"
+                src={DoctorIcon}
+                alt="My Doctor"
               />
               <p className="dashboard-card__title">My Doctor</p>
             </div>
@@ -92,8 +96,8 @@ const Dashboard = () => {
             <div className="dashboard-card__container">
               <img
                 className="dashboard-card__img"
-                src="https://www.svgrepo.com/show/169567/health-care.svg"
-                alt="Appointment"
+                src={HealthCareIcon}
+                alt="Update Status"
               />
               <p className="dashboard-card__title">Update status</p>
             </div>
