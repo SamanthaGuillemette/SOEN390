@@ -18,6 +18,7 @@ import FlagIcon from "@mui/icons-material/Flag";
 import EditIcon from "@mui/icons-material/Edit";
 import Fab from "@mui/material/Fab";
 import { useState, useEffect } from "react";
+import DropdownConfirmation from "../DropdownConfirmation/index";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -94,21 +95,30 @@ function ClientProfile() {
             >
               <CardActionArea>
                 <CardContent>
-                  <Box className="clientProfile-statusBox">
-                    Status
-                    <FlagIcon
-                      onClick={() => {
-                        priorityFlag
-                          ? setPriorityFlag(false)
-                          : setPriorityFlag(true);
-                      }}
-                      className={
-                        priorityFlag
-                          ? "clientProfile-priority-flag clicked"
-                          : "clientProfile-priority-flag"
-                      }
-                    ></FlagIcon>
-                  </Box>
+                  <div className="clientProfile-statusBox">
+                    <Typography
+                      className="header"
+                      gutterBottom
+                      variant="button"
+                      component="div"
+                    >
+                      Status
+                      <FlagIcon
+                        onClick={() => {
+                          priorityFlag
+                            ? setPriorityFlag(false)
+                            : setPriorityFlag(true);
+                        }}
+                        className={
+                          priorityFlag
+                            ? "clientProfile-priority-flag clicked"
+                            : "clientProfile-priority-flag"
+                        }
+                      ></FlagIcon>
+                      <br></br>
+                      <br></br>
+                    </Typography>
+                  </div>
                   <Stack
                     direction="row"
                     divider={<Divider orientation="vertical" />}
@@ -116,31 +126,23 @@ function ClientProfile() {
                     marginBottom={2}
                     alignItems="baseline"
                   >
-                    <FormControl sx={{ width: 115 }}>
-                      <InputLabel
-                        variant="standard"
-                        htmlFor="uncontrolled-native"
-                      >
-                        Confirmation
-                      </InputLabel>
-                      <NativeSelect
-                        size="small"
-                        defaultValue={20}
-                        inputProps={{
-                          name: "confirmation",
-                          id: "uncontrolled-native",
-                        }}
-                      >
-                        <option value={10}>Confirmed</option>
-                        <option value={20}>Unconfirmed</option>
-                      </NativeSelect>
-                    </FormControl>
+                    <DropdownConfirmation className="profile-data"></DropdownConfirmation>
                     <span className="label-positive">positive</span>
                   </Stack>
                   <Box />
                   <Stack spacing={2}>
-                    <Item>Temperature: 39 °C</Item>
-                    <Item>Weight: 150 lbs</Item>
+                    <Item
+                      className="profile-data"
+                      sx={{ bgcolor: "inherit", boxShadow: "none" }}
+                    >
+                      Temperature: 39 °C
+                    </Item>
+                    <Item
+                      className="profile-data"
+                      sx={{ bgcolor: "inherit", boxShadow: "none" }}
+                    >
+                      Weight: 150 lbs
+                    </Item>
                   </Stack>
                 </CardContent>
               </CardActionArea>
