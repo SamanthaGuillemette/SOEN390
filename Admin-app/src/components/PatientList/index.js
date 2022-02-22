@@ -74,7 +74,14 @@ function Row(props) {
 
   return (
     <React.Fragment>
-      <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+      <TableRow
+        className={
+          row.priority.className === "priority-flag clicked"
+            ? "patient-row flagged"
+            : "patient-row"
+        }
+        sx={{ "& > *": { borderBottom: "unset" } }}
+      >
         <TableCell sx={{ borderColor: "var(--background-secondary)" }}>
           <IconButton
             aria-label="expand row"
