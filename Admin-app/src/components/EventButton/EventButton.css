@@ -1,0 +1,15 @@
+.event-button-div {
+    margin-top:20px;
+    display: inline-block;
+}
+
+.event-button-div:hover{
+    transition: all .3s;
+    opacity: 0.9;
+    transform: translateY(5px);
+}
+
+.event-btn {
+    background: var(--background-main) !important;
+    border-radius: 20px !important;
+}

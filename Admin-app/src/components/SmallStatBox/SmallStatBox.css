@@ -12,3 +12,8 @@
 .statDesc {
   margin-top: -12px;
 }
+
+h2.statNumber {
+  color: var(--text-primary) !important;
+  opacity: 1;
+}
