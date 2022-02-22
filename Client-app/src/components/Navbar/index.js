@@ -24,13 +24,13 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
   MuiDrawer: {
-    background: 'rgb(23, 23, 23)',
-    borderRight: '1px solid rgba(74, 207, 248, 0.3)',
-    borderRadius: '10px'
-  }
+    background: "rgb(23, 23, 23)",
+    borderRight: "1px solid rgba(74, 207, 248, 0.3)",
+    borderRadius: "10px",
+  },
 });
 
-export default function MenuAppBar() {
+const MenuAppBar = () => {
   const classes = useStyles();
   const [state, setState] = React.useState(false);
 
@@ -40,7 +40,7 @@ export default function MenuAppBar() {
 
   const list = () => (
     <Box
-      sx={{ width: 250, pt: 5, pl: 2}}
+      sx={{ width: 250, pt: 5, pl: 2 }}
       role="presentation"
       onClick={toggleDrawer}
     >
@@ -72,10 +72,10 @@ export default function MenuAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar
-            sx={{
-              backgroundColor: "var(--background-secondary)",
-              boxShadow: "2px 2px 10px 2px rgba(0, 0, 0, 0.3)",
-            }}
+          sx={{
+            backgroundColor: "var(--background-secondary)",
+            boxShadow: "2px 2px 10px 2px rgba(0, 0, 0, 0.3)",
+          }}
         >
           <IconButton
             size="large"
@@ -87,7 +87,12 @@ export default function MenuAppBar() {
           >
             <MenuIcon />
 
-            <Drawer classes={{paper: classes.MuiDrawer}} anchor="left" open={state} onClose={toggleDrawer}>
+            <Drawer
+              classes={{ paper: classes.MuiDrawer }}
+              anchor="left"
+              open={state}
+              onClose={toggleDrawer}
+            >
               {list()}
             </Drawer>
           </IconButton>
@@ -101,11 +106,12 @@ export default function MenuAppBar() {
             Covid-19 App
           </Typography>
 
-          <IconButton sx={{color: "var(--text-inactive)"}}>
+          <IconButton sx={{ color: "var(--text-inactive)" }}>
             <SearchIcon />
           </IconButton>
         </Toolbar>
       </AppBar>
     </Box>
   );
-}
+};
+export default MenuAppBar;
