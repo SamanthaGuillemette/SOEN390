@@ -18,6 +18,10 @@ import FlagIcon from "@mui/icons-material/Flag";
 import EditIcon from "@mui/icons-material/Edit";
 import Fab from "@mui/material/Fab";
 import { useState, useEffect } from "react";
+import { auth, db } from "../../backend/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { collection, doc } from "firebase/firestore";
+import { useCollection, useDocument } from "react-firebase-hooks/firestore";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -28,17 +32,30 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function ClientProfile() {
   const [priorityFlag, setPriorityFlag] = useState(false);
+  const [user] = useAuthState(auth);
+  const [currentUser] = useDocument(doc(db, `Client/${user.email}`));
 
-  useEffect(() => {
-    const data = localStorage.getItem("priorityFlag");
-    if (data) {
-      setPriorityFlag(JSON.parse(data));
-    }
-  }, []);
+  const {
+    firstName,
+    lastName,
+    email,
+    dob,
+    postalCode,
+    city,
+    province,
+    address,
+  } = currentUser?.data();
 
-  useEffect(() => {
-    localStorage.setItem("priorityFlag", JSON.stringify(priorityFlag));
-  });
+  // useEffect(() => {
+  //   const data = localStorage.getItem("priorityFlag");
+  //   if (data) {
+  //     setPriorityFlag(JSON.parse(data));
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   localStorage.setItem("priorityFlag", JSON.stringify(priorityFlag));
+  // });
 
   return (
     <Grid container spacing={3} padding={5}>
@@ -71,16 +88,16 @@ function ClientProfile() {
                 fontSize="1.2rem"
                 component="div"
               >
-                Jane Doe
+                {`${firstName} ${lastName}`}
               </Typography>
               <Box className="clientProfile-text">
-                <p className="clientProfile-textDetail">Age: 50</p>
+                <p className="clientProfile-textDetail">DOB: {dob}</p>
+                <p className="clientProfile-textDetail">City: {city}</p>
+                <p className="clientProfile-textDetail">Province: {province}</p>
                 <p className="clientProfile-textDetail">
-                  Birthday: 1 July 1971
+                  Postal Code: {postalCode}
                 </p>
-                <p className="clientProfile-textDetail">
-                  Address: 101 Brooke, Montreal L5L 9T9
-                </p>
+                <p className="clientProfile-textDetail">Address: {address}</p>
               </Box>
             </CardContent>
           </Box>
