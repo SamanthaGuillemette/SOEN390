@@ -9,6 +9,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 // import MenuItem from "@mui/material/MenuItem";
 // import Menu from "@mui/material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
+import "./Navbar.css";
 import {
   Divider,
   Drawer,
@@ -19,8 +20,18 @@ import {
 } from "@mui/material";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  MuiDrawer: {
+    background: 'rgb(23, 23, 23, 0.18)',
+    borderRight: '1px solid rgba(74, 207, 248, 0.3)',
+    borderRadius: '10px'
+  }
+});
 
 export default function MenuAppBar() {
+  const classes = useStyles();
   const [state, setState] = React.useState(false);
 
   const toggleDrawer = () => {
@@ -29,17 +40,17 @@ export default function MenuAppBar() {
 
   const list = () => (
     <Box
-      sx={{ width: 250, pt: 5, pl: 2 }}
+      sx={{ width: 250, pt: 5, pl: 2}}
       role="presentation"
       onClick={toggleDrawer}
     >
       <List>
         {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
+          <ListItem className="sidebar-button" button key={text}>
+            <ListItemIcon className="sidebar-icon">
               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
             </ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemText className="sidebar-text" primary={text} />
           </ListItem>
         ))}
       </List>
@@ -60,7 +71,12 @@ export default function MenuAppBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar
+            sx={{
+              backgroundColor: "var(--background-secondary)",
+              boxShadow: "2px 2px 10px 2px rgba(0, 0, 0, 0.3)",
+            }}
+        >
           <IconButton
             size="large"
             edge="start"
@@ -71,15 +87,21 @@ export default function MenuAppBar() {
           >
             <MenuIcon />
 
-            <Drawer anchor="left" open={state} onClose={toggleDrawer}>
+            <Drawer classes={{paper: classes.MuiDrawer}} anchor="left" open={state} onClose={toggleDrawer}>
               {list()}
             </Drawer>
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography
+            variant="h6"
+            component="div"
+            color="var(--text-primary)"
+            noWrap
+            sx={{ flexGrow: 1 }}
+          >
             Covid-19 App
           </Typography>
 
-          <IconButton color="inherit">
+          <IconButton sx={{color: "var(--text-inactive)"}}>
             <SearchIcon />
           </IconButton>
         </Toolbar>

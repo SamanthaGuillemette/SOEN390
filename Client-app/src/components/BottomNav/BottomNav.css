@@ -19,6 +19,16 @@
 }
 
 .bottomNav-iconTitle {
-  color: white;
+  color: var(--text-inactive);
   font-size: 0.9rem;
+}
+
+.bottomNav-button:hover {
+  transition: all .3s;
+  opacity: 0.9;
+  transform: translateY(2px);
+}
+
+.bottomNav-button:hover .bottomNav-iconTitle {
+  color: var(--text-primary);
 }

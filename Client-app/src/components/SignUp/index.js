@@ -27,7 +27,6 @@ import { Navigate } from "react-router-dom";
 import Modal from '@mui/material/Modal';
 import {createMuiTheme } from "@material-ui/core/styles";
 import { inputLabelClasses } from "@mui/material/InputLabel";
-import "./SignUp.css";
 
 const style = {
   position: 'absolute',
@@ -242,7 +241,7 @@ export default function SignUp(props) {
                       required
                       labelId="province"
                       id="province"
-                      label="province"
+                      label="Province"
                       value={province}
                       onChange={(e) => setProvince(e.target.value)}
                       InputLabelProps={{
@@ -250,7 +249,7 @@ export default function SignUp(props) {
                           color: "var(--text-primary)",
                           [`&.${inputLabelClasses.shrink}`]: {
                             color: "var(--primary-main)"
-                          }
+                          },
                         }
                       }}
                       select
