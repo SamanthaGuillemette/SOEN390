@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const NewsList = ({news}) => {
+const NewsList = ({news = []}) => {
     console.log(news);
     var todayDate = new Date();
     var date = (todayDate.getMonth()+1)+'/'+todayDate.getDate()+'/'+todayDate.getFullYear();
