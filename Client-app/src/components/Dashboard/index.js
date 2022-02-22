@@ -1,6 +1,4 @@
-import { Box, Grid, IconButton } from "@mui/material";
-import BottomNav from "../BottomNav";
-import Navbar from "../Navbar";
+import { Box, Grid } from "@mui/material";
 import "./Dashboard.css";
 import NewspaperIcon from "../../assets/newspaper-sharp-white.svg";
 import CalendarIcon from "../../assets/calendar-page.svg";
@@ -14,7 +12,6 @@ import HealthCareIcon from "../../assets/health-care.svg";
 const Dashboard = () => {
   return (
     <>
-      <Navbar />
       <Box
         sx={{
           padding: 4,
@@ -104,7 +101,6 @@ const Dashboard = () => {
           </Grid>
         </Grid>
       </Box>
-      <BottomNav />
     </>
   );
 };
