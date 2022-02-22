@@ -15,13 +15,12 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import NativeSelect from "@mui/material/NativeSelect";
 import FlagIcon from "@mui/icons-material/Flag";
-import EditIcon from "@mui/icons-material/Edit";
-import Fab from "@mui/material/Fab";
 import { useState, useEffect } from "react";
 import { auth, db } from "../../backend/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { doc } from "firebase/firestore";
 import { useDocument } from "react-firebase-hooks/firestore";
+import EditModal from "./ProfileEditModal";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -55,13 +54,7 @@ function ClientProfile() {
       <Grid item xs={12}>
         <Card>
           <Box className="clientProfile-profileCard">
-            <Fab
-              color="primary"
-              aria-label="edit"
-              className="clientProfile-editIcon"
-            >
-              <EditIcon fontSize="small" />
-            </Fab>
+            <EditModal />
             <Grid
               container
               direction="column"
