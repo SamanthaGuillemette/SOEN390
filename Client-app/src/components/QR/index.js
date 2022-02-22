@@ -23,6 +23,8 @@ const QR = () => {
   // const [user, loading] = useAuthState(auth);
   const user = auth.currentUser;
   const [value] = useDocumentOnce(doc(db, "Client", user?.email));
+  
+  // Declaring a constant that uses the data of the user to generate a unique qr code for the user using a qrserver website
   const qrCode = `http://api.qrserver.com/v1/create-qr-code/?data=${user?.email}`;
 
   return (
