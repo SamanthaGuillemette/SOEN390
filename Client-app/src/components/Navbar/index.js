@@ -24,7 +24,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
   MuiDrawer: {
-    background: 'rgb(23, 23, 23, 0.18)',
+    background: 'rgb(23, 23, 23)',
     borderRight: '1px solid rgba(74, 207, 248, 0.3)',
     borderRadius: '10px'
   }

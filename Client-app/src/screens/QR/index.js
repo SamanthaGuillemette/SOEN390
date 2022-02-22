@@ -1,4 +1,4 @@
-/*import QR from "../../components/QR";
+import QR from "../../components/QR";
 import MenuAppBar from "../../components/Navbar";
 import Box from "@mui/material/Box";
 
@@ -11,4 +11,4 @@ const QRPage = () => {
     );
 };
 
-export default QRPage; */
+export default QRPage;
