@@ -181,7 +181,7 @@ function PatientProfileNew() {
         {/* Status grid */}
         <Grid item>
           {/* Changing status card color according to priority flag */}
-          <Card sx={{bgcolor: "var(--background-main)", borderRadius:"20px"}} className={priorityFlag ? "status-card clicked" : "status-card"}>
+          <Card data-testid="card-2" sx={{bgcolor: "var(--background-main)", borderRadius:"20px"}} className={priorityFlag ? "status-card clicked" : "status-card"}>
             <CardActionArea>
               <CardContent>
                 <Typography className="header" gutterBottom variant="button" component="div">

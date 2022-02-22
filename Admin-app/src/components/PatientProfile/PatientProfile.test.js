@@ -9,6 +9,11 @@ test("PatientProfile should render without errors", () => {
   const avatarCardElement = screen.getByTestId("card-1");
   expect(avatarCardElement).toBeInTheDocument();
   expect(avatarCardElement).toHaveTextContent('Age:');
+
+  // Status card element
+  const statusCardElement = screen.getByTestId("card-2");
+  expect(statusCardElement).toBeInTheDocument();
+  expect(statusCardElement).toHaveTextContent('Status');
 });
 
 afterEach(() => {
