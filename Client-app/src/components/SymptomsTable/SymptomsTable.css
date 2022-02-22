@@ -1,5 +1,5 @@
 .symptoms-list {
-  width: 45vh;
+  width: 45vh !important;
   margin-top: 30px !important;
   background-color: var(--background-main) !important;
   border-radius: 20px !important;
