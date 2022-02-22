@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import { saveUser } from "./store/authSlice";
 // import { useEffect } from "react";
 // import { auth } from "./backend/firebase";
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./screens/Dashboard";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import { useAuthState } from "react-firebase-hooks/auth";

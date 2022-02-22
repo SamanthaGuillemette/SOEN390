@@ -1,6 +1,4 @@
-import { Box, Grid, IconButton } from "@mui/material";
-import BottomNav from "../BottomNav";
-import Navbar from "../Navbar";
+import { Box, Grid } from "@mui/material";
 import "./Dashboard.css";
 import NewspaperIcon from "../../assets/newspaper-sharp-white.svg";
 import CalendarIcon from "../../assets/calendar-page.svg";
@@ -10,11 +8,11 @@ import MessageIcon from "../../assets/message.svg";
 import QRCodeIcon from "../../assets/qr-codes.svg";
 import DoctorIcon from "../../assets/doctor.svg";
 import HealthCareIcon from "../../assets/health-care.svg";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   return (
     <>
-      <Navbar />
       <Box
         sx={{
           padding: 4,
@@ -62,6 +60,7 @@ const Dashboard = () => {
             </div>
           </Grid>
           <Grid item xs={6}>
+          <Link to="../qr">
             <div className="dashboard-card__container">
               <img
                 className="dashboard-card__img"
@@ -70,6 +69,7 @@ const Dashboard = () => {
               />
               <p className="dashboard-card__title">QR Code</p>
             </div>
+            </Link>
           </Grid>
           <Grid item xs={6}>
             <div className="dashboard-card__container">
@@ -104,7 +104,6 @@ const Dashboard = () => {
           </Grid>
         </Grid>
       </Box>
-      <BottomNav />
     </>
   );
 };

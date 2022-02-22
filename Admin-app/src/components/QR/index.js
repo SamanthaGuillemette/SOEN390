@@ -32,10 +32,12 @@ const Scanner = () => {
   const [notPatient, setNotPatient] = useState(false);
   const [qr, setQR] = useState("");
 
+  // handling error function
   function handleError(err) {
     console.error(err)
   }
-
+  
+  // async function that handles the scanned code and checks if the patient exist or not
   async function handleScan(QRScan) {
     try {
       if (QRScan) {
