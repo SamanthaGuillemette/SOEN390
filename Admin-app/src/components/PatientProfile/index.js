@@ -250,7 +250,7 @@ function PatientProfileNew() {
 
       {/* Symptom details table */}
       <Grid item xs={12} lg={10.51}>
-        <TableContainer sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }} component={Paper}>
+        <TableContainer data-testid="table-1" sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }} component={Paper}>
           <h5 className="symptomsTitle">
             <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SYMPTOM DETAILS
