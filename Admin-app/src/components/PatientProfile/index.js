@@ -62,18 +62,23 @@ function getAge(dobStr) {
 
 function PatientProfile()
 {
+  // new (with DB)
   if (!useOld)
   {
     return PatientProfileNew();
   }
+  
+  // old (without DB)
   else
   {
     return PatientProfileOld();
   }
 }
 
+// With DB
 function PatientProfileNew() {
   
+  // Creating data for symptom details table
   function createData(
     Date,
     Fever,
@@ -96,6 +101,7 @@ function PatientProfileNew() {
     };
   }
 
+  // priority flag with DB
   function onFlagClick(id)
   {
     togglePriorityFlag(id)
@@ -112,6 +118,8 @@ function PatientProfileNew() {
   const { id } = useParams();
   const [patientInfo, setPatientInfo] = useState(null);
 
+
+  // get priority flag from localstorage
   useEffect(() => {
     const data = localStorage.getItem('priorityFlag');
     if (data){
@@ -119,6 +127,7 @@ function PatientProfileNew() {
     }
   }, []);
 
+  // set priority flag in localstorage
   useEffect(() => {
     localStorage.setItem('priorityFlag', JSON.stringify(priorityFlag));
   });
@@ -137,6 +146,7 @@ function PatientProfileNew() {
   
   return (
     <Grid container spacing={2} maxWidth="lg" alignItems="flex-end">
+      {/* Avatar grid */}
       <Grid item xs={8} lg={4}>
         <Card sx={{background: "var(--gradient-to-right-btm)", borderRadius: "20px"}}>
           <CardActionArea>
@@ -168,12 +178,15 @@ function PatientProfileNew() {
       </Grid>
 
       <Grid container spacing={2} item rowSpacing={2} direction="column" xs={6.51}>
+        {/* Status grid */}
         <Grid item>
+          {/* Changing status card color according to priority flag */}
           <Card sx={{bgcolor: "var(--background-main)", borderRadius:"20px"}} className={priorityFlag ? "status-card clicked" : "status-card"}>
             <CardActionArea>
               <CardContent>
                 <Typography className="header" gutterBottom variant="button" component="div">
-                  Status  <FlagIcon onClick={() => { (  onFlagClick(id));}}
+                  {/* Changing flag color when clicked */}
+                  Status  <FlagIcon onClick={() => {( onFlagClick(id));}}
                   className={priorityFlag ? "priority-flag clicked" : "priority-flag"}>
                   </FlagIcon>
                   <br></br>
@@ -200,6 +213,7 @@ function PatientProfileNew() {
         </Grid>
 
         <Grid container spacing={2} item rowSpacing={2} direction="row">
+          {/* Assigned doctor grid */}
           <Grid item xs={6}>
             <Card sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }}>
               <CardActionArea>
@@ -216,6 +230,7 @@ function PatientProfileNew() {
             </Card>
           </Grid>
 
+          {/* Status review grid */}        
           <Grid item xs={6}>
             <Card sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }}>
               <CardActionArea>
@@ -233,6 +248,7 @@ function PatientProfileNew() {
         </Grid>
       </Grid>
 
+      {/* Symptom details table */}
       <Grid item xs={12} lg={10.51}>
         <TableContainer sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }} component={Paper}>
           <h5 className="symptomsTitle">
@@ -282,7 +298,7 @@ function PatientProfileNew() {
   );
 }
 
-
+// Without DB
 function PatientProfileOld() {
   
   function createData(
@@ -314,6 +330,7 @@ function PatientProfileOld() {
   
   const [priorityFlag, setPriorityFlag] = useState(false);
 
+  // get priority flag from localstorage
   useEffect(() => {
     const data = localStorage.getItem('priorityFlag');
     if (data){
@@ -321,6 +338,7 @@ function PatientProfileOld() {
     }
   }, []);
 
+  // set priority flag in localstorage
   useEffect(() => {
     localStorage.setItem('priorityFlag', JSON.stringify(priorityFlag));
   });
@@ -328,6 +346,7 @@ function PatientProfileOld() {
   
   return (
     <Grid container spacing={2} maxWidth="lg" alignItems="flex-end">
+      {/* Avatar grid */}
       <Grid item xs={8} lg={4}>
         <Card>
           <CardActionArea>
@@ -360,11 +379,14 @@ function PatientProfileOld() {
       </Grid>
 
       <Grid container spacing={2} item rowSpacing={2} direction="column" xs={6.1}>
+        {/* Status grid */}
         <Grid item>
+           {/* Changing status card color according to priority flag */}
           <Card className={priorityFlag ? "status-card clicked" : "status-card"}>
             <CardActionArea>
               <CardContent>
                 <Typography gutterBottom variant="button" component="div">
+                  {/* Changing flag color when clicked */}
                   Status  <FlagIcon onClick={() => {priorityFlag ? setPriorityFlag(false) : setPriorityFlag(true)}}
                   className={priorityFlag ? "priority-flag clicked" : "priority-flag"}>
                   </FlagIcon>
@@ -402,6 +424,7 @@ function PatientProfileOld() {
           </Card>
         </Grid>
 
+         {/* Assigned doctor grid */}
         <Grid container spacing={2} item rowSpacing={2} direction="row">
           <Grid item xs={6}>
             <Card>
@@ -419,6 +442,7 @@ function PatientProfileOld() {
             </Card>
           </Grid>
 
+          {/* Status review grid */} 
           <Grid item xs={6}>
             <Card>
               <CardActionArea>
@@ -436,6 +460,7 @@ function PatientProfileOld() {
         </Grid>
       </Grid>
 
+      {/* Symptom details table */}
       <Grid item xs={12} lg={10.1}>
         <TableContainer component={Paper}>
           <h5>
