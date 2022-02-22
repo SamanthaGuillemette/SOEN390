@@ -1,6 +1,13 @@
+.clientProfile-container {
+  height: 105vh;
+  background: var(--background-secondary);
+}
+
 .clientProfile-profileCard {
   padding-top: 15px !important;
   position: relative;
+  background: var(--background-main) !important;
+  color: var(--text-primary) !important;
 }
 
 #clientProfile-avatar {
@@ -15,16 +22,7 @@
   right: 10px;
   width: 35px !important;
   height: 35px !important;
-}
-
-.label-positive {
-  text-transform: uppercase;
-  color: white;
-  background: linear-gradient(rgb(233, 61, 61), rgb(241, 11, 11));
-  font-size: 0.78rem;
-  font-weight: 700;
-  border-radius: 0.375rem;
-  padding: 0.5em 1em;
+  color: var(--text-primary) !important;
 }
 
 .clientProfile-text {
@@ -34,7 +32,7 @@
 .clientProfile-textDetail {
   font-size: 1rem;
   margin: 2px 0;
-  color: var(--text-secondary);
+  color: var(--text-main);
 }
 
 .profile-name {
@@ -47,22 +45,78 @@
 }
 
 .clientProfile-priority-flag {
-  color: black;
+  color: var(--text-primary);
   padding-left: 5px;
   margin-bottom: -5px;
 }
 
 .clientProfile-priority-flag.clicked {
-  color: red;
+  color: var(--info-main);
   padding-left: 5px;
   margin-bottom: -5px;
 }
 
 .status-card {
   border-style: none;
+  background: var(--background-main) !important;
 }
 
 .status-card.clicked {
-  border-style: double;
-  border-color: red;
+  border: 1px solid var(--info-border);
+}
+
+.label-positive {
+  text-transform: uppercase;
+  color: var(--secondary-main);
+  background: rgba(58, 74, 240, 0.18);
+  border: 1px solid rgba(109, 120, 236, 0.3);
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 0.375rem;
+  padding-bottom: 0.3rem !important;
+  padding: 0.55em 0.9em;
+  margin: auto;
+}
+
+.label-negative {
+  text-transform: uppercase;
+  color: var(--primary-main);
+  background: rgba(7, 181, 235, 0.18);
+  border: 1px solid rgba(74, 207, 248, 0.3);
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 0.375rem;
+  padding-bottom: 0.3rem !important;
+  padding: 0.55em 0.9em;
+  margin: auto;
+}
+
+::selection {
+  color: var(--primary-main);
+  background: transparent;
+}
+
+.clientProfile-editIcon {
+  color: var(--text-inactive);
+  border-radius: 100px;
+  background-color: transparent !important;
+}
+
+.profile-data {
+  color: var(--text-primary) !important;
+  font-weight: 500 !important;
+  font-size: 0.96rem !important;
+}
+
+.data {
+  color: var(--text-primary) !important;
+  font-weight: 500 !important;
+  font-size: 1rem !important;
+}
+
+.header {
+  color: var(--text-inactive) !important;
+  text-transform: uppercase;
+  opacity: 0.7;
+  font-weight: 900 !important;
 }

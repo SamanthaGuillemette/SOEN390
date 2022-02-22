@@ -47,3 +47,7 @@
 fieldset{
   border: none !important;
 }
+
+.link-sign:hover {
+  color: var(--text-primary) !important;
+}

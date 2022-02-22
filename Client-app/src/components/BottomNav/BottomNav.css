@@ -16,9 +16,32 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  color: var(--text-inactive) !important;
+}
+
+.bottomNav-button:hover {
+  color: var(--text-primary) !important;
 }
 
 .bottomNav-iconTitle {
-  color: white;
+  color: var(--text-inactive);
   font-size: 0.9rem;
+}
+
+.more-dropdown {
+  color: var(--text-inactive) !important;
+}
+
+.more-dropdown:hover {
+  color: var(--text-primary) !important;
+}
+
+.bottomNav-button:hover {
+  transition: all .3s;
+  opacity: 0.9;
+  transform: translateY(2px);
+}
+
+.bottomNav-button:hover .bottomNav-iconTitle {
+  color: var(--text-primary);
 }
