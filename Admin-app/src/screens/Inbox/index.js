@@ -5,7 +5,7 @@ import { db, auth } from "../../backend/firebase";
 import {useAuthState} from 'react-firebase-hooks/auth';
 import { doc, serverTimestamp, addDoc, collection, query, orderBy, onSnapshot } from "firebase/firestore"; 
 import './Chat.css'
-import Patients from './Patients.js';
+import ChatList from './ChatList.js';
 import Typography from '@material-ui/core/Typography';
 import { green, pink } from '@mui/material/colors';
 
@@ -56,7 +56,7 @@ const Inbox = () => {
             >
             <Grid container spacing={2}>
                 <Grid item xs={6}> 
-                    <Patients func={pull_data} />
+                    <ChatList func={pull_data} />
                 </Grid>
                 <Grid item xs={6}>
                        <Grid container sx={{ mb: 2 }} >
@@ -66,7 +66,7 @@ const Inbox = () => {
                              <Grid container>
                                 <Grid item xs={12}>
                                     <main id="messagesReceived">
-                                        {messagesReceived && messagesReceived.map(msg => <ChatMessage key={msg.id} message={msg} />)}
+                                        {messagesReceived && messagesReceived.map(msg => <ChatMessage key={msg.timestamp} message={msg} />)}
                                     </main> 
                                 </Grid>
                             </Grid>

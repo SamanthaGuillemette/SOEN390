@@ -12,7 +12,7 @@ import { db, auth } from "../../backend/firebase";
 import { useEffect, useState } from "react";
 import Chip from '@mui/material/Chip';
 
-export default function Patients(props) {
+export default function ChatList(props) {
 
     const [user] = useAuthState(auth);
     const [clients, setClients] = useState('');
@@ -35,7 +35,7 @@ export default function Patients(props) {
 
     return (
         <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'white', height: '100%' }}>
-                {clients && clients.map(client => <div onClick={() => {handleClick(client)}}><PatientsList key={client} name={client} /></div>)}
+                {clients && clients.map((client, index) => <div onClick={() => {handleClick(client)}}><PatientsList key={index} name={client} /></div>)}
         </List>
     );
 }
@@ -46,19 +46,40 @@ function PatientsList(props) {
     const clientRef = doc(db, "Client", name)
     const messageRef = collection(clientRef, "Messages")
     const q = query(messageRef, orderBy('timestamp', 'desc'), limit(1));
-    const [lastMessage, setLastMessage] = useState(['message']);
+    const [lastMessage, setLastMessage] = useState('');
 
     useEffect(() => {
         onSnapshot(q, (doc) => {
             setLastMessage(doc.docs.map(doc=> ({
-                name: doc.data().name,
                 message: doc.data().message,
-                timestamp: doc.data().timestamp,
             })))
         })
     // eslint-disable-next-line
     }, [])
-    
+
+    if(!lastMessage[0]){
+        return(
+            <>
+            <ListItem alignItems="flex-start">
+                <ListItemAvatar>
+                    <Avatar alt={name} />
+                </ListItemAvatar>
+                <ListItemText
+                    primary= {
+                        <React.Fragment>
+                            {name}
+                            {<Chip label="primary" color="primary" variant="outlined" />}
+                        </React.Fragment>}
+                    secondary={
+                        <React.Fragment>
+                        </React.Fragment>
+                    }
+                />
+            </ListItem>
+            <Divider variant="inset" component="li" />
+        </>
+        )
+    }
     return (
         <>
             <ListItem alignItems="flex-start">
