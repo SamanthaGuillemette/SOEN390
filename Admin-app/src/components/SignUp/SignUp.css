@@ -3,6 +3,10 @@
   margin-left: 10px !important;
 }
 
+.MuiList-root {
+  background-color: var(--background-main) !important;
+}
+
 .Mui-selected {
   background-color: var(--background-secondary) !important;
 }

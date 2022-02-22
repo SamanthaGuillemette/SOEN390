@@ -88,12 +88,12 @@ const Scanner = () => {
           }
           {notPatient &&
             <Stack sx={{ width: '100%' }} spacing={2}>
-              <Alert severity="warning" className={classes.failureAlert} sx={{ bgcolor: 'rgb(156, 113, 3, 0.18)', color: 'rgb(231, 167, 5)', border: '1px solid rgb(231, 167, 5, 0.3)', borderRadius: "30px"}}>The patient is not registered, no profile was found.</Alert>
+              <Alert severity="warning" className={classes.failureAlert} sx={{ bgcolor: 'rgb(156, 113, 3, 0.18)', color: 'rgb(231, 167, 5)', border: '1px solid rgb(231, 167, 5, 0.3)', borderRadius: "2rem"}}>The patient is not registered, no profile was found.</Alert>
             </Stack>
           }
           {patient &&
             <Stack sx={{ width: '100%' }} spacing={2}>
-              <Alert severity="success" className={classes.successAlert} sx={{ bgcolor: 'var(--success-background)', color: 'var(--success-main)', border: '1px solid var(--success-border)', borderRadius: "30px"}}>The patient profile was found successfully!</Alert>
+              <Alert severity="success" className={classes.successAlert} sx={{ bgcolor: 'var(--success-background)', color: 'var(--success-main)', border: '1px solid var(--success-border)', borderRadius: "2rem"}}>The patient profile was found successfully!</Alert>
             </Stack>
           }
         </CardContent>
