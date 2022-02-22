@@ -6,18 +6,9 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import {createMuiTheme } from "@material-ui/core/styles";
-import {ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import "./QR.css";
 
-const theme = createMuiTheme({
-  palette: {
-    background: {
-      default: "var(--background-secondary)"
-    },
-  },
-});
 
 const QR = () => {
   // const [user, loading] = useAuthState(auth);
@@ -29,9 +20,7 @@ const QR = () => {
 
   return (
     <>
-    <ThemeProvider theme={theme}>
       <div className="container">
-      <CssBaseline />
       <Card className="QR-box">
         <CardContent
           sx={{
@@ -89,7 +78,6 @@ const QR = () => {
         </CardContent>
       </Card>
       </div>
-    </ThemeProvider>
     </>
   );
 };
