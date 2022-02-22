@@ -8,6 +8,7 @@ import MessageIcon from "../../assets/message.svg";
 import QRCodeIcon from "../../assets/qr-codes.svg";
 import DoctorIcon from "../../assets/doctor.svg";
 import HealthCareIcon from "../../assets/health-care.svg";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   return (
@@ -59,6 +60,7 @@ const Dashboard = () => {
             </div>
           </Grid>
           <Grid item xs={6}>
+          <Link to="../qr">
             <div className="dashboard-card__container">
               <img
                 className="dashboard-card__img"
@@ -67,6 +69,7 @@ const Dashboard = () => {
               />
               <p className="dashboard-card__title">QR Code</p>
             </div>
+            </Link>
           </Grid>
           <Grid item xs={6}>
             <div className="dashboard-card__container">
