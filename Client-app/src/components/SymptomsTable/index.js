@@ -104,8 +104,6 @@ function SymptomsTable() {
     setPage(0);
   };
   return (
-    <Grid className="container" container spacing={3} padding={5}>
-      <Grid className="symptoms__grid" item xs={12}>
         <TableContainer className="symptoms-list">
           <Box className="label">
             <img className="symptoms__icon" src={VirusIcon} alt="Symptoms" />
@@ -189,8 +187,6 @@ function SymptomsTable() {
             </TableFooter>
           </Table>
         </TableContainer>
-      </Grid>
-    </Grid>
   );
 }
 

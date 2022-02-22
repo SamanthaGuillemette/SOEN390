@@ -9,7 +9,8 @@ import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./backend/firebase";
-import SymptomsTable from "./components/SymptomsTable";
+import Symptoms from "./screens/Symptoms";
+
 function App() {
   const [user] = useAuthState(auth);
   // const user = useSelector((state) => state.auth.userToken);
@@ -48,7 +49,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="*" element={<Dashboard />} />
-          <Route path="/symptoms" element={<SymptomsTable />} />
+          <Route path="/symptoms" element={<Symptoms />} />
         </Routes>
       )}
       {!user && (
