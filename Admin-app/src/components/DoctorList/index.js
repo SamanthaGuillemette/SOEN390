@@ -91,7 +91,7 @@ function DoctorList() {
   };
 
   return (
-    <TableContainer className="patient-doctor-list">
+    <TableContainer data-testid="table-container1" className="patient-doctor-list">
       <Box className="label">
         <HealingIcon className="patients-icon"></HealingIcon>
        Doctor List
