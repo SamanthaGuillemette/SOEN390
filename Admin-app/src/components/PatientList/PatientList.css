@@ -61,6 +61,14 @@
   color: var(--primary-main) !important;
 }
 
+.rowsss {
+  background-color: yellow !important;
+}
+
+.ress {
+  background-color: red !important;
+}
+
 .label-positive {
   text-transform: uppercase;
   color: var(--secondary-main);

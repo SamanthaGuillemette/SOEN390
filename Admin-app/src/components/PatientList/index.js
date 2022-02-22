@@ -71,17 +71,11 @@ function createData(
 function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
+  const data = localStorage.getItem('priorityFlag')
 
   return (
     <React.Fragment>
-      <TableRow
-        className={
-          row.priority.className === "priority-flag clicked"
-            ? "patient-row flagged"
-            : "patient-row"
-        }
-        sx={{ "& > *": { borderBottom: "unset" } }}
-      >
+      <TableRow>
         <TableCell sx={{ borderColor: "var(--background-secondary)" }}>
           <IconButton
             aria-label="expand row"
