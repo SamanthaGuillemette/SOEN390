@@ -148,7 +148,7 @@ function PatientProfileNew() {
     <Grid container spacing={2} maxWidth="lg" alignItems="flex-end">
       {/* Avatar grid */}
       <Grid item xs={8} lg={4}>
-        <Card sx={{background: "var(--gradient-to-right-btm)", borderRadius: "20px"}}>
+        <Card data-testid="card-1" sx={{background: "var(--gradient-to-right-btm)", borderRadius: "20px"}}>
           <CardActionArea>
             <Avatar
               id="avatar"
