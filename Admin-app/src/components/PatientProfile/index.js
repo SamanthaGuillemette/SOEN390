@@ -215,7 +215,7 @@ function PatientProfileNew() {
         <Grid container spacing={2} item rowSpacing={2} direction="row">
           {/* Assigned doctor grid */}
           <Grid item xs={6}>
-            <Card sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }}>
+            <Card data-testid="card-3" sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }}>
               <CardActionArea>
                 <CardContent>
                   <Typography className="header" gutterBottom variant="button" component="div">
