@@ -148,7 +148,7 @@ function PatientProfileNew() {
     <Grid container spacing={2} maxWidth="lg" alignItems="flex-end">
       {/* Avatar grid */}
       <Grid item xs={8} lg={4}>
-        <Card sx={{background: "var(--gradient-to-right-btm)", borderRadius: "20px"}}>
+        <Card data-testid="card-1" sx={{background: "var(--gradient-to-right-btm)", borderRadius: "20px"}}>
           <CardActionArea>
             <Avatar
               id="avatar"
@@ -181,7 +181,7 @@ function PatientProfileNew() {
         {/* Status grid */}
         <Grid item>
           {/* Changing status card color according to priority flag */}
-          <Card sx={{bgcolor: "var(--background-main)", borderRadius:"20px"}} className={priorityFlag ? "status-card clicked" : "status-card"}>
+          <Card data-testid="card-2" sx={{bgcolor: "var(--background-main)", borderRadius:"20px"}} className={priorityFlag ? "status-card clicked" : "status-card"}>
             <CardActionArea>
               <CardContent>
                 <Typography className="header" gutterBottom variant="button" component="div">
@@ -215,7 +215,7 @@ function PatientProfileNew() {
         <Grid container spacing={2} item rowSpacing={2} direction="row">
           {/* Assigned doctor grid */}
           <Grid item xs={6}>
-            <Card sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }}>
+            <Card data-testid="card-3" sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }}>
               <CardActionArea>
                 <CardContent>
                   <Typography className="header" gutterBottom variant="button" component="div">
@@ -250,7 +250,7 @@ function PatientProfileNew() {
 
       {/* Symptom details table */}
       <Grid item xs={12} lg={10.51}>
-        <TableContainer sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }} component={Paper}>
+        <TableContainer data-testid="table-1" sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }} component={Paper}>
           <h5 className="symptomsTitle">
             <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SYMPTOM DETAILS
