@@ -20,8 +20,8 @@ import Fab from "@mui/material/Fab";
 import { useState, useEffect } from "react";
 import { auth, db } from "../../backend/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { collection, doc } from "firebase/firestore";
-import { useCollection, useDocument } from "react-firebase-hooks/firestore";
+import { doc } from "firebase/firestore";
+import { useDocument } from "react-firebase-hooks/firestore";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -32,19 +32,12 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function ClientProfile() {
   const [priorityFlag, setPriorityFlag] = useState(false);
-  const [user] = useAuthState(auth);
-  const [currentUser] = useDocument(doc(db, `Client/${user.email}`));
 
-  const {
-    firstName,
-    lastName,
-    email,
-    dob,
-    postalCode,
-    city,
-    province,
-    address,
-  } = currentUser?.data();
+  // Pull currently logged in user obj => to get user email below
+  const [user] = useAuthState(auth);
+
+  // Query for a single user from the Client collection (table) based on user's email
+  const [currentUser] = useDocument(doc(db, `Client/${user?.email}`));
 
   // useEffect(() => {
   //   const data = localStorage.getItem("priorityFlag");
@@ -75,10 +68,7 @@ function ClientProfile() {
               justifyContent="center"
               alignItems="center"
             >
-              <Avatar
-                id="clientProfile-avatar"
-                src="https://cdn.discordapp.com/attachments/943266123393142804/943303072300548156/Stevie.png"
-              />
+              <Avatar id="clientProfile-avatar" src={user?.photoURL} />
             </Grid>
             <CardContent>
               <Typography
@@ -88,16 +78,26 @@ function ClientProfile() {
                 fontSize="1.2rem"
                 component="div"
               >
-                {`${firstName} ${lastName}`}
+                {`${currentUser?.data().firstName} ${
+                  currentUser?.data().lastName
+                }`}
               </Typography>
               <Box className="clientProfile-text">
-                <p className="clientProfile-textDetail">DOB: {dob}</p>
-                <p className="clientProfile-textDetail">City: {city}</p>
-                <p className="clientProfile-textDetail">Province: {province}</p>
                 <p className="clientProfile-textDetail">
-                  Postal Code: {postalCode}
+                  DOB: {currentUser?.data().dob}
                 </p>
-                <p className="clientProfile-textDetail">Address: {address}</p>
+                <p className="clientProfile-textDetail">
+                  City: {currentUser?.data().city}
+                </p>
+                <p className="clientProfile-textDetail">
+                  Province: {currentUser?.data().province}
+                </p>
+                <p className="clientProfile-textDetail">
+                  Postal Code: {currentUser?.data().postalCode}
+                </p>
+                <p className="clientProfile-textDetail">
+                  Address: {currentUser?.data().address}
+                </p>
               </Box>
             </CardContent>
           </Box>
