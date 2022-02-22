@@ -104,89 +104,72 @@ function SymptomsTable() {
     setPage(0);
   };
   return (
-        <TableContainer className="symptoms-list">
-          <Box className="label">
-            <img className="symptoms__icon" src={VirusIcon} alt="Symptoms" />
-            Symptoms List
-          </Box>
-          <Table sx={{ minWidth: 50 }} aria-label="custom pagination table">
-            <TableHead>
-              <TableRow>
-                <TableCell
-                  className="header"
-                  sx={{ borderColor: "var(--secondary-light)" }}
-                >
-                  Date of Contact
-                </TableCell>
-                <TableCell
-                  className="header"
-                  sx={{ borderColor: "var(--secondary-light)" }}
-                  align="right"
-                >
-                  Status
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {(rowsPerPage > 0
-                ? rows.slice(
-                    page * rowsPerPage,
-                    page * rowsPerPage + rowsPerPage
-                  )
-                : rows
-              ).map((row) => (
-                <TableRow key={row.name}>
-                  <TableCell
-                    className="data"
-                    sx={{ borderColor: "var(--primary-light)" }}
-                    component="th"
-                    scope="row"
-                  >
-                    {row.symptomDate}
-                  </TableCell>
-                  <TableCell
-                    className="data"
-                    sx={{ borderColor: "var(--primary-light)" }}
-                    style={{ width: 160 }}
-                    align="right"
-                  >
-                    {row.status}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-            <TableFooter>
-              <TableRow>
-                <TablePagination
-                  sx={{ borderColor: "transparent", m: 0, p: 0 }}
-                  classes={{
-                    root: classes.color,
-                  }}
-                  rowsPerPageOptions={[5, 10, { label: "All", value: -1 }]}
-                  colSpan={3}
-                  count={rows.length}
-                  rowsPerPage={rowsPerPage}
-                  page={page}
-                  className={classes.select}
-                  SelectProps={{
-                    inputProps: { "aria-label": "rows per page" },
-                    MenuProps: {
-                      classes: { paper: classes.paper },
-                      sx: {
-                        "&& .Mui-selected": {
-                          backgroundColor: "var(--background-secondary)",
-                        },
-                      },
-                    },
-                  }}
-                  onPageChange={handleChangePage}
-                  onRowsPerPageChange={handleChangeRowsPerPage}
-                  ActionsComponent={TablePaginationActions}
-                />
-              </TableRow>
-            </TableFooter>
-          </Table>
-        </TableContainer>
+    <TableContainer className="symptoms-list">
+      <Box className="label">
+        <img className="symptoms__icon" src={VirusIcon} alt="Symptoms" />
+        Symptoms List
+      </Box>
+      <Table sx={{ minWidth: 50 }} aria-label="custom pagination table">
+        <TableHead>
+          <TableRow>
+            <TableCell
+              className="header"
+              sx={{ borderColor: "var(--secondary-light)" }}
+            >
+              Date of Contact
+            </TableCell>
+            <TableCell
+              className="header"
+              sx={{ borderColor: "var(--secondary-light)" }}
+              align="right"
+            >
+              Status
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {(rowsPerPage > 0
+            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            : rows
+          ).map((row) => (
+            <TableRow key={row.name}>
+              <TableCell
+                className="data"
+                sx={{ borderColor: "var(--primary-light)" }}
+                component="th"
+                scope="row"
+              >
+                {row.symptomDate}
+              </TableCell>
+              <TableCell
+                className="data"
+                sx={{ borderColor: "var(--primary-light)" }}
+                style={{ width: 160 }}
+                align="right"
+              >
+                {row.status}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+        <TableFooter>
+          <TableRow>
+            <TableCell
+              className="footer"
+              sx={{ backgroundColor: "var(--background-main)" }}
+              component="th"
+              scope="row"
+            ></TableCell>
+            <TableCell
+              className="footer"
+              sx={{ backgroundColor: "var(--background-main)" }}
+              style={{ width: 160 }}
+              align="right"
+            ></TableCell>
+          </TableRow>
+        </TableFooter>
+      </Table>
+    </TableContainer>
   );
 }
 
