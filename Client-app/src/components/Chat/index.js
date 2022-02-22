@@ -2,12 +2,12 @@ import { Grid, Avatar, TextField, Button, Box } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 import BottomNav from "../BottomNav";
 import Navbar from "../Navbar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { db, auth } from "../../backend/firebase";
 import {useAuthState} from 'react-firebase-hooks/auth';
-// import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { doc, serverTimestamp, addDoc, collection, query, orderBy, onSnapshot } from "firebase/firestore"; 
 import './Chat.css'
+import { deepOrange, deepPurple } from '@mui/material/colors';
 
 
 const Chat = () => {
@@ -17,8 +17,7 @@ const Chat = () => {
     const clientRef = doc(db, "Client", user.email)
     const messageRef = collection(clientRef, "Messages")
     const q = query(messageRef, orderBy('timestamp'))
-    const messagesReceived  = [{name: "tushar@client.com", message:"shalom" }, {name: "tushar@admin.com", message:"hey how are you?" }, {name: "tushar@client.com", message:"I'm feeling a little sick today :(" },
-    {name: "tushar@admin.com", message:"Oh no, what is the problem?" }];
+    const [messagesReceived, setMessagesReceived]  = useState([]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -27,14 +26,19 @@ const Chat = () => {
             timestamp: serverTimestamp(),
             message: msgToSend,
         });
-        setMsgToSend('')
+        setMsgToSend("")
     }
 
-    // const unsubscribe = onSnapshot(q, (querySnapshot) => {
-    //     querySnapshot.forEach((doc) => {
-    //         messagesReceived.push(doc.data())
-    //     } )
-    // })
+    useEffect(() => {
+        onSnapshot(q, (doc) => {
+            setMessagesReceived(doc.docs.map(doc=> ({
+                name: doc.data().name,
+                message: doc.data().message,
+                timestamp: doc.data().timestamp,
+            })))
+        })
+        // eslint-disable-next-line
+    }, [])
 
     return (
         <>
@@ -49,7 +53,7 @@ const Chat = () => {
                 <Grid container spacing={2}>
                     <Grid container>
                         <Grid item xs={12}>
-                            <main>
+                            <main id="messagesReceived">
                              {messagesReceived && messagesReceived.map(msg => <ChatMessage key={msg.id} message={msg} />)}
                             </main> 
                         </Grid>
@@ -57,7 +61,7 @@ const Chat = () => {
 
                     <Grid container sx={{mb:0,}}>
                         <Grid item xs={2}>
-                            <Avatar>{user.email.charAt(0).toUpperCase()}</Avatar>
+                            <Avatar sx={{ bgcolor: deepPurple[500] }}>{user.email.charAt(0).toUpperCase()}</Avatar>
                         </Grid>
                         <Grid item xs={8}>
                             <TextField
@@ -88,7 +92,8 @@ const Chat = () => {
         </>
     )
 }
-
+//This function is responsible for getting the messages and sorting them by sender and receiver.
+//Then it returns the chating bubbles which are displayed above. 
 function ChatMessage(props) {
     
     const {name, timestamp, message } = props.message
@@ -99,11 +104,10 @@ function ChatMessage(props) {
     return (
         <>
             <div className={`message ${messageClass}`}>
-                <Avatar>{name.toUpperCase().charAt(0)}</Avatar>
+                <Avatar sx={{ bgcolor: deepPurple[500] }}>{name.toUpperCase().charAt(0)}</Avatar>
                 <p>{message}</p>
             </div>
         </>
     )
 }
-
 export default Chat;
