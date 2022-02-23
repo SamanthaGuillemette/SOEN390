@@ -277,6 +277,7 @@ export default function SignUp(props) {
             >
               Sign Up
             </Button>
+            {/* This model is used to display an error message for using the same email in the admin application as the client application  */}
             <Modal
               open={open}
               onClose={handleClose}
@@ -292,6 +293,7 @@ export default function SignUp(props) {
               </Typography>
             </Box>
             </Modal>
+            {/* This model is used to display an error messages pertaining to the database such as wrong email or wrong password  */}
             <Modal
               open={open2}
               onClose={handleClose}
