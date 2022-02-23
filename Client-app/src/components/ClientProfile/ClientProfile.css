@@ -120,3 +120,40 @@
   opacity: 0.7;
   font-weight: 900 !important;
 }
+
+.header-update-profile {
+  text-align: center;
+  font-weight: bold !important;
+  color: var(--text-primary) !important;
+}
+
+.update_profile__img {
+  width: 50px;
+  margin-bottom: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cancel-button {
+  background-color: #e0e4e4 !important;
+  color: var(--text-inactive) !important;
+}
+
+.cancel-button:hover {
+  transition: all .3s;
+  opacity: 0.9;
+  transform: translateY(2px);
+}
+
+.update-button {
+  background-color: var(--primary-main) !important;
+  color: var(--text-primary) !important;
+  margin-left: 10px !important;
+}
+
+.update-button:hover {
+  transition: all .3s;
+  opacity: 0.9;
+  transform: translateY(2px);
+}

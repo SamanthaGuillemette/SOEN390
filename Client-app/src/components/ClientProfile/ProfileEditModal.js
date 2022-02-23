@@ -21,6 +21,10 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../../backend/firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { useDocument } from "react-firebase-hooks/firestore";
+import { inputLabelClasses } from "@mui/material/InputLabel";
+import { makeStyles } from "@material-ui/core/styles";
+import FormIcon from "../../assets/form.svg";
+import "./ClientProfile.css";
 
 const style = {
   position: "absolute",
@@ -29,11 +33,12 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: "80%",
   height: "60vh",
-  bgcolor: "background.paper",
-  boxShadow: 24,
+  //bgcolor: "#0b0b0b",
+  bgcolor: "var(--background-secondary)",
+  boxShadow: "0px 0px 2px 2px var(--background-secondary)",
   p: 3,
   overflowY: "scroll",
-  borderRadius: 1,
+  borderRadius: "10px",
 };
 
 export default function BasicModal() {
@@ -91,7 +96,12 @@ export default function BasicModal() {
           noValidate
           onSubmit={handleUpdateSubmit}
         >
-          <Typography variant="h6" component="h2" sx={{ mb: 2 }}>
+          <img
+            className="update_profile__img"
+            src={FormIcon}
+            alt="My Doctor"
+          />
+          <Typography className="header-update-profile" variant="h6" component="h2" sx={{ mb: 2 }}>
             Update your profile
           </Typography>
           <Grid container spacing={2}>
@@ -103,6 +113,14 @@ export default function BasicModal() {
                 label="Profile Photo"
                 value={photoUrl}
                 onChange={(e) => setPhotoUrl(e.target.value)}
+                InputLabelProps={{
+                  sx: {
+                    color: "var(--text-primary)",
+                    [`&.${inputLabelClasses.shrink}`]: {
+                      color: "#e0e4e4",
+                    }
+                  }
+                }}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -114,6 +132,14 @@ export default function BasicModal() {
                 label="First Name"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
+                InputLabelProps={{
+                  sx: {
+                    color: "var(--text-primary)",
+                    [`&.${inputLabelClasses.shrink}`]: {
+                      color: "#e0e4e4",
+                    }
+                  }
+                }}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -125,6 +151,14 @@ export default function BasicModal() {
                 autoComplete="family-name"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
+                InputLabelProps={{
+                  sx: {
+                    color: "var(--text-primary)",
+                    [`&.${inputLabelClasses.shrink}`]: {
+                      color: "#e0e4e4",
+                    }
+                  }
+                }}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -136,6 +170,14 @@ export default function BasicModal() {
                 autoComplete="street-address"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
+                InputLabelProps={{
+                  sx: {
+                    color: "var(--text-primary)",
+                    [`&.${inputLabelClasses.shrink}`]: {
+                      color: "#e0e4e4",
+                    }
+                  }
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -148,6 +190,14 @@ export default function BasicModal() {
                       setDOB(e);
                     }}
                     renderInput={(params) => <TextField {...params} />}
+                    InputLabelProps={{
+                      sx: {
+                        color: "var(--text-primary)",
+                        [`&.${inputLabelClasses.shrink}`]: {
+                          color: "#e0e4e4",
+                        }
+                      }
+                    }}
                   />
                 </Stack>
               </LocalizationProvider>
@@ -161,18 +211,35 @@ export default function BasicModal() {
                 autoComplete="address-level3"
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
+                InputLabelProps={{
+                  sx: {
+                    color: "var(--text-primary)",
+                    [`&.${inputLabelClasses.shrink}`]: {
+                      color: "#e0e4e4",
+                    }
+                  }
+                }}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Province</InputLabel>
-                <Select
-                  labelId="province"
-                  id="province"
-                  label="province"
-                  value={province}
-                  onChange={(e) => setProvince(e.target.value)}
-                >
+              <TextField
+                      required
+                      labelId="province"
+                      id="province"
+                      label="Province"
+                      value={province}
+                      onChange={(e) => setProvince(e.target.value)}
+                      InputLabelProps={{
+                        sx: {
+                          color: "var(--text-primary)",
+                          [`&.${inputLabelClasses.shrink}`]: {
+                            color: "#e0e4e4"
+                          },
+                        }
+                      }}
+                      select
+                    >
                   <MenuItem value={"Alberta"}>Alberta</MenuItem>
                   <MenuItem value={"British Columbia"}>
                     British Columbia
@@ -189,7 +256,7 @@ export default function BasicModal() {
                   </MenuItem>
                   <MenuItem value={"Quebec"}>Quebec</MenuItem>
                   <MenuItem value={"Saskatchewan"}>Saskatchewan</MenuItem>
-                </Select>
+                </TextField>
               </FormControl>
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -201,14 +268,30 @@ export default function BasicModal() {
                 autoComplete="postal-code"
                 value={postalCode}
                 onChange={(e) => setPostalCode(e.target.value)}
+                InputLabelProps={{
+                  sx: {
+                    color: "var(--text-primary)",
+                    [`&.${inputLabelClasses.shrink}`]: {
+                      color: "#e0e4e4",
+                    }
+                  }
+                }}
               />
             </Grid>
           </Grid>
           <Button
             type="submit"
-            fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+            className="cancel-button"
+            sx={{ mt: 3, mb: 2}}
+          >
+            CANCEL
+          </Button>
+          <Button
+            type="submit"
+            variant="contained"
+            className="update-button"
+            sx={{ mt: 3, mb: 2}}
           >
             UPDATE
           </Button>
