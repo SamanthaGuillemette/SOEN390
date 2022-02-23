@@ -17,10 +17,13 @@
   align-items: center;
   justify-content: center;
   color: var(--text-inactive) !important;
+  background-color: inherit !important;
+  box-shadow: none !important;
 }
 
 .bottomNav-button:hover {
   color: var(--text-primary) !important;
+  box-shadow: none !important;
 }
 
 .bottomNav-iconTitle {
