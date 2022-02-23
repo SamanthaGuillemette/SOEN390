@@ -50,7 +50,7 @@ const BottomNav = () => {
             className="bottomNav-icon"
             sx={{ color: "white" }}
           />
-          <p className="bottomNav-iconTitle">Profile</p>
+          <p data-testid="profile" className="bottomNav-iconTitle">Profile</p>
         </IconButton>
       </Link>
       <IconButton size="large" className="bottomNav-button">
@@ -86,7 +86,7 @@ const BottomNav = () => {
                 horizontal: "center",
               }}
             >
-              <Typography className="popover-text" onClick={logout} sx={{ p: 2 }}>
+              <Typography data-testid = "signout" className="popover-text" onClick={logout} sx={{ p: 2 }}>
                 Signout
               </Typography>
             </Popover>
