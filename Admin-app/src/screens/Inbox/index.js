@@ -1,6 +1,6 @@
 import { Grid, Avatar, TextField, Button, Box } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { db, auth } from "../../backend/firebase";
 import {useAuthState} from 'react-firebase-hooks/auth';
 import { doc, serverTimestamp, addDoc, collection, query, orderBy, onSnapshot } from "firebase/firestore"; 
@@ -18,6 +18,7 @@ const Inbox = () => {
     const messageRef = collection(clientRef, "Messages")
     const q = query(messageRef, orderBy('timestamp'))
     const [messagesReceived, setMessagesReceived]  = useState([]);
+    const dummy = useRef();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -39,6 +40,10 @@ const Inbox = () => {
       })
         // eslint-disable-next-line
     }, [clientMessage])
+
+    useEffect(() => {
+      dummy.current.scrollIntoView({ behavior: 'smooth' });
+    })
 
     const pull_data = (data) => {
       if(data){  
@@ -67,6 +72,7 @@ const Inbox = () => {
                                 <Grid item xs={12}>
                                     <main id="messagesReceived">
                                         {messagesReceived && messagesReceived.map(msg => <ChatMessage key={msg.timestamp} message={msg} />)}
+                                        <span ref={dummy}></span>
                                     </main> 
                                 </Grid>
                             </Grid>
