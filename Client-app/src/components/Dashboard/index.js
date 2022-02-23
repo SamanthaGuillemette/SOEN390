@@ -29,7 +29,7 @@ const Dashboard = () => {
                 src={CalendarIcon}
                 alt="Appointment"
               />
-              <p className="dashboard-card__title">Appointment</p>
+              <p data-testid = "appointment" className="dashboard-card__title">Appointment</p>
             </div>
           </Grid>
 
