@@ -91,9 +91,9 @@ function DoctorList() {
   };
 
   return (
-    <TableContainer className="patient-doctor-list">
+    <TableContainer data-testid="table-container1" className="patient-doctor-list">
       <Box className="label">
-        <HealingIcon className="patients-icon"></HealingIcon>
+        <HealingIcon data-testid = "health-icon" className="patients-icon"></HealingIcon>
        Doctor List
      </Box>
       <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">

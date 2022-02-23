@@ -77,7 +77,6 @@ const theme = createMuiTheme({
 });
 
 export default function SignUp(props) {
-  console.log(inputLabelClasses);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [role, setRole] = useState('');
@@ -85,12 +84,16 @@ export default function SignUp(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [open, setOpen] = React.useState(false);
-  const handleClose = () => setOpen(false);
+  const [open2, setOpen2] = React.useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+  const handleClose = () => {
+    setOpen(false) 
+    setOpen2(false)
+  };
 
   const [
     user,
     loading,
-    error,
   ] = useAuthState(auth);
   
   const handleSubmit = async(event) => {
@@ -109,17 +112,15 @@ export default function SignUp(props) {
         dob: dobValue,
         email: email
       });
-      createUserWithEmailAndPassword(auth, email, password); 
+      createUserWithEmailAndPassword(auth, email, password)
+      .catch((error) => {
+        setErrorMsg(error.message);
+        setOpen2(true);
+      })
     }
   }
 
-  if (error) {
-    return (
-      <div>
-        <p>Error: {error.message}</p>
-      </div>
-    );
-  }
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -300,6 +301,7 @@ export default function SignUp(props) {
             >
               Sign Up
             </Button>
+            {/* This model is used to display an error message for using the same email in the admin application as the client application  */}
             <Modal
               open={open}
               onClose={handleClose}
@@ -315,6 +317,22 @@ export default function SignUp(props) {
               </Typography>
             </Box>
             </Modal>
+            {/* This model is used to display an error messages pertaining to the database such as wrong email or wrong password  */}
+            <Modal
+              open={open2}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+            <Box sx={style}>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                Error
+              </Typography>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                {errorMsg}
+              </Typography>
+            </Box>
+          </Modal>
             <Grid container justifyContent="center">
               <Grid item>
                 <Link className="link-sign" sx={{textDecoration: 'none', color: "var(--primary-main)"}} href="/signin" variant="body2">

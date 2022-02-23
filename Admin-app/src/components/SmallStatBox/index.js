@@ -2,7 +2,7 @@ import "./SmallStatBox.css";
 
 const SmallStatBox = ({ icon, number, description }) => {
   return (
-    <div className="statDetailGroup">
+    <div data-testid = "statbox1" className="statDetailGroup">
       {icon}
       <div className="statTextContainer">
         <h2 className="ui large header statNumber">{number}</h2>

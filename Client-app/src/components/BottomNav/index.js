@@ -36,11 +36,15 @@ const BottomNav = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
   };
+
   return (
-    <div className="bottomNav-container" >
-      <IconButton size="large" className="bottomNav-button" sx={{mb: "10px"}}>
+    <div className="bottomNav-container">
+      <IconButton size="large" className="bottomNav-button" sx={{ mb: "10px" }}>
         <Link to="../">
-          <HomeRoundedIcon className="bottomNav-icon" sx={{ color: "white", mb: "-5px"}} />
+          <HomeRoundedIcon
+            className="bottomNav-icon"
+            sx={{ color: "white", mb: "-5px" }}
+          />
           <p className="bottomNav-iconTitle">Home</p>
         </Link>
       </IconButton>
@@ -50,7 +54,9 @@ const BottomNav = () => {
             className="bottomNav-icon"
             sx={{ color: "white" }}
           />
-          <p data-testid="profile" className="bottomNav-iconTitle">Profile</p>
+          <p data-testid="profile" className="bottomNav-iconTitle">
+            Profile
+          </p>
         </IconButton>
       </Link>
       <IconButton size="large" className="bottomNav-button">
@@ -86,7 +92,12 @@ const BottomNav = () => {
                 horizontal: "center",
               }}
             >
-              <Typography data-testid = "signout" className="popover-text" onClick={logout} sx={{ p: 2 }}>
+              <Typography
+                data-testid="signout"
+                className="popover-text"
+                onClick={logout}
+                sx={{ p: 2 }}
+              >
                 Signout
               </Typography>
             </Popover>
