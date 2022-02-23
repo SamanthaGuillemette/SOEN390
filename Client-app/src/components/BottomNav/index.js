@@ -5,8 +5,14 @@ import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import MailRoundedIcon from "@mui/icons-material/MailRounded";
 import MoreHorizRoundedIcon from "@mui/icons-material/MoreHorizRounded";
 import { Link } from "react-router-dom";
+import { signOut } from 'firebase/auth';
+import { auth } from '../../backend/firebase';
 
 const BottomNav = () => {
+  const logout = async(e) => {
+    e.preventDefault();
+    signOut(auth);
+  }
   return (
     <div className="bottomNav-container">
       <IconButton
@@ -43,7 +49,7 @@ const BottomNav = () => {
         className="bottomNav-button"
       >
         <MoreHorizRoundedIcon sx={{ color: "white" }} />
-        <p className="bottomNav-iconTitle">More</p>
+        <p onClick={logout} className="bottomNav-iconTitle">More</p>
       </IconButton>
     </div>
   );
