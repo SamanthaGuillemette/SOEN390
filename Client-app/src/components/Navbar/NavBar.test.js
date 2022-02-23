@@ -3,7 +3,7 @@ import {MemoryRouter} from "react-router-dom";
 import "@testing-library/jest-dom";
 import Navbar from "./index";
 
-test("should render the bottom navbar", () => {
+test("should render the top navbar", () => {
     render(<MemoryRouter><Navbar /></MemoryRouter>);
 
     const title = screen.getByTestId("title");
