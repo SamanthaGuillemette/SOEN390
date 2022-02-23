@@ -2,11 +2,11 @@ import Box from "@mui/material/Box";
 import ClientProfile from "../../components/ClientProfile";
 import MenuAppBar from "../../components/Navbar";
 import BottomNav from "../../components/BottomNav";
-import {createMuiTheme } from "@material-ui/core/styles";
+import {createTheme } from "@material-ui/core/styles";
 import {ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
-const theme = createMuiTheme({
+const theme = createTheme({
     palette: {
       background: {
         default: "var(--background-secondary)"

@@ -44,8 +44,8 @@ function SymptomsTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name}>
+          {rows.map((row, index) => (
+            <TableRow key={index}>
               <TableCell
                 className="data"
                 sx={{ borderColor: "var(--primary-light)" }}

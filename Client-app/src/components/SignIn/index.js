@@ -18,7 +18,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Navigate } from "react-router-dom";
 import Modal from '@mui/material/Modal';
-import {createMuiTheme } from "@material-ui/core/styles";
+import { createTheme } from '@material-ui/core/styles'
 import { inputLabelClasses } from "@mui/material/InputLabel";
 import "./../SignUp/SignUp.css";
 
@@ -49,7 +49,7 @@ function Copyright(props) {
   );
 }
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     background: {
       default: "var(--background-secondary)"

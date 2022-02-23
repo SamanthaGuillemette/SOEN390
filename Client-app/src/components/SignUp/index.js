@@ -25,7 +25,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import { Navigate } from "react-router-dom";
 import Modal from '@mui/material/Modal';
-import {createMuiTheme } from "@material-ui/core/styles";
+import {createTheme } from "@material-ui/core/styles";
 import { inputLabelClasses } from "@mui/material/InputLabel";
 
 const style = {
@@ -55,7 +55,7 @@ function Copyright(props) {
   );
 }
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     background: {
       default: "var(--background-secondary)"
