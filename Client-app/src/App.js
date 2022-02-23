@@ -66,7 +66,7 @@ function App() {
             <Route path="*" element={<Dashboard />} />
             <Route path="/qr" element={<QR />} />
             <Route path="/clientprofile" element={<ClientProfile />} />
-            <Route path="chat" element={<Chat />} />
+            <Route path="clientinbox" element={<Chat />} />
           </Routes>
           <BottomNav />
         </>
