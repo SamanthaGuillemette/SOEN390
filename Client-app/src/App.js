@@ -7,10 +7,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
+import QR from "./components/QR";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./backend/firebase";
 import Chat from "./components/Chat";
 import Loading from "./components/Loading";
+import ClientProfile from "./components/ClientProfile";
+import BottomNav from "./components/BottomNav";
 import Navbar from "./components/Navbar";
 
 function App() {
@@ -53,13 +56,20 @@ function App() {
     //   </Routes>
     //   )} */}
     // </BrowserRouter>
+
     <BrowserRouter>
       {user && (
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="*" element={<Dashboard />} />
-          <Route path="chat" element={<Chat />} />
-        </Routes>
+        <>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="*" element={<Dashboard />} />
+            <Route path="/qr" element={<QR />} />
+            <Route path="/clientprofile" element={<ClientProfile />} />
+            <Route path="chat" element={<Chat />} />
+          </Routes>
+          <BottomNav />
+        </>
       )}
       {!user && (
         <Routes>

@@ -23,10 +23,12 @@
     "dayjs": "^1.10.7",
     "firebase": "^9.6.3",
     "firebaseui": "^6.0.0",
+    "modern-react-qr-reader": "^1.0.12",
     "react": "^17.0.2",
     "react-chartjs-2": "^4.0.1",
     "react-dom": "^17.0.2",
     "react-firebase-hooks": "^5.0.0",
+    "react-qr-reader": "^3.0.0-beta-1",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
@@ -35,7 +37,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --silent",
+    "test": "react-scripts test --silent --detectOpenHandles --forceExit",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -58,6 +60,7 @@
   },
   "devDependencies": {
     "@types/jest": "^27.4.0",
+    "cypress": "^9.5.0",
     "jest": "^27.4.7"
   }
 }

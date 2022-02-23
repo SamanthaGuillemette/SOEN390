@@ -3,7 +3,7 @@ const Notifications = () => {
     <>
       <div
         className="ui relaxed divided list"
-        style={{ backgroundColor: "white" }}
+        style={{ backgroundColor: "var(--text-primary)" }}
       >
         <h1>Notifications component</h1>
 

@@ -5,7 +5,7 @@ const SmallStatBox = ({ icon, number, description }) => {
     <div className="statDetailGroup">
       {icon}
       <div className="statTextContainer">
-        <h2 className="ui large header">{number}</h2>
+        <h2 className="ui large header statNumber">{number}</h2>
         <div className="statDesc">{description}</div>
       </div>
     </div>
