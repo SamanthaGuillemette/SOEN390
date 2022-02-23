@@ -63,7 +63,7 @@ function ClientProfile() {
                 />
               </Grid>
               <CardContent>
-                <Typography
+                <Typography data-testid ="avatar"
                   className="profile-name"
                   gutterBottom
                   variant="button"
