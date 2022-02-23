@@ -29,6 +29,8 @@
 .bottomNav-iconTitle {
   color: var(--text-inactive);
   font-size: 0.9rem;
+  text-transform: uppercase !important;
+  margin-top: 4px !important;
 }
 
 .more-dropdown {
@@ -47,4 +49,19 @@
 
 .bottomNav-button:hover .bottomNav-iconTitle {
   color: var(--text-primary);
+}
+
+.MuiPopover-paper {
+  background-color: var(--background-main) !important;
+  border-radius: 10px !important;
+}
+
+.popover-text {
+  color: var(--text-inactive) !important;
+  font-size: 0.9rem;
+  text-transform: uppercase !important;
+}
+
+.popover-text:hover {
+  color: var(--text-primary) !important;
 }

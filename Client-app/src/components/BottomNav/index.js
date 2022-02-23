@@ -37,10 +37,10 @@ const BottomNav = () => {
     handleMobileMenuClose();
   };
   return (
-    <div className="bottomNav-container">
-      <IconButton size="large" className="bottomNav-button">
+    <div className="bottomNav-container" >
+      <IconButton size="large" className="bottomNav-button" sx={{mb: "10px"}}>
         <Link to="../">
-          <HomeRoundedIcon className="bottomNav-icon" sx={{ color: "white" }} />
+          <HomeRoundedIcon className="bottomNav-icon" sx={{ color: "white", mb: "-5px"}} />
           <p className="bottomNav-iconTitle">Home</p>
         </Link>
       </IconButton>
@@ -70,7 +70,7 @@ const BottomNav = () => {
                 className="bottomNav-icon"
                 sx={{ color: "white" }}
               />
-              More
+              <p className="bottomNav-iconTitle">More</p>
             </Button>
             <Popover
               id={id}
@@ -86,7 +86,7 @@ const BottomNav = () => {
                 horizontal: "center",
               }}
             >
-              <Typography onClick={logout} sx={{ p: 2 }}>
+              <Typography className="popover-text" onClick={logout} sx={{ p: 2 }}>
                 Signout
               </Typography>
             </Popover>
