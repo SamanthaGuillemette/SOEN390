@@ -55,7 +55,11 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [open, setOpen] = useState(false);
-  const handleClose = () => setOpen(false);
+  const [open2, setOpen2] = useState(false);
+  const handleClose = () => {
+    setOpen(false) 
+    setOpen2(false)
+  };
 
     const login = async (e) => {
       e.preventDefault();
@@ -63,22 +67,18 @@ export default function SignIn() {
       const docSnap = await getDoc(docRef);
       
       if(docSnap.exists()){
-        signInWithEmailAndPassword(auth, email, password);
+        signInWithEmailAndPassword(auth, email, password)
+        .catch((error) => {
+          setOpen2(true);
+        })
       }else{
         setOpen(true);
       } 
     };
 
 
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
 
-  if (error) {
-    return (
-      <div>
-        <p>Error: {error.message}</p>
-      </div>
-    );
-  }
   if (user) {
     return <Navigate to="/" replace={true} />;
   }
@@ -141,6 +141,7 @@ export default function SignIn() {
             >
               Sign In
             </Button>
+            {/* This model is used to display an error message for using the same email in the admin application as the client application  */}
             <Modal
               open={open}
               onClose={handleClose}
@@ -152,10 +153,26 @@ export default function SignIn() {
                 Error
               </Typography>
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                You are currently in the Client Application, please sign in using this email on the Administration App.                
+                This email is not registered with the Administration application.
               </Typography>
             </Box>
             </Modal>
+            {/* This model is used to display an error messages pertaining to the database such as wrong email or wrong password  */}
+            <Modal
+              open={open2}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+            <Box sx={style}>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                Error
+              </Typography>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                Your password or email is incorrect. Please try again!
+              </Typography>
+            </Box>
+          </Modal>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
