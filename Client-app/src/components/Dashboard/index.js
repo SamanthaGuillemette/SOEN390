@@ -49,26 +49,30 @@ const Dashboard = () => {
               <p className="dashboard-card__title">Diary</p>
             </div>
           </Grid>
+
           <Grid item xs={6}>
-            <div className="dashboard-card__container">
-              <img
-                className="dashboard-card__img"
-                src={MessageIcon}
-                alt="Send message"
-              />
-              <p className="dashboard-card__title">Send Message</p>
-            </div>
+            <Link to="../clientinbox">
+              <div className="dashboard-card__container">
+                <img
+                  className="dashboard-card__img"
+                  src={MessageIcon}
+                  alt="Send message"
+                />
+                <p className="dashboard-card__title">Send Message</p>
+              </div>
+            </Link>
           </Grid>
+
           <Grid item xs={6}>
-          <Link to="../qr">
-            <div className="dashboard-card__container">
-              <img
-                className="dashboard-card__img"
-                src={QRCodeIcon}
-                alt="QR code"
-              />
-              <p className="dashboard-card__title">QR Code</p>
-            </div>
+            <Link to="../qr">
+              <div className="dashboard-card__container">
+                <img
+                  className="dashboard-card__img"
+                  src={QRCodeIcon}
+                  alt="QR code"
+                />
+                <p className="dashboard-card__title">QR Code</p>
+              </div>
             </Link>
           </Grid>
           <Grid item xs={6}>
