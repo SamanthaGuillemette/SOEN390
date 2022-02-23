@@ -14,54 +14,54 @@ import "./SidebarItems.css";
 export const mainListItems = (
   <div>
     <Link className="sidebar-link" to="/">
-      <ListItem button sx={{color: "transparent"}}>
+      <ListItem button className="sidebar-button">
         <ListItemIcon>
-          <DashboardIcon sx={{color: "var(--text-inactive)"}}/>
+          <DashboardIcon className="sidebar-icon"/>
         </ListItemIcon>
         <ListItemText className="sidebar-text" primary="Dashboard" />
       </ListItem>
     </Link>
 
     <Link className="sidebar-link" to="/appointments">
-      <ListItem button sx={{color: "transparent"}}>
+      <ListItem button className="sidebar-button">
         <ListItemIcon>
-          <EventIcon sx={{color: "var(--text-inactive)"}}/>
+          <EventIcon className="sidebar-icon"/>
         </ListItemIcon>
         <ListItemText className="sidebar-text" primary="Appointments" />
       </ListItem>
     </Link>
 
     <Link className="sidebar-link" to="/patients">
-      <ListItem button sx={{color: "transparent"}}>
+      <ListItem button className="sidebar-button">
         <ListItemIcon>
-          <PeopleIcon sx={{color: "var(--text-inactive)"}}/>
+          <PeopleIcon className="sidebar-icon"/>
         </ListItemIcon>
         <ListItemText className="sidebar-text" primary="Patients" />
       </ListItem>
     </Link>
 
     <Link className="sidebar-link" to="inbox">
-      <ListItem button sx={{color: "transparent"}}>
+      <ListItem button className="sidebar-button">
         <ListItemIcon>
-          <MailIcon sx={{color: "var(--text-inactive)"}}/>
+          <MailIcon className="sidebar-icon"/>
         </ListItemIcon>
         <ListItemText className="sidebar-text" primary="Inbox" />
       </ListItem>
     </Link>
 
     <Link className="sidebar-link" to="testing">
-      <ListItem button sx={{color: "transparent"}}>
+      <ListItem button className="sidebar-button">
         <ListItemIcon>
-          <LayersIcon sx={{color: "var(--text-inactive)"}}/>
+          <LayersIcon className="sidebar-icon"/>
         </ListItemIcon>
         <ListItemText className="sidebar-text" primary="Test Component" />
       </ListItem>
     </Link>
 
     <Link className="sidebar-link" to="QR">
-      <ListItem button sx={{color: "transparent"}}>
+      <ListItem button className="sidebar-button">
         <ListItemIcon>
-          <QrCodeIcon sx={{color: "var(--text-inactive)"}}/>
+          <QrCodeIcon className="sidebar-icon"/>
         </ListItemIcon>
         <ListItemText className="sidebar-text" primary="QR Code" />
       </ListItem>

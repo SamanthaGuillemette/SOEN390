@@ -71,10 +71,11 @@ function createData(
 function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
+  const data = localStorage.getItem('priorityFlag')
 
   return (
     <React.Fragment>
-      <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+      <TableRow>
         <TableCell sx={{ borderColor: "var(--background-secondary)" }}>
           <IconButton
             aria-label="expand row"

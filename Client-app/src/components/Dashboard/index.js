@@ -1,4 +1,5 @@
 import { Box, Grid } from "@mui/material";
+
 import "./Dashboard.css";
 import NewspaperIcon from "../../assets/newspaper-sharp-white.svg";
 import CalendarIcon from "../../assets/calendar-page.svg";
@@ -28,19 +29,21 @@ const Dashboard = () => {
                 src={CalendarIcon}
                 alt="Appointment"
               />
-              <p className="dashboard-card__title">Appointment</p>
+              <p data-testid = "appointment" className="dashboard-card__title">Appointment</p>
             </div>
           </Grid>
 
           <Grid item xs={6}>
-            <div className="dashboard-card__container">
-              <img
-                className="dashboard-card__img"
-                src={VirusIcon}
-                alt="Symptoms"
-              />
-              <p className="dashboard-card__title">Symptoms</p>
-            </div>
+            <Link to="../symptoms">
+              <div className="dashboard-card__container">
+                <img
+                  className="dashboard-card__img"
+                  src={VirusIcon}
+                  alt="Symptoms"
+                />
+                <p className="dashboard-card__title">Symptoms</p>
+              </div>
+            </Link>
           </Grid>
 
           <Grid item xs={6}>
@@ -60,15 +63,15 @@ const Dashboard = () => {
             </div>
           </Grid>
           <Grid item xs={6}>
-          <Link to="../qr">
-            <div className="dashboard-card__container">
-              <img
-                className="dashboard-card__img"
-                src={QRCodeIcon}
-                alt="QR code"
-              />
-              <p className="dashboard-card__title">QR Code</p>
-            </div>
+            <Link to="../qr">
+              <div className="dashboard-card__container">
+                <img
+                  className="dashboard-card__img"
+                  src={QRCodeIcon}
+                  alt="QR code"
+                />
+                <p className="dashboard-card__title">QR Code</p>
+              </div>
             </Link>
           </Grid>
           <Grid item xs={6}>

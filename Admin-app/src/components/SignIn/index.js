@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -12,34 +12,40 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import {ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { db, auth } from "../../backend/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Navigate } from "react-router-dom";
-import Modal from '@mui/material/Modal';
-import {createMuiTheme } from "@material-ui/core/styles";
+import Modal from "@mui/material/Modal";
+import { createMuiTheme } from "@material-ui/core/styles";
 import { inputLabelClasses } from "@mui/material/InputLabel";
-import "./SignIn.css";
+import "./../SignUp/SignUp.css";
 
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
+  position: "absolute",
+  top: "30%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 500,
+  bgcolor: "var(--background-main)",
+  borderRadius: "10px",
+  border: "1px solid var(--info-border)",
   boxShadow: 24,
+  color: "var(--info-main)",
   p: 4,
 };
 
 function Copyright(props) {
   return (
     <Typography variant="body2" align="center" {...props}>
-      {'Copyright © '}
-      <Link className="link-sign" sx={{fontSize: "12px", textDecoration: 'none'}} color="inherit">
+      {"Copyright © "}
+      <Link
+        className="link-sign"
+        sx={{ fontSize: "12px", textDecoration: "none" }}
+        color="inherit"
+      >
         Your Website
       </Link>{" "}
       {new Date().getFullYear()}
@@ -51,43 +57,40 @@ function Copyright(props) {
 const theme = createMuiTheme({
   palette: {
     background: {
-      default: "var(--background-secondary)"
+      default: "var(--background-secondary)",
     },
     text: {
-      primary: "#ffffff"
-    }
-  }
+      primary: "#ffffff",
+    },
+  },
 });
 
-
 export default function SignIn() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [open, setOpen] = React.useState(false);
   const [open2, setOpen2] = React.useState(false);
   const handleClose = () => {
-    setOpen(false) 
-    setOpen2(false)
+    setOpen(false);
+    setOpen2(false);
   };
   const [user, loading] = useAuthState(auth);
 
-  const login = async(e) => {
+  const login = async (e) => {
     e.preventDefault();
     const docRef = doc(db, "Admin", email);
     const docSnap = await getDoc(docRef);
-    
-    if(docSnap.exists()){
-      signInWithEmailAndPassword(auth, email, password)
-        .catch((error) => {
-          setOpen2(true);
-        })
-    }else{
+
+    if (docSnap.exists()) {
+      signInWithEmailAndPassword(auth, email, password).catch((error) => {
+        setOpen2(true);
+      });
+    } else {
       setOpen(true);
     }
   };
 
   if (user) {
-    
     return <Navigate to="/" replace={true} />;
   }
   if (loading) {
@@ -96,127 +99,147 @@ export default function SignIn() {
 
   return (
     <ThemeProvider theme={theme}>
-    <Container sx={{bgcolor: "var(--background-main)", borderRadius: "20px"}} component="main" maxWidth="xs">
-      <CssBaseline />
-      <Box
-        sx={{
-          marginTop: 10,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
+      <Container
+        sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }}
+        component="main"
+        maxWidth="xs"
       >
-        <Avatar sx={{ m: 2, bgcolor: 'var(--secondary-main)' }}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <Box component="form" onSubmit={login} noValidate sx={{ mt: 1 }}>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            InputLabelProps={{
-              sx: {
-                color: "var(--text-primary)",
-                [`&.${inputLabelClasses.shrink}`]: {
-                  color: "var(--primary-main)"
-                }
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 10,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Avatar sx={{ m: 2, bgcolor: "var(--secondary-main)" }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <Box component="form" onSubmit={login} noValidate sx={{ mt: 1 }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              InputLabelProps={{
+                sx: {
+                  color: "var(--text-primary)",
+                  [`&.${inputLabelClasses.shrink}`]: {
+                    color: "var(--primary-main)",
+                  },
+                },
+              }}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              InputLabelProps={{
+                sx: {
+                  color: "var(--text-primary)",
+                  [`&.${inputLabelClasses.shrink}`]: {
+                    color: "var(--primary-main)",
+                  },
+                },
+              }}
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  style={{ color: "var(--text-primary)" }}
+                  value="remember"
+                />
               }
-            }}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value = {password}
-            onChange={(e) => setPassword(e.target.value)}
-            InputLabelProps={{
-              sx: {
-                color: "var(--text-primary)",
-                [`&.${inputLabelClasses.shrink}`]: {
-                  color: "var(--primary-main)"
-                }
-              }
-            }}
-          />
-          <FormControlLabel
-            control={<Checkbox style={{color: "var(--text-primary)"}} value="remember" />}
-            label="Remember me"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ 
-              mt: 3, 
-              mb: 2,
-              background: 'var(--gradient-to-right)'
-            }}
-          >
-            Sign In
-          </Button>
-          {/* This model is used to display an error message for using the same email in the admin application as the client application  */}
-          <Modal
+              label="Remember me"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{
+                mt: 3,
+                mb: 2,
+                background: "var(--gradient-to-right)",
+              }}
+            >
+              Sign In
+            </Button>
+            {/* This model is used to display an error message for using the same email in the admin application as the client application  */}
+            <Modal
               open={open}
               onClose={handleClose}
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
             >
-            <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Error
-              </Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                This email is not registered with the Administration application.
-              </Typography>
-            </Box>
-          </Modal>
-          {/* This model is used to display an error messages pertaining to the database such as wrong email or wrong password  */}
-          <Modal
+              <Box sx={style}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  Error
+                </Typography>
+                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                  This email is not registered with the Administration
+                  application.
+                </Typography>
+              </Box>
+            </Modal>
+            {/* This model is used to display an error messages pertaining to the database such as wrong email or wrong password  */}
+            <Modal
               open={open2}
               onClose={handleClose}
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
             >
-            <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Error
-              </Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                Your password or email is incorrect. Please try again!
-              </Typography>
-            </Box>
-          </Modal>
-          <Grid container>
-            <Grid item xs>
-              <Link className="link-sign" sx={{color: "var(--primary-main)", textDecoration: 'none'}} href="#" variant="body2">
-                Forgot password?
-              </Link>
+              <Box sx={style}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  Error
+                </Typography>
+                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                  Your password or email is incorrect. Please try again!
+                </Typography>
+              </Box>
+            </Modal>
+            <Grid container>
+              <Grid item xs>
+                <Link
+                  className="link-sign"
+                  sx={{ color: "var(--primary-main)", textDecoration: "none" }}
+                  href="#"
+                  variant="body2"
+                >
+                  Forgot password?
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link
+                  className="link-sign"
+                  sx={{ color: "var(--primary-main)", textDecoration: "none" }}
+                  href="/signup"
+                  variant="body2"
+                >
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Link className="link-sign" sx={{color: "var(--primary-main)", textDecoration: 'none'}} href="/signup" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
+          </Box>
         </Box>
-      </Box>
-      <Copyright sx={{ mt: 8, mb: 4 }} />
-    </Container>
-  </ThemeProvider>
+        <Copyright sx={{ mt: 8, mb: 4 }} />
+      </Container>
+    </ThemeProvider>
   );
 }

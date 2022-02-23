@@ -18,3 +18,10 @@
   font-weight: 400;
   color: var(--text-primary) !important;
 }
+
+.dashboard-card__container:hover  {
+  transition: all .3s;
+  opacity: 0.9;
+  transform: translateY(5px);
+  box-shadow: 2px 2px 10px 2px rgb(139, 195, 235, 0.12);
+}

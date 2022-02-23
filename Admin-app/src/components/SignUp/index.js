@@ -27,18 +27,19 @@ import {createMuiTheme } from "@material-ui/core/styles";
 import { inputLabelClasses } from "@mui/material/InputLabel";
 import { Navigate } from "react-router-dom";
 import Modal from '@mui/material/Modal';
-import "./../SignIn";
 import "./SignUp.css";
 
 const style = {
   position: 'absolute',
-  top: '50%',
+  top: '30%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
+  width: 500,
+  bgcolor: 'var(--background-main)',
+  borderRadius: '10px',
+  border: "1px solid var(--info-border)",
   boxShadow: 24,
+  color: "var(--info-main)",
   p: 4,
 };
 
