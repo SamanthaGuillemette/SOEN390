@@ -16,6 +16,11 @@ import EditIcon from "@mui/icons-material/Edit";
 import Fab from "@mui/material/Fab";
 import { useState, useEffect } from "react";
 import DropdownConfirmation from "../DropdownConfirmation/index";
+import { auth, db } from "../../backend/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { doc } from "firebase/firestore";
+import { useDocument } from "react-firebase-hooks/firestore";
+import EditModal from "./ProfileEditModal";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -26,6 +31,12 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function ClientProfile() {
   const [priorityFlag, setPriorityFlag] = useState(false);
+
+  // Pull currently logged in user obj => to get user email below
+  //const [user] = useAuthState(auth);
+
+  // Query for a single user from the Client collection (table) based on user's email
+  //const [currentUser] = useDocument(doc(db, `Client/${user?.email}`));
 
   useEffect(() => {
     const data = localStorage.getItem("priorityFlag");
@@ -44,13 +55,7 @@ function ClientProfile() {
         <Grid item xs={12}>
           <Card>
             <Box className="clientProfile-profileCard">
-              <Fab
-                color="primary"
-                aria-label="edit"
-                className="clientProfile-editIcon"
-              >
-                <EditIcon fontSize="small" />
-              </Fab>
+              <EditModal />
               <Grid
                 container
                 direction="column"
@@ -63,7 +68,8 @@ function ClientProfile() {
                 />
               </Grid>
               <CardContent>
-                <Typography data-testid ="avatar"
+                <Typography
+                  data-testid="avatar"
                   className="profile-name"
                   gutterBottom
                   variant="button"
