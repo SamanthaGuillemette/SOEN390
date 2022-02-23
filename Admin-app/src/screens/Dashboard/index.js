@@ -89,7 +89,7 @@ const Dashboard = () => {
             }}
             subheader={<li />}
           >
-            <Typography className="listTitle" gutterBottom variant="h5" sx={{color: "var(--text-primary)", border: "transparent"}}>
+            <Typography data-testid="patientlist" className="listTitle" gutterBottom variant="h5" sx={{color: "var(--text-primary)", border: "transparent"}}>
               Patient's list
             </Typography>
             {[0, 1, 2, 3, 4].map((sectionId) => (
@@ -113,7 +113,7 @@ const Dashboard = () => {
             <Typography sx={{color: "var(--text-primary)"}} className="title" gutterBottom variant="h5">
               Important Links
             </Typography>
-            <Card variant="contained" className="cardShape1">
+            <Card data-testid ="card1" variant="contained" className="cardShape1">
               <CardMedia
                 component="img"
                 height="220"
@@ -147,7 +147,7 @@ const Dashboard = () => {
               </CardContent>
             </Card>
 
-            <Card variant="contained" className="cardShape2">
+            <Card data-testid="card2" variant="contained" className="cardShape2">
               <CardMedia
                 component="img"
                 height="220"
@@ -183,7 +183,7 @@ const Dashboard = () => {
               </CardContent>
             </Card>
 
-            <Card variant="contained" className="cardShape3">
+            <Card data-testid ="card3" variant="contained" className="cardShape3">
               <CardMedia
                 component="img"
                 height="220"

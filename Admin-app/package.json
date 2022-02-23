@@ -38,7 +38,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --silent --detectOpenHandles --forceExit",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "e2e" : "cypress open"
   },
   "eslintConfig": {
     "extends": [
@@ -61,6 +62,7 @@
   "devDependencies": {
     "@types/jest": "^27.4.0",
     "cypress": "^9.5.0",
-    "jest": "^27.4.7"
+    "jest": "^27.4.7",
+    "jest-watch-typeahead": "^0.6.5"
   }
 }
