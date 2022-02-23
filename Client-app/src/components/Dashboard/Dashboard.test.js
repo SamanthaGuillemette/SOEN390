@@ -10,4 +10,8 @@ test("should render dashboard", () => {
     expect(appointment).toBeInTheDocument();
     expect(appointment).toHaveTextContent("Appointment");
     expect(appointment).toHaveClass("dashboard-card__title");
-})
+});
+
+afterEach(() => {
+    cleanup();
+});
