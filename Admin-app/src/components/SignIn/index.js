@@ -64,7 +64,7 @@ const theme = createMuiTheme({
     },
   },
 });
-
+// This function is responsible for the signin component which also communicates with the server and displays relevent error messages if necessary.
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -76,6 +76,9 @@ export default function SignIn() {
   };
   const [user, loading] = useAuthState(auth);
 
+  // This asynchronus function is responsible for the login communication with the server
+  // If any errors occur, the modals in the return statement below will show the relevent messages
+  // The signInWithEmailAndPassword function from firebase is what allows to authenticate the user.
   const login = async (e) => {
     e.preventDefault();
     const docRef = doc(db, "Admin", email);
