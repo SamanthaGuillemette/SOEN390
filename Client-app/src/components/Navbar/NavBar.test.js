@@ -6,6 +6,7 @@ import Navbar from "./index";
 test("should render the top navbar", () => {
     render(<MemoryRouter><Navbar /></MemoryRouter>);
 
+    // Checks if navbar has been rendered
     const title = screen.getByTestId("title");
     expect(title).toBeInTheDocument();
     expect(title).toHaveTextContent("Covid-19 App");

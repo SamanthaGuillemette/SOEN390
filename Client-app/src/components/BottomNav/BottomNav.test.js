@@ -6,6 +6,7 @@ import BottomNav from "./index";
 test("should render the bottom navbar", () => {
     render(<MemoryRouter><BottomNav /></MemoryRouter>);
 
+    // Checks if the bottom nav has been rendred and has components
     const profile = screen.getByTestId("profile");
     expect(profile).toBeInTheDocument();
     expect(profile).toHaveTextContent("Profile");
