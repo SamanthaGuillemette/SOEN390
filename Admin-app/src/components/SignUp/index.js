@@ -313,7 +313,7 @@ export default function SignUp(props) {
                 Error
               </Typography>
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                This email has already been used for the Client Application. Please use another email. 
+                This email has already been used for the Admin Application. Please use another email. 
               </Typography>
             </Box>
             </Modal>
