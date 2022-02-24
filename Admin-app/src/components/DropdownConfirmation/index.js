@@ -5,35 +5,36 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { makeStyles } from "@material-ui/core/styles";
 
+// styling the dropdown
 const dropdownStyle = makeStyles({
   paper: {
-    background: "var(--background-main)",
-    borderRadius: "10px",
+    background: "var(--background-main)", // changing background color of dropdown
+    borderRadius: "10px", // making corners rounded
   },
   icon: {
-    fill: 'var(--text-inactive)',
+    fill: 'var(--text-inactive)', // color for dropdown button
   },
 });
 
 function DropdownConfirmation() {
-  const classes = dropdownStyle();
-  const [confirmation, setConfirmation] = React.useState('');
+  const classes = dropdownStyle(); // adding styling
+  const [confirmation, setConfirmation] = React.useState(''); // empty choice
 
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
     setConfirmation(
-      typeof value === 'string' ? value.split(',') : value,
+      typeof value === 'string' ? value.split(',') : value, // storing the confirmation string
     );
   };
 
   return (
       <FormControl sx={{minWidth: 140}}>
-        <InputLabel className="data" shrink={false}>{confirmation === '' && 'Confirm Status'}</InputLabel>
+        <InputLabel className="data" shrink={false}>{confirmation === '' && 'Confirm Status'}</InputLabel> {/* removing the shrinking of the form title */}
         <Select data-testid = "select1" className="data"
           value={confirmation}
-          onChange={handleChange}
+          onChange={handleChange} // changing the text to the chosen
           inputProps={{
             classes: {
                 icon: classes.icon,
@@ -50,7 +51,7 @@ function DropdownConfirmation() {
             }
           }}
         >
-        <MenuItem className="data" value="1">Confirmed</MenuItem>
+        <MenuItem className="data" value="1">Confirmed</MenuItem> {/* adding dropdown option */}
         </Select>
       </FormControl>
   );
