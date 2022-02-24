@@ -1,11 +1,23 @@
 .sidebar-link:hover {
-    color: transparent !important;
+    color: var(--background-secondary) !important;
 }
 
-.sidebar-text:hover {
-    color: var(--text-primary) !important;
+.sidebar-icon {
+    color: var(--text-inactive) !important;
 }
 
 .sidebar-text {
     color: var(--text-inactive) !important;
+}
+
+.sidebar-button {
+    background-color: transparent !important;
+}
+
+.sidebar-button:hover .sidebar-icon{
+    color: var(--text-primary) !important;
+}
+
+.sidebar-button:hover .sidebar-text{
+    color: var(--text-primary) !important;
 }

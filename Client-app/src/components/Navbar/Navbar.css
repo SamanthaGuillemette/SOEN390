@@ -1,0 +1,19 @@
+.sidebar-text {
+    color: var(--primary-main) !important;
+}
+
+.sidebar-icon {
+    color: var(--primary-main) !important; 
+}
+
+.sidebar-button:hover .sidebar-icon{
+    color: var(--text-primary) !important;
+}
+
+.sidebar-button:hover .sidebar-text{
+    color: var(--text-primary) !important;
+}
+
+.sidebar-button {
+    background-color: rgb(23, 23, 23) !important;
+}
