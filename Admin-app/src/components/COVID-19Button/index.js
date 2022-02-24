@@ -3,6 +3,8 @@ import Button from '@mui/material/Button';
 import { Link } from "react-router-dom";
 import './COVID-19Button.css'
 
+// Function for the creation of our COVID- News Button
+
 function COVID19Button() {
     return(
         <div data-testid="covid-1" className="news-button-div">

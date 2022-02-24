@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import './../COVID-19Button/COVID-19Button.css';
 import './EventButton.css';
 
+// Function for the use of our Upcoming events button on the dashboard
 function EventButton() {
     return(
         <div className="event-button-div">
