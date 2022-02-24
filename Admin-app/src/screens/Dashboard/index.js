@@ -18,8 +18,11 @@ import SmallStatBox from "../../components/SmallStatBox";
 import "./Dashboard.css";
 import UpcomingEvents from "../../components/UpcomingEvents/index"
 
+// Main function which will render the dashboard
+
 const Dashboard = () => {
   return (
+    // This returns the buttons on the top which display the buttons on the top, this one is for the patients
     <Container maxWidth="xl">
       <Grid container spacing={2} className="statContainer">
         <Grid container spacing={3} className="statContainer">
@@ -32,6 +35,7 @@ const Dashboard = () => {
               />
             </Card>
           </Grid>
+          {/* This button is for the doctors*/}
           <Grid item xs={6} md={3}>
             <Card className="statItem" sx={{backgroundColor: "var(--background-main)", color: "var(--text-inactive)"}}>
               <SmallStatBox
@@ -43,6 +47,7 @@ const Dashboard = () => {
               />
             </Card>
           </Grid>
+            {/* This button is for the active cases*/}
           <Grid item xs={6} md={3}>
             <Card className="statItem" sx={{backgroundColor: "var(--background-main)", color: "var(--text-inactive)"}}>
               <SmallStatBox
@@ -52,6 +57,7 @@ const Dashboard = () => {
               />
             </Card>
           </Grid>
+            {/* This button is for the recovered cases*/}
           <Grid item xs={6} md={3}>
             <Card className="statItem" sx={{backgroundColor: "var(--background-main)", color: "var(--text-inactive)"}}>
               <SmallStatBox
@@ -62,6 +68,8 @@ const Dashboard = () => {
             </Card>
           </Grid>
         </Grid>
+
+      {/* Here it displays the line and the doughnut charts*/}
 
         <Grid container spacing={3} className="statContainer">
           <Grid item xs={12} md={8}>
@@ -75,6 +83,8 @@ const Dashboard = () => {
             </Card>
           </Grid>
 
+            {/* The following is the Patient List which appears on the dashboard
+            Here we have the styling.*/}
           <List
             className="patientList"
             sx={{
@@ -89,6 +99,7 @@ const Dashboard = () => {
             }}
             subheader={<li />}
           >
+            {/* While here is the implementation*/}
             <Typography data-testid="patientlist" className="listTitle" gutterBottom variant="h5" sx={{color: "var(--text-primary)", border: "transparent"}}>
               Patient's list
             </Typography>
@@ -108,7 +119,9 @@ const Dashboard = () => {
           </List>
 
           <UpcomingEvents></UpcomingEvents>
-
+              
+         {/* Here we see where the 3 cards at the bottom of the dashboard are implemented.
+        The section here is called important links. */}
           <Grid className="infoGrid" container spacing={2} xs ={12}>
             <Typography sx={{color: "var(--text-primary)"}} className="title" gutterBottom variant="h5">
               Important Links
