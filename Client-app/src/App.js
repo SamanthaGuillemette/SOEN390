@@ -10,6 +10,7 @@ import SignUp from "./components/SignUp";
 
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./backend/firebase";
+import Chat from "./components/Chat";
 import Loading from "./components/Loading";
 import QR from "./screens/QR";
 import ClientProfile from "./screens/Profile";
@@ -32,9 +33,12 @@ function App() {
   // }, [dispatch]);
 
   if (loading) {
-    return <Loading />;
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   }
-
   return (
     // <BrowserRouter>
     //   {/* {user && ( */}
@@ -62,6 +66,7 @@ function App() {
           <Route path="/qr" element={<QR />} />
           <Route path="/clientprofile" element={<ClientProfile />} />
           <Route path="/symptoms" element={<Symptoms />} />
+          <Route path="clientinbox" element={<Chat />} />
         </Routes>
       )}
       {!user && (

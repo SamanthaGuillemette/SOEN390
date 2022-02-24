@@ -1,0 +1,44 @@
+#messagesReceived {
+    padding: 10px;
+    height: 75vh;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+}
+
+ul,
+li {
+    text-align: left;
+    list-style: none;
+}
+
+.message p {
+    max-width: 500px;
+    margin-bottom: 12px;
+    line-height: 24px;
+    padding: 10px 20px;
+    border-radius: 25px;
+    position: relative;
+    color: white;
+}
+
+.message {
+    display: flex;
+    align-items: center;
+}
+
+.sent {
+    flex-direction: row-reverse;
+}
+
+
+.sent p {
+    color: white;
+    background: #0b93f6;
+    align-self: flex-end;
+}
+
+.received p {
+    background: #e5e5ea;
+    color: black;
+}
