@@ -5,6 +5,7 @@ import Calendar from ".";
 test("Calendar component has month-week-day buttons", () => {
   render(<Calendar />);
 
+  // Check that the text content is there and if a we get a value by role if its there or not as well.
   const monthButton = screen.getByRole("button", { name: /month view/i });
   expect(monthButton.textContent).toContain("month");
 

@@ -9,6 +9,8 @@ import ChatList from './ChatList.js';
 import Typography from '@material-ui/core/Typography';
 import { green, pink } from '@mui/material/colors';
 
+// This component is what allows the chatting feature to work. Below are many consts and 
+// useEffect hooks that communicate with the database in order to recieve or send information.
 const Inbox = () => {
     
     const [user] = useAuthState(auth);
@@ -20,6 +22,9 @@ const Inbox = () => {
     const [messagesReceived, setMessagesReceived]  = useState([]);
     const dummy = useRef();
 
+    // This method allows the user to send messages to the data base using asynchronus methods. 
+    // The addDoc funtion adds a document which is essentially a mesage in the database. 
+    // This message gets added to the patient's database collection. 
     const handleSubmit = async (e) => {
         e.preventDefault();
         await addDoc(messageRef, {
@@ -30,6 +35,8 @@ const Inbox = () => {
         setMsgToSend("")
     }
 
+    // This hook allows this component to receive messages from the database, the same location as the const above. 
+    // The onSnapshot listens for changes and then updates the user interface to show new messages being sent or received in the chat box. 
     useEffect(() => {
         onSnapshot(q, (doc) => {
           setMessagesReceived(doc.docs.map(doc=> ({
@@ -41,10 +48,13 @@ const Inbox = () => {
         // eslint-disable-next-line
     }, [clientMessage])
 
+    // This hook scrolls down to the latest message that was sent. 
     useEffect(() => {
       dummy.current.scrollIntoView({ behavior: 'smooth' });
     })
 
+    // This function allows the child component to communicate with this parent component.
+    // The child component is sending which user has been selected to display their messages. 
     const pull_data = (data) => {
       if(data){  
         setClientMessage(data.name); 

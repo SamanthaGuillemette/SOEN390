@@ -12,6 +12,8 @@ import { db, auth } from "../../backend/firebase";
 import { useEffect, useState } from "react";
 import Chip from '@mui/material/Chip';
 
+// This function is responsible for showing the list of patients that belong to the doctor that is signed in. 
+// It communicates with its parent component to display the messages. 
 export default function ChatList(props) {
 
     const [user] = useAuthState(auth);
@@ -20,6 +22,7 @@ export default function ChatList(props) {
     const messageRef = collection(adminRef, "Clients")
     const q = query(messageRef)
 
+    // This hook shows all the clients that belong to the doctor as a list. 
     useEffect(() => {
         onSnapshot(q, (doc) => {
             setClients(doc.docs.map(doc => ({
@@ -29,6 +32,7 @@ export default function ChatList(props) {
         // eslint-disable-next-line
     }, [])
 
+    // This is the function that communicates and sends its parent component which patient has been chosen. 
     const handleClick = (reference) => {
         props.func(reference)
     }
@@ -40,6 +44,7 @@ export default function ChatList(props) {
     );
 }
 
+// This function is responsible for getting the latest messages and also displaying all the patients. 
 function PatientsList(props) {
     const { name } = props.name;
     
@@ -48,6 +53,7 @@ function PatientsList(props) {
     const q = query(messageRef, orderBy('timestamp', 'desc'), limit(1));
     const [lastMessage, setLastMessage] = useState('');
 
+    // This hook is used to show the lastest message sent on the database. 
     useEffect(() => {
         onSnapshot(q, (doc) => {
             setLastMessage(doc.docs.map(doc=> ({
