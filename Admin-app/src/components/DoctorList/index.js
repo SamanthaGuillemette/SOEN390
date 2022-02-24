@@ -16,58 +16,63 @@ import { makeStyles } from "@material-ui/core/styles";
 import TableHead from '@mui/material/TableHead';
 import "./../PatientList/PatientList.css";
 
-const dropdownStyle = makeStyles({
+// Styling the list
+const dropdownStyle = makeStyles({ 
   paper: {
-    background: "var(--background-main)",
-    color: "var(--text-inactive)",
-    borderRadius: "10px",
+    background: "var(--background-main)", // background color
+    color: "var(--text-inactive)", // text color of pagination dropdown
+    borderRadius: "10px", // making corners rounded
   },
   color: {
-    color: "var(--text-inactive)"
+    color: "var(--text-inactive)" // pagination text color
   },
   select: {
     "&:after": {
       borderBottomColor: "var(--text-inactive)",
     },
     "& .MuiSvgIcon-root": {
-      color: "var(--text-inactive)",
+      color: "var(--text-inactive)", // pagination button color
     },
   },
 });
 
+// function to create data
 function createData(doctorName, numOfPatients) {
   return {doctorName, numOfPatients};
 }
 
+// creating hardcoded data
 const rows = [
-  createData('Allyson Richards', "4/10"),
-  createData('Charles Ludwig', "3/10"),
+  createData('Allyson Richards', "4/10"), // data 1
+  createData('Charles Ludwig', "3/10"), // data 2
 ];
 
+// function to create pagination
 function TablePaginationActions(props) {
-  const theme = useTheme();
+  const theme = useTheme(); // adding styling
   const { count, page, rowsPerPage, onPageChange } = props;
 
   const handleBackButtonClick = (event) => {
-    onPageChange(event, page - 1);
+    onPageChange(event, page - 1); // changing page back
   };
 
   const handleNextButtonClick = (event) => {
-    onPageChange(event, page + 1);
+    onPageChange(event, page + 1); // changing to next page
   };
 
   return (
-    <Box sx={{ flexShrink: 0, ml: 2.5 }}>
+    // making box for paignation
+    <Box sx={{ flexShrink: 0, ml: 2.5 }}> 
       <IconButton
-        onClick={handleBackButtonClick}
+        onClick={handleBackButtonClick} // change on click
         disabled={page === 0}
         aria-label="previous page"
       >
         {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
       </IconButton>
       <IconButton
-        onClick={handleNextButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+        onClick={handleNextButtonClick} // change on click
+        disabled={page >= Math.ceil(count / rowsPerPage) - 1} // calculating the number of pages
         aria-label="next page"
       >
         {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
@@ -77,20 +82,21 @@ function TablePaginationActions(props) {
 }
 
 function DoctorList() {
-  const classes = dropdownStyle();
+  const classes = dropdownStyle(); // adding styling
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const handleChangePage = (event, newPage) => {
-    setPage(newPage);
+    setPage(newPage); // creating new page
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
+    setRowsPerPage(parseInt(event.target.value, 10)); // setting the page with data
     setPage(0);
   };
 
   return (
+    // Creating table
     <TableContainer data-testid="table-container1" className="patient-doctor-list">
       <Box className="label">
         <HealingIcon data-testid = "health-icon" className="patients-icon"></HealingIcon>
@@ -98,52 +104,54 @@ function DoctorList() {
      </Box>
       <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
       <TableHead>
-          <TableRow>
-            <TableCell className="header" sx={{borderColor: "var(--secondary-light)"}}>Doctor Name</TableCell>
+          <TableRow> {/* adding table header */}
+            <TableCell className="header" sx={{borderColor: "var(--secondary-light)"}}>Doctor Name</TableCell> 
             <TableCell className="header" sx={{borderColor: "var(--secondary-light)"}} align="right">patient number</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
+          {/* adding rows in table */}
           {(rowsPerPage > 0
-            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) // calculating how many items to display per page
             : rows
           ).map((row) => (
+            // getting the data of each row
             <TableRow key={row.name}>
               <TableCell className="data" sx={{borderColor: "var(--primary-light)"}} component="th" scope="row">
-                {row.doctorName}
+                {row.doctorName} {/* getting the doctor name */}
               </TableCell>
               <TableCell className="data" sx={{borderColor: "var(--primary-light)"}} style={{ width: 160 }} align="right">
-                {row.numOfPatients}
+                {row.numOfPatients} {/* getting the number of patients */}
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
         <TableFooter>
           <TableRow>
-            <TablePagination
+            <TablePagination // adding table pagination
               sx={{borderColor: "transparent"}}
               classes={{
                 root: classes.color
               }}
-              rowsPerPageOptions={[5, 10, { label: 'All', value: -1 }]}
+              rowsPerPageOptions={[5, 10, { label: 'All', value: -1 }]} // adding options dropdown pagination to choose from
               colSpan={3}
-              count={rows.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              className={classes.select}
+              count={rows.length} // getting how many rows there are in total
+              rowsPerPage={rowsPerPage} // how many to display per page
+              page={page} // how many pages
+              className={classes.select} // adding design
               SelectProps={{
-                inputProps: { "aria-label": "rows per page" },
-                MenuProps: {
+              inputProps: { "aria-label": "rows per page" },
+              MenuProps: {
                   classes: { paper: classes.paper },
                   sx: {
                     "&& .Mui-selected": {
-                      backgroundColor: "var(--background-secondary)"
+                      backgroundColor: "var(--background-secondary)" // changing background color of selected pagination
                     }
                   },
                 }
               }}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
+              onPageChange={handleChangePage} // handling page change
+              onRowsPerPageChange={handleChangeRowsPerPage} // handling how many rows to display per page
               ActionsComponent={TablePaginationActions}
             />
           </TableRow>
