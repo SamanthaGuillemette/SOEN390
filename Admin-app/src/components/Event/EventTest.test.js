@@ -6,6 +6,8 @@ import EventList  from "./EventList";
 import EventDetails from "./EventDetails";
 
 
+// Unit and integration tests for all the event components.
+
 test("should render event button", () => {
 render(<MemoryRouter><EventButton /></MemoryRouter>);
 

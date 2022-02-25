@@ -11,36 +11,40 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth , db} from "../../backend/firebase";
+import { auth, db } from "../../backend/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Navigate } from "react-router-dom";
-import Modal from '@mui/material/Modal';
+import Modal from "@mui/material/Modal";
+import { createTheme } from "@material-ui/core/styles";
+import { inputLabelClasses } from "@mui/material/InputLabel";
+import "./../SignUp/SignUp.css";
 
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
+  position: "absolute",
+  top: "30%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 500,
+  bgcolor: "var(--background-main)",
+  borderRadius: "10px",
+  border: "1px solid var(--info-border)",
   boxShadow: 24,
+  color: "var(--info-main)",
   p: 4,
 };
 
 function Copyright(props) {
   return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
+    <Typography variant="body2" align="center" {...props}>
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
+      <Link
+        className="link-sign"
+        sx={{ fontSize: "12px", textDecoration: "none" }}
+        color="inherit"
+      >
         Your Website
       </Link>{" "}
       {new Date().getFullYear()}
@@ -49,36 +53,48 @@ function Copyright(props) {
   );
 }
 
-const theme = createTheme();
+const theme = createTheme({
+  palette: {
+    background: {
+      default: "var(--background-secondary)",
+    },
+    text: {
+      primary: "#ffffff",
+    },
+  },
+});
 
+// This function is responsible for the signin component which also communicates with the server and displays relevent error messages if necessary.
 export default function SignIn() {
+  console.log(inputLabelClasses);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [open, setOpen] = useState(false);
-  const handleClose = () => setOpen(false);
+  const [open2, setOpen2] = useState(false);
+  const handleClose = () => {
+    setOpen(false);
+    setOpen2(false);
+  };
 
-    const login = async (e) => {
-      e.preventDefault();
-      const docRef = doc(db, "Client", email);
-      const docSnap = await getDoc(docRef);
-      
-      if(docSnap.exists()){
-        signInWithEmailAndPassword(auth, email, password);
-      }else{
-        setOpen(true);
-      } 
-    };
+  // This asynchronus function is responsible for the login communication with the server
+  // If any errors occur, the modals in the return statement below will show the relevent messages
+  // The signInWithEmailAndPassword function from firebase is what allows to authenticate the user.
+  const login = async (e) => {
+    e.preventDefault();
+    const docRef = doc(db, "Client", email);
+    const docSnap = await getDoc(docRef);
 
+    if (docSnap.exists()) {
+      signInWithEmailAndPassword(auth, email, password).catch((error) => {
+        setOpen2(true);
+      });
+    } else {
+      setOpen(true);
+    }
+  };
 
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
 
-  if (error) {
-    return (
-      <div>
-        <p>Error: {error.message}</p>
-      </div>
-    );
-  }
   if (user) {
     return <Navigate to="/" replace={true} />;
   }
@@ -88,17 +104,21 @@ export default function SignIn() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container
+        sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }}
+        component="main"
+        maxWidth="xs"
+      >
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 10,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <Avatar sx={{ m: 2, bgcolor: "var(--secondary-main)" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -116,6 +136,14 @@ export default function SignIn() {
               autoFocus
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              InputLabelProps={{
+                sx: {
+                  color: "var(--text-primary)",
+                  [`&.${inputLabelClasses.shrink}`]: {
+                    color: "var(--primary-main)",
+                  },
+                },
+              }}
             />
             <TextField
               margin="normal"
@@ -128,42 +156,88 @@ export default function SignIn() {
               autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              InputLabelProps={{
+                sx: {
+                  color: "var(--text-primary)",
+                  [`&.${inputLabelClasses.shrink}`]: {
+                    color: "var(--primary-main)",
+                  },
+                },
+              }}
             />
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
+              control={
+                <Checkbox
+                  style={{ color: "var(--text-primary)" }}
+                  value="remember"
+                  color="primary"
+                />
+              }
               label="Remember me"
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{
+                mt: 3,
+                mb: 2,
+                background: "var(--gradient-to-right)",
+              }}
             >
               Sign In
             </Button>
+            {/* This model is used to display an error message for using the same email in the admin application as the client application  */}
             <Modal
               open={open}
               onClose={handleClose}
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
             >
-            <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Error
-              </Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                You are currently in the Client Application, please sign in using this email on the Administration App.                
-              </Typography>
-            </Box>
+              <Box sx={style}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  Error
+                </Typography>
+                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                  This email is not registered with the Administration
+                  application.
+                </Typography>
+              </Box>
+            </Modal>
+            {/* This model is used to display an error messages pertaining to the database such as wrong email or wrong password  */}
+            <Modal
+              open={open2}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  Error
+                </Typography>
+                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                  Your password or email is incorrect. Please try again!
+                </Typography>
+              </Box>
             </Modal>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link
+                  className="link-sign"
+                  href="#"
+                  sx={{ color: "var(--primary-main)", textDecoration: "none" }}
+                  variant="body2"
+                >
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/signup" variant="body2">
+                <Link
+                  className="link-sign"
+                  href="/signup"
+                  sx={{ color: "var(--primary-main)", textDecoration: "none" }}
+                  variant="body2"
+                >
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

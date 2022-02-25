@@ -21,25 +21,27 @@ import "./PatientList.css";
 import { useEffect, useState } from "react";
 import { getPatients, useOld } from "../../backend/firebasePatientUtilities";
 
+// adding styling
 const dropdownStyle = makeStyles({
   paper: {
-    background: "var(--background-main)",
-    color: "var(--text-inactive)",
+    background: "var(--background-main)", // giving background color to dropdown
+    color: "var(--text-inactive)", // color of text in the dropdown
     borderRadius: "10px",
   },
   color: {
-    color: "var(--text-inactive)",
+    color: "var(--text-inactive)", // color of text in pasgination
   },
   select: {
     "&:after": {
       borderBottomColor: "var(--text-inactive)",
     },
     "& .MuiSvgIcon-root": {
-      color: "var(--text-inactive)",
+      color: "var(--text-inactive)", // color of pagination button
     },
   },
 });
 
+// function to create data
 function createData(
   patientname,
   id,
@@ -70,11 +72,12 @@ function createData(
 
 function Row(props) {
   const { row } = props;
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false); // setting the open condition to be false
+  const data = localStorage.getItem('priorityFlag') // getting the priority flag
 
   return (
     <React.Fragment>
-      <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+      <TableRow>
         <TableCell sx={{ borderColor: "var(--background-secondary)" }}>
           <IconButton
             aria-label="expand row"
@@ -82,50 +85,26 @@ function Row(props) {
             onClick={() => setOpen(!open)}
             sx={{ color: "var(--text-inactive)" }}
           >
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />} {/* changing icon to up or down based on open or not */}
           </IconButton>
         </TableCell>
-        <TableCell
-          sx={{ borderColor: "var(--background-secondary)" }}
-          className="data"
-          component="th"
-          scope="row"
-        >
-          {row.patientname}
+        {/* Displaying row of data */}
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" component="th" scope="row">
+        {row.patientname}
         </TableCell>
-        <TableCell
-          sx={{ borderColor: "var(--background-secondary)" }}
-          className="data"
-          align="right"
-        >
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="right" >
           {row.id}
         </TableCell>
-        <TableCell
-          sx={{ borderColor: "var(--background-secondary)" }}
-          className="data"
-          align="right"
-        >
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="right" >
           {row.status}
         </TableCell>
-        <TableCell
-          sx={{ borderColor: "var(--background-secondary)" }}
-          className="data"
-          align="right"
-        >
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="right" >
           {row.appointment}
         </TableCell>
-        <TableCell
-          sx={{ borderColor: "var(--background-secondary)" }}
-          className="data"
-          align="right"
-        >
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="right">
           {row.doctor}
         </TableCell>
-        <TableCell
-          sx={{ borderColor: "var(--background-secondary)" }}
-          className="data"
-          align="right"
-        >
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="right">
           {row.priority}
         </TableCell>
       </TableRow>
@@ -135,8 +114,10 @@ function Row(props) {
           style={{ paddingBottom: 0, paddingTop: 0 }}
           colSpan={6}
         >
+          {/* Adding collapsible table */}
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
+              {/* Adding Table Label */}
               <Typography
                 variant="h6"
                 gutterBottom
@@ -150,6 +131,7 @@ function Row(props) {
                 size="small"
                 aria-label="purchases"
               >
+              {/* Start of Table headers */}
                 <TableHead>
                   <TableRow>
                     <TableCell
@@ -173,7 +155,10 @@ function Row(props) {
                     </TableCell>
                   </TableRow>
                 </TableHead>
+                {/* End of Table Headers */}
+                {/* Adding the body of collapsible table */}
                 <TableBody>
+                  {/* Displaying each row */}
                   {row.symptoms.map((symptomsRow) => (
                     <TableRow key={symptomsRow.date}>
                       <TableCell
@@ -210,15 +195,15 @@ function Row(props) {
 }
 
 function PatientList() {
-  if (!useOld) {
-    return PatientListNew();
-  } else {
-    return PatientListOld();
+  if (!useOld) { // if useOld is false
+    return PatientListNew(); // displaying this functin
+  } else { 
+    return PatientListOld(); // otherwise displaying this function
   }
 }
 
 function PatientListNew() {
-  const classes = dropdownStyle();
+  const classes = dropdownStyle(); // adding styling
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [patientsList, setPatientsList] = useState(null);
@@ -270,11 +255,12 @@ function PatientListNew() {
 
   return (
     <TableContainer className="patient-doctor-list">
-      <Box className="label">
+      <Box className="label"> {/* Creating label*/}
         <HealthAndSafetyIcon className="patients-icon"></HealthAndSafetyIcon>
         Patient List
       </Box>
       <Table aria-label="collapsible table">
+        {/* Start of table headers */}
         <TableHead>
           <TableRow>
             <TableCell sx={{ borderColor: "var(--background-secondary)" }} />
@@ -321,10 +307,12 @@ function PatientListNew() {
             </TableCell>
           </TableRow>
         </TableHead>
+        {/* End of table headers */}
         <TableBody>
+          {/* Calculating how many pages to show per page */}
           {patientsList &&
             (rowsPerPage > 0
-              ? patientsList.slice(
+              ? patientsList.slice( 
                   page * rowsPerPage,
                   page * rowsPerPage + rowsPerPage
                 )
@@ -333,18 +321,18 @@ function PatientListNew() {
         </TableBody>
       </Table>
       {patientsList && (
-        <TablePagination
+        <TablePagination // adding pagination
           classes={{
             root: classes.color,
           }}
-          rowsPerPageOptions={[5, 10, { label: "All", value: -1 }]}
+          rowsPerPageOptions={[5, 10, { label: "All", value: -1 }]} // displaying options 5, 10, or ALL
           component="div"
-          count={patientsList.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-          className={classes.select}
+          count={patientsList.length} // setting how many rows there are in total
+          rowsPerPage={rowsPerPage} // setting the rows per page
+          page={page} // setting the page
+          onPageChange={handleChangePage} // changing page
+          onRowsPerPageChange={handleChangeRowsPerPage} // changing rows on page
+          className={classes.select} // styling
           SelectProps={{
             inputProps: { "aria-label": "rows per page" },
             MenuProps: {

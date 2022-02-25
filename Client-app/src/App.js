@@ -4,19 +4,21 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import { saveUser } from "./store/authSlice";
 // import { useEffect } from "react";
 // import { auth } from "./backend/firebase";
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./screens/Dashboard";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
-import QR from "./components/QR";
+
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./backend/firebase";
+import Chat from "./components/Chat";
 import Loading from "./components/Loading";
-import ClientProfile from "./components/ClientProfile";
-import BottomNav from "./components/BottomNav";
-import Navbar from "./components/Navbar";
+import QR from "./screens/QR";
+import ClientProfile from "./screens/Profile";
+import Symptoms from "./screens/Symptoms";
 
 function App() {
   const [user, loading] = useAuthState(auth);
+
   // const user = useSelector((state) => state.auth.userToken);
   // const dispatch = useDispatch();
 
@@ -31,9 +33,12 @@ function App() {
   // }, [dispatch]);
 
   if (loading) {
-    return <Loading />;
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   }
-
   return (
     // <BrowserRouter>
     //   {/* {user && ( */}
@@ -55,16 +60,14 @@ function App() {
 
     <BrowserRouter>
       {user && (
-        <>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="*" element={<Dashboard />} />
-            <Route path="/qr" element={<QR />} />
-            <Route path="/clientprofile" element={<ClientProfile />} />
-          </Routes>
-          <BottomNav />
-        </>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="*" element={<Dashboard />} />
+          <Route path="/qr" element={<QR />} />
+          <Route path="/clientprofile" element={<ClientProfile />} />
+          <Route path="/symptoms" element={<Symptoms />} />
+          <Route path="clientinbox" element={<Chat />} />
+        </Routes>
       )}
       {!user && (
         <Routes>

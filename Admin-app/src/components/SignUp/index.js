@@ -27,18 +27,19 @@ import {createMuiTheme } from "@material-ui/core/styles";
 import { inputLabelClasses } from "@mui/material/InputLabel";
 import { Navigate } from "react-router-dom";
 import Modal from '@mui/material/Modal';
-import "./../SignIn";
 import "./SignUp.css";
 
 const style = {
   position: 'absolute',
-  top: '50%',
+  top: '30%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
+  width: 500,
+  bgcolor: 'var(--background-main)',
+  borderRadius: '10px',
+  border: "1px solid var(--info-border)",
   boxShadow: 24,
+  color: "var(--info-main)",
   p: 4,
 };
 
@@ -75,8 +76,9 @@ const theme = createMuiTheme({
   },
 });
 
+// This function is responsible for the signup component which also communicates with the server and displays relevent error messages if necessary.
+// Next, it will make a document in the collection of admin on the server with all the necessary information 
 export default function SignUp(props) {
-  console.log(inputLabelClasses);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [role, setRole] = useState('');
@@ -84,14 +86,21 @@ export default function SignUp(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [open, setOpen] = React.useState(false);
-  const handleClose = () => setOpen(false);
+  const [open2, setOpen2] = React.useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+  const handleClose = () => {
+    setOpen(false) 
+    setOpen2(false)
+  };
 
   const [
     user,
     loading,
-    error,
   ] = useAuthState(auth);
   
+  // This function is responsible for creating a new document in the admin collection with the information of the user who has signed up. 
+  // This also ensures that the email is not being reused by the client or admin collection
+  // Lastly, the createUserWithEmailAndPassword function will create the database authentication 
   const handleSubmit = async(event) => {
     event.preventDefault();
     const docRef = doc(db, "Client", email);
@@ -108,17 +117,15 @@ export default function SignUp(props) {
         dob: dobValue,
         email: email
       });
-      createUserWithEmailAndPassword(auth, email, password); 
+      createUserWithEmailAndPassword(auth, email, password)
+      .catch((error) => {
+        setErrorMsg(error.message);
+        setOpen2(true);
+      })
     }
   }
 
-  if (error) {
-    return (
-      <div>
-        <p>Error: {error.message}</p>
-      </div>
-    );
-  }
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -299,6 +306,7 @@ export default function SignUp(props) {
             >
               Sign Up
             </Button>
+            {/* This model is used to display an error message for using the same email in the admin application as the client application  */}
             <Modal
               open={open}
               onClose={handleClose}
@@ -310,10 +318,26 @@ export default function SignUp(props) {
                 Error
               </Typography>
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                This email has already been used for the Client Application. Please use another email. 
+                This email has already been used for the Admin Application. Please use another email. 
               </Typography>
             </Box>
             </Modal>
+            {/* This model is used to display an error messages pertaining to the database such as wrong email or wrong password  */}
+            <Modal
+              open={open2}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+            <Box sx={style}>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                Error
+              </Typography>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                {errorMsg}
+              </Typography>
+            </Box>
+          </Modal>
             <Grid container justifyContent="center">
               <Grid item>
                 <Link className="link-sign" sx={{textDecoration: 'none', color: "var(--primary-main)"}} href="/signin" variant="body2">
