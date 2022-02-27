@@ -39,17 +39,18 @@ const getTableDataItem= async (tableName, id) => {
   }
 };    
 
-const populateTable = (tableName, data) => {  
+const populateTable = (tableName, jsonStr) => {  
   try
   {
-    const patientsRef = collection(db, tableName);
+    console.log(`[populateTable] tableName:${tableName} jsonStr:${jsonStr}`);  
+    const dataRef = collection(db, tableName);
 
-    data.map((patientData) =>
-      setDoc(doc(patientsRef, patientData.id), patientData));
+    jsonStr.map((data) =>
+      setDoc(doc(dataRef, data.id), data));
   }
   catch(error)
   {
-    console.error("[populateTable]" + error);  
+    console.error(`[populateTable] ${error}`);  
   }
 }
 
