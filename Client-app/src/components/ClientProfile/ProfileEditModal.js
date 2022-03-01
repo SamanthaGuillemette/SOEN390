@@ -96,12 +96,13 @@ export default function BasicModal() {
           noValidate
           onSubmit={handleUpdateSubmit}
         >
-          <img
-            className="update_profile__img"
-            src={FormIcon}
-            alt="My Doctor"
-          />
-          <Typography className="header-update-profile" variant="h6" component="h2" sx={{ mb: 2 }}>
+          <img className="update_profile__img" src={FormIcon} alt="My Doctor" />
+          <Typography
+            className="header-update-profile"
+            variant="h6"
+            component="h2"
+            sx={{ mb: 2 }}
+          >
             Update your profile
           </Typography>
           <Grid container spacing={2}>
@@ -118,8 +119,8 @@ export default function BasicModal() {
                     color: "var(--text-primary)",
                     [`&.${inputLabelClasses.shrink}`]: {
                       color: "#e0e4e4",
-                    }
-                  }
+                    },
+                  },
                 }}
               />
             </Grid>
@@ -137,8 +138,8 @@ export default function BasicModal() {
                     color: "var(--text-primary)",
                     [`&.${inputLabelClasses.shrink}`]: {
                       color: "#e0e4e4",
-                    }
-                  }
+                    },
+                  },
                 }}
               />
             </Grid>
@@ -156,8 +157,8 @@ export default function BasicModal() {
                     color: "var(--text-primary)",
                     [`&.${inputLabelClasses.shrink}`]: {
                       color: "#e0e4e4",
-                    }
-                  }
+                    },
+                  },
                 }}
               />
             </Grid>
@@ -175,8 +176,8 @@ export default function BasicModal() {
                     color: "var(--text-primary)",
                     [`&.${inputLabelClasses.shrink}`]: {
                       color: "#e0e4e4",
-                    }
-                  }
+                    },
+                  },
                 }}
               />
             </Grid>
@@ -195,8 +196,8 @@ export default function BasicModal() {
                         color: "var(--text-primary)",
                         [`&.${inputLabelClasses.shrink}`]: {
                           color: "#e0e4e4",
-                        }
-                      }
+                        },
+                      },
                     }}
                   />
                 </Stack>
@@ -216,30 +217,30 @@ export default function BasicModal() {
                     color: "var(--text-primary)",
                     [`&.${inputLabelClasses.shrink}`]: {
                       color: "#e0e4e4",
-                    }
-                  }
+                    },
+                  },
                 }}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <FormControl fullWidth>
-              <TextField
-                      required
-                      labelId="province"
-                      id="province"
-                      label="Province"
-                      value={province}
-                      onChange={(e) => setProvince(e.target.value)}
-                      InputLabelProps={{
-                        sx: {
-                          color: "var(--text-primary)",
-                          [`&.${inputLabelClasses.shrink}`]: {
-                            color: "#e0e4e4"
-                          },
-                        }
-                      }}
-                      select
-                    >
+                <TextField
+                  required
+                  labelId="province"
+                  id="province"
+                  label="Province"
+                  value={province}
+                  onChange={(e) => setProvince(e.target.value)}
+                  InputLabelProps={{
+                    sx: {
+                      color: "var(--text-primary)",
+                      [`&.${inputLabelClasses.shrink}`]: {
+                        color: "#e0e4e4",
+                      },
+                    },
+                  }}
+                  select
+                >
                   <MenuItem value={"Alberta"}>Alberta</MenuItem>
                   <MenuItem value={"British Columbia"}>
                     British Columbia
@@ -273,8 +274,8 @@ export default function BasicModal() {
                     color: "var(--text-primary)",
                     [`&.${inputLabelClasses.shrink}`]: {
                       color: "#e0e4e4",
-                    }
-                  }
+                    },
+                  },
                 }}
               />
             </Grid>
@@ -282,18 +283,19 @@ export default function BasicModal() {
           <Button
             type="submit"
             variant="contained"
-            className="cancel-button"
-            sx={{ mt: 3, mb: 2}}
+            className="update-button"
+            sx={{ mt: 3, mb: 2 }}
           >
-            CANCEL
+            UPDATE
           </Button>
           <Button
             type="submit"
             variant="contained"
-            className="update-button"
-            sx={{ mt: 3, mb: 2}}
+            className="cancel-button"
+            sx={{ mt: 3, mb: 2 }}
+            onClick={handleClose}
           >
-            UPDATE
+            CANCEL
           </Button>
         </Box>
       </Modal>

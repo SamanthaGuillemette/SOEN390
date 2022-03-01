@@ -138,10 +138,11 @@
 .cancel-button {
   background-color: #e0e4e4 !important;
   color: var(--text-inactive) !important;
+  margin-left: 10px !important;
 }
 
 .cancel-button:hover {
-  transition: all .3s;
+  transition: all 0.3s;
   opacity: 0.9;
   transform: translateY(2px);
 }
@@ -149,11 +150,25 @@
 .update-button {
   background-color: var(--primary-main) !important;
   color: var(--text-primary) !important;
-  margin-left: 10px !important;
 }
 
 .update-button:hover {
-  transition: all .3s;
+  transition: all 0.3s;
   opacity: 0.9;
   transform: translateY(2px);
+}
+
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="text"] {
+  color: var(--text-primary);
+  background-color: #262626;
+}
+
+/* Ugly fix to override MUI's label */
+.css-exdfv2-MuiFormLabel-root-MuiInputLabel-root,
+.MuiPickersDay-root.MuiButtonBase-root,
+.MuiInputLabel-root.MuiInputLabel-formControl {
+  color: var(--text-primary) !important;
 }
