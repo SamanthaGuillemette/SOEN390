@@ -89,10 +89,10 @@ function Row(props) {
           </IconButton>
         </TableCell>
         {/* Displaying row of data */}
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" component="th" scope="row" align="center">
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" component="th" scope="row" align="left">
         {row.patientname}
         </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="center" >
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="left" >
           {row.id}
         </TableCell>
         <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="center" >
@@ -101,7 +101,7 @@ function Row(props) {
         <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="center" >
           {row.appointment}
         </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="center">
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="left">
           {row.doctor}
         </TableCell>
         <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="center">
@@ -259,14 +259,14 @@ function PatientList() {
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
               className="header"
-              align="center"
+              align="left"
             >
               Patient Name
             </TableCell>
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
               className="header"
-              align="center"
+              align="left"
             >
               ID
             </TableCell>
@@ -287,7 +287,7 @@ function PatientList() {
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
               className="header"
-              align="center"
+              align="left"
             >
               Assigned Doctor
             </TableCell>
