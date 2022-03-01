@@ -4,8 +4,6 @@ import { getTableData, getTableDataItem, populateTable } from "./firebaseUtiliti
 import { doc, updateDoc } from "firebase/firestore";
 
 const tableName = "Patients";
-const useOld = false; // In case we want to use the non-DB version for patients
-console.log(`[useOld]: ${useOld}`);
 
 const getPatients = async () => {
   return getTableData(tableName);
@@ -62,5 +60,5 @@ const populatePatients = () => {
   populateTable(patientData);
 }
 
-  export { getPatients, getPatient, populatePatients, togglePriorityFlag, useOld };
+  export { getPatients, getPatient, populatePatients, togglePriorityFlag };
   
