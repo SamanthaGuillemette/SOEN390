@@ -89,22 +89,22 @@ function Row(props) {
           </IconButton>
         </TableCell>
         {/* Displaying row of data */}
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" component="th" scope="row">
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" component="th" scope="row" align="center">
         {row.patientname}
         </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="right" >
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="center" >
           {row.id}
         </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="right" >
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="center" >
           {row.status}
         </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="right" >
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="center" >
           {row.appointment}
         </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="right">
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="center">
           {row.doctor}
         </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="right">
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="center">
           {row.priority}
         </TableCell>
       </TableRow>
@@ -259,6 +259,7 @@ function PatientList() {
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
               className="header"
+              align="center"
             >
               Patient Name
             </TableCell>
@@ -272,28 +273,28 @@ function PatientList() {
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
               className="header"
-              align="right"
+              align="center"
             >
               status
             </TableCell>
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
               className="header"
-              align="right"
+              align="center"
             >
               Upcoming Appointment
             </TableCell>
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
               className="header"
-              align="right"
+              align="center"
             >
               Assigned Doctor
             </TableCell>
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
               className="header"
-              align="right"
+              align="center"
             >
               Flagged Priority
             </TableCell>
