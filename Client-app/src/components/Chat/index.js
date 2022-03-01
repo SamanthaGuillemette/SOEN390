@@ -65,6 +65,7 @@ const Chat = () => {
 
   return (
     <>
+    <Navbar/>
       <Box
         sx={{
           padding: 4,
@@ -118,6 +119,7 @@ const Chat = () => {
           </Grid>
         </Grid>
       </Box>
+      <BottomNav/>
     </>
   );
 };
