@@ -33,10 +33,10 @@ function ClientProfile() {
   const [priorityFlag, setPriorityFlag] = useState(false);
 
   // Pull currently logged in user obj => to get user email below
-  const [user] = useAuthState(auth);
+  //const [user] = useAuthState(auth);
 
   // Query for a single user from the Client collection (table) based on user's email
-  const [currentUser] = useDocument(doc(db, `Client/${user?.email}`));
+  //const [currentUser] = useDocument(doc(db, `Client/${user?.email}`));
 
   useEffect(() => {
     const data = localStorage.getItem("priorityFlag");
@@ -62,7 +62,10 @@ function ClientProfile() {
                 justifyContent="center"
                 alignItems="center"
               >
-                <Avatar id="clientProfile-avatar" src={user?.photoURL} />
+                <Avatar
+                  id="clientProfile-avatar"
+                  src="https://cdn.discordapp.com/attachments/943266123393142804/943303072300548156/Stevie.png"
+                />
               </Grid>
               <CardContent>
                 <Typography
@@ -73,25 +76,15 @@ function ClientProfile() {
                   fontSize="1.2rem"
                   component="div"
                 >
-                  {`${currentUser?.data().firstName} ${
-                    currentUser?.data().lastName
-                  }`}
+                  Jane Doe
                 </Typography>
                 <Box className="clientProfile-text">
+                  <p className="clientProfile-textDetail">Age: 50</p>
                   <p className="clientProfile-textDetail">
-                    DOB: {currentUser?.data().dob}
+                    Birthday: 1 July 1971
                   </p>
                   <p className="clientProfile-textDetail">
-                    City: {currentUser?.data().city}
-                  </p>
-                  <p className="clientProfile-textDetail">
-                    Province: {currentUser?.data().province}
-                  </p>
-                  <p className="clientProfile-textDetail">
-                    Postal Code: {currentUser?.data().postalCode}
-                  </p>
-                  <p className="clientProfile-textDetail">
-                    Address: {currentUser?.data().address}
+                    Address: 101 Brooke, Montreal L5L 9T9
                   </p>
                 </Box>
               </CardContent>
