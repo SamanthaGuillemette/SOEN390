@@ -265,7 +265,7 @@ function PatientList() {
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
               className="header"
-              align="right"
+              align="center"
             >
               ID
             </TableCell>
