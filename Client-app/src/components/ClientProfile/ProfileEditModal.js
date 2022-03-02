@@ -25,6 +25,7 @@ import { inputLabelClasses } from "@mui/material/InputLabel";
 import { makeStyles } from "@material-ui/core/styles";
 import FormIcon from "../../assets/form.svg";
 import "./ClientProfile.css";
+import { useDispatch, useSelector } from "react-redux";
 
 const style = {
   position: "absolute",
@@ -45,13 +46,17 @@ export default function BasicModal() {
   const [user] = useAuthState(auth);
   const clientDoc = doc(db, `Client/${user?.email}`);
 
+  const userInfoDetails = useSelector(
+    (state) => state.userInfo.userInfoDetails
+  );
+
   const [open, setOpen] = useState(false);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
+  const [firstName, setFirstName] = useState(userInfoDetails?.firstName);
+  const [lastName, setLastName] = useState(userInfoDetails?.lastName);
+  const [address, setAddress] = useState(userInfoDetails?.address);
+  const [city, setCity] = useState(userInfoDetails?.city);
   const [province, setProvince] = useState("");
-  const [postalCode, setPostalCode] = useState("");
+  const [postalCode, setPostalCode] = useState(userInfoDetails?.postalCode);
   const [dob, setDOB] = useState(null);
   const [photoUrl, setPhotoUrl] = useState("");
 
@@ -225,8 +230,7 @@ export default function BasicModal() {
             <Grid item xs={12} sm={6}>
               <FormControl fullWidth>
                 <TextField
-                  required
-                  labelId="province"
+                  // labelId="province"
                   id="province"
                   label="Province"
                   value={province}

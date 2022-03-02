@@ -13,14 +13,14 @@ import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import FlagIcon from "@mui/icons-material/Flag";
 import EditIcon from "@mui/icons-material/Edit";
-import Fab from "@mui/material/Fab";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import DropdownConfirmation from "../DropdownConfirmation/index";
 import { auth, db } from "../../backend/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { doc } from "firebase/firestore";
 import { useDocument } from "react-firebase-hooks/firestore";
 import EditModal from "./ProfileEditModal";
+import { useSelector } from "react-redux";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -38,16 +38,20 @@ function ClientProfile() {
   // Query for a single user from the Client collection (table) based on user's email
   const [currentUser] = useDocument(doc(db, `Client/${user?.email}`));
 
-  useEffect(() => {
-    const data = localStorage.getItem("priorityFlag");
-    if (data) {
-      setPriorityFlag(JSON.parse(data));
-    }
-  }, []);
+  const userInfoDetails = useSelector(
+    (state) => state.userInfo.userInfoDetails
+  );
 
-  useEffect(() => {
-    localStorage.setItem("priorityFlag", JSON.stringify(priorityFlag));
-  });
+  // useEffect(() => {
+  //   const data = localStorage.getItem("priorityFlag");
+  //   if (data) {
+  //     setPriorityFlag(JSON.parse(data));
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   localStorage.setItem("priorityFlag", JSON.stringify(priorityFlag));
+  // });
 
   return (
     <Box className="clientProfile-container">
@@ -73,25 +77,23 @@ function ClientProfile() {
                   fontSize="1.2rem"
                   component="div"
                 >
-                  {`${currentUser?.data().firstName} ${
-                    currentUser?.data().lastName
-                  }`}
+                  {`${userInfoDetails?.firstName} ${userInfoDetails?.lastName}`}
                 </Typography>
                 <Box className="clientProfile-text">
                   <p className="clientProfile-textDetail">
-                    DOB: {currentUser?.data().dob}
+                    DOB: {userInfoDetails?.dob}
                   </p>
                   <p className="clientProfile-textDetail">
-                    City: {currentUser?.data().city}
+                    City: {userInfoDetails?.city}
                   </p>
                   <p className="clientProfile-textDetail">
-                    Province: {currentUser?.data().province}
+                    Province: {userInfoDetails?.province}
                   </p>
                   <p className="clientProfile-textDetail">
-                    Postal Code: {currentUser?.data().postalCode}
+                    Postal Code: {userInfoDetails?.postalCode}
                   </p>
                   <p className="clientProfile-textDetail">
-                    Address: {currentUser?.data().address}
+                    Address: {userInfoDetails?.address}
                   </p>
                 </Box>
               </CardContent>

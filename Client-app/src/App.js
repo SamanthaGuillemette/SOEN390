@@ -15,22 +15,26 @@ import Loading from "./components/Loading";
 import QR from "./screens/QR";
 import ClientProfile from "./screens/Profile";
 import Symptoms from "./screens/Symptoms";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchUserInfo } from "./store/userInfoSlice";
 
 function App() {
   const [user, loading] = useAuthState(auth);
 
   // const user = useSelector((state) => state.auth.userToken);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   onAuthStateChanged(auth, (userObj) => {
-  //     if (userObj) {
-  //       dispatch(saveUser(userObj.refreshToken));
-  //     } else {
-  //       dispatch(saveUser(undefined));
-  //     }
-  //   });
-  // }, [dispatch]);
+  useEffect(() => {
+    //   onAuthStateChanged(auth, (userObj) => {
+    //     if (userObj) {
+    //       dispatch(saveUser(userObj.refreshToken));
+    //     } else {
+    //       dispatch(saveUser(undefined));
+    //     }
+    //   });
+    dispatch(fetchUserInfo());
+  }, [dispatch]);
 
   if (loading) {
     return (
