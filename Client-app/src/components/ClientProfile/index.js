@@ -33,10 +33,10 @@ function ClientProfile() {
   const [priorityFlag, setPriorityFlag] = useState(false);
 
   // Pull currently logged in user obj => to get user email below
-  const [user] = useAuthState(auth);
+  //const [user] = useAuthState(auth);
 
   // Query for a single user from the Client collection (table) based on user's email
-  const [currentUser] = useDocument(doc(db, `Client/${user?.email}`));
+  //const [currentUser] = useDocument(doc(db, `Client/${user?.email}`));
 
   const userInfoDetails = useSelector(
     (state) => state.userInfo.userInfoDetails
@@ -66,7 +66,10 @@ function ClientProfile() {
                 justifyContent="center"
                 alignItems="center"
               >
-                <Avatar id="clientProfile-avatar" src={user?.photoURL} />
+                <Avatar
+                  id="clientProfile-avatar"
+                  src="https://cdn.discordapp.com/attachments/943266123393142804/943303072300548156/Stevie.png"
+                />
               </Grid>
               <CardContent>
                 <Typography
@@ -80,6 +83,7 @@ function ClientProfile() {
                   {`${userInfoDetails?.firstName} ${userInfoDetails?.lastName}`}
                 </Typography>
                 <Box className="clientProfile-text">
+                  <p className="clientProfile-textDetail">Age: 50</p>
                   <p className="clientProfile-textDetail">
                     DOB: {userInfoDetails?.dob}
                   </p>
