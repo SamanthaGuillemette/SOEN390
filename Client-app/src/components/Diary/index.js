@@ -9,6 +9,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import NoteIcon from "../../assets/note.svg";
 import "./DiaryTable.css";
+import CRUDButtons from "../CRUDButtons";
+import { Grid } from "@material-ui/core";
 
 // function to create data
 function createData(diaryDate, contactName) {
@@ -23,14 +25,17 @@ const rows = [
 
 function DiaryTable() {
   return (
-    <TableContainer className="diary-list">
-      <Box className="label">
-        {" "}
-        {/* Making Label Box */}
-        <img className="symptoms__icon" src={NoteIcon} alt="Diary" />{" "}
-        {/* Adding Label */}
-        Diary List {/* Adding text */}
-      </Box>
+    <TableContainer className="diary__list">
+      <Grid className="diary__label" container spacing={2}>
+        <Grid item xs={8}>
+          <img className="symptoms__icon" src={NoteIcon} alt="Diary" />
+          Diary List
+        </Grid>
+        <Grid item xs={2}>
+          <CRUDButtons></CRUDButtons>
+        </Grid>
+      </Grid>
+
       {/* Making Table */}
       <Table sx={{ minWidth: 50 }} aria-label="custom pagination table">
         {/* Displaying Table headers */}
