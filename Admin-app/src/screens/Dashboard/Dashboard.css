@@ -9,50 +9,18 @@
   border-radius: 20px !important;
 }
 
-.cardShape2{
-  max-width: lg;
-  border-radius:20px !important;
-  height:50vh;
-  width:300px;
-  margin-top: 120px;
-  margin-left:20px;
-  margin-right:10px;
-  background-color: var(--background-main) !important;
-}
-
 a {
   color: var(--text-primary);
 }
 
-.cardShape1{
-  max-width: lg;
-  border-radius:20px !important;
-  height:50vh;
-  width:300px;
-  margin-top: 120px;
-  margin-left:-590px;
-  margin-right:10px;
-  background-color: var(--background-main) !important;
-}
-
-.cardShape3{
-  max-width: lg;
-  border-radius:20px !important;
-  height:50vh;
-  width:300px;
-  margin-top: 120px;
-  margin-left:20px;
-  margin-right:25px;
-  background-color: var(--background-main) !important;
-}
-
 .cardTitle{
-  margin: 0 0 1rem;
+    margin: 0 0 1rem;
     color: #231F20;
     font-size: 1.5rem;
     line-height: 1.5625rem;
     font-weight: bold !important;
     font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    text-align: left !important;
 }
 
 .card-details {
@@ -63,6 +31,7 @@ a {
   text-transform: uppercase;
   letter-spacing: .0625rem;
   font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  text-align: left !important;
 }
 
 .card-details::before{
@@ -81,16 +50,15 @@ a {
   font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-weight: bold !important;
   font-size: 30px !important;
-  margin-top:50px !important;
   text-align: center !important;
-  margin-left: 450px !important;
 }
 
 .textContent{
   font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size:16px !important;
   font-weight: bold italic !important;
-  color:var(--text-inactive) !important
+  color:var(--text-inactive) !important;
+  text-align: left !important;
 }
 
 .listTitle{
@@ -107,9 +75,14 @@ a {
 }
 
 .infoGrid{
-  width: 500px !important;
-  margin-top: 75px !important;
-  border-radius:8px;
-  padding-left: -10px;
-  height: 50% !important;
+  margin-top: 100px !important;
+}
+
+.cardShape {
+  width: 30% !important;
+  display: inline-block;
+  border-radius:20px !important;
+  height: 54vh;
+  margin-top: 30px;
+  background-color: var(--background-main) !important;
 }
