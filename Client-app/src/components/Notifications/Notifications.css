@@ -8,3 +8,14 @@
     border: 1px solid var(--secondary-dark) !important;
     border-radius: 20px !important;
 }
+
+.notifications-closeIcon {
+    justify-content: right;
+    color: #949be2 !important;
+    position: absolute !important;
+    right: 60px;
+}
+
+.notifications-closeIcon:hover {
+    color: var(--text-primary) !important;
+}
