@@ -1,0 +1,10 @@
+.container {
+    margin: auto;
+}
+
+.notifications-box {
+    margin: 30px;
+    background-color: rgb(67, 77, 184, 0.05) !important;
+    border: 1px solid var(--secondary-dark) !important;
+    border-radius: 20px !important;
+}
