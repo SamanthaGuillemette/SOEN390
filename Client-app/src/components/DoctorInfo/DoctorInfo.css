@@ -1,0 +1,63 @@
+.doctorInfo-container {
+  height: 105vh;
+  background: var(--background-secondary);
+}
+
+.doctorInfo-Card {
+  padding-top: 15px !important;
+  position: relative;
+  background: var(--background-main) !important;
+  color: var(--text-primary) !important;
+  background-color: #7290cf !important;
+}
+
+#doctorInfo-avatar {
+  width: 180px;
+  height: 180px;
+  box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.12);
+}
+
+.doctorInfo-text {
+  text-align: center;
+}
+
+.doctorInfo-textDetail {
+  font-size: 1rem;
+  margin: 2px 0;
+  color: var(--text-main);
+}
+
+.name {
+  text-align: center;
+  font-weight: bold !important;
+}
+
+.info-card {
+  border-style: none;
+  background: var(--background-main) !important;
+  background-color: #004d50 !important;
+}
+
+::selection {
+  color: var(--primary-main);
+  background: transparent;
+}
+
+.info-data {
+  color: var(--text-primary) !important;
+  font-weight: 500 !important;
+  font-size: 0.96rem !important;
+}
+
+.data {
+  color: var(--text-primary) !important;
+  font-weight: 500 !important;
+  font-size: 1rem !important;
+}
+
+.header {
+  color: var(--text-inactive) !important;
+  text-transform: uppercase;
+  opacity: 0.7;
+  font-weight: 900 !important;
+}
