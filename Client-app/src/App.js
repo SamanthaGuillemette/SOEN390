@@ -11,7 +11,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./backend/firebase";
 import Chat from "./components/Chat";
 import Loading from "./components/Loading";
-import Notifications from "./components/Notifications";
+import Notifications from "./screens/Notifications";
 import QR from "./screens/QR";
 import ClientProfile from "./screens/Profile";
 import Symptoms from "./screens/Symptoms";
