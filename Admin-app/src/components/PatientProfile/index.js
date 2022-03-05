@@ -22,9 +22,6 @@ import Button from "@mui/material/Button";
 import FlagIcon from '@mui/icons-material/Flag';
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import InputLabel from "@mui/material/InputLabel";
-import FormControl from "@mui/material/FormControl";
-import NativeSelect from '@mui/material/NativeSelect';
 import { getPatient, togglePriorityFlag } from "../../backend/firebasePatientUtilities";
 import DropdownConfirmation from "../DropdownConfirmation/index";
 
@@ -102,31 +99,18 @@ function PatientProfile() {
   const { id } = useParams();
   const [patientInfo, setPatientInfo] = useState(null);
 
-
-  // get priority flag from localstorage
+  // Get Patient Info each time page refreshes
   useEffect(() => {
-    const data = localStorage.getItem('priorityFlag');
-    if (data){
-      setPriorityFlag(JSON.parse(data));
-    }
-  }, []);
-
-  // set priority flag in localstorage
-  useEffect(() => {
-    localStorage.setItem('priorityFlag', JSON.stringify(priorityFlag));
-  });
-
-    // Get Patient Info each time page refreshes
-    useEffect(() => {
-      //console.log("id" + id);
-      getPatient(id)
-        .then((data) => {
-          setPatientInfo(data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }, [id]);
+    //console.log("id" + id);
+    getPatient(id)
+      .then((data) => {
+        setPatientInfo(data);
+        setPriorityFlag(data.flaggedPriority === "1");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [id]);
   
   return (
     <Grid container spacing={2} maxWidth="lg" alignItems="flex-end">
