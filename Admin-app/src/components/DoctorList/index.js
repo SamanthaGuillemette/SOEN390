@@ -84,6 +84,7 @@ function DoctorList() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [doctorsList, setDoctorsList] = useState(null);
+  const patientLimit = 10;
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage); // creating new page
@@ -98,7 +99,9 @@ function DoctorList() {
     getDoctors().then((data) => {
       let results = [];
       data.forEach((doc) => {
-        results.push(createData(doc.name, `0/10`)); 
+        const size = doc.treats? Object.keys(doc.treats).length : 0;
+        results.push(createData(doc.name, `${size}/${patientLimit}`));
+        doc.treats && console.log(size); 
       });
       setDoctorsList(results);
     });
