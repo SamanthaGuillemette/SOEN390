@@ -12,13 +12,8 @@ import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import FlagIcon from "@mui/icons-material/Flag";
-import EditIcon from "@mui/icons-material/Edit";
 import { useState } from "react";
 import DropdownConfirmation from "../DropdownConfirmation/index";
-import { auth, db } from "../../backend/firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { doc } from "firebase/firestore";
-import { useDocument } from "react-firebase-hooks/firestore";
 import EditModal from "./ProfileEditModal";
 import { useSelector } from "react-redux";
 
@@ -32,26 +27,10 @@ const Item = styled(Paper)(({ theme }) => ({
 function ClientProfile() {
   const [priorityFlag, setPriorityFlag] = useState(false);
 
-  // Pull currently logged in user obj => to get user email below
-  //const [user] = useAuthState(auth);
-
-  // Query for a single user from the Client collection (table) based on user's email
-  //const [currentUser] = useDocument(doc(db, `Client/${user?.email}`));
-
+  // Pull 'userInfoDetails' from the store (Redux centralized store)
   const userInfoDetails = useSelector(
     (state) => state.userInfo.userInfoDetails
   );
-
-  // useEffect(() => {
-  //   const data = localStorage.getItem("priorityFlag");
-  //   if (data) {
-  //     setPriorityFlag(JSON.parse(data));
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   localStorage.setItem("priorityFlag", JSON.stringify(priorityFlag));
-  // });
 
   return (
     <Box className="clientProfile-container">
