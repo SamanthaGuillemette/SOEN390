@@ -66,10 +66,7 @@ function ClientProfile() {
                 justifyContent="center"
                 alignItems="center"
               >
-                <Avatar
-                  id="clientProfile-avatar"
-                  src="https://cdn.discordapp.com/attachments/943266123393142804/943303072300548156/Stevie.png"
-                />
+                <Avatar id="clientProfile-avatar" src="" />
               </Grid>
               <CardContent>
                 <Typography
@@ -83,7 +80,6 @@ function ClientProfile() {
                   {`${userInfoDetails?.firstName} ${userInfoDetails?.lastName}`}
                 </Typography>
                 <Box className="clientProfile-text">
-                  <p className="clientProfile-textDetail">Age: 50</p>
                   <p className="clientProfile-textDetail">
                     DOB: {userInfoDetails?.dob}
                   </p>
@@ -131,8 +127,6 @@ function ClientProfile() {
                             : "clientProfile-priority-flag"
                         }
                       ></FlagIcon>
-                      <br></br>
-                      <br></br>
                     </Typography>
                   </div>
                   <Stack

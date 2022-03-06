@@ -66,7 +66,6 @@ const theme = createTheme({
 
 // This function is responsible for the signin component which also communicates with the server and displays relevent error messages if necessary.
 export default function SignIn() {
-  console.log(inputLabelClasses);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [open, setOpen] = useState(false);
