@@ -16,7 +16,7 @@ const getDoctor = async (id) => {
  * imported at the beginning of this file
  */  
  const populateDoctors = () => {
-    populateTable(doctorData);
+    populateTable(tableName, doctorData);
   }
 
 export { getDoctors, getDoctor, populateDoctors }

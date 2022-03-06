@@ -57,7 +57,7 @@ const togglePriorityFlag = async (id) => {
  * imported at the beginning of this file
  */  
 const populatePatients = () => {
-  populateTable(patientData);
+  populateTable(tableName, patientData);
 }
 
   export { getPatients, getPatient, populatePatients, togglePriorityFlag };
