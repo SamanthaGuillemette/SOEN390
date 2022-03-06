@@ -36,9 +36,6 @@ export default function BasicModal() {
   // Pull 'userEmail' out from the centralized store
   const userEmail = useSelector((state) => state.auth.userEmail);
 
-  // FIXME: DELETE LATER
-  // console.log("inside Profile Edit Modal", userEmail);
-
   // Get the client's reference via the userEmail (query the database)
   const clientDoc = doc(db, `Client/${userEmail}`);
 
@@ -47,7 +44,7 @@ export default function BasicModal() {
     (state) => state.userInfo.userInfoDetails
   );
 
-  const [open, setOpen] = useState(false);
+  const [openPopup, setOpenPopup] = useState(false);
   const [firstName, setFirstName] = useState(userInfoDetails?.firstName);
   const [lastName, setLastName] = useState(userInfoDetails?.lastName);
   const [address, setAddress] = useState(userInfoDetails?.address);
@@ -57,8 +54,8 @@ export default function BasicModal() {
   const [dob, setDOB] = useState(userInfoDetails?.dob);
   const [photoUrl, setPhotoUrl] = useState("");
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleOpen = () => setOpenPopup(true);
+  const handleClose = () => setOpenPopup(false);
 
   const handleUpdateSubmit = async (event) => {
     event.preventDefault();
@@ -90,7 +87,7 @@ export default function BasicModal() {
         <EditIcon fontSize="small" />
       </Fab>
       <Modal
-        open={open}
+        open={openPopup}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
