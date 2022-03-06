@@ -14,7 +14,7 @@ const theme = createTheme({
     },
   });
 
-const QRPage = () => {
+const NotificationsPage = () => {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
@@ -27,4 +27,4 @@ const QRPage = () => {
     );
 };
 
-export default QRPage;
+export default NotificationsPage;
