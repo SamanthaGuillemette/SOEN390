@@ -9,15 +9,10 @@ const initialState = {
 
 export const fetchUserInfo = createAsyncThunk(
   "userInfo/fetchUserInfo",
-  async () => {
-    // const response = await fetchCount(amount);
-    // // The value we return becomes the `fulfilled` action payload
-    // return response.data;
-    const responseData = await getDoc(
-      doc(db, "Client/client.quangtran@gmail.com")
-    );
+  async (userEmail) => {
+    const responseData = await getDoc(doc(db, `Client/${userEmail}`));
 
-    if (responseData.exists()) {
+    if (responseData) {
       return responseData.data();
     } else {
       console.log("User info does not exist");
