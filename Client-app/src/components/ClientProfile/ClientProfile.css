@@ -161,7 +161,8 @@
 input[type="email"],
 input[type="password"],
 input[type="search"],
-input[type="text"] {
+input[type="text"],
+div#province {
   color: var(--text-primary);
   background-color: #262626;
 }
@@ -169,6 +170,8 @@ input[type="text"] {
 /* Ugly fix to override MUI's label */
 .css-exdfv2-MuiFormLabel-root-MuiInputLabel-root,
 .MuiPickersDay-root.MuiButtonBase-root,
-.MuiInputLabel-root.MuiInputLabel-formControl {
+.MuiInputLabel-root.MuiInputLabel-formControl,
+li.MuiMenuItem-root.MuiMenuItem-gutters.MuiButtonBase-root.css-10zqpw5-MuiButtonBase-root-MuiMenuItem-root,
+.css-1v994a0 {
   color: var(--text-primary) !important;
 }

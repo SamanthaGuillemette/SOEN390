@@ -5,27 +5,17 @@ import Modal from "@mui/material/Modal";
 import { useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import Fab from "@mui/material/Fab";
-import {
-  FormControl,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Select,
-  Stack,
-  TextField,
-} from "@mui/material";
+import { FormControl, Grid, MenuItem, Stack, TextField } from "@mui/material";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
 import AdapterDateFns from "@mui/lab/AdapterDayjs";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../../backend/firebase";
 import { doc, setDoc } from "firebase/firestore";
-import { useDocument } from "react-firebase-hooks/firestore";
 import { inputLabelClasses } from "@mui/material/InputLabel";
-import { makeStyles } from "@material-ui/core/styles";
 import FormIcon from "../../assets/form.svg";
 import "./ClientProfile.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const style = {
   position: "absolute",
@@ -43,9 +33,16 @@ const style = {
 };
 
 export default function BasicModal() {
-  const [user] = useAuthState(auth);
-  const clientDoc = doc(db, `Client/${user?.email}`);
+  // Pull 'userEmail' out from the centralized store
+  const userEmail = useSelector((state) => state.auth.userEmail);
 
+  // FIXME: DELETE LATER
+  // console.log("inside Profile Edit Modal", userEmail);
+
+  // Get the client's reference via the userEmail (query the database)
+  const clientDoc = doc(db, `Client/${userEmail}`);
+
+  // Pull 'userInfoDetails' out from the centralized store
   const userInfoDetails = useSelector(
     (state) => state.userInfo.userInfoDetails
   );
@@ -55,9 +52,9 @@ export default function BasicModal() {
   const [lastName, setLastName] = useState(userInfoDetails?.lastName);
   const [address, setAddress] = useState(userInfoDetails?.address);
   const [city, setCity] = useState(userInfoDetails?.city);
-  const [province, setProvince] = useState("");
+  const [province, setProvince] = useState(`${userInfoDetails?.province}`);
   const [postalCode, setPostalCode] = useState(userInfoDetails?.postalCode);
-  const [dob, setDOB] = useState(null);
+  const [dob, setDOB] = useState(userInfoDetails?.dob);
   const [photoUrl, setPhotoUrl] = useState("");
 
   const handleOpen = () => setOpen(true);
@@ -77,6 +74,9 @@ export default function BasicModal() {
       province: province,
       dob: dobValue,
     });
+
+    // Close the popup after user submit the form
+    handleClose();
   };
 
   return (
