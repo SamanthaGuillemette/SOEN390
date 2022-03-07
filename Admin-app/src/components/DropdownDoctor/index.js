@@ -5,7 +5,8 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { makeStyles } from "@material-ui/core/styles";
 import "./DropdownDoctor.css";
-import { getDoctors, patientLimit} from "../../backend/firebaseDoctorUtilities";
+import { getDoctors } from "../../backend/firebaseDoctorUtilities";
+import { setAssignedDoctor} from "../../backend/firebasePatientUtilities";
 import { useEffect, useState } from "react";
 
 const dropdownStyle = makeStyles({
@@ -20,14 +21,14 @@ const dropdownStyle = makeStyles({
 
 function DropdownDoctor(props) {
   const classes = dropdownStyle(); // adding styling
-  const [doctorId, setDoctorId] = React.useState(''); // initially string is empty
+  const [patientInfo, setPatientInfo] = React.useState(null); // initially string is empty
   const [doctorsList, setDoctorsList] = useState(null);
  
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
-    setDoctorId(value);
+    patientInfo && setAssignedDoctor(patientInfo.id, value === "0"?null:value).then((newPatientInfo) => setPatientInfo(newPatientInfo))
   };
 
   useEffect(() => {
@@ -41,14 +42,14 @@ function DropdownDoctor(props) {
   }, []);
   
   useEffect(() => {
-    props && props.assignedDoctor && setDoctorId(props.assignedDoctor);
-  }, [props, props.assignedDoctor]);    
+    props && props.patientInfo && setPatientInfo(props.patientInfo);
+  }, [props, props.patientInfo]);    
 
   return doctorsList && (
       <FormControl sx={{minWidth: 130}}>
         <Select data-testid="select2" className="data"
           onChange={handleChange} // changing the text to the chosen
-          value={doctorId in doctorsList? doctorId : "0"}
+          value={patientInfo && patientInfo.assignedDoctor in doctorsList? patientInfo.assignedDoctor : "0"}
           inputProps={{
             classes: {
                 icon: classes.icon,

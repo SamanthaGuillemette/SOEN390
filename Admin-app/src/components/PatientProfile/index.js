@@ -191,7 +191,7 @@ function PatientProfile() {
                     Assigned Doctor
                   </Typography>
                   <Typography className="profile-data" variant="body2">
-                    Name: <DropdownDoctor assignedDoctor={patientInfo && patientInfo.assignedDoctor} />
+                    Name: <DropdownDoctor patientInfo={patientInfo} />
                   </Typography>
                 </CardContent>
               </CardActionArea>
