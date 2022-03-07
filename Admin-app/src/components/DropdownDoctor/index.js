@@ -45,12 +45,11 @@ function DropdownDoctor(props) {
   }, [props, props.assignedDoctor]);    
 
   doctorsList && console.log(doctorsList);
-  console.log(`doctorName ${doctorName}`);
   return doctorsList && (
       <FormControl sx={{minWidth: 130}}>
         <Select data-testid="select2" className="data"
           onChange={handleChange} // changing the text to the chosen
-          value={doctorName? doctorName : ""}
+          value={doctorName? doctorName : "0"}
           inputProps={{
             classes: {
                 icon: classes.icon,
@@ -67,8 +66,9 @@ function DropdownDoctor(props) {
             }
           }}
         >
+          <MenuItem className="data" value="0">&lt;Doctor is Unassigned&gt;</MenuItem>
           {doctorsList && doctorsList.map((doctor) =>
-          <MenuItem className="data" value = {doctor.id} selected="true">{doctor.name}</MenuItem>
+          <MenuItem className="data" value = {doctor.id}>{doctor.name}</MenuItem>
           )}
         </Select>
       </FormControl>
