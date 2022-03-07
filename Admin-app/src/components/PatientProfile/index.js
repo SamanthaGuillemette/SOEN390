@@ -85,6 +85,11 @@ function PatientProfile() {
   // reviewed status with DB
   function onReviewedClick(id)
   {
+    if (checked == true) {
+      setChecked(false);
+    } else {
+      setChecked(true);
+    }
     toggleReviewed(id)
     .then((newPatientInfo) => newPatientInfo);
   }  
@@ -101,10 +106,10 @@ function PatientProfile() {
     createData("Jan 26", "No", "Yes", "No", "No", "No", "No", "No")
   ];
   
-  const [priorityFlag, setPriorityFlag] = useState(false);
-
   const { id } = useParams();
+  const [priorityFlag, setPriorityFlag] = useState(false);
   const [patientInfo, setPatientInfo] = useState(null);
+  const [checked, setChecked] = useState('');
 
   // Get Patient Info each time page refreshes
   useEffect(() => {
@@ -113,6 +118,11 @@ function PatientProfile() {
       .then((data) => {
         setPatientInfo(data);
         setPriorityFlag(data.flaggedPriority === "1");
+        if (data.statusReview === "Not Completed") {
+          setChecked(false);      
+        } else {
+          setChecked(true); 
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -215,7 +225,7 @@ function PatientProfile() {
                   </Typography>
                   <Typography className="profile-data" variant="body2">
                     Review Completed: {patientInfo && patientInfo.statusReview}
-                    <Checkbox size="small" style={{ color: "var(--text-primary)" }}
+                    <Checkbox checked={checked} size="small" style={{ color: "var(--text-primary)" }}
                     onClick={() => {( onReviewedClick(id));}}
                     />
                   </Typography>
