@@ -20,7 +20,7 @@ const dropdownStyle = makeStyles({
 
 function DropdownDoctor(props) {
   const classes = dropdownStyle(); // adding styling
-  const [doctorName, setDoctorName] = React.useState('621927b609a71ec61d0d61da'); // initially string is empty
+  const [doctorName, setDoctorName] = React.useState(''); // initially string is empty
   const [doctorsList, setDoctorsList] = useState(null);
  
   const handleChange = (event) => {
@@ -30,16 +30,10 @@ function DropdownDoctor(props) {
     setDoctorName(value);
   };
 
-// function to create data
-/* function createData(doctorName, numOfPatients) {
-  return {doctorName, numOfPatients};
-}  
- */
   useEffect(() => {
     getDoctors().then((data) => {
       let results = [];
       data.forEach((doc) => {
-        //const menuItemToAdd = (<MenuItem className={doc} value="1">{doc.name}</MenuItem>);
         results.push(doc);
       });
       setDoctorsList(results);
@@ -54,10 +48,9 @@ function DropdownDoctor(props) {
   console.log(`doctorName ${doctorName}`);
   return doctorsList && (
       <FormControl sx={{minWidth: 130}}>
-        <InputLabel className="data" shrink={false}>{doctorName === '' && 'Assign Doctor'}</InputLabel> {/* removing the shrinking of the form title */}
         <Select data-testid="select2" className="data"
           onChange={handleChange} // changing the text to the chosen
-          value={doctorName && doctorName}
+          value={doctorName? doctorName : ""}
           inputProps={{
             classes: {
                 icon: classes.icon,
