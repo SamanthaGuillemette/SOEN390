@@ -100,7 +100,6 @@ function DoctorList() {
       data.forEach((doc) => {
         const size = doc.treats? Object.keys(doc.treats).length : 0;
         results.push(createData(doc.name, `${size}/${patientLimit}`));
-        doc.treats && console.log(size); 
       });
       setDoctorsList(results);
     });
