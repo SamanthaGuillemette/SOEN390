@@ -19,7 +19,7 @@ import Paper from "@mui/material/Paper";
 import FlagIcon from "@mui/icons-material/Flag";
 import "./PatientList.css";
 import { useEffect, useState } from "react";
-import { getPatients, useOld } from "../../backend/firebasePatientUtilities";
+import { getPatients } from "../../backend/firebasePatientUtilities";
 
 // adding styling
 const dropdownStyle = makeStyles({
@@ -89,22 +89,22 @@ function Row(props) {
           </IconButton>
         </TableCell>
         {/* Displaying row of data */}
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" component="th" scope="row">
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" component="th" scope="row" align="left">
         {row.patientname}
         </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="right" >
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="left" >
           {row.id}
         </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="right" >
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="center" >
           {row.status}
         </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="right" >
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="center" >
           {row.appointment}
         </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="right">
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="left">
           {row.doctor}
         </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="right">
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="center">
           {row.priority}
         </TableCell>
       </TableRow>
@@ -195,14 +195,6 @@ function Row(props) {
 }
 
 function PatientList() {
-  if (!useOld) { // if useOld is false
-    return PatientListNew(); // displaying this functin
-  } else { 
-    return PatientListOld(); // otherwise displaying this function
-  }
-}
-
-function PatientListNew() {
   const classes = dropdownStyle(); // adding styling
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -267,41 +259,42 @@ function PatientListNew() {
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
               className="header"
+              align="left"
             >
               Patient Name
             </TableCell>
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
               className="header"
-              align="right"
+              align="left"
             >
               ID
             </TableCell>
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
               className="header"
-              align="right"
+              align="center"
             >
               status
             </TableCell>
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
               className="header"
-              align="right"
+              align="center"
             >
               Upcoming Appointment
             </TableCell>
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
               className="header"
-              align="right"
+              align="left"
             >
               Assigned Doctor
             </TableCell>
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
               className="header"
-              align="right"
+              align="center"
             >
               Flagged Priority
             </TableCell>
@@ -346,161 +339,6 @@ function PatientListNew() {
           }}
         />
       )}
-    </TableContainer>
-  );
-}
-
-function PatientListOld() {
-  const flag = localStorage.getItem("priorityFlag");
-  const rows = [
-    createData(
-      <a href="/patientprofile">John Doe</a>,
-      1476,
-      <span className="label-positive">positive</span>,
-      "23/05/22",
-      "Allyson Richards",
-      <FlagIcon
-        className={JSON.parse(flag) ? "priority-flag clicked" : "priority-flag"}
-      ></FlagIcon>,
-      "90°C",
-      "150 lbs",
-      "5'9"
-    ),
-    createData(
-      "Jane Smith",
-      159,
-      <span className="label-positive">positive</span>,
-      "05/02/22",
-      "Charles Ludwig",
-      <FlagIcon
-        className={flag ? "priority-flag" : "priority-flag clicked"}
-      ></FlagIcon>,
-      "65°C",
-      "120lbs",
-      "5'5"
-    ),
-    createData(
-      "William Hill",
-      1666,
-      <span className="label-positive">positive</span>,
-      "06/05/22",
-      "Allyson Richards",
-      <FlagIcon
-        className={flag ? "priority-flag" : "priority-flag clicked"}
-      ></FlagIcon>,
-      "90°C",
-      "150 lbs",
-      "5'9"
-    ),
-    createData(
-      "Maria Sánchez",
-      1200,
-      <span className="label-negative">negative</span>,
-      "06/02/22",
-      "Charles Ludwig",
-      <FlagIcon
-        className={flag ? "priority-flag" : "priority-flag clicked"}
-      ></FlagIcon>,
-      "65°C",
-      "120lbs",
-      "5'5"
-    ),
-    createData(
-      "Liam Hill",
-      233,
-      <span className="label-positive">positive</span>,
-      "22/03/22",
-      "Allyson Richards",
-      <FlagIcon
-        className={flag ? "priority-flag" : "priority-flag clicked"}
-      ></FlagIcon>,
-      "90°C",
-      "150 lbs",
-      "5'9"
-    ),
-    createData(
-      "Connor Jackson",
-      2893,
-      <span className="label-negative">negative</span>,
-      "31/01/22",
-      "Allyson Richards",
-      <FlagIcon
-        className={flag ? "priority-flag" : "priority-flag clicked"}
-      ></FlagIcon>,
-      "65°C",
-      "120lbs",
-      "5'5"
-    ),
-    createData(
-      "Connor Jackson",
-      2896,
-      <span className="label-negative">negative</span>,
-      "01/02/22",
-      "Charles Ludwig",
-      <FlagIcon
-        className={flag ? "priority-flag" : "priority-flag clicked"}
-      ></FlagIcon>,
-      "65°C",
-      "120lbs",
-      "5'5"
-    ),
-  ];
-
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
-  return (
-    <TableContainer className="patient-list" component={Paper}>
-      <Box className="label">Patient List</Box>
-      <Table aria-label="collapsible table">
-        <TableHead>
-          <TableRow>
-            <TableCell />
-            <TableCell className="header">Patient Name</TableCell>
-            <TableCell className="header" align="right">
-              ID
-            </TableCell>
-            <TableCell className="header" align="right">
-              status
-            </TableCell>
-            <TableCell className="header" align="right">
-              Upcoming Appointment
-            </TableCell>
-            <TableCell className="header" align="right">
-              Assigned Doctor
-            </TableCell>
-            <TableCell className="header" align="right">
-              Flagged Priority
-            </TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {(rowsPerPage > 0
-            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : rows
-          ).map((row) => (
-            <Row key={row.id} row={row}></Row>
-          ))}
-        </TableBody>
-      </Table>
-      <TablePagination
-        rowsPerPageOptions={[5, 10, { label: "All", value: -1 }]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
     </TableContainer>
   );
 }

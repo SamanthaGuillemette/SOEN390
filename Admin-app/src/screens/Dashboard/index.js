@@ -82,9 +82,10 @@ const Dashboard = () => {
               <DoughnutChart />
             </Card>
           </Grid>
+        </Grid>
 
-            {/* The following is the Patient List which appears on the dashboard
-            Here we have the styling.*/}
+      {/* The following is the Patient List which appears on the dashboard
+          Here we have the styling.*/}  
           <List
             className="patientList"
             sx={{
@@ -117,16 +118,17 @@ const Dashboard = () => {
               </li>
             ))}
           </List>
-
           <UpcomingEvents></UpcomingEvents>
+
               
          {/* Here we see where the 3 cards at the bottom of the dashboard are implemented.
         The section here is called important links. */}
-          <Grid className="infoGrid" container spacing={2} xs ={12}>
+
+          <Grid className="infoGrid" align="center">
             <Typography sx={{color: "var(--text-primary)"}} className="title" gutterBottom variant="h5">
-              Important Links
-            </Typography>
-            <Card data-testid ="card1" variant="contained" className="cardShape1">
+                Important Links
+                </Typography>
+            <Card data-testid ="card1" variant="contained" className="cardShape">
               <CardMedia
                 component="img"
                 height="220"
@@ -160,7 +162,7 @@ const Dashboard = () => {
               </CardContent>
             </Card>
 
-            <Card data-testid="card2" variant="contained" className="cardShape2">
+            <Card data-testid="card2" variant="contained" className="cardShape" sx={{marginLeft: 2, marginRight: 2}}>
               <CardMedia
                 component="img"
                 height="220"
@@ -196,7 +198,7 @@ const Dashboard = () => {
               </CardContent>
             </Card>
 
-            <Card data-testid ="card3" variant="contained" className="cardShape3">
+            <Card data-testid ="card3" variant="contained" className="cardShape">
               <CardMedia
                 component="img"
                 height="220"
@@ -231,7 +233,6 @@ const Dashboard = () => {
             </Card>
           </Grid>
         </Grid>
-      </Grid>
     </Container>
   );
 };
