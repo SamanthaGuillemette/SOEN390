@@ -20,36 +20,35 @@ const dropdownStyle = makeStyles({
 
 function DropdownDoctor(props) {
   const classes = dropdownStyle(); // adding styling
-  const [doctorName, setDoctorName] = React.useState(''); // initially string is empty
+  const [doctorId, setDoctorId] = React.useState(''); // initially string is empty
   const [doctorsList, setDoctorsList] = useState(null);
  
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
-    setDoctorName(value);
+    setDoctorId(value);
   };
 
   useEffect(() => {
     getDoctors().then((data) => {
       let results = [];
       data.forEach((doc) => {
-        results.push(doc);
+        results[doc.id] = doc;
       });
       setDoctorsList(results);
     });
   }, []);
   
   useEffect(() => {
-    props && props.assignedDoctor && setDoctorName(props.assignedDoctor);
+    props && props.assignedDoctor && setDoctorId(props.assignedDoctor);
   }, [props, props.assignedDoctor]);    
 
-  doctorsList && console.log(doctorsList);
   return doctorsList && (
       <FormControl sx={{minWidth: 130}}>
         <Select data-testid="select2" className="data"
           onChange={handleChange} // changing the text to the chosen
-          value={doctorName? doctorName : "0"}
+          value={doctorId in doctorsList? doctorId : "0"}
           inputProps={{
             classes: {
                 icon: classes.icon,
@@ -67,7 +66,7 @@ function DropdownDoctor(props) {
           }}
         >
           <MenuItem className="data" value="0">&lt;Doctor is Unassigned&gt;</MenuItem>
-          {doctorsList && doctorsList.map((doctor) =>
+          {doctorsList && Object.values(doctorsList) && Object.values(doctorsList).map((doctor) =>
           <MenuItem className="data" value = {doctor.id}>{doctor.name}</MenuItem>
           )}
         </Select>
