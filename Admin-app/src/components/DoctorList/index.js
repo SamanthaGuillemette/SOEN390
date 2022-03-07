@@ -16,7 +16,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import TableHead from '@mui/material/TableHead';
 import "./../PatientList/PatientList.css";
 import { useEffect, useState } from "react";
-import { getDoctors } from "../../backend/firebaseDoctorUtilities";
+import { getDoctors, patientLimit } from "../../backend/firebaseDoctorUtilities";
 
 // Styling the list
 const dropdownStyle = makeStyles({ 
@@ -84,7 +84,6 @@ function DoctorList() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [doctorsList, setDoctorsList] = useState(null);
-  const patientLimit = 10;
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage); // creating new page

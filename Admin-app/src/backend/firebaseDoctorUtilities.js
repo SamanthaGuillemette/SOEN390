@@ -2,6 +2,8 @@ import doctorData from "../data/doctors.json";
 import { getTableData, getTableDataItem, populateTable } from "./firebaseUtilities";
 
 const tableName = "Doctors";
+const patientLimit = 10;
+
 
 const getDoctors = async () => {
     return getTableData(tableName);
@@ -19,4 +21,4 @@ const getDoctor = async (id) => {
     populateTable(tableName, doctorData);
   }
 
-export { getDoctors, getDoctor, populateDoctors }
+export { getDoctors, getDoctor, populateDoctors, patientLimit }
