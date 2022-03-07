@@ -1,7 +1,7 @@
 import patientData from "../data/patients.json";
 import { db } from "./firebase";
 import { getTableData, getTableDataItem, populateTable } from "./firebaseUtilities";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc, deleteField } from "firebase/firestore";
 
 const tableName = "Patients";
 
@@ -51,22 +51,29 @@ const togglePriorityFlag = async (id) => {
 };
 
 const setAssignedDoctor = async (patientId, doctorId) => {
-  try
+  try 
   {
     // Get Patient
     const docRef = doc(db, tableName, patientId);
     let patientInfo = await getPatient(patientId);
 
-    // Update DB with new value
-    docRef && await updateDoc(docRef, "assignedDoctor", doctorId);
+    if (doctorId != null)
+    {
+      // Update Assigned Doctor field in Patient
+      docRef && await updateDoc(docRef, "assignedDoctor", doctorId);
+    }
+    else
+    {
+      // Delete Assigned Doctor field in Patient
+      docRef && await updateDoc(docRef, { "assignedDoctor": deleteField() });
+    }
 
     // Get updated patient
     patientInfo = await getPatient(patientId);      
 
     return patientInfo;
   }
-
-  catch(error)
+  catch (error)
   {
     console.log("[setAssignedDoctor]" + error);  
   }
