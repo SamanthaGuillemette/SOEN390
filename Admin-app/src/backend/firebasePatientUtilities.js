@@ -79,6 +79,42 @@ const getPatients = async () => {
     }
   };
 
+  const toggleReviewed = async (id) => {
+    try
+    {
+      // Get Patient
+      const docRef = doc(db, tableName, id);
+      let patientInfo = await getPatient(id);
+
+      // Set reviewed value 
+      let reviewed;
+
+      if (patientInfo)
+      {
+        if (patientInfo.statusReview === 'Not Completed')
+        {
+          reviewed = "Status Reviewed";
+        }
+        else
+        {
+          reviewed = "Not Completed";
+        }
+      }
+
+      // Update DB with new value
+      docRef && await updateDoc(docRef, "statusReview", reviewed);
+
+      // Get updated patient
+      patientInfo = await getPatient(id);      
+
+      return patientInfo;
+    }
+
+    catch(error)
+    {
+      console.log("[toggleReviewed]" + error);  
+    }
+  };
 
   
   /**
@@ -99,5 +135,5 @@ const getPatients = async () => {
     }
   }
 
-  export { getPatients, getPatient, populatePatients, togglePriorityFlag };
+  export { getPatients, getPatient, populatePatients, togglePriorityFlag, toggleReviewed };
   
