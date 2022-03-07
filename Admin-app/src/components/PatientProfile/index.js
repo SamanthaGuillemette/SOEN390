@@ -86,7 +86,7 @@ function PatientProfile() {
   function onReviewedClick(id)
   {
     toggleReviewed(id)
-    .then((newPatientInfo) => newPatientInfo && setReviewed(newPatientInfo.statusReview === "Status Reviewed"));
+    .then((newPatientInfo) => newPatientInfo);
   }  
 
   // priority flag with DB
@@ -101,7 +101,6 @@ function PatientProfile() {
     createData("Jan 26", "No", "Yes", "No", "No", "No", "No", "No")
   ];
   
-  const [reviewed, setReviewed] = useState(false);
   const [priorityFlag, setPriorityFlag] = useState(false);
 
   const { id } = useParams();
@@ -114,7 +113,6 @@ function PatientProfile() {
       .then((data) => {
         setPatientInfo(data);
         setPriorityFlag(data.flaggedPriority === "1");
-        setReviewed(data.statusReview === "Status Reviewed");
       })
       .catch((err) => {
         console.log(err);
@@ -219,7 +217,6 @@ function PatientProfile() {
                     Review Completed: {patientInfo && patientInfo.statusReview}
                     <Checkbox size="small" style={{ color: "var(--text-primary)" }}
                     onClick={() => {( onReviewedClick(id));}}
-                    // className={reviewed ? "reviewed clicked" : "reviewed"}
                     />
                   </Typography>
                 </CardContent>
