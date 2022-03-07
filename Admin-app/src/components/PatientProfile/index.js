@@ -192,7 +192,6 @@ function PatientProfile() {
                   </Typography>
                   <Typography className="profile-data" variant="body2">
                     Name: <DropdownDoctor assignedDoctor={patientInfo && patientInfo.assignedDoctor} />
-                    <Checkbox size="small" style={{ color: "var(--text-primary)" }}/>
                   </Typography>
                 </CardContent>
               </CardActionArea>
