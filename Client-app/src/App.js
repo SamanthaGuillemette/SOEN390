@@ -23,6 +23,7 @@ function App() {
   const userEmail = useSelector((state) => state.auth.userEmail);
   const dispatch = useDispatch();
 
+  // This function will run as soon as the App loads
   useEffect(() => {
     // Save user token & user email to redux store (for logged in user)
     onAuthStateChanged(auth, (userObj) => {
@@ -33,10 +34,12 @@ function App() {
       }
     });
 
-    // Fetch user info from firestore using his/her email
+    // Fetch user info from database to store using his/her email
     dispatch(fetchUserInfo(userEmail));
   }, [dispatch, userEmail]);
 
+  // I have to disable this since we're using Redux store.
+  // This loading checks cause the app to hang. Already tried with the user / userEmail
   // if (loading) {
   //   return (
   //     <div>
@@ -44,6 +47,7 @@ function App() {
   //     </div>
   //   );
   // }
+
   return (
     <BrowserRouter>
       {user && (
