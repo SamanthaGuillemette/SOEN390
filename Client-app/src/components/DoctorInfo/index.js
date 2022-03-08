@@ -21,11 +21,11 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function DoctorInfo() {
   return (
-    <Box className="doctorInfo-container">
+    <Box className="doctorInfo-box__container">
       <Grid container spacing={3} padding={5}>
         <Grid item xs={12}>
           <Card>
-            <Box className="doctorInfo-Card">
+            <Box className="doctorInfo-card__profile">
               <Grid
                 container
                 direction="column"
@@ -33,14 +33,14 @@ function DoctorInfo() {
                 alignItems="center"
               >
                 <Avatar
-                  id="doctorInfo-avatar"
+                  id="doctorInfo-card__img"
                   src="https://media.discordapp.net/attachments/948246278490456064/949745262367232100/unknown.png"
                 />
               </Grid>
               <CardContent>
                 <Typography
                   data-testid="avatar"
-                  className="name"
+                  className="doctorInfo-card__profileName"
                   gutterBottom
                   variant="button"
                   fontSize="1.2rem"
@@ -48,10 +48,14 @@ function DoctorInfo() {
                 >
                   Jamal Doe
                 </Typography>
-                <Box className="doctorInfo-text">
-                  <p className="doctorInfo-textDetail">Age: 86</p>
-                  <p className="doctorInfo-textDetail">Gender: male</p>
-                  <p className="doctorInfo-textDetail">Work Place: MUHC</p>
+                <Box className="doctorInfo-card__profileText">
+                  <p className="doctorInfo-card__profileTextDetail">Age: 86</p>
+                  <p className="doctorInfo-card__profileTextDetail">
+                    Gender: male
+                  </p>
+                  <p className="doctorInfo-card__profileTextDetail">
+                    Work Place: MUHC
+                  </p>
                 </Box>
               </CardContent>
             </Box>
@@ -59,12 +63,12 @@ function DoctorInfo() {
         </Grid>
         <Grid item xs={12}>
           <Grid item>
-            <Card className="info-card">
+            <Card className="doctorInfo-card__info">
               <CardActionArea>
                 <CardContent>
                   <div>
                     <Typography
-                      className="header"
+                      className="doctorInfo-card__header"
                       gutterBottom
                       variant="button"
                       component="div"
@@ -82,19 +86,19 @@ function DoctorInfo() {
                   <Box />
                   <Stack spacing={2}>
                     <Item
-                      className="info-data"
+                      className="doctorInfo-card__data"
                       sx={{ bgcolor: "black", boxShadow: "none" }}
                     >
                       Speciality: Family Doctor
                     </Item>
                     <Item
-                      className="info-data"
+                      className="doctorInfo-card__data"
                       sx={{ bgcolor: "black", boxShadow: "none" }}
                     >
                       Patient spots: 10/20
                     </Item>
                     <Item
-                      className="info-data"
+                      className="doctorInfo-card__data"
                       sx={{ bgcolor: "black", boxShadow: "none" }}
                     >
                       Experience: 7 years

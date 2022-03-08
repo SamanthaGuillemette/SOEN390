@@ -1,9 +1,9 @@
-.doctorInfo-container {
+.doctorInfo-box__container {
   height: 105vh;
   background: var(--background-secondary);
 }
 
-.doctorInfo-Card {
+.doctorInfo-card__profile {
   padding-top: 15px !important;
   position: relative;
   background: var(--background-main) !important;
@@ -11,52 +11,40 @@
   background-color: #7290cf !important;
 }
 
-#doctorInfo-avatar {
+#doctorInfo-card__img {
   width: 180px;
   height: 180px;
   box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.12);
 }
 
-.doctorInfo-text {
+.doctorInfo-card__profileText {
   text-align: center;
 }
 
-.doctorInfo-textDetail {
+.doctorInfo-card__profileTextDetail {
   font-size: 1rem;
   margin: 2px 0;
   color: var(--text-main);
 }
 
-.name {
+.doctorInfo-card__profileName {
   text-align: center;
   font-weight: bold !important;
 }
 
-.info-card {
+.doctorInfo-card__info {
   border-style: none;
   background: var(--background-main) !important;
-  background-color: #004d50 !important;
+  background-color: #8372cf !important;
 }
 
-::selection {
-  color: var(--primary-main);
-  background: transparent;
-}
-
-.info-data {
+.doctorInfo-card__data {
   color: var(--text-primary) !important;
   font-weight: 500 !important;
   font-size: 0.96rem !important;
 }
 
-.data {
-  color: var(--text-primary) !important;
-  font-weight: 500 !important;
-  font-size: 1rem !important;
-}
-
-.header {
-  color: var(--text-inactive) !important;
+.doctorInfo-card__header {
   text-transform: uppercase;
   opacity: 0.7;
   font-weight: 900 !important;
