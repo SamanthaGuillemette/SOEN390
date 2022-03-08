@@ -16,6 +16,7 @@ import { inputLabelClasses } from "@mui/material/InputLabel";
 import FormIcon from "../../assets/form.svg";
 import "./ClientProfile.css";
 import { useSelector } from "react-redux";
+// import { updateUserInfo } from "../../store/userInfoSlice";
 
 const style = {
   position: "absolute",
@@ -38,6 +39,8 @@ export default function BasicModal() {
 
   // Get the client's reference via the userEmail (query the database)
   const clientDoc = doc(db, `Client/${userEmail}`);
+
+  // const dispatch = useDispatch();
 
   // Pull 'userInfoDetails' out from the centralized store
   const userInfoDetails = useSelector(
@@ -67,6 +70,19 @@ export default function BasicModal() {
 
   const handleUpdateSubmit = async (event) => {
     event.preventDefault();
+
+    // dispatch(
+    //   updateUserInfo(userEmail, {
+    //     firstName: firstName,
+    //     lastName: lastName,
+    //     profileImage: profileImage,
+    //     address: address,
+    //     postalCode: postalCode,
+    //     city: city,
+    //     province: province,
+    //     dob: dob,
+    //   })
+    // );
 
     await setDoc(clientDoc, {
       firstName: firstName,

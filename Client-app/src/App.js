@@ -6,7 +6,7 @@ import SignUp from "./components/SignUp";
 // import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./backend/firebase";
 import Chat from "./components/Chat";
-// import Loading from "./components/Loading";
+import Loading from "./components/Loading";
 import QR from "./screens/QR";
 import ClientProfile from "./screens/Profile";
 import Symptoms from "./screens/Symptoms";
@@ -38,15 +38,16 @@ function App() {
     dispatch(fetchUserInfo(userEmail));
   }, [dispatch, userEmail]);
 
-  // I have to disable this since we're using Redux store.
-  // This loading checks cause the app to hang. Already tried with the user / userEmail
-  // if (loading) {
-  //   return (
-  //     <div>
-  //       <Loading />
-  //     </div>
-  //   );
-  // }
+  // Added setTimeout() to show loading screen for 500ms, ottherise it'll keep loading
+  if (userEmail == null) {
+    setTimeout(() => {
+      return (
+        <div>
+          <Loading />
+        </div>
+      );
+    }, 500);
+  }
 
   return (
     <BrowserRouter>

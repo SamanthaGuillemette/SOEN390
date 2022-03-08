@@ -5,6 +5,7 @@ import { db } from "../backend/firebase";
 // --------------- States -------------------
 const initialState = {
   userInfoDetails: null,
+  // userInfoStatus: "idle",
 };
 
 export const fetchUserInfo = createAsyncThunk(
@@ -21,6 +22,21 @@ export const fetchUserInfo = createAsyncThunk(
   }
 );
 
+// export const updateUserInfo = createAsyncThunk(
+//   "userInfo/updateUserInfo",
+//   async (userEmail, newlyUpdatedInfo) => {
+//     const clientDoc = doc(db, `Client/${userEmail}`);
+//     const response = await setDoc(clientDoc, newlyUpdatedInfo);
+
+//     if (response) {
+//       return newlyUpdatedInfo;
+//     } else {
+//       console.log("Cannot update user info");
+//       return initialState;
+//     }
+//   }
+// );
+
 export const userInfoSlice = createSlice({
   name: "userInfo",
   initialState,
@@ -31,6 +47,15 @@ export const userInfoSlice = createSlice({
     builder.addCase(fetchUserInfo.fulfilled, (state, action) => {
       state.userInfoDetails = action.payload;
     });
+
+    // builder.addCase(updateUserInfo.pending, (state) => {
+    //   state.userInfoStatus = "pending";
+    // });
+    // builder.addCase(updateUserInfo.fulfilled, (state, action) => {
+    //   state.userInfoStatus = "updated";
+    //   console.log(action.payload);
+    //   state.userInfoDetails = action.payload;
+    // });
   },
 });
 
