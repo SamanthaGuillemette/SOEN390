@@ -9,8 +9,8 @@ import { FormControl, Grid, MenuItem, Stack, TextField } from "@mui/material";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
 import AdapterDateFns from "@mui/lab/AdapterDayjs";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, db } from "../../backend/firebase";
+// import { useAuthState } from "react-firebase-hooks/auth";
+import { db } from "../../backend/firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { inputLabelClasses } from "@mui/material/InputLabel";
 import FormIcon from "../../assets/form.svg";
@@ -51,25 +51,32 @@ export default function BasicModal() {
   const [city, setCity] = useState(userInfoDetails?.city);
   const [province, setProvince] = useState(`${userInfoDetails?.province}`);
   const [postalCode, setPostalCode] = useState(userInfoDetails?.postalCode);
-  const [dob, setDOB] = useState(userInfoDetails?.dob);
-  const [photoUrl, setPhotoUrl] = useState("");
+  const [dob, setDOB] = useState(`${userInfoDetails?.dob}`);
+  const [profileImage, setProfileImage] = useState(
+    userInfoDetails?.profileImage
+  );
 
+  // Handle the popup open/close state
   const handleOpen = () => setOpenPopup(true);
   const handleClose = () => setOpenPopup(false);
+
+  // Convert DOB to string (Works better this way compared to the SignUp component)
+  const handleUpdateDOB = (newDate) => {
+    setDOB(`${newDate?.$D}/${newDate?.$M + 1}/${newDate?.$y}`);
+  };
 
   const handleUpdateSubmit = async (event) => {
     event.preventDefault();
 
-    const dobValue = dob.$D + "/" + (dob.$M + 1) + "/" + dob.$y;
     await setDoc(clientDoc, {
       firstName: firstName,
       lastName: lastName,
-      photoUrl: photoUrl,
+      profileImage: profileImage,
       address: address,
       postalCode: postalCode,
       city: city,
       province: province,
-      dob: dobValue,
+      dob: dob,
     });
 
     // Close the popup after user submit the form
@@ -110,12 +117,12 @@ export default function BasicModal() {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
-                name="photoUrl"
+                name="profileImage"
                 fullWidth
-                id="photoUrl"
+                id="profileImage"
                 label="Profile Photo"
-                value={photoUrl}
-                onChange={(e) => setPhotoUrl(e.target.value)}
+                value={profileImage}
+                onChange={(e) => setProfileImage(e.target.value)}
                 InputLabelProps={{
                   sx: {
                     color: "var(--text-primary)",
@@ -189,9 +196,7 @@ export default function BasicModal() {
                   <DatePicker
                     label="Date of Birth"
                     value={dob}
-                    onChange={(e) => {
-                      setDOB(e);
-                    }}
+                    onChange={handleUpdateDOB}
                     renderInput={(params) => <TextField {...params} />}
                     InputLabelProps={{
                       sx: {

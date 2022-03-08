@@ -45,7 +45,10 @@ function ClientProfile() {
                 justifyContent="center"
                 alignItems="center"
               >
-                <Avatar id="clientProfile-avatar" src="" />
+                <Avatar
+                  id="clientProfile-avatar"
+                  src={userInfoDetails?.profileImage}
+                />
               </Grid>
               <CardContent>
                 <Typography
