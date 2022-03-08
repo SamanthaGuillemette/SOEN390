@@ -190,9 +190,8 @@ function PatientProfile() {
                   <Typography className="header" gutterBottom variant="button" component="div">
                     Assigned Doctor
                   </Typography>
-                  <Typography className="profile-data" variant="body2">
-                    Name: <DropdownDoctor patientInfo={patientInfo} />
-                  </Typography>
+                  <Typography className="doctor-name" variant="body2"> Name: </Typography>
+                  <DropdownDoctor patientInfo={patientInfo} />
                 </CardContent>
               </CardActionArea>
             </Card>
