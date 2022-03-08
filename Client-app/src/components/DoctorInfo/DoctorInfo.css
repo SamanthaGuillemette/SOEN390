@@ -8,7 +8,6 @@
   position: relative;
   background: var(--background-main) !important;
   color: var(--text-primary) !important;
-  background-color: #7290cf !important;
 }
 
 #doctorInfo-card__img {
@@ -35,7 +34,6 @@
 .doctorInfo-card__info {
   border-style: none;
   background: var(--background-main) !important;
-  background-color: #8372cf !important;
 }
 
 .doctorInfo-card__data {
@@ -45,6 +43,7 @@
 }
 
 .doctorInfo-card__header {
+  color: var(--text-inactive) !important;
   text-transform: uppercase;
   opacity: 0.7;
   font-weight: 900 !important;
