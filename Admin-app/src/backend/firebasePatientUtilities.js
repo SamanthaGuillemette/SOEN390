@@ -91,5 +91,5 @@ const populatePatients = () => {
   populateTable(tableName, patientData);
 }
 
-  export { getPatients, getPatient, populatePatients, togglePriorityFlag,setAssignedDoctor, isValidPatientId };
+export { getPatients, getPatient, populatePatients, togglePriorityFlag,setAssignedDoctor, isValidPatientId };
   

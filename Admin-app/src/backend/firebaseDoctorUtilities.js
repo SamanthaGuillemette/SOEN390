@@ -72,24 +72,4 @@ const removePatientFromDoctor = async (doctorId, patientId) => {
     populateTable(tableName, doctorData);
   }
 
-/*       // Make sure patientId already isn't in treat table and is a valid patient Id
-      if (!(patientId in arrayOfPatients) && (patientId in patients))
-      {
-      // Update Assigned Doctor field in Patient
-      arrayOfPatients.add(patientId);
-      docRef && await updateDoc(docRef, "treats", arrayOfPatients);
-      }
- */
-
-    // Get All Patients
-    // let patients = [];
-    // getPatients().then((data) => {
-    //   data.forEach((doc) => {
-    //     patients[doc.id] = doc;
-    //   });
-    // });
-
-
-
-
 export { getDoctors, getDoctor, populateDoctors, patientLimit, addPatientToDoctor, removePatientFromDoctor }
