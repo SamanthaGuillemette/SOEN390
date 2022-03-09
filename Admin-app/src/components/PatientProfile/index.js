@@ -86,10 +86,13 @@ function PatientProfile() {
   function onReviewedClick(id)
   {
     if (checked == true) {
+      setReviewingStatus("Not Completed");
       setChecked(false);
     } else {
+      setReviewingStatus("Status Reviewed");
       setChecked(true);
     }
+    //{patientInfo && patientInfo.statusReview}
     toggleReviewed(id)
     .then((newPatientInfo) => newPatientInfo);
   }  
@@ -110,6 +113,7 @@ function PatientProfile() {
   const [priorityFlag, setPriorityFlag] = useState(false);
   const [patientInfo, setPatientInfo] = useState(null);
   const [checked, setChecked] = useState('');
+  const [reviewingStatus, setReviewingStatus] = useState('');
 
   // Get Patient Info each time page refreshes
   useEffect(() => {
@@ -119,9 +123,11 @@ function PatientProfile() {
         setPatientInfo(data);
         setPriorityFlag(data.flaggedPriority === "1");
         if (data.statusReview === "Not Completed") {
-          setChecked(false);      
+          setChecked(false); 
+          setReviewingStatus("Not Completed");     
         } else {
           setChecked(true); 
+          setReviewingStatus("Status Reviewed");
         }
       })
       .catch((err) => {
@@ -224,7 +230,7 @@ function PatientProfile() {
                     Status Review
                   </Typography>
                   <Typography className="profile-data" variant="body2">
-                    Review Completed: {patientInfo && patientInfo.statusReview}
+                    Review Completed: {reviewingStatus}
                     <Checkbox checked={checked} size="small" style={{ color: "var(--text-primary)" }}
                     onClick={() => {( onReviewedClick(id));}}
                     />
