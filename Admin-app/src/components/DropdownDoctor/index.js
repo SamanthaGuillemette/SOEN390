@@ -5,7 +5,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { makeStyles } from "@material-ui/core/styles";
 import "./DropdownDoctor.css";
-import { getDoctors } from "../../backend/firebaseDoctorUtilities";
+import { getDoctor, getDoctors, patientLimit, removePatientFromDoctor, addPatientToDoctor } from "../../backend/firebaseDoctorUtilities";
 import { setAssignedDoctor} from "../../backend/firebasePatientUtilities";
 import { useEffect, useState } from "react";
 
@@ -28,6 +28,39 @@ function DropdownDoctor(props) {
     const {
       target: { value },
     } = event;
+
+    if (patientInfo != null)
+    {
+      // Get selected doctor
+      let selectedDoctor = null;
+      if (value !== "0")
+      {
+        selectedDoctor = getDoctor(value);
+      }
+
+      // Occurs when user chooses to not to associate a doctor to patient
+      if (!selectedDoctor)
+      {
+        if (patientInfo.assignedDoctor) // Only remove association if there is one
+        {
+          // Remove patient from doctor's list
+          removePatientFromDoctor(patientInfo.assignedDoctor, patientInfo.id);
+
+          // Remove doctor from patient
+          setAssignedDoctor(patientInfo.id, null).then((newPatientInfo) => setPatientInfo(newPatientInfo));
+        }
+      }
+      else if (!isDoctorAtFullCapacity(selectedDoctor)) // Occurs when user chooses to associate a doctor to patient
+      {
+        // Add doctor to patient table
+        setAssignedDoctor(patientInfo.id, value).then((newPatientInfo) => setPatientInfo(newPatientInfo));
+
+        // Add patient to doctor table
+        addPatientToDoctor(selectedDoctor.id, patientInfo.id);
+      }
+
+    }
+
     patientInfo && setAssignedDoctor(patientInfo.id, value === "0"?null:value).then((newPatientInfo) => setPatientInfo(newPatientInfo))
   };
 
@@ -68,11 +101,16 @@ function DropdownDoctor(props) {
         >
           <MenuItem className="data" value="0">&lt;Doctor is Unassigned&gt;</MenuItem>
           {doctorsList && Object.values(doctorsList) && Object.values(doctorsList).map((doctor) =>
-          <MenuItem className="data" value = {doctor.id}>{doctor.name}</MenuItem>
+          <MenuItem className="data" value = {doctor.id} disabled={isDoctorAtFullCapacity(doctor)}>{doctor.name}</MenuItem>
           )}
         </Select>
       </FormControl>
   );
+}
+
+function isDoctorAtFullCapacity(doctor)
+{
+  return doctor && doctor.treats && doctor.treats.length >= patientLimit;
 }
 
 export default DropdownDoctor;
