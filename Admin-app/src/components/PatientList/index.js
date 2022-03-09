@@ -49,6 +49,7 @@ function createData(
   appointment,
   doctor,
   priority,
+  reviewStatus,
   temperature,
   weight,
   height
@@ -60,6 +61,7 @@ function createData(
     appointment,
     doctor,
     priority,
+    reviewStatus,
     symptoms: [
       {
         temperature,
@@ -77,7 +79,7 @@ function Row(props) {
 
   return (
     <React.Fragment>
-      <TableRow>
+      <TableRow className={ row.statusReview === "Status Reviewed" ? "PatientList-reviewedStatus" : "PatientList-not-reviewedStatus" }>
         <TableCell sx={{ borderColor: "var(--background-secondary)" }}>
           <IconButton
             aria-label="expand row"
@@ -90,7 +92,7 @@ function Row(props) {
         </TableCell>
         {/* Displaying row of data */}
         <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" component="th" scope="row" align="left">
-        {row.patientname}
+         {row.patientname}
         </TableCell>
         <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="left" >
           {row.id}
@@ -226,6 +228,7 @@ function PatientList() {
                   : "priority-flag clicked"
               }
             ></FlagIcon>,
+            doc.reviewStatus,
             doc.temperature + "°C",
             doc.weight + " lbs",
             doc.heightFeet + "' " + doc.heightInches + '"'

@@ -99,6 +99,14 @@
   background: var(--info-background);
 }
 
+.PatientList-reviewedStatus {
+  background: red;
+}
+
+.PatientList-not-reviewedStatus {
+  background: yellow;
+}
+
 /*might not be the right element for hover*/
 TableRow:hover {
   background: var(--primary-light) !important;
