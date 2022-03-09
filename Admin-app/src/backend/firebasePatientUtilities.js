@@ -13,6 +13,10 @@ const getPatient = async (id) => {
   return getTableDataItem(tableName, id);
 };
 
+const isValidPatientId = async (id) => {
+  return getPatient(id) != null;
+};
+
 const togglePriorityFlag = async (id) => {
   try
   {
@@ -87,5 +91,5 @@ const populatePatients = () => {
   populateTable(tableName, patientData);
 }
 
-  export { getPatients, getPatient, populatePatients, togglePriorityFlag,setAssignedDoctor };
+  export { getPatients, getPatient, populatePatients, togglePriorityFlag,setAssignedDoctor, isValidPatientId };
   
