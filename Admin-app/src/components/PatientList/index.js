@@ -20,6 +20,7 @@ import FlagIcon from "@mui/icons-material/Flag";
 import "./PatientList.css";
 import { useEffect, useState } from "react";
 import { getPatients } from "../../backend/firebasePatientUtilities";
+import DropdownStatus from "./../DropdownStatus";
 
 // adding styling
 const dropdownStyle = makeStyles({
@@ -212,9 +213,10 @@ function PatientList() {
             doc.id,
             <span
               className={
-                doc.status === "POSITIVE" ? "label-positive" : "label-negative"
+                (doc.status === "POSITIVE") ? "label-positive" : (doc.status === "NEGATIVE") ? "label-negative" : "label-unconfirmed"
               }
             >
+              <DropdownStatus></DropdownStatus>
               {doc.status}
             </span>,
             doc.upcomingAppointment,
