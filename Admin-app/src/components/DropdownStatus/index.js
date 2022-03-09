@@ -58,9 +58,6 @@ function DropdownStatus() {
         <MenuItem value="negative"> {/* dropdown option 2 */}
             <span class="label-negative">negative</span>
         </MenuItem>
-        <MenuItem value="unconfirmed"> {/* dropdown option 3 */}
-            <span class="label-unconfirmed">unconfirmed</span>
-        </MenuItem>
         </Select>
       </FormControl>
   );
