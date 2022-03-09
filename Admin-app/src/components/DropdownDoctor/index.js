@@ -56,14 +56,18 @@ function DropdownDoctor(props) {
             if (patientInfo && patientInfo.assignedDoctor) // Only remove association if there is one
             {
               // Remove patient from old doctor's list
-              removePatientFromDoctor(patientInfo.assignedDoctor, patientInfo.id)
+              const oldDoctor = removePatientFromDoctor(patientInfo.assignedDoctor, patientInfo.id)
+              doctorsList[oldDoctor.id] = oldDoctor;
+              setDoctorsList(doctorsList);
             }
 
             // Add new doctor to patient table
             setAssignedDoctor(patientInfo.id, value).then((newPatientInfo) => setPatientInfo(newPatientInfo));
 
             // Add patient to new doctor table
-            addPatientToDoctor(selectedDoctor.id, patientInfo.id);
+            const newDoctor =addPatientToDoctor(selectedDoctor.id, patientInfo.id);
+            doctorsList[newDoctor.id] = newDoctor;
+            setDoctorsList(doctorsList);
           }
         })
       }
@@ -72,6 +76,7 @@ function DropdownDoctor(props) {
           // Remove patient from doctor's list
           const doctor = removePatientFromDoctor(patientInfo.assignedDoctor, patientInfo.id);
           doctorsList[doctor.id] = doctor;
+          setDoctorsList(doctorsList);
 
           // Remove doctor from patient
           setAssignedDoctor(patientInfo.id, null).then((newPatientInfo) => setPatientInfo(newPatientInfo));
