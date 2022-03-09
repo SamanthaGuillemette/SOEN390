@@ -49,7 +49,7 @@ function createData(
   appointment,
   doctor,
   priority,
-  reviewStatus,
+  statusReview,
   temperature,
   weight,
   height
@@ -61,7 +61,7 @@ function createData(
     appointment,
     doctor,
     priority,
-    reviewStatus,
+    statusReview,
     symptoms: [
       {
         temperature,
@@ -85,7 +85,7 @@ function Row(props) {
             aria-label="expand row"
             size="small"
             onClick={() => setOpen(!open)}
-            sx={{ color: "var(--text-inactive)" }}
+            sx={{ color: "var(--text-primary)" }}
           >
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />} {/* changing icon to up or down based on open or not */}
           </IconButton>
@@ -110,7 +110,7 @@ function Row(props) {
           {row.priority}
         </TableCell>
       </TableRow>
-      <TableRow>
+      <TableRow >
         <TableCell
           sx={{ borderColor: "var(--background-secondary)" }}
           style={{ paddingBottom: 0, paddingTop: 0 }}
@@ -228,7 +228,7 @@ function PatientList() {
                   : "priority-flag clicked"
               }
             ></FlagIcon>,
-            doc.reviewStatus,
+            doc.statusReview,
             doc.temperature + "°C",
             doc.weight + " lbs",
             doc.heightFeet + "' " + doc.heightInches + '"'

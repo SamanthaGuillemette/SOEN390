@@ -96,15 +96,15 @@
 }
 
 .patient-row.flagged {
-  background: var(--info-background);
+  background: var(--primary-main);
 }
 
 .PatientList-reviewedStatus {
-  background: red;
+  background: #949be2;
 }
 
 .PatientList-not-reviewedStatus {
-  background: yellow;
+  background: var(--background-secondary);
 }
 
 /*might not be the right element for hover*/
