@@ -79,43 +79,6 @@ const getPatients = async () => {
     }
   };
 
-  const setConfirmation = async (patientId) => {
-    try
-    {
-      // Get Patient
-      const docRef = doc(db, tableName, patientId);
-      let patientInfo = await getPatient(patientId);
-  
-      // Set status value 
-      let patientStatus;
-  
-      if (patientInfo)
-      {
-        if (patientInfo.status === 'UNCONFIRMED')
-        {
-          patientStatus = "0";
-        }
-        else
-        {
-          patientStatus = "1";
-        }
-      }
-  
-      // Update DB with new value
-      docRef && await updateDoc(docRef, "status", patientStatus);
-  
-      // Get updated patient
-      patientInfo = await getPatient(patientId);      
-  
-      return patientInfo;
-    }
-  
-    catch(error)
-    {
-      console.log("[setConfirmation]" + error);  
-    }
-  };
-
   /**
    * This function populates the Patient table in firebase given a JSON file
    * imported at the beginning of this file
@@ -134,4 +97,4 @@ const getPatients = async () => {
     }
   }
 
-  export { getPatients, getPatient, populatePatients, togglePriorityFlag, setConfirmation };
+  export { getPatients, getPatient, populatePatients, togglePriorityFlag };

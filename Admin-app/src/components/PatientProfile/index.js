@@ -23,7 +23,6 @@ import FlagIcon from '@mui/icons-material/Flag';
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getPatient, togglePriorityFlag } from "../../backend/firebasePatientUtilities";
-import DropdownConfirmation from "../DropdownConfirmation/index";
 import DropdownStatus from "./../DropdownStatus";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -166,18 +165,8 @@ function PatientProfile() {
                       divider={<Divider orientation="vertical" />}
                       spacing={1}
                       alignItems="baseline"
-                    >
-                      {patientInfo && patientInfo.status === "UNCONFIRMED" && 
-                        <DropdownConfirmation></DropdownConfirmation>
-                      }
-                      {patientInfo && patientInfo.status !== "UNCONFIRMED" &&
+                      >
                         <DropdownStatus></DropdownStatus>
-                      }
-                      <span className={
-                        (patientInfo && patientInfo.status === "POSITIVE") ? "label-positive"
-                        : (patientInfo && patientInfo.status === "NEGATIVE") ? "label-negative"
-                        : "label-unconfirmed"
-                      }>{patientInfo && patientInfo.status}</span>
                       <Item className="profile-data" sx={{ bgcolor: "inherit", boxShadow: "none" }}>Temperature: {patientInfo && patientInfo.temperature} °C</Item>
                       <Item className="profile-data" sx={{ bgcolor: "inherit", boxShadow: "none" }}>Weight: {patientInfo && patientInfo.weight} lbs</Item>
                     </Stack>

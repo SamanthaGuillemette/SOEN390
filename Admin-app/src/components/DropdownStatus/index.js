@@ -19,6 +19,7 @@ const dropdownStyle = makeStyles({
 
 function DropdownStatus() {
   const classes = dropdownStyle(); // adding styling
+  const [patientInfo, setPatientInfo] = React.useState(null);
   const [status, setStatus] = React.useState(''); // empty string
 
   const handleChange = (event) => {
@@ -52,11 +53,14 @@ function DropdownStatus() {
             }
           }}
         >
-        <MenuItem value="positive"> {/* dropdown option 1 */}
+        <MenuItem value="0"> {/* dropdown option 1 */}
             <span class="label-positive">positive</span>
         </MenuItem>
-        <MenuItem value="negative"> {/* dropdown option 2 */}
+        <MenuItem value="1"> {/* dropdown option 2 */}
             <span class="label-negative">negative</span>
+        </MenuItem>
+        <MenuItem value="2"> {/* dropdown option 2 */}
+            <span class="label-unconfirmed">unconfirmed</span>
         </MenuItem>
         </Select>
       </FormControl>
