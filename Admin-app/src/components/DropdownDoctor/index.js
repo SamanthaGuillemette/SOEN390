@@ -23,46 +23,6 @@ function DropdownDoctor(props) {
   const classes = dropdownStyle(); // adding styling
   const [patientInfo, setPatientInfo] = React.useState(null); // initially string is empty
   const [doctorsList, setDoctorsList] = useState(null);
- 
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-
-    if (patientInfo != null)
-    {
-      // Get selected doctor
-      let selectedDoctor = null;
-      if (value !== "0")
-      {
-        selectedDoctor = getDoctor(value);
-      }
-
-      // Occurs when user chooses to not to associate a doctor to patient
-      if (!selectedDoctor)
-      {
-        if (patientInfo.assignedDoctor) // Only remove association if there is one
-        {
-          // Remove patient from doctor's list
-          removePatientFromDoctor(patientInfo.assignedDoctor, patientInfo.id);
-
-          // Remove doctor from patient
-          setAssignedDoctor(patientInfo.id, null).then((newPatientInfo) => setPatientInfo(newPatientInfo));
-        }
-      }
-      else if (!isDoctorAtFullCapacity(selectedDoctor)) // Occurs when user chooses to associate a doctor to patient
-      {
-        // Add doctor to patient table
-        setAssignedDoctor(patientInfo.id, value).then((newPatientInfo) => setPatientInfo(newPatientInfo));
-
-        // Add patient to doctor table
-        addPatientToDoctor(selectedDoctor.id, patientInfo.id);
-      }
-
-    }
-
-    patientInfo && setAssignedDoctor(patientInfo.id, value === "0"?null:value).then((newPatientInfo) => setPatientInfo(newPatientInfo))
-  };
 
   useEffect(() => {
     getDoctors().then((data) => {
@@ -77,6 +37,49 @@ function DropdownDoctor(props) {
   useEffect(() => {
     props && props.patientInfo && setPatientInfo(props.patientInfo);
   }, [props, props.patientInfo]);    
+
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+
+    if (patientInfo != null)
+    {
+      // Get selected doctor
+      if (value !== "0")
+      {
+        getDoctor(value).then((selectedDoctor) => 
+        {
+          if (!isDoctorAtFullCapacity(selectedDoctor)) // Occurs when user chooses to associate a doctor to patient
+          {
+            // If patient had an assigned doctor before, remove patient from old doctor
+            if (patientInfo && patientInfo.assignedDoctor) // Only remove association if there is one
+            {
+              // Remove patient from old doctor's list
+              removePatientFromDoctor(patientInfo.assignedDoctor, patientInfo.id)
+            }
+
+            // Add new doctor to patient table
+            setAssignedDoctor(patientInfo.id, value).then((newPatientInfo) => setPatientInfo(newPatientInfo));
+
+            // Add patient to new doctor table
+            addPatientToDoctor(selectedDoctor.id, patientInfo.id);
+          }
+        })
+      }
+      else // Remove assigned doctor completely
+      {
+          // Remove patient from doctor's list
+          const doctor = removePatientFromDoctor(patientInfo.assignedDoctor, patientInfo.id);
+          doctorsList[doctor.id] = doctor;
+
+          // Remove doctor from patient
+          setAssignedDoctor(patientInfo.id, null).then((newPatientInfo) => setPatientInfo(newPatientInfo));
+      }
+    }
+
+    patientInfo && setAssignedDoctor(patientInfo.id, value === "0"?null:value).then((newPatientInfo) => setPatientInfo(newPatientInfo))
+  };
 
   return doctorsList && (
       <FormControl sx={{minWidth: 130}}>
