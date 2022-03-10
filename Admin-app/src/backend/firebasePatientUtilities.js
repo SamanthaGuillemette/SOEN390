@@ -1,5 +1,5 @@
 
-import { collection, doc, getDocs, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { collection, doc, getDocs, getDoc, setDoc, updateDoc, deleteField } from "firebase/firestore";
 import patientData from "../data/patients.json";
 import { db } from "./firebase";
 
@@ -79,6 +79,30 @@ const getPatients = async () => {
     }
   };
 
+  const setStatus = async (patientId, status) => {
+    try 
+    {
+      // Get Patient
+      const docRef = doc(db, tableName, patientId);
+      let patientInfo = await getPatient(patientId);
+  
+      if (status != null)
+      {
+        // Update Assigned Doctor field in Patient
+        docRef && await updateDoc(docRef, "status", status);
+      }
+  
+      // Get updated patient
+      patientInfo = await getPatient(patientId);      
+  
+      return patientInfo;
+    }
+    catch (error)
+    {
+      console.log("[setStatus]" + error);  
+    }
+  };
+
   /**
    * This function populates the Patient table in firebase given a JSON file
    * imported at the beginning of this file
@@ -97,4 +121,4 @@ const getPatients = async () => {
     }
   }
 
-  export { getPatients, getPatient, populatePatients, togglePriorityFlag };
+  export { getPatients, getPatient, populatePatients, togglePriorityFlag, setStatus};

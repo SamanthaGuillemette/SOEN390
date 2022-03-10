@@ -166,7 +166,7 @@ function PatientProfile() {
                       spacing={1}
                       alignItems="baseline"
                       >
-                        <DropdownStatus></DropdownStatus>
+                      <DropdownStatus patientInfo={patientInfo}/>
                       <Item className="profile-data" sx={{ bgcolor: "inherit", boxShadow: "none" }}>Temperature: {patientInfo && patientInfo.temperature} °C</Item>
                       <Item className="profile-data" sx={{ bgcolor: "inherit", boxShadow: "none" }}>Weight: {patientInfo && patientInfo.weight} lbs</Item>
                     </Stack>
