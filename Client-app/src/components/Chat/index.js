@@ -1,7 +1,5 @@
 import { Grid, Avatar, TextField, Button, Box } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import BottomNav from "../BottomNav";
-import Navbar from "../Navbar";
 import { useEffect, useState, useRef } from "react";
 import { db, auth } from "../../backend/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";

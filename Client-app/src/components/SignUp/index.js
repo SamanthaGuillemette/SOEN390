@@ -153,7 +153,6 @@ export default function SignUp(props) {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 10,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
