@@ -4,8 +4,8 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { makeStyles } from "@material-ui/core/styles";
-import { useEffect, useState } from "react";
-import { getPatient, setStatus } from "../../backend/firebasePatientUtilities";
+import { useEffect} from "react";
+import { setStatus } from "../../backend/firebasePatientUtilities";
 import "./DropdownStatus.css";
 
 // adding styling

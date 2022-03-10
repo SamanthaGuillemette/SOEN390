@@ -1,5 +1,5 @@
 
-import { collection, doc, getDocs, getDoc, setDoc, updateDoc, deleteField } from "firebase/firestore";
+import { collection, doc, getDocs, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import patientData from "../data/patients.json";
 import { db } from "./firebase";
 
