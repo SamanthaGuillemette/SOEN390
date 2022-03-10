@@ -20,6 +20,7 @@ import FlagIcon from "@mui/icons-material/Flag";
 import "./PatientList.css";
 import { useEffect, useState } from "react";
 import { getPatients } from "../../backend/firebasePatientUtilities";
+import { getDoctors } from "../../backend/firebaseDoctorUtilities";
 
 // adding styling
 const dropdownStyle = makeStyles({
@@ -199,6 +200,17 @@ function PatientList() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [patientsList, setPatientsList] = useState(null);
+  const [doctorsList, setDoctorsList] = useState(null);
+
+  useEffect(() => {
+    getDoctors().then((data) => {
+      let results = [];
+      data.forEach((doc) => {
+        results[doc.id] = doc;
+      });
+      setDoctorsList(results);
+    });
+  }, []);
 
   useEffect(() => {
     getPatients().then((data) => {
@@ -218,7 +230,7 @@ function PatientList() {
               {doc.status}
             </span>,
             doc.upcomingAppointment,
-            doc.assignedDoctor,
+            doc.assignedDoctor && doctorsList && doctorsList[doc.assignedDoctor] && doctorsList[doc.assignedDoctor].name,
             <FlagIcon
               className={
                 doc.flaggedPriority === "0"
@@ -234,7 +246,7 @@ function PatientList() {
       });
       setPatientsList(results);
     });
-  }, []);
+  }, [doctorsList]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
