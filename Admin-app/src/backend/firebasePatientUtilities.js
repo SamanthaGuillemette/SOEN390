@@ -80,16 +80,19 @@ const getPatients = async () => {
   };
 
   const setStatus = async (patientId, status) => {
+
     try 
     {
       // Get Patient
       const docRef = doc(db, tableName, patientId);
       let patientInfo = await getPatient(patientId);
   
-      if (status != null)
-      {
-        // Update Assigned Doctor field in Patient
-        docRef && await updateDoc(docRef, "status", status);
+      if (patientInfo) {
+        if (status != null)
+        {
+          // Update status field in Patient
+          docRef && await updateDoc(docRef, "status", status);
+        }
       }
   
       // Get updated patient
