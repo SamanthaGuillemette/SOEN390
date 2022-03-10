@@ -1,0 +1,50 @@
+.doctorInfo-box__container {
+  height: 105vh;
+  background: var(--background-secondary);
+}
+
+.doctorInfo-card__profile {
+  padding-top: 15px !important;
+  position: relative;
+  background: var(--background-main) !important;
+  color: var(--text-primary) !important;
+}
+
+#doctorInfo-card__img {
+  width: 180px;
+  height: 180px;
+  box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.12);
+}
+
+.doctorInfo-card__profileText {
+  text-align: center;
+}
+
+.doctorInfo-card__profileTextDetail {
+  font-size: 1rem;
+  margin: 2px 0;
+  color: var(--text-main);
+}
+
+.doctorInfo-card__profileName {
+  text-align: center;
+  font-weight: bold !important;
+}
+
+.doctorInfo-card__info {
+  border-style: none;
+  background: var(--background-main) !important;
+}
+
+.doctorInfo-card__data {
+  color: var(--text-primary) !important;
+  font-weight: 500 !important;
+  font-size: 0.96rem !important;
+}
+
+.doctorInfo-card__header {
+  color: var(--text-inactive) !important;
+  text-transform: uppercase;
+  opacity: 0.7;
+  font-weight: 900 !important;
+}
