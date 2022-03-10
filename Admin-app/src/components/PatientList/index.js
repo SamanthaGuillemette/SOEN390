@@ -79,7 +79,7 @@ function Row(props) {
 
   return (
     <React.Fragment>
-      <TableRow className={ row.statusReview === "Status Reviewed" ? "PatientList-reviewedStatus" : "PatientList-not-reviewedStatus" }>
+      <TableRow className={ row.statusReview === "Status Reviewed" ? "PatientList-reviewedStatus" : "" }>
         <TableCell sx={{ borderColor: "var(--background-secondary)" }}>
           <IconButton
             aria-label="expand row"

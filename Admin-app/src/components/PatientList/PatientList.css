@@ -61,14 +61,6 @@
   color: var(--primary-main) !important;
 }
 
-.rowsss {
-  background-color: yellow !important;
-}
-
-.ress {
-  background-color: red !important;
-}
-
 .label-positive {
   text-transform: uppercase;
   color: rgba(218, 207, 250);
@@ -100,14 +92,5 @@
 }
 
 .PatientList-reviewedStatus {
-  background: #949be2;
-}
-
-.PatientList-not-reviewedStatus {
-  background: var(--background-secondary);
-}
-
-/*might not be the right element for hover*/
-TableRow:hover {
-  background: var(--primary-light) !important;
+  background: rgb(148, 155, 226, 0.3);
 }
