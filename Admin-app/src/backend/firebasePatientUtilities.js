@@ -73,6 +73,33 @@ const setAssignedDoctor = async (patientId, doctorId) => {
   }
 };
 
+const setStatus = async (patientId, status) => {
+
+  try 
+  {
+    // Get Patient
+    const docRef = doc(db, tableName, patientId);
+    let patientInfo = await getPatient(patientId);
+
+    if (patientInfo) {
+      if (status != null)
+      {
+        // Update status field in Patient
+        docRef && await updateDoc(docRef, "status", status);
+      }
+    }
+
+    // Get updated patient
+    patientInfo = await getPatient(patientId);      
+
+    return patientInfo;
+  }
+  catch (error)
+  {
+    console.log("[setStatus]" + error);  
+  }
+};
+
 /**
  * This function populates the Patient table in firebase given a JSON file
  * imported at the beginning of this file
@@ -88,4 +115,5 @@ export {
   togglePriorityFlag,
   setAssignedDoctor,
   isValidPatientId,
+  setStatus
 };
