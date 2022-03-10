@@ -50,8 +50,13 @@ h5.symptomsTitle {
   border: 1px solid var(--info-border);
 }
 
-.profile-data {
+.profile-data, .doctor-name {
   color: var(--text-primary) !important;
   font-weight: 500 !important;
   font-size: 0.96rem !important;
+}
+
+.doctor-name {
+  margin-top: 18px !important;
+  display: inline-block !important;
 }
