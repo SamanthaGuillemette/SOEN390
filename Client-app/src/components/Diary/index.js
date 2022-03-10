@@ -52,10 +52,15 @@ function DiaryTable() {
             <TableCell
               className="header"
               sx={{ borderColor: "var(--secondary-light)" }}
+            ></TableCell>
+            {/* Second column header */}
+            <TableCell
+              className="header"
+              sx={{ borderColor: "var(--secondary-light)" }}
             >
               Contact Date
             </TableCell>
-            {/* Second column header */}
+            {/* Third column header */}
             <TableCell
               className="header"
               sx={{ borderColor: "var(--secondary-light)" }}
@@ -69,8 +74,14 @@ function DiaryTable() {
         <TableBody>
           {rows.map((row, index) => (
             <TableRow key={index}>
-              <DiaryEntryModal />
-
+              <TableCell
+                className="data"
+                sx={{ borderColor: "var(--primary-light)" }}
+                component="th"
+                scope="row"
+              >
+                <DiaryEntryModal />
+              </TableCell>
               <TableCell
                 className="data"
                 sx={{ borderColor: "var(--primary-light)" }}

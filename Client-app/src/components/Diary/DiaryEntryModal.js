@@ -14,10 +14,9 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
 import Fab from "@mui/material/Fab";
-import EditIcon from "@mui/icons-material/Edit";
-
+import BookIcon from "@mui/icons-material/Book";
 const style = {
-  position: "absolute",
+  //position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
@@ -41,12 +40,13 @@ const DiaryEntryModal = () => {
   return (
     <div sx={style}>
       <Fab
+        sx={{ boxShadow: 3 }}
         onClick={handleEntryOpen}
         color="primary"
-        aria-label="edit"
-        className="clientProfile-editIcon"
+        aria-label="openEntry"
+        className="diaryEntry-openIcon"
       >
-        <EditIcon fontSize="small" />
+        <BookIcon fontSize="small" />
       </Fab>
       <Dialog
         open={openEntry}
@@ -55,7 +55,7 @@ const DiaryEntryModal = () => {
         aria-describedby="diary-entry-description"
       >
         <DialogTitle id="diary-entry-dialog-title">
-          <img className="symptoms__icon" src={NoteIcon} alt="Diary" />
+          <img className="diary__icon" src={NoteIcon} alt="Diary" />
           Diary Entry
         </DialogTitle>
         <DialogContent>
