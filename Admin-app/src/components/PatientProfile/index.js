@@ -25,6 +25,7 @@ import { useParams } from "react-router-dom";
 import {
   getPatient,
   togglePriorityFlag,
+  toggleReviewed
 } from "../../backend/firebasePatientUtilities";
 import DropdownStatus from "./../DropdownStatus";
 import DropdownDoctor from "./../DropdownDoctor";
@@ -85,6 +86,21 @@ function PatientProfile() {
     };
   }
 
+  // reviewed status with DB
+  function onReviewedClick(id)
+  {
+    if (checked == true) {
+      setReviewingStatus("Not Completed");
+      setChecked(false);
+    } else {
+      setReviewingStatus("Status Reviewed");
+      setChecked(true);
+    }
+    //{patientInfo && patientInfo.statusReview}
+    toggleReviewed(id)
+    .then((newPatientInfo) => newPatientInfo);
+  }  
+
   // priority flag with DB
   function onFlagClick(id) {
     togglePriorityFlag(id).then(
@@ -98,11 +114,12 @@ function PatientProfile() {
     createData("Jan 25", "No", "Yes", "No", "Yes", "Yes", "No", "No"),
     createData("Jan 26", "No", "Yes", "No", "No", "No", "No", "No"),
   ];
-
-  const [priorityFlag, setPriorityFlag] = useState(false);
-
+  
   const { id } = useParams();
+  const [priorityFlag, setPriorityFlag] = useState(false);
   const [patientInfo, setPatientInfo] = useState(null);
+  const [checked, setChecked] = useState('');
+  const [reviewingStatus, setReviewingStatus] = useState('');
 
   // Get Patient Info each time page refreshes
   useEffect(() => {
@@ -111,6 +128,13 @@ function PatientProfile() {
       .then((data) => {
         setPatientInfo(data);
         setPriorityFlag(data.flaggedPriority === "1");
+        if (data.statusReview === "Not Completed") {
+          setChecked(false); 
+          setReviewingStatus("Not Completed");     
+        } else {
+          setChecked(true); 
+          setReviewingStatus("Status Reviewed");
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -255,10 +279,9 @@ function PatientProfile() {
                     Status Review
                   </Typography>
                   <Typography className="profile-data" variant="body2">
-                    Review Completed:{" "}
-                    <Checkbox
-                      size="small"
-                      style={{ color: "var(--text-primary)" }}
+                    Review Completed: {reviewingStatus}
+                    <Checkbox checked={checked} size="small" style={{ color: "var(--text-primary)" }}
+                    onClick={() => {( onReviewedClick(id));}}
                     />
                   </Typography>
                 </CardContent>

@@ -64,3 +64,7 @@
 .patient-row.flagged {
   background: var(--info-background);
 }
+
+.PatientList-reviewedStatus {
+  background: rgb(148, 155, 226, 0.2);
+}
