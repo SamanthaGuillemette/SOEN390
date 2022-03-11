@@ -61,14 +61,6 @@
   color: var(--primary-main) !important;
 }
 
-.rowsss {
-  background-color: yellow !important;
-}
-
-.ress {
-  background-color: red !important;
-}
-
 .label-positive {
   text-transform: uppercase;
   color: rgba(218, 207, 250);
@@ -96,10 +88,9 @@
 }
 
 .patient-row.flagged {
-  background: var(--info-background);
+  background: var(--primary-main);
 }
 
-/*might not be the right element for hover*/
-TableRow:hover {
-  background: var(--primary-light) !important;
+.PatientList-reviewedStatus {
+  background: rgb(148, 155, 226, 0.2);
 }
