@@ -226,7 +226,7 @@ function PatientList() {
             doc.id,
             <span
               className={
-                doc.status === "POSITIVE" ? "label-positive" : "label-negative"
+                (doc.status === "POSITIVE") ? "label-positive" : (doc.status === "NEGATIVE") ? "label-negative" : "label-unconfirmed"
               }
             >
               {doc.status}
