@@ -89,22 +89,22 @@ export default function SimpleModal() {
             </Grid>
 
             <Grid item style = {{maxWidth: "160px"}} sx={{ lineHeight: 3 }} xs={12} sm={6}>
-              <FormControlLabel control={<Checkbox style ={{color: "lightskyblue",}}/> } label={<Typography variant="subtitle2" style={{ color: "white" }}>Fever</Typography>} labelPlacement="start"/>
+              <FormControlLabel control={<Checkbox style ={{color: "lightskyblue",}}/> } label={<Typography variant="subtitle2" style={{ color: "white" }}>Fever</Typography>}/>
             </Grid>
             <Grid item style = {{maxWidth: "160px"}} sx={{ lineHeight: 3 }} xs={12} sm={6}>
-              <FormControlLabel control={<Checkbox style ={{color: "lightskyblue",}}/> } label={<Typography variant="subtitle2" style={{ color: "white" }}>Sore Throat</Typography>} labelPlacement="start"/>
+              <FormControlLabel control={<Checkbox style ={{color: "lightskyblue",}}/> } label={<Typography variant="subtitle2" style={{ color: "white" }}>Sore Throat</Typography>}/>
             </Grid>
             <Grid item style = {{maxWidth: "160px"}} xs={12} sm={6}>
-              <FormControlLabel control={<Checkbox style ={{color: "lightskyblue",}}/> } label={<Typography variant="subtitle2" style={{ color: "white" }}>Tiredness</Typography>} labelPlacement="start"/>
+              <FormControlLabel control={<Checkbox style ={{color: "lightskyblue",}}/> } label={<Typography variant="subtitle2" style={{ color: "white" }}>Cough</Typography>}/>
             </Grid>
             <Grid item style = {{maxWidth: "160px"}} xs={12} sm={6}>
-              <FormControlLabel control={<Checkbox style ={{color: "lightskyblue",}}/> } label={<Typography variant="subtitle2" style={{ color: "white" }}>Runny Nose</Typography>} labelPlacement="start"/>
+              <FormControlLabel control={<Checkbox style ={{color: "lightskyblue",}}/> } label={<Typography variant="subtitle2" style={{ color: "white" }}>Runny Nose</Typography>}/>
             </Grid>
             <Grid item style = {{maxWidth: "160px"}} xs={12} sm={6}>
-              <FormControlLabel control={<Checkbox style ={{color: "lightskyblue",}}/> } label={<Typography variant="subtitle2" style={{ color: "white" }}>Cough</Typography>} labelPlacement="start"/>
+              <FormControlLabel control={<Checkbox style ={{color: "lightskyblue",}}/> } label={<Typography variant="subtitle2" style={{ color: "white" }}>Tiredness</Typography>}/>
             </Grid>
             <Grid item style = {{maxWidth: "160px"}} xs={12} sm={6}>
-              <FormControlLabel control={<Checkbox style ={{color: "lightskyblue",}}/> } label={<Typography variant="subtitle2" style={{ color: "white" }}>Smell Loss</Typography>} labelPlacement="start"/>
+              <FormControlLabel control={<Checkbox style ={{color: "lightskyblue",}}/> } label={<Typography variant="subtitle2" style={{ color: "white" }}>Smell Loss</Typography>}/>
             </Grid>
           </Grid>
           <Button
