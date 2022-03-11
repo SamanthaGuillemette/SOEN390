@@ -24,6 +24,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getPatient, togglePriorityFlag, toggleReviewed } from "../../backend/firebasePatientUtilities";
 import DropdownConfirmation from "../DropdownConfirmation/index";
+import DropdownDoctor from "../DropdownDoctor/index";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -212,10 +213,8 @@ function PatientProfile() {
                   <Typography className="header" gutterBottom variant="button" component="div">
                     Assigned Doctor
                   </Typography>
-                  <Typography className="profile-data" variant="body2">
-                    Name: {patientInfo && patientInfo.assignedDoctor}
-                    <Checkbox size="small" style={{ color: "var(--text-primary)" }}/>
-                  </Typography>
+                  <Typography className="doctor-name" variant="body2"> Name: </Typography>
+                  <DropdownDoctor patientInfo={patientInfo} />
                 </CardContent>
               </CardActionArea>
             </Card>

@@ -1,83 +1,59 @@
-
-import { collection, doc, getDocs, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import patientData from "../data/patients.json";
 import { db } from "./firebase";
+import { getTableData, getTableDataItem, populateTable } from "./firebaseUtilities";
+import { doc, updateDoc, deleteField } from "firebase/firestore";
 
 const tableName = "Patients";
 
 const getPatients = async () => {
-  try
-  {
-    console.log("getPatients Called");
-    const querySnapshot = await getDocs(collection(db, tableName));
-    const returnValue = querySnapshot.docs.map((patient) => patient.data());
-    return returnValue;
-  }
-  catch(error)
-  {
-    console.log("[getPatients]" + error);  
-  }
+  return getTableData(tableName);
 };
   
-  const getPatient = async (id) => {
-    try
-    {
-      // Do call to firebase
-      const docRef = doc(db, tableName, id);
-      const docSnapShot = await getDoc(docRef);
-      
-      // If file exists, return it
-      if (docSnapShot.exists()) {
-        console.log("Patient document Found!");
-        return docSnapShot.data();
-      } 
-      else {
-        // If not found, write to console.
-        console.log("Patient document not found");
-      }
-    }
-    catch(error)
-    {
-      console.log("[getPatient]" + error);  
-    }
-  };
+const getPatient = async (id) => {
+  return getTableDataItem(tableName, id);
+};
 
-  const togglePriorityFlag = async (id) => {
-    try
+const isValidPatientId = async (id) => {
+  return getPatient(id) != null;
+};
+
+const togglePriorityFlag = async (id) => {
+  try
+  {
+    // Get Patient
+    const docRef = doc(db, tableName, id);
+    let patientInfo = await getPatient(id);
+
+    // Set priorityFlag value 
+    let priorityFlag;
+
+    if (patientInfo)
     {
-      // Get Patient
-      const docRef = doc(db, tableName, id);
-      let patientInfo = await getPatient(id);
-
-      // Set priorityFlag value 
-      let priorityFlag;
-
-      if (patientInfo)
+      if (patientInfo.flaggedPriority === '0')
       {
-        if (patientInfo.flaggedPriority === '0')
-        {
-          priorityFlag = "1";
-        }
-        else
-        {
-          priorityFlag = "0";
-        }
+        priorityFlag = "1";
       }
-
-      // Update DB with new value
-      docRef && await updateDoc(docRef, "flaggedPriority", priorityFlag);
-
-      // Get updated patient
-      patientInfo = await getPatient(id);      
-
-      return patientInfo;
+      else
+      {
+        priorityFlag = "0";
+      }
     }
 
-    catch(error)
-    {
-      console.log("[togglePriorityFlag]" + error);  
-    }
-  };
+    // Update DB with new value
+    docRef && await updateDoc(docRef, "flaggedPriority", priorityFlag);
+
+    // Get updated patient
+    patientInfo = await getPatient(id);      
+
+    return patientInfo;
+  }
+
+  catch(error)
+  {
+    console.log("[togglePriorityFlag]" + error);  
+  }
+};
+
 
   const toggleReviewed = async (id) => {
     try
@@ -115,25 +91,43 @@ const getPatients = async () => {
       console.log("[toggleReviewed]" + error);  
     }
   };
+const setAssignedDoctor = async (patientId, doctorId) => {
+  try 
+  {
+    // Get Patient
+    const docRef = doc(db, tableName, patientId);
+    let patientInfo = await getPatient(patientId);
 
-  
-  /**
-   * This function populates the Patient table in firebase given a JSON file
-   * imported at the beginning of this file
-   */  
-  const populatePatients = () => {
-    try
+
+    if (doctorId != null)
     {
-      const patientsRef = collection(db, tableName);
-  
-      patientData.map((patientData) =>
-        setDoc(doc(patientsRef, patientData.id), patientData));
+      // Update Assigned Doctor field in Patient
+      docRef && await updateDoc(docRef, "assignedDoctor", doctorId);
     }
-    catch(error)
+    else
     {
-      console.log("[populatePatients]" + error);  
+      // Delete Assigned Doctor field in Patient
+      docRef && await updateDoc(docRef, { "assignedDoctor": deleteField() });
     }
+
+    // Get updated patient
+    patientInfo = await getPatient(patientId);      
+
+    return patientInfo;
   }
+  catch (error)
+  {
+    console.log("[setAssignedDoctor]" + error);  
+  }
+};
 
-  export { getPatients, getPatient, populatePatients, togglePriorityFlag, toggleReviewed };
+/**
+ * This function populates the Patient table in firebase given a JSON file
+ * imported at the beginning of this file
+ */  
+const populatePatients = () => {
+  populateTable(tableName, patientData);
+}
+
+export { getPatients, getPatient, populatePatients, togglePriorityFlag,setAssignedDoctor, isValidPatientId, toggleReviewed };
   
