@@ -103,14 +103,16 @@ const Dashboard = () => {
             </Link>
           </Grid>
           <Grid item xs={12}>
-            <div className="dashboard-card__container">
-              <img
-                className="dashboard-card__img"
-                src={HealthCareIcon}
-                alt="Update Status"
-              />
-              <p className="dashboard-card__title">Update status</p>
-            </div>
+            <Link to="../status">
+              <div className="dashboard-card__container">
+                <img
+                  className="dashboard-card__img"
+                  src={HealthCareIcon}
+                  alt="Update Status"
+                />
+                <p className="dashboard-card__title">Update status</p>
+              </div>
+            </Link>
           </Grid>
         </Grid>
       </Box>
