@@ -1,18 +1,15 @@
+import "./UpdateStatus.css";
 import * as React from "react";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import { styled } from "@mui/material/styles";
+import Grid from "@material-ui/core/Grid";
+import Button from '@mui/material/Button';
+import StatusModal from "./StatusModal";
 
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(0.5),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
 
 function UpdateStatus() {
   return (
-    <Box></Box>
+    <Grid container justify="center">
+     <StatusModal />
+    </Grid>
   );
 }
 
