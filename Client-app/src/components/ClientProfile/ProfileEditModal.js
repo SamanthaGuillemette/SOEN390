@@ -16,6 +16,7 @@ import { inputLabelClasses } from "@mui/material/InputLabel";
 import FormIcon from "../../assets/form.svg";
 import "./ClientProfile.css";
 import { useSelector } from "react-redux";
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 // import { updateUserInfo } from "../../store/userInfoSlice";
 
 const style = {
@@ -58,10 +59,17 @@ export default function BasicModal() {
   const [profileImage, setProfileImage] = useState(
     userInfoDetails?.profileImage
   );
+  const [buttonColor, setButtonColor] = useState("var(--primary-main)");
+  const [icon, setIcon] = useState(false);
+
 
   // Handle the popup open/close state
   const handleOpen = () => setOpenPopup(true);
-  const handleClose = () => setOpenPopup(false);
+  const handleClose = () => {
+    setOpenPopup(false);
+    setButtonColor("var(--primary-main)");
+    setIcon(false);
+  }
 
   // Convert DOB to string (Works better this way compared to the SignUp component)
   const handleUpdateDOB = (newDate) => {
@@ -97,6 +105,11 @@ export default function BasicModal() {
 
     // Close the popup after user submit the form
     handleClose();
+  };
+
+  const HandleUpdate = () => {
+    setButtonColor("#27ae60");
+    setIcon(true);
   };
 
   return (
@@ -306,9 +319,11 @@ export default function BasicModal() {
             type="submit"
             variant="contained"
             className="update-button"
+            style={{ backgroundColor: buttonColor}}
+            onClick={HandleUpdate}
             sx={{ mt: 3, mb: 2 }}
           >
-            UPDATE
+            {icon ? <CheckCircleOutlineIcon sx={{fontSize: '175%'}}></CheckCircleOutlineIcon> : "UPDATE"}
           </Button>
           <Button
             type="submit"

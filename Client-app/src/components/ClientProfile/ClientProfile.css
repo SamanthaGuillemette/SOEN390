@@ -148,8 +148,8 @@
 }
 
 .update-button {
-  background-color: var(--primary-main) !important;
   color: var(--text-primary) !important;
+  width: 10% !important;
 }
 
 .update-button:hover {
