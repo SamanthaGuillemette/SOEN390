@@ -37,6 +37,18 @@ const style = {
   p: 4,
 };
 
+const styleForModal = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: "var(--background-main)",
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
 function Copyright(props) {
   return (
     <Typography variant="body2" align="center" {...props}>
@@ -197,7 +209,7 @@ export default function SignIn() {
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
             >
-              <Box sx={style}>
+              <Box sx={styleForModal}>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
                   Error
                 </Typography>
