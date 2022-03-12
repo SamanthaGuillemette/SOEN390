@@ -4,6 +4,8 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { makeStyles } from "@material-ui/core/styles";
+import { useEffect} from "react";
+import { setStatus } from "../../backend/firebasePatientUtilities";
 import "./DropdownStatus.css";
 
 // adding styling
@@ -17,24 +19,29 @@ const dropdownStyle = makeStyles({
   },
 });
 
-function DropdownStatus() {
+function DropdownStatus(props) {
   const classes = dropdownStyle(); // adding styling
-  const [status, setStatus] = React.useState(''); // empty string
+  const [patientInfo, setPatientInfo] = React.useState(null);
+  
+  useEffect(() => {
+    props && props.patientInfo && setPatientInfo(props.patientInfo);
+  }, [props, props.patientInfo]);
 
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
-    setStatus(
-      typeof value === 'string' ? value.split(',') : value, // setting status to be the string chosen
-    );
+
+    if (patientInfo != null && patientInfo.status) { // if status and patient exists
+      setStatus(patientInfo.id, value).then((newPatientInfo) => setPatientInfo(newPatientInfo)); // then setting
+    }
   };
 
   return (
       <FormControl sx={{minWidth: 130 }}>
-        <InputLabel className="data" shrink={false}>{status === '' && 'Select Status'}</InputLabel> {/* removing the shrinking of the form title */}
+        <InputLabel className="data" shrink={false}></InputLabel> {/* removing the shrinking of the form title */}
         <Select data-testid = "select3"
-          value={status}
+          value={patientInfo && patientInfo.status} // setting value to be the new status
           onChange={handleChange} // changing the text to the chosen
           inputProps={{
             classes: {
@@ -52,11 +59,14 @@ function DropdownStatus() {
             }
           }}
         >
-        <MenuItem value="positive"> {/* dropdown option 2 */}
+        <MenuItem value="POSITIVE"> {/* dropdown option 1 */}
             <span class="label-positive">positive</span>
         </MenuItem>
-        <MenuItem value="negative"> {/* dropdown option 1 */}
+        <MenuItem value="NEGATIVE"> {/* dropdown option 2 */}
             <span class="label-negative">negative</span>
+        </MenuItem>
+        <MenuItem value="UNCONFIRMED"> {/* dropdown option 3 */}
+            <span class="label-unconfirmed">unconfirmed</span>
         </MenuItem>
         </Select>
       </FormControl>

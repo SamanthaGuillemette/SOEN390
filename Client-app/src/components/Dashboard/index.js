@@ -29,7 +29,9 @@ const Dashboard = () => {
                 src={CalendarIcon}
                 alt="Appointment"
               />
-              <p data-testid = "appointment" className="dashboard-card__title">Appointment</p>
+              <p data-testid="appointment" className="dashboard-card__title">
+                Appointment
+              </p>
             </div>
           </Grid>
 
@@ -89,16 +91,17 @@ const Dashboard = () => {
             </div>
           </Grid>
           <Grid item xs={12}>
-            <div className="dashboard-card__container">
-              <img
-                className="dashboard-card__img"
-                src={DoctorIcon}
-                alt="My Doctor"
-              />
-              <p className="dashboard-card__title">My Doctor</p>
-            </div>
+            <Link to="../mydoctor">
+              <div className="dashboard-card__container">
+                <img
+                  className="dashboard-card__img"
+                  src={DoctorIcon}
+                  alt="My Doctor"
+                />
+                <p className="dashboard-card__title">My Doctor</p>
+              </div>
+            </Link>
           </Grid>
-
           <Grid item xs={12}>
             <div className="dashboard-card__container">
               <img

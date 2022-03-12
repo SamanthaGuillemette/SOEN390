@@ -20,6 +20,7 @@ import FlagIcon from "@mui/icons-material/Flag";
 import "./PatientList.css";
 import { useEffect, useState } from "react";
 import { getPatients } from "../../backend/firebasePatientUtilities";
+import { getDoctors } from "../../backend/firebaseDoctorUtilities";
 
 // adding styling
 const dropdownStyle = makeStyles({
@@ -49,6 +50,7 @@ function createData(
   appointment,
   doctor,
   priority,
+  statusReview,
   temperature,
   weight,
   height
@@ -60,6 +62,7 @@ function createData(
     appointment,
     doctor,
     priority,
+    statusReview,
     symptoms: [
       {
         temperature,
@@ -77,20 +80,20 @@ function Row(props) {
 
   return (
     <React.Fragment>
-      <TableRow>
+      <TableRow className={ row.statusReview === "Status Reviewed" ? "PatientList-reviewedStatus" : "" }>
         <TableCell sx={{ borderColor: "var(--background-secondary)" }}>
           <IconButton
             aria-label="expand row"
             size="small"
             onClick={() => setOpen(!open)}
-            sx={{ color: "var(--text-inactive)" }}
+            sx={{ color: "var(--text-primary)" }}
           >
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />} {/* changing icon to up or down based on open or not */}
           </IconButton>
         </TableCell>
         {/* Displaying row of data */}
         <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" component="th" scope="row" align="left">
-        {row.patientname}
+         {row.patientname}
         </TableCell>
         <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="left" >
           {row.id}
@@ -108,7 +111,7 @@ function Row(props) {
           {row.priority}
         </TableCell>
       </TableRow>
-      <TableRow>
+      <TableRow >
         <TableCell
           sx={{ borderColor: "var(--background-secondary)" }}
           style={{ paddingBottom: 0, paddingTop: 0 }}
@@ -199,6 +202,17 @@ function PatientList() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [patientsList, setPatientsList] = useState(null);
+  const [doctorsList, setDoctorsList] = useState(null);
+
+  useEffect(() => {
+    getDoctors().then((data) => {
+      let results = [];
+      data.forEach((doc) => {
+        results[doc.id] = doc;
+      });
+      setDoctorsList(results);
+    });
+  }, []);
 
   useEffect(() => {
     getPatients().then((data) => {
@@ -212,13 +226,13 @@ function PatientList() {
             doc.id,
             <span
               className={
-                doc.status === "POSITIVE" ? "label-positive" : "label-negative"
+                (doc.status === "POSITIVE") ? "label-positive" : (doc.status === "NEGATIVE") ? "label-negative" : "label-unconfirmed"
               }
             >
               {doc.status}
             </span>,
             doc.upcomingAppointment,
-            doc.assignedDoctor,
+            doc.assignedDoctor && doctorsList && doctorsList[doc.assignedDoctor] && doctorsList[doc.assignedDoctor].name,
             <FlagIcon
               className={
                 doc.flaggedPriority === "0"
@@ -226,6 +240,7 @@ function PatientList() {
                   : "priority-flag clicked"
               }
             ></FlagIcon>,
+            doc.statusReview,
             doc.temperature + "°C",
             doc.weight + " lbs",
             doc.heightFeet + "' " + doc.heightInches + '"'
@@ -234,7 +249,7 @@ function PatientList() {
       });
       setPatientsList(results);
     });
-  }, []);
+  }, [doctorsList]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

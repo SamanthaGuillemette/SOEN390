@@ -15,6 +15,7 @@ import Notifications from "./screens/Notifications";
 import QR from "./screens/QR";
 import ClientProfile from "./screens/Profile";
 import Symptoms from "./screens/Symptoms";
+import MyDoctor from "./screens/MyDoctor";
 
 function App() {
   const [user, loading] = useAuthState(auth);
@@ -68,6 +69,7 @@ function App() {
           <Route path="/symptoms" element={<Symptoms />} />
           <Route path="/notifications" element={<Notifications />} />
           <Route path="clientinbox" element={<Chat />} />
+          <Route path="/mydoctor" element={<MyDoctor />} />
         </Routes>
       )}
       {!user && (
