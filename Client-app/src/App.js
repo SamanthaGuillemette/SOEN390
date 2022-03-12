@@ -16,6 +16,7 @@ import QR from "./screens/QR";
 import ClientProfile from "./screens/Profile";
 import Symptoms from "./screens/Symptoms";
 import MyDoctor from "./screens/MyDoctor";
+import Appointment from "./screens/Appointment";
 
 function App() {
   const [user, loading] = useAuthState(auth);
@@ -69,6 +70,7 @@ function App() {
           <Route path="/symptoms" element={<Symptoms />} />
           <Route path="clientinbox" element={<Chat />} />
           <Route path="/mydoctor" element={<MyDoctor />} />
+          <Route path="/appointment" element={<Appointment />} />
         </Routes>
       )}
       {!user && (

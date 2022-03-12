@@ -96,7 +96,8 @@ const MenuAppBar = () => {
               {list()}
             </Drawer>
           </IconButton>
-          <Typography data-testid = "title"
+          <Typography
+            data-testid="title"
             variant="h6"
             component="div"
             color="var(--text-primary)"

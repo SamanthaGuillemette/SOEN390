@@ -1,0 +1,34 @@
+.appointment-topContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-dark);
+  padding: 60px 15%;
+  border-radius: 0 0 90px 0;
+  position: relative;
+}
+
+.appointment-quickAccessContainer {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.appointment-quickAccess_DoctorIcon {
+}
+
+.appointment-quickAccess_InboxButton {
+}
+
+.appointment-mainContainer {
+  padding: 50px 15%;
+}
+
+.appointment-topTitle {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+}
