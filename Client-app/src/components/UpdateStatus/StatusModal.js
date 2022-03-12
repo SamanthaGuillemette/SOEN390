@@ -7,6 +7,7 @@ import { Grid, TextField } from "@mui/material";
 import { inputLabelClasses } from "@mui/material/InputLabel";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 
 const style = {
@@ -30,7 +31,7 @@ export default function SimpleModal() {
 
   return (
     <div> 
-      <Button onClick={handleOpen} variant="outlined" className='updateStatus-button'>Add Status</Button>
+      <Button onClick={handleOpen} variant="outlined" className='updateStatus-button'><AddCircleIcon></AddCircleIcon></Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -101,10 +102,10 @@ export default function SimpleModal() {
               <FormControlLabel control={<Checkbox style ={{color: "lightskyblue",}}/> } label={<Typography variant="subtitle2" style={{ color: "white" }}>Runny Nose</Typography>}/>
             </Grid>
             <Grid item style = {{maxWidth: "160px"}} xs={12} sm={6}>
-              <FormControlLabel control={<Checkbox style ={{color: "lightskyblue",}}/> } label={<Typography variant="subtitle2" style={{ color: "white" }}>Tiredness</Typography>}/>
+              <FormControlLabel control={<Checkbox style ={{color: "lightskyblue",}}/> } label={<Typography variant="subtitle2" style={{ color: "white" }}>Smell Loss</Typography>}/>
             </Grid>
             <Grid item style = {{maxWidth: "160px"}} xs={12} sm={6}>
-              <FormControlLabel control={<Checkbox style ={{color: "lightskyblue",}}/> } label={<Typography variant="subtitle2" style={{ color: "white" }}>Smell Loss</Typography>}/>
+              <FormControlLabel control={<Checkbox style ={{color: "lightskyblue",}}/> } label={<Typography variant="subtitle2" style={{ color: "white" }}>Muscle pain</Typography>}/>
             </Grid>
           </Grid>
           <Button

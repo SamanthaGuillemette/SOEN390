@@ -1,17 +1,40 @@
 .updateStatus-button{
-    color: rgb(155, 154, 154) !important;
-    border-color: rgb(155, 154, 154) !important;
-    top: 40px;
+  color: rgb(255, 255, 255) !important;
+  top: 20px;
+  margin-left: 80%;
+  border-color: var(--background-main);
 }
 
 .header-statusModal {
-    text-align: center;
-    font-weight: bold !important;
-    color: var(--text-primary) !important;
-  }
+  text-align: center;
+  font-weight: bold !important;
+  color: var(--text-primary) !important;
+}
 
-  .save-button {
-    background-color: var(--primary-main) !important;
-    color: var(--text-primary) !important;
-    margin-left: 125px !important;
-  }
+.save-button {
+  background-color: var(--primary-main) !important;
+  color: var(--text-primary) !important;
+  margin-left: 125px !important;
+}
+
+.updateStatus-table {
+  width: 56vh !important;
+  height: 70vh !important;
+  margin-top: 30px !important;
+  background-color: var(--background-main) !important;
+  border-radius: 20px !important;
+  padding: 1 !important;
+  justify-content: center;
+}
+
+.updateStatus-label {
+  background: inherit;
+  width: 100%;
+  height: 6.5vh;
+  padding: 5px;
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-size: 18px;
+  font-weight: 700;
+  padding-left: 16px;
+}
