@@ -27,7 +27,6 @@ import { Navigate } from "react-router-dom";
 import Modal from "@mui/material/Modal";
 import { createTheme } from "@material-ui/core/styles";
 import { inputLabelClasses } from "@mui/material/InputLabel";
-import { createImmutableStateInvariantMiddleware } from "@reduxjs/toolkit";
 
 const style = {
   position: "absolute",
@@ -93,12 +92,14 @@ export default function SignUp(props) {
   const [dob, setDOB] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [open, setOpen] = React.useState(false);
-  const [open2, setOpen2] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [error1, setError1] = useState(false);
+  const [error2, setError2] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const handleClose = () => {
     setOpen(false);
-    setOpen2(false);
+    setError1(false);
+    setError2(false);
   };
 
   const [user, loading] = useAuthState(auth);
@@ -112,22 +113,27 @@ export default function SignUp(props) {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
+      setError1(true);
       setOpen(true);
     } else {
-      const dobValue = dob.$D + "/" + (dob.$M + 1) + "/" + dob.$y;
-      await setDoc(doc(db, "Client", email), {
-        firstName: firstName,
-        lastName: lastName,
-        address: address,
-        postalCode: postalCode,
-        city: city,
-        province: province,
-        dob: dobValue,
-        email: email,
-      });
-      createUserWithEmailAndPassword(auth, email, password).catch((error) => {
+      createUserWithEmailAndPassword(auth, email, password)
+      .then(async() => {
+        const dobValue = dob.$D + "/" + (dob.$M + 1) + "/" + dob.$y;
+        await setDoc(doc(db, "Client", email), {
+          firstName: firstName,
+          lastName: lastName,
+          address: address,
+          postalCode: postalCode,
+          city: city,
+          province: province,
+          dob: dobValue,
+          email: email,
+        })}
+      )
+      .catch((error) => {
         setErrorMsg(error.message);
-        setOpen2(true);
+        setError2(true);
+        setOpen(true);
       });
     }
   };
@@ -403,7 +409,8 @@ export default function SignUp(props) {
             >
               Sign Up
             </Button>
-            {/* This model is used to display an error message for using the same email in the admin application as the client application  */}
+            {/* This model is used to display an error message for using the same email in the client application as the admin application 
+            and pertaining to the database such as wrong email or wrong password */}
             <Modal
               open={open}
               onClose={handleClose}
@@ -415,24 +422,8 @@ export default function SignUp(props) {
                   Error
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  This email has already been used for the Admin Application.
-                  Please use another email.
-                </Typography>
-              </Box>
-            </Modal>
-            {/* This model is used to display an error messages pertaining to the database such as wrong email or wrong password  */}
-            <Modal
-              open={open2}
-              onClose={handleClose}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              <Box sx={style}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                  Error
-                </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  {errorMsg}
+                  {error1 && "This email has already been used for the Admin Application. Please use another email."}
+                  {error2 && errorMsg}
                 </Typography>
               </Box>
             </Modal>

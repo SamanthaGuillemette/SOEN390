@@ -19,7 +19,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Navigate } from "react-router-dom";
 import Modal from "@mui/material/Modal";
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createTheme } from "@material-ui/core/styles";
 import { inputLabelClasses } from "@mui/material/InputLabel";
 import "./../SignUp/SignUp.css";
 
@@ -54,7 +54,7 @@ function Copyright(props) {
   );
 }
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     background: {
       default: "var(--background-secondary)",
@@ -68,11 +68,14 @@ const theme = createMuiTheme({
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [open, setOpen] = React.useState(false);
-  const [open2, setOpen2] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [error1, setError1] = useState(false);
+  const [error2, setError2] = useState(false);
+  // const [open2, setOpen2] = React.useState(false);
   const handleClose = () => {
     setOpen(false);
-    setOpen2(false);
+    setError1(false);
+    setError2(false);
   };
   const [user, loading] = useAuthState(auth);
 
@@ -86,9 +89,11 @@ export default function SignIn() {
 
     if (docSnap.exists()) {
       signInWithEmailAndPassword(auth, email, password).catch((error) => {
-        setOpen2(true);
+        setError2(true);
+        setOpen(true);
       });
     } else {
+      setError1(true);
       setOpen(true);
     }
   };
@@ -184,7 +189,8 @@ export default function SignIn() {
             >
               Sign In
             </Button>
-            {/* This model is used to display an error message for using the same email in the admin application as the client application  */}
+            {/* This model is used to display an error message for using the same email in the admin application as the client application. 
+            Also pertaining to the database such as wrong email or wrong password  */}
             <Modal
               open={open}
               onClose={handleClose}
@@ -196,24 +202,8 @@ export default function SignIn() {
                   Error
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  This email is not registered with the Administration
-                  application.
-                </Typography>
-              </Box>
-            </Modal>
-            {/* This model is used to display an error messages pertaining to the database such as wrong email or wrong password  */}
-            <Modal
-              open={open2}
-              onClose={handleClose}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              <Box sx={style}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                  Error
-                </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  Your password or email is incorrect. Please try again!
+                  {error1 && "This email is registered with the Client application."}
+                  {error2 && "Your password or email is incorrect. Please try again!"}
                 </Typography>
               </Box>
             </Modal>
