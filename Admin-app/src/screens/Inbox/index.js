@@ -68,12 +68,13 @@ const Inbox = () => {
             onSubmit={handleSubmit} 
             noValidate 
             component="form"
+            sx = {{ width: '100%', maxWidth: '100%' }}
             >
             <Grid container spacing={2}>
-                <Grid item xs={6}> 
+                <Grid item xs={4}> 
                     <ChatList func={pull_data} />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={8}>
                        <Grid container sx={{ mb: 2 }} >
                              <Typography variant="h5" className="header-message">{clientMessage}</Typography>
                        </Grid>
@@ -87,10 +88,10 @@ const Inbox = () => {
                                 </Grid>
                             </Grid>
                             <Grid container>
-                                <Grid item xs={2}>
+                                <Grid item xs={1} style={{ marginLeft: '20px',}}>
                                     <Avatar sx={{ bgcolor: pink[500] }}>{user.email.charAt(0).toUpperCase()}</Avatar>
                                 </Grid>
-                                <Grid item xs={6}>
+                                <Grid item xs={9}>
                                     <TextField
                                         required
                                         fullWidth
@@ -98,13 +99,14 @@ const Inbox = () => {
                                         autoFocus
                                         onChange={(e) => setMsgToSend(e.target.value)}
                                         placeholder="Type your message here..."
+                                        sx={{ bgcolor: 'var(--text-inactive)', borderRadius: '15px', marginBottom:'15px'}}
                                     />
                                 </Grid>
                                 <Grid item>
                                      <Button type="submit"
                                         fullWidth
                                         variant="contained"
-                                        sx={{ mb: 2 }} 
+                                        sx={{ mb: 1 }} 
                                         endIcon={<SendIcon />}
                                         disabled={!msgToSend}
                                         >

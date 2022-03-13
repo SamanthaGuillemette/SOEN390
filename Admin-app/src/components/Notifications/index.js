@@ -24,6 +24,7 @@ const Notifications = () => {
                     >
                         <Typography
                             sx={{
+                                mx: "30px",
                                 pb: "30px",
                                 fontWeight: "800",
                             }}
@@ -50,7 +51,7 @@ const Notifications = () => {
                                     >
                                         <b>Status Update</b>
                                     </Typography>
-                                    <CloseIcon className="notifications-closeIcon" />
+                                    <CloseIcon className="notifications-closingIcon"/>
                                 </Box>
                                 <Typography
                                     style={{
@@ -91,7 +92,7 @@ const Notifications = () => {
                                     >
                                         <b>New Case Reported</b>
                                     </Typography>
-                                    <CloseIcon className="notifications-closeIcon" />
+                                    <CloseIcon className="notifications-closingIcon " />
                                 </Box>
                                 <Typography
                                     style={{
@@ -132,7 +133,7 @@ const Notifications = () => {
                                     >
                                         <b>Urgent Case</b>
                                     </Typography>
-                                    <CloseIcon className="notifications-closeIcon" />
+                                    <CloseIcon className="notifications-closingIcon" />
                                 </Box>
                                 <Typography
                                     style={{

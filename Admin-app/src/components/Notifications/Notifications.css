@@ -1,5 +1,6 @@
 .admin-notifications-container {
     margin: auto;
+    width: 100%;
 }
 
 .admin-notifications-box {
@@ -9,10 +10,10 @@
     border-radius: 20px !important;
 }
 
-.notifications-closeIcon {
+.notifications-closingIcon {
     color: #949be2 !important;
     /* position: absolute !important;
-    right: 240px; */
+    right: 400px; */
 }
 
 .notifications-closeIcon:hover {
