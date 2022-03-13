@@ -61,45 +61,10 @@
   color: var(--primary-main) !important;
 }
 
-.rowsss {
-  background-color: yellow !important;
-}
-
-.ress {
-  background-color: red !important;
-}
-
-.label-positive {
-  text-transform: uppercase;
-  color: rgba(218, 207, 250);
-  background: rgba(83, 25, 231, 0.18);
-  border: 1px solid rgba(218, 207, 250, 0.3);
-  font-size: 0.7rem;
-  font-weight: 700;
-  border-radius: 0.375rem;
-  padding-bottom: 0.3rem !important;
-  padding: 0.55em 0.9em;
-  margin: auto;
-}
-
-.label-negative {
-  text-transform: uppercase;
-  color: rgba(58, 173, 255);
-  background: rgba(0, 117, 202, 0.18);
-  border: 1px solid rgba(58, 173, 255, 0.3);
-  font-size: 0.7rem;
-  font-weight: 700;
-  border-radius: 0.375rem;
-  padding-bottom: 0.3rem !important;
-  padding: 0.55em 0.9em;
-  margin: auto;
-}
-
 .patient-row.flagged {
   background: var(--info-background);
 }
 
-/*might not be the right element for hover*/
-TableRow:hover {
-  background: var(--primary-light) !important;
+.PatientList-reviewedStatus {
+  background: rgb(148, 155, 226, 0.2);
 }
