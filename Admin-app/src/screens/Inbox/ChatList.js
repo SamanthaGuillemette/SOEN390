@@ -10,7 +10,36 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { doc, collection, query,onSnapshot, orderBy, limit} from "firebase/firestore";
 import { db, auth } from "../../backend/firebase";
 import { useEffect, useState } from "react";
-import Chip from '@mui/material/Chip';
+import FlagIcon from "@mui/icons-material/Flag";
+
+function stringToColor(string) {
+    let hash = 0;
+    let i;
+  
+    /* eslint-disable no-bitwise */
+    for (i = 0; i < string.length; i += 1) {
+      hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+  
+    let color = '#';
+  
+    for (i = 0; i < 3; i += 1) {
+      const value = (hash >> (i * 8)) & 0xff;
+      color += `00${value.toString(16)}`.substr(-2);
+    }
+    /* eslint-enable no-bitwise */
+  
+    return color;
+  }
+  
+  function stringAvatar(name) {
+    return {
+      sx: {
+        bgcolor: stringToColor(name),
+      },
+      children: name.toUpperCase().charAt(0),
+    };
+  }
 
 // This function is responsible for showing the list of patients that belong to the doctor that is signed in. 
 // It communicates with its parent component to display the messages. 
@@ -38,7 +67,7 @@ export default function ChatList(props) {
     }
 
     return (
-        <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'white', height: '100%' }}>
+        <List sx={{ bgcolor: 'white', height: '100%' }}>
                 {clients && clients.map((client, index) => <div onClick={() => {handleClick(client)}}><PatientsList key={index} name={client} /></div>)}
         </List>
     );
@@ -68,13 +97,13 @@ function PatientsList(props) {
             <>
             <ListItem alignItems="flex-start">
                 <ListItemAvatar>
-                    <Avatar alt={name} />
+                    <Avatar {...stringAvatar(name)} />
                 </ListItemAvatar>
                 <ListItemText
                     primary= {
                         <React.Fragment>
-                            {name}
-                            {<Chip label="primary" color="primary" variant="outlined" />}
+                            <Typography style={{ maxWidth: '100px',}} color="var(--text-primary)"> {name} </Typography>
+                            {<FlagIcon label="primary" color="primary" variant="outlined" />}
                         </React.Fragment>}
                     secondary={
                         <React.Fragment>
@@ -82,7 +111,7 @@ function PatientsList(props) {
                     }
                 />
             </ListItem>
-            <Divider variant="inset" component="li" />
+            <Divider variant="inset" component="li"/>
         </>
         )
     }
@@ -90,23 +119,25 @@ function PatientsList(props) {
         <>
             <ListItem alignItems="flex-start">
                 <ListItemAvatar>
-                    <Avatar alt={name} />
+                    <Avatar {...stringAvatar(name)} />
                 </ListItemAvatar>
                 <ListItemText
                     primary= {
                         <React.Fragment>
-                            {name}
-                            {<Chip label="primary" color="primary" variant="outlined" />}
+                            <Typography color="var(--text-primary)"> 
+                                {name} 
+                                <FlagIcon style={{ marginLeft: '10px',}} label="error" color="error" variant="outlined" />
+                            </Typography>
                         </React.Fragment>}
                     secondary={
                         <React.Fragment>
-                            {lastMessage && lastMessage[0].message}
+                            <Typography style={{ maxWidth: '100px',}} color="var(--text-inactive)"> {lastMessage && lastMessage[0].message} </Typography>
                             {/* {"last comment"} */}
                         </React.Fragment>
                     }
                 />
             </ListItem>
-            <Divider variant="inset" component="li" />
+            <Divider variant="inset" component="li"/>
         </>
     )
 

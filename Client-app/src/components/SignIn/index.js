@@ -36,6 +36,18 @@ const style = {
   p: 4,
 };
 
+const styleForModal = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: "var(--background-main)",
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
 function Copyright(props) {
   return (
     <Typography variant="body2" align="center" {...props}>
@@ -69,10 +81,12 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [open, setOpen] = useState(false);
-  const [open2, setOpen2] = useState(false);
+  const [error1, setError1] = useState(false);
+  const [error2, setError2] = useState(false);
   const handleClose = () => {
     setOpen(false);
-    setOpen2(false);
+    setError1(false);
+    setError2(false);
   };
 
   // This asynchronus function is responsible for the login communication with the server
@@ -85,9 +99,11 @@ export default function SignIn() {
 
     if (docSnap.exists()) {
       signInWithEmailAndPassword(auth, email, password).catch((error) => {
-        setOpen2(true);
+        setError2(true);
+        setOpen(true);
       });
     } else {
+      setError1(true);
       setOpen(true);
     }
   };
@@ -111,7 +127,7 @@ export default function SignIn() {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 10,
+            // marginTop: 10,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -186,36 +202,21 @@ export default function SignIn() {
             >
               Sign In
             </Button>
-            {/* This model is used to display an error message for using the same email in the admin application as the client application  */}
+            {/* This model is used to display an error message for using the same email in the client application as the admin application. 
+            Also pertaining to the database such as wrong email or wrong password  */}
             <Modal
               open={open}
               onClose={handleClose}
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
             >
-              <Box sx={style}>
+              <Box sx={styleForModal}>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
                   Error
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  This email is not registered with the Administration
-                  application.
-                </Typography>
-              </Box>
-            </Modal>
-            {/* This model is used to display an error messages pertaining to the database such as wrong email or wrong password  */}
-            <Modal
-              open={open2}
-              onClose={handleClose}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              <Box sx={style}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                  Error
-                </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  Your password or email is incorrect. Please try again!
+                  {error1 && "This email is registered with the Administration application."}
+                  {error2 && "Your password or email is incorrect. Please try again!"}
                 </Typography>
               </Box>
             </Modal>
