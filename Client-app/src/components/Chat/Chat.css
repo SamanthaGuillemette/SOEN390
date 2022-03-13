@@ -1,21 +1,10 @@
-main {
+#messagesReceived {
   padding: 10px;
-  height: 60vh;
+  max-width: 100vw; 
+  max-height: 72.5vh; 
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
-}
-
-main::-webkit-scrollbar {
-  width: 0.5rem;
-}
-
-main::-webkit-scrollbar-track {
-  background: #6f6f91;
-}
-
-main::-webkit-scrollbar-thumb {
-  background: #715fa3;
 }
 
 ul,
