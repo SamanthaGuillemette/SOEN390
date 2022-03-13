@@ -25,12 +25,12 @@ li {
 .message {
     display: flex;
     align-items: center;
+    color: white;
 }
 
 .sent {
     flex-direction: row-reverse;
 }
-
 
 .sent p {
     color: white;
