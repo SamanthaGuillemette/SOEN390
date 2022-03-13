@@ -12,15 +12,10 @@ import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import FlagIcon from "@mui/icons-material/Flag";
-import EditIcon from "@mui/icons-material/Edit";
-import Fab from "@mui/material/Fab";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import DropdownConfirmation from "../DropdownConfirmation/index";
-import { auth, db } from "../../backend/firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { doc } from "firebase/firestore";
-import { useDocument } from "react-firebase-hooks/firestore";
 import EditModal from "./ProfileEditModal";
+import { useSelector } from "react-redux";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -32,22 +27,10 @@ const Item = styled(Paper)(({ theme }) => ({
 function ClientProfile() {
   const [priorityFlag, setPriorityFlag] = useState(false);
 
-  // Pull currently logged in user obj => to get user email below
-  //const [user] = useAuthState(auth);
-
-  // Query for a single user from the Client collection (table) based on user's email
-  //const [currentUser] = useDocument(doc(db, `Client/${user?.email}`));
-
-  useEffect(() => {
-    const data = localStorage.getItem("priorityFlag");
-    if (data) {
-      setPriorityFlag(JSON.parse(data));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("priorityFlag", JSON.stringify(priorityFlag));
-  });
+  // Pull 'userInfoDetails' from the store (Redux centralized store)
+  const userInfoDetails = useSelector(
+    (state) => state.userInfo.userInfoDetails
+  );
 
   return (
     <Box className="clientProfile-container">
@@ -64,7 +47,7 @@ function ClientProfile() {
               >
                 <Avatar
                   id="clientProfile-avatar"
-                  src="https://cdn.discordapp.com/attachments/943266123393142804/943303072300548156/Stevie.png"
+                  src={userInfoDetails?.profileImage}
                 />
               </Grid>
               <CardContent>
@@ -76,15 +59,23 @@ function ClientProfile() {
                   fontSize="1.2rem"
                   component="div"
                 >
-                  Jane Doe
+                  {`${userInfoDetails?.firstName} ${userInfoDetails?.lastName}`}
                 </Typography>
                 <Box className="clientProfile-text">
-                  <p className="clientProfile-textDetail">Age: 50</p>
                   <p className="clientProfile-textDetail">
-                    Birthday: 1 July 1971
+                    DOB: {userInfoDetails?.dob}
                   </p>
                   <p className="clientProfile-textDetail">
-                    Address: 101 Brooke, Montreal L5L 9T9
+                    City: {userInfoDetails?.city}
+                  </p>
+                  <p className="clientProfile-textDetail">
+                    Province: {userInfoDetails?.province}
+                  </p>
+                  <p className="clientProfile-textDetail">
+                    Postal Code: {userInfoDetails?.postalCode}
+                  </p>
+                  <p className="clientProfile-textDetail">
+                    Address: {userInfoDetails?.address}
                   </p>
                 </Box>
               </CardContent>
@@ -118,8 +109,6 @@ function ClientProfile() {
                             : "clientProfile-priority-flag"
                         }
                       ></FlagIcon>
-                      <br></br>
-                      <br></br>
                     </Typography>
                   </div>
                   <Stack
