@@ -104,10 +104,13 @@ export default function BasicModal() {
 
     // Close the popup after user submit the form
     handleClose();
+
+    // Refresh page after user submit the form
+    window.location.reload();
   };
 
   // Display the update button color & icon after submit
-  const handleUpdateClicked = () => {
+  const displaySuccessCheckmark = () => {
     setButtonColor("#27ae60");
     setIcon(true);
   };
@@ -320,7 +323,7 @@ export default function BasicModal() {
             variant="contained"
             className="update-button"
             style={{ backgroundColor: buttonColor }}
-            onClick={handleUpdateClicked}
+            onClick={displaySuccessCheckmark}
             sx={{ mt: 3, mb: 2 }}
           >
             {icon ? (
