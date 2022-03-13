@@ -33,21 +33,21 @@ function UpdateStatus() {
                   sx={{ borderColor: "var(--primary-light)" }}
                   align="left"
                 >
-                  Date: 
+                  Date
                 </TableCell>
                 <TableCell
                   className="header"
                   sx={{ borderColor: "var(--primary-light)" }}
                   align="center"
                 >
-                  Temperature: 
+                  Temperature
                 </TableCell>
                 <TableCell
                     className="header"
                     sx={{ borderColor: "var(--primary-light)"}}
                     align="right"
                   >
-                    Weight:
+                    Weight
                   </TableCell>
                   </TableRow>
             </TableHead>

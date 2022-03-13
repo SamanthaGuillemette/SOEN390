@@ -16,12 +16,12 @@ import { createTheme } from "@material-ui/core/styles";
 
 const style = {
   position: "absolute",
-  top: "49%",
+  top: "48%",
   left: "50%",
   transform: "translate(-50%, -50%)",
   bgcolor: "var(--background-secondary)",
-  width: "38vh",
-  height: "55vh",
+  width: "48vh",
+  height: "83vh",
   p: 3,
   borderRadius: "10px",
 };
@@ -179,7 +179,7 @@ export default function SimpleModal() {
             type="submit"
             variant="contained"
             className="save-button"
-            sx={{ mt: 5, mb: 2}}
+            sx={{ mt: 4, mb: 2}}
           >
             SAVE
           </Button>
