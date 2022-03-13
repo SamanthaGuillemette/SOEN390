@@ -3,6 +3,7 @@ import "./BottomNav.css";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import MailRoundedIcon from "@mui/icons-material/MailRounded";
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import { Link } from "react-router-dom";
 import React from "react";
 import Button from "@mui/material/Button";
@@ -59,10 +60,14 @@ const BottomNav = () => {
           </p>
         </IconButton>
       </Link>
-      <IconButton size="large" className="bottomNav-button">
-        <MailRoundedIcon className="bottomNav-icon" sx={{ color: "white" }} />
-        <p className="bottomNav-iconTitle">Inbox</p>
-      </IconButton>
+      <Link to="../notifications">
+        <IconButton size="large" className="bottomNav-button">
+          <NotificationsIcon className="bottomNav-icon" sx={{ color: "white" }} />
+          <p className="bottomNav-iconTitle">
+            Notifications
+          </p>
+        </IconButton>
+      </Link>
       <PopupState variant="popover" popupId="demo-popup-popover">
         {(popupState) => (
           <div>
