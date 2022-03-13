@@ -5,26 +5,24 @@ import Box from "@mui/material/Box";
 import CoronavirusIcon from '@mui/icons-material/Coronavirus';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import ReportIcon from '@mui/icons-material/Report';
 import { Divider } from '@mui/material';
 import "./Notifications.css";
 
 const Notifications = () => {
     return (
         <>
-            <div className="admin-notifications-container">
-                <Card className="admin-notifications-box">
+            <div className="notifications-container ">
+                <Card className="notifications-box">
                     <CardContent
                         sx={{
-                          display: "flex",
-                          flexDirection: "column",
-                          p: "30px",
-                          mb: "20px",
+                            display: "flex",
+                            flexDirection: "column",
+                            p: "30px",
+                            mb: "20px",
                         }}
                     >
                         <Typography
                             sx={{
-                                mx: "30px",
                                 pb: "30px",
                                 fontWeight: "800",
                             }}
@@ -42,16 +40,16 @@ const Notifications = () => {
                                     flexWrap: 'wrap',
                                 }}
                                 >
-                                    <CheckCircleIcon color="success" sx={{ fontSize: 40 }} />
+                                    <CoronavirusIcon color="error" sx={{ fontSize: 40 }} />
                                     <Typography
                                         style={{
                                             marginLeft: '10px',
                                         }}
                                         color="var(--text-primary)"
                                     >
-                                        <b>Status Update</b>
+                                        <b>Potential Exposures</b>
                                     </Typography>
-                                    <CloseIcon className="notifications-closingIcon"/>
+                                    <CloseIcon className="notifications-closeIcon" />
                                 </Box>
                                 <Typography
                                     style={{
@@ -60,7 +58,7 @@ const Notifications = () => {
                                     }}
                                     color="var(--text-primary)"
                                 >
-                                    Shakira updated her status. Please check the status update for more information.
+                                    Based on the address information you have provied, you have been near someone in the past 14 days who tested positive for COVID-19.
                                 </Typography>
                                 <Typography
                                     style={{
@@ -83,16 +81,16 @@ const Notifications = () => {
                                     flexWrap: 'wrap',
                                 }}
                                 >
-                                    <CoronavirusIcon color="error" sx={{ fontSize: 40 }} />
+                                    <CoronavirusIcon color="success" sx={{ fontSize: 40 }} />
                                     <Typography
                                         style={{
                                             marginLeft: '10px',
                                         }}
                                         color="var(--text-primary)"
                                     >
-                                        <b>New Case Reported</b>
+                                        <b>No Exposure Detected</b>
                                     </Typography>
-                                    <CloseIcon className="notifications-closingIcon " />
+                                    <CloseIcon className="notifications-closeIcon" />
                                 </Box>
                                 <Typography
                                     style={{
@@ -101,7 +99,7 @@ const Notifications = () => {
                                     }}
                                     color="var(--text-primary)"
                                 >
-                                    A new patient was tested positive, please check the patient's information and status for more information.
+                                    Based on the address information you have provied, you have not been near anyone who reported a COVID-19 diagnosis through this app.
                                 </Typography>
                                 <Typography
                                     style={{
@@ -124,16 +122,16 @@ const Notifications = () => {
                                     flexWrap: 'wrap',
                                 }}
                                 >
-                                    <ReportIcon color="error" sx={{ fontSize: 40 }} />
+                                    <CheckCircleIcon color="success" sx={{ fontSize: 40 }} />
                                     <Typography
                                         style={{
                                             marginLeft: '10px',
                                         }}
                                         color="var(--text-primary)"
                                     >
-                                        <b>Urgent Case</b>
+                                        <b>Status Reviewed</b>
                                     </Typography>
-                                    <CloseIcon className="notifications-closingIcon" />
+                                    <CloseIcon className="notifications-closeIcon" />
                                 </Box>
                                 <Typography
                                     style={{
@@ -142,7 +140,7 @@ const Notifications = () => {
                                     }}
                                     color="var(--text-primary)"
                                 >
-                                    Your patient Micheal Kors is requesting an urgent status review. Please check the inbox messages for more information. 
+                                    Your status has been reviewed by your doctor, please check your inbox for more information.
                                 </Typography>
                                 <Typography
                                     style={{
@@ -164,4 +162,3 @@ const Notifications = () => {
 };
 
 export default Notifications;
-

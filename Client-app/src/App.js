@@ -11,6 +11,7 @@ import SignUp from "./components/SignUp";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./backend/firebase";
 import Loading from "./components/Loading";
+import Notifications from "./screens/Notifications";
 import QR from "./screens/QR";
 import ClientProfile from "./screens/Profile";
 import Symptoms from "./screens/Symptoms";
@@ -66,6 +67,7 @@ function App() {
           <Route path="/qr" element={<QR />} />
           <Route path="/clientprofile" element={<ClientProfile />} />
           <Route path="/symptoms" element={<Symptoms />} />
+          <Route path="/notifications" element={<Notifications />} />
           <Route path="clientinbox" element={<Chatting />} />
           <Route path="/mydoctor" element={<MyDoctor />} />
         </Routes>
