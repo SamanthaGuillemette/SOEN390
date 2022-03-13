@@ -1,8 +1,7 @@
 .updateStatus-button{
   color: rgb(255, 255, 255) !important;
   top: 20px;
-  margin-left: 80%;
-  border-color: var(--background-main);
+  left: 81%;
 }
 
 .header-statusModal {
@@ -14,27 +13,22 @@
 .save-button {
   background-color: var(--primary-main) !important;
   color: var(--text-primary) !important;
-  margin-left: 125px !important;
-}
-
-.updateStatus-table {
-  width: 56vh !important;
-  height: 70vh !important;
-  margin-top: 30px !important;
-  background-color: var(--background-main) !important;
-  border-radius: 20px !important;
-  padding: 1 !important;
-  justify-content: center;
+  left: 38%;
 }
 
 .updateStatus-label {
-  background: inherit;
-  width: 100%;
-  height: 6.5vh;
-  padding: 5px;
-  border-radius: 10px;
   color: var(--text-primary);
-  font-size: 18px;
-  font-weight: 700;
-  padding-left: 16px;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+}
+
+.STATUS__box {
+  margin-top: 30px !important;
+  background-color: var(--background-main) !important;
+  border-radius: 20px !important;
+}
+
+.updateSymptoms-label {
+  color: var(--text-primary);
+  font-weight: 700 !important;
 }
