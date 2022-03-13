@@ -1,4 +1,4 @@
-import { Grid, Avatar, TextField, Button, Box } from "@mui/material";
+import { Grid, Avatar, TextField, Button, Box, ListItemAvatar } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 import { useEffect, useState, useRef } from "react";
 import { db, auth } from "../../backend/firebase";
@@ -7,7 +7,35 @@ import { doc, serverTimestamp, addDoc, collection, query, orderBy, onSnapshot } 
 import './Chat.css'
 import ChatList from './ChatList.js';
 import Typography from '@material-ui/core/Typography';
-import { green, pink } from '@mui/material/colors';
+
+function stringToColor(string) {
+    let hash = 0;
+    let i;
+  
+    /* eslint-disable no-bitwise */
+    for (i = 0; i < string.length; i += 1) {
+      hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+  
+    let color = '#';
+  
+    for (i = 0; i < 3; i += 1) {
+      const value = (hash >> (i * 8)) & 0xff;
+      color += `00${value.toString(16)}`.substr(-2);
+    }
+    /* eslint-enable no-bitwise */
+  
+    return color;
+  }
+  
+  function stringAvatar(name) {
+    return {
+      sx: {
+        bgcolor: stringToColor(name),
+      },
+      children: name.toUpperCase().charAt(0),
+    };
+  }
 
 // This component is what allows the chatting feature to work. Below are many consts and 
 // useEffect hooks that communicate with the database in order to recieve or send information.
@@ -89,7 +117,7 @@ const Inbox = () => {
                             </Grid>
                             <Grid container>
                                 <Grid item xs={1} style={{ marginLeft: '20px',}}>
-                                    <Avatar sx={{ bgcolor: pink[500] }}>{user.email.charAt(0).toUpperCase()}</Avatar>
+                                    <Avatar {...stringAvatar(user.email)}/>
                                 </Grid>
                                 <Grid item xs={9} sx={{ color: 'white'}}>
                                     <TextField
@@ -128,13 +156,14 @@ function ChatMessage(props) {
     
     const {name, timestamp, message } = props.message
     const [user] = useAuthState(auth);
-    const avatarColor = (name === user.email ? pink[500] : green[500])
     const messageClass = (name === user.email ? 'sent' : 'received')
     
     return (
         <>
             <div className={`message ${messageClass}`}>
-                <Avatar sx={{ bgcolor: avatarColor, marginBottom:'10px', marginLeft:'10px', marginRight:'10px' }}>{name.toUpperCase().charAt(0)}</Avatar>
+                <ListItemAvatar sx={{ marginBottom:'10px', marginLeft:'10px', marginRight:'10px' }}>
+                    <Avatar {...stringAvatar(name)} />
+                </ListItemAvatar>
                 <Typography>{message}</Typography>
             </div>
         </>

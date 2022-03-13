@@ -12,6 +12,35 @@ import { db, auth } from "../../backend/firebase";
 import { useEffect, useState } from "react";
 import FlagIcon from "@mui/icons-material/Flag";
 
+function stringToColor(string) {
+    let hash = 0;
+    let i;
+  
+    /* eslint-disable no-bitwise */
+    for (i = 0; i < string.length; i += 1) {
+      hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+  
+    let color = '#';
+  
+    for (i = 0; i < 3; i += 1) {
+      const value = (hash >> (i * 8)) & 0xff;
+      color += `00${value.toString(16)}`.substr(-2);
+    }
+    /* eslint-enable no-bitwise */
+  
+    return color;
+  }
+  
+  function stringAvatar(name) {
+    return {
+      sx: {
+        bgcolor: stringToColor(name),
+      },
+      children: name.toUpperCase().charAt(0),
+    };
+  }
+
 // This function is responsible for showing the list of patients that belong to the doctor that is signed in. 
 // It communicates with its parent component to display the messages. 
 export default function ChatList(props) {
@@ -68,12 +97,12 @@ function PatientsList(props) {
             <>
             <ListItem alignItems="flex-start">
                 <ListItemAvatar>
-                    <Avatar alt={name} />
+                    <Avatar {...stringAvatar(name)} />
                 </ListItemAvatar>
                 <ListItemText
                     primary= {
                         <React.Fragment>
-                            <Typography color="var(--text-primary)"> {name} </Typography>
+                            <Typography style={{ maxWidth: '100px',}} color="var(--text-primary)"> {name} </Typography>
                             {<FlagIcon label="primary" color="primary" variant="outlined" />}
                         </React.Fragment>}
                     secondary={
@@ -90,7 +119,7 @@ function PatientsList(props) {
         <>
             <ListItem alignItems="flex-start">
                 <ListItemAvatar>
-                    <Avatar alt={name} />
+                    <Avatar {...stringAvatar(name)} />
                 </ListItemAvatar>
                 <ListItemText
                     primary= {
@@ -102,7 +131,7 @@ function PatientsList(props) {
                         </React.Fragment>}
                     secondary={
                         <React.Fragment>
-                            <Typography color="var(--text-inactive)"> {lastMessage && lastMessage[0].message} </Typography>
+                            <Typography style={{ maxWidth: '100px',}} color="var(--text-inactive)"> {lastMessage && lastMessage[0].message} </Typography>
                             {/* {"last comment"} */}
                         </React.Fragment>
                     }
