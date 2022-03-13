@@ -82,7 +82,7 @@ function PatientsList(props) {
                     }
                 />
             </ListItem>
-            <Divider variant="inset" component="li" />
+            <Divider variant="inset" component="li"/>
         </>
         )
     }
@@ -108,7 +108,7 @@ function PatientsList(props) {
                     }
                 />
             </ListItem>
-            <Divider variant="inset" component="li" />
+            <Divider variant="inset" component="li"/>
         </>
     )
 

@@ -75,7 +75,7 @@ const Inbox = () => {
                     <ChatList func={pull_data} />
                 </Grid>
                 <Grid item xs={8}>
-                       <Grid container sx={{ mb: 2 }} >
+                       <Grid container sx={{ mb: 2,  color: 'white', alignItems: 'center', display: "flex", flexDirection: "column",}}>
                              <Typography variant="h5" className="header-message">{clientMessage}</Typography>
                        </Grid>
                         <Grid container spacing={2}>
@@ -91,7 +91,7 @@ const Inbox = () => {
                                 <Grid item xs={1} style={{ marginLeft: '20px',}}>
                                     <Avatar sx={{ bgcolor: pink[500] }}>{user.email.charAt(0).toUpperCase()}</Avatar>
                                 </Grid>
-                                <Grid item xs={9}>
+                                <Grid item xs={9} sx={{ color: 'white'}}>
                                     <TextField
                                         required
                                         fullWidth
@@ -99,14 +99,14 @@ const Inbox = () => {
                                         autoFocus
                                         onChange={(e) => setMsgToSend(e.target.value)}
                                         placeholder="Type your message here..."
-                                        sx={{ bgcolor: 'var(--text-inactive)', borderRadius: '15px', marginBottom:'15px'}}
+                                        sx={{ color: 'white', bgcolor: 'var(--text-inactive)', borderRadius: '15px', marginBottom:'15px'}}
                                     />
                                 </Grid>
-                                <Grid item>
+                                <Grid item sx={{ marginTop:'3px', }}>
                                      <Button type="submit"
                                         fullWidth
                                         variant="contained"
-                                        sx={{ mb: 1 }} 
+                                        sx={{ mb: 1, bgcolor: '#8f96e2', height: '50px'}} 
                                         endIcon={<SendIcon />}
                                         disabled={!msgToSend}
                                         >
@@ -134,8 +134,8 @@ function ChatMessage(props) {
     return (
         <>
             <div className={`message ${messageClass}`}>
-                <Avatar sx={{ bgcolor: avatarColor }}>{name.toUpperCase().charAt(0)}</Avatar>
-                <p>{message}</p>
+                <Avatar sx={{ bgcolor: avatarColor, marginBottom:'10px', marginLeft:'10px', marginRight:'10px' }}>{name.toUpperCase().charAt(0)}</Avatar>
+                <Typography>{message}</Typography>
             </div>
         </>
     )
