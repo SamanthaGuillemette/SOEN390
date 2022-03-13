@@ -27,8 +27,3 @@
   background-color: var(--background-main) !important;
   border-radius: 20px !important;
 }
-
-.updateSymptoms-label {
-  color: var(--text-primary);
-  font-weight: 700 !important;
-}

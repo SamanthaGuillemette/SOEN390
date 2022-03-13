@@ -103,7 +103,7 @@ export default function SimpleModal() {
           noValidate
           onSubmit={handleSymptomsSubmit}
         >
-          <Typography className="header-statusModal" variant="h6" component="h2" sx={{ mb: 2 }}>
+          <Typography className="header-statusModal" variant="h6" component="h2" sx={{ mb: 1.5 }}>
             ADD STATUS
           </Typography>
           <Grid container spacing={2}>
