@@ -1,36 +1,44 @@
 .fc {
-    background-color: var(--background-main) !important;
-    color: var(--text-primary);
-    border-radius: 20px;
-    padding: 20px;
+  background-color: var(--background-main) !important;
+  color: var(--text-primary);
+  border-radius: 20px;
+  padding: 20px;
 }
 
 .fc-day-today {
-    background: var(--background-secondary) !important;
+  background: var(--background-secondary) !important;
 }
 
-.fc-day-today:hover, .fc-day-past:hover, .fc-day-future:hover{
-    background-color: var(--primary-light) !important;
+.fc-day-today:hover,
+.fc-day-past:hover,
+.fc-day-future:hover {
+  background-color: var(--primary-light) !important;
 }
 
 .fc-event {
-    background: var(--gradient-to-right) !important;
+  background: var(--gradient-to-right) !important;
 }
 
 .fc-button {
-    background-color: transparent !important;
-    border-color: transparent !important;
-    box-shadow:none !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
 }
 
 .fc-button:focus {
-    background-color: var(--secondary-main) !important;
+  background-color: var(--secondary-main) !important;
 }
 
-.fc *, .fc *:before, .fc *:after {
-    border-color: transparent !important;
+.fc *,
+.fc *:before,
+.fc *:after {
+  border-color: transparent !important;
 }
 
 .fc a:hover {
-    color: var(--text-primary) !important;
+  color: var(--text-primary) !important;
+}
+
+.fc-theme-standard td {
+  border: 1px solid #595959 !important;
 }
