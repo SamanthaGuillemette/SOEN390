@@ -106,7 +106,8 @@ export default function BasicModal() {
     handleClose();
   };
 
-  const HandleUpdate = () => {
+  // Display the update button color & icon after submit
+  const handleUpdateClicked = () => {
     setButtonColor("#27ae60");
     setIcon(true);
   };
@@ -319,7 +320,7 @@ export default function BasicModal() {
             variant="contained"
             className="update-button"
             style={{ backgroundColor: buttonColor }}
-            onClick={HandleUpdate}
+            onClick={handleUpdateClicked}
             sx={{ mt: 3, mb: 2 }}
           >
             {icon ? (
