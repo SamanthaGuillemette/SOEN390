@@ -1,17 +1,24 @@
-describe("Cypress QA testing", () => {
+describe("Cypress QA testing", () => { 
+    
+   
+      
     it("first", () => {
       // Visit our app url
       cy.visit("localhost:3000");
 
+    
+
 
       /* ==== Generated with Cypress Studio ==== */
+
+    
       cy.get('#email').clear();
       cy.get('#email').type('anxaxn@gmail.com');
       cy.get('#password').clear();
       cy.get('#password').type('ab');
       cy.get('#password').clear();
       cy.get('#password').type('abcdefghi');
-      cy.get('.MuiButton-root').click({force: true});
+      cy.get('.MuiButton-root').click({timeout:1200});
       cy.get('.MuiBackdrop-root').click({force: true});
       cy.get('#root').click({force: true});
       cy.get('#email').clear();
@@ -38,7 +45,7 @@ describe("Cypress QA testing", () => {
       cy.get('#mui-1').clear();
       cy.get('#mui-1').type('Hello doctor I need some help');
       cy.get('.css-ju8w42').click({force: true});
-      cy.get('#mui-1').clear();
+      cy.get('#mui-1').clear({force: true});
       cy.get('#mui-1').type('I need a doctor');
       cy.get(':nth-child(3) > .MuiButton-root').click({force: true});
       cy.get('[data-testid="HomeRoundedIcon"]').click();
