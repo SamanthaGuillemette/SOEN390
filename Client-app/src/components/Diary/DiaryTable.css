@@ -19,6 +19,15 @@
   margin: auto;
 }
 
+.diary__header__icon,
+.diaryEntry__icon {
+  position: relative;
+  top: 13px;
+  right: 10px;
+  width: 20px;
+  margin-bottom: 10px;
+}
+
 .diary__icon {
   position: relative;
   top: 13px;
@@ -49,13 +58,44 @@
   border: 1px solid rgba(218, 207, 250, 0.3) !important;
 }
 
-.clientProfile-container {
-  height: 105vh;
-  background: var(--background-secondary);
+.MuiDialogTitle-root,
+.MuiDialogContent-root,
+.MuiDialogActions-root {
+  background: var(--background-secondary) !important;
+  color: var(--text-primary) !important;
 }
 
-#diary-entry-dialog-title {
-  font-size: 1rem;
-  margin: 2px 0;
-  color: var(--text-main);
+.header-diaryEntry-dialog {
+  text-align: center;
+  font-weight: bold !important;
+  color: var(--text-primary) !important;
+}
+
+.diary__icon {
+  width: 50px;
+  margin-bottom: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.diaryEntry-cancel-button {
+  background-color: var(--text-inactive) !important;
+  color: var(--text-primary) !important;
+  margin-left: 10px !important;
+}
+
+.diaryEntry-cancel-button:hover {
+  transition: all 0.3s;
+  opacity: 0.9;
+  transform: translateY(2px);
+}
+
+.diaryEntry > p {
+  color: var(--text-primary) !important;
+  background-color: var(--background-secondary) !important;
+}
+
+.MuiDialogContent-dividers {
+  border-color: var(--primary-light) !important;
 }

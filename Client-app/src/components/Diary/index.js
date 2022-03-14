@@ -35,7 +35,7 @@ function DiaryTable() {
       <Grid className="diary__label" container spacing={2}>
         <Grid item xs={8}>
           <img
-            className="symptoms__icon"
+            className="diary__header__icon"
             src={NoteIcon}
             alt="Diary"
             onClick={() => handleEntryOpen()}
