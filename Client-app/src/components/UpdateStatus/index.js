@@ -24,7 +24,9 @@ function UpdateStatus() {
       <Box className="STATUS__box">
       <TableContainer>
         <StatusModal></StatusModal>
-        <Typography className="updateStatus-label" align="center" sx={{mt: 1}}>STATUS</Typography>
+        <Typography className="updateStatus-label" align="center" sx={{mt: 1}} style={{ paddingBottom: 8 }}>
+          STATUS
+        </Typography>
         <Table sx={{ width: 350 }} aria-label="spanning table">
           <TableHead>
             <TableRow>

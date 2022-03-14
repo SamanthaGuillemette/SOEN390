@@ -5,7 +5,6 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
-import Typography from "@mui/material/Typography";
 import { useSelector } from "react-redux";
 import IconButton from '@mui/material/IconButton';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -27,10 +26,10 @@ function SymptomsTable() {
     <Table sx={{ width: 350 }} aria-label="spanning table">
       <TableBody>
           <TableRow>
-            <TableCell 
+            <TableCell
               className="header"
+              style={{ paddingBottom: 8, paddingTop: 0, paddingLeft: 40 }}
               align="center"
-              colSpan={2}
               sx={{ borderColor: "var(--background-secondary)" }}
             >
             <IconButton
@@ -38,10 +37,10 @@ function SymptomsTable() {
               size="small"
               style={{ color: "var(--primary-light)" }}
               onClick={() => setOpen(!open)}
-              >
+            >
               {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
             </IconButton>
-              Symptoms
+            Symptoms
             </TableCell>
             <TableCell
              sx={{ borderColor: "var(--background-secondary)" }}
@@ -49,27 +48,15 @@ function SymptomsTable() {
             </TableCell>
           </TableRow>
           <TableRow>
-            <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+            <TableCell 
+              style={{ paddingBottom: 0, paddingTop: 0 }} 
+              sx={{ borderColor: "var(--background-secondary)" }} 
+              colSpan={6}
+            >
               <Collapse in={open} timeout="auto" unmountOnExit>
-                <Box sx={{ margin: 1 }}>
+                <Box className="updateStatus-symptomsBox">
                   <Table size="small" aria-label="purchases">
                     <TableBody>
-                      <TableRow>
-                        <TableCell 
-                          className="header"
-                          sx={{ borderColor: "var(--primary-light)" }}
-                          align="left"
-                        >
-                          Muscle pain
-                        </TableCell>
-                        <TableCell
-                            className="data"
-                            sx={{ borderColor: "var(--primary-light)" }}
-                            align="right"
-                          >
-                            {userInfoDetails?.musclePain}
-                        </TableCell>
-                      </TableRow>
                       <TableRow>
                         <TableCell 
                           className="header"
@@ -133,6 +120,22 @@ function SymptomsTable() {
                             align="right"
                           >
                             {userInfoDetails?.runnyNose}
+                        </TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell 
+                          className="header"
+                          sx={{ borderColor: "var(--primary-light)" }}
+                          align="left"
+                        >
+                          Muscle pain
+                        </TableCell>
+                        <TableCell
+                            className="data"
+                            sx={{ borderColor: "var(--primary-light)" }}
+                            align="right"
+                          >
+                            {userInfoDetails?.musclePain}
                         </TableCell>
                       </TableRow>
                       <TableRow>

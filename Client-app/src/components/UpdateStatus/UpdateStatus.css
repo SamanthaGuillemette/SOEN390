@@ -27,3 +27,9 @@
   background-color: var(--background-main) !important;
   border-radius: 20px !important;
 }
+
+.updateStatus-symptomsBox{
+  margin-top: 15px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
