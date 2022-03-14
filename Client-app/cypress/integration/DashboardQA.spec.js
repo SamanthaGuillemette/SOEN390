@@ -19,6 +19,7 @@ describe("Cypress QA testing", () => {
       cy.get('#password').clear();
       cy.get('#password').type('abcdefghi');
       cy.get('.MuiButton-root').click({timeout:1200});
+      // cy.wait(2000);
       cy.get('.MuiBackdrop-root').click({force: true});
       cy.get('#root').click({force: true});
       cy.get('#email').clear();
