@@ -80,7 +80,7 @@
 }
 
 .diaryEntry-cancel-button {
-  background-color: var(--text-inactive) !important;
+  background-color: var(--primary-main) !important;
   color: var(--text-primary) !important;
   margin-left: 10px !important;
 }
