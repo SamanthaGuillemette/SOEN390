@@ -11,6 +11,10 @@ import Paper from "@mui/material/Paper";
 import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
+import { auth, db } from "../../backend/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { doc } from "firebase/firestore";
+import { useDocument } from "react-firebase-hooks/firestore";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -20,6 +24,16 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function DoctorInfo() {
+  // Pull currently logged in user obj => to get user email below
+  const [user] = useAuthState(auth);
+
+  // Query for a single user from the Client collection (table) based on user's email
+  const [currentUser] = useDocument(doc(db, `Client/${user?.email}`));
+  // Query for a the assigned doctor from the Doctors collection (table) based on client's email
+  const [assignedDoctor] = useDocument(
+    doc(db, `Doctors/${currentUser?.data().assignedDr}`)
+  );
+
   return (
     <Box className="doctorInfo-box__container">
       <Grid container spacing={3} padding={5}>
@@ -46,15 +60,19 @@ function DoctorInfo() {
                   fontSize="1.2rem"
                   component="div"
                 >
-                  Jamal Doe
+                  {`${assignedDoctor?.data().firstName} ${
+                    assignedDoctor?.data().lastName
+                  }`}
                 </Typography>
                 <Box className="doctorInfo-card__profileText">
-                  <p className="doctorInfo-card__profileTextDetail">Age: 86</p>
                   <p className="doctorInfo-card__profileTextDetail">
-                    Gender: male
+                    Age: {`${assignedDoctor?.data().age}`}
                   </p>
                   <p className="doctorInfo-card__profileTextDetail">
-                    Work Place: MUHC
+                    Gender: {`${assignedDoctor?.data().gender}`}
+                  </p>
+                  <p className="doctorInfo-card__profileTextDetail">
+                    Work Place: {`${assignedDoctor?.data().workPlace}`}
                   </p>
                 </Box>
               </CardContent>
@@ -89,19 +107,20 @@ function DoctorInfo() {
                       className="doctorInfo-card__data"
                       sx={{ bgcolor: "black", boxShadow: "none" }}
                     >
-                      Speciality: Family Doctor
+                      Speciality: {`${assignedDoctor?.data().speciality}`}
                     </Item>
                     <Item
                       className="doctorInfo-card__data"
                       sx={{ bgcolor: "black", boxShadow: "none" }}
                     >
-                      Patient spots: 10/20
+                      Patient spots: {`${assignedDoctor?.data().patientSpots}`}
+                      /20
                     </Item>
                     <Item
                       className="doctorInfo-card__data"
                       sx={{ bgcolor: "black", boxShadow: "none" }}
                     >
-                      Experience: 7 years
+                      Experience: {`${assignedDoctor?.data().experience}`} years
                     </Item>
                   </Stack>
                 </CardContent>
