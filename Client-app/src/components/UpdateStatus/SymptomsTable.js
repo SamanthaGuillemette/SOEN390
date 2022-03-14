@@ -59,7 +59,7 @@ function SymptomsTable() {
                     <TableBody>
                       <TableRow>
                         <TableCell 
-                          className="header"
+                          className="updateStatus-symptomsHeader"
                           sx={{ borderColor: "var(--secondary-light)" }}
                           style={{ width: 120 }}
                           align="left"
@@ -76,7 +76,7 @@ function SymptomsTable() {
                       </TableRow>
                       <TableRow>
                         <TableCell 
-                          className="header"
+                          className="updateStatus-symptomsHeader"
                           sx={{ borderColor: "var(--primary-light)" }}
                           align="left"
                         >
@@ -92,7 +92,7 @@ function SymptomsTable() {
                       </TableRow>
                       <TableRow>
                         <TableCell 
-                          className="header"
+                          className="updateStatus-symptomsHeader"
                           sx={{ borderColor: "var(--secondary-light)" }}
                           align="left"
                         >
@@ -108,7 +108,7 @@ function SymptomsTable() {
                       </TableRow>
                       <TableRow>
                         <TableCell 
-                          className="header"
+                          className="updateStatus-symptomsHeader"
                           sx={{ borderColor: "var(--primary-light)" }}
                           align="left"
                         >
@@ -124,7 +124,7 @@ function SymptomsTable() {
                       </TableRow>
                       <TableRow>
                         <TableCell 
-                          className="header"
+                          className="updateStatus-symptomsHeader"
                           sx={{ borderColor: "var(--primary-light)" }}
                           align="left"
                         >
@@ -140,7 +140,7 @@ function SymptomsTable() {
                       </TableRow>
                       <TableRow>
                         <TableCell 
-                          className="header"
+                          className="updateStatus-symptomsHeader"
                           sx={{ borderColor: "var(--secondary-light)" }}
                           align="left"
                         >
@@ -156,7 +156,7 @@ function SymptomsTable() {
                       </TableRow>
                       <TableRow>
                         <TableCell 
-                          className="header"
+                          className="updateStatus-symptomsHeader"
                           sx={{ borderColor: "transparent" }}
                           align="left"
                         >
