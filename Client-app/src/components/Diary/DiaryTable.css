@@ -80,8 +80,8 @@
 }
 
 .diaryEntry-cancel-button {
-  background-color: var(--primary-main) !important;
-  color: var(--text-primary) !important;
+  background-color: #e0e4e4 !important;
+  color: var(--text-inactive) !important;
   margin-left: 10px !important;
 }
 
@@ -91,9 +91,15 @@
   transform: translateY(2px);
 }
 
-.diaryEntry > p {
+.diaryEntry-contactDate,
+.diaryEntry-contactFullName,
+.diaryEntry-phoneNumber,
+.diaryEntry-email,
+.diaryEntry-contactLocation {
+  color: var(--text-inactive) !important;
+}
+.diaryEntry-data {
   color: var(--text-primary) !important;
-  background-color: var(--background-secondary) !important;
 }
 
 .MuiDialogContent-dividers {

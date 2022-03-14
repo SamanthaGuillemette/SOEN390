@@ -7,7 +7,6 @@ import { useDocument } from "react-firebase-hooks/firestore";
 import { makeStyles } from "@material-ui/core/styles";
 import NoteIcon from "../../assets/note.svg";
 import "./DiaryTable.css";
-
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -15,6 +14,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
 import Fab from "@mui/material/Fab";
 import BookIcon from "@mui/icons-material/Book";
+import Grid from "@mui/material/Grid";
+
 const style = {
   //position: "absolute",
   top: "50%",
@@ -65,19 +66,38 @@ const DiaryEntryModal = () => {
             Diary Entry
           </DialogTitle>
           <DialogContent dividers>
-            <Box className="diaryEntry-text">
-              <p className="diaryEntry-contactDate">Contact Date: 2022-02-02</p>
-              <p className="diaryEntry-contactFullName">
-                Contact Full Name: Julie Doe
-              </p>
-              <p className="diaryEntry-phoneNumber">
-                Phone Number: 555-555-5555
-              </p>
-              <p className="diaryEntry-email">Email: email@email.com</p>
-              <p className="diaryEntry-contactLocation">
-                Contact Location: Concordia Hall Building
-              </p>
-            </Box>
+            <Grid container>
+              <Grid item xs={6} className="diaryEntry-text">
+                <p className="diaryEntry-contactDate">Contact Date:</p>
+              </Grid>
+              <Grid item xs={6}>
+                <p className="diaryEntry-data">2022-02-02</p>
+              </Grid>
+              <Grid item xs={6}>
+                <p className="diaryEntry-contactFullName">Contact Full Name:</p>
+              </Grid>
+              <Grid item xs={6}>
+                <p className="diaryEntry-data">Julie Doe</p>
+              </Grid>
+              <Grid item xs={6}>
+                <p className="diaryEntry-phoneNumber">Phone Number:</p>
+              </Grid>
+              <Grid item xs={6}>
+                <p className="diaryEntry-data">555-555-5555</p>
+              </Grid>
+              <Grid item xs={6}>
+                <p className="diaryEntry-email">Email:</p>
+              </Grid>
+              <Grid item xs={6}>
+                <p className="diaryEntry-data">email@email.com</p>
+              </Grid>
+              <Grid item xs={6}>
+                <p className="diaryEntry-contactLocation">Contact Location:</p>
+              </Grid>
+              <Grid item xs={6}>
+                <p className="diaryEntry-data">Concordia Hall Building</p>
+              </Grid>
+            </Grid>
           </DialogContent>
           <DialogActions>
             <Button
