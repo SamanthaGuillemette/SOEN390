@@ -16,13 +16,13 @@ import { createTheme } from "@material-ui/core/styles";
 
 const style = {
   position: "absolute",
-  top: "48%",
+  top: "49%",
   left: "50%",
   transform: "translate(-50%, -50%)",
   bgcolor: "var(--background-secondary)",
-  width: "48vh",
-  height: "83vh",
-  p: 3,
+  width: "51vh",
+  height: "77vh",
+  p: 4,
   borderRadius: "10px",
 };
 
@@ -106,7 +106,7 @@ export default function SimpleModal() {
           <Typography className="header-statusModal" variant="h6" component="h2" sx={{ mb: 1.5 }}>
             ADD STATUS
           </Typography>
-          <Grid container spacing={2}>
+          <Grid container minWidth={285} spacing={1}>
             <Grid item xs={12}>
               <TextField
                 label="Date*"
@@ -152,26 +152,26 @@ export default function SimpleModal() {
                 }}
               />
             </Grid>
-
-            <Grid item style = {{maxWidth: "160px"}} xs={4} sm={6}>
+          
+            <Grid item style = {{maxWidth: "160px"}} xs={6} sm={6}><br/>
               <FormControlLabel control={<Checkbox style ={{color: "lightskyblue"}} checked={checked} onChange={handleChange} /> } label={<Typography variant="subtitle2" style={{ color: "white" }}>Fever</Typography>}/>
             </Grid>
-            <Grid item style = {{maxWidth: "160px"}} xs={4} sm={6}>
+            <Grid item style = {{maxWidth: "160px"}} xs={6} sm={6}><br/>
               <FormControlLabel control={<Checkbox style ={{color: "lightskyblue"}} checked={checked} onChange={handleChange} /> } label={<Typography variant="subtitle2" style={{ color: "white" }}>Sore Throat</Typography>}/>
             </Grid>
-            <Grid item style = {{maxWidth: "160px"}} xs={4}  sm={6}>
+            <Grid item style = {{maxWidth: "160px"}} xs={6}  sm={6}>
               <FormControlLabel control={<Checkbox style ={{color: "lightskyblue"}} checked={checked} onChange={handleChange} /> } label={<Typography variant="subtitle2" style={{ color: "white" }}>Cough</Typography>}/>
             </Grid>
-            <Grid item style = {{maxWidth: "160px"}} xs={4}  sm={6}>
+            <Grid item style = {{maxWidth: "160px"}} xs={6}  sm={6}>
               <FormControlLabel control={<Checkbox style ={{color: "lightskyblue"}} checked={checked} onChange={handleChange} /> } label={<Typography variant="subtitle2" style={{ color: "white" }}>Runny Nose</Typography>}/>
             </Grid>
-            <Grid item style = {{maxWidth: "160px"}} xs={4}  sm={6}>
+            <Grid item style = {{maxWidth: "160px"}} xs={6}  sm={6}>
               <FormControlLabel control={<Checkbox style ={{color: "lightskyblue"}} checked={checked} onChange={handleChange} /> } label={<Typography variant="subtitle2" style={{ color: "white" }}>Smell Loss</Typography>}/>
             </Grid>
-            <Grid item style = {{maxWidth: "160px"}} xs={4}  sm={6}>
+            <Grid item style = {{maxWidth: "160px"}} xs={6}  sm={6}>
               <FormControlLabel control={<Checkbox style ={{color: "lightskyblue"}} checked={checked} onChange={handleChange} /> } label={<Typography variant="subtitle2" style={{ color: "white" }}>Muscle Ache</Typography>}/>
             </Grid>
-            <Grid item style = {{maxWidth: "160px"}} xs={4}  sm={6}>
+            <Grid item style = {{maxWidth: "160px"}} xs={6}  sm={6}>
               <FormControlLabel control={<Checkbox style ={{color: "lightskyblue"}} checked={checked} onChange={handleChange} /> } label={<Typography variant="subtitle2" style={{ color: "white" }}>Taste Loss</Typography>}/>
             </Grid>
           </Grid>
@@ -179,7 +179,7 @@ export default function SimpleModal() {
             type="submit"
             variant="contained"
             className="save-button"
-            sx={{ mt: 4, mb: 2}}
+            sx={{ mt: 3, mb: 2}}
           >
             SAVE
           </Button>

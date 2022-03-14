@@ -5,6 +5,7 @@
 }
 
 .header-statusModal {
+  margin-top: -10px !important;
   text-align: center;
   font-weight: bold !important;
   color: var(--text-primary) !important;
