@@ -1,20 +1,16 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import { useDispatch, useSelector } from "react-redux";
-// import { onAuthStateChanged } from "firebase/auth";
-// import { saveUser } from "./store/authSlice";
-// import { useEffect } from "react";
-// import { auth } from "./backend/firebase";
 import Dashboard from "./screens/Dashboard";
+import Chatting from "./screens/Chatting";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
-
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./backend/firebase";
-import Chat from "./components/Chat";
 import Loading from "./components/Loading";
+import Notifications from "./screens/Notifications";
 import QR from "./screens/QR";
 import ClientProfile from "./screens/Profile";
 import Symptoms from "./screens/Symptoms";
+import Diary from "./screens/Diary";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserInfo } from "./store/userInfoSlice";
@@ -65,9 +61,11 @@ function App() {
           <Route path="/qr" element={<QR />} />
           <Route path="/clientprofile" element={<ClientProfile />} />
           <Route path="/symptoms" element={<Symptoms />} />
-          <Route path="clientinbox" element={<Chat />} />
+          <Route path="/notifications" element={<Notifications />} />
+          <Route path="clientinbox" element={<Chatting />} />
           <Route path="/mydoctor" element={<MyDoctor />} />
           <Route path="/status" element={<Status />} />
+          <Route path="/diary" element={<Diary />} />
         </Routes>
       )}
       {!user && (
