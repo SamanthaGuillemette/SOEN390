@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This component takes care of the inbox function.
+ *
+ */
 import { Grid, Avatar, TextField, Button, Box, ListItemAvatar } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 import { useEffect, useState, useRef } from "react";
@@ -37,8 +41,10 @@ function stringToColor(string) {
     };
   }
 
-// This component is what allows the chatting feature to work. Below are many consts and 
-// useEffect hooks that communicate with the database in order to recieve or send information.
+/**
+ * This component is what allows the chatting feature to work. Below are many consts and 
+ * useEffect hooks that communicate with the database in order to recieve or send information.
+ */
 const Inbox = () => {
     
     const [user] = useAuthState(auth);
@@ -50,9 +56,12 @@ const Inbox = () => {
     const [messagesReceived, setMessagesReceived]  = useState([]);
     const dummy = useRef();
 
-    // This method allows the user to send messages to the data base using asynchronus methods. 
-    // The addDoc funtion adds a document which is essentially a mesage in the database. 
-    // This message gets added to the patient's database collection. 
+    /**
+     * This method allows the user to send messages to the data base using asynchronus methods. 
+     * The addDoc funtion adds a document which is essentially a mesage in the database. 
+     * This message gets added to the patient's database collection. 
+     * @param  {} e
+     */
     const handleSubmit = async (e) => {
         e.preventDefault();
         await addDoc(messageRef, {
@@ -63,8 +72,11 @@ const Inbox = () => {
         setMsgToSend("")
     }
 
-    // This hook allows this component to receive messages from the database, the same location as the const above. 
-    // The onSnapshot listens for changes and then updates the user interface to show new messages being sent or received in the chat box. 
+    /**
+     * This hook allows this component to receive messages from the database, the same location as the const above. 
+     * The onSnapshot listens for changes and then updates the user interface to show new messages being sent or received in the chat box. 
+     * @param  {} 
+     */
     useEffect(() => {
         onSnapshot(q, (doc) => {
           setMessagesReceived(doc.docs.map(doc=> ({
@@ -75,14 +87,20 @@ const Inbox = () => {
       })
         // eslint-disable-next-line
     }, [clientMessage])
-
-    // This hook scrolls down to the latest message that was sent. 
+ 
+    /**
+     * This hook scrolls down to the latest message that was sent.
+     * @param  {} 
+     */
     useEffect(() => {
       dummy.current.scrollIntoView({ behavior: 'smooth' });
     })
 
-    // This function allows the child component to communicate with this parent component.
-    // The child component is sending which user has been selected to display their messages. 
+    /**
+     * This function allows the child component to communicate with this parent component.
+     * The child component is sending which user has been selected to display their messages. 
+     * @param  {} data
+     */
     const pull_data = (data) => {
       if(data){  
         setClientMessage(data.name); 
