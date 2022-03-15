@@ -1,3 +1,8 @@
+/**
+ * @fileoverview This component takes care of the DoctorList function.
+ *
+ */
+
 import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -38,12 +43,20 @@ const dropdownStyle = makeStyles({
   },
 });
 
-// function to create data
+/**
+ * This component is used to create data using the doctorName and numOfPatients.
+ * 
+ * @param  {} doctorName
+ * @param  {} numOfPatients
+ */
 function createData(doctorName, numOfPatients) {
   return {doctorName, numOfPatients};
 }
 
-// function to create pagination
+/**
+ * This function is used to create pagination
+ * @param  {} props
+ */
 function TablePaginationActions(props) {
   const theme = useTheme(); // adding styling
   const { count, page, rowsPerPage, onPageChange } = props;
@@ -78,7 +91,12 @@ function TablePaginationActions(props) {
 }
 
 
-
+/**
+ * This component is what allows the DoctorList feature to be displayed. Below are many consts and
+ * useEffect hooks that communicate with the database in order to recieve or send information. 
+ *
+ * @returns {JSX.Element}
+ */
 function DoctorList() {
   const classes = dropdownStyle(); // adding styling
   const [page, setPage] = React.useState(0);

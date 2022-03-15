@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This component takes care of the sidebarItems.
+ *
+ */
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
@@ -11,6 +15,10 @@ import { Link } from "react-router-dom";
 import QrCodeIcon from '@mui/icons-material/QrCode'
 import "./SidebarItems.css";
 
+/**
+ * This component is what allows the mainListItems feature to be displayed. 
+ * @returns {JSX.Element}
+ */
 export const mainListItems = (
   <div>
     <Link className="sidebar-link" to="/">

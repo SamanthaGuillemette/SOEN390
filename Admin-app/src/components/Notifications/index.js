@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This component takes care of the Notifications function.
+ *
+ */
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
@@ -9,6 +13,9 @@ import ReportIcon from '@mui/icons-material/Report';
 import { Divider } from '@mui/material';
 import "./Notifications.css";
 
+/**
+ * This component is what allows the Notifications feature to work.
+ */
 const Notifications = () => {
     return (
         <>

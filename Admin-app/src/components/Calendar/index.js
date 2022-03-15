@@ -1,3 +1,8 @@
+/**
+ * @fileoverview This component takes care of the Calender function.
+ *
+ */
+
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
@@ -29,6 +34,13 @@ const events = [
     allDay: true,
   },
 ];
+
+/**
+ * This component is what allows the Calender feature to work. Below are many consts and
+ * handlers to handle selecting the dates.
+ *
+ * @returns {JSX.Element}
+ */
 
 const Calendar = () => {
   const handleDateClick = (event) => {

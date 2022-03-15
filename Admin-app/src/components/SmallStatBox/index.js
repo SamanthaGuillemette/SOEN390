@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This component takes care of the SmallStatBox function.
+ *
+ */
 import "./SmallStatBox.css";
 
 const SmallStatBox = ({ icon, number, description }) => {

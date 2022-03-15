@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This component takes care of the News function.
+ *
+ */
 import NewsList from "./NewsList";
 import useFetchData from "../../useFetchData";
 

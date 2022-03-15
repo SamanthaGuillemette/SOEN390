@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This component takes care of the DropdownDoctor function.
+ *
+ */
 import * as React from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -19,6 +23,13 @@ const dropdownStyle = makeStyles({
   },
 });
 
+/**
+ * This function is used for the dropdown of the doctors.
+ * Below are many consts and useEffect hooks that communicate with the database 
+ * in order to recieve or send information about the doctors and patients.
+ * 
+ * @param  {} props
+ */
 function DropdownDoctor(props) {
   const classes = dropdownStyle(); // adding styling
   const [patientInfo, setPatientInfo] = React.useState(null); // initially string is empty
@@ -116,6 +127,11 @@ function DropdownDoctor(props) {
   );
 }
 
+/**
+ * This function will check the capacity of the doctor.
+ * 
+ * @param  {} doctor
+ */
 function isDoctorAtFullCapacity(doctor)
 {
   return doctor && doctor.treats && doctor.treats.length >= patientLimit;

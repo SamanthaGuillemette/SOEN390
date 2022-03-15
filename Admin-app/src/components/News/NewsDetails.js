@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This component takes care of the NewsDetails function.
+ *
+ */
 import { useParams } from "react-router-dom";
 import useFetchData from "../../useFetchData";
 

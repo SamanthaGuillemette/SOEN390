@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This component takes care of the PatientList function.
+ *
+ */
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
@@ -73,6 +77,10 @@ function createData(
   };
 }
 
+/**
+ * Function Row that returns the details of the patients
+ * @param  {} props
+ */
 function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false); // setting the open condition to be false
@@ -197,6 +205,9 @@ function Row(props) {
   );
 }
 
+/**
+ * Function PatientList that returns the patient list
+ */
 function PatientList() {
   const classes = dropdownStyle(); // adding styling
   const [page, setPage] = React.useState(0);
@@ -251,10 +262,19 @@ function PatientList() {
     });
   }, [doctorsList]);
 
+  /**
+   * Function that handles changing the page of the patients
+   * @param  {} event
+   * @param  {} newPage
+   */
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
+  /**
+   * Function that handles changing the row per page
+   * @param  {} event
+   */
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);

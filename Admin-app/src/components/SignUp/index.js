@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This component takes care of the sign up function.
+ *
+ */
 import * as React from 'react';
 import {useState} from 'react';
 import Avatar from '@mui/material/Avatar';
@@ -88,8 +92,11 @@ const theme = createTheme({
   },
 });
 
-// This function is responsible for the signup component which also communicates with the server and displays relevent error messages if necessary.
-// Next, it will make a document in the collection of admin on the server with all the necessary information 
+/**
+ * This function is responsible for the signup component which also communicates with the server and displays relevent error messages if necessary.
+ * Next, it will make a document in the collection of admin on the server with all the necessary information 
+ * @param  {} props
+ */
 export default function SignUp(props) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -112,9 +119,12 @@ export default function SignUp(props) {
     loading,
   ] = useAuthState(auth);
   
-  // This function is responsible for creating a new document in the admin collection with the information of the user who has signed up. 
-  // This also ensures that the email is not being reused by the client or admin collection
-  // Lastly, the createUserWithEmailAndPassword function will create the database authentication 
+  /**
+   * This function is responsible for creating a new document in the admin collection with the information of the user who has signed up. 
+   * This also ensures that the email is not being reused by the client or admin collection
+   * Lastly, the createUserWithEmailAndPassword function will create the database authentication 
+   * @param  {} event
+   */
   const handleSubmit = async(event) => {
     event.preventDefault();
     const docRef = doc(db, "Client", email);

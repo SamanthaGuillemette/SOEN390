@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This component takes care of the QR function.
+ *
+ */
 import React, { useState } from "react";
 import QrReader from 'modern-react-qr-reader';
 import Card from "@mui/material/Card";
@@ -23,7 +27,9 @@ const useStyles = makeStyles({
     }
   }
 });
-
+/**
+ * Scanner function that handles the scanned document and checks if the patient exist or not.
+ */
 const Scanner = () => {
   const classes = useStyles();
   const [scanned, setScanned] = useState("Not scanned yet!");
@@ -32,12 +38,18 @@ const Scanner = () => {
   const [notPatient, setNotPatient] = useState(false);
   const [qr, setQR] = useState("");
 
-  // handling error function
+  /**
+   * handling error function
+   * @param  {} err
+   */
   function handleError(err) {
     console.error(err)
   }
   
-  // async function that handles the scanned code and checks if the patient exist or not
+  /**
+   * async function that handles the scanned code and checks if the patient exist or not
+   * @param  {} QRScan
+   */
   async function handleScan(QRScan) {
     try {
       if (QRScan) {

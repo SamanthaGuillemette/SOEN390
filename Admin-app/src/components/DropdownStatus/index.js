@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This component takes care of the DropdownStatus function.
+ *
+ */ 
 import * as React from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -19,6 +23,11 @@ const dropdownStyle = makeStyles({
   },
 });
 
+/**
+ * This component is what allows the DropdownStatus feature to work. Below are many consts and
+ * useEffect hooks that communicate with the database in order to recieve or send information.
+ * @param  {} props
+ */
 function DropdownStatus(props) {
   const classes = dropdownStyle(); // adding styling
   const [patientInfo, setPatientInfo] = React.useState(null);
