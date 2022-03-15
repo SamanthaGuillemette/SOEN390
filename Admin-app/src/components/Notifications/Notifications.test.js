@@ -6,7 +6,7 @@ import Notifications from ".";
 test("Notifications component renders on screen", () => {
   render(<Notifications />);
   const updatedStatus = screen.getByTestId("notification-statusUpdate");
-  expect(updatedStatus).toHaveTextContent("Updated 10 mins ago");
+  expect(updatedStatus).toHaveTextContent("22 March, 2022. At 5:50 pm");
 });
 
 afterEach(() => {

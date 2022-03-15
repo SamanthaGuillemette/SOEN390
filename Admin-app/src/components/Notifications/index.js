@@ -68,6 +68,7 @@ const Notifications = () => {
                                         marginBottom: '30px'
                                     }}
                                     color="#949be2"
+                                    data-testid="notification-statusUpdate"
                                 >
                                     22 March, 2022. At 5:50 pm.
                                 </Typography>
