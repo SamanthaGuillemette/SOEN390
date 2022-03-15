@@ -130,7 +130,7 @@ function ChatMessage(props) {
 
   return (
     <>
-      <div className={`message ${messageClass}`}>
+      <div className={`INBOX__message ${messageClass}`}>
         <Avatar sx={{ bgcolor: deepPurple[500] }}>
           {name.toUpperCase().charAt(0)}
         </Avatar>
