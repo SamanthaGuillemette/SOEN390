@@ -160,7 +160,7 @@ function ChatMessage(props) {
     
     return (
         <>
-            <div className={`message ${messageClass}`}>
+            <div className={`INBOX__message ${messageClass}`}>
                 <ListItemAvatar sx={{ marginBottom:'10px', marginLeft:'10px', marginRight:'10px' }}>
                     <Avatar {...stringAvatar(name)} />
                 </ListItemAvatar>
