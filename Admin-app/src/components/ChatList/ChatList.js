@@ -61,7 +61,7 @@ export default function ChatList(props) {
 
     const [user] = useAuthState(auth);
     const [clients, setClients] = useState('');
-    const adminRef = doc(db, "Admin", user.email)
+    const adminRef = doc(db, `Admin/${user?.email}`)
     const messageRef = collection(adminRef, "Clients")
     const q = query(messageRef)
     const [priorityFlag, setPriorityFlag] = useState(false);

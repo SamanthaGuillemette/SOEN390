@@ -13,7 +13,7 @@ function stringToColor(string) {
     let i;
   
     /* eslint-disable no-bitwise */
-    for (i = 0; i < string.length; i += 1) {
+    for (i = 0; i < string?.length; i += 1) {
       hash = string.charCodeAt(i) + ((hash << 5) - hash);
     }
   
@@ -33,7 +33,7 @@ function stringToColor(string) {
       sx: {
         bgcolor: stringToColor(name),
       },
-      children: name.toUpperCase().charAt(0),
+      children: name?.toUpperCase().charAt(0),
     };
   }
 
@@ -56,7 +56,7 @@ const Inbox = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         await addDoc(messageRef, {
-            name: user.email,
+            name: user?.email,
             timestamp: serverTimestamp(),
             message: msgToSend,
         });
@@ -117,7 +117,7 @@ const Inbox = () => {
                             </Grid>
                             <Grid container>
                                 <Grid item xs={1} style={{ marginLeft: '20px',}}>
-                                    <Avatar {...stringAvatar(user.email)}/>
+                                    <Avatar {...stringAvatar(user?.email)}/>
                                 </Grid>
                                 <Grid item xs={9} sx={{ color: 'white'}}>
                                     <TextField
