@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This component takes care of the UpcomingEvents function.
+ *
+ */
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import EventButton from "../../components/EventButton";
@@ -20,7 +24,12 @@ const style = {
     p: 4,
   };
   
-
+/**
+ * This component is what allows the UpcomingEvents feature to work. Below are many consts and
+ * useEffect hooks that are used to open and close the modal when the button is clicked.
+ *
+ * @returns {JSX.Element}
+ */
 function UpcomingEvents() {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true); 
