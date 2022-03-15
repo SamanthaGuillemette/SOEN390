@@ -10,6 +10,7 @@ import Notifications from "./screens/Notifications";
 import QR from "./screens/QR";
 import ClientProfile from "./screens/Profile";
 import Symptoms from "./screens/Symptoms";
+import Diary from "./screens/Diary";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserInfo } from "./store/userInfoSlice";
@@ -62,6 +63,7 @@ function App() {
           <Route path="/notifications" element={<Notifications />} />
           <Route path="clientinbox" element={<Chatting />} />
           <Route path="/mydoctor" element={<MyDoctor />} />
+          <Route path="/diary" element={<Diary />} />
         </Routes>
       )}
       {!user && (
