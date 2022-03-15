@@ -5,7 +5,7 @@ import ListItemText from "@mui/material/ListItemText";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import MailIcon from "@mui/icons-material/Mail";
 import PeopleIcon from "@mui/icons-material/People";
-import LayersIcon from "@mui/icons-material/Layers";
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import EventIcon from "@mui/icons-material/Event";
 import { Link } from "react-router-dom";
 import QrCodeIcon from '@mui/icons-material/QrCode'
@@ -52,9 +52,9 @@ export const mainListItems = (
     <Link className="sidebar-link" to="testing">
       <ListItem button className="sidebar-button">
         <ListItemIcon>
-          <LayersIcon className="sidebar-icon"/>
+          <NotificationsIcon className="sidebar-icon"/>
         </ListItemIcon>
-        <ListItemText className="sidebar-text" primary="Test Component" />
+        <ListItemText className="sidebar-text" primary="Updates" />
       </ListItem>
     </Link>
 

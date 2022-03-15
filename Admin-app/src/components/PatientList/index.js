@@ -50,6 +50,7 @@ function createData(
   appointment,
   doctor,
   priority,
+  statusReview,
   temperature,
   weight,
   height
@@ -61,6 +62,7 @@ function createData(
     appointment,
     doctor,
     priority,
+    statusReview,
     symptoms: [
       {
         temperature,
@@ -78,20 +80,20 @@ function Row(props) {
 
   return (
     <React.Fragment>
-      <TableRow>
+      <TableRow className={ row.statusReview === "Status Reviewed" ? "PatientList-reviewedStatus" : "" }>
         <TableCell sx={{ borderColor: "var(--background-secondary)" }}>
           <IconButton
             aria-label="expand row"
             size="small"
             onClick={() => setOpen(!open)}
-            sx={{ color: "var(--text-inactive)" }}
+            sx={{ color: "var(--text-primary)" }}
           >
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />} {/* changing icon to up or down based on open or not */}
           </IconButton>
         </TableCell>
         {/* Displaying row of data */}
         <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" component="th" scope="row" align="left">
-        {row.patientname}
+         {row.patientname}
         </TableCell>
         <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="left" >
           {row.id}
@@ -109,7 +111,7 @@ function Row(props) {
           {row.priority}
         </TableCell>
       </TableRow>
-      <TableRow>
+      <TableRow >
         <TableCell
           sx={{ borderColor: "var(--background-secondary)" }}
           style={{ paddingBottom: 0, paddingTop: 0 }}
@@ -224,7 +226,7 @@ function PatientList() {
             doc.id,
             <span
               className={
-                doc.status === "POSITIVE" ? "label-positive" : "label-negative"
+                (doc.status === "POSITIVE") ? "label-positive" : (doc.status === "NEGATIVE") ? "label-negative" : "label-unconfirmed"
               }
             >
               {doc.status}
@@ -238,6 +240,7 @@ function PatientList() {
                   : "priority-flag clicked"
               }
             ></FlagIcon>,
+            doc.statusReview,
             doc.temperature + "°C",
             doc.weight + " lbs",
             doc.heightFeet + "' " + doc.heightInches + '"'
