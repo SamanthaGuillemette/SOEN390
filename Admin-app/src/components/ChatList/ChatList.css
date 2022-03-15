@@ -1,0 +1,7 @@
+.priority-flag {
+    color: var(--text-primary);
+  }
+  
+  .priority-flag.clicked {
+    color: var(--info-main);
+  }

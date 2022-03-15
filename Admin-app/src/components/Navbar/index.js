@@ -20,7 +20,7 @@ import { useState } from "react";
 import { signOut } from 'firebase/auth';
 import { auth } from '../../backend/firebase';
 import { makeStyles } from "@material-ui/core/styles";
-import ChatList from '../../screens/Inbox/ChatList.js';
+import ChatList from '../ChatList/ChatList.js';
 
 const dropdownStyle = makeStyles(() => ({
   menu: {

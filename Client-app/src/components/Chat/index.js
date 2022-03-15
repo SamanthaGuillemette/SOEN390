@@ -1,4 +1,4 @@
-import { Grid, Avatar, TextField, Button, Box } from "@mui/material";
+import { Grid, Avatar, TextField, Button, Box, ListItemAvatar } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useEffect, useState, useRef } from "react";
 import { db, auth } from "../../backend/firebase";
@@ -11,9 +11,40 @@ import {
   query,
   orderBy,
   onSnapshot,
+  updateDoc,
+  increment,
 } from "firebase/firestore";
+import Typography from '@material-ui/core/Typography';
 import "./Chat.css";
-import { deepOrange, deepPurple } from "@mui/material/colors";
+
+function stringToColor(string) {
+  let hash = 0;
+  let i;
+
+  /* eslint-disable no-bitwise */
+  for (i = 0; i < string.length; i += 1) {
+    hash = string.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  let color = '#';
+
+  for (i = 0; i < 3; i += 1) {
+    const value = (hash >> (i * 8)) & 0xff;
+    color += `00${value.toString(16)}`.substr(-2);
+  }
+  /* eslint-enable no-bitwise */
+
+  return color;
+}
+
+function stringAvatar(name) {
+  return {
+    sx: {
+      bgcolor: stringToColor(name),
+    },
+    children: name.toUpperCase().charAt(0),
+  };
+}
 
 // This component is what allows the chatting feature to work. Below are many consts and 
 // useEffect hooks that communicate with the database in order to recieve or send information.
@@ -22,6 +53,8 @@ const Chat = () => {
   const [msgToSend, setMsgToSend] = useState("");
   const clientRef = doc(db, "Client", user.email);
   const messageRef = collection(clientRef, "Messages");
+  const counterCol = collection(clientRef, "Counter");
+  const counterRef = doc(counterCol, "counter");
   const q = query(messageRef, orderBy("timestamp"));
 
   const [messagesReceived, setMessagesReceived] = useState([]);
@@ -38,6 +71,9 @@ const Chat = () => {
       message: msgToSend,
     });
 
+    await updateDoc(counterRef, {
+      counterDoc: increment(1)
+    })
     setMsgToSend("");
   };
 
@@ -65,7 +101,7 @@ const Chat = () => {
     <>
       <Box
         sx={{
-          padding: 4,
+          padding: 2,
           backgroundColor: "",
         }}
         onSubmit={handleSubmit}
@@ -75,38 +111,35 @@ const Chat = () => {
         <Grid container spacing={2}>
           <Grid container>
             <Grid item xs={12}>
-              <main id="messagesReceived">
+              <Grid id="messagesReceived">
                 {messagesReceived &&
                   messagesReceived.map((msg) => (
                     <ChatMessage key={msg.id} message={msg} />
                   ))}
                 <span ref={dummy}></span>
-              </main>
+              </Grid>
             </Grid>
           </Grid>
 
-          <Grid container sx={{ mb: 0 }}>
-            <Grid item xs={2}>
-              <Avatar sx={{ bgcolor: deepPurple[500] }}>
-                {user.email.charAt(0).toUpperCase()}
-              </Avatar>
+          <Grid container sx={{ mb: 5 }} xs={12}>
+            <Grid item xs={1} sx={{ marginLeft: "20px" }}>
+              <Avatar {...stringAvatar(user.email)} />
             </Grid>
-            <Grid item xs={8}>
+            <Grid item xs={7}>
               <TextField
                 required
-                fullWidth
                 value={msgToSend}
                 autoFocus
                 onChange={(e) => setMsgToSend(e.target.value)}
                 placeholder="Type your message here..."
+                sx={{ color: 'white', bgcolor: 'var(--text-inactive)', borderRadius: '15px', width: "90%", marginLeft: "10px"}}
               />
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={1}>
               <Button
                 type="submit"
-                fullWidth
                 variant="contained"
-                sx={{ mb: 2 }}
+                sx={{ mb: 1, bgcolor: '#8f96e2', height: '50px'}} 
                 endIcon={<SendIcon />}
                 disabled={!msgToSend}
               >
@@ -131,11 +164,10 @@ function ChatMessage(props) {
   return (
     <>
       <div className={`message ${messageClass}`}>
-        <Avatar sx={{ bgcolor: deepPurple[500] }}>
-          {name.toUpperCase().charAt(0)}
-        </Avatar>
-
-        <p>{message}</p>
+        <ListItemAvatar sx={{ marginBottom:'10px', marginLeft:'10px', marginRight:'10px' }}>
+          <Avatar {...stringAvatar(name)} />
+        </ListItemAvatar>
+        <Typography>{message}</Typography>
       </div>
     </>
   );
