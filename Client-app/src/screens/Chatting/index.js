@@ -1,5 +1,4 @@
 import BottomNav from "../../components/BottomNav";
-import Navbar from "../../components/Navbar";
 import Chat from "../../components/Chat";
 import Box from "@mui/material/Box";
 import MenuAppBar from "../../components/Navbar";

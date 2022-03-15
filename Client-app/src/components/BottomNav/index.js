@@ -2,22 +2,20 @@ import { IconButton } from "@mui/material";
 import "./BottomNav.css";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
-import MailRoundedIcon from "@mui/icons-material/MailRounded";
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { Link } from "react-router-dom";
-import React from "react";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Popover from "@mui/material/Popover";
-import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
+import PopupState from "material-ui-popup-state";
 import MoreHorizRoundedIcon from "@mui/icons-material/MoreHorizRounded";
 import { useState } from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "../../backend/firebase";
 
 const BottomNav = () => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const setMobileMoreAnchorEl = useState(null);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -31,6 +29,7 @@ const BottomNav = () => {
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
+  
   const logout = async (e) => {
     e.preventDefault();
     signOut(auth);

@@ -1,5 +1,3 @@
-import * as React from 'react';
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
@@ -21,7 +19,7 @@ const dropdownStyle = makeStyles({
 
 function DropdownDoctor(props) {
   const classes = dropdownStyle(); // adding styling
-  const [patientInfo, setPatientInfo] = React.useState(null); // initially string is empty
+  const [patientInfo, setPatientInfo] = useState(null); // initially string is empty
   const [doctorsList, setDoctorsList] = useState(null);
 
   useEffect(() => {

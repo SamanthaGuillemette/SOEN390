@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
@@ -81,8 +80,8 @@ function TablePaginationActions(props) {
 
 function DoctorList() {
   const classes = dropdownStyle(); // adding styling
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
   const [doctorsList, setDoctorsList] = useState(null);
 
   const handleChangePage = (event, newPage) => {

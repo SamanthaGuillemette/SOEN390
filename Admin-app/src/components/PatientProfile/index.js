@@ -1,5 +1,4 @@
 import "./PatientProfile.css";
-import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -89,7 +88,7 @@ function PatientProfile() {
   // reviewed status with DB
   function onReviewedClick(id)
   {
-    if (checked == true) {
+    if (checked === true) {
       setReviewingStatus("Not Completed");
       setChecked(false);
     } else {

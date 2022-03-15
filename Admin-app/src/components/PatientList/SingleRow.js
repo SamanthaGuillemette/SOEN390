@@ -1,4 +1,4 @@
-import * as React from "react";
+import {Fragment} from "react";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
@@ -8,15 +8,16 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
+import {useState} from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 function SingleRow(props) {
   const { row } = props;
-  const [open, setOpen] = React.useState(false); // setting the open condition to be false
+  const [open, setOpen] = useState(false); // setting the open condition to be false
 
   return (
-    <React.Fragment>
+    <Fragment>
       <TableRow className={ row.statusReview === "Status Reviewed" ? "PatientList-reviewedStatus" : "" }>
         <TableCell sx={{ borderColor: "var(--background-secondary)" }}>
           <IconButton
@@ -130,7 +131,7 @@ function SingleRow(props) {
           </Collapse>
         </TableCell>
       </TableRow>
-    </React.Fragment>
+    </Fragment>
   );
 }
 

@@ -1,5 +1,5 @@
-import * as React from "react";
 import AppBar from "@mui/material/AppBar";
+import {useState} from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -32,7 +32,7 @@ const useStyles = makeStyles({
 
 const MenuAppBar = () => {
   const classes = useStyles();
-  const [state, setState] = React.useState(false);
+  const [state, setState] = useState(false);
 
   const toggleDrawer = () => {
     setState(!state);

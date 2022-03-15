@@ -1,10 +1,9 @@
-import * as React from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { makeStyles } from "@material-ui/core/styles";
-import { useEffect} from "react";
+import { useEffect, useState} from "react";
 import { setStatus } from "../../backend/firebasePatientUtilities";
 import "./DropdownStatus.css";
 
@@ -21,7 +20,7 @@ const dropdownStyle = makeStyles({
 
 function DropdownStatus(props) {
   const classes = dropdownStyle(); // adding styling
-  const [patientInfo, setPatientInfo] = React.useState(null);
+  const [patientInfo, setPatientInfo] = useState(null);
   
   useEffect(() => {
     props && props.patientInfo && setPatientInfo(props.patientInfo);

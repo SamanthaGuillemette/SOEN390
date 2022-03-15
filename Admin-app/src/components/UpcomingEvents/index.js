@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {useState} from 'react';
 import Box from '@mui/material/Box';
 import EventButton from "../../components/EventButton";
 import COVID19Button from "../../components/COVID-19Button";
@@ -22,7 +22,7 @@ const style = {
   
 
 function UpcomingEvents() {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true); 
     const handleClose = () => setOpen(false);
 

@@ -22,20 +22,6 @@ import { createTheme } from "@material-ui/core/styles";
 import { inputLabelClasses } from "@mui/material/InputLabel";
 import "./../SignUp/SignUp.css";
 
-const style = {
-  position: "absolute",
-  top: "30%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 500,
-  bgcolor: "var(--background-main)",
-  borderRadius: "10px",
-  border: "1px solid var(--info-border)",
-  boxShadow: 24,
-  color: "var(--info-main)",
-  p: 4,
-};
-
 const styleForModal = {
   position: 'absolute',
   top: '50%',

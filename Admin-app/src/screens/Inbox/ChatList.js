@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {Fragment} from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Divider from '@mui/material/Divider';
@@ -101,13 +101,13 @@ function PatientsList(props) {
                 </ListItemAvatar>
                 <ListItemText
                     primary= {
-                        <React.Fragment>
+                        <Fragment>
                             <Typography style={{ maxWidth: '100px',}} color="var(--text-primary)"> {name} </Typography>
                             {<FlagIcon label="primary" color="primary" variant="outlined" />}
-                        </React.Fragment>}
+                        </Fragment>}
                     secondary={
-                        <React.Fragment>
-                        </React.Fragment>
+                        <Fragment>
+                        </Fragment>
                     }
                 />
             </ListItem>
@@ -123,17 +123,17 @@ function PatientsList(props) {
                 </ListItemAvatar>
                 <ListItemText
                     primary= {
-                        <React.Fragment>
+                        <Fragment>
                             <Typography color="var(--text-primary)"> 
                                 {name} 
                                 <FlagIcon style={{ marginLeft: '10px',}} label="error" color="error" variant="outlined" />
                             </Typography>
-                        </React.Fragment>}
+                        </Fragment>}
                     secondary={
-                        <React.Fragment>
+                        <Fragment>
                             <Typography style={{ maxWidth: '100px',}} color="var(--text-inactive)"> {lastMessage && lastMessage[0].message} </Typography>
                             {/* {"last comment"} */}
-                        </React.Fragment>
+                        </Fragment>
                     }
                 />
             </ListItem>

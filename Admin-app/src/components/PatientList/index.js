@@ -1,4 +1,3 @@
-import React from "react";
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -52,7 +51,7 @@ function createData(patientname, id, status, appointment, doctor, priority, stat
 function PatientList() {
   const classes = dropdownStyle(); // adding styling
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
   const [patientsList, setPatientsList] = useState(null);
   const [doctorsList, setDoctorsList] = useState(null);
 
