@@ -6,7 +6,7 @@
 // https://on.cypress.io/writing-first-test
 
 /* ==== Test Created with Cypress Studio ==== */
-it('Dashboard QA ', function() {
+it('Dashboard QA', function() {
   /* ==== Generated with Cypress Studio ==== */
   cy.visit('http://localhost:3000/');
   cy.get('#email').click();
