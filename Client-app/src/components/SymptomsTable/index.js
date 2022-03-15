@@ -6,8 +6,10 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableFooter from "@mui/material/TableFooter";
 import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";import VirusIcon from "../../assets/virus.svg";
+import TableRow from "@mui/material/TableRow";
+import VirusIcon from "../../assets/virus.svg";
 import "./SymptomsTable.css";
+import SymptomsEntryModal from "./SymptomEntryModal";
 
 // function to create data
 function createData(symptomDate, status) {
@@ -23,8 +25,11 @@ const rows = [
 function SymptomsTable() {
   return (
     <TableContainer className="symptoms-list">
-      <Box className="label"> {/* Making Label Box */}
-        <img className="symptoms__icon" src={VirusIcon} alt="Symptoms" /> {/* Adding Label */}
+      <Box className="label">
+        {" "}
+        {/* Making Label Box */}
+        <img className="symptoms__icon" src={VirusIcon} alt="Symptoms" />{" "}
+        {/* Adding Label */}
         Symptoms List {/* Adding text */}
       </Box>
       {/* Making Table */}
@@ -53,6 +58,14 @@ function SymptomsTable() {
         <TableBody>
           {rows.map((row, index) => (
             <TableRow key={index}>
+              <TableCell
+                className="data"
+                sx={{ borderColor: "var(--primary-light)" }}
+                component="th"
+                scope="row"
+              >
+                <SymptomsEntryModal />
+              </TableCell>
               <TableCell
                 className="data"
                 sx={{ borderColor: "var(--primary-light)" }}
