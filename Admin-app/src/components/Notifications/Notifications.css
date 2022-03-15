@@ -1,21 +1,21 @@
-.admin-notifications-container {
+.ADMIN-NOTIFICATIONS__container {
     margin: auto;
     width: 100%;
 }
 
-.admin-notifications-box {
+.ADMIN-NOTIFICATIONS__box {
     margin: 0px;
     background-color: rgb(67, 77, 184, 0.05) !important;
     border: 1px solid var(--secondary-dark) !important;
     border-radius: 20px !important;
 }
 
-.notifications-closingIcon {
+.NOTIFICATIONS__closingIcon {
     color: #949be2 !important;
     /* position: absolute !important;
     right: 400px; */
 }
 
-.notifications-closeIcon:hover {
+.NOTIFICATIONS__closingIcon:hover {
     color: var(--text-primary) !important;
 }

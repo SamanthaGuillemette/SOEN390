@@ -104,7 +104,7 @@ const Inbox = () => {
                 </Grid>
                 <Grid item xs={8}>
                        <Grid container sx={{ mb: 2,  color: 'white', alignItems: 'center', display: "flex", flexDirection: "column",}}>
-                             <Typography variant="h5" className="header-message">{clientMessage}</Typography>
+                             <Typography variant="h5" className="INBOX__header__message">{clientMessage}</Typography>
                        </Grid>
                         <Grid container spacing={2}>
                              <Grid container>
@@ -160,7 +160,7 @@ function ChatMessage(props) {
     
     return (
         <>
-            <div className={`message ${messageClass}`}>
+            <div className={`INBOX__message ${messageClass}`}>
                 <ListItemAvatar sx={{ marginBottom:'10px', marginLeft:'10px', marginRight:'10px' }}>
                     <Avatar {...stringAvatar(name)} />
                 </ListItemAvatar>

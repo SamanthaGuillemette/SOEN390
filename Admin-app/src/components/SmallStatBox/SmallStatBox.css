@@ -1,19 +1,19 @@
-.statDetailGroup {
+.STAT__BOX {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 10px 0;
 }
 
-.statTextContainer {
+.STAT__text__container {
   margin-left: 15px;
 }
 
-.statDesc {
+.STAT__desc {
   margin-top: -12px;
 }
 
-h2.statNumber {
+h2.STAT__number {
   color: var(--text-primary) !important;
   opacity: 1;
 }

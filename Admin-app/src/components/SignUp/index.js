@@ -29,20 +29,6 @@ import { Navigate } from "react-router-dom";
 import Modal from '@mui/material/Modal';
 import "./SignUp.css";
 
-const style = {
-  position: 'absolute',
-  top: '30%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 500,
-  bgcolor: 'var(--background-main)',
-  borderRadius: '10px',
-  border: "1px solid var(--info-border)",
-  boxShadow: 24,
-  color: "var(--info-main)",
-  p: 4,
-};
-
 const styleForModal = {
   position: 'absolute',
   top: '50%',
@@ -59,7 +45,7 @@ function Copyright(props) {
   return (
     <Typography variant="body2" align="center" {...props}>
       {'Copyright © '}
-      <Link className="link-sign" sx={{fontSize: "12px", textDecoration: 'none'}} color="inherit">
+      <Link className="SIGN-UP__link" sx={{fontSize: "12px", textDecoration: 'none'}} color="inherit">
         Your Website
       </Link>{' '}
       {new Date().getFullYear()}
@@ -266,7 +252,7 @@ export default function SignUp(props) {
               <Grid item xs={12}>
               <FormControlLabel
                   required
-                  control={<Checkbox className="signup-checkbox" value="allowExtraEmails" />}
+                  control={<Checkbox className="SIGN-UP__checkbox" value="allowExtraEmails" />}
                   label="I confirm my data above is correct."
                 />
               </Grid>
@@ -344,7 +330,7 @@ export default function SignUp(props) {
             </Modal>
             <Grid container justifyContent="center">
               <Grid item>
-                <Link className="link-sign" sx={{textDecoration: 'none', color: "var(--primary-main)"}} href="/signin" variant="body2">
+                <Link className="SIGN-UP__link" sx={{textDecoration: 'none', color: "var(--primary-main)"}} href="/signin" variant="body2">
                   Already have an account? Sign in
                 </Link> 
               </Grid>

@@ -24,10 +24,10 @@ const Dashboard = () => {
   return (
     // This returns the buttons on the top which display the buttons on the top, this one is for the patients
     <Container maxWidth="xl">
-      <Grid container spacing={2} className="statContainer">
-        <Grid container spacing={3} className="statContainer">
+      <Grid container spacing={2} className="STAT__container">
+        <Grid container spacing={3} className="STAT__container">
           <Grid item xs={6} md={3}>
-            <Card className="statItem" sx={{backgroundColor: "var(--background-main)", color: "var(--text-inactive)"}}>
+            <Card className="STAT_item" sx={{backgroundColor: "var(--background-main)", color: "var(--text-inactive)"}}>
               <SmallStatBox
                 icon={<PersonIcon fontSize="large" sx={{color: "var(--text-primary)"}} />}
                 number="1523"
@@ -37,7 +37,7 @@ const Dashboard = () => {
           </Grid>
           {/* This button is for the doctors*/}
           <Grid item xs={6} md={3}>
-            <Card className="statItem" sx={{backgroundColor: "var(--background-main)", color: "var(--text-inactive)"}}>
+            <Card className="STAT_item" sx={{backgroundColor: "var(--background-main)", color: "var(--text-inactive)"}}>
               <SmallStatBox
                 icon={
                   <SupervisedUserCircleIcon fontSize="large" sx={{color: "var(--text-primary)"}} />
@@ -49,7 +49,7 @@ const Dashboard = () => {
           </Grid>
             {/* This button is for the active cases*/}
           <Grid item xs={6} md={3}>
-            <Card className="statItem" sx={{backgroundColor: "var(--background-main)", color: "var(--text-inactive)"}}>
+            <Card className="STAT_item" sx={{backgroundColor: "var(--background-main)", color: "var(--text-inactive)"}}>
               <SmallStatBox
                 icon={<CoronavirusIcon fontSize="large" sx={{color: "var(--text-primary)"}} />}
                 number="1523"
@@ -59,7 +59,7 @@ const Dashboard = () => {
           </Grid>
             {/* This button is for the recovered cases*/}
           <Grid item xs={6} md={3}>
-            <Card className="statItem" sx={{backgroundColor: "var(--background-main)", color: "var(--text-inactive)"}}>
+            <Card className="STAT_item" sx={{backgroundColor: "var(--background-main)", color: "var(--text-inactive)"}}>
               <SmallStatBox
                 icon={<VerifiedUserIcon fontSize="large" sx={{color: "var(--text-primary)"}} />}
                 number="1523"
@@ -71,14 +71,14 @@ const Dashboard = () => {
 
       {/* Here it displays the line and the doughnut charts*/}
 
-        <Grid container spacing={3} className="statContainer">
+        <Grid container spacing={3} className="STAT__container">
           <Grid item xs={12} md={8}>
-            <Card className="statItem" sx={{backgroundColor: "inherit", boxShadow: "none"}}>
+            <Card className="STAT_item" sx={{backgroundColor: "inherit", boxShadow: "none"}}>
               <LineChart/>
             </Card>
           </Grid>
           <Grid item xs={12} md={4}>
-            <Card className="statItem" sx={{background: 'var(--gradient-to-right-btm)'}}>
+            <Card className="STAT_item" sx={{background: 'var(--gradient-to-right-btm)'}}>
               <DoughnutChart />
             </Card>
           </Grid>
@@ -87,7 +87,7 @@ const Dashboard = () => {
       {/* The following is the Patient List which appears on the dashboard
           Here we have the styling.*/}  
           <List
-            className="patientList"
+            className="PATIENT-LIST"
             sx={{
               width: "28vh",
               maxWidth: "xl",
@@ -101,7 +101,7 @@ const Dashboard = () => {
             subheader={<li />}
           >
             {/* While here is the implementation*/}
-            <Typography data-testid="patientlist" className="listTitle" gutterBottom variant="h5" sx={{color: "var(--text-primary)", border: "transparent"}}>
+            <Typography data-testid="patientlist" className="PATIENT-LIST__title" gutterBottom variant="h5" sx={{color: "var(--text-primary)", border: "transparent"}}>
               Patient's list
             </Typography>
             {[0, 1, 2, 3, 4].map((sectionId) => (
@@ -124,11 +124,11 @@ const Dashboard = () => {
          {/* Here we see where the 3 cards at the bottom of the dashboard are implemented.
         The section here is called important links. */}
 
-          <Grid className="infoGrid" align="center">
-            <Typography sx={{color: "var(--text-primary)"}} className="title" gutterBottom variant="h5">
+          <Grid className="DASHBOARD__cards__grid" align="center">
+            <Typography sx={{color: "var(--text-primary)"}} className="DASHBOARD__cards__title" gutterBottom variant="h5">
                 Important Links
                 </Typography>
-            <Card data-testid ="card1" variant="contained" className="cardShape">
+            <Card data-testid ="card1" variant="contained" className="DASHBOARD__card">
               <CardMedia
                 component="img"
                 height="220"
@@ -136,9 +136,9 @@ const Dashboard = () => {
                 alt="covid testing"
               />
               <CardContent>
-                <p className="card-details">Info</p>
+                <p className="DASHBOARD__card__label">Info</p>
                 <Typography
-                  className="cardTitle"
+                  className="DASHBOARD__card__title"
                   gutterBottom
                   variant="h5"
                   component="div"
@@ -152,7 +152,7 @@ const Dashboard = () => {
                   </a>
                 </Typography>
                 <Typography
-                  className="textContent"
+                  className="DASHBOARD__card__desc"
                   variant="body2"
                   color="text.secondary"
                 >
@@ -162,7 +162,7 @@ const Dashboard = () => {
               </CardContent>
             </Card>
 
-            <Card data-testid="card2" variant="contained" className="cardShape" sx={{marginLeft: 2, marginRight: 2}}>
+            <Card data-testid="card2" variant="contained" className="DASHBOARD__card" sx={{marginLeft: 2, marginRight: 2}}>
               <CardMedia
                 component="img"
                 height="220"
@@ -170,9 +170,9 @@ const Dashboard = () => {
                 alt="covid testing"
               />
               <CardContent>
-                <p className="card-details">Info</p>
+                <p className="DASHBOARD__card__label">Info</p>
                 <Typography
-                  className="cardTitle"
+                  className="DASHBOARD__card__title"
                   gutterBottom
                   variant="h5"
                   component="div"
@@ -186,7 +186,7 @@ const Dashboard = () => {
                   </a>
                 </Typography>
                 <Typography
-                  className="textContent"
+                  className="DASHBOARD__card__desc"
                   variant="body2"
                   color="text.secondary"
                 >
@@ -198,7 +198,7 @@ const Dashboard = () => {
               </CardContent>
             </Card>
 
-            <Card data-testid ="card3" variant="contained" className="cardShape">
+            <Card data-testid ="card3" variant="contained" className="DASHBOARD__card">
               <CardMedia
                 component="img"
                 height="220"
@@ -206,9 +206,9 @@ const Dashboard = () => {
                 alt="covid testing"
               />
               <CardContent>
-                <p className="card-details">Info</p>
+                <p className="DASHBOARD__card__label">Info</p>
                 <Typography
-                  className="cardTitle"
+                  className="DASHBOARD__card__title"
                   gutterBottom
                   variant="h5"
                   component="div"
@@ -222,7 +222,7 @@ const Dashboard = () => {
                   </a>
                 </Typography>
                 <Typography
-                  className="textContent"
+                  className="DASHBOARD__card__desc"
                   variant="body2"
                   color="text.secondary"
                 >

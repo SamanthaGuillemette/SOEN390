@@ -28,20 +28,6 @@ import Modal from "@mui/material/Modal";
 import { createTheme } from "@material-ui/core/styles";
 import { inputLabelClasses } from "@mui/material/InputLabel";
 
-const style = {
-  position: "absolute",
-  top: "30%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 500,
-  bgcolor: "var(--background-main)",
-  borderRadius: "10px",
-  border: "1px solid var(--info-border)",
-  boxShadow: 24,
-  color: "var(--info-main)",
-  p: 4,
-};
-
 const styleForModal = {
   position: 'absolute',
   top: '50%',
@@ -60,7 +46,7 @@ function Copyright(props) {
       {"Copyright © "}
       <Link
         color="inherit"
-        className="link-sign"
+        className="SIGN-UP__link"
         sx={{ fontSize: "12px", textDecoration: "none" }}
       >
         Your Website
@@ -171,6 +157,7 @@ export default function SignUp(props) {
         <CssBaseline />
         <Box
           sx={{
+            marginTop: 10,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -358,7 +345,7 @@ export default function SignUp(props) {
                   required
                   control={
                     <Checkbox
-                      className="signup-checkbox"
+                      className="SIGN-UP__checkbox"
                       value="allowExtraEmails"
                     />
                   }
@@ -440,7 +427,7 @@ export default function SignUp(props) {
             <Grid container justifyContent="center">
               <Grid item>
                 <Link
-                  className="link-sign"
+                  className="SIGN-UP__link"
                   sx={{ textDecoration: "none", color: "var(--primary-main)" }}
                   href="/signin"
                   variant="body2"
