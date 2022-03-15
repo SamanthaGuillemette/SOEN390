@@ -19,7 +19,6 @@ const style = {
     boxShadow: 24,
     p: 4,
   };
-  
 
 function UpcomingEvents() {
     const [open, setOpen] = React.useState(false);
@@ -27,17 +26,17 @@ function UpcomingEvents() {
     const handleClose = () => setOpen(false);
 
     return (
-        <div className="outline"> {/* Making event box */}
-            <div className="outer-layer">
-            <div className="event">
-                <div className="eventMonth">Feb</div>    
-                <div className="eventDate" >04</div>
+        <div className="UPCOMING-EVENTS__div"> {/* Making event box */}
+            <div className="UPCOMING-EVENTS-1__background">
+            <div className="UPCOMING-EVENTS__date">
+                <div className="UPCOMING-EVENTS__month">Feb</div>    
+                <div className="UPCOMING-EVENTS__day" >04</div>
                 </div>
-                <div data-testid = "up-events" className="eventTitle" >Blood Donations</div>
-                <div className="eventTime">6:00 PM</div>
+                <div data-testid = "up-events" className="UPCOMING-EVENTS__title" >Blood Donations</div>
+                <div className="UPCOMING-EVENTS__time">6:00 PM</div>
                 <div>
-                <Button className="viewMore" onClick={handleOpen}>View more {/* on click displaying modal */}
-                <ArrowForwardIcon className="events-arrow"></ArrowForwardIcon></Button>
+                <Button className="UPCOMING-EVENTS__viewMore" onClick={handleOpen}>View more {/* on click displaying modal */}
+                <ArrowForwardIcon className="UPCOMING-EVENTS__arrow"></ArrowForwardIcon></Button>
                 <Modal // Adding Modal
                     open={open}
                     onClose={handleClose} // Closing modal
@@ -45,26 +44,26 @@ function UpcomingEvents() {
                     aria-describedby="modal-modal-description"
                 >
                     <Box sx={style}>
-                    <Typography color="var(--text-primary)" id="modal-modal-title" variant="h6" component="h2">
+                    <Typography className="UPCOMING-EVENTS__modal__header" color="var(--text-primary)" id="modal-modal-title" variant="h6" component="h2">
                         Blood Donations {/* Displaying text on modal */}
                     </Typography>
-                    <Typography color="var(--text-inactive)" id="modal-modal-description" sx={{ mt: 2 }}>
+                    <Typography className="UPCOMING-EVENTS__modal__desc" color="var(--text-inactive)" id="modal-modal-description" sx={{ mt: 2 }}>
                         On Feb 04 exclusively, you can being donating blood at your nearest hospital. {/* Displaying text on modal */}
                     </Typography>
                     </Box>
                 </Modal>
                 </div>
             </div>
-            <div className="outer-layer-2"> {/* Making event box */}
-                <div className="event">
-                <div className="eventMonth">Feb</div>    
-                <div className="eventDate" >08</div>
+            <div className="UPCOMING-EVENTS-2__background"> {/* Making event box */}
+                <div className="UPCOMING-EVENTS__date">
+                <div className="UPCOMING-EVENTS__month">Feb</div>    
+                <div className="UPCOMING-EVENTS__day" >08</div>
                 </div>
-                <div className="eventTitle" >Vaccine Available for People 12+</div>
-                <div className="eventTime">12:00 PM</div>
+                <div className="UPCOMING-EVENTS__title" >Vaccine Available for People 12+</div>
+                <div className="UPCOMING-EVENTS__time">12:00 PM</div>
                 <div>
-                <Button className="viewMore" onClick={handleOpen}>View more {/* on click displaying modal */}
-                <ArrowForwardIcon className="events-arrow"></ArrowForwardIcon></Button>
+                <Button className="UPCOMING-EVENTS__viewMore" onClick={handleOpen}>View more {/* on click displaying modal */}
+                <ArrowForwardIcon className="UPCOMING-EVENTS__arrow"></ArrowForwardIcon></Button>
                 <Modal
                     open={open}
                     onClose={handleClose} // Closing modal
@@ -72,18 +71,18 @@ function UpcomingEvents() {
                     aria-describedby="modal-modal-description"
                 >
                     <Box sx={style}>
-                    <Typography className="events-modal-h" id="modal-modal-title" variant="h6" component="h2">
+                    <Typography className="UPCOMING-EVENTS__modal__header" id="modal-modal-title" variant="h6" component="h2">
                         Vaccine Available for People 12+ {/* Displaying text on modal */}
                     </Typography>
-                    <Typography className="events-modal-sec" id="modal-modal-description" sx={{ mt: 2 }}>
+                    <Typography className="UPCOMING-EVENTS__modal__desc" id="modal-modal-description" sx={{ mt: 2 }}>
                         NOTE: Pfizer is recommended for ages under 40. Moderna carries serious risks. {/* Displaying text on modal */}
                     </Typography>
                     </Box>
                 </Modal>
                 </div>
             </div>
-            <EventButton></EventButton>
-            <COVID19Button></COVID19Button>
+            <EventButton/>
+            <COVID19Button/>
         </div>
     );
 }

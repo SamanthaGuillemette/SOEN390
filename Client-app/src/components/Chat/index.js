@@ -132,14 +132,14 @@ const Chat = () => {
                 autoFocus
                 onChange={(e) => setMsgToSend(e.target.value)}
                 placeholder="Type your message here..."
-                sx={{ color: 'white', bgcolor: 'var(--text-inactive)', borderRadius: '15px', width: "90%", marginLeft: "10px"}}
+                sx={{ color: 'white', bgcolor: 'var(--text-inactive)', borderRadius: '15px', width: "90%", marginLeft: "10px" }}
               />
             </Grid>
             <Grid item xs={1}>
               <Button
                 type="submit"
                 variant="contained"
-                sx={{ mb: 1, bgcolor: '#8f96e2', height: '50px'}} 
+                sx={{ mb: 1, bgcolor: '#8f96e2', height: '50px' }}
                 endIcon={<SendIcon />}
                 disabled={!msgToSend}
               >
@@ -164,7 +164,7 @@ function ChatMessage(props) {
   return (
     <>
       <div className={`message ${messageClass}`}>
-        <ListItemAvatar sx={{ marginBottom:'10px', marginLeft:'10px', marginRight:'10px' }}>
+        <ListItemAvatar sx={{ marginBottom: '10px', marginLeft: '10px', marginRight: '10px' }}>
           <Avatar {...stringAvatar(name)} />
         </ListItemAvatar>
         <Typography>{message}</Typography>

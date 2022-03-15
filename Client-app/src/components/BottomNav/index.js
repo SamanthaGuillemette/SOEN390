@@ -39,31 +39,25 @@ const BottomNav = () => {
   };
 
   return (
-    <div className="bottomNav-container">
-      <IconButton size="large" className="bottomNav-button" sx={{ mb: "10px" }}>
+    <div className="BOTTOM-NAV__container">
+      <IconButton size="large" className="BOTTOM-NAV__btn" sx={{ mb: "10px" }}>
         <Link to="../">
-          <HomeRoundedIcon
-            className="bottomNav-icon"
-            sx={{ color: "white", mb: "-5px" }}
-          />
-          <p className="bottomNav-iconTitle">Home</p>
+          <HomeRoundedIcon sx={{ color: "white", mb: "-5px" }}/>
+          <p className="BOTTOM-NAV__btn__title">Home</p>
         </Link>
       </IconButton>
       <Link className="client-profile" to="../ClientProfile">
-        <IconButton size="large" className="bottomNav-button">
-          <AccountCircleRoundedIcon
-            className="bottomNav-icon"
-            sx={{ color: "white" }}
-          />
-          <p data-testid="profile" className="bottomNav-iconTitle">
+        <IconButton size="large" className="BOTTOM-NAV__btn">
+          <AccountCircleRoundedIcon sx={{ color: "white" }}/>
+          <p data-testid="profile" className="BOTTOM-NAV__btn__title">
             Profile
           </p>
         </IconButton>
       </Link>
       <Link to="../notifications">
-        <IconButton size="large" className="bottomNav-button">
-          <NotificationsIcon className="bottomNav-icon" sx={{ color: "white" }} />
-          <p className="bottomNav-iconTitle">
+        <IconButton size="large" className="BOTTOM-NAV__btn">
+          <NotificationsIcon sx={{ color: "white" }} />
+          <p className="BOTTOM-NAV__btn__title">
             Notifications
           </p>
         </IconButton>
@@ -75,13 +69,10 @@ const BottomNav = () => {
               aria-describedby={id}
               variant="contained"
               onClick={handleClick}
-              className="bottomNav-button"
+              className="BOTTOM-NAV__btn"
             >
-              <MoreHorizRoundedIcon
-                className="bottomNav-icon"
-                sx={{ color: "white" }}
-              />
-              <p className="bottomNav-iconTitle">More</p>
+              <MoreHorizRoundedIcon sx={{ color: "white" }}/>
+              <p className="BOTTOM-NAV__btn__title">More</p>
             </Button>
             <Popover
               id={id}
@@ -99,7 +90,7 @@ const BottomNav = () => {
             >
               <Typography
                 data-testid="signout"
-                className="popover-text"
+                className="BOTTOM-NAV__popover__text"
                 onClick={logout}
                 sx={{ p: 2 }}
               >

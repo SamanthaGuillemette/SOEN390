@@ -7,9 +7,9 @@ import './EventButton.css';
 // Function for the use of our Upcoming events button on the dashboard
 function EventButton() {
     return(
-        <div className="event-button-div">
+        <div className="EVENT-BTN__div">
         <Link to="event">        
-            <Button variant= "contained" className="event-btn"><p className="content">Upcoming Events</p></Button>
+            <Button variant= "contained" className="EVENT-BTN__button"><p className="EVENT-BTN__text">Upcoming Events</p></Button>
         </Link>
         </div>
     );

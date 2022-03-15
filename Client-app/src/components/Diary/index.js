@@ -6,27 +6,43 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableFooter from "@mui/material/TableFooter";
 import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";import VirusIcon from "../../assets/virus.svg";
-import "./SymptomsTable.css";
+import TableRow from "@mui/material/TableRow";
+import NoteIcon from "../../assets/note.svg";
+import "./DiaryTable.css";
+import { Grid } from "@material-ui/core";
+import { useState } from "react";
+import DiaryEntryModal from "./DiaryEntryModal";
 
 // function to create data
-function createData(symptomDate, status) {
-  return { symptomDate, status };
+function createData(diaryDate, contactName) {
+  return { diaryDate, contactName };
 }
 
 // creating data
 const rows = [
-  createData("05/02/22", <span className="label-negative">negative</span>),
-  createData("22/03/22", <span className="label-positive">positive</span>),
+  createData("05/02/22", "Jane Doe"),
+  createData("22/03/22", "Wendy Gables"),
 ];
 
-function SymptomsTable() {
+function DiaryTable() {
+  const [openEntry, setOpenEntry] = useState(false);
+
+  const handleEntryOpen = () => setOpenEntry(true);
+  const handleEntryClose = () => setOpenEntry(false);
+
   return (
-    <TableContainer className="symptoms-list">
-      <Box className="label"> {/* Making Label Box */}
-        <img className="symptoms__icon" src={VirusIcon} alt="Symptoms" /> {/* Adding Label */}
-        Symptoms List {/* Adding text */}
-      </Box>
+    <TableContainer className="diary__list">
+      <Grid className="diary__label" container spacing={2}>
+        <Grid item xs={8}>
+          <img
+            className="diary__header__icon"
+            src={NoteIcon}
+            alt="Diary"
+            onClick={() => handleEntryOpen()}
+          />
+          Diary List
+        </Grid>
+      </Grid>
       {/* Making Table */}
       <Table sx={{ minWidth: 50 }} aria-label="custom pagination table">
         {/* Displaying Table headers */}
@@ -34,18 +50,23 @@ function SymptomsTable() {
           <TableRow>
             {/* First column header */}
             <TableCell
-              className="SYMPTOMS__table__header"
+              className="header"
               sx={{ borderColor: "var(--secondary-light)" }}
-            >
-              Date of Contact
-            </TableCell>
+            ></TableCell>
             {/* Second column header */}
             <TableCell
-              className="SYMPTOMS__table__header"
+              className="header"
+              sx={{ borderColor: "var(--secondary-light)" }}
+            >
+              Contact Date
+            </TableCell>
+            {/* Third column header */}
+            <TableCell
+              className="header"
               sx={{ borderColor: "var(--secondary-light)" }}
               align="right"
             >
-              Status
+              Contact Name
             </TableCell>
           </TableRow>
         </TableHead>
@@ -54,20 +75,28 @@ function SymptomsTable() {
           {rows.map((row, index) => (
             <TableRow key={index}>
               <TableCell
-                className="SYMPTOMS__table__data"
+                className="data"
                 sx={{ borderColor: "var(--primary-light)" }}
                 component="th"
                 scope="row"
               >
-                {row.symptomDate}
+                <DiaryEntryModal />
               </TableCell>
               <TableCell
-                className="SYMPTOMS__table__data"
+                className="data"
+                sx={{ borderColor: "var(--primary-light)" }}
+                component="th"
+                scope="row"
+              >
+                {row.diaryDate}
+              </TableCell>
+              <TableCell
+                className="data"
                 sx={{ borderColor: "var(--primary-light)" }}
                 style={{ width: 160 }}
                 align="right"
               >
-                {row.status}
+                {row.contactName}
               </TableCell>
             </TableRow>
           ))}
@@ -75,11 +104,13 @@ function SymptomsTable() {
         <TableFooter>
           <TableRow>
             <TableCell
+              className="footer"
               sx={{ backgroundColor: "var(--background-main)" }}
               component="th"
               scope="row"
             ></TableCell>
             <TableCell
+              className="footer"
               sx={{ backgroundColor: "var(--background-main)" }}
               style={{ width: 160 }}
               align="right"
@@ -91,4 +122,4 @@ function SymptomsTable() {
   );
 }
 
-export default SymptomsTable;
+export default DiaryTable;

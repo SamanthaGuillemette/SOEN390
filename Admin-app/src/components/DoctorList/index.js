@@ -14,7 +14,6 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import { makeStyles } from "@material-ui/core/styles";
 import TableHead from '@mui/material/TableHead';
-import "./../PatientList/PatientList.css";
 import { useEffect, useState } from "react";
 import { getDoctors, patientLimit } from "../../backend/firebaseDoctorUtilities";
 
@@ -109,16 +108,16 @@ function DoctorList() {
 
   return (
     // Creating table
-    <TableContainer data-testid="table-container1" className="patient-doctor-list">
-      <Box className="label">
-        <HealingIcon data-testid = "health-icon" className="patients-icon"></HealingIcon>
+    <TableContainer data-testid="table-container1" className="DOC__table">
+      <Box className="DOC__table__label">
+        <HealingIcon data-testid = "health-icon" className="DOC__table__icon"></HealingIcon>
        Doctor List
      </Box>
       <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
       <TableHead>
           <TableRow> {/* adding table header */}
-            <TableCell className="header" sx={{borderColor: "var(--secondary-light)"}}>Doctor Name</TableCell> 
-            <TableCell className="header" sx={{borderColor: "var(--secondary-light)"}} align="right">patient number</TableCell>
+            <TableCell className="DOC__table__header" sx={{borderColor: "var(--secondary-light)"}}>Doctor Name</TableCell> 
+            <TableCell className="DOC__table__header" sx={{borderColor: "var(--secondary-light)"}} align="right">patient number</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -129,10 +128,10 @@ function DoctorList() {
           ).map((row) => (
             // getting the data of each row
             <TableRow key={row.name}>
-              <TableCell className="data" sx={{borderColor: "var(--primary-light)"}} component="th" scope="row">
+              <TableCell className="DOC__table__data" sx={{borderColor: "var(--primary-light)"}} component="th" scope="row">
                 {row.doctorName} {/* getting the doctor name */}
               </TableCell>
-              <TableCell className="data" sx={{borderColor: "var(--primary-light)"}} style={{ width: 160 }} align="right">
+              <TableCell className="DOC__table__data" sx={{borderColor: "var(--primary-light)"}} style={{ width: 160 }} align="right">
                 {row.numOfPatients} {/* getting the number of patients */}
               </TableCell>
             </TableRow>

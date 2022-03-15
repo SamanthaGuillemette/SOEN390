@@ -7,13 +7,12 @@
   flex-direction: column;
 }
 
-ul,
-li {
+ul, li {
   text-align: left;
   list-style: none;
 }
 
-.message p {
+.INBOX__message p {
   max-width: 500px;
   margin-bottom: 16px;
   line-height: 22px;
@@ -24,7 +23,7 @@ li {
   text-align: center;
 }
 
-.message {
+.INBOX__message {
   display: flex;
   align-items: center;
 }
