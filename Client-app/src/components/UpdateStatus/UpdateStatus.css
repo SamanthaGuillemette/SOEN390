@@ -23,6 +23,12 @@
   font-weight: 700 !important;
 }
 
+#statusModal-standardBasic {
+  padding-top: 16px;
+  background-color: var(--background-secondary);
+  font-size: 13.5px;
+}
+
 .STATUS__box {
   margin-top: 30px !important;
   background-color: var(--background-main) !important;

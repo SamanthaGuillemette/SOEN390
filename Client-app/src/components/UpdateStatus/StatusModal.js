@@ -21,7 +21,7 @@ const style = {
   transform: "translate(-50%, -50%)",
   bgcolor: "var(--background-secondary)",
   width: "51vh",
-  height: "77vh",
+  height: "76vh",
   p: 4,
   borderRadius: "10px",
 };
@@ -51,13 +51,13 @@ export default function SimpleModal() {
   const [dos, setDOS] = useState(userInfoDetails?.dos);
   const [temperature, setTemperature] = useState(userInfoDetails?.temperature);
   const [weight, setWeight] = useState(userInfoDetails?.weight);
-  const [fever, setFever] = useState(userInfoDetails?.fever);
-  const [soreThroat, setSoreThroat] = useState(userInfoDetails?.soreThroat);
-  const [cough, setCough] = useState(`${userInfoDetails?.setCough}`);
-  const [runnyNose, setRunnyNose] = useState(userInfoDetails?.runnyNose);
-  const [smellLoss, setSmellLoss] = useState(`${userInfoDetails?.smellLoss}`);
-  const [muscleAche, setMuscleAche] = useState(userInfoDetails?.muscleAche);
-  const [tasteLoss, setTasteLoss] = useState(userInfoDetails?.tastleLoss);
+  const [fever] = useState(userInfoDetails?.fever);
+  const [soreThroat] = useState(userInfoDetails?.soreThroat);
+  const [cough] = useState(`${userInfoDetails?.setCough}`);
+  const [runnyNose] = useState(userInfoDetails?.runnyNose);
+  const [smellLoss] = useState(`${userInfoDetails?.smellLoss}`);
+  const [muscleAche] = useState(userInfoDetails?.muscleAche);
+  const [tasteLoss] = useState(userInfoDetails?.tastleLoss);
 
   // Handle the popup open/close state
   const handleOpen = () => setOpenModal(true);
@@ -103,14 +103,16 @@ export default function SimpleModal() {
           noValidate
           onSubmit={handleSymptomsSubmit}
         >
-          <Typography className="header-statusModal" variant="h6" component="h2" sx={{ mb: 1.5 }}>
+          <Typography className="header-statusModal" variant="h6" component="h2" sx={{ mb: 1.8 }}>
             ADD STATUS
           </Typography>
           <Grid container minWidth={285} spacing={1}>
             <Grid item xs={12}>
               <TextField
-                label="Date*"
+                id="statusModal-standardBasic"
+                placeholder="Date*"
                 variant="standard"
+                color="grey"
                 onChange={(e) => setDOS(e.target.value)}
                 InputLabelProps={{
                   sx: {
@@ -124,8 +126,10 @@ export default function SimpleModal() {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="Temperature*"
+                id="statusModal-standardBasic"
+                placeholder="Temperature*"
                 variant="standard"
+                color="grey"
                 onChange={(e) => setTemperature(e.target.value)}
                 InputLabelProps={{
                   sx: {
@@ -139,8 +143,10 @@ export default function SimpleModal() {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="Weight*"
+                id="statusModal-standardBasic"
+                placeholder="Weight*"
                 variant="standard"
+                color="grey"
                 onChange={(e) => setWeight(e.target.value)}
                 InputLabelProps={{
                   sx: {
