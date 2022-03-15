@@ -29,9 +29,10 @@ function DoctorInfo() {
 
   // Query for a single user from the Client collection (table) based on user's email
   const [currentUser] = useDocument(doc(db, `Client/${user?.email}`));
+//  const [currentUser] = useDocument(doc(db, `Patients/${user?.uid}`));
   // Query for a the assigned doctor from the Doctors collection (table) based on client's email
   const [assignedDoctor] = useDocument(
-    doc(db, `Doctors/${currentUser?.data().assignedDr}`)
+    doc(db, `Doctors/${currentUser?.data()?.assignedDoctor}`)
   );
 
   return (
@@ -48,7 +49,7 @@ function DoctorInfo() {
               >
                 <Avatar
                   id="doctorInfo-card__img"
-                  src="https://media.discordapp.net/attachments/948246278490456064/949745262367232100/unknown.png"
+                  src={`${assignedDoctor?.data()?.profileImage}`}
                 />
               </Grid>
               <CardContent>
@@ -60,19 +61,17 @@ function DoctorInfo() {
                   fontSize="1.2rem"
                   component="div"
                 >
-                  {`${assignedDoctor?.data().firstName} ${
-                    assignedDoctor?.data().lastName
-                  }`}
+                  {`${assignedDoctor?.data()?.name}`}
                 </Typography>
                 <Box className="doctorInfo-card__profileText">
                   <p className="doctorInfo-card__profileTextDetail">
-                    Age: {`${assignedDoctor?.data().age}`}
+                    Age: {`${assignedDoctor?.data()?.dob}`}
                   </p>
                   <p className="doctorInfo-card__profileTextDetail">
-                    Gender: {`${assignedDoctor?.data().gender}`}
+                    Gender: {`${assignedDoctor?.data()?.gender}`}
                   </p>
                   <p className="doctorInfo-card__profileTextDetail">
-                    Work Place: {`${assignedDoctor?.data().workPlace}`}
+                    Work Place: {`${assignedDoctor?.data()?.address}`}
                   </p>
                 </Box>
               </CardContent>
@@ -107,20 +106,20 @@ function DoctorInfo() {
                       className="doctorInfo-card__data"
                       sx={{ bgcolor: "black", boxShadow: "none" }}
                     >
-                      Speciality: {`${assignedDoctor?.data().speciality}`}
+                      Speciality: {`${assignedDoctor?.data()?.speciality}`}
                     </Item>
                     <Item
                       className="doctorInfo-card__data"
                       sx={{ bgcolor: "black", boxShadow: "none" }}
                     >
-                      Patient spots: {`${assignedDoctor?.data().patientSpots}`}
+                      Patient spots: {`${assignedDoctor?.data()?.patientSpots}`}
                       /20
                     </Item>
                     <Item
                       className="doctorInfo-card__data"
                       sx={{ bgcolor: "black", boxShadow: "none" }}
                     >
-                      Experience: {`${assignedDoctor?.data().experience}`} years
+                      Experience: {`${assignedDoctor?.data()?.experience}`} years
                     </Item>
                   </Stack>
                 </CardContent>
