@@ -44,10 +44,6 @@
   color: var(--text-primary) !important;
 }
 
-fieldset{
-  border: none !important;
-}
-
 .SIGN-UP__link:hover, .SIGN-IN__link:hover {
   color: var(--text-primary) !important;
 }

@@ -5,3 +5,7 @@
 #modal-modal-description{
     color: black;
 }
+
+fieldset {
+    border: none !important;
+}

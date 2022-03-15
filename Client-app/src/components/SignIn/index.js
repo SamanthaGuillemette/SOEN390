@@ -20,7 +20,7 @@ import { Navigate } from "react-router-dom";
 import Modal from "@mui/material/Modal";
 import { createTheme } from "@material-ui/core/styles";
 import { inputLabelClasses } from "@mui/material/InputLabel";
-import "./../SignUp/SignUp.css";
+import "./signin.css";
 
 const styleForModal = {
   position: 'absolute',
