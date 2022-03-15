@@ -1,10 +1,6 @@
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-import PersonIcon from "@mui/icons-material/Person";
-import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
-import CoronavirusIcon from "@mui/icons-material/Coronavirus";
-import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
 import DoughnutChart from "../../components/Charts/DoughnutChart";
 import LineChart from "../../components/Charts/LineChart";
 import Typography from "@mui/material/Typography";
@@ -12,10 +8,10 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
-import SmallStatBox from "../../components/SmallStatBox";
 import "./Dashboard.css";
 import UpcomingEvents from "../../components/UpcomingEvents";
 import DashboardCards from "../../components/DashboardCards";
+import DashboardStats from "../../components/DashboardStats";
 
 // Main function which will render the dashboard
 
@@ -24,52 +20,9 @@ const Dashboard = () => {
     // This returns the buttons on the top which display the buttons on the top, this one is for the patients
     <Container maxWidth="xl">
       <Grid container spacing={2} className="statContainer">
-        <Grid container spacing={3} className="statContainer">
-          <Grid item xs={6} md={3}>
-            <Card className="statItem" sx={{backgroundColor: "var(--background-main)", color: "var(--text-inactive)"}}>
-              <SmallStatBox
-                icon={<PersonIcon fontSize="large" sx={{color: "var(--text-primary)"}} />}
-                number="1523"
-                description="Patients"
-              />
-            </Card>
-          </Grid>
-          {/* This button is for the doctors*/}
-          <Grid item xs={6} md={3}>
-            <Card className="statItem" sx={{backgroundColor: "var(--background-main)", color: "var(--text-inactive)"}}>
-              <SmallStatBox
-                icon={
-                  <SupervisedUserCircleIcon fontSize="large" sx={{color: "var(--text-primary)"}} />
-                }
-                number="1523"
-                description="Doctors"
-              />
-            </Card>
-          </Grid>
-            {/* This button is for the active cases*/}
-          <Grid item xs={6} md={3}>
-            <Card className="statItem" sx={{backgroundColor: "var(--background-main)", color: "var(--text-inactive)"}}>
-              <SmallStatBox
-                icon={<CoronavirusIcon fontSize="large" sx={{color: "var(--text-primary)"}} />}
-                number="1523"
-                description="Active cases"
-              />
-            </Card>
-          </Grid>
-            {/* This button is for the recovered cases*/}
-          <Grid item xs={6} md={3}>
-            <Card className="statItem" sx={{backgroundColor: "var(--background-main)", color: "var(--text-inactive)"}}>
-              <SmallStatBox
-                icon={<VerifiedUserIcon fontSize="large" sx={{color: "var(--text-primary)"}} />}
-                number="1523"
-                description="Recovered"
-              />
-            </Card>
-          </Grid>
-        </Grid>
+      <DashboardStats/> {/* Displaying DashbordStats */}
 
       {/* Here it displays the line and the doughnut charts*/}
-
         <Grid container spacing={3} className="statContainer">
           <Grid item xs={12} md={8}>
             <Card className="statItem" sx={{backgroundColor: "inherit", boxShadow: "none"}}>
