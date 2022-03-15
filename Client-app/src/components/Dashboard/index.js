@@ -51,10 +51,16 @@ const Dashboard = () => {
           </Grid>
 
           <Grid item xs={6}>
-            <div className="dashboard-card__container">
-              <img className="dashboard-card__img" src={NoteIcon} alt="Diary" />
-              <p className="dashboard-card__title">Diary</p>
-            </div>
+            <Link to="../diary">
+              <div className="dashboard-card__container">
+                <img
+                  className="dashboard-card__img"
+                  src={NoteIcon}
+                  alt="Diary"
+                />
+                <p className="dashboard-card__title">Diary</p>
+              </div>
+            </Link>
           </Grid>
 
           <Grid item xs={6}>
