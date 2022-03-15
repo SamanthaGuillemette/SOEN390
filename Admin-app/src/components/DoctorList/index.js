@@ -15,6 +15,8 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import { makeStyles } from "@material-ui/core/styles";
 import TableHead from '@mui/material/TableHead';
 import "./../PatientList/PatientList.css";
+import { useEffect, useState } from "react";
+import { getDoctors, patientLimit } from "../../backend/firebaseDoctorUtilities";
 
 // Styling the list
 const dropdownStyle = makeStyles({ 
@@ -40,12 +42,6 @@ const dropdownStyle = makeStyles({
 function createData(doctorName, numOfPatients) {
   return {doctorName, numOfPatients};
 }
-
-// creating hardcoded data
-const rows = [
-  createData('Allyson Richards', "4/10"), // data 1
-  createData('Charles Ludwig', "3/10"), // data 2
-];
 
 // function to create pagination
 function TablePaginationActions(props) {
@@ -81,10 +77,13 @@ function TablePaginationActions(props) {
   );
 }
 
+
+
 function DoctorList() {
   const classes = dropdownStyle(); // adding styling
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [doctorsList, setDoctorsList] = useState(null);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage); // creating new page
@@ -94,6 +93,19 @@ function DoctorList() {
     setRowsPerPage(parseInt(event.target.value, 10)); // setting the page with data
     setPage(0);
   };
+
+  useEffect(() => {
+    getDoctors().then((data) => {
+      let results = [];
+      data.forEach((doc) => {
+        const size = doc.treats? Object.keys(doc.treats).length : 0;
+        results.push(createData(doc.name, `${size}/${patientLimit}`));
+      });
+      setDoctorsList(results);
+    });
+  }, []);
+  
+
 
   return (
     // Creating table
@@ -111,9 +123,9 @@ function DoctorList() {
         </TableHead>
         <TableBody>
           {/* adding rows in table */}
-          {(rowsPerPage > 0
-            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) // calculating how many items to display per page
-            : rows
+          {doctorsList && (rowsPerPage > 0
+            ? doctorsList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) // calculating how many items to display per page
+            : doctorsList
           ).map((row) => (
             // getting the data of each row
             <TableRow key={row.name}>
@@ -128,6 +140,7 @@ function DoctorList() {
         </TableBody>
         <TableFooter>
           <TableRow>
+          {doctorsList && (            
             <TablePagination // adding table pagination
               sx={{borderColor: "transparent"}}
               classes={{
@@ -135,7 +148,7 @@ function DoctorList() {
               }}
               rowsPerPageOptions={[5, 10, { label: 'All', value: -1 }]} // adding options dropdown pagination to choose from
               colSpan={3}
-              count={rows.length} // getting how many rows there are in total
+              count={doctorsList.length} // getting how many rows there are in total
               rowsPerPage={rowsPerPage} // how many to display per page
               page={page} // how many pages
               className={classes.select} // adding design
@@ -154,6 +167,7 @@ function DoctorList() {
               onRowsPerPageChange={handleChangeRowsPerPage} // handling how many rows to display per page
               ActionsComponent={TablePaginationActions}
             />
+          )}
           </TableRow>
         </TableFooter>
       </Table>

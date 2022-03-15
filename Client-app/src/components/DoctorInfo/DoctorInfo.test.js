@@ -8,7 +8,7 @@ test("DoctorInfo should render without errors", () => {
   const avatar = screen.getByTestId("avatar");
   expect(avatar).toBeInTheDocument();
   expect(avatar).toHaveTextContent("Jamal Doe");
-  expect(avatar).toHaveClass("name");
+  expect(avatar).toHaveClass("doctorInfo-card__profileName");
 });
 
 afterEach(() => {

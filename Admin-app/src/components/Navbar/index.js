@@ -20,6 +20,7 @@ import { useState } from "react";
 import { signOut } from 'firebase/auth';
 import { auth } from '../../backend/firebase';
 import { makeStyles } from "@material-ui/core/styles";
+import ChatList from '../../screens/Inbox/ChatList.js';
 
 const dropdownStyle = makeStyles(() => ({
   menu: {
@@ -95,15 +96,25 @@ function Navbar() {
   const classes = dropdownStyle();
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const [msgMoreAnchorEl, setMsgMoreAnchorEl] = useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const isMsgOpen = Boolean(msgMoreAnchorEl);
 
   const open = useSelector(openState);
   const dispatch = useDispatch();
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const handleMessagesMenuOpen = (event) => {
+    setMsgMoreAnchorEl(event.currentTarget);
+  };
+
+  const handleMessagesMenuClose = (event) => {
+    setMsgMoreAnchorEl(null);
   };
 
   const handleMobileMenuClose = () => {
@@ -153,6 +164,20 @@ function Navbar() {
 
   );
 
+  const msgId = "primary-search-msg-menu";
+  const renderMessages = (
+    <Menu
+      anchorEl={msgMoreAnchorEl}
+      id={msgId}
+      keepMounted
+      open={isMsgOpen}
+      onClose={handleMessagesMenuClose}
+      className={classes.menu}
+    >
+      <ChatList />
+    </Menu>
+  );
+
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
@@ -162,8 +187,13 @@ function Navbar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+      <MenuItem  onClick={handleMessagesMenuOpen}>
+        <IconButton 
+          size="large" 
+          aria-label="show 4 new mails" 
+          aria-controls="primary-search-msg-menu"
+          color="inherit"
+          >
           <Badge badgeContent={4} color="error">
             <MailIcon />
           </Badge>
@@ -245,6 +275,7 @@ function Navbar() {
               size="large"
               aria-label="show 4 new mails"
               color="inherit"
+              onClick={handleMessagesMenuOpen}
             >
               <Badge
                 badgeContent={4}
@@ -302,6 +333,7 @@ function Navbar() {
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
+      {renderMessages}
       {renderMenu}
     </Box>
   );
