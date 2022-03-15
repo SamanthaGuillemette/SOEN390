@@ -22,7 +22,7 @@ function stringToColor(string) {
   let i;
 
   /* eslint-disable no-bitwise */
-  for (i = 0; i < string.length; i += 1) {
+  for (i = 0; i < string?.length; i += 1) {
     hash = string.charCodeAt(i) + ((hash << 5) - hash);
   }
 
@@ -42,7 +42,7 @@ function stringAvatar(name) {
     sx: {
       bgcolor: stringToColor(name),
     },
-    children: name.toUpperCase().charAt(0),
+    children: name?.toUpperCase().charAt(0),
   };
 }
 
@@ -51,7 +51,7 @@ function stringAvatar(name) {
 const Chat = () => {
   const [user] = useAuthState(auth);
   const [msgToSend, setMsgToSend] = useState("");
-  const clientRef = doc(db, "Client", user.email);
+  const clientRef = doc(db, `Client/${user?.email}`);
   const messageRef = collection(clientRef, "Messages");
   const counterCol = collection(clientRef, "Counter");
   const counterRef = doc(counterCol, "counter");
@@ -121,9 +121,9 @@ const Chat = () => {
             </Grid>
           </Grid>
 
-          <Grid container sx={{ mb: 5 }} xs={12}>
+          <Grid container sx={{ mb: 5 }}>
             <Grid item xs={1} sx={{ marginLeft: "20px" }}>
-              <Avatar {...stringAvatar(user.email)} />
+              <Avatar {...stringAvatar(user?.email)} />
             </Grid>
             <Grid item xs={7}>
               <TextField
