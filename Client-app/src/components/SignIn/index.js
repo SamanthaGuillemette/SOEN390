@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This component displays & handles the login/signup form.
+ *
+ */
 import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -37,13 +41,13 @@ const style = {
 };
 
 const styleForModal = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "var(--background-main)",
-  border: '2px solid #000',
+  border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
@@ -215,8 +219,10 @@ export default function SignIn() {
                   Error
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  {error1 && "This email is registered with the Administration application."}
-                  {error2 && "Your password or email is incorrect. Please try again!"}
+                  {error1 &&
+                    "This email is registered with the Administration application."}
+                  {error2 &&
+                    "Your password or email is incorrect. Please try again!"}
                 </Typography>
               </Box>
             </Modal>

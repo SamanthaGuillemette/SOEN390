@@ -1,5 +1,8 @@
+/**
+ * @fileoverview This component displays the main dashboard for Client app.
+ *
+ */
 import { Box, Grid } from "@mui/material";
-
 import "./Dashboard.css";
 import NewspaperIcon from "../../assets/newspaper-sharp-white.svg";
 import CalendarIcon from "../../assets/calendar-page.svg";

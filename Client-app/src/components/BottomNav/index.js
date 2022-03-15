@@ -1,9 +1,13 @@
+/**
+ * @fileoverview This component displays the bottom navigation bar.
+ *
+ */
 import { IconButton } from "@mui/material";
 import "./BottomNav.css";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import MailRoundedIcon from "@mui/icons-material/MailRounded";
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import NotificationsIcon from "@mui/icons-material/Notifications";
 import { Link } from "react-router-dom";
 import React from "react";
 import Button from "@mui/material/Button";
@@ -19,6 +23,10 @@ const BottomNav = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
+  /**
+   * Handle click event on bottom nav.
+   * @param  {ClickEvent} event
+   */
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -31,6 +39,11 @@ const BottomNav = () => {
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
+
+  /**
+   * Handle logging user out.
+   * @param  {ClickEvent} e
+   */
   const logout = async (e) => {
     e.preventDefault();
     signOut(auth);
@@ -62,10 +75,11 @@ const BottomNav = () => {
       </Link>
       <Link to="../notifications">
         <IconButton size="large" className="bottomNav-button">
-          <NotificationsIcon className="bottomNav-icon" sx={{ color: "white" }} />
-          <p className="bottomNav-iconTitle">
-            Notifications
-          </p>
+          <NotificationsIcon
+            className="bottomNav-icon"
+            sx={{ color: "white" }}
+          />
+          <p className="bottomNav-iconTitle">Notifications</p>
         </IconButton>
       </Link>
       <PopupState variant="popover" popupId="demo-popup-popover">

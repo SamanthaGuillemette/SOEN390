@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This component displays the navigation bar and the drawer.
+ *
+ */
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -11,7 +15,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import "./Navbar.css";
 import {
-  Divider,
   Drawer,
   List,
   ListItem,
@@ -38,6 +41,10 @@ const MenuAppBar = () => {
     setState(!state);
   };
 
+  /**
+   * Create the drawer menu
+   * @returns {JSX.Element}
+   */
   const list = () => (
     <Box
       sx={{ width: 250, pt: 5, pl: 2 }}
@@ -96,7 +103,8 @@ const MenuAppBar = () => {
               {list()}
             </Drawer>
           </IconButton>
-          <Typography data-testid = "title"
+          <Typography
+            data-testid="title"
             variant="h6"
             component="div"
             color="var(--text-primary)"

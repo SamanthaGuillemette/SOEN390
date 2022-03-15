@@ -1,3 +1,8 @@
+/**
+ * @fileoverview This component takes care of the chat function.
+ *
+ */
+
 import { Grid, Avatar, TextField, Button, Box } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useEffect, useState, useRef } from "react";
@@ -15,8 +20,12 @@ import {
 import "./Chat.css";
 import { deepOrange, deepPurple } from "@mui/material/colors";
 
-// This component is what allows the chatting feature to work. Below are many consts and 
-// useEffect hooks that communicate with the database in order to recieve or send information.
+/**
+ * This component is what allows the chatting feature to work. Below are many consts and
+ * useEffect hooks that communicate with the database in order to recieve or send information.
+ *
+ * @returns {JSX.Element}
+ */
 const Chat = () => {
   const [user] = useAuthState(auth);
   const [msgToSend, setMsgToSend] = useState("");
@@ -27,9 +36,12 @@ const Chat = () => {
   const [messagesReceived, setMessagesReceived] = useState([]);
   const dummy = useRef();
 
-  // This method allows the user to send messages to the data base using asynchronus methods. 
-  // The addDoc funtion adds a document which is essentially a message in the database. 
-  // This message gets added to the patient's database collection. 
+  /**
+   * This method allows the user to send messages to the data base using asynchronus methods.
+   * The addDoc funtion adds a document which is essentially a message in the database.
+   * This message gets added to the patient's database collection.
+   * @param  {ClieckEvent} e
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     await addDoc(messageRef, {
@@ -41,8 +53,10 @@ const Chat = () => {
     setMsgToSend("");
   };
 
-  // This hook allows this component to receive messages from the database, the same location as the const above. 
-  // The onSnapshot listens for changes and then updates the user interface to show new messages being sent or received in the chat box. 
+  /**
+   * This hook allows this component to receive messages from the database, the same location as the const above.
+   * The onSnapshot listens for changes and then updates the user interface to show new messages being sent or received in the chat box.
+   */
   useEffect(() => {
     onSnapshot(q, (doc) => {
       setMessagesReceived(
@@ -56,7 +70,7 @@ const Chat = () => {
     // eslint-disable-next-line
   }, []);
 
-  // This hook scrolls down to the latest message that was sent. 
+  // This hook scrolls down to the latest message that was sent.
   useEffect(() => {
     dummy.current.scrollIntoView({ behavior: "smooth" });
   });
@@ -120,8 +134,10 @@ const Chat = () => {
   );
 };
 
-//This function is responsible for getting the messages and sorting them by sender and receiver.
-//Then it returns the chating bubbles which are displayed above. 
+/**
+ * This function is responsible for getting the messages and sorting them by sender and receiver.
+ * Then it returns the chating bubbles which are displayed above.
+ */
 function ChatMessage(props) {
   const { name, timestamp, message } = props.message;
   const [user] = useAuthState(auth);

@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This is the entry point of the application righ after the main 'index.js' file.
+ *
+ */
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./screens/Dashboard";
 import Chatting from "./screens/Chatting";
@@ -25,7 +29,10 @@ function App() {
   const userEmail = useSelector((state) => state.auth.userEmail);
   const dispatch = useDispatch();
 
-  // This function will run as soon as the App loads
+  /**
+   * This function will run as soon as the App loads
+   * @returns {void}
+   */
   useEffect(() => {
     // Save user token & user email to redux store (for logged in user)
     onAuthStateChanged(auth, (userObj) => {

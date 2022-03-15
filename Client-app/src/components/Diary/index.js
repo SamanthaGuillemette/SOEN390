@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This component displays the Diary table for patient
+ *
+ */
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
@@ -13,7 +17,11 @@ import { Grid } from "@material-ui/core";
 import { useState } from "react";
 import DiaryEntryModal from "./DiaryEntryModal";
 
-// function to create data
+/**
+ * Create hardcoded data for the table
+ * @param  {string} diaryDate
+ * @param  {string} contactName
+ */
 function createData(diaryDate, contactName) {
   return { diaryDate, contactName };
 }
