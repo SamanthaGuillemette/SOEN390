@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This class takes care of the symptoms table component
+ */
+
 import "./UpdateStatus.css";
 import * as React from "react";
 import Table from "@mui/material/Table";
@@ -12,7 +16,10 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 
-
+/**
+ * Renders the symptoms table function
+ * @returns SymptomsTable function
+ */
 function SymptomsTable() {
     // Pull 'userInfoDetails' from the store (Redux centralized store)
   const userInfoDetails = useSelector(
