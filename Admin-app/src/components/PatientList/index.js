@@ -1,16 +1,10 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
-import Collapse from "@mui/material/Collapse";
-import IconButton from "@mui/material/IconButton";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Typography from "@mui/material/Typography";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import TablePagination from "@mui/material/TablePagination";
 import { Link } from "react-router-dom";
 import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
@@ -19,6 +13,7 @@ import FlagIcon from "@mui/icons-material/Flag";
 import { useEffect, useState } from "react";
 import { getPatients } from "../../backend/firebasePatientUtilities";
 import { getDoctors } from "../../backend/firebaseDoctorUtilities";
+import SingleRow from "./SingleRow";
 import "./Patients-Table.css";
 
 // adding styling
@@ -42,28 +37,9 @@ const dropdownStyle = makeStyles({
 });
 
 // function to create data
-function createData(
-  patientname,
-  id,
-  status,
-  appointment,
-  doctor,
-  priority,
-  statusReview,
-  temperature,
-  weight,
-  height
-) {
-  return {
-    patientname,
-    id,
-    status,
-    appointment,
-    doctor,
-    priority,
-    statusReview,
-    symptoms: [
-      {
+function createData(patientname, id, status, appointment, doctor, priority, statusReview, temperature, weight, height) {
+  return { patientname,id, status, appointment, doctor, priority, statusReview, symptoms: [
+  {
         temperature,
         weight,
         height,
@@ -72,134 +48,10 @@ function createData(
   };
 }
 
-function Row(props) {
-  const { row } = props;
-  const [open, setOpen] = React.useState(false); // setting the open condition to be false
-  const data = localStorage.getItem('priorityFlag') // getting the priority flag
-
-  return (
-    <React.Fragment>
-      <TableRow className={ row.statusReview === "Status Reviewed" ? "PATIENT__reviewed-status" : "" }>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }}>
-          <IconButton
-            aria-label="expand row"
-            size="small"
-            onClick={() => setOpen(!open)}
-            sx={{ color: "var(--text-primary)" }}
-          >
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />} {/* changing icon to up or down based on open or not */}
-          </IconButton>
-        </TableCell>
-        {/* Displaying row of data */}
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="PATIENT__table__data" component="th" scope="row" align="left">
-         {row.patientname}
-        </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="PATIENT__table__data" align="left" >
-          {row.id}
-        </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="PATIENT__table__data" align="center" >
-          {row.status}
-        </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="PATIENT__table__data" align="center" >
-          {row.appointment}
-        </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="PATIENT__table__data" align="left">
-          {row.doctor}
-        </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="PATIENT__table__data" align="center">
-          {row.priority}
-        </TableCell>
-      </TableRow>
-      <TableRow >
-        <TableCell
-          sx={{ borderColor: "var(--background-secondary)" }}
-          style={{ paddingBottom: 0, paddingTop: 0 }}
-          colSpan={6}
-        >
-          {/* Adding collapsible table */}
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1 }}>
-              {/* Adding Table Label */}
-              <Typography
-                variant="h6"
-                gutterBottom
-                component="div"
-                color="var(--text-inactive)"
-              >
-                Symptoms
-              </Typography>
-              <Table
-                className="SYMPTOMS__table"
-                size="small"
-                aria-label="purchases"
-              >
-              {/* Start of Table headers */}
-                <TableHead>
-                  <TableRow>
-                    <TableCell
-                      sx={{ borderColor: "var(--primary-light)" }}
-                      className="SYMPTOMS__table__data"
-                    >
-                      Temperature
-                    </TableCell>
-                    <TableCell
-                      sx={{ borderColor: "var(--primary-light)" }}
-                      className="SYMPTOMS__table__data"
-                    >
-                      Weight
-                    </TableCell>
-                    <TableCell
-                      sx={{ borderColor: "var(--primary-light)" }}
-                      className="SYMPTOMS__table__data"
-                      align="right"
-                    >
-                      Height
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                {/* End of Table Headers */}
-                {/* Adding the body of collapsible table */}
-                <TableBody>
-                  {/* Displaying each row */}
-                  {row.symptoms.map((symptomsRow) => (
-                    <TableRow key={symptomsRow.date}>
-                      <TableCell
-                        sx={{ borderColor: "transparent" }}
-                        className="SYMPTOMS__table__data"
-                        component="th"
-                        scope="row"
-                      >
-                        {symptomsRow.temperature}
-                      </TableCell>
-                      <TableCell
-                        sx={{ borderColor: "transparent" }}
-                        className="SYMPTOMS__table__data"
-                      >
-                        {symptomsRow.weight}
-                      </TableCell>
-                      <TableCell
-                        sx={{ borderColor: "transparent" }}
-                        className="SYMPTOMS__table__data"
-                        align="right"
-                      >
-                        {symptomsRow.height}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </Box>
-          </Collapse>
-        </TableCell>
-      </TableRow>
-    </React.Fragment>
-  );
-}
-
 function PatientList() {
   const classes = dropdownStyle(); // adding styling
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
   const [patientsList, setPatientsList] = useState(null);
   const [doctorsList, setDoctorsList] = useState(null);
 
@@ -324,7 +176,7 @@ function PatientList() {
                   page * rowsPerPage + rowsPerPage
                 )
               : patientsList
-            ).map((row) => <Row key={row.id} row={row}></Row>)}
+            ).map((row) => <SingleRow key={row.id} row={row}/>)}
         </TableBody>
       </Table>
       {patientsList && (

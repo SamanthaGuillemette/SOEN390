@@ -1,5 +1,4 @@
 import { Box, Grid } from "@mui/material";
-
 import "./Dashboard.css";
 import NewspaperIcon from "../../assets/newspaper-sharp-white.svg";
 import CalendarIcon from "../../assets/calendar-page.svg";
