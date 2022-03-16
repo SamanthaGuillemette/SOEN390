@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This file contains the component for the chatlist
+ */
+
 import {Fragment} from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';

@@ -1,3 +1,9 @@
+/**
+ * @fileoverview This file contains the function for the DashboardStats
+ */
+
+
+
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import PersonIcon from "@mui/icons-material/Person";

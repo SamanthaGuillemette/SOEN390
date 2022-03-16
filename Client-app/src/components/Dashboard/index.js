@@ -14,6 +14,10 @@ import DoctorIcon from "../../assets/doctor.svg";
 import HealthCareIcon from "../../assets/health-care.svg";
 import { Link } from "react-router-dom";
 
+/**
+ * Main function which renders the dashboard
+ * @returns Dashboard object/component
+ */
 const Dashboard = () => {
   return (
     <>
