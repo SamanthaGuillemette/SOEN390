@@ -89,7 +89,7 @@ function ClientProfile() {
                 <CardContent>
                   <div className="clientProfile-statusBox">
                     <Typography
-                      className="header"
+                      className="profile__header"
                       gutterBottom
                       variant="button"
                       component="div"
@@ -116,7 +116,8 @@ function ClientProfile() {
                     marginBottom={2}
                     alignItems="baseline"
                   >
-                    <span className="label-positive">positive</span>
+                    <span className={userInfoDetails?.status === "POSITIVE" ? "PATIENT__label-positive" : userInfoDetails?.status === "NEGATIVE" ? "PATIENT__label-negative" : "PATIENT__label-unconfirmed"}>
+                      {userInfoDetails?.status}</span>
                   </Stack>
                   <Box />
                   <Stack spacing={2}>

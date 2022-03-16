@@ -44,7 +44,7 @@ function Copyright(props) {
   return (
     <Typography variant="body2" align="center" {...props}>
       {'Copyright © '}
-      <Link className="link-sign" sx={{fontSize: "12px", textDecoration: 'none'}} color="inherit">
+      <Link className="SIGN-UP__link" sx={{fontSize: "12px", textDecoration: 'none'}} color="inherit">
         Your Website
       </Link>{' '}
       {new Date().getFullYear()}
@@ -251,7 +251,7 @@ export default function SignUp(props) {
               <Grid item xs={12}>
               <FormControlLabel
                   required
-                  control={<Checkbox className="signup-checkbox" value="allowExtraEmails" />}
+                  control={<Checkbox className="SIGN-UP__checkbox" value="allowExtraEmails" />}
                   label="I confirm my data above is correct."
                 />
               </Grid>
@@ -329,7 +329,7 @@ export default function SignUp(props) {
             </Modal>
             <Grid container justifyContent="center">
               <Grid item>
-                <Link className="link-sign" sx={{textDecoration: 'none', color: "var(--primary-main)"}} href="/signin" variant="body2">
+                <Link className="SIGN-UP__link" sx={{textDecoration: 'none', color: "var(--primary-main)"}} href="/signin" variant="body2">
                   Already have an account? Sign in
                 </Link> 
               </Grid>

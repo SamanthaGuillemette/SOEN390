@@ -1,16 +1,19 @@
+.STAT__container {
+  display: flex;
+  padding-top: 25px;
+}
+
+.STAT_item {
+  padding: 15px;
+  height: 100%;
+  border-radius: 20px !important;
+}
+
 a {
   color: var(--text-primary);
 }
 
-.textContent{
-  font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  font-size:16px !important;
-  font-weight: bold italic !important;
-  color:var(--text-inactive) !important;
-  text-align: left !important;
-}
-
-.listTitle{
+.PATIENT-LIST__title{
   font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   text-align: center !important;
   font-size: 16px;
@@ -19,6 +22,6 @@ a {
   margin-top: 10px !important;
 }
 
-.patientList{
+.PATIENT-LIST {
   border-radius: 20px;
 }

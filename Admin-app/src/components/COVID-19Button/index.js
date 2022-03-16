@@ -6,9 +6,9 @@ import './COVID-19Button.css'
 
 function COVID19Button() {
     return(
-        <div data-testid="covid-1" className="news-button-div">
+        <div data-testid="covid-1" className="COVID-NEWS__div">
             <Link to="news">
-                <Button variant= "contained" className="news-btn"><p className="content">COVID-19 News</p></Button>
+                <Button variant= "contained" className="COVID-NEWS__button"><p className="COVID-NEWS__text">COVID-19 News</p></Button>
             </Link>
         </div>
     );

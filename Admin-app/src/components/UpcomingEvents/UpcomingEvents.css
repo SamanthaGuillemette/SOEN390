@@ -1,16 +1,16 @@
-.outline {
+.UPCOMING-EVENTS__div {
     margin-left: 5%;
     margin-top: 4%;
 }
 
-.outer-layer {
+.UPCOMING-EVENTS-1__background {
     background-color: var(--background-main);
     width: 110%;
     height: 38%;
     border-radius: 20px;
 }
 
-.outer-layer-2 {
+.UPCOMING-EVENTS-2__background {
     background-color: var(--background-main);
     width: 110%;
     height: 38%;
@@ -18,7 +18,7 @@
     border-radius: 20px;
 }
 
-.event {
+.UPCOMING-EVENTS__date {
     background: var(--gradient-to-right);
     color: var(--text-primary);
     width: 90px;
@@ -31,17 +31,17 @@
     margin-left: 20px;
 }
 
-.eventDate {
+.UPCOMING-EVENTS__day {
     padding: 0.8rem 0.5rem;
     font-size: 30px;
     font-weight: bold;
 }
 
-.eventMonth {
+.UPCOMING-EVENTS__month {
     font-size: 20px;
 }
 
-.eventTitle {
+.UPCOMING-EVENTS__title {
     color: var(--text-primary);
     font-weight: bold;
     margin-left: 130px;
@@ -49,7 +49,7 @@
     margin-top: -70px;
 }
 
-.eventTime {
+.UPCOMING-EVENTS__time {
     color: var(--text-inactive);
     font-weight: bold;
     margin-left: 130px;
@@ -57,31 +57,31 @@
     margin-top: 10px;
 }
 
-.viewMore {
+.UPCOMING-EVENTS__viewMore {
     color: var(--text-inactive) !important;
     font-size: 15px !important;
     font-weight: bold !important;
     margin-left: 123px !important;
 }
 
-.events-arrow {
+.UPCOMING-EVENTS__arrow {
     position: relative;
     left: 5px;
     bottom: 1px;
 }
 
-.events-modal-h {
+.UPCOMING-EVENTS__modal__header {
     color: var(--text-primary);
     font-weight: bold;
     font-size: 20px;
 }
 
-.events-modal-sec {
+.UPCOMING-EVENTS__modal__desc {
     color: var(--text-primary);
     font-size: 15px;
 }
 
-.viewMore:hover {
+.UPCOMING-EVENTS__viewMore:hover {
     background-color: transparent !important;
     color: var(--primary-main) !important;
 }

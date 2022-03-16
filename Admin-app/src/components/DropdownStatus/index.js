@@ -38,7 +38,7 @@ function DropdownStatus(props) {
 
   return (
       <FormControl sx={{minWidth: 130 }}>
-        <InputLabel className="data" shrink={false}></InputLabel> {/* removing the shrinking of the form title */}
+        <InputLabel className="PATIENT__table__data" shrink={false}></InputLabel> {/* removing the shrinking of the form title */}
         <Select data-testid = "select3"
           value={patientInfo && patientInfo.status} // setting value to be the new status
           onChange={handleChange} // changing the text to the chosen
@@ -59,13 +59,13 @@ function DropdownStatus(props) {
           }}
         >
         <MenuItem value="POSITIVE"> {/* dropdown option 1 */}
-            <span class="label-positive">positive</span>
+            <span class="PATIENT__label-positive">positive</span>
         </MenuItem>
         <MenuItem value="NEGATIVE"> {/* dropdown option 2 */}
-            <span class="label-negative">negative</span>
+            <span class="PATIENT__label-negative">negative</span>
         </MenuItem>
         <MenuItem value="UNCONFIRMED"> {/* dropdown option 3 */}
-            <span class="label-unconfirmed">unconfirmed</span>
+            <span class="PATIENT__label-unconfirmed">unconfirmed</span>
         </MenuItem>
         </Select>
       </FormControl>

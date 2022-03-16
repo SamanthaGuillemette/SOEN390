@@ -2,7 +2,6 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { makeStyles } from "@material-ui/core/styles";
-import "./DropdownDoctor.css";
 import { getDoctor, getDoctors, patientLimit, removePatientFromDoctor, addPatientToDoctor } from "../../backend/firebaseDoctorUtilities";
 import { setAssignedDoctor} from "../../backend/firebasePatientUtilities";
 import { useEffect, useState } from "react";
@@ -86,7 +85,7 @@ function DropdownDoctor(props) {
 
   return doctorsList && (
       <FormControl sx={{minWidth: 130}}>
-        <Select data-testid="select2" className="data"
+        <Select data-testid="select2" className="PATIENT__table__data"
           onChange={handleChange} // changing the text to the chosen
           value={patientInfo && patientInfo.assignedDoctor in doctorsList? patientInfo.assignedDoctor : "0"}
           inputProps={{
@@ -105,9 +104,9 @@ function DropdownDoctor(props) {
             }
           }}
         >
-          <MenuItem className="data" value="0">&lt;Doctor is Unassigned&gt;</MenuItem>
+          <MenuItem className="PATIENT__table__data" value="0">&lt;Doctor is Unassigned&gt;</MenuItem>
           {doctorsList && Object.values(doctorsList) && Object.values(doctorsList).map((doctor) =>
-          <MenuItem className="data" value = {doctor.id} disabled={isDoctorAtFullCapacity(doctor)}>{doctor.name}</MenuItem>
+          <MenuItem className="PATIENT__table__data" value = {doctor.id} disabled={isDoctorAtFullCapacity(doctor)}>{doctor.name}</MenuItem>
           )}
         </Select>
       </FormControl>

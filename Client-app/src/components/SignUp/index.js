@@ -26,6 +26,7 @@ import { Navigate } from "react-router-dom";
 import Modal from "@mui/material/Modal";
 import { createTheme } from "@material-ui/core/styles";
 import { inputLabelClasses } from "@mui/material/InputLabel";
+import "./SignUp.css";
 
 const styleForModal = {
   position: 'absolute',
@@ -45,7 +46,7 @@ function Copyright(props) {
       {"Copyright © "}
       <Link
         color="inherit"
-        className="link-sign"
+        className="SIGN-UP__link"
         sx={{ fontSize: "12px", textDecoration: "none" }}
       >
         Your Website
@@ -56,22 +57,23 @@ function Copyright(props) {
   );
 }
 
+
 const theme = createTheme({
   palette: {
     background: {
-      default: "var(--background-secondary)",
+      default: "var(--background-secondary)"
     },
     text: {
-      primary: "#ffffff",
-    },
+      primary: "#ffffff"
+    }
   },
   components: {
     MuiIconButton: {
       styleOverrides: {
         sizeMedium: {
-          color: "var(--text-inactive)",
-        },
-      },
+          color: "var(--text-inactive)"
+        }
+      }
     },
   },
 });
@@ -79,7 +81,6 @@ const theme = createTheme({
 // This function is responsible for the signup component which also communicates with the server and displays relevent error messages if necessary.
 // Next, it will make a document in the collection of client on the server with all the necessary information
 export default function SignUp(props) {
-  console.log(inputLabelClasses);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [address, setAddress] = useState("");
@@ -156,6 +157,7 @@ export default function SignUp(props) {
         <CssBaseline />
         <Box
           sx={{
+            marginTop: 10,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -343,7 +345,7 @@ export default function SignUp(props) {
                   required
                   control={
                     <Checkbox
-                      className="signup-checkbox"
+                      className="SIGN-UP__checkbox"
                       value="allowExtraEmails"
                     />
                   }
@@ -425,7 +427,7 @@ export default function SignUp(props) {
             <Grid container justifyContent="center">
               <Grid item>
                 <Link
-                  className="link-sign"
+                  className="SIGN-UP__link"
                   sx={{ textDecoration: "none", color: "var(--primary-main)" }}
                   href="/signin"
                   variant="body2"

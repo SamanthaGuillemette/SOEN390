@@ -39,7 +39,7 @@ function Copyright(props) {
     <Typography variant="body2" align="center" {...props}>
       {"Copyright © "}
       <Link
-        className="link-sign"
+        className="SIGN-IN__link"
         sx={{ fontSize: "12px", textDecoration: "none" }}
         color="inherit"
       >
@@ -207,7 +207,7 @@ export default function SignIn() {
             <Grid container>
               <Grid item xs>
                 <Link
-                  className="link-sign"
+                  className="SIGN-IN__link"
                   sx={{ color: "var(--primary-main)", textDecoration: "none" }}
                   href="#"
                   variant="body2"
@@ -217,7 +217,7 @@ export default function SignIn() {
               </Grid>
               <Grid item>
                 <Link
-                  className="link-sign"
+                  className="SIGN-IN__link"
                   sx={{ color: "var(--primary-main)", textDecoration: "none" }}
                   href="/signup"
                   variant="body2"

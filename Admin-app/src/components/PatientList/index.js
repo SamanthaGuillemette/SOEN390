@@ -10,11 +10,11 @@ import { Link } from "react-router-dom";
 import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
 import { makeStyles } from "@material-ui/core/styles";
 import FlagIcon from "@mui/icons-material/Flag";
-import "./PatientList.css";
 import { useEffect, useState } from "react";
 import { getPatients } from "../../backend/firebasePatientUtilities";
 import { getDoctors } from "../../backend/firebaseDoctorUtilities";
 import SingleRow from "./SingleRow";
+import "./Patients-Table.css";
 
 // adding styling
 const dropdownStyle = makeStyles({
@@ -71,13 +71,13 @@ function PatientList() {
       data.forEach((doc) => {
         results.push(
           createData(
-            <Link className="patient-name" to={`/patientprofile/${doc.id}`}>
+            <Link className="PATIENT__table__name" to={`/patientprofile/${doc.id}`}>
               {doc.name}
             </Link>,
             doc.id,
             <span
               className={
-                (doc.status === "POSITIVE") ? "label-positive" : (doc.status === "NEGATIVE") ? "label-negative" : "label-unconfirmed"
+                (doc.status === "POSITIVE") ? "PATIENT__label-positive" : (doc.status === "NEGATIVE") ? "PATIENT__label-negative" : "PATIENT__label-unconfirmed"
               }
             >
               {doc.status}
@@ -87,8 +87,8 @@ function PatientList() {
             <FlagIcon
               className={
                 doc.flaggedPriority === "0"
-                  ? "priority-flag"
-                  : "priority-flag clicked"
+                  ? "PATIENT__priority-flag"
+                  : "PATIENT__priority-flag clicked"
               }
             ></FlagIcon>,
             doc.statusReview,
@@ -112,9 +112,9 @@ function PatientList() {
   };
 
   return (
-    <TableContainer className="patient-doctor-list">
-      <Box className="label"> {/* Creating label*/}
-        <HealthAndSafetyIcon className="patients-icon"/>
+    <TableContainer className="PATIENT__table">
+      <Box className="PATIENT__table__label"> {/* Creating label*/}
+        <HealthAndSafetyIcon className="PATIENT__table__icon"></HealthAndSafetyIcon>
         Patient List
       </Box>
       <Table aria-label="collapsible table">
@@ -124,42 +124,42 @@ function PatientList() {
             <TableCell sx={{ borderColor: "var(--background-secondary)" }} />
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
-              className="header"
+              className="PATIENT__table__header"
               align="left"
             >
               Patient Name
             </TableCell>
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
-              className="header"
+              className="PATIENT__table__header"
               align="left"
             >
               ID
             </TableCell>
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
-              className="header"
+              className="PATIENT__table__header"
               align="center"
             >
               status
             </TableCell>
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
-              className="header"
+              className="PATIENT__table__header"
               align="center"
             >
               Upcoming Appointment
             </TableCell>
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
-              className="header"
+              className="PATIENT__table__header"
               align="left"
             >
               Assigned Doctor
             </TableCell>
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
-              className="header"
+              className="PATIENT__table__header"
               align="center"
             >
               Flagged Priority

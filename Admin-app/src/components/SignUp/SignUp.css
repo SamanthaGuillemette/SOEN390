@@ -1,4 +1,4 @@
-.signup-checkbox {
+.SIGN-UP__checkbox {
   color: var(--text-primary) !important;
   margin-left: 10px !important;
 }
@@ -48,6 +48,6 @@ fieldset{
   border: none !important;
 }
 
-.link-sign:hover {
+.SIGN-UP__link:hover, .SIGN-IN__link:hover {
   color: var(--text-primary) !important;
 }

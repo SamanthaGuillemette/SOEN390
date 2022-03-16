@@ -25,12 +25,12 @@ const Dashboard = () => {
       {/* Here it displays the line and the doughnut charts*/}
         <Grid container spacing={3} className="statContainer">
           <Grid item xs={12} md={8}>
-            <Card className="statItem" sx={{backgroundColor: "inherit", boxShadow: "none"}}>
+            <Card className="STAT_item" sx={{backgroundColor: "inherit", boxShadow: "none"}}>
               <LineChart/>
             </Card>
           </Grid>
           <Grid item xs={12} md={4}>
-            <Card className="statItem" sx={{background: 'var(--gradient-to-right-btm)'}}>
+            <Card className="STAT_item" sx={{background: 'var(--gradient-to-right-btm)'}}>
               <DoughnutChart />
             </Card>
           </Grid>
@@ -39,7 +39,7 @@ const Dashboard = () => {
       {/* The following is the Patient List which appears on the dashboard
           Here we have the styling.*/}  
           <List
-            className="patientList"
+            className="PATIENT-LIST"
             sx={{
               width: "28vh",
               maxWidth: "xl",
@@ -53,7 +53,7 @@ const Dashboard = () => {
             subheader={<li />}
           >
             {/* While here is the implementation*/}
-            <Typography data-testid="patientlist" className="listTitle" gutterBottom variant="h5" sx={{color: "var(--text-primary)", border: "transparent"}}>
+            <Typography data-testid="patientlist" className="PATIENT-LIST__title" gutterBottom variant="h5" sx={{color: "var(--text-primary)", border: "transparent"}}>
               Patient's list
             </Typography>
             {[0, 1, 2, 3, 4].map((sectionId) => (

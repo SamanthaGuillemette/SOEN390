@@ -19,7 +19,7 @@ const QR = () => {
 
   return (
     <>
-      <div className="container">
+      <div className="QR__container">
       <Card className="QR-box">
         <CardContent
           sx={{

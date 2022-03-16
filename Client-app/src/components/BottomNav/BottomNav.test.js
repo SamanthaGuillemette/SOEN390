@@ -11,7 +11,7 @@ test("should render the bottom navbar", () => {
     expect(profile).toBeInTheDocument();
     expect(profile).toHaveTextContent("Profile");
     expect(profile).toBeVisible();
-    expect(profile).toHaveClass("bottomNav-iconTitle");
+    expect(profile).toHaveClass("BOTTOM-NAV__btn__title");
 
 
 });

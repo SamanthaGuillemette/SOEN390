@@ -20,7 +20,7 @@ import { Navigate } from "react-router-dom";
 import Modal from "@mui/material/Modal";
 import { createTheme } from "@material-ui/core/styles";
 import { inputLabelClasses } from "@mui/material/InputLabel";
-import "./../SignUp/SignUp.css";
+import "./signin.css";
 
 const styleForModal = {
   position: 'absolute',
@@ -39,7 +39,7 @@ function Copyright(props) {
     <Typography variant="body2" align="center" {...props}>
       {"Copyright © "}
       <Link
-        className="link-sign"
+        className="SIGN-IN__link"
         sx={{ fontSize: "12px", textDecoration: "none" }}
         color="inherit"
       >
@@ -113,7 +113,7 @@ export default function SignIn() {
         <CssBaseline />
         <Box
           sx={{
-            // marginTop: 10,
+            marginTop: 10,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -209,7 +209,7 @@ export default function SignIn() {
             <Grid container>
               <Grid item xs>
                 <Link
-                  className="link-sign"
+                  className="SIGN-IN__link"
                   href="#"
                   sx={{ color: "var(--primary-main)", textDecoration: "none" }}
                   variant="body2"
@@ -219,7 +219,7 @@ export default function SignIn() {
               </Grid>
               <Grid item>
                 <Link
-                  className="link-sign"
+                  className="SIGN-IN__link"
                   href="/signup"
                   sx={{ color: "var(--primary-main)", textDecoration: "none" }}
                   variant="body2"
