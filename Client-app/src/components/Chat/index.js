@@ -153,8 +153,10 @@ const Chat = () => {
                 onChange={(e) => setMsgToSend(e.target.value)}
                 placeholder="Type your message here..."
                 sx={{
-                  color: "white",
-                  bgcolor: "var(--text-inactive)",
+                  input: {
+                    color: "white"
+                  },
+                  bgcolor: "#262626",
                   borderRadius: "15px",
                   width: "90%",
                   marginLeft: "10px",
@@ -165,7 +167,8 @@ const Chat = () => {
               <Button
                 type="submit"
                 variant="contained"
-                sx={{ mb: 1, bgcolor: "#8f96e2", height: "50px" }}
+                className="CHAT__send-button"
+                sx={{ mb: 1}}
                 endIcon={<SendIcon />}
                 disabled={!msgToSend}
               >

@@ -13,7 +13,3 @@
 .sidebar-button:hover .sidebar-text{
     color: var(--text-primary) !important;
 }
-
-.sidebar-button {
-    background-color: rgb(23, 23, 23) !important;
-}
