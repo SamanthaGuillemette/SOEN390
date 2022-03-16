@@ -21,6 +21,7 @@ import { fetchUserInfo } from "./store/userInfoSlice";
 import { onAuthStateChanged } from "firebase/auth";
 import { saveUser } from "./store/authSlice";
 import MyDoctor from "./screens/MyDoctor";
+import Appointment from "./screens/Appointment";
 
 function App() {
   // const [user, loading] = useAuthState(auth);
@@ -70,6 +71,7 @@ function App() {
           <Route path="/notifications" element={<Notifications />} />
           <Route path="clientinbox" element={<Chatting />} />
           <Route path="/mydoctor" element={<MyDoctor />} />
+          <Route path="/appointment" element={<Appointment />} />
           <Route path="/diary" element={<Diary />} />
         </Routes>
       )}

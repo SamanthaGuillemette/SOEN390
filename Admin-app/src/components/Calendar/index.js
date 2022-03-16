@@ -9,9 +9,10 @@ import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import resourceTimeGridPlugin from "@fullcalendar/resource-timegrid";
 import "./Calendar.css";
+import { useRef, useState } from "react";
 
 const events = [
-  { date: "2022-01-02"},
+  { date: "2022-01-02" },
   {
     start: "2022-01-21",
     end: "2022-01-22",
@@ -43,14 +44,49 @@ const events = [
  */
 
 const Calendar = () => {
+  const [title, setTitle] = useState("");
+  const [details, setDetails] = useState("");
+  const [start, setStart] = useState("");
+  const [end, setEnd] = useState("");
+
+  const calendarRef = useRef();
+
   const handleDateClick = (event) => {
-    alert("Date selected!");
-    // console.log(event);
+    // alert("Date selected!");
+    // console.log(event.date);
+    // console.log(event.dateStr);
+    // // alert("selected " + event.startStr + " to " + event.endStr);
+    // const title = prompt("Appointment title: ");
+    // const details = prompt("Appointment description: ");
+    // // if (title != null) {
+    // setTitle(title);
+    // setDetails(details);
+    // setStart(event.dateStr);
+    // // } else {
+    // //   console.log("nothing");
+    // // }
+    // console.log(title);
+    // console.log(details);
+    // console.log(start);
   };
 
-  const handleEventClick = (event) => {
-    console.log(event.event);
+  const handleSelectedDate = (event) => {
+    alert("selected " + event.startStr + " to " + event.endStr);
+    const title = prompt("Appointment title: ");
+    const details = prompt("Appointment description: ");
+
+    if (title != null) {
+      setTitle(title);
+      setDetails(details);
+      setStart(event.startStr);
+      setEnd(event.endStr);
+    } else {
+      console.log("No input");
+    }
   };
+
+  console.log(start);
+  console.log(end);
 
   return (
     <FullCalendar
@@ -68,10 +104,12 @@ const Calendar = () => {
         right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
       }}
       schedulerLicenseKey="GPL-My-Project-Is-Open-Source"
+      ref={calendarRef}
       selectable={true}
       events={events}
       dateClick={handleDateClick}
-      eventClick={handleEventClick}
+      // eventClick={handleSelectedDate}
+      select={handleSelectedDate}
     />
   );
 };

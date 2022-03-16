@@ -26,20 +26,22 @@ const Dashboard = () => {
       >
         <Grid container spacing={3}>
           <Grid item xs={6}>
-            <div className="dashboard-card__container">
-              <img
-                className="dashboard-card__img"
-                src={CalendarIcon}
-                alt="Appointment"
-              />
-              <p data-testid="appointment" className="dashboard-card__title">
-                Appointment
-              </p>
-            </div>
+            <Link to="/appointment">
+              <div className="dashboard-card__container">
+                <img
+                  className="dashboard-card__img"
+                  src={CalendarIcon}
+                  alt="Appointment"
+                />
+                <p data-testid="appointment" className="dashboard-card__title">
+                  Appointment
+                </p>
+              </div>
+            </Link>
           </Grid>
 
           <Grid item xs={6}>
-            <Link to="../symptoms">
+            <Link to="/symptoms">
               <div className="dashboard-card__container">
                 <img
                   className="dashboard-card__img"
@@ -65,7 +67,7 @@ const Dashboard = () => {
           </Grid>
 
           <Grid item xs={6}>
-            <Link to="../clientinbox">
+            <Link to="/clientinbox">
               <div className="dashboard-card__container">
                 <img
                   className="dashboard-card__img"
@@ -78,7 +80,7 @@ const Dashboard = () => {
           </Grid>
 
           <Grid item xs={6}>
-            <Link to="../qr">
+            <Link to="/qr">
               <div className="dashboard-card__container">
                 <img
                   className="dashboard-card__img"
@@ -100,7 +102,7 @@ const Dashboard = () => {
             </div>
           </Grid>
           <Grid item xs={12}>
-            <Link to="../mydoctor">
+            <Link to="/mydoctor">
               <div className="dashboard-card__container">
                 <img
                   className="dashboard-card__img"
