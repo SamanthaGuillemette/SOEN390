@@ -9,11 +9,11 @@ import "./DashboardCards.css";
         The section here is called important links. */
 function DashboardCards() {
     return (
-        <Grid className="infoGrid" align="center">
-        <Typography sx={{color: "var(--text-primary)"}} className="title" gutterBottom variant="h5">
+        <Grid className="DASHBOARD__cards__grid" align="center">
+        <Typography sx={{color: "var(--text-primary)"}} className="DASHBOARD__cards__title" gutterBottom variant="h5">
             Important Links
             </Typography>
-        <Card data-testid ="card1" variant="contained" className="cardShape">
+        <Card data-testid ="card1" variant="contained" className="DASHBOARD__card">
           <CardMedia
             component="img"
             height="220"
@@ -21,9 +21,9 @@ function DashboardCards() {
             alt="covid testing"
           />
           <CardContent>
-            <p className="card-details">Info</p>
+            <p className="DASHBOARD__card__label">Info</p>
             <Typography
-              className="cardTitle"
+              className="DASHBOARD__card__title"
               gutterBottom
               variant="h5"
               component="div"
@@ -37,7 +37,7 @@ function DashboardCards() {
               </a>
             </Typography>
             <Typography
-              className="textContent"
+              className="DASHBOARD__card__desc"
               variant="body2"
               color="text.secondary"
             >
@@ -47,7 +47,7 @@ function DashboardCards() {
           </CardContent>
         </Card>
 
-        <Card data-testid="card2" variant="contained" className="cardShape" sx={{marginLeft: 2, marginRight: 2}}>
+        <Card data-testid="card2" variant="contained" className="DASHBOARD__card" sx={{marginLeft: 2, marginRight: 2}}>
           <CardMedia
             component="img"
             height="220"
@@ -55,9 +55,9 @@ function DashboardCards() {
             alt="covid testing"
           />
           <CardContent>
-            <p className="card-details">Info</p>
+            <p className="DASHBOARD__card__label">Info</p>
             <Typography
-              className="cardTitle"
+              className="DASHBOARD__card__title"
               gutterBottom
               variant="h5"
               component="div"
@@ -71,7 +71,7 @@ function DashboardCards() {
               </a>
             </Typography>
             <Typography
-              className="textContent"
+              className="DASHBOARD__card__desc"
               variant="body2"
               color="text.secondary"
             >
@@ -83,7 +83,7 @@ function DashboardCards() {
           </CardContent>
         </Card>
 
-        <Card data-testid ="card3" variant="contained" className="cardShape">
+        <Card data-testid ="card3" variant="contained" className="DASHBOARD__card">
           <CardMedia
             component="img"
             height="220"
@@ -91,9 +91,9 @@ function DashboardCards() {
             alt="covid testing"
           />
           <CardContent>
-            <p className="card-details">Info</p>
+            <p className="DASHBOARD__card__label">Info</p>
             <Typography
-              className="cardTitle"
+              className="DASHBOARD__card__title"
               gutterBottom
               variant="h5"
               component="div"
@@ -107,7 +107,7 @@ function DashboardCards() {
               </a>
             </Typography>
             <Typography
-              className="textContent"
+              className="DASHBOARD__card__desc"
               variant="body2"
               color="text.secondary"
             >

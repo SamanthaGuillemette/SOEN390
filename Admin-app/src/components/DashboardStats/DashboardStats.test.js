@@ -9,22 +9,22 @@ test("DashboardStats should render without errors", () => {
   // Checks text for stat 1
   const stat1 = screen.getByTestId("stat_numOfPatients");
   expect(stat1).toBeInTheDocument();
-  expect(stat1).toHaveClass("statItem");
+  expect(stat1).toHaveClass("STAT_item");
 
   //Checks text for stat 2
   const stat2 = screen.getByTestId("stat_numOfDoctors");
   expect(stat2).toBeInTheDocument();
-  expect(stat2).toHaveClass("statItem");
+  expect(stat2).toHaveClass("STAT_item");
 
   // Checks text for stat 3
   const stat3 = screen.getByTestId("stat_numOfActiveCases");
   expect(stat3).toBeInTheDocument();
-  expect(stat3).toHaveClass("statItem");
+  expect(stat3).toHaveClass("STAT_item");
 
   // Checks text for stat 3
   const stat4 = screen.getByTestId("stat_numOfRecoveredCases");
   expect(stat4).toBeInTheDocument();
-  expect(stat4).toHaveClass("statItem");
+  expect(stat4).toHaveClass("STAT_item");
 });
 
 afterEach(() => {
