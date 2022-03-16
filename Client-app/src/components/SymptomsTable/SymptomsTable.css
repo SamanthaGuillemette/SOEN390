@@ -70,3 +70,60 @@
   padding: 0.55em 0.9em;
   margin: auto;
 }
+
+.symptomsEntry-Icon {
+  left: 10px;
+  width: 35px !important;
+  height: 35px !important;
+  color: rgba(218, 207, 250) !important;
+  background: rgba(83, 25, 231, 0.18) !important;
+  border: 1px solid rgba(218, 207, 250, 0.3) !important;
+}
+
+.MuiDialogTitle-root,
+.MuiDialogContent-root,
+.MuiDialogActions-root {
+  background: var(--background-secondary) !important;
+  color: var(--text-primary) !important;
+}
+
+.header-diaryEntry-dialog {
+  text-align: center;
+  font-weight: bold !important;
+  color: var(--text-primary) !important;
+}
+
+.symptoms__icon {
+  width: 50px;
+  margin-bottom: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.diaryEntry-cancel-button {
+  background-color: #e0e4e4 !important;
+  color: var(--text-inactive) !important;
+  margin-left: 10px !important;
+}
+
+.diaryEntry-cancel-button:hover {
+  transition: all 0.3s;
+  opacity: 0.9;
+  transform: translateY(2px);
+}
+
+.diaryEntry-contactDate,
+.diaryEntry-contactFullName,
+.diaryEntry-phoneNumber,
+.diaryEntry-email,
+.diaryEntry-contactLocation {
+  color: var(--text-inactive) !important;
+}
+.diaryEntry-data {
+  color: var(--text-primary) !important;
+}
+
+.MuiDialogContent-dividers {
+  border-color: var(--primary-light) !important;
+}

@@ -1,4 +1,4 @@
-//import "./UpdateStatus.css";
+import "./SymptomsTable.css";
 import * as React from "react";
 import Grid from "@material-ui/core/Grid";
 //import StatusModal from "./StatusModal";
