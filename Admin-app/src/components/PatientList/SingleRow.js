@@ -30,22 +30,22 @@ function SingleRow(props) {
           </IconButton>
         </TableCell>
         {/* Displaying row of data */}
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" component="th" scope="row" align="left">
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="PATIENT__table__data" component="th" scope="row" align="left">
          {row.patientname}
         </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="left" >
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="PATIENT__table__data" align="left" >
           {row.id}
         </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="center" >
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="PATIENT__table__data" align="center" >
           {row.status}
         </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="center" >
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="PATIENT__table__data" align="center" >
           {row.appointment}
         </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="left">
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="PATIENT__table__data" align="left">
           {row.doctor}
         </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="center">
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="PATIENT__table__data" align="center">
           {row.priority}
         </TableCell>
       </TableRow>
@@ -68,7 +68,7 @@ function SingleRow(props) {
                 Symptoms
               </Typography>
               <Table
-                className="symptoms-table"
+                className="SYMPTOMS__table"
                 size="small"
                 aria-label="purchases"
               >
@@ -77,19 +77,19 @@ function SingleRow(props) {
                   <TableRow>
                     <TableCell
                       sx={{ borderColor: "var(--primary-light)" }}
-                      className="symptoms-data"
+                      className="SYMPTOMS__table__data"
                     >
                       Temperature
                     </TableCell>
                     <TableCell
                       sx={{ borderColor: "var(--primary-light)" }}
-                      className="symptoms-data"
+                      className="SYMPTOMS__table__data"
                     >
                       Weight
                     </TableCell>
                     <TableCell
                       sx={{ borderColor: "var(--primary-light)" }}
-                      className="symptoms-data"
+                      className="SYMPTOMS__table__data"
                       align="right"
                     >
                       Height
@@ -104,7 +104,7 @@ function SingleRow(props) {
                     <TableRow key={symptomsRow.date}>
                       <TableCell
                         sx={{ borderColor: "transparent" }}
-                        className="symptoms-data"
+                        className="SYMPTOMS__table__data"
                         component="th"
                         scope="row"
                       >
@@ -112,13 +112,13 @@ function SingleRow(props) {
                       </TableCell>
                       <TableCell
                         sx={{ borderColor: "transparent" }}
-                        className="symptoms-data"
+                        className="SYMPTOMS__table__data"
                       >
                         {symptomsRow.weight}
                       </TableCell>
                       <TableCell
                         sx={{ borderColor: "transparent" }}
-                        className="symptoms-data"
+                        className="SYMPTOMS__table__data"
                         align="right"
                       >
                         {symptomsRow.height}

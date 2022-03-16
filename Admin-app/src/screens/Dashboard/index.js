@@ -19,11 +19,11 @@ const Dashboard = () => {
   return (
     // This returns the buttons on the top which display the buttons on the top, this one is for the patients
     <Container maxWidth="xl">
-      <Grid container spacing={2} className="statContainer">
+      <Grid container spacing={2} className="STAT__container">
       <DashboardStats/> {/* Displaying DashbordStats */}
 
       {/* Here it displays the line and the doughnut charts*/}
-        <Grid container spacing={3} className="statContainer">
+        <Grid container spacing={3} className="STAT__container">
           <Grid item xs={12} md={8}>
             <Card className="STAT_item" sx={{backgroundColor: "inherit", boxShadow: "none"}}>
               <LineChart/>

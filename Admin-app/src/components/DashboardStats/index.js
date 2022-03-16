@@ -8,7 +8,6 @@ import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
 import { getPatients } from "../../backend/firebasePatientUtilities";
 import { getDoctors } from "../../backend/firebaseDoctorUtilities";
 import { useEffect, useState} from "react";
-import "./DashboardStats.css";
 
 function DashboardStats() {
     const [activeCases, setActiveCases] = useState(0);
@@ -37,7 +36,7 @@ function DashboardStats() {
     );
 
     return (
-        <Grid container spacing={3} className="statContainer">
+        <Grid container spacing={3} className="STAT__container">
           <Grid item xs={6} md={3}>
             <Card data-testid="stat_numOfPatients" className="STAT_item" sx={{backgroundColor: "var(--background-main)", color: "var(--text-inactive)"}}>
               <SmallStatBox
