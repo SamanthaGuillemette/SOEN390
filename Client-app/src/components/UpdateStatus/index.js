@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This class contains the component for updating a client's status
+ */
+
 import "./UpdateStatus.css";
 import Grid from "@material-ui/core/Grid";
 import StatusModal from "./StatusModal";
@@ -12,6 +16,10 @@ import Box from "@mui/material/Box";
 import SymptomsTable from "./SymptomsTable";
 import TableHead from "@mui/material/TableHead";
 
+/**
+ * Renders function to update a client's status'
+ * @returns UpdateStatus function
+ */
 function UpdateStatus() {
     // Pull 'userInfoDetails' from the store (Redux centralized store)
   const userInfoDetails = useSelector(
