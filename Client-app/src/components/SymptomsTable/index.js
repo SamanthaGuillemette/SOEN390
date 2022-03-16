@@ -48,7 +48,7 @@ function SymptomsTable() {
               className="SYMPTOMS__table__header"
               sx={{ borderColor: "var(--secondary-light)" }}
             >
-              Date of Contact
+              Date of Symptoms
             </TableCell>
             {/* Second column header */}
             <TableCell
@@ -86,12 +86,12 @@ function SymptomsTable() {
         <TableFooter>
           <TableRow>
             <TableCell
-              sx={{ backgroundColor: "var(--background-main)" }}
+              sx={{ borderColor: "transparent" }}
               component="th"
               scope="row"
             ></TableCell>
             <TableCell
-              sx={{ backgroundColor: "var(--background-main)" }}
+              sx={{ borderColor: "transparent" }}
               style={{ width: 160 }}
               align="right"
             ></TableCell>

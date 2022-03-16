@@ -41,3 +41,9 @@ ul, li {
     background: #474646;
     color: white;
 }
+
+.CHAT__send-button {
+    background-color: #8f96e2 !important;
+    height: 50px !important;
+    color: var(--text-primary) !important;
+  }
