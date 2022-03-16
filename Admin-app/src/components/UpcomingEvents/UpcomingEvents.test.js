@@ -8,7 +8,7 @@ test("should render simple upcoming events test", () =>{
     const upevents = screen.getByTestId('up-events');
     expect(upevents).toBeInTheDocument();
     expect(upevents).toHaveTextContent(/^Blood Donations$/);
-    expect(upevents).toHaveClass('eventTitle');
+    expect(upevents).toHaveClass('UPCOMING-EVENTS__title');
 });
 
 afterEach(() =>{

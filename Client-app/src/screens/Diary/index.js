@@ -1,3 +1,8 @@
+/**
+ * @fileoverview This component takes care of displaying the Diary page.
+ *
+ */
+
 import Box from "@mui/material/Box";
 import DiaryTable from "../../components/Diary";
 import BottomNav from "../../components/BottomNav";
@@ -19,9 +24,9 @@ const Diary = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Box sx={{ flexGrow: 1 }}>
-        <MenuAppBar></MenuAppBar>
-        <DiaryTable></DiaryTable>
-        <BottomNav></BottomNav>
+        <MenuAppBar />
+        <DiaryTable />
+        <BottomNav />
       </Box>
     </ThemeProvider>
   );

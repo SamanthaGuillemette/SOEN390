@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This component takes care of the Sidebar function.
+ *
+ */
 import { mainListItems, secondaryListItems } from "../SidebarItems";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
@@ -39,6 +43,9 @@ const Drawer = styled(MuiDrawer, {
   },
 }));
 
+/**
+ * This component is what allows the Sidebar feature to be displayed. 
+ */
 function Sidebar() {
   // const [open, setOpen] = useState(true);
 

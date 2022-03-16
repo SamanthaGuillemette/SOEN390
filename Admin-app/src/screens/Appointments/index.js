@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This component takes care of the appointments function.
+ *
+ */
 import Card from "@mui/material/Card";
 import Calendar from "../../components/Calendar";
 

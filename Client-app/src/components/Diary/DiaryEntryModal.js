@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This component displays the modal for adding a new diary entry.
+ *
+ */
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { useAuthState } from "react-firebase-hooks/auth";

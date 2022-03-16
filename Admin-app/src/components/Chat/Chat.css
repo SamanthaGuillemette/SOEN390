@@ -6,13 +6,12 @@
     flex-direction: column;
 }
 
-ul,
-li {
+ul, li {
     text-align: left;
     list-style: none;
 }
 
-.message p {
+.INBOX__message p {
     max-width: 500px;
     margin-bottom: 12px;
     line-height: 24px;
@@ -22,7 +21,7 @@ li {
     color: white;
 }
 
-.message {
+.INBOX__message {
     display: flex;
     align-items: center;
     color: white;
