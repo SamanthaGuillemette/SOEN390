@@ -39,7 +39,7 @@ it('QA Test', function() {
   cy.get(':nth-child(3) > .MuiFormControl-root > .MuiInput-root > #statusModal-standardBasic').clear();
   cy.get(':nth-child(3) > .MuiFormControl-root > .MuiInput-root > #statusModal-standardBasic').type('150');
   cy.get('.MuiBox-root > .MuiButton-root').click();
-  cy.get('[data-testid="AddCircleIcon"]').click();
+  cy.get('[data-testid="AddCircleIcon"]').click({force: true});
   cy.get(':nth-child(1) > .MuiFormControl-root > .MuiInput-root > #statusModal-standardBasic').clear();
   cy.get(':nth-child(1) > .MuiFormControl-root > .MuiInput-root > #statusModal-standardBasic').type('16/03/2022');
   cy.get(':nth-child(1) > .MuiFormControl-root > .MuiInput-root > #statusModal-standardBasic').clear();
@@ -53,7 +53,7 @@ it('QA Test', function() {
   cy.get('.MuiBox-root > .MuiButton-root').click();
   cy.get(':nth-child(10) > .MuiFormControlLabel-root > .MuiCheckbox-root > .PrivateSwitchBase-input').check();
   cy.get('.MuiBox-root > .MuiButton-root').click();
-  cy.get('.MuiBackdrop-root').click();
+  cy.get('.MuiBackdrop-root').click({force:true});
   cy.get('a > .BOTTOM-NAV__btn__title').click();
   cy.get('.client-profile > .MuiButtonBase-root').click();
   cy.get('[data-testid="EditIcon"]').click();
@@ -62,7 +62,7 @@ it('QA Test', function() {
   cy.get('#firstName').type('QA');
   cy.get('.MuiModal-root > .MuiBox-root').click();
   cy.get('.update-button').click();
-  cy.get('[data-testid="NotificationsIcon"]').click();
+  cy.get('[data-testid="NotificationsIcon"]').click({force: true});
   cy.get('.MuiButton-root > .BOTTOM-NAV__btn__title').click();
   cy.get('[data-testid="signout"]').click();
   /* ==== End Cypress Studio ==== */
