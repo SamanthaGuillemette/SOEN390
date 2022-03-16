@@ -1,9 +1,18 @@
+/**
+ * @fileoverview This component displays the app body.
+ *
+ */
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Sidebar from "../Sidebar";
 import Navbar from "../Navbar";
+
+/**
+ * This component returns the app body containing the Toolbar, Sidebar and Navbar components.
+ * @returns {JSX.Element}
+ */
 
 function AppBody(props) {
 

@@ -1,12 +1,16 @@
+/**
+ * @fileoverview This component takes care of the SmallStatBox function.
+ *
+ */
 import "./SmallStatBox.css";
 
 const SmallStatBox = ({ icon, number, description }) => {
   return (
-    <div data-testid = "statbox1" className="statDetailGroup">
+    <div data-testid = "statbox1" className="STAT__BOX">
       {icon}
-      <div className="statTextContainer">
-        <h2 className="ui large header statNumber">{number}</h2>
-        <div className="statDesc">{description}</div>
+      <div className="STAT__text__container">
+        <h2 className="STAT__number">{number}</h2>
+        <div className="STAT__desc">{description}</div>
       </div>
     </div>
   );

@@ -6,13 +6,13 @@
   border: 1px solid inherit;
 }
 
-.avatar-text {
+.PATIENT-profile__info {
   text-align: center;
   font-size: 13px !important;
   color: var(--text-primary);
 }
 
-.profile-name {
+.PATIENT-profile__name {
   text-align: center;
   font-weight: bold !important;
   color: var(--text-primary);
@@ -29,34 +29,34 @@
   background-color: transparent;
 }
 
-h5.symptomsTitle {
+h5.PATIENT-SYMPTOMS__table__label {
   color: var(--text-primary);
   font-weight: 900 !important;
 }
 
-.priority-flag {
+.PATIENT__priority-flag {
   color: var(--text-primary);
 }
 
-.priority-flag.clicked {
+.PATIENT__priority-flag.clicked {
   color: var(--info-main);
 }
 
-.status-card {
+.PATIENT__status__card {
   border-style: none;
 }
 
-.status-card.clicked {
+.PATIENT__status.clicked {
   border: 1px solid var(--info-border);
 }
 
-.profile-data, .doctor-name {
+.PATIENT-PROFILE__data, .ASSIGNED-DOC__name, .PATIENT-STATUS-REVIEW__data {
   color: var(--text-primary) !important;
   font-weight: 500 !important;
   font-size: 0.96rem !important;
 }
 
-.doctor-name {
+.ASSIGNED-DOC__name {
   margin-top: 18px !important;
   display: inline-block !important;
 }

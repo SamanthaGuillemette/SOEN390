@@ -1,0 +1,60 @@
+.DASHBOARD__card__title{
+  margin: 0 0 1rem;
+  color: #231F20;
+  font-size: 1.5rem;
+  line-height: 1.5625rem;
+  font-weight: bold !important;
+  font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  text-align: left !important;
+}
+
+.DASHBOARD__card__label {
+color: #74767B;
+font-size: .875rem !important;
+line-height: 1.25rem;
+font-weight: bold !important;
+text-transform: uppercase;
+letter-spacing: .0625rem;
+font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+text-align: left !important;
+}
+
+.DASHBOARD__card__label::before{
+content: '';
+display: inline-block;
+width: 1.25rem;
+height: 0.4rem;
+margin-right: 0.75rem;
+padding: 0 1rem 0 0.5rem;
+border-radius: 0.25rem;
+background: var(--primary-main);
+box-shadow: 0 1px 4px 1px rgb(2 125 114 / 50%);
+}
+
+.DASHBOARD__cards__title{
+font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+font-weight: bold !important;
+font-size: 30px !important;
+text-align: center !important;
+}
+
+.DASHBOARD__card__desc{
+  font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-size:16px !important;
+  font-weight: bold italic !important;
+  color:var(--text-inactive) !important;
+  text-align: left !important;
+}
+
+.DASHBOARD__cards__grid {
+  margin-top: 100px !important;
+}
+
+.DASHBOARD__card {
+  width: 30% !important;
+  display: inline-block;
+  border-radius:20px !important;
+  height: 54vh;
+  margin-top: 30px;
+  background-color: var(--background-main) !important;
+}

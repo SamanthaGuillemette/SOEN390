@@ -1,21 +1,21 @@
-.news-button-div {
+.COVID-NEWS__div {
     margin-top:20px;
     display: inline-block;
     margin-left: 20px;
 }
 
-.news-button-div:hover{
+.COVID-NEWS__div:hover, .EVENT-BTN__div:hover{
     transition: all .3s;
     opacity: 0.9;
     transform: translateY(5px);
 }
 
-.news-btn {
+.COVID-NEWS__button {
     background: var(--primary-main) !important;
     border-radius: 20px !important;
 }
 
-.content{
+.COVID-NEWS__text, .EVENT-BTN__text {
     font-family:"Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
     font-weight: bold !important;
     font-size: 20px !important;

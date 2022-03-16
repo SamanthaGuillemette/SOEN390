@@ -1,4 +1,4 @@
-.bottomNav-container {
+.BOTTOM-NAV__container {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -11,7 +11,7 @@
   padding-top: 5px;
 }
 
-.bottomNav-button {
+.BOTTOM-NAV__btn {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,12 +21,12 @@
   box-shadow: none !important;
 }
 
-.bottomNav-button:hover {
+.BOTTOM-NAV__btn:hover {
   color: var(--text-primary) !important;
   box-shadow: none !important;
 }
 
-.bottomNav-iconTitle {
+.BOTTOM-NAV__btn__title {
   color: var(--text-inactive);
   font-size: 0.9rem;
   text-transform: uppercase !important;
@@ -47,7 +47,7 @@
   transform: translateY(2px);
 }
 
-.bottomNav-button:hover .bottomNav-iconTitle {
+.BOTTOM-NAV__btn:hover .BOTTOM-NAV__btn__title {
   color: var(--text-primary);
 }
 
@@ -56,12 +56,12 @@
   border-radius: 10px !important;
 }
 
-.popover-text {
+.BOTTOM-NAV__popover__text {
   color: var(--text-inactive) !important;
   font-size: 0.9rem;
   text-transform: uppercase !important;
 }
 
-.popover-text:hover {
+.BOTTOM-NAV__popover__text:hover {
   color: var(--text-primary) !important;
 }
