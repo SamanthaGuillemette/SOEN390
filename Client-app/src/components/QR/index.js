@@ -36,7 +36,6 @@
            >
              <Typography
                sx={{
-                 mx: "30px",
                  pb: "30px",
                  textAlign: "center",
                  fontWeight: "800",
@@ -48,8 +47,7 @@
              </Typography>
              <Typography
                sx={{
-                 mx: "360px",
-                 justifyContent: "center",
+                 textAlign: "center",
                  fontSize: 14,
                  color: "var(--text-primary)",
                }}
@@ -71,7 +69,7 @@
                <br />
              </Typography>
  
-             <Box sx={{ mx: "350px", mb: "30px" }}>
+             <Box sx={{ mb: "30px" }}>
                <img alt="QRCode" src={qrCode} />
              </Box>
  
