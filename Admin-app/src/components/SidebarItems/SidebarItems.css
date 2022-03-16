@@ -1,23 +1,20 @@
-.sidebar-link:hover {
+.SIDEBAR__link:hover {
     color: var(--background-secondary) !important;
 }
 
-.sidebar-icon {
+.SIDEBAR__icon {
     color: var(--text-inactive) !important;
 }
 
-.sidebar-text {
+.SIDEBAR__text {
     color: var(--text-inactive) !important;
 }
 
-.sidebar-button {
+.SIDEBAR__button {
     background-color: transparent !important;
 }
 
-.sidebar-button:hover .sidebar-icon{
-    color: var(--text-primary) !important;
-}
-
-.sidebar-button:hover .sidebar-text{
+.SIDEBAR__button:hover .SIDEBAR__icon,
+.SIDEBAR__button:hover .SIDEBAR__text {
     color: var(--text-primary) !important;
 }

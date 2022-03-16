@@ -9,9 +9,9 @@ test("should render doctor list component", () => {
     //Unit and interaction test for doctor list component
     const tablecontainer1 = screen.getByTestId("table-container1");
     expect(tablecontainer1).toBeInTheDocument();
-    expect(tablecontainer1).toHaveClass('patient-doctor-list');
+    expect(tablecontainer1).toHaveClass('DOC__table');
 
     const healthicon = screen.getByTestId("health-icon");
     expect(healthicon).toBeInTheDocument();
-    expect(healthicon).toHaveClass('patients-icon');
+    expect(healthicon).toHaveClass('DOC__table__icon');
 })

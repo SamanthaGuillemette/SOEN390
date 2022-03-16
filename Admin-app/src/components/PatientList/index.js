@@ -15,12 +15,11 @@ import TablePagination from "@mui/material/TablePagination";
 import { Link } from "react-router-dom";
 import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@mui/material/Paper";
 import FlagIcon from "@mui/icons-material/Flag";
-import "./PatientList.css";
 import { useEffect, useState } from "react";
 import { getPatients } from "../../backend/firebasePatientUtilities";
 import { getDoctors } from "../../backend/firebaseDoctorUtilities";
+import "./Patients-Table.css";
 
 // adding styling
 const dropdownStyle = makeStyles({
@@ -80,7 +79,7 @@ function Row(props) {
 
   return (
     <React.Fragment>
-      <TableRow className={ row.statusReview === "Status Reviewed" ? "PatientList-reviewedStatus" : "" }>
+      <TableRow className={ row.statusReview === "Status Reviewed" ? "PATIENT__reviewed-status" : "" }>
         <TableCell sx={{ borderColor: "var(--background-secondary)" }}>
           <IconButton
             aria-label="expand row"
@@ -92,22 +91,22 @@ function Row(props) {
           </IconButton>
         </TableCell>
         {/* Displaying row of data */}
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" component="th" scope="row" align="left">
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="PATIENT__table__data" component="th" scope="row" align="left">
          {row.patientname}
         </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="left" >
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="PATIENT__table__data" align="left" >
           {row.id}
         </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="center" >
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="PATIENT__table__data" align="center" >
           {row.status}
         </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="center" >
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="PATIENT__table__data" align="center" >
           {row.appointment}
         </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="left">
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="PATIENT__table__data" align="left">
           {row.doctor}
         </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="center">
+        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="PATIENT__table__data" align="center">
           {row.priority}
         </TableCell>
       </TableRow>
@@ -130,7 +129,7 @@ function Row(props) {
                 Symptoms
               </Typography>
               <Table
-                className="symptoms-table"
+                className="SYMPTOMS__table"
                 size="small"
                 aria-label="purchases"
               >
@@ -139,19 +138,19 @@ function Row(props) {
                   <TableRow>
                     <TableCell
                       sx={{ borderColor: "var(--primary-light)" }}
-                      className="symptoms-data"
+                      className="SYMPTOMS__table__data"
                     >
                       Temperature
                     </TableCell>
                     <TableCell
                       sx={{ borderColor: "var(--primary-light)" }}
-                      className="symptoms-data"
+                      className="SYMPTOMS__table__data"
                     >
                       Weight
                     </TableCell>
                     <TableCell
                       sx={{ borderColor: "var(--primary-light)" }}
-                      className="symptoms-data"
+                      className="SYMPTOMS__table__data"
                       align="right"
                     >
                       Height
@@ -166,7 +165,7 @@ function Row(props) {
                     <TableRow key={symptomsRow.date}>
                       <TableCell
                         sx={{ borderColor: "transparent" }}
-                        className="symptoms-data"
+                        className="SYMPTOMS__table__data"
                         component="th"
                         scope="row"
                       >
@@ -174,13 +173,13 @@ function Row(props) {
                       </TableCell>
                       <TableCell
                         sx={{ borderColor: "transparent" }}
-                        className="symptoms-data"
+                        className="SYMPTOMS__table__data"
                       >
                         {symptomsRow.weight}
                       </TableCell>
                       <TableCell
                         sx={{ borderColor: "transparent" }}
-                        className="symptoms-data"
+                        className="SYMPTOMS__table__data"
                         align="right"
                       >
                         {symptomsRow.height}
@@ -220,13 +219,13 @@ function PatientList() {
       data.forEach((doc) => {
         results.push(
           createData(
-            <Link className="patient-name" to={`/patientprofile/${doc.id}`}>
+            <Link className="PATIENT__table__name" to={`/patientprofile/${doc.id}`}>
               {doc.name}
             </Link>,
             doc.id,
             <span
               className={
-                (doc.status === "POSITIVE") ? "label-positive" : (doc.status === "NEGATIVE") ? "label-negative" : "label-unconfirmed"
+                (doc.status === "POSITIVE") ? "PATIENT__label-positive" : (doc.status === "NEGATIVE") ? "PATIENT__label-negative" : "PATIENT__label-unconfirmed"
               }
             >
               {doc.status}
@@ -236,8 +235,8 @@ function PatientList() {
             <FlagIcon
               className={
                 doc.flaggedPriority === "0"
-                  ? "priority-flag"
-                  : "priority-flag clicked"
+                  ? "PATIENT__priority-flag"
+                  : "PATIENT__priority-flag clicked"
               }
             ></FlagIcon>,
             doc.statusReview,
@@ -261,9 +260,9 @@ function PatientList() {
   };
 
   return (
-    <TableContainer className="patient-doctor-list">
-      <Box className="label"> {/* Creating label*/}
-        <HealthAndSafetyIcon className="patients-icon"></HealthAndSafetyIcon>
+    <TableContainer className="PATIENT__table">
+      <Box className="PATIENT__table__label"> {/* Creating label*/}
+        <HealthAndSafetyIcon className="PATIENT__table__icon"></HealthAndSafetyIcon>
         Patient List
       </Box>
       <Table aria-label="collapsible table">
@@ -273,42 +272,42 @@ function PatientList() {
             <TableCell sx={{ borderColor: "var(--background-secondary)" }} />
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
-              className="header"
+              className="PATIENT__table__header"
               align="left"
             >
               Patient Name
             </TableCell>
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
-              className="header"
+              className="PATIENT__table__header"
               align="left"
             >
               ID
             </TableCell>
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
-              className="header"
+              className="PATIENT__table__header"
               align="center"
             >
               status
             </TableCell>
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
-              className="header"
+              className="PATIENT__table__header"
               align="center"
             >
               Upcoming Appointment
             </TableCell>
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
-              className="header"
+              className="PATIENT__table__header"
               align="left"
             >
               Assigned Doctor
             </TableCell>
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
-              className="header"
+              className="PATIENT__table__header"
               align="center"
             >
               Flagged Priority

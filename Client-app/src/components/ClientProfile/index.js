@@ -13,7 +13,6 @@ import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import FlagIcon from "@mui/icons-material/Flag";
 import { useState } from "react";
-import DropdownConfirmation from "../DropdownConfirmation/index";
 import EditModal from "./ProfileEditModal";
 import { useSelector } from "react-redux";
 
@@ -91,7 +90,7 @@ function ClientProfile() {
                 <CardContent>
                   <div className="clientProfile-statusBox">
                     <Typography
-                      className="header"
+                      className="profile__header"
                       gutterBottom
                       variant="button"
                       component="div"
@@ -118,8 +117,8 @@ function ClientProfile() {
                     marginBottom={2}
                     alignItems="baseline"
                   >
-                    <DropdownConfirmation className="profile-data"></DropdownConfirmation>
-                    <span className="label-positive">positive</span>
+                    <span className={userInfoDetails?.status === "POSITIVE" ? "PATIENT__label-positive" : userInfoDetails?.status === "NEGATIVE" ? "PATIENT__label-negative" : "PATIENT__label-unconfirmed"}>
+                      {userInfoDetails?.status}</span>
                   </Stack>
                   <Box />
                   <Stack spacing={2}>

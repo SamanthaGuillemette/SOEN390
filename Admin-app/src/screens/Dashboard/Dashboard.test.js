@@ -18,7 +18,7 @@ test("should get the dashboard", () => {
   expect(card1).toHaveTextContent(
     /^InfoCovid-19 Testing PoliciesFind out how you could get tested if you develop any symptoms to the virus.$/
   );
-  expect(card1).toHaveClass("cardShape");
+  expect(card1).toHaveClass("DASHBOARD__card");
 
   //Checks text for card 2
   const card2 = screen.getByTestId("card2");
@@ -26,7 +26,7 @@ test("should get the dashboard", () => {
   expect(card2).toHaveTextContent(
     /^InfoData of COVID-19 in QuebecMost people who fall sick with COVID-19 will experience mild to moderate symptoms and recover without special treatment. However, some will become seriously ill and require medical attention.$/
   );
-  expect(card2).toHaveClass("cardShape");
+  expect(card2).toHaveClass("DASHBOARD__card");
 
   // Checks text for card 3
   const card3 = screen.getByTestId("card3");
@@ -34,13 +34,13 @@ test("should get the dashboard", () => {
   expect(card3).toHaveTextContent(
     /^InfoAppointment for vaccinationTo book a appointment for the vaccination, as well as check eligibilty, click on this link for more info.$/
   );
-  expect(card3).toHaveClass("cardShape");
+  expect(card3).toHaveClass("DASHBOARD__card");
 
   // Checks text for patientlist
   const plist = screen.getByTestId("patientlist");
   expect(plist).toBeInTheDocument();
   expect(plist).toHaveTextContent(/^Patient's list$/);
-  expect(plist).toHaveClass("listTitle");
+  expect(plist).toHaveClass("PATIENT-LIST__title");
 });
 
 afterEach(() => {
