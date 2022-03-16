@@ -8,6 +8,7 @@ import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
 import { getPatients } from "../../backend/firebasePatientUtilities";
 import { getDoctors } from "../../backend/firebaseDoctorUtilities";
 import { useEffect, useState} from "react";
+import "./DashboardStats.css";
 
 function DashboardStats() {
     const [activeCases, setActiveCases] = useState(0);
@@ -38,7 +39,7 @@ function DashboardStats() {
     return (
         <Grid container spacing={3} className="statContainer">
           <Grid item xs={6} md={3}>
-            <Card className="statItem" sx={{backgroundColor: "var(--background-main)", color: "var(--text-inactive)"}}>
+            <Card data-testid="stat_numOfPatients" className="statItem" sx={{backgroundColor: "var(--background-main)", color: "var(--text-inactive)"}}>
               <SmallStatBox
                 icon={<PersonIcon fontSize="large" sx={{color: "var(--text-primary)"}} />}
                 number={patientNum}
@@ -48,7 +49,7 @@ function DashboardStats() {
           </Grid>
           {/* This button is for the doctors*/}
           <Grid item xs={6} md={3}>
-            <Card className="statItem" sx={{backgroundColor: "var(--background-main)", color: "var(--text-inactive)"}}>
+            <Card data-testid="stat_numOfDoctors" className="statItem" sx={{backgroundColor: "var(--background-main)", color: "var(--text-inactive)"}}>
               <SmallStatBox
                 icon={
                   <SupervisedUserCircleIcon fontSize="large" sx={{color: "var(--text-primary)"}} />
@@ -60,7 +61,7 @@ function DashboardStats() {
           </Grid>
             {/* This button is for the active cases*/}
           <Grid item xs={6} md={3}>
-            <Card className="statItem" sx={{backgroundColor: "var(--background-main)", color: "var(--text-inactive)"}}>
+            <Card data-testid="stat_numOfActiveCases" className="statItem" sx={{backgroundColor: "var(--background-main)", color: "var(--text-inactive)"}}>
               <SmallStatBox
                 icon={<CoronavirusIcon fontSize="large" sx={{color: "var(--text-primary)"}} />}
                 number={activeCases}
@@ -70,7 +71,7 @@ function DashboardStats() {
           </Grid>
             {/* This button is for the recovered cases*/}
           <Grid item xs={6} md={3}>
-            <Card className="statItem" sx={{backgroundColor: "var(--background-main)", color: "var(--text-inactive)"}}>
+            <Card data-testid="stat_numOfRecoveredCases" className="statItem" sx={{backgroundColor: "var(--background-main)", color: "var(--text-inactive)"}}>
               <SmallStatBox
                 icon={<VerifiedUserIcon fontSize="large" sx={{color: "var(--text-primary)"}} />}
                 number="1523"

@@ -1,14 +1,3 @@
-.statContainer {
-  display: flex;
-  padding-top: 25px;
-}
-
-.statItem {
-  padding: 15px;
-  height: 100%;
-  border-radius: 20px !important;
-}
-
 a {
   color: var(--text-primary);
 }
