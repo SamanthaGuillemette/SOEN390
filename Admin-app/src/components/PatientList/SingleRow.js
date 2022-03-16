@@ -18,7 +18,7 @@ function SingleRow(props) {
 
   return (
     <Fragment>
-      <TableRow className={ row.statusReview === "Status Reviewed" ? "PatientList-reviewedStatus" : "" }>
+      <TableRow className={ row.statusReview === "Status Reviewed" ? "PATIENT__reviewed-status" : "" }>
         <TableCell sx={{ borderColor: "var(--background-secondary)" }}>
           <IconButton
             aria-label="expand row"
