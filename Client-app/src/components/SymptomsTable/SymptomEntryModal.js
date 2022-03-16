@@ -54,7 +54,7 @@ function SymptomEntry() {
             id="diary-entry-dialog-title"
             className="header-diaryEntry-dialog"
           >
-            <img className="diaryEntry__icon" src={VirusIcon} alt="Diary" />
+            <img className="symptomsEntry__icon" src={VirusIcon} alt="Diary" />
             Diary Entry
           </DialogTitle>
           <DialogContent dividers>
