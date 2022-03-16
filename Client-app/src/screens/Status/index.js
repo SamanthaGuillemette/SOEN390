@@ -1,3 +1,8 @@
+/**
+ * @fileoverview This component takes care of displaying the update status page.
+ *
+ */
+
 import Box from "@mui/material/Box";
 import UpdateStatus from "../../components/UpdateStatus";
 import BottomNav from "../../components/BottomNav";

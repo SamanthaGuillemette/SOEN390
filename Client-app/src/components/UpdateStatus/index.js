@@ -34,6 +34,7 @@ function UpdateStatus() {
         <Typography className="updateStatus-label" align="center" sx={{mt: 1}} style={{ paddingBottom: 8 }}>
           STATUS
         </Typography>
+        {/* Table for displaying date, temperature and weight */}
         <Table sx={{ width: 350 }} aria-label="spanning table">
           <TableHead>
             <TableRow>
