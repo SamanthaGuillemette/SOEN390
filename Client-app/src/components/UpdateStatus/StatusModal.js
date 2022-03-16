@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This class contains the component for displaying the add status modal.
+ */
+
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -107,6 +111,7 @@ export default function SimpleModal() {
             ADD STATUS
           </Typography>
           <Grid container minWidth={285} spacing={1}>
+            {/* Date TextField */}
             <Grid item xs={12}>
               <TextField
                 id="statusModal-standardBasic"
@@ -124,6 +129,7 @@ export default function SimpleModal() {
                 }}
               />
             </Grid>
+             {/* Temperature TextField */}
             <Grid item xs={12}>
               <TextField
                 id="statusModal-standardBasic"
@@ -141,6 +147,7 @@ export default function SimpleModal() {
                 }}
               />
             </Grid>
+             {/* Weight TextField */}
             <Grid item xs={12}>
               <TextField
                 id="statusModal-standardBasic"
@@ -158,7 +165,8 @@ export default function SimpleModal() {
                 }}
               />
             </Grid>
-          
+            
+            {/* Checkboxes for symptoms */}
             <Grid item style = {{maxWidth: "160px"}} xs={6} sm={6}><br/>
               <FormControlLabel control={<Checkbox style ={{color: "lightskyblue"}} checked={checked} onChange={handleChange} /> } label={<Typography variant="subtitle2" style={{ color: "white" }}>Fever</Typography>}/>
             </Grid>

@@ -1,5 +1,5 @@
 /**
- * @fileoverview This class takes care of the symptoms table component
+ * @fileoverview This class takes care of the symptoms table component.
  */
 
 import "./UpdateStatus.css";
@@ -30,8 +30,8 @@ function SymptomsTable() {
 
   return (
     <TableContainer sx={{mt: 2}}>
-    <Table sx={{ width: 350 }} aria-label="spanning table">
-      <TableBody>
+      <Table sx={{ width: 350 }} aria-label="spanning table">
+        <TableBody>
           <TableRow>
             <TableCell
               className="header"
@@ -62,7 +62,8 @@ function SymptomsTable() {
             >
               <Collapse in={open} timeout="auto" unmountOnExit>
                 <Box className="updateStatus-symptomsBox">
-                  <Table size="small" aria-label="purchases">
+                  {/* Collapsible symptoms table */}
+                  <Table size="small" aria-label="symptoms">
                     <TableBody>
                       <TableRow>
                         <TableCell 
@@ -183,9 +184,9 @@ function SymptomsTable() {
               </Collapse>
             </TableCell>
           </TableRow>
-      </TableBody>
-    </Table>
-  </TableContainer>
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 }
 
