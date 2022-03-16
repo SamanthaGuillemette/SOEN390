@@ -3,6 +3,9 @@
   margin-left: 10px !important;
 }
 
+fieldset {
+  border: none !important;
+}
 
 .Mui-selected {
   background-color: var(--background-secondary) !important;
