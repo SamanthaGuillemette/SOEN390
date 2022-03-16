@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This component takes care of the Dashboard function.
+ *
+ */
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -13,8 +17,9 @@ import UpcomingEvents from "../../components/UpcomingEvents";
 import DashboardCards from "../../components/DashboardCards";
 import DashboardStats from "../../components/DashboardStats";
 
-// Main function which will render the dashboard
-
+/**
+ * Main function which will render the dashboard
+ */
 const Dashboard = () => {
   return (
     // This returns the buttons on the top which display the buttons on the top, this one is for the patients

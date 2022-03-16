@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This component takes care of displaying the patients and docors tables.
+ *
+ */
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import DoctorList from "../../components/DoctorList/";

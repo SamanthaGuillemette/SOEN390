@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This component displays the popup modal for editing client profile.
+ *
+ */
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -9,7 +13,6 @@ import { FormControl, Grid, MenuItem, Stack, TextField } from "@mui/material";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
 import AdapterDateFns from "@mui/lab/AdapterDayjs";
-// import { useAuthState } from "react-firebase-hooks/auth";
 import { db } from "../../backend/firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { inputLabelClasses } from "@mui/material/InputLabel";
@@ -17,7 +20,6 @@ import FormIcon from "../../assets/form.svg";
 import "./ClientProfile.css";
 import { useSelector } from "react-redux";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-// import { updateUserInfo } from "../../store/userInfoSlice";
 
 const style = {
   position: "absolute",
@@ -62,19 +64,34 @@ export default function BasicModal() {
   const [buttonColor, setButtonColor] = useState("var(--primary-main)");
   const [icon, setIcon] = useState(false);
 
-  // Handle the popup open/close state
+  /**
+   * Handle the popup open state
+   * @returns {void}
+   */
   const handleOpen = () => setOpenPopup(true);
+
+  /**
+   * Handle the popup close state
+   * @returns {void}
+   */
   const handleClose = () => {
     setOpenPopup(false);
     setButtonColor("var(--primary-main)");
     setIcon(false);
   };
 
-  // Convert DOB to string (Works better this way compared to the SignUp component)
+  /**
+   * Convert DOB to string (Works better this way compared to the SignUp component)
+   * @param {Object} date
+   */
   const handleUpdateDOB = (newDate) => {
     setDOB(`${newDate?.$D}/${newDate?.$M + 1}/${newDate?.$y}`);
   };
 
+  /**
+   * Update the client's data to the database
+   * @param {ClickEvent} event
+   */
   const handleUpdateSubmit = async (event) => {
     event.preventDefault();
 
@@ -109,7 +126,10 @@ export default function BasicModal() {
     window.location.reload();
   };
 
-  // Display the update button color & icon after submit
+  /**
+   * Display the update button color & icon after submit
+   * @returns {void}
+   */
   const displaySuccessCheckmark = () => {
     setButtonColor("#27ae60");
     setIcon(true);

@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This component is the root of the whole application
+ * It is the first file that will be executed when the application starts.
+ */
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";

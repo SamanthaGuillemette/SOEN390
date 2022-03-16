@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This component displays the doctor's basic information.
+ *
+ */
 import "./DoctorInfo.css";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";

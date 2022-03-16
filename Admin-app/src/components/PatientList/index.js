@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This component takes care of the PatientList function.
+ *
+ */
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -37,9 +41,28 @@ const dropdownStyle = makeStyles({
 });
 
 // function to create data
-function createData(patientname, id, status, appointment, doctor, priority, statusReview, temperature, weight, height) {
-  return { patientname,id, status, appointment, doctor, priority, statusReview, symptoms: [
-  {
+function createData(
+  patientname,
+  id,
+  status,
+  appointment,
+  doctor,
+  priority,
+  statusReview,
+  temperature,
+  weight,
+  height
+) {
+  return {
+    patientname,
+    id,
+    status,
+    appointment,
+    doctor,
+    priority,
+    statusReview,
+    symptoms: [
+      {
         temperature,
         weight,
         height,
@@ -71,19 +94,29 @@ function PatientList() {
       data.forEach((doc) => {
         results.push(
           createData(
-            <Link className="PATIENT__table__name" to={`/patientprofile/${doc.id}`}>
+            <Link
+              className="PATIENT__table__name"
+              to={`/patientprofile/${doc.id}`}
+            >
               {doc.name}
             </Link>,
             doc.id,
             <span
               className={
-                (doc.status === "POSITIVE") ? "PATIENT__label-positive" : (doc.status === "NEGATIVE") ? "PATIENT__label-negative" : "PATIENT__label-unconfirmed"
+                doc.status === "POSITIVE"
+                  ? "PATIENT__label-positive"
+                  : doc.status === "NEGATIVE"
+                  ? "PATIENT__label-negative"
+                  : "PATIENT__label-unconfirmed"
               }
             >
               {doc.status}
             </span>,
             doc.upcomingAppointment,
-            doc.assignedDoctor && doctorsList && doctorsList[doc.assignedDoctor] && doctorsList[doc.assignedDoctor].name,
+            doc.assignedDoctor &&
+              doctorsList &&
+              doctorsList[doc.assignedDoctor] &&
+              doctorsList[doc.assignedDoctor].name,
             <FlagIcon
               className={
                 doc.flaggedPriority === "0"
@@ -102,10 +135,19 @@ function PatientList() {
     });
   }, [doctorsList]);
 
+  /**
+   * Function that handles changing the page of the patients
+   * @param  {} event
+   * @param  {} newPage
+   */
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
+  /**
+   * Function that handles changing the row per page
+   * @param  {} event
+   */
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -113,7 +155,9 @@ function PatientList() {
 
   return (
     <TableContainer className="PATIENT__table">
-      <Box className="PATIENT__table__label"> {/* Creating label*/}
+      <Box className="PATIENT__table__label">
+        {" "}
+        {/* Creating label*/}
         <HealthAndSafetyIcon className="PATIENT__table__icon"></HealthAndSafetyIcon>
         Patient List
       </Box>
@@ -171,12 +215,12 @@ function PatientList() {
           {/* Calculating how many pages to show per page */}
           {patientsList &&
             (rowsPerPage > 0
-              ? patientsList.slice( 
+              ? patientsList.slice(
                   page * rowsPerPage,
                   page * rowsPerPage + rowsPerPage
                 )
               : patientsList
-            ).map((row) => <SingleRow key={row.id} row={row}/>)}
+            ).map((row) => <SingleRow key={row.id} row={row} />)}
         </TableBody>
       </Table>
       {patientsList && (
