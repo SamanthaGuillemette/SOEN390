@@ -23,13 +23,7 @@ it('QA Test', function() {
  cy.get('.EVENT-BTN__text').click();
  cy.get('[href="/"] > .MuiButtonBase-root').click();
  cy.get('[href="/patients"] > .MuiButtonBase-root > .MuiListItemText-root > .MuiTypography-root').click();
- cy.get('body').click();
- /**
-  * Bug here 
-  */
- //cy.get('[data-value="-1"]').click();
- /* ==== End Cypress Studio ==== */
- /* ==== Generated with Cypress Studio ==== */
+ cy.get('[tabindex="0"] > [data-testid="KeyboardArrowRightIcon"]').click();
  cy.get('[href="/"] > .MuiButtonBase-root > .MuiListItemText-root > .MuiTypography-root').click();
  cy.get('[href="/QR"] > .MuiButtonBase-root').click();
  cy.get('[href="/"] > .MuiButtonBase-root > .MuiListItemText-root > .MuiTypography-root').click();
