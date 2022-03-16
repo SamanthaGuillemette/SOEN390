@@ -32,10 +32,6 @@ it('Dashboard QA', function() {
   cy.get('#password').clear();
   cy.get('#password').type('123456');
   cy.get('.MuiButton-root').click();
-  cy.get('[data-testid="card1"] > .MuiCardContent-root > .MuiTypography-h5 > a').click();
-  cy.get('[data-testid="card2"] > .MuiCardContent-root > .MuiTypography-h5 > a').click();
-  cy.get('[data-testid="card3"] > .MuiCardContent-root > .MuiTypography-h5 > a').click();
-  cy.get('.event-button-div > a > .MuiButton-root > .content').click();
   cy.get('[href="/"] > .MuiButtonBase-root > .MuiListItemText-root > .MuiTypography-root').click();
   cy.get('[data-testid="covid-1"] > a > .MuiButton-root > .content').click();
   cy.get('[data-testid="ChevronLeftIcon"]').click();
@@ -59,10 +55,10 @@ it('Dashboard QA', function() {
   cy.get('.MuiIconButton-edgeEnd > [data-testid="AccountCircleIcon"]').click();
   cy.get('.MuiIconButton-edgeEnd > [data-testid="AccountCircleIcon"]').click({force: true});
   cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > [tabindex="0"]').click({force: true});
-  cy.get('.MuiIconButton-edgeEnd > [data-testid="AccountCircleIcon"]').click({force: true});
+  cy.get('.MuiIconButton-edgeEnd > [data-testid="AccountCircleIcon"]').contains("Signout").click({force: true})
   /* ==== End Cypress Studio ==== */
   /* ==== Generated with Cypress Studio ==== */
-  cy.get('[style="color: var(--text-primary);"]').click();
+
   /* ==== End Cypress Studio ==== */
 });
 

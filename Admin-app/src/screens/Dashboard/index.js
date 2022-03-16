@@ -18,6 +18,7 @@ import SmallStatBox from "../../components/SmallStatBox";
 import "./Dashboard.css";
 import UpcomingEvents from "../../components/UpcomingEvents/index"
 
+
 // Main function which will render the dashboard
 
 const Dashboard = () => {
