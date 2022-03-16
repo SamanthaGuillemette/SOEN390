@@ -1,5 +1,8 @@
+/**
+ * @fileoverview This component displays the client profile page.
+ *
+ */
 import "./ClientProfile.css";
-import * as React from "react";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Grid from "@mui/material/Grid";
@@ -26,7 +29,9 @@ const Item = styled(Paper)(({ theme }) => ({
 function ClientProfile() {
   const [priorityFlag, setPriorityFlag] = useState(false);
 
-  // Pull 'userInfoDetails' from the store (Redux centralized store)
+  /**
+   * Pull 'userInfoDetails' from the store (Redux centralized store)
+   */
   const userInfoDetails = useSelector(
     (state) => state.userInfo.userInfoDetails
   );

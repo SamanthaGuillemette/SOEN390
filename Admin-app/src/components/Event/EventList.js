@@ -1,3 +1,8 @@
+/**
+ * @fileoverview This component takes care of the EventList function.
+ *
+ */
+
 import { Link } from "react-router-dom";
 
 const EventList = ({events = []}) => {

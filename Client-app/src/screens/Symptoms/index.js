@@ -1,3 +1,8 @@
+/**
+ * @fileoverview This component takes care of displaying the Symptoms page.
+ *
+ */
+
 import Box from "@mui/material/Box";
 import SymptomsTable from "../../components/SymptomsTable";
 import BottomNav from "../../components/BottomNav";
@@ -18,11 +23,11 @@ const Symptoms = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-        <Box sx={{ flexGrow: 1 }}>
-          <MenuAppBar></MenuAppBar>
-          <SymptomsTable></SymptomsTable>
-          <BottomNav></BottomNav>
-        </Box>
+      <Box sx={{ flexGrow: 1 }}>
+        <MenuAppBar />
+        <SymptomsTable />
+        <BottomNav />
+      </Box>
     </ThemeProvider>
   );
 };

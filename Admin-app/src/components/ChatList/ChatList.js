@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {Fragment} from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Divider from '@mui/material/Divider';
@@ -142,7 +142,7 @@ function PatientsList(props) {
                 </ListItemAvatar>
                 <ListItemText
                     primary= {
-                        <React.Fragment>
+                        <Fragment>
                             <Typography style={{ maxWidth: '100px',}} color="var(--text-primary)"> {name} </Typography>
                             {<FlagIcon label="primary" color="primary" variant="outlined"
                             // onClick={() => {
@@ -152,10 +152,10 @@ function PatientsList(props) {
                             //     priorityFlag ? "priority-flag clicked" : "priority-flag"
                             //   } 
                             />}
-                        </React.Fragment>}
+                        </Fragment>}
                     secondary={
-                        <React.Fragment>
-                        </React.Fragment>
+                        <Fragment>
+                        </Fragment>
                     }
                 />
             </ListItem>
@@ -171,18 +171,18 @@ function PatientsList(props) {
                 </ListItemAvatar>
                 <ListItemText
                     primary= {
-                        <React.Fragment>
+                        <Fragment>
                             <Typography color="var(--text-primary)"> 
                                 {name} 
                                 <FlagIcon style={{ marginLeft: '10px',}} label="error" color="error" variant="outlined" 
                                     onClick={() => {handleClick()}} className={flag ? "priority-flag clicked" : "priority-flag"} />
                                 {/* <Avatar sx={{ width: 24, height: 24, bgcolor: red[500]}} >{messageCount}</Avatar> */}
                             </Typography>
-                        </React.Fragment>}
+                        </Fragment>}
                     secondary={
-                        <React.Fragment>
+                        <Fragment>
                             <Typography style={{ maxWidth: '100px',}} color="var(--text-inactive)"> {lastMessage && lastMessage[0].message} </Typography>
-                        </React.Fragment>
+                        </Fragment>
                     }
                 />
             </ListItem>

@@ -1,24 +1,30 @@
+/**
+ * @fileoverview This component displays the bottom navigation bar.
+ *
+ */
 import { IconButton } from "@mui/material";
 import "./BottomNav.css";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
-import MailRoundedIcon from "@mui/icons-material/MailRounded";
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import NotificationsIcon from "@mui/icons-material/Notifications";
 import { Link } from "react-router-dom";
-import React from "react";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Popover from "@mui/material/Popover";
-import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
+import PopupState from "material-ui-popup-state";
 import MoreHorizRoundedIcon from "@mui/icons-material/MoreHorizRounded";
 import { useState } from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "../../backend/firebase";
 
 const BottomNav = () => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const setMobileMoreAnchorEl = useState(null);
 
+  /**
+   * Handle click event on bottom nav.
+   * @param  {ClickEvent} event
+   */
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -31,6 +37,11 @@ const BottomNav = () => {
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
+
+  /**
+   * Handle logging user out.
+   * @param  {ClickEvent} e
+   */
   const logout = async (e) => {
     e.preventDefault();
     signOut(auth);
@@ -42,13 +53,13 @@ const BottomNav = () => {
     <div className="BOTTOM-NAV__container">
       <IconButton size="large" className="BOTTOM-NAV__btn" sx={{ mb: "10px" }}>
         <Link to="../">
-          <HomeRoundedIcon sx={{ color: "white", mb: "-5px" }}/>
+          <HomeRoundedIcon sx={{ color: "white", mb: "-5px" }} />
           <p className="BOTTOM-NAV__btn__title">Home</p>
         </Link>
       </IconButton>
       <Link className="client-profile" to="../ClientProfile">
         <IconButton size="large" className="BOTTOM-NAV__btn">
-          <AccountCircleRoundedIcon sx={{ color: "white" }}/>
+          <AccountCircleRoundedIcon sx={{ color: "white" }} />
           <p data-testid="profile" className="BOTTOM-NAV__btn__title">
             Profile
           </p>
@@ -57,9 +68,7 @@ const BottomNav = () => {
       <Link to="../notifications">
         <IconButton size="large" className="BOTTOM-NAV__btn">
           <NotificationsIcon sx={{ color: "white" }} />
-          <p className="BOTTOM-NAV__btn__title">
-            Notifications
-          </p>
+          <p className="BOTTOM-NAV__btn__title">Notifications</p>
         </IconButton>
       </Link>
       <PopupState variant="popover" popupId="demo-popup-popover">
@@ -71,7 +80,7 @@ const BottomNav = () => {
               onClick={handleClick}
               className="BOTTOM-NAV__btn"
             >
-              <MoreHorizRoundedIcon sx={{ color: "white" }}/>
+              <MoreHorizRoundedIcon sx={{ color: "white" }} />
               <p className="BOTTOM-NAV__btn__title">More</p>
             </Button>
             <Popover

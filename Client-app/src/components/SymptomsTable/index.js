@@ -1,4 +1,7 @@
-import * as React from "react";
+/**
+ * @fileoverview This component displays the symptoms table.
+ *
+ */
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -11,7 +14,11 @@ import VirusIcon from "../../assets/virus.svg";
 import "./SymptomsTable.css";
 import SymptomsEntryModal from "./SymptomEntryModal";
 
-// function to create data
+/**
+ * function to create data
+ * @param  {string} symptomDate
+ * @param  {label} status
+ */
 function createData(symptomDate, status) {
   return { symptomDate, status };
 }

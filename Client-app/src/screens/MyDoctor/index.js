@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This component takes care of displaying the MyDoctor page.
+ *
+ */
 import Box from "@mui/material/Box";
 import DoctorInfo from "../../components/DoctorInfo";
 import BottomNav from "../../components/BottomNav";
@@ -19,9 +23,9 @@ const MyDoctor = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Box sx={{ flexGrow: 1 }}>
-        <MenuAppBar></MenuAppBar>
-        <DoctorInfo></DoctorInfo>
-        <BottomNav></BottomNav>
+        <MenuAppBar />
+        <DoctorInfo />
+        <BottomNav />
       </Box>
     </ThemeProvider>
   );

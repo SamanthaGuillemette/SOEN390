@@ -1,4 +1,15 @@
-import { Grid, Avatar, TextField, Button, Box, ListItemAvatar } from "@mui/material";
+/**
+ * @fileoverview This component takes care of the chat function.
+ *
+ */
+import {
+  Grid,
+  Avatar,
+  TextField,
+  Button,
+  Box,
+  ListItemAvatar,
+} from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useEffect, useState, useRef } from "react";
 import { db, auth } from "../../backend/firebase";
@@ -14,7 +25,7 @@ import {
   updateDoc,
   increment,
 } from "firebase/firestore";
-import Typography from '@material-ui/core/Typography';
+import Typography from "@material-ui/core/Typography";
 import "./Chat.css";
 
 function stringToColor(string) {
@@ -26,7 +37,7 @@ function stringToColor(string) {
     hash = string.charCodeAt(i) + ((hash << 5) - hash);
   }
 
-  let color = '#';
+  let color = "#";
 
   for (i = 0; i < 3; i += 1) {
     const value = (hash >> (i * 8)) & 0xff;
@@ -46,8 +57,12 @@ function stringAvatar(name) {
   };
 }
 
-// This component is what allows the chatting feature to work. Below are many consts and 
-// useEffect hooks that communicate with the database in order to recieve or send information.
+/**
+ * This component is what allows the chatting feature to work. Below are many consts and
+ * useEffect hooks that communicate with the database in order to recieve or send information.
+ *
+ * @returns {JSX.Element}
+ */
 const Chat = () => {
   const [user] = useAuthState(auth);
   const [msgToSend, setMsgToSend] = useState("");
@@ -60,9 +75,12 @@ const Chat = () => {
   const [messagesReceived, setMessagesReceived] = useState([]);
   const dummy = useRef();
 
-  // This method allows the user to send messages to the data base using asynchronus methods. 
-  // The addDoc funtion adds a document which is essentially a message in the database. 
-  // This message gets added to the patient's database collection. 
+  /**
+   * This method allows the user to send messages to the data base using asynchronus methods.
+   * The addDoc funtion adds a document which is essentially a message in the database.
+   * This message gets added to the patient's database collection.
+   * @param  {ClieckEvent} e
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     await addDoc(messageRef, {
@@ -72,13 +90,15 @@ const Chat = () => {
     });
 
     await updateDoc(counterRef, {
-      counterDoc: increment(1)
-    })
+      counterDoc: increment(1),
+    });
     setMsgToSend("");
   };
 
-  // This hook allows this component to receive messages from the database, the same location as the const above. 
-  // The onSnapshot listens for changes and then updates the user interface to show new messages being sent or received in the chat box. 
+  /**
+   * This hook allows this component to receive messages from the database, the same location as the const above.
+   * The onSnapshot listens for changes and then updates the user interface to show new messages being sent or received in the chat box.
+   */
   useEffect(() => {
     onSnapshot(q, (doc) => {
       setMessagesReceived(
@@ -92,7 +112,7 @@ const Chat = () => {
     // eslint-disable-next-line
   }, []);
 
-  // This hook scrolls down to the latest message that was sent. 
+  // This hook scrolls down to the latest message that was sent.
   useEffect(() => {
     dummy.current.scrollIntoView({ behavior: "smooth" });
   });
@@ -132,14 +152,20 @@ const Chat = () => {
                 autoFocus
                 onChange={(e) => setMsgToSend(e.target.value)}
                 placeholder="Type your message here..."
-                sx={{ color: 'white', bgcolor: 'var(--text-inactive)', borderRadius: '15px', width: "90%", marginLeft: "10px" }}
+                sx={{
+                  color: "white",
+                  bgcolor: "var(--text-inactive)",
+                  borderRadius: "15px",
+                  width: "90%",
+                  marginLeft: "10px",
+                }}
               />
             </Grid>
             <Grid item xs={1}>
               <Button
                 type="submit"
                 variant="contained"
-                sx={{ mb: 1, bgcolor: '#8f96e2', height: '50px' }}
+                sx={{ mb: 1, bgcolor: "#8f96e2", height: "50px" }}
                 endIcon={<SendIcon />}
                 disabled={!msgToSend}
               >
@@ -153,8 +179,10 @@ const Chat = () => {
   );
 };
 
-//This function is responsible for getting the messages and sorting them by sender and receiver.
-//Then it returns the chating bubbles which are displayed above. 
+/**
+ * This function is responsible for getting the messages and sorting them by sender and receiver.
+ * Then it returns the chating bubbles which are displayed above.
+ */
 function ChatMessage(props) {
   const { name, timestamp, message } = props.message;
   const [user] = useAuthState(auth);
@@ -164,7 +192,9 @@ function ChatMessage(props) {
   return (
     <>
       <div className={`INBOX__message ${messageClass}`}>
-        <ListItemAvatar sx={{ marginBottom: '10px', marginLeft: '10px', marginRight: '10px' }}>
+        <ListItemAvatar
+          sx={{ marginBottom: "10px", marginLeft: "10px", marginRight: "10px" }}
+        >
           <Avatar {...stringAvatar(name)} />
         </ListItemAvatar>
         <Typography>{message}</Typography>

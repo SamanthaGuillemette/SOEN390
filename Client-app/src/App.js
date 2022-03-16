@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This is the entry point of the application righ after the main 'index.js' file.
+ *
+ */
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./screens/Dashboard";
 import Chatting from "./screens/Chatting";
@@ -17,6 +21,8 @@ import { fetchUserInfo } from "./store/userInfoSlice";
 import { onAuthStateChanged } from "firebase/auth";
 import { saveUser } from "./store/authSlice";
 import MyDoctor from "./screens/MyDoctor";
+import Status from "./screens/Status"
+import Appointment from "./screens/Appointment";
 
 function App() {
   // const [user, loading] = useAuthState(auth);
@@ -25,7 +31,10 @@ function App() {
   const userEmail = useSelector((state) => state.auth.userEmail);
   const dispatch = useDispatch();
 
-  // This function will run as soon as the App loads
+  /**
+   * This function will run as soon as the App loads
+   * @returns {void}
+   */
   useEffect(() => {
     // Save user token & user email to redux store (for logged in user)
     onAuthStateChanged(auth, (userObj) => {
@@ -63,6 +72,8 @@ function App() {
           <Route path="/notifications" element={<Notifications />} />
           <Route path="clientinbox" element={<Chatting />} />
           <Route path="/mydoctor" element={<MyDoctor />} />
+          <Route path="/status" element={<Status />} />
+          <Route path="/appointment" element={<Appointment />} />
           <Route path="/diary" element={<Diary />} />
         </Routes>
       )}

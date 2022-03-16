@@ -1,5 +1,8 @@
+/**
+ * @fileoverview This component takes care of the PatientProfile function.
+ *
+ */
 import "./PatientProfile.css";
-import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -37,6 +40,10 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
+/**
+ * setAge function works for setting the age of the patient
+ * @param  {} dobStr
+ */
 function getAge(dobStr) {
   // First get today's date
   var todaysDate = new Date();
@@ -62,6 +69,11 @@ function getAge(dobStr) {
   return returnValue;
 }
 
+/**
+ * This component is what allows the chatting feature to work. Below are many consts and
+ * useEffect hooks that communicate with the database in order to recieve or send 
+ * information about the patient profile.
+ */
 function PatientProfile() {
   // Creating data for symptom details table
   function createData(
