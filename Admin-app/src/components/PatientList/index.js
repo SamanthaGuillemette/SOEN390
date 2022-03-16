@@ -1,25 +1,24 @@
-import * as React from "react";
+/**
+ * @fileoverview This component takes care of the PatientList function.
+ *
+ */
 import Box from "@mui/material/Box";
-import Collapse from "@mui/material/Collapse";
-import IconButton from "@mui/material/IconButton";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Typography from "@mui/material/Typography";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import TablePagination from "@mui/material/TablePagination";
 import { Link } from "react-router-dom";
 import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@mui/material/Paper";
 import FlagIcon from "@mui/icons-material/Flag";
-import "./PatientList.css";
 import { useEffect, useState } from "react";
-import { getPatients, useOld } from "../../backend/firebasePatientUtilities";
+import { getPatients } from "../../backend/firebasePatientUtilities";
+import { getDoctors } from "../../backend/firebaseDoctorUtilities";
+import SingleRow from "./SingleRow";
+import "./Patients-Table.css";
 
 // adding styling
 const dropdownStyle = makeStyles({
@@ -49,6 +48,7 @@ function createData(
   appointment,
   doctor,
   priority,
+  statusReview,
   temperature,
   weight,
   height
@@ -60,6 +60,7 @@ function createData(
     appointment,
     doctor,
     priority,
+    statusReview,
     symptoms: [
       {
         temperature,
@@ -70,143 +71,22 @@ function createData(
   };
 }
 
-function Row(props) {
-  const { row } = props;
-  const [open, setOpen] = React.useState(false); // setting the open condition to be false
-  const data = localStorage.getItem('priorityFlag') // getting the priority flag
-
-  return (
-    <React.Fragment>
-      <TableRow>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }}>
-          <IconButton
-            aria-label="expand row"
-            size="small"
-            onClick={() => setOpen(!open)}
-            sx={{ color: "var(--text-inactive)" }}
-          >
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />} {/* changing icon to up or down based on open or not */}
-          </IconButton>
-        </TableCell>
-        {/* Displaying row of data */}
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" component="th" scope="row">
-        {row.patientname}
-        </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="right" >
-          {row.id}
-        </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="right" >
-          {row.status}
-        </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="right" >
-          {row.appointment}
-        </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="right">
-          {row.doctor}
-        </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="data" align="right">
-          {row.priority}
-        </TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell
-          sx={{ borderColor: "var(--background-secondary)" }}
-          style={{ paddingBottom: 0, paddingTop: 0 }}
-          colSpan={6}
-        >
-          {/* Adding collapsible table */}
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1 }}>
-              {/* Adding Table Label */}
-              <Typography
-                variant="h6"
-                gutterBottom
-                component="div"
-                color="var(--text-inactive)"
-              >
-                Symptoms
-              </Typography>
-              <Table
-                className="symptoms-table"
-                size="small"
-                aria-label="purchases"
-              >
-              {/* Start of Table headers */}
-                <TableHead>
-                  <TableRow>
-                    <TableCell
-                      sx={{ borderColor: "var(--primary-light)" }}
-                      className="symptoms-data"
-                    >
-                      Temperature
-                    </TableCell>
-                    <TableCell
-                      sx={{ borderColor: "var(--primary-light)" }}
-                      className="symptoms-data"
-                    >
-                      Weight
-                    </TableCell>
-                    <TableCell
-                      sx={{ borderColor: "var(--primary-light)" }}
-                      className="symptoms-data"
-                      align="right"
-                    >
-                      Height
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                {/* End of Table Headers */}
-                {/* Adding the body of collapsible table */}
-                <TableBody>
-                  {/* Displaying each row */}
-                  {row.symptoms.map((symptomsRow) => (
-                    <TableRow key={symptomsRow.date}>
-                      <TableCell
-                        sx={{ borderColor: "transparent" }}
-                        className="symptoms-data"
-                        component="th"
-                        scope="row"
-                      >
-                        {symptomsRow.temperature}
-                      </TableCell>
-                      <TableCell
-                        sx={{ borderColor: "transparent" }}
-                        className="symptoms-data"
-                      >
-                        {symptomsRow.weight}
-                      </TableCell>
-                      <TableCell
-                        sx={{ borderColor: "transparent" }}
-                        className="symptoms-data"
-                        align="right"
-                      >
-                        {symptomsRow.height}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </Box>
-          </Collapse>
-        </TableCell>
-      </TableRow>
-    </React.Fragment>
-  );
-}
-
 function PatientList() {
-  if (!useOld) { // if useOld is false
-    return PatientListNew(); // displaying this functin
-  } else { 
-    return PatientListOld(); // otherwise displaying this function
-  }
-}
-
-function PatientListNew() {
   const classes = dropdownStyle(); // adding styling
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
   const [patientsList, setPatientsList] = useState(null);
+  const [doctorsList, setDoctorsList] = useState(null);
+
+  useEffect(() => {
+    getDoctors().then((data) => {
+      let results = [];
+      data.forEach((doc) => {
+        results[doc.id] = doc;
+      });
+      setDoctorsList(results);
+    });
+  }, []);
 
   useEffect(() => {
     getPatients().then((data) => {
@@ -214,26 +94,37 @@ function PatientListNew() {
       data.forEach((doc) => {
         results.push(
           createData(
-            <Link className="patient-name" to={`/patientprofile/${doc.id}`}>
+            <Link
+              className="PATIENT__table__name"
+              to={`/patientprofile/${doc.id}`}
+            >
               {doc.name}
             </Link>,
             doc.id,
             <span
               className={
-                doc.status === "POSITIVE" ? "label-positive" : "label-negative"
+                doc.status === "POSITIVE"
+                  ? "PATIENT__label-positive"
+                  : doc.status === "NEGATIVE"
+                  ? "PATIENT__label-negative"
+                  : "PATIENT__label-unconfirmed"
               }
             >
               {doc.status}
             </span>,
             doc.upcomingAppointment,
-            doc.assignedDoctor,
+            doc.assignedDoctor &&
+              doctorsList &&
+              doctorsList[doc.assignedDoctor] &&
+              doctorsList[doc.assignedDoctor].name,
             <FlagIcon
               className={
                 doc.flaggedPriority === "0"
-                  ? "priority-flag"
-                  : "priority-flag clicked"
+                  ? "PATIENT__priority-flag"
+                  : "PATIENT__priority-flag clicked"
               }
             ></FlagIcon>,
+            doc.statusReview,
             doc.temperature + "°C",
             doc.weight + " lbs",
             doc.heightFeet + "' " + doc.heightInches + '"'
@@ -242,21 +133,32 @@ function PatientListNew() {
       });
       setPatientsList(results);
     });
-  }, []);
+  }, [doctorsList]);
 
+  /**
+   * Function that handles changing the page of the patients
+   * @param  {} event
+   * @param  {} newPage
+   */
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
+  /**
+   * Function that handles changing the row per page
+   * @param  {} event
+   */
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
 
   return (
-    <TableContainer className="patient-doctor-list">
-      <Box className="label"> {/* Creating label*/}
-        <HealthAndSafetyIcon className="patients-icon"></HealthAndSafetyIcon>
+    <TableContainer className="PATIENT__table">
+      <Box className="PATIENT__table__label">
+        {" "}
+        {/* Creating label*/}
+        <HealthAndSafetyIcon className="PATIENT__table__icon"></HealthAndSafetyIcon>
         Patient List
       </Box>
       <Table aria-label="collapsible table">
@@ -266,42 +168,43 @@ function PatientListNew() {
             <TableCell sx={{ borderColor: "var(--background-secondary)" }} />
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
-              className="header"
+              className="PATIENT__table__header"
+              align="left"
             >
               Patient Name
             </TableCell>
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
-              className="header"
-              align="right"
+              className="PATIENT__table__header"
+              align="left"
             >
               ID
             </TableCell>
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
-              className="header"
-              align="right"
+              className="PATIENT__table__header"
+              align="center"
             >
               status
             </TableCell>
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
-              className="header"
-              align="right"
+              className="PATIENT__table__header"
+              align="center"
             >
               Upcoming Appointment
             </TableCell>
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
-              className="header"
-              align="right"
+              className="PATIENT__table__header"
+              align="left"
             >
               Assigned Doctor
             </TableCell>
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
-              className="header"
-              align="right"
+              className="PATIENT__table__header"
+              align="center"
             >
               Flagged Priority
             </TableCell>
@@ -312,12 +215,12 @@ function PatientListNew() {
           {/* Calculating how many pages to show per page */}
           {patientsList &&
             (rowsPerPage > 0
-              ? patientsList.slice( 
+              ? patientsList.slice(
                   page * rowsPerPage,
                   page * rowsPerPage + rowsPerPage
                 )
               : patientsList
-            ).map((row) => <Row key={row.id} row={row}></Row>)}
+            ).map((row) => <SingleRow key={row.id} row={row} />)}
         </TableBody>
       </Table>
       {patientsList && (
@@ -346,161 +249,6 @@ function PatientListNew() {
           }}
         />
       )}
-    </TableContainer>
-  );
-}
-
-function PatientListOld() {
-  const flag = localStorage.getItem("priorityFlag");
-  const rows = [
-    createData(
-      <a href="/patientprofile">John Doe</a>,
-      1476,
-      <span className="label-positive">positive</span>,
-      "23/05/22",
-      "Allyson Richards",
-      <FlagIcon
-        className={JSON.parse(flag) ? "priority-flag clicked" : "priority-flag"}
-      ></FlagIcon>,
-      "90°C",
-      "150 lbs",
-      "5'9"
-    ),
-    createData(
-      "Jane Smith",
-      159,
-      <span className="label-positive">positive</span>,
-      "05/02/22",
-      "Charles Ludwig",
-      <FlagIcon
-        className={flag ? "priority-flag" : "priority-flag clicked"}
-      ></FlagIcon>,
-      "65°C",
-      "120lbs",
-      "5'5"
-    ),
-    createData(
-      "William Hill",
-      1666,
-      <span className="label-positive">positive</span>,
-      "06/05/22",
-      "Allyson Richards",
-      <FlagIcon
-        className={flag ? "priority-flag" : "priority-flag clicked"}
-      ></FlagIcon>,
-      "90°C",
-      "150 lbs",
-      "5'9"
-    ),
-    createData(
-      "Maria Sánchez",
-      1200,
-      <span className="label-negative">negative</span>,
-      "06/02/22",
-      "Charles Ludwig",
-      <FlagIcon
-        className={flag ? "priority-flag" : "priority-flag clicked"}
-      ></FlagIcon>,
-      "65°C",
-      "120lbs",
-      "5'5"
-    ),
-    createData(
-      "Liam Hill",
-      233,
-      <span className="label-positive">positive</span>,
-      "22/03/22",
-      "Allyson Richards",
-      <FlagIcon
-        className={flag ? "priority-flag" : "priority-flag clicked"}
-      ></FlagIcon>,
-      "90°C",
-      "150 lbs",
-      "5'9"
-    ),
-    createData(
-      "Connor Jackson",
-      2893,
-      <span className="label-negative">negative</span>,
-      "31/01/22",
-      "Allyson Richards",
-      <FlagIcon
-        className={flag ? "priority-flag" : "priority-flag clicked"}
-      ></FlagIcon>,
-      "65°C",
-      "120lbs",
-      "5'5"
-    ),
-    createData(
-      "Connor Jackson",
-      2896,
-      <span className="label-negative">negative</span>,
-      "01/02/22",
-      "Charles Ludwig",
-      <FlagIcon
-        className={flag ? "priority-flag" : "priority-flag clicked"}
-      ></FlagIcon>,
-      "65°C",
-      "120lbs",
-      "5'5"
-    ),
-  ];
-
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
-  return (
-    <TableContainer className="patient-list" component={Paper}>
-      <Box className="label">Patient List</Box>
-      <Table aria-label="collapsible table">
-        <TableHead>
-          <TableRow>
-            <TableCell />
-            <TableCell className="header">Patient Name</TableCell>
-            <TableCell className="header" align="right">
-              ID
-            </TableCell>
-            <TableCell className="header" align="right">
-              status
-            </TableCell>
-            <TableCell className="header" align="right">
-              Upcoming Appointment
-            </TableCell>
-            <TableCell className="header" align="right">
-              Assigned Doctor
-            </TableCell>
-            <TableCell className="header" align="right">
-              Flagged Priority
-            </TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {(rowsPerPage > 0
-            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : rows
-          ).map((row) => (
-            <Row key={row.id} row={row}></Row>
-          ))}
-        </TableBody>
-      </Table>
-      <TablePagination
-        rowsPerPageOptions={[5, 10, { label: "All", value: -1 }]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
     </TableContainer>
   );
 }

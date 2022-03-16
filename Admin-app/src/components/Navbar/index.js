@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This component takes care of the Navbar function.
+ *
+ */
 import { styled} from "@mui/material/styles";
 import MuiAppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -20,6 +24,7 @@ import { useState } from "react";
 import { signOut } from 'firebase/auth';
 import { auth } from '../../backend/firebase';
 import { makeStyles } from "@material-ui/core/styles";
+import ChatList from '../ChatList/ChatList.js';
 
 const dropdownStyle = makeStyles(() => ({
   menu: {
@@ -91,30 +96,66 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
+/**
+ * This component is what allows the navnar feature to work. Below are many consts and
+ * functions to handle opening and closing the menus.
+ */
 function Navbar() {
   const classes = dropdownStyle();
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const [msgMoreAnchorEl, setMsgMoreAnchorEl] = useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const isMsgOpen = Boolean(msgMoreAnchorEl);
 
   const open = useSelector(openState);
   const dispatch = useDispatch();
 
+  /**
+   * Function to handle profile menu open
+   * @param  {} event
+   */
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
+  /**
+   * Function to handle messages menu open
+   * @param  {} event
+   */
+  const handleMessagesMenuOpen = (event) => {
+    setMsgMoreAnchorEl(event.currentTarget);
+  };
+
+  /**
+   * Function to handle messages menu close
+   * @param  {} event
+   */
+  const handleMessagesMenuClose = (event) => {
+    setMsgMoreAnchorEl(null);
+  };
+
+  /**
+   * Function to handle mobile menu open
+   */
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
 
+   /**
+   * Function to handle menu open
+   */
   const handleMenuClose = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
   };
 
+   /**
+   * Function to handle mobile menu open
+   * @param  {} event
+   */
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
@@ -153,6 +194,20 @@ function Navbar() {
 
   );
 
+  const msgId = "primary-search-msg-menu";
+  const renderMessages = (
+    <Menu
+      anchorEl={msgMoreAnchorEl}
+      id={msgId}
+      keepMounted
+      open={isMsgOpen}
+      onClose={handleMessagesMenuClose}
+      className={classes.menu}
+    >
+      <ChatList />
+    </Menu>
+  );
+
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
@@ -162,8 +217,13 @@ function Navbar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+      <MenuItem  onClick={handleMessagesMenuOpen}>
+        <IconButton 
+          size="large" 
+          aria-label="show 4 new mails" 
+          aria-controls="primary-search-msg-menu"
+          color="inherit"
+          >
           <Badge badgeContent={4} color="error">
             <MailIcon />
           </Badge>
@@ -245,6 +305,7 @@ function Navbar() {
               size="large"
               aria-label="show 4 new mails"
               color="inherit"
+              onClick={handleMessagesMenuOpen}
             >
               <Badge
                 badgeContent={4}
@@ -302,6 +363,7 @@ function Navbar() {
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
+      {renderMessages}
       {renderMenu}
     </Box>
   );

@@ -1,1 +1,6 @@
-{}
+{
+    "experimentalStudio": true,
+    "waitForAnimations" :true,
+    "keyStrokeDelay": 160
+    
+}

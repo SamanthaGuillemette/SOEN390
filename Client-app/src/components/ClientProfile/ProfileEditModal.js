@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This component displays the popup modal for editing client profile.
+ *
+ */
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -5,26 +9,17 @@ import Modal from "@mui/material/Modal";
 import { useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import Fab from "@mui/material/Fab";
-import {
-  FormControl,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Select,
-  Stack,
-  TextField,
-} from "@mui/material";
+import { FormControl, Grid, MenuItem, Stack, TextField } from "@mui/material";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
 import AdapterDateFns from "@mui/lab/AdapterDayjs";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, db } from "../../backend/firebase";
+import { db } from "../../backend/firebase";
 import { doc, setDoc } from "firebase/firestore";
-import { useDocument } from "react-firebase-hooks/firestore";
 import { inputLabelClasses } from "@mui/material/InputLabel";
-import { makeStyles } from "@material-ui/core/styles";
 import FormIcon from "../../assets/form.svg";
 import "./ClientProfile.css";
+import { useSelector } from "react-redux";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
 const style = {
   position: "absolute",
@@ -42,36 +37,102 @@ const style = {
 };
 
 export default function BasicModal() {
-  const [user] = useAuthState(auth);
-  const clientDoc = doc(db, `Client/${user?.email}`);
+  // Pull 'userEmail' out from the centralized store
+  const userEmail = useSelector((state) => state.auth.userEmail);
 
-  const [open, setOpen] = useState(false);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [province, setProvince] = useState("");
-  const [postalCode, setPostalCode] = useState("");
-  const [dob, setDOB] = useState(null);
-  const [photoUrl, setPhotoUrl] = useState("");
+  // Get the client's reference via the userEmail (query the database)
+  const clientDoc = doc(db, `Client/${userEmail}`);
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  // const dispatch = useDispatch();
 
+  // Pull 'userInfoDetails' out from the centralized store
+  const userInfoDetails = useSelector(
+    (state) => state.userInfo.userInfoDetails
+  );
+
+  const [openPopup, setOpenPopup] = useState(false);
+  const [firstName, setFirstName] = useState(userInfoDetails?.firstName);
+  const [lastName, setLastName] = useState(userInfoDetails?.lastName);
+  const [address, setAddress] = useState(userInfoDetails?.address);
+  const [city, setCity] = useState(userInfoDetails?.city);
+  const [province, setProvince] = useState(`${userInfoDetails?.province}`);
+  const [postalCode, setPostalCode] = useState(userInfoDetails?.postalCode);
+  const [dob, setDOB] = useState(`${userInfoDetails?.dob}`);
+  const [profileImage, setProfileImage] = useState(
+    userInfoDetails?.profileImage || ""
+  );
+  const [buttonColor, setButtonColor] = useState("var(--primary-main)");
+  const [icon, setIcon] = useState(false);
+
+  /**
+   * Handle the popup open state
+   * @returns {void}
+   */
+  const handleOpen = () => setOpenPopup(true);
+
+  /**
+   * Handle the popup close state
+   * @returns {void}
+   */
+  const handleClose = () => {
+    setOpenPopup(false);
+    setButtonColor("var(--primary-main)");
+    setIcon(false);
+  };
+
+  /**
+   * Convert DOB to string (Works better this way compared to the SignUp component)
+   * @param {Object} date
+   */
+  const handleUpdateDOB = (newDate) => {
+    setDOB(`${newDate?.$D}/${newDate?.$M + 1}/${newDate?.$y}`);
+  };
+
+  /**
+   * Update the client's data to the database
+   * @param {ClickEvent} event
+   */
   const handleUpdateSubmit = async (event) => {
     event.preventDefault();
 
-    const dobValue = dob.$D + "/" + (dob.$M + 1) + "/" + dob.$y;
+    // dispatch(
+    //   updateUserInfo(userEmail, {
+    //     firstName: firstName,
+    //     lastName: lastName,
+    //     profileImage: profileImage,
+    //     address: address,
+    //     postalCode: postalCode,
+    //     city: city,
+    //     province: province,
+    //     dob: dob,
+    //   })
+    // );
+
     await setDoc(clientDoc, {
       firstName: firstName,
       lastName: lastName,
-      photoUrl: photoUrl,
+      profileImage: profileImage,
       address: address,
       postalCode: postalCode,
       city: city,
       province: province,
-      dob: dobValue,
+      dob: dob,
     });
+
+    // Close the popup after user submit the form
+    handleClose();
+
+    // Refresh page after user submit the form
+    window.location.reload();
+  };
+
+  /**
+   * Display the update button color & icon after submit
+   * @returns {void}
+   */
+  const displaySuccessCheckmark = () => {
+    setButtonColor("#27ae60");
+    setIcon(true);
   };
 
   return (
@@ -85,7 +146,7 @@ export default function BasicModal() {
         <EditIcon fontSize="small" />
       </Fab>
       <Modal
-        open={open}
+        open={openPopup}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
@@ -96,30 +157,31 @@ export default function BasicModal() {
           noValidate
           onSubmit={handleUpdateSubmit}
         >
-          <img
-            className="update_profile__img"
-            src={FormIcon}
-            alt="My Doctor"
-          />
-          <Typography className="header-update-profile" variant="h6" component="h2" sx={{ mb: 2 }}>
+          <img className="update_profile__img" src={FormIcon} alt="My Doctor" />
+          <Typography
+            className="header-update-profile"
+            variant="h6"
+            component="h2"
+            sx={{ mb: 2 }}
+          >
             Update your profile
           </Typography>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
-                name="photoUrl"
+                name="profileImage"
                 fullWidth
-                id="photoUrl"
+                id="profileImage"
                 label="Profile Photo"
-                value={photoUrl}
-                onChange={(e) => setPhotoUrl(e.target.value)}
+                value={profileImage}
+                onChange={(e) => setProfileImage(e.target.value)}
                 InputLabelProps={{
                   sx: {
                     color: "var(--text-primary)",
                     [`&.${inputLabelClasses.shrink}`]: {
                       color: "#e0e4e4",
-                    }
-                  }
+                    },
+                  },
                 }}
               />
             </Grid>
@@ -137,8 +199,8 @@ export default function BasicModal() {
                     color: "var(--text-primary)",
                     [`&.${inputLabelClasses.shrink}`]: {
                       color: "#e0e4e4",
-                    }
-                  }
+                    },
+                  },
                 }}
               />
             </Grid>
@@ -156,8 +218,8 @@ export default function BasicModal() {
                     color: "var(--text-primary)",
                     [`&.${inputLabelClasses.shrink}`]: {
                       color: "#e0e4e4",
-                    }
-                  }
+                    },
+                  },
                 }}
               />
             </Grid>
@@ -175,8 +237,8 @@ export default function BasicModal() {
                     color: "var(--text-primary)",
                     [`&.${inputLabelClasses.shrink}`]: {
                       color: "#e0e4e4",
-                    }
-                  }
+                    },
+                  },
                 }}
               />
             </Grid>
@@ -186,17 +248,15 @@ export default function BasicModal() {
                   <DatePicker
                     label="Date of Birth"
                     value={dob}
-                    onChange={(e) => {
-                      setDOB(e);
-                    }}
+                    onChange={handleUpdateDOB}
                     renderInput={(params) => <TextField {...params} />}
                     InputLabelProps={{
                       sx: {
                         color: "var(--text-primary)",
                         [`&.${inputLabelClasses.shrink}`]: {
                           color: "#e0e4e4",
-                        }
-                      }
+                        },
+                      },
                     }}
                   />
                 </Stack>
@@ -216,30 +276,29 @@ export default function BasicModal() {
                     color: "var(--text-primary)",
                     [`&.${inputLabelClasses.shrink}`]: {
                       color: "#e0e4e4",
-                    }
-                  }
+                    },
+                  },
                 }}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <FormControl fullWidth>
-              <TextField
-                      required
-                      labelId="province"
-                      id="province"
-                      label="Province"
-                      value={province}
-                      onChange={(e) => setProvince(e.target.value)}
-                      InputLabelProps={{
-                        sx: {
-                          color: "var(--text-primary)",
-                          [`&.${inputLabelClasses.shrink}`]: {
-                            color: "#e0e4e4"
-                          },
-                        }
-                      }}
-                      select
-                    >
+                <TextField
+                  // labelId="province"
+                  id="province"
+                  label="Province"
+                  value={province}
+                  onChange={(e) => setProvince(e.target.value)}
+                  InputLabelProps={{
+                    sx: {
+                      color: "var(--text-primary)",
+                      [`&.${inputLabelClasses.shrink}`]: {
+                        color: "#e0e4e4",
+                      },
+                    },
+                  }}
+                  select
+                >
                   <MenuItem value={"Alberta"}>Alberta</MenuItem>
                   <MenuItem value={"British Columbia"}>
                     British Columbia
@@ -273,8 +332,8 @@ export default function BasicModal() {
                     color: "var(--text-primary)",
                     [`&.${inputLabelClasses.shrink}`]: {
                       color: "#e0e4e4",
-                    }
-                  }
+                    },
+                  },
                 }}
               />
             </Grid>
@@ -282,18 +341,27 @@ export default function BasicModal() {
           <Button
             type="submit"
             variant="contained"
-            className="cancel-button"
-            sx={{ mt: 3, mb: 2}}
+            className="update-button"
+            style={{ backgroundColor: buttonColor }}
+            onClick={displaySuccessCheckmark}
+            sx={{ mt: 3, mb: 2 }}
           >
-            CANCEL
+            {icon ? (
+              <CheckCircleOutlineIcon
+                sx={{ fontSize: "175%" }}
+              ></CheckCircleOutlineIcon>
+            ) : (
+              "UPDATE"
+            )}
           </Button>
           <Button
             type="submit"
             variant="contained"
-            className="update-button"
-            sx={{ mt: 3, mb: 2}}
+            className="cancel-button"
+            sx={{ mt: 3, mb: 2 }}
+            onClick={handleClose}
           >
-            UPDATE
+            CANCEL
           </Button>
         </Box>
       </Modal>

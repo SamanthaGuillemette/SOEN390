@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This component takes care of displaying the DoughnutChart.
+ *
+ */
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 
@@ -29,6 +33,11 @@ export const data = {
   ],
 };
 
+/**
+ * This component allows displaying the Doughnut. 
+ *
+ * @returns {JSX.Element}
+ */
 function DoughnutChart() {
   return (
     <div style={{ maxWidth: "400px" }}>

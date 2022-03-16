@@ -6,13 +6,12 @@
     flex-direction: column;
 }
 
-ul,
-li {
+ul, li {
     text-align: left;
     list-style: none;
 }
 
-.message p {
+.INBOX__message p {
     max-width: 500px;
     margin-bottom: 12px;
     line-height: 24px;
@@ -22,23 +21,23 @@ li {
     color: white;
 }
 
-.message {
+.INBOX__message {
     display: flex;
     align-items: center;
+    color: white;
 }
 
 .sent {
     flex-direction: row-reverse;
 }
 
-
 .sent p {
     color: white;
-    background: #0b93f6;
+    background: #8f96e2;
     align-self: flex-end;
 }
 
 .received p {
-    background: #e5e5ea;
-    color: black;
+    background: #474646;
+    color: white;
 }

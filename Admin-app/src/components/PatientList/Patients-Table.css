@@ -1,0 +1,67 @@
+.PATIENT__table, .DOC__table {
+  margin-top: 30px;
+  background-color: var(--background-main) !important;
+  border-radius: 20px !important;
+}
+
+.PATIENT__table__label, .DOC__table__label {
+  background: inherit;
+  width: 100%;
+  height: 6.5vh;
+  padding: 22px;
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-size: 18px;
+  font-weight: 700;
+  padding-left: 40px;
+}
+
+.PATIENT__table__icon, .DOC__table__icon {
+  position: relative;
+  top: 4px;
+  right: 10px;
+}
+
+.PATIENT__table__header, .DOC__table__header, .ASSIGNED-DOC__header,
+ .STATUS-CARD__header, .PATIENT-STATUS-REVIEW__header, .PATIENT-SYMPTOMS__table__header{
+  color: var(--text-inactive) !important;
+  text-transform: uppercase;
+  opacity: 0.7;
+  font-weight: 900 !important;
+}
+
+.SYMPTOMS__table {
+  background: var(--background-secondary);
+  border-radius: 15px;
+  width: 55% !important;
+}
+
+.SYMPTOMS__table__data {
+  color: var(--text-primary) !important;
+  font-weight: 500 !important;
+}
+
+.PATIENT__table__data, .DOC__table__data, .PATIENT-SYMPTOMS__table__data {
+  color: var(--text-primary) !important;
+  font-weight: 500 !important;
+  font-size: 1rem !important;
+}
+
+::selection {
+  color: var(--primary-main);
+  background: transparent;
+}
+
+.PATIENT__table__name {
+  color: var(--text-primary) !important;
+  font-weight: 500 !important;
+  font-size: 1rem !important;
+}
+
+.PATIENT__table__name:hover {
+  color: var(--primary-main) !important;
+}
+
+.PATIENT__reviewed-status {
+  background: rgb(148, 155, 226, 0.2);
+}

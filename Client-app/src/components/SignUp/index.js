@@ -1,4 +1,7 @@
-import * as React from "react";
+/**
+ * @fileoverview This component displays & handles the login/signup form.
+ *
+ */
 import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -27,29 +30,31 @@ import { Navigate } from "react-router-dom";
 import Modal from "@mui/material/Modal";
 import { createTheme } from "@material-ui/core/styles";
 import { inputLabelClasses } from "@mui/material/InputLabel";
-import { createImmutableStateInvariantMiddleware } from "@reduxjs/toolkit";
+import "./SignUp.css";
 
-const style = {
+const styleForModal = {
   position: "absolute",
-  top: "30%",
+  top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 500,
+  width: 400,
   bgcolor: "var(--background-main)",
-  borderRadius: "10px",
-  border: "1px solid var(--info-border)",
+  border: "2px solid #000",
   boxShadow: 24,
-  color: "var(--info-main)",
   p: 4,
 };
 
+/**
+ * Return copyright info
+ * @param  {} props
+ */
 function Copyright(props) {
   return (
     <Typography variant="body2" align="center" {...props}>
       {"Copyright © "}
       <Link
         color="inherit"
-        className="link-sign"
+        className="SIGN-UP__link"
         sx={{ fontSize: "12px", textDecoration: "none" }}
       >
         Your Website
@@ -80,10 +85,13 @@ const theme = createTheme({
   },
 });
 
-// This function is responsible for the signup component which also communicates with the server and displays relevent error messages if necessary.
-// Next, it will make a document in the collection of client on the server with all the necessary information 
+/**
+ * This function is responsible for the signup component which also communicates with the server and displays relevent error messages if necessary.
+ * Next, it will make a document in the collection of client on the server with all the necessary information
+ *
+ * @param  {} props
+ */
 export default function SignUp(props) {
-  console.log(inputLabelClasses);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [address, setAddress] = useState("");
@@ -93,48 +101,67 @@ export default function SignUp(props) {
   const [dob, setDOB] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [open, setOpen] = React.useState(false);
-  const [open2, setOpen2] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [error1, setError1] = useState(false);
+  const [error2, setError2] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const handleClose = () => {
     setOpen(false);
-    setOpen2(false);
+    setError1(false);
+    setError2(false);
   };
 
   const [user, loading] = useAuthState(auth);
 
-  // This function is responsible for creating a new document in the admin collection with the information of the user who has signed up. 
-  // This also ensures that the email is not being reused by the client or admin collection
-  // Lastly, the createUserWithEmailAndPassword function will create the database authentication
+  /**
+   * This function is responsible for creating a new document in the admin collection with the information of the user who has signed up.
+   * This also ensures that the email is not being reused by the client or admin collection
+   * Lastly, the createUserWithEmailAndPassword function will create the database authentication
+   *
+   * @param  {clickEvent} event
+   */
   const handleSubmit = async (event) => {
     event.preventDefault();
     const docRef = doc(db, "Admin", email);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
+      setError1(true);
       setOpen(true);
     } else {
-      const dobValue = dob.$D + "/" + (dob.$M + 1) + "/" + dob.$y;
-      await setDoc(doc(db, "Client", email), {
-        firstName: firstName,
-        lastName: lastName,
-        address: address,
-        postalCode: postalCode,
-        city: city,
-        province: province,
-        dob: dobValue,
-        email: email,
-      });
-      createUserWithEmailAndPassword(auth, email, password).catch((error) => {
-        setErrorMsg(error.message);
-        setOpen2(true);
-      });
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(async () => {
+          const dobValue = dob.$D + "/" + (dob.$M + 1) + "/" + dob.$y;
+          await setDoc(doc(db, "Client", email), {
+            firstName: firstName,
+            lastName: lastName,
+            address: address,
+            postalCode: postalCode,
+            city: city,
+            province: province,
+            dob: dobValue,
+            email: email,
+          });
+        })
+        .catch((error) => {
+          setErrorMsg(error.message);
+          setError2(true);
+          setOpen(true);
+        });
     }
   };
-
+  /**
+   * Check if the page is still loading
+   * @param  {boolean} loading
+   */
   if (loading) {
     return <p>Loading...</p>;
   }
+
+  /**
+   * Navigte user to the dashboard if the user is already logged in
+   * @param  {Object} user
+   */
   if (user) {
     return (
       <div>
@@ -143,6 +170,7 @@ export default function SignUp(props) {
       </div>
     );
   }
+
   return (
     <ThemeProvider theme={theme}>
       <Container
@@ -257,7 +285,6 @@ export default function SignUp(props) {
                 <FormControl fullWidth>
                   <TextField
                     required
-                    labelId="province"
                     id="province"
                     label="Province"
                     value={province}
@@ -342,7 +369,7 @@ export default function SignUp(props) {
                   required
                   control={
                     <Checkbox
-                      className="signup-checkbox"
+                      className="SIGN-UP__checkbox"
                       value="allowExtraEmails"
                     />
                   }
@@ -403,43 +430,29 @@ export default function SignUp(props) {
             >
               Sign Up
             </Button>
-            {/* This model is used to display an error message for using the same email in the admin application as the client application  */}
+            {/* This model is used to display an error message for using the same email in the client application as the admin application 
+            and pertaining to the database such as wrong email or wrong password */}
             <Modal
               open={open}
               onClose={handleClose}
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
             >
-              <Box sx={style}>
+              <Box sx={styleForModal}>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
                   Error
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  This email has already been used for the Admin Application.
-                  Please use another email.
-                </Typography>
-              </Box>
-            </Modal>
-            {/* This model is used to display an error messages pertaining to the database such as wrong email or wrong password  */}
-            <Modal
-              open={open2}
-              onClose={handleClose}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              <Box sx={style}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                  Error
-                </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  {errorMsg}
+                  {error1 &&
+                    "This email has already been used for the Admin Application. Please use another email."}
+                  {error2 && errorMsg}
                 </Typography>
               </Box>
             </Modal>
             <Grid container justifyContent="center">
               <Grid item>
                 <Link
-                  className="link-sign"
+                  className="SIGN-UP__link"
                   sx={{ textDecoration: "none", color: "var(--primary-main)" }}
                   href="/signin"
                   variant="body2"

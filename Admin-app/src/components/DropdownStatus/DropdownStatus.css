@@ -1,25 +1,35 @@
-.label-positive {
-    text-transform: uppercase;
-    color: var(--secondary-main);
-    background: rgba(58, 74, 240, 0.18);
-    border: 1px solid rgba(109, 120, 236, 0.3);
-    font-size: 0.7rem;
-    font-weight: 700;
-    border-radius: 0.375rem;
-    padding-bottom: 0.3rem !important;
-    padding: 0.55em 0.9em;
-    margin: auto;
+.PATIENT__label-positive {
+  text-transform: uppercase;
+  color: rgb(241, 11, 11);
+  border: 1px solid rgb(241, 11, 11, 0.8);
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 0.375rem;
+  padding-bottom: 0.3rem !important;
+  padding: 0.55em 0.9em;
+  margin: auto;
 }
 
-.label-negative {
-    text-transform: uppercase;
-    color: var(--primary-main);
-    background: rgba(7, 181, 235, 0.18);
-    border: 1px solid rgba(74, 207, 248, 0.3);
-    font-size: 0.7rem;
-    font-weight: 700;
-    border-radius: 0.375rem;
-    padding-bottom: 0.3rem !important;
-    padding: 0.55em 0.9em;
-    margin: auto;
+.PATIENT__label-negative {
+  text-transform: uppercase;
+  color: rgb(207, 212, 218);
+  border: 1px solid rgb(207, 212, 218, 0.5);
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 0.375rem;
+  padding-bottom: 0.3rem !important;
+  padding: 0.55em 0.9em;
+  margin: auto;
+}
+
+.PATIENT__label-unconfirmed {
+  text-transform: uppercase;
+  color: var(--success-main);
+  border: 1px solid rgb(156, 241, 147, 0.5);
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 0.375rem;
+  padding-bottom: 0.3rem !important;
+  padding: 0.55em 0.9em;
+  margin: auto;
 }
