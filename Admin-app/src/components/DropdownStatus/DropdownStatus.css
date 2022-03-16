@@ -1,4 +1,4 @@
-.label-positive {
+.PATIENT__label-positive {
   text-transform: uppercase;
   color: rgb(241, 11, 11);
   border: 1px solid rgb(241, 11, 11, 0.8);
@@ -10,7 +10,7 @@
   margin: auto;
 }
 
-.label-negative {
+.PATIENT__label-negative {
   text-transform: uppercase;
   color: rgb(207, 212, 218);
   border: 1px solid rgb(207, 212, 218, 0.5);
@@ -22,7 +22,7 @@
   margin: auto;
 }
 
-.label-unconfirmed {
+.PATIENT__label-unconfirmed {
   text-transform: uppercase;
   color: var(--success-main);
   border: 1px solid rgb(156, 241, 147, 0.5);

@@ -2,7 +2,6 @@
  * @fileoverview This component takes care of the sign in  function.
  *
  */
-import * as React from "react";
 import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -27,28 +26,14 @@ import { createTheme } from "@material-ui/core/styles";
 import { inputLabelClasses } from "@mui/material/InputLabel";
 import "./../SignUp/SignUp.css";
 
-const style = {
+const styleForModal = {
   position: "absolute",
-  top: "30%",
+  top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 500,
-  bgcolor: "var(--background-main)",
-  borderRadius: "10px",
-  border: "1px solid var(--info-border)",
-  boxShadow: 24,
-  color: "var(--info-main)",
-  p: 4,
-};
-
-const styleForModal = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
   width: 400,
   bgcolor: "var(--background-main)",
-  border: '2px solid #000',
+  border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
@@ -58,7 +43,7 @@ function Copyright(props) {
     <Typography variant="body2" align="center" {...props}>
       {"Copyright © "}
       <Link
-        className="link-sign"
+        className="SIGN-IN__link"
         sx={{ fontSize: "12px", textDecoration: "none" }}
         color="inherit"
       >
@@ -224,15 +209,17 @@ export default function SignIn() {
                   Error
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  {error1 && "This email is registered with the Client application."}
-                  {error2 && "Your password or email is incorrect. Please try again!"}
+                  {error1 &&
+                    "This email is registered with the Client application."}
+                  {error2 &&
+                    "Your password or email is incorrect. Please try again!"}
                 </Typography>
               </Box>
             </Modal>
             <Grid container>
               <Grid item xs>
                 <Link
-                  className="link-sign"
+                  className="SIGN-IN__link"
                   sx={{ color: "var(--primary-main)", textDecoration: "none" }}
                   href="#"
                   variant="body2"
@@ -242,7 +229,7 @@ export default function SignIn() {
               </Grid>
               <Grid item>
                 <Link
-                  className="link-sign"
+                  className="SIGN-IN__link"
                   sx={{ color: "var(--primary-main)", textDecoration: "none" }}
                   href="/signup"
                   variant="body2"

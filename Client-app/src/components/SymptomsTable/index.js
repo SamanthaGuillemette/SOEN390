@@ -2,7 +2,6 @@
  * @fileoverview This component displays the symptoms table.
  *
  */
-import * as React from "react";
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -46,14 +45,14 @@ function SymptomsTable() {
           <TableRow>
             {/* First column header */}
             <TableCell
-              className="header"
+              className="SYMPTOMS__table__header"
               sx={{ borderColor: "var(--secondary-light)" }}
             >
               Date of Contact
             </TableCell>
             {/* Second column header */}
             <TableCell
-              className="header"
+              className="SYMPTOMS__table__header"
               sx={{ borderColor: "var(--secondary-light)" }}
               align="right"
             >
@@ -66,7 +65,7 @@ function SymptomsTable() {
           {rows.map((row, index) => (
             <TableRow key={index}>
               <TableCell
-                className="data"
+                className="SYMPTOMS__table__data"
                 sx={{ borderColor: "var(--primary-light)" }}
                 component="th"
                 scope="row"
@@ -74,7 +73,7 @@ function SymptomsTable() {
                 {row.symptomDate}
               </TableCell>
               <TableCell
-                className="data"
+                className="SYMPTOMS__table__data"
                 sx={{ borderColor: "var(--primary-light)" }}
                 style={{ width: 160 }}
                 align="right"
@@ -87,13 +86,11 @@ function SymptomsTable() {
         <TableFooter>
           <TableRow>
             <TableCell
-              className="footer"
               sx={{ backgroundColor: "var(--background-main)" }}
               component="th"
               scope="row"
             ></TableCell>
             <TableCell
-              className="footer"
               sx={{ backgroundColor: "var(--background-main)" }}
               style={{ width: 160 }}
               align="right"

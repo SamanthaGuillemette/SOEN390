@@ -3,7 +3,6 @@
  *
  */
 import "./PatientProfile.css";
-import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -102,7 +101,7 @@ function PatientProfile() {
   // reviewed status with DB
   function onReviewedClick(id)
   {
-    if (checked == true) {
+    if (checked === true) {
       setReviewingStatus("Not Completed");
       setChecked(false);
     } else {
@@ -169,7 +168,7 @@ function PatientProfile() {
             <Avatar id="avatar" src={patientInfo && patientInfo.profileImage} />
             <CardContent>
               <Typography
-                className="profile-name"
+                className="PATIENT-profile__name"
                 gutterBottom
                 variant="button"
                 fontSize="1.2rem"
@@ -177,7 +176,7 @@ function PatientProfile() {
               >
                 {patientInfo && patientInfo.name}
               </Typography>
-              <Typography className="avatar-text" variant="body2">
+              <Typography className="PATIENT-profile__info" variant="body2">
                 <br></br>Age: {patientInfo && getAge(patientInfo.dob)}
                 <br></br>Birthday: {patientInfo && patientInfo.dob}
                 <br></br>Address: {patientInfo && patientInfo.address}
@@ -201,12 +200,12 @@ function PatientProfile() {
           <Card
             data-testid="card-2"
             sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }}
-            className={priorityFlag ? "status-card clicked" : "status-card"}
+            className={priorityFlag ? "PATIENT__status clicked" : "PATIENT__status__card"}
           >
             <CardActionArea>
               <CardContent>
                 <Typography
-                  className="header"
+                  className="STATUS-CARD__header"
                   gutterBottom
                   variant="button"
                   component="div"
@@ -218,7 +217,7 @@ function PatientProfile() {
                       onFlagClick(id);
                     }}
                     className={
-                      priorityFlag ? "priority-flag clicked" : "priority-flag"
+                      priorityFlag ? "PATIENT__priority-flag clicked" : "PATIENT__priority-flag"
                     }
                   ></FlagIcon>
                   <br></br>
@@ -232,13 +231,13 @@ function PatientProfile() {
                 >
                   <DropdownStatus patientInfo={patientInfo} />
                   <Item
-                    className="profile-data"
+                    className="PATIENT-PROFILE__data"
                     sx={{ bgcolor: "inherit", boxShadow: "none" }}
                   >
                     Temperature: {patientInfo && patientInfo.temperature} °C
                   </Item>
                   <Item
-                    className="profile-data"
+                    className="PATIENT-PROFILE__data"
                     sx={{ bgcolor: "inherit", boxShadow: "none" }}
                   >
                     Weight: {patientInfo && patientInfo.weight} lbs
@@ -259,14 +258,14 @@ function PatientProfile() {
               <CardActionArea>
                 <CardContent>
                   <Typography
-                    className="header"
+                    className="ASSIGNED-DOC__header"
                     gutterBottom
                     variant="button"
                     component="div"
                   >
                     Assigned Doctor
                   </Typography>
-                  <Typography className="doctor-name" variant="body2">
+                  <Typography className="ASSIGNED-DOC__name" variant="body2">
                     {" "}
                     Name:{" "}
                   </Typography>
@@ -284,14 +283,14 @@ function PatientProfile() {
               <CardActionArea>
                 <CardContent>
                   <Typography
-                    className="header"
+                    className="PATIENT-STATUS-REVIEW__header"
                     gutterBottom
                     variant="button"
                     component="div"
                   >
                     Status Review
                   </Typography>
-                  <Typography className="profile-data" variant="body2">
+                  <Typography className="PATIENT-STATUS-REVIEW__data" variant="body2">
                     Review Completed: {reviewingStatus}
                     <Checkbox checked={checked} size="small" style={{ color: "var(--text-primary)" }}
                     onClick={() => {( onReviewedClick(id));}}
@@ -311,7 +310,7 @@ function PatientProfile() {
           sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }}
           component={Paper}
         >
-          <h5 className="symptomsTitle">
+          <h5 className="PATIENT-SYMPTOMS__table__label">
             <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SYMPTOM DETAILS
             <Button id="addButton">
@@ -324,55 +323,55 @@ function PatientProfile() {
             <TableHead>
               <TableRow>
                 <TableCell
-                  className="header"
+                  className="PATIENT-SYMPTOMS__table__header"
                   sx={{ borderColor: "var(--background-secondary)" }}
                 >
                   Date
                 </TableCell>
                 <TableCell
-                  className="header"
+                  className="PATIENT-SYMPTOMS__table__header"
                   sx={{ borderColor: "var(--background-secondary)" }}
                   align="right"
                 >
                   Fever
                 </TableCell>
                 <TableCell
-                  className="header"
+                  className="PATIENT-SYMPTOMS__table__header"
                   sx={{ borderColor: "var(--background-secondary)" }}
                   align="right"
                 >
                   Cough
                 </TableCell>
                 <TableCell
-                  className="header"
+                  className="PATIENT-SYMPTOMS__table__header"
                   sx={{ borderColor: "var(--background-secondary)" }}
                   align="right"
                 >
                   Runny Nose
                 </TableCell>
                 <TableCell
-                  className="header"
+                  className="PATIENT-SYMPTOMS__table__header"
                   sx={{ borderColor: "var(--background-secondary)" }}
                   align="right"
                 >
                   Muscle Ache
                 </TableCell>
                 <TableCell
-                  className="header"
+                  className="PATIENT-SYMPTOMS__table__header"
                   sx={{ borderColor: "var(--background-secondary)" }}
                   align="right"
                 >
                   Tiredness
                 </TableCell>
                 <TableCell
-                  className="header"
+                  className="PATIENT-SYMPTOMS__table__header"
                   sx={{ borderColor: "var(--background-secondary)" }}
                   align="right"
                 >
                   Smell Loss
                 </TableCell>
                 <TableCell
-                  className="header"
+                  className="PATIENT-SYMPTOMS__table__header"
                   sx={{ borderColor: "var(--background-secondary)" }}
                   align="right"
                 >
@@ -387,7 +386,7 @@ function PatientProfile() {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell
-                    className="data"
+                    className="PATIENT-SYMPTOMS__table__data"
                     sx={{ borderColor: "var(--background-secondary)" }}
                     component="th"
                     scope="row"
@@ -395,49 +394,49 @@ function PatientProfile() {
                     {row.Date}
                   </TableCell>
                   <TableCell
-                    className="data"
+                    className="PATIENT-SYMPTOMS__table__data"
                     sx={{ borderColor: "var(--background-secondary)" }}
                     align="right"
                   >
                     {row.Fever}
                   </TableCell>
                   <TableCell
-                    className="data"
+                    className="PATIENT-SYMPTOMS__table__data"
                     sx={{ borderColor: "var(--background-secondary)" }}
                     align="right"
                   >
                     {row.Cough}
                   </TableCell>
                   <TableCell
-                    className="data"
+                    className="PATIENT-SYMPTOMS__table__data"
                     sx={{ borderColor: "var(--background-secondary)" }}
                     align="right"
                   >
                     {row.RunnyNose}
                   </TableCell>
                   <TableCell
-                    className="data"
+                    className="PATIENT-SYMPTOMS__table__data"
                     sx={{ borderColor: "var(--background-secondary)" }}
                     align="right"
                   >
                     {row.MuscleAche}
                   </TableCell>
                   <TableCell
-                    className="data"
+                    className="PATIENT-SYMPTOMS__table__data"
                     sx={{ borderColor: "var(--background-secondary)" }}
                     align="right"
                   >
                     {row.Tiredness}
                   </TableCell>
                   <TableCell
-                    className="data"
+                    className="PATIENT-SYMPTOMS__table__data"
                     sx={{ borderColor: "var(--background-secondary)" }}
                     align="right"
                   >
                     {row.SmellLoss}
                   </TableCell>
                   <TableCell
-                    className="data"
+                    className="PATIENT-SYMPTOMS__table__data"
                     sx={{ borderColor: "var(--background-secondary)" }}
                     align="right"
                   >

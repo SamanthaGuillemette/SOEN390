@@ -10,7 +10,6 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import CssBaseline from "@mui/material/CssBaseline";
 import "./QR.css";
 
 const QR = () => {
@@ -23,9 +22,24 @@ const QR = () => {
 
   return (
     <>
+<<<<<<< HEAD
       <div className="container">
         <Card className="QR-box">
           <CardContent
+=======
+      <div className="QR__container">
+      <Card className="QR-box">
+        <CardContent
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            p: "30px",
+            mb: "20px",
+          }}
+        >
+          <Typography
+>>>>>>> develop
             sx={{
               display: "flex",
               flexDirection: "column",

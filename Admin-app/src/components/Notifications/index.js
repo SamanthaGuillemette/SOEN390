@@ -19,8 +19,8 @@ import "./Notifications.css";
 const Notifications = () => {
     return (
         <>
-            <div className="admin-notifications-container">
-                <Card className="admin-notifications-box">
+            <div className="ADMIN-NOTIFICATIONS__container">
+                <Card className="ADMIN-NOTIFICATIONS__box">
                     <CardContent
                         sx={{
                           display: "flex",
@@ -58,7 +58,7 @@ const Notifications = () => {
                                     >
                                         <b>Status Update</b>
                                     </Typography>
-                                    <CloseIcon className="notifications-closingIcon"/>
+                                    <CloseIcon className="NOTIFICATIONS__closingIcon"/>
                                 </Box>
                                 <Typography
                                     style={{
@@ -75,6 +75,7 @@ const Notifications = () => {
                                         marginBottom: '30px'
                                     }}
                                     color="#949be2"
+                                    data-testid="notification-statusUpdate"
                                 >
                                     22 March, 2022. At 5:50 pm.
                                 </Typography>
@@ -99,7 +100,7 @@ const Notifications = () => {
                                     >
                                         <b>New Case Reported</b>
                                     </Typography>
-                                    <CloseIcon className="notifications-closingIcon " />
+                                    <CloseIcon className="NOTIFICATIONS__closingIcon " />
                                 </Box>
                                 <Typography
                                     style={{
@@ -140,7 +141,7 @@ const Notifications = () => {
                                     >
                                         <b>Urgent Case</b>
                                     </Typography>
-                                    <CloseIcon className="notifications-closingIcon" />
+                                    <CloseIcon className="NOTIFICATIONS__closingIcon" />
                                 </Box>
                                 <Typography
                                     style={{

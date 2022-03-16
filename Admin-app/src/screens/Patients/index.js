@@ -4,9 +4,8 @@
  */
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import DoctorList from "../../components/DoctorList/index";
-import PatientList from "../../components/PatientList/index";
-import "./Patients.css";
+import DoctorList from "../../components/DoctorList/";
+import PatientList from "../../components/PatientList/";
 
 const Patients = () => {
   return (

@@ -21,57 +21,57 @@ import "./SidebarItems.css";
  */
 export const mainListItems = (
   <div>
-    <Link className="sidebar-link" to="/">
-      <ListItem button className="sidebar-button">
+    <Link className="SIDEBAR__link" to="/">
+      <ListItem button className="SIDEBAR__button">
         <ListItemIcon>
-          <DashboardIcon className="sidebar-icon"/>
+          <DashboardIcon className="SIDEBAR__icon"/>
         </ListItemIcon>
-        <ListItemText className="sidebar-text" primary="Dashboard" />
+        <ListItemText className="SIDEBAR__text" primary="Dashboard" />
       </ListItem>
     </Link>
 
-    <Link className="sidebar-link" to="/appointments">
-      <ListItem button className="sidebar-button">
+    <Link className="SIDEBAR__link" to="/appointments">
+      <ListItem button className="SIDEBAR__button">
         <ListItemIcon>
-          <EventIcon className="sidebar-icon"/>
+          <EventIcon className="SIDEBAR__icon"/>
         </ListItemIcon>
-        <ListItemText className="sidebar-text" primary="Appointments" />
+        <ListItemText className="SIDEBAR__text" primary="Appointments" />
       </ListItem>
     </Link>
 
-    <Link className="sidebar-link" to="/patients">
-      <ListItem button className="sidebar-button">
+    <Link className="SIDEBAR__link" to="/patients">
+      <ListItem button className="SIDEBAR__button">
         <ListItemIcon>
-          <PeopleIcon className="sidebar-icon"/>
+          <PeopleIcon className="SIDEBAR__icon"/>
         </ListItemIcon>
-        <ListItemText className="sidebar-text" primary="Patients" />
+        <ListItemText className="SIDEBAR__text" primary="Patients" />
       </ListItem>
     </Link>
 
-    <Link className="sidebar-link" to="inbox">
-      <ListItem button className="sidebar-button">
+    <Link className="SIDEBAR__link" to="inbox">
+      <ListItem button className="SIDEBAR__button">
         <ListItemIcon>
-          <MailIcon className="sidebar-icon"/>
+          <MailIcon className="SIDEBAR__icon"/>
         </ListItemIcon>
-        <ListItemText className="sidebar-text" primary="Inbox" />
+        <ListItemText className="SIDEBAR__text" primary="Inbox" />
       </ListItem>
     </Link>
 
-    <Link className="sidebar-link" to="testing">
-      <ListItem button className="sidebar-button">
+    <Link className="SIDEBAR__link" to="testing">
+      <ListItem button className="SIDEBAR__button">
         <ListItemIcon>
-          <NotificationsIcon className="sidebar-icon"/>
+          <NotificationsIcon className="SIDEBAR__icon"/>
         </ListItemIcon>
-        <ListItemText className="sidebar-text" primary="Updates" />
+        <ListItemText className="SIDEBAR__text" primary="Updates" />
       </ListItem>
     </Link>
 
-    <Link className="sidebar-link" to="QR">
-      <ListItem button className="sidebar-button">
+    <Link className="SIDEBAR__link" to="QR">
+      <ListItem button className="SIDEBAR__button">
         <ListItemIcon>
-          <QrCodeIcon className="sidebar-icon"/>
+          <QrCodeIcon className="SIDEBAR__icon"/>
         </ListItemIcon>
-        <ListItemText className="sidebar-text" primary="QR Code" />
+        <ListItemText className="SIDEBAR__text" primary="QR Code" />
       </ListItem>
     </Link>
   </div>
