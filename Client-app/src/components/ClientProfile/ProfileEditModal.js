@@ -15,11 +15,22 @@ import DatePicker from "@mui/lab/DatePicker";
 import AdapterDateFns from "@mui/lab/AdapterDayjs";
 import { db } from "../../backend/firebase";
 import { doc, setDoc } from "firebase/firestore";
-import { inputLabelClasses } from "@mui/material/InputLabel";
 import FormIcon from "../../assets/form.svg";
 import "./ClientProfile.css";
 import { useSelector } from "react-redux";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import { createTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@mui/material/styles";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  root: {
+    // input label when focused
+    "& label.Mui-focused": {
+      color: "var(--primary-main)"
+    },
+  }
+});
 
 const style = {
   position: "absolute",
@@ -28,7 +39,6 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: "80%",
   height: "60vh",
-  //bgcolor: "#0b0b0b",
   bgcolor: "var(--background-secondary)",
   boxShadow: "0px 0px 2px 2px var(--background-secondary)",
   p: 3,
@@ -36,7 +46,31 @@ const style = {
   borderRadius: "10px",
 };
 
+const theme = createTheme({
+  palette: {
+    text: {
+      primary: "#ffffff",
+    },
+  },
+  components: {
+    MuiIconButton: {
+      styleOverrides: {
+        sizeMedium: {
+          color: "var(--text-inactive)",
+        },
+        root: {
+          "&.Mui-focused": {
+            color: 'yellow',
+          },
+        }
+      },
+    },
+  },
+});
+
 export default function BasicModal() {
+  const classes = useStyles();
+
   // Pull 'userEmail' out from the centralized store
   const userEmail = useSelector((state) => state.auth.userEmail);
 
@@ -136,7 +170,7 @@ export default function BasicModal() {
   };
 
   return (
-    <div>
+    <ThemeProvider theme={theme}>
       <Fab
         onClick={handleOpen}
         color="primary"
@@ -174,13 +208,17 @@ export default function BasicModal() {
                 id="profileImage"
                 label="Profile Photo"
                 value={profileImage}
+                className={classes.root}
                 onChange={(e) => setProfileImage(e.target.value)}
+                sx={{
+                  input: {
+                    background: "#262626",
+                    borderRadius: "5px",
+                  }
+                }}
                 InputLabelProps={{
                   sx: {
                     color: "var(--text-primary)",
-                    [`&.${inputLabelClasses.shrink}`]: {
-                      color: "#e0e4e4",
-                    },
                   },
                 }}
               />
@@ -193,13 +231,17 @@ export default function BasicModal() {
                 id="firstName"
                 label="First Name"
                 value={firstName}
+                className={classes.root}
                 onChange={(e) => setFirstName(e.target.value)}
+                sx={{
+                  input: {
+                    background: "#262626",
+                    borderRadius: "5px",
+                  }
+                }}
                 InputLabelProps={{
                   sx: {
                     color: "var(--text-primary)",
-                    [`&.${inputLabelClasses.shrink}`]: {
-                      color: "#e0e4e4",
-                    },
                   },
                 }}
               />
@@ -212,13 +254,17 @@ export default function BasicModal() {
                 name="lastName"
                 autoComplete="family-name"
                 value={lastName}
+                className={classes.root}
                 onChange={(e) => setLastName(e.target.value)}
+                sx={{
+                  input: {
+                    background: "#262626",
+                    borderRadius: "5px",
+                  }
+                }}
                 InputLabelProps={{
                   sx: {
                     color: "var(--text-primary)",
-                    [`&.${inputLabelClasses.shrink}`]: {
-                      color: "#e0e4e4",
-                    },
                   },
                 }}
               />
@@ -231,13 +277,17 @@ export default function BasicModal() {
                 name="Address"
                 autoComplete="street-address"
                 value={address}
+                className={classes.root}
                 onChange={(e) => setAddress(e.target.value)}
+                sx={{
+                  input: {
+                    background: "#262626",
+                    borderRadius: "5px",
+                  }
+                }}
                 InputLabelProps={{
                   sx: {
                     color: "var(--text-primary)",
-                    [`&.${inputLabelClasses.shrink}`]: {
-                      color: "#e0e4e4",
-                    },
                   },
                 }}
               />
@@ -249,15 +299,20 @@ export default function BasicModal() {
                     label="Date of Birth"
                     value={dob}
                     onChange={handleUpdateDOB}
-                    renderInput={(params) => <TextField {...params} />}
-                    InputLabelProps={{
-                      sx: {
-                        color: "var(--text-primary)",
-                        [`&.${inputLabelClasses.shrink}`]: {
-                          color: "#e0e4e4",
+                    renderInput={(params) => <TextField 
+                      className={classes.root}
+                      sx={{
+                        input: {
+                          background: "#262626",
+                          borderRadius: "5px",
+                        }
+                      }}
+                      InputLabelProps={{
+                        sx: {
+                          color: "var(--text-primary)",
                         },
-                      },
-                    }}
+                      }}
+                      {...params} />}
                   />
                 </Stack>
               </LocalizationProvider>
@@ -270,13 +325,17 @@ export default function BasicModal() {
                 name="City"
                 autoComplete="address-level3"
                 value={city}
+                className={classes.root}
                 onChange={(e) => setCity(e.target.value)}
+                sx={{
+                  input: {
+                    background: "#262626",
+                    borderRadius: "5px",
+                  }
+                }}
                 InputLabelProps={{
                   sx: {
                     color: "var(--text-primary)",
-                    [`&.${inputLabelClasses.shrink}`]: {
-                      color: "#e0e4e4",
-                    },
                   },
                 }}
               />
@@ -288,16 +347,20 @@ export default function BasicModal() {
                   id="province"
                   label="Province"
                   value={province}
+                  className={classes.root}
                   onChange={(e) => setProvince(e.target.value)}
+                  select
+                  SelectProps={{
+                      sx: {
+                        background: "#262626",
+                        color: "var(--text-primary)"
+                    }
+                  }}
                   InputLabelProps={{
                     sx: {
                       color: "var(--text-primary)",
-                      [`&.${inputLabelClasses.shrink}`]: {
-                        color: "#e0e4e4",
-                      },
                     },
                   }}
-                  select
                 >
                   <MenuItem value={"Alberta"}>Alberta</MenuItem>
                   <MenuItem value={"British Columbia"}>
@@ -326,13 +389,17 @@ export default function BasicModal() {
                 name="Postal Code"
                 autoComplete="postal-code"
                 value={postalCode}
+                className={classes.root}
                 onChange={(e) => setPostalCode(e.target.value)}
+                sx={{
+                  input: {
+                    background: "#262626",
+                    borderRadius: "5px",
+                  }
+                }}
                 InputLabelProps={{
                   sx: {
                     color: "var(--text-primary)",
-                    [`&.${inputLabelClasses.shrink}`]: {
-                      color: "#e0e4e4",
-                    },
                   },
                 }}
               />
@@ -365,6 +432,6 @@ export default function BasicModal() {
           </Button>
         </Box>
       </Modal>
-    </div>
+    </ThemeProvider>
   );
 }
