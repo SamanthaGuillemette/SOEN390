@@ -120,10 +120,6 @@ const Chat = () => {
   return (
     <>
       <Box
-        sx={{
-          padding: 2,
-          backgroundColor: "",
-        }}
         onSubmit={handleSubmit}
         noValidate
         component="form"

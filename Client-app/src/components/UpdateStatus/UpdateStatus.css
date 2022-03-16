@@ -5,7 +5,6 @@
 }
 
 .header-statusModal {
-  margin-top: -10px !important;
   text-align: center;
   font-weight: bold !important;
   color: var(--text-primary) !important;
@@ -30,7 +29,6 @@
 }
 
 .STATUS__box {
-  margin-top: 30px !important;
   background-color: var(--background-main) !important;
   border-radius: 20px !important;
 }

@@ -19,7 +19,6 @@ const Dashboard = () => {
     <>
       <Box
         sx={{
-          padding: 4,
           paddingBottom: "120px",
         }}
       >

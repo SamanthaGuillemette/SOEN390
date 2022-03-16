@@ -13,3 +13,9 @@
 .sidebar-button:hover .sidebar-text{
     color: var(--text-primary) !important;
 }
+
+.sidebar-button {
+    background-color: rgba(15, 15, 15, 0.8) !important;
+    border-radius: 5px !important;
+    border: 1px solid var(--background-main) !important;
+}

@@ -1,6 +1,4 @@
 import Box from "@mui/material/Box";
-import BottomNav from "../../components/BottomNav";
-import MenuAppBar from "../../components/Navbar";
 import "./Appointment.css";
 import { Button } from "@mui/material";
 import DoctorIcon from "../../assets/doctor-icon.svg";
@@ -9,7 +7,6 @@ const Appointment = () => {
   return (
     <div>
         <Box sx={{ flexGrow: 1, color: "var(--text-primary)" }}>
-          <MenuAppBar />
 
           <div className="appointment-topContainer">
             <h1 className="appointment-topTitle">Upcoming Appointment</h1>
@@ -56,7 +53,6 @@ const Appointment = () => {
               </Button>
             </div>
           </div>
-          <BottomNav />
         </Box>
     </div>
   );

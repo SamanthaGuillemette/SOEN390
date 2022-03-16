@@ -38,7 +38,7 @@ function ClientProfile() {
 
   return (
     <Box className="clientProfile-container">
-      <Grid container spacing={3} padding={5}>
+      <Grid container spacing={3}>
         <Grid item xs={12}>
           <Card>
             <Box className="clientProfile-profileCard">
