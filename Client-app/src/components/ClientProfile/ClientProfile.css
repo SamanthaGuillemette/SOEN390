@@ -125,24 +125,6 @@
   transform: translateY(2px);
 }
 
-input[type="email"],
-input[type="password"],
-input[type="search"],
-input[type="text"],
-div#province {
-  color: var(--text-primary);
-  background-color: #262626;
-}
-
-/* Ugly fix to override MUI's label */
-.css-exdfv2-MuiFormLabel-root-MuiInputLabel-root,
-.MuiPickersDay-root.MuiButtonBase-root,
-.MuiInputLabel-root.MuiInputLabel-formControl,
-li.MuiMenuItem-root.MuiMenuItem-gutters.MuiButtonBase-root.css-10zqpw5-MuiButtonBase-root-MuiMenuItem-root,
-.css-1v994a0 {
-  color: var(--text-primary) !important;
-}
-
 .PATIENT__label-positive {
   text-transform: uppercase;
   color: rgb(241, 11, 11);

@@ -27,7 +27,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
   MuiDrawer: {
-    background: "rgb(23, 23, 23)",
+    background: "rgba(15, 15, 15, 0.8)",
     borderRight: "1px solid rgba(74, 207, 248, 0.3)",
     borderRadius: "10px",
   },
@@ -47,13 +47,13 @@ const MenuAppBar = () => {
    */
   const list = () => (
     <Box
-      sx={{ width: 250, pt: 5, pl: 2 }}
+      sx={{ width: 250, pt: 5, pl: 2}}
       role="presentation"
       onClick={toggleDrawer}
     >
       <List>
         {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem className="sidebar-button" button key={text}>
+          <ListItem className="sidebar-button"button key={text}>
             <ListItemIcon className="sidebar-icon">
               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
             </ListItemIcon>

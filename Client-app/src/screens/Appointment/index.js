@@ -1,28 +1,12 @@
 import Box from "@mui/material/Box";
-import BottomNav from "../../components/BottomNav";
-import MenuAppBar from "../../components/Navbar";
-import { createTheme } from "@material-ui/core/styles";
-import { ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
 import "./Appointment.css";
 import { Button } from "@mui/material";
 import DoctorIcon from "../../assets/doctor-icon.svg";
 
-const theme = createTheme({
-  palette: {
-    background: {
-      default: "var(--background-secondary)",
-    },
-  },
-});
-
 const Appointment = () => {
   return (
     <div>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
         <Box sx={{ flexGrow: 1, color: "var(--text-primary)" }}>
-          <MenuAppBar />
 
           <div className="appointment-topContainer">
             <h1 className="appointment-topTitle">Upcoming Appointment</h1>
@@ -69,10 +53,7 @@ const Appointment = () => {
               </Button>
             </div>
           </div>
-
-          <BottomNav />
         </Box>
-      </ThemeProvider>
     </div>
   );
 };
