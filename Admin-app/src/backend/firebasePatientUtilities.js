@@ -137,6 +137,33 @@ const setStatus = async (patientId, status) => {
   }
 };
 
+const setRecovered = async (patientId, recovered) => {
+
+  try 
+  {
+    // Get Patient
+    const docRef = doc(db, tableName, patientId);
+    let patientInfo = await getPatient(patientId);
+
+    if (patientInfo) {
+      if (recovered != null)
+      {
+        // Update status field in Patient
+        docRef && await updateDoc(docRef, "recovered", recovered);
+      }
+    }
+
+    // Get updated patient
+    patientInfo = await getPatient(patientId);      
+
+    return patientInfo;
+  }
+  catch (error)
+  {
+    console.log("[setRecovered]" + error);  
+  }
+};
+
 /**
  * This function populates the Patient table in firebase given a JSON file
  * imported at the beginning of this file
@@ -153,5 +180,6 @@ export {
   setAssignedDoctor,
   isValidPatientId,
   toggleReviewed,
-  setStatus
+  setStatus,
+  setRecovered
 };
