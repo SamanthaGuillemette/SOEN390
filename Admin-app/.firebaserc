@@ -5,8 +5,8 @@
   "targets": {
     "covid-tracking-cfa70": {
       "hosting": {
-        "client": [
-          "client-covidtracker"
+        "admin": [
+          "admin-covidtracker"
         ]
       }
     }
