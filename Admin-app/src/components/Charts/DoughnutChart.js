@@ -4,34 +4,22 @@
  */
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
+import { useEffect, useState} from "react";
+import { getDoctors, patientLimit } from "../../backend/firebaseDoctorUtilities";
+import Typography from "@mui/material/Typography";
+import "./DoughtnutChart.css";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export const data = {
-  labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-  datasets: [
-    {
-      data: [12, 19, 3, 5, 2, 3],
-      backgroundColor: [
-        "rgba(255, 99, 132, 0.2)",
-        "rgba(54, 162, 235, 0.2)",
-        "rgba(255, 206, 86, 0.2)",
-        "rgba(75, 192, 192, 0.2)",
-        "rgba(153, 102, 255, 0.2)",
-        "rgba(255, 159, 64, 0.2)",
-      ],
-      borderColor: [
-        "rgba(255, 99, 132, 1)",
-        "rgba(54, 162, 235, 1)",
-        "rgba(255, 206, 86, 1)",
-        "rgba(75, 192, 192, 1)",
-        "rgba(153, 102, 255, 1)",
-        "rgba(255, 159, 64, 1)",
-      ],
-      borderWidth: 1,
-    },
-  ],
-};
+
+/**
+ * This function will check the capacity of the doctor.
+ *
+ * @param  {} doctor
+ */
+ function isDoctorAtFullCapacity(doctor) {
+  return doctor && doctor.treats && doctor.treats.length >= patientLimit;
+}
 
 /**
  * This component allows displaying the Doughnut. 
@@ -39,9 +27,45 @@ export const data = {
  * @returns {JSX.Element}
  */
 function DoughnutChart() {
+  const [doctorsAtCapacity, setDoctorsAtCapacity] = useState(0);
+  const [doctorsAvailable, setDoctorsAvailable] = useState(0);
+
+    /* Counting how many doctors are at full capacity and how many arent  */
+    useEffect(() => {
+      getDoctors().then((data) => {
+        data.forEach((doc) => {
+          if (!isDoctorAtFullCapacity(doc)) { /* if NOT at full capacity */
+            setDoctorsAvailable(doctorsAvailable => doctorsAvailable + 1)
+          } else {
+            setDoctorsAtCapacity(doctorsAtCapacity => doctorsAtCapacity + 1)
+          }
+        });
+      });
+  }, []);
+
+  const data = {
+    labels: [],
+    datasets: [
+      {
+        data: [doctorsAvailable, doctorsAtCapacity],
+        backgroundColor: ["#8bc3eb", "rgb(5, 132, 190)"],
+        borderColor: ["#1e1e1e"],
+        borderWidth: 3,
+        cutout: '80%',
+        borderRadius: 15,
+        hoverBackgroundColor: ["#8bc3eb", "rgb(5, 132, 190)"],
+      },
+    ],
+  };
+
   return (
-    <div style={{ maxWidth: "400px" }}>
-      <Doughnut data={data} />
+    <div style={{ maxWidth: "400px"}}>
+      <Typography sx={{fontSize: "18px", color: "var(--text-primary)", fontWeight: "bold", textAlign: "center"}}>Doctors Available vs Unavailable</Typography>
+      <Doughnut data={data}/>
+      <Typography sx={{textAlign: "center", mt: 1}}>
+        <Typography className="DASHBOARD__chart__label-unavail">Unavailable</Typography>
+        <Typography className="DASHBOARD__chart__label-avail">Available</Typography>
+      </Typography>
     </div>
   );
 }

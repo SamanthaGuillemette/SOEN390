@@ -35,7 +35,7 @@ const Dashboard = () => {
             </Card>
           </Grid>
           <Grid item xs={12} md={4}>
-            <Card className="STAT_item" sx={{background: 'var(--gradient-to-right-btm)'}}>
+            <Card className="STAT_item" sx={{background: 'inherit', boxShadow: "none"}}>
               <DoughnutChart />
             </Card>
           </Grid>
