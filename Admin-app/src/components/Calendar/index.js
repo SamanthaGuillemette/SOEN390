@@ -2,7 +2,6 @@
  * @fileoverview This component takes care of the Calender function.
  *
  */
-
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
@@ -12,7 +11,57 @@ import "./Calendar.css";
 import { useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../../backend/firebase";
-import { collection, doc } from "firebase/firestore";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { Button, Grid, Modal, TextField, Typography } from "@mui/material";
+import { Box } from "@mui/system";
+import { createTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@mui/material/styles";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  root: {
+    // input label when focused
+    "& label.Mui-focused": {
+      color: "var(--primary-main)",
+    },
+  },
+});
+
+const theme = createTheme({
+  palette: {
+    text: {
+      primary: "#ffffff",
+    },
+  },
+  components: {
+    MuiIconButton: {
+      styleOverrides: {
+        sizeMedium: {
+          color: "var(--text-inactive)",
+        },
+        root: {
+          "&.Mui-focused": {
+            color: "yellow",
+          },
+        },
+      },
+    },
+  },
+});
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "80%",
+  height: "60vh",
+  bgcolor: "var(--background-secondary)",
+  boxShadow: "0px 0px 2px 2px var(--background-secondary)",
+  p: 3,
+  overflowY: "scroll",
+  borderRadius: "10px",
+};
 
 const events = [
   {
@@ -51,58 +100,47 @@ const Calendar = () => {
   const [finish, setFinish] = useState(false);
 
   const calendarRef = useRef();
+  const classes = useStyles();
 
   const [user] = useAuthState(auth);
   const doctorEmail = user?.email;
   const clientEmail = "client.quang@gmail.com";
 
-  // Get the client's reference via the userEmail (query the database)
-  // const appointmentRef = collection(
-  //   db,
-  //   `Appointment/${doctorEmail}&${clientEmail}`
-  // );
-
   const [modalOpen, setModalOpen] = useState(false);
 
   // const handleDateClick = (event) => {
   //   console.log("Date clicked: ", event);
-  //   alert("Date selected!");
-  //   console.log(event.date);
-  //   console.log(event.dateStr);
-  //   // alert("selected " + event.startStr + " to " + event.endStr);
-  //   const title = prompt("Appointment title: ");
-  //   const details = prompt("Appointment description: ");
-  //   // if (title != null) {
-  //   setTitle(title);
-  //   setDetails(details);
-  //   setStart(event.dateStr);
-  //   // } else {
-  //   //   console.log("nothing");
-  //   // }
-  //   console.log(title);
-  //   console.log(details);
-  //   console.log(start);
   // };
 
   const handleSelectedDate = (event) => {
-    console.log("Selected date: ", event);
+    // console.log("Selected date: ", event);
 
-    let title = prompt("Appointment title: ");
-    let description = prompt("Appointment description: ");
-    let location = prompt("Appointment location: ");
-    let note = prompt("Appointment note: ");
+    // Save the start & end date user just selected first
+    setStartDate(event?.startStr);
+    setEndDate(event?.endStr);
 
-    // Only set other fields if title is not empty
-    if (title != null) {
-      setTitle(title);
-      setDescription(description);
-      setStartDate(event?.startStr);
-      setEndDate(event?.endStr);
-      setLocation(location);
-      setNote(note);
-    } else {
-      alert("Failed to create new event!");
-    }
+    // Open event modal to save the rest of the info
+    setModalOpen(true);
+  };
+
+  const handleCreateAppointment = async (event) => {
+    event.preventDefault();
+
+    // Submit appointment to database
+    await setDoc(doc(db, "Appointment", `${doctorEmail}&${clientEmail}`), {
+      startDate: startDate,
+      endDate: endDate,
+      title: title,
+      description: description,
+      location: location,
+      note: note,
+    });
+
+    // Close the modal after user create the event
+    setModalOpen(false);
+
+    // Refresh page after user submit the form
+    window.location.reload();
   };
 
   const handleEventClick = (event) => {
@@ -111,28 +149,159 @@ const Calendar = () => {
   };
 
   return (
-    <FullCalendar
-      plugins={[
-        dayGridPlugin,
-        interactionPlugin,
-        timeGridPlugin,
-        resourceTimeGridPlugin,
-      ]}
-      initialView="dayGridMonth"
-      displayEventTime={true}
-      headerToolbar={{
-        left: "prev,next today",
-        center: "title",
-        right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
-      }}
-      schedulerLicenseKey="GPL-My-Project-Is-Open-Source"
-      ref={calendarRef}
-      selectable={true}
-      events={events}
-      eventClick={handleEventClick}
-      // dateClick={handleDateClick}
-      select={handleSelectedDate}
-    />
+    <>
+      <FullCalendar
+        plugins={[
+          dayGridPlugin,
+          interactionPlugin,
+          timeGridPlugin,
+          resourceTimeGridPlugin,
+        ]}
+        initialView="dayGridMonth"
+        displayEventTime={true}
+        headerToolbar={{
+          left: "prev,next today",
+          center: "title",
+          right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
+        }}
+        schedulerLicenseKey="GPL-My-Project-Is-Open-Source"
+        ref={calendarRef}
+        selectable={true}
+        events={events}
+        eventClick={handleEventClick}
+        // dateClick={handleDateClick}
+        select={handleSelectedDate}
+      />
+
+      <ThemeProvider theme={theme}>
+        <Modal
+          open={modalOpen}
+          onClose={() => {
+            setModalOpen(false);
+          }}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box
+            sx={style}
+            component="form"
+            noValidate
+            onSubmit={handleCreateAppointment}
+          >
+            <Typography variant="h4" component="h2">
+              Create new appointment
+            </Typography>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  className={classes.root}
+                  fullWidth
+                  id="title"
+                  label="Title"
+                  value={title}
+                  onChange={(e) => {
+                    setTitle(e.target.value);
+                  }}
+                  sx={{
+                    input: {
+                      background: "#262626",
+                      borderRadius: "5px",
+                    },
+                  }}
+                  InputLabelProps={{
+                    sx: {
+                      color: "var(--text-primary)",
+                    },
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  className={classes.root}
+                  fullWidth
+                  id="description"
+                  label="Description"
+                  value={description}
+                  onChange={(e) => {
+                    setDescription(e.target.value);
+                  }}
+                  sx={{
+                    input: {
+                      background: "#262626",
+                      borderRadius: "5px",
+                    },
+                  }}
+                  InputLabelProps={{
+                    sx: {
+                      color: "var(--text-primary)",
+                    },
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  className={classes.root}
+                  fullWidth
+                  id="location"
+                  label="Location"
+                  value={location}
+                  onChange={(e) => {
+                    setLocation(e.target.value);
+                  }}
+                  sx={{
+                    input: {
+                      background: "#262626",
+                      borderRadius: "5px",
+                    },
+                  }}
+                  InputLabelProps={{
+                    sx: {
+                      color: "var(--text-primary)",
+                    },
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  className={classes.root}
+                  fullWidth
+                  id="note"
+                  label="Note"
+                  value={note}
+                  onChange={(e) => {
+                    setNote(e.target.value);
+                  }}
+                  sx={{
+                    input: {
+                      background: "#262626",
+                      borderRadius: "5px",
+                    },
+                  }}
+                  InputLabelProps={{
+                    sx: {
+                      color: "var(--text-primary)",
+                    },
+                  }}
+                />
+              </Grid>
+            </Grid>
+            <Button type="submit" variant="contained" className="update-button">
+              CREATE APPOINTMENT
+            </Button>
+            <Button
+              type="submit"
+              variant="outlined"
+              className="cancel-button"
+              onClick={() => {
+                setModalOpen(false);
+              }}
+            >
+              CANCEL
+            </Button>
+          </Box>
+        </Modal>
+      </ThemeProvider>
+    </>
   );
 };
 
