@@ -96,8 +96,6 @@ const Calendar = () => {
   const [endDate, setEndDate] = useState("");
   const [location, setLocation] = useState("");
   const [note, setNote] = useState("");
-  const [confirmation, setConfirmation] = useState(false);
-  const [finish, setFinish] = useState(false);
 
   const calendarRef = useRef();
   const classes = useStyles();
@@ -127,13 +125,15 @@ const Calendar = () => {
     event.preventDefault();
 
     // Submit appointment to database
-    await setDoc(doc(db, "Appointment", `${doctorEmail}&${clientEmail}`), {
+    await setDoc(doc(db, `Appointment/${doctorEmail}&${clientEmail}`), {
       startDate: startDate,
       endDate: endDate,
       title: title,
       description: description,
       location: location,
       note: note,
+      confirmation: false,
+      finish: false,
     });
 
     // Close the modal after user create the event
