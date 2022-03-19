@@ -24,6 +24,7 @@ import { Navigate } from "react-router-dom";
 import Modal from "@mui/material/Modal";
 import { createTheme } from "@material-ui/core/styles";
 import { inputLabelClasses } from "@mui/material/InputLabel";
+import "./Signin.css";
 
 const styleForModal = {
   position: "absolute",
@@ -32,7 +33,7 @@ const styleForModal = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "var(--background-main)",
-  borderRadius: '10px',
+  borderRadius: "10px",
   border: "1px solid var(--info-border)",
   boxShadow: 24,
   color: "var(--info-main)",
