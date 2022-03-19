@@ -5,7 +5,7 @@
   align-items: center;
   background-color: var(--primary-dark);
   padding: 60px 15%;
-  border-radius: 0 0 90px 0;
+  border-radius: 8px;
   position: relative;
 }
 
@@ -19,12 +19,12 @@
 }
 
 .appointment-mainContainer {
-  padding: 50px 15%;
+  padding: 50px 10%;
 }
 
 .appointment-buttonContainer {
   margin-top: 50px;
-  margin-bottom: 100px;
+  margin-bottom: 60px;
 }
 
 .appointment-quickAccess_DoctorIcon {

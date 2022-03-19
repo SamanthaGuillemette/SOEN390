@@ -13,26 +13,28 @@ import Grid from "@mui/material/Grid";
  * @returns {JSX.Element}
  */
 
- function AppBody(props) {
-     return (
-        <Box sx={{ display: "flex" }}>
-            <Box
-            component="main"
-            sx={{
-                flexGrow: 1,
-                height: "100vh",
-                overflow: "auto",
-            }}
-            >
-            <MenuAppBar/>
-            <BottomNav/>
-            <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-                <Grid spacing={3} padding={2}>
-                {props.children}
-                </Grid>
-            </Container>
-            </Box>
-        </Box>
-     );
- }
- export default AppBody;
+function AppBody(props) {
+  return (
+    <Box sx={{ display: "flex" }}>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          // height: "100vh",
+          // overflow: "auto",
+        }}
+      >
+        <MenuAppBar />
+
+        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          <Grid spacing={3} padding={2}>
+            {props.children}
+          </Grid>
+        </Container>
+
+        <BottomNav />
+      </Box>
+    </Box>
+  );
+}
+export default AppBody;
