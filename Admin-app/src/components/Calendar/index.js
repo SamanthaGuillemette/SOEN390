@@ -10,29 +10,26 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import resourceTimeGridPlugin from "@fullcalendar/resource-timegrid";
 import "./Calendar.css";
 import { useRef, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth, db } from "../../backend/firebase";
+import { collection, doc } from "firebase/firestore";
 
 const events = [
-  { date: "2022-01-02" },
   {
-    start: "2022-01-21",
-    end: "2022-01-22",
+    title: "event 1",
+    start: "2022-03-21",
+    end: "2022-03-22",
     allDay: true,
-    HostName: "William",
+    description: "event 1 description",
+    note: "event 1 note",
   },
   {
-    start: "2022-01-19",
-    end: "2022-01-19",
+    title: "test event",
+    start: "2022-03-13",
+    end: "2022-03-14",
     allDay: true,
-  },
-  {
-    start: "2022-01-05",
-    end: "2022-01-07",
-    allDay: true,
-  },
-  {
-    start: "2022-01-13",
-    end: "2022-01-15",
-    allDay: true,
+    description: "test event description",
+    note: "test event note",
   },
 ];
 
@@ -45,48 +42,73 @@ const events = [
 
 const Calendar = () => {
   const [title, setTitle] = useState("");
-  const [details, setDetails] = useState("");
-  const [start, setStart] = useState("");
-  const [end, setEnd] = useState("");
+  const [description, setDescription] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [location, setLocation] = useState("");
+  const [note, setNote] = useState("");
+  const [confirmation, setConfirmation] = useState(false);
+  const [finish, setFinish] = useState(false);
 
   const calendarRef = useRef();
 
-  const handleDateClick = (event) => {
-    // alert("Date selected!");
-    // console.log(event.date);
-    // console.log(event.dateStr);
-    // // alert("selected " + event.startStr + " to " + event.endStr);
-    // const title = prompt("Appointment title: ");
-    // const details = prompt("Appointment description: ");
-    // // if (title != null) {
-    // setTitle(title);
-    // setDetails(details);
-    // setStart(event.dateStr);
-    // // } else {
-    // //   console.log("nothing");
-    // // }
-    // console.log(title);
-    // console.log(details);
-    // console.log(start);
-  };
+  const [user] = useAuthState(auth);
+  const doctorEmail = user?.email;
+  const clientEmail = "client.quang@gmail.com";
+
+  // Get the client's reference via the userEmail (query the database)
+  // const appointmentRef = collection(
+  //   db,
+  //   `Appointment/${doctorEmail}&${clientEmail}`
+  // );
+
+  const [modalOpen, setModalOpen] = useState(false);
+
+  // const handleDateClick = (event) => {
+  //   console.log("Date clicked: ", event);
+  //   alert("Date selected!");
+  //   console.log(event.date);
+  //   console.log(event.dateStr);
+  //   // alert("selected " + event.startStr + " to " + event.endStr);
+  //   const title = prompt("Appointment title: ");
+  //   const details = prompt("Appointment description: ");
+  //   // if (title != null) {
+  //   setTitle(title);
+  //   setDetails(details);
+  //   setStart(event.dateStr);
+  //   // } else {
+  //   //   console.log("nothing");
+  //   // }
+  //   console.log(title);
+  //   console.log(details);
+  //   console.log(start);
+  // };
 
   const handleSelectedDate = (event) => {
-    alert("selected " + event.startStr + " to " + event.endStr);
-    const title = prompt("Appointment title: ");
-    const details = prompt("Appointment description: ");
+    console.log("Selected date: ", event);
 
+    let title = prompt("Appointment title: ");
+    let description = prompt("Appointment description: ");
+    let location = prompt("Appointment location: ");
+    let note = prompt("Appointment note: ");
+
+    // Only set other fields if title is not empty
     if (title != null) {
       setTitle(title);
-      setDetails(details);
-      setStart(event.startStr);
-      setEnd(event.endStr);
+      setDescription(description);
+      setStartDate(event?.startStr);
+      setEndDate(event?.endStr);
+      setLocation(location);
+      setNote(note);
     } else {
-      console.log("No input");
+      alert("Failed to create new event!");
     }
   };
 
-  console.log(start);
-  console.log(end);
+  const handleEventClick = (event) => {
+    console.log("Event clicked: ", event);
+    console.log("==> ", event.event._def.extendedProps.note);
+  };
 
   return (
     <FullCalendar
@@ -107,8 +129,8 @@ const Calendar = () => {
       ref={calendarRef}
       selectable={true}
       events={events}
-      dateClick={handleDateClick}
-      // eventClick={handleSelectedDate}
+      eventClick={handleEventClick}
+      // dateClick={handleDateClick}
       select={handleSelectedDate}
     />
   );
