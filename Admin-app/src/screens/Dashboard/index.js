@@ -19,6 +19,8 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import Table from "@mui/material/Table";
+import { Link } from "react-router-dom";
+
 
 /**
  * Main function which will render the dashboard
@@ -87,7 +89,12 @@ const Dashboard = () => {
                   component="th"
                   scope="row"
                   align="left">
-                  {row.name} {/* getting the patient name */}
+                  <Link
+              className="PATIENT__table__name"
+              to={`/patientprofile/${row.id}`}
+
+            >{row.name}</Link>
+                   {/* getting the patient name */}
                   </TableCell>
                   <TableCell
                   sx={{ borderColor: "transparent" }}
