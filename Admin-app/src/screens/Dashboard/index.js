@@ -27,11 +27,10 @@ const Dashboard = () => {
   const [patientList, setPatientList] = useState(null);
 
   useEffect(() =>{
-   
     getPatients().then((data) => { 
       let patients_array = []
       data.forEach((patient) => {
-      patients_array[patient.id] = patient;
+      patients_array.push(patient.name);
       });
       setPatientList(patients_array);
     });
@@ -77,11 +76,11 @@ const Dashboard = () => {
             <Typography data-testid="patientlist" className="PATIENT-LIST__title" gutterBottom variant="h5" sx={{color: "var(--text-primary)", border: "transparent"}}>
               Patient's list
             </Typography>
-            {[0, 1, 2, 3].map((item) => (
-              <ListItem sx={{color: "var(--text-inactive)"}} key={`item-${item}`}>
-                <ListItemText primary={`Item ${item}`} />
-              </ListItem>
-            ))}
+            {patientList.map((name) => (
+                <ListItem sx={{color: "var(--text-inactive)"}} key={`${name}`}>
+                  <ListItemText primary={`${name}`} />
+                </ListItem>
+              ))}
           </List>
           <UpcomingEvents/>
           <DashboardCards/>{/* Displaying DashbordCards */}
