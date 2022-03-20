@@ -1,5 +1,9 @@
-import * as React from "react";
+/**
+ * @fileoverview This component displays the navigation bar and the drawer.
+ *
+ */
 import AppBar from "@mui/material/AppBar";
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -11,7 +15,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import "./Navbar.css";
 import {
-  Divider,
   Drawer,
   List,
   ListItem,
@@ -24,7 +27,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
   MuiDrawer: {
-    background: "rgb(23, 23, 23)",
+    background: "rgba(15, 15, 15, 0.8)",
     borderRight: "1px solid rgba(74, 207, 248, 0.3)",
     borderRadius: "10px",
   },
@@ -32,21 +35,25 @@ const useStyles = makeStyles({
 
 const MenuAppBar = () => {
   const classes = useStyles();
-  const [state, setState] = React.useState(false);
+  const [state, setState] = useState(false);
 
   const toggleDrawer = () => {
     setState(!state);
   };
 
+  /**
+   * Create the drawer menu
+   * @returns {JSX.Element}
+   */
   const list = () => (
     <Box
-      sx={{ width: 250, pt: 5, pl: 2 }}
+      sx={{ width: 250, pt: 5, pl: 2}}
       role="presentation"
       onClick={toggleDrawer}
     >
       <List>
         {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem className="sidebar-button" button key={text}>
+          <ListItem className="sidebar-button"button key={text}>
             <ListItemIcon className="sidebar-icon">
               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
             </ListItemIcon>
@@ -96,7 +103,8 @@ const MenuAppBar = () => {
               {list()}
             </Drawer>
           </IconButton>
-          <Typography data-testid = "title"
+          <Typography
+            data-testid="title"
             variant="h6"
             component="div"
             color="var(--text-primary)"

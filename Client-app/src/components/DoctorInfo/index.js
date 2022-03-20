@@ -1,5 +1,8 @@
+/**
+ * @fileoverview This component displays the doctor's basic information.
+ *
+ */
 import "./DoctorInfo.css";
-import * as React from "react";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Grid from "@mui/material/Grid";
@@ -22,7 +25,7 @@ const Item = styled(Paper)(({ theme }) => ({
 function DoctorInfo() {
   return (
     <Box className="doctorInfo-box__container">
-      <Grid container spacing={3} padding={5}>
+      <Grid container spacing={3}>
         <Grid item xs={12}>
           <Card>
             <Box className="doctorInfo-card__profile">

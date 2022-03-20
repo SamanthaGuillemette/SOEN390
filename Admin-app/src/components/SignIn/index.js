@@ -1,4 +1,7 @@
-import * as React from "react";
+/**
+ * @fileoverview This component takes care of the sign in  function.
+ *
+ */
 import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -23,29 +26,17 @@ import { createTheme } from "@material-ui/core/styles";
 import { inputLabelClasses } from "@mui/material/InputLabel";
 import "./../SignUp/SignUp.css";
 
-const style = {
+const styleForModal = {
   position: "absolute",
-  top: "30%",
+  top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 500,
+  width: 400,
   bgcolor: "var(--background-main)",
-  borderRadius: "10px",
+  borderRadius: '10px',
   border: "1px solid var(--info-border)",
   boxShadow: 24,
   color: "var(--info-main)",
-  p: 4,
-};
-
-const styleForModal = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: "var(--background-main)",
-  border: '2px solid #000',
-  boxShadow: 24,
   p: 4,
 };
 
@@ -76,7 +67,10 @@ const theme = createTheme({
     },
   },
 });
-// This function is responsible for the signin component which also communicates with the server and displays relevent error messages if necessary.
+
+/**
+ * This function is responsible for the signin component which also communicates with the server and displays relevent error messages if necessary.
+ */
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -91,9 +85,12 @@ export default function SignIn() {
   };
   const [user, loading] = useAuthState(auth);
 
-  // This asynchronus function is responsible for the login communication with the server
-  // If any errors occur, the modals in the return statement below will show the relevent messages
-  // The signInWithEmailAndPassword function from firebase is what allows to authenticate the user.
+  /**
+   * This asynchronus function is responsible for the login communication with the server
+   * If any errors occur, the modals in the return statement below will show the relevent messages
+   * The signInWithEmailAndPassword function from firebase is what allows to authenticate the user.
+   * @param  {} e
+   */
   const login = async (e) => {
     e.preventDefault();
     const docRef = doc(db, "Admin", email);
@@ -214,8 +211,10 @@ export default function SignIn() {
                   Error
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  {error1 && "This email is registered with the Client application."}
-                  {error2 && "Your password or email is incorrect. Please try again!"}
+                  {error1 &&
+                    "This email is registered with the Client application."}
+                  {error2 &&
+                    "Your password or email is incorrect. Please try again!"}
                 </Typography>
               </Box>
             </Modal>

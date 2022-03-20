@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This component takes care of the NewsList function.
+ *
+ */
 import { Link } from "react-router-dom";
 
 const NewsList = ({news = []}) => {

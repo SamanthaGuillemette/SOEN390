@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This component takes care of the LineChart function.
+ *
+ */
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -61,6 +65,13 @@ export const data = {
     },
   ],
 };
+
+/**
+ * This component will allow the LineChart feature to work. Below is the function LineChart that will return the 
+ * Line component that is imported from react-chartjs-2.
+ *
+ * @returns {JSX.Element}
+ */
 
 function LineChart() {
   return <Line options={options} data={data} />;

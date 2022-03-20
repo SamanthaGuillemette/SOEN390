@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This files contains the component for the chat service
+ */
+
 import { Grid, Avatar, TextField, Button, Box, ListItemAvatar } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 import { useEffect, useState, useRef } from "react";
@@ -127,14 +131,22 @@ const Inbox = () => {
                                         autoFocus
                                         onChange={(e) => setMsgToSend(e.target.value)}
                                         placeholder="Type your message here..."
-                                        sx={{ color: 'white', bgcolor: 'var(--text-inactive)', borderRadius: '15px', marginBottom:'15px'}}
+                                        sx={{
+                                            input: {
+                                              color: "white"
+                                            },
+                                            bgcolor: "#262626",
+                                            borderRadius: "15px",
+                                            marginBottom:'15px'
+                                        }}
                                     />
                                 </Grid>
                                 <Grid item sx={{ marginTop:'3px', }}>
                                      <Button type="submit"
                                         fullWidth
                                         variant="contained"
-                                        sx={{ mb: 1, bgcolor: '#8f96e2', height: '50px'}} 
+                                        className="CHAT__send-button"
+                                        sx={{ mb: 1 }}
                                         endIcon={<SendIcon />}
                                         disabled={!msgToSend}
                                         >

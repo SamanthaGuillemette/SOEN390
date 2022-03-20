@@ -3,5 +3,7 @@
   "ignoreTestFiles": ["**/example/*"],
   "viewportHeight": 720,
   "viewportWidth": 1280,
-  "watchForFileChanges": true
+  "watchForFileChanges": true,
+  "experimentalStudio": true,
+  "keyStrokeDelay": 160
 }

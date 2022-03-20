@@ -1,4 +1,7 @@
-import * as React from "react";
+/**
+ * @fileoverview This component displays the symptoms table.
+ *
+ */
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -6,10 +9,15 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableFooter from "@mui/material/TableFooter";
 import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";import VirusIcon from "../../assets/virus.svg";
+import TableRow from "@mui/material/TableRow";
+import VirusIcon from "../../assets/virus.svg";
 import "./SymptomsTable.css";
 
-// function to create data
+/**
+ * function to create data
+ * @param  {string} symptomDate
+ * @param  {label} status
+ */
 function createData(symptomDate, status) {
   return { symptomDate, status };
 }
@@ -23,8 +31,11 @@ const rows = [
 function SymptomsTable() {
   return (
     <TableContainer className="symptoms-list">
-      <Box className="label"> {/* Making Label Box */}
-        <img className="symptoms__icon" src={VirusIcon} alt="Symptoms" /> {/* Adding Label */}
+      <Box className="label">
+        {" "}
+        {/* Making Label Box */}
+        <img className="symptoms__icon" src={VirusIcon} alt="Symptoms" />{" "}
+        {/* Adding Label */}
         Symptoms List {/* Adding text */}
       </Box>
       {/* Making Table */}
@@ -37,7 +48,7 @@ function SymptomsTable() {
               className="SYMPTOMS__table__header"
               sx={{ borderColor: "var(--secondary-light)" }}
             >
-              Date of Contact
+              Date of Symptoms
             </TableCell>
             {/* Second column header */}
             <TableCell
@@ -75,12 +86,12 @@ function SymptomsTable() {
         <TableFooter>
           <TableRow>
             <TableCell
-              sx={{ backgroundColor: "var(--background-main)" }}
+              sx={{ borderColor: "transparent" }}
               component="th"
               scope="row"
             ></TableCell>
             <TableCell
-              sx={{ backgroundColor: "var(--background-main)" }}
+              sx={{ borderColor: "transparent" }}
               style={{ width: 160 }}
               align="right"
             ></TableCell>

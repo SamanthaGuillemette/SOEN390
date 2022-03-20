@@ -1,5 +1,8 @@
+/**
+ * @fileoverview This component displays the main dashboard for Client app.
+ *
+ */
 import { Box, Grid } from "@mui/material";
-
 import "./Dashboard.css";
 import NewspaperIcon from "../../assets/newspaper-sharp-white.svg";
 import CalendarIcon from "../../assets/calendar-page.svg";
@@ -11,32 +14,36 @@ import DoctorIcon from "../../assets/doctor.svg";
 import HealthCareIcon from "../../assets/health-care.svg";
 import { Link } from "react-router-dom";
 
+/**
+ * Main function which renders the dashboard
+ * @returns Dashboard object/component
+ */
 const Dashboard = () => {
   return (
     <>
       <Box
         sx={{
-          padding: 4,
           paddingBottom: "120px",
-          backgroundColor: "var(--background-secondary)",
         }}
       >
         <Grid container spacing={3}>
           <Grid item xs={6}>
-            <div className="dashboard-card__container">
-              <img
-                className="dashboard-card__img"
-                src={CalendarIcon}
-                alt="Appointment"
-              />
-              <p data-testid="appointment" className="dashboard-card__title">
-                Appointment
-              </p>
-            </div>
+            <Link to="/appointment">
+              <div className="dashboard-card__container">
+                <img
+                  className="dashboard-card__img"
+                  src={CalendarIcon}
+                  alt="Appointment"
+                />
+                <p data-testid="appointment" className="dashboard-card__title">
+                  Appointment
+                </p>
+              </div>
+            </Link>
           </Grid>
 
           <Grid item xs={6}>
-            <Link to="../symptoms">
+            <Link to="/symptoms">
               <div className="dashboard-card__container">
                 <img
                   className="dashboard-card__img"
@@ -62,7 +69,7 @@ const Dashboard = () => {
           </Grid>
 
           <Grid item xs={6}>
-            <Link to="../clientinbox">
+            <Link to="/clientinbox">
               <div className="dashboard-card__container">
                 <img
                   className="dashboard-card__img"
@@ -75,7 +82,7 @@ const Dashboard = () => {
           </Grid>
 
           <Grid item xs={6}>
-            <Link to="../qr">
+            <Link to="/qr">
               <div className="dashboard-card__container">
                 <img
                   className="dashboard-card__img"
@@ -97,7 +104,7 @@ const Dashboard = () => {
             </div>
           </Grid>
           <Grid item xs={12}>
-            <Link to="../mydoctor">
+            <Link to="/mydoctor">
               <div className="dashboard-card__container">
                 <img
                   className="dashboard-card__img"
@@ -109,14 +116,16 @@ const Dashboard = () => {
             </Link>
           </Grid>
           <Grid item xs={12}>
-            <div className="dashboard-card__container">
-              <img
-                className="dashboard-card__img"
-                src={HealthCareIcon}
-                alt="Update Status"
-              />
-              <p className="dashboard-card__title">Update status</p>
-            </div>
+            <Link to="../status">
+              <div className="dashboard-card__container">
+                <img
+                  className="dashboard-card__img"
+                  src={HealthCareIcon}
+                  alt="Update Status"
+                />
+                <p className="dashboard-card__title">Update status</p>
+              </div>
+            </Link>
           </Grid>
         </Grid>
       </Box>
