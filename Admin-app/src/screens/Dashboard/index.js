@@ -16,6 +16,8 @@ import "./Dashboard.css";
 import UpcomingEvents from "../../components/UpcomingEvents";
 import DashboardCards from "../../components/DashboardCards";
 import DashboardStats from "../../components/DashboardStats";
+import EventButton from "../../components/EventButton";
+import COVID19Button from "../../components/COVID-19Button";
 
 /**
  * Main function which will render the dashboard
@@ -52,7 +54,6 @@ const Dashboard = () => {
               overflow: "auto",
               maxHeight: "30vh",
               marginTop: 3,
-              marginLeft: 5,
               "& ul": { padding: 0 },
             }}
             subheader={<li />}
@@ -75,7 +76,22 @@ const Dashboard = () => {
               </li>
             ))}
           </List>
-          <UpcomingEvents/>
+
+      {/* The following is the Upcoming Events which appears on the dashboard
+      and the buttons for events and covid news.*/}  
+          <Grid container>
+            <Grid xs={6}>
+              <UpcomingEvents
+              eventTitle="title"
+              eventMonth="month"
+              eventDay="day"
+              eventTime="time"
+              eventDesc="desc"
+              />
+            </Grid>
+            <EventButton/>
+            <COVID19Button/>
+          </Grid>
           <DashboardCards/>{/* Displaying DashbordCards */}
         </Grid>
     </Container>
