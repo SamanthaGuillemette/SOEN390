@@ -79,8 +79,9 @@ const Dashboard = () => {
             </Typography>
             {patientList != null ? patientList.map((patient) => (
               <ListItem sx={{color: "var(--text-inactive)"}} key={patient}>
-                <ListItemText primary={patient.name} secondary={<Typography marginTop = {-2} textAlign = {'right'}
-                  >{patient.status}</Typography> }/>
+                <ListItemText primary={patient.name} secondary={<Typography
+                className = {patient.status === "NEGATIVE" ? "PATIENT__label-negative" : patient.status === "POSITIVE" ? "PATIENT__label-positive" : "PATIENT__label-unconfirmed"}
+                textAlign='right'>{patient.status}</Typography> }/>
               </ListItem>
               
             )): ""}
