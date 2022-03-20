@@ -8,10 +8,6 @@ import Card from "@mui/material/Card";
 import DoughnutChart from "../../components/Charts/DoughnutChart";
 import LineChart from "../../components/Charts/LineChart";
 import Typography from "@mui/material/Typography";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import ListSubheader from "@mui/material/ListSubheader";
 import "./Dashboard.css";
 import UpcomingEvents from "../../components/UpcomingEvents";
 import DashboardCards from "../../components/DashboardCards";
@@ -21,7 +17,6 @@ import {getPatients} from "../../backend/firebasePatientUtilities";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Table from "@mui/material/Table";
 
@@ -79,7 +74,7 @@ const Dashboard = () => {
             }}
             subheader={<li />}
           >
-            <Typography textAlign="center" variant="h6" sx={{color: "var(--text-primary)", border: "transparent", mt: 1}}>
+            <Typography textAlign="center" variant="h6" sx={{color: "var(--text-primary)", border: "transparent", mt: 2, mb: 2}}>
               Flagged Patient's List
             </Typography>
             <Table>
