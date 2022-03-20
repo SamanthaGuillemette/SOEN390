@@ -74,7 +74,7 @@ const Dashboard = () => {
             }}
             subheader={<li />}
           >
-            <Typography textAlign="center" variant="h6" sx={{color: "var(--text-primary)", border: "transparent", mt: 2, mb: 2}}>
+            <Typography textAlign="center" variant="h6" sx={{color: "var(--text-primary)", borderColor: "transparent", mt: 2, mb: 2}}>
               Flagged Patient's List
             </Typography>
             <Table>
@@ -87,7 +87,7 @@ const Dashboard = () => {
                   component="th"
                   scope="row"
                   align="left">
-                  {row.name} {/* getting the doctor name */}
+                  {row.name} {/* getting the patient name */}
                   </TableCell>
                   <TableCell
                   sx={{ borderColor: "transparent" }}
@@ -96,7 +96,7 @@ const Dashboard = () => {
                   align="right">
                   <span className={row.status === "POSITIVE" ? "PATIENT__label-positive" : row.status === "NEGATIVE"
                   ? "PATIENT__label-negative"
-                  : "PATIENT__label-unconfirmed"}>{row.status}</span>{/* getting the doctor name */}
+                  : "PATIENT__label-unconfirmed"}>{row.status}</span>{/* getting the patient name */}
                   </TableCell>
                 </TableRow>
             )): ""}
