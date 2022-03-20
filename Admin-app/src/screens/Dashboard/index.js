@@ -76,11 +76,11 @@ const Dashboard = () => {
             <Typography data-testid="patientlist" className="PATIENT-LIST__title" gutterBottom variant="h5" sx={{color: "var(--text-primary)", border: "transparent"}}>
               Patient's list
             </Typography>
-            {patientList.map((name) => (
+            {patientList != null ? patientList.map((name) => (
               <ListItem sx={{color: "var(--text-inactive)"}} key={name}>
                 <ListItemText primary={name} />
               </ListItem>
-            ))}
+            )): ""}
           </List>
           <UpcomingEvents/>
           <DashboardCards/>{/* Displaying DashbordCards */}
