@@ -74,7 +74,7 @@ const Dashboard = () => {
             }}
             subheader={<li />}
           >
-            <Typography textAlign="center" variant="h6" sx={{color: "var(--text-primary)", borderColor: "transparent", mt: 2, mb: 2}}>
+            <Typography data-testid = "patientlist" textAlign="center" variant="h6" sx={{color: "var(--text-primary)", borderColor: "transparent", mt: 2, mb: 2}}>
               Flagged Patient's List
             </Typography>
             <Table>
