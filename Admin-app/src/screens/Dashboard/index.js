@@ -18,6 +18,12 @@ import DashboardCards from "../../components/DashboardCards";
 import DashboardStats from "../../components/DashboardStats";
 import {useState, useEffect} from "react";
 import {getPatients} from "../../backend/firebasePatientUtilities";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Table from "@mui/material/Table";
 
 /**
  * Main function which will render the dashboard
@@ -30,7 +36,7 @@ const Dashboard = () => {
     getPatients().then((data) => { 
       let patients_array = []
       data.forEach((patient) => {
-        if(patient.flaggedPriority === "1"){
+        if (patient.flaggedPriority === "1"){
       patients_array.push(patient);
       }});
       setPatientList(patients_array);
@@ -59,7 +65,7 @@ const Dashboard = () => {
 
       {/* The following is the Patient List which appears on the dashboard
           Here we have the styling.*/}  
-          <List
+          <TableContainer
             className="PATIENT-LIST"
             sx={{
               width: "28vh",
@@ -73,19 +79,35 @@ const Dashboard = () => {
             }}
             subheader={<li />}
           >
-            {/* While here is the implementation*/}
-            <Typography data-testid="patientlist" className="PATIENT-LIST__title" gutterBottom variant="h5" sx={{color: "var(--text-primary)", border: "transparent"}}>
+            <Typography textAlign="center" variant="h6" sx={{color: "var(--text-primary)", border: "transparent", mt: 1}}>
               Flagged Patient's List
             </Typography>
-            {patientList != null ? patientList.map((patient) => (
-              <ListItem sx={{color: "var(--text-inactive)"}} key={patient}>
-                <ListItemText primary={patient.name} secondary={<Typography
-                className = {patient.status === "NEGATIVE" ? "PATIENT__label-negative" : patient.status === "POSITIVE" ? "PATIENT__label-positive" : "PATIENT__label-unconfirmed"}
-                textAlign='right'>{patient.status}</Typography> }/>
-              </ListItem>
-              
+            <Table>
+            {/* While here is the implementation*/}
+            <TableBody>
+            {patientList != null ? patientList.map((row) => (
+              <TableRow key={row.id}>
+                <TableCell
+                  sx={{ borderColor: "transparent", color: "var(--text-primary)"}}
+                  component="th"
+                  scope="row"
+                  align="left">
+                  {row.name} {/* getting the doctor name */}
+                  </TableCell>
+                  <TableCell
+                  sx={{ borderColor: "transparent" }}
+                  component="th"
+                  scope="row"
+                  align="right">
+                  <span className={row.status === "POSITIVE" ? "PATIENT__label-positive" : row.status === "NEGATIVE"
+                  ? "PATIENT__label-negative"
+                  : "PATIENT__label-unconfirmed"}>{row.status}</span>{/* getting the doctor name */}
+                  </TableCell>
+                </TableRow>
             )): ""}
-          </List>
+            </TableBody>
+            </Table>
+          </TableContainer>
           <UpcomingEvents/>
           <DashboardCards/>{/* Displaying DashbordCards */}
         </Grid>
