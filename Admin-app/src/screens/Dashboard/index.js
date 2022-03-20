@@ -77,10 +77,10 @@ const Dashboard = () => {
               Patient's list
             </Typography>
             {patientList.map((name) => (
-                <ListItem sx={{color: "var(--text-inactive)"}} key={`${name}`}>
-                  <ListItemText primary={`${name}`} />
-                </ListItem>
-              ))}
+              <ListItem sx={{color: "var(--text-inactive)"}} key={name}>
+                <ListItemText primary={name} />
+              </ListItem>
+            ))}
           </List>
           <UpcomingEvents/>
           <DashboardCards/>{/* Displaying DashbordCards */}
