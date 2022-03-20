@@ -31,7 +31,7 @@ const Dashboard = () => {
       let patients_array = []
       data.forEach((patient) => {
         if(patient.flaggedPriority === "1"){
-      patients_array.push(patient.name);
+      patients_array.push(patient);
       }});
       setPatientList(patients_array);
     });
@@ -77,10 +77,12 @@ const Dashboard = () => {
             <Typography data-testid="patientlist" className="PATIENT-LIST__title" gutterBottom variant="h5" sx={{color: "var(--text-primary)", border: "transparent"}}>
               Flagged Patient's List
             </Typography>
-            {patientList != null ? patientList.map((name) => (
-              <ListItem sx={{color: "var(--text-inactive)"}} key={name}>
-                <ListItemText primary={name} />
+            {patientList != null ? patientList.map((patient) => (
+              <ListItem sx={{color: "var(--text-inactive)"}} key={patient}>
+                <ListItemText primary={patient.name} secondary={<Typography marginTop = {-2} textAlign = {'right'}
+                  >{patient.status}</Typography> }/>
               </ListItem>
+              
             )): ""}
           </List>
           <UpcomingEvents/>
