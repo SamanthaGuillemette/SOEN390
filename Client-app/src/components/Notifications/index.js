@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import CoronavirusIcon from '@mui/icons-material/Coronavirus';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import { Divider } from '@mui/material';
 import "./Notifications.css";
 
@@ -141,6 +142,45 @@ const Notifications = () => {
                                     color="var(--text-primary)"
                                 >
                                     Your status has been reviewed by your doctor, please check your inbox for more information.
+                                </Typography>
+                                <Typography
+                                    style={{
+                                        marginLeft: '50px',
+                                        marginBottom: '30px'
+                                    }}
+                                    color="#949be2"
+                                >
+                                    1 January, 2022. At 3:20 pm.
+                                </Typography>
+                                <Divider color="#949be2" />
+                            </Box>
+                            <Box>
+                                <Box style={{
+                                    marginTop: '20px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    flexWrap: 'wrap',
+                                }}
+                                >
+                                    <ModeEditIcon color="primary" sx={{ fontSize: 40 }} />
+                                    <Typography
+                                        style={{
+                                            marginLeft: '10px',
+                                        }}
+                                        color="var(--text-primary)"
+                                    >
+                                        <b>Status Update Reminder</b>
+                                    </Typography>
+                                    <CloseIcon className="notifications-closeIcon" />
+                                </Box>
+                                <Typography
+                                    style={{
+                                        marginLeft: '50px',
+                                        marginBottom: '30px'
+                                    }}
+                                    color="var(--text-primary)"
+                                >
+                                    How are you feeling today? Please update your symptoms list for today.
                                 </Typography>
                                 <Typography
                                     style={{

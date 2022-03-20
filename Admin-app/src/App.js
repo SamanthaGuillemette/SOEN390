@@ -48,7 +48,7 @@ function App() {
             <Route path="/patients" element={<Patients />} />
             <Route path="/patientprofile/:id" element={<PatientProfile />} />
             <Route path="/inbox" element={<Inbox />} />
-            <Route path="/testing" element={<Notifications />} />
+            <Route path="/notifications" element={<Notifications />} />
             <Route path="/qr" element={<QR />} />
             <Route path="/news" element={<News />} />
             <Route path="/news/:id" element={<NewsDetails />} />{" "}

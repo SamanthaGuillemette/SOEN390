@@ -49,7 +49,7 @@ export const mainListItems = (
       </ListItem>
     </Link>
 
-    <Link className="SIDEBAR__link" to="testing">
+    <Link className="SIDEBAR__link" to="notifications">
       <ListItem button className="SIDEBAR__button">
         <ListItemIcon>
           <NotificationsIcon className="SIDEBAR__icon"/>
