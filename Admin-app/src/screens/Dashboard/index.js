@@ -89,11 +89,12 @@ const Dashboard = () => {
                   component="th"
                   scope="row"
                   align="left">
+            {/*Added the link to the table name */}
                   <Link
               className="PATIENT__table__name"
               to={`/patientprofile/${row.id}`}
-
-            >{row.name}</Link>
+            >{row.name}
+            </Link>
                    {/* getting the patient name */}
                   </TableCell>
                   <TableCell
