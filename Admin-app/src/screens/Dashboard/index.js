@@ -16,11 +16,27 @@ import "./Dashboard.css";
 import UpcomingEvents from "../../components/UpcomingEvents";
 import DashboardCards from "../../components/DashboardCards";
 import DashboardStats from "../../components/DashboardStats";
+import {useState, useEffect} from "react";
+import {getPatients} from "../../backend/firebasePatientUtilities";
 
 /**
  * Main function which will render the dashboard
  */
 const Dashboard = () => {
+
+  const [patientList, setPatientList] = useState(null);
+
+  useEffect(() =>{
+   
+    getPatients().then((data) => { 
+      let patients_array = []
+      data.forEach((patient) => {
+      patients_array[patient.id] = patient;
+      });
+      setPatientList(patients_array);
+    });
+  }, []);
+
   return (
     // This returns the buttons on the top which display the buttons on the top, this one is for the patients
     <Container maxWidth="xl">
@@ -61,18 +77,10 @@ const Dashboard = () => {
             <Typography data-testid="patientlist" className="PATIENT-LIST__title" gutterBottom variant="h5" sx={{color: "var(--text-primary)", border: "transparent"}}>
               Patient's list
             </Typography>
-            {[0, 1, 2, 3, 4].map((sectionId) => (
-              <li key={`section-${sectionId}`}>
-                <ul>
-                  <ListSubheader sx={{bgcolor: "var(--background-main)", color: "var(--text-inactive)"}}>
-                    {`I'm sticky ${sectionId}`}</ListSubheader>
-                  {[0, 1, 2].map((item) => (
-                    <ListItem sx={{color: "var(--text-inactive)"}} key={`item-${sectionId}-${item}`}>
-                      <ListItemText primary={`Item ${item}`} />
-                    </ListItem>
-                  ))}
-                </ul>
-              </li>
+            {[0, 1, 2, 3].map((item) => (
+              <ListItem sx={{color: "var(--text-inactive)"}} key={`item-${item}`}>
+                <ListItemText primary={`Item ${item}`} />
+              </ListItem>
             ))}
           </List>
           <UpcomingEvents/>
