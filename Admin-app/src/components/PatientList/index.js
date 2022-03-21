@@ -98,9 +98,9 @@ function PatientList() {
               className="PATIENT__table__name"
               to={`/patientprofile/${doc.id}`}
             >
-              {doc.name}
+              `{doc.firstName} {doc.lastName}`
             </Link>,
-            doc.id,
+            doc.email,
             <span
               className={
                 doc.status === "POSITIVE"
