@@ -39,7 +39,7 @@ const styleForModal = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "var(--background-main)",
-  borderRadius: '10px',
+  borderRadius: "10px",
   border: "1px solid var(--info-border)",
   boxShadow: 24,
   color: "var(--info-main)",
@@ -133,7 +133,11 @@ export default function SignUp(props) {
     } else {
       createUserWithEmailAndPassword(auth, email, password)
         .then(async () => {
-          const dobValue = dob.$D + "/" + (dob.$M + 1) + "/" + dob.$y;
+          // Needs to be in the "Short Date" format if we're using slashes
+          // Required to be in either ISO, Short or Long format in order to convert to a Date object
+          const dobValue = dob.$M + "/" + (dob.$D + 1) + "/" + dob.$y;
+          // const dobValue = dob.$D + "/" + (dob.$M + 1) + "/" + dob.$y;
+
           await setDoc(doc(db, "Client", email), {
             firstName: firstName,
             lastName: lastName,

@@ -20,7 +20,7 @@ const addPatientToDoctor = async (doctorKey, patientKey) => {
   try {
     // Get Doctor
     const docRef = getAdminRef(doctorKey);
-    let doctorInfo = await getDoctor(patientKey);
+    let doctorInfo = await getDoctor(doctorKey);
 
     if (doctorInfo) {
       // Update Assigned Doctor field in Patient
