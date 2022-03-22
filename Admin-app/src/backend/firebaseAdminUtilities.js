@@ -1,13 +1,10 @@
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "./firebase";
-import { getTableDataItem } from "./firebaseUtilities";
+import { getTableDataItem, getDocRef } from "./firebaseUtilities";
 
 const getAdminsByRole = async (roleName) => {
   try {
-    const queryForRole = query(
-      collection(db, getTableName()),
-      where("role", "==", roleName)
-    );
+    const queryForRole = getQueryForRole(roleName);
     const querySnapshot = await getDocs(queryForRole);
 
     const returnValue = querySnapshot.docs.map((admins) => admins.data());
@@ -25,4 +22,12 @@ const getTableName = () => {
   return "Admin";
 };
 
-export { getAdminsByRole, getAdminByRoleAndKey };
+const getQueryForRole = (roleName) => {
+  return query(collection(db, getTableName()), where("role", "==", roleName));
+};
+
+const getAdminRef = (key) => {
+  return getDocRef(getTableName(), key);
+};
+
+export { getAdminsByRole, getAdminByRoleAndKey, getAdminRef };
