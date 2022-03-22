@@ -31,7 +31,10 @@ const togglePriorityFlag = async (id) => {
     let priorityFlag;
 
     if (patientInfo) {
-      if (patientInfo.flaggedPriority === "0") {
+      if (
+        patientInfo.flaggedPriority == null ||
+        patientInfo.flaggedPriority === "0"
+      ) {
         priorityFlag = "1";
       } else {
         priorityFlag = "0";
@@ -60,7 +63,10 @@ const toggleReviewed = async (id) => {
     let reviewed;
 
     if (patientInfo) {
-      if (patientInfo.statusReview === "Not Completed") {
+      if (
+        patientInfo.statusReview == null ||
+        patientInfo.statusReview === "Not Completed"
+      ) {
         reviewed = "Status Reviewed";
       } else {
         reviewed = "Not Completed";
@@ -101,21 +107,20 @@ const setAssignedDoctor = async (patientId, doctorId) => {
   }
 };
 
-const setStatus = async (patientId, status) => {
+const setStatus = async (patientKey, status) => {
+  console.log("[setStatus]" + patientKey);
   try {
     // Get Patient
-    const docRef = doc(db, tableName, patientId);
-    let patientInfo = await getPatient(patientId);
+    const docRef = doc(db, tableName, patientKey);
+    let patientInfo = await getPatient(patientKey);
 
     if (patientInfo) {
-      if (status != null) {
-        // Update status field in Patient
-        docRef && (await updateDoc(docRef, "status", status));
-      }
+      // Update status field in Patient
+      docRef && (await updateDoc(docRef, "status", status));
     }
 
     // Get updated patient
-    patientInfo = await getPatient(patientId);
+    patientInfo = await getPatient(patientKey);
 
     return patientInfo;
   } catch (error) {
