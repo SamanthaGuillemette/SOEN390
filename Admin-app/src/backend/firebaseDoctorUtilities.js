@@ -56,15 +56,6 @@ const removePatientFromDoctor = async (doctorKey, patientKey) => {
   }
 };
 
-/**
- * This function populates the Patient table in firebase given a JSON file
- * imported at the beginning of this file
- */
-/* const populateDoctors = () => {
-  populateTable(tableName, doctorData);
-};
- */
-
 export {
   getDoctors,
   getDoctor,
