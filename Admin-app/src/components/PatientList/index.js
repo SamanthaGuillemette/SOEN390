@@ -116,7 +116,8 @@ function PatientList() {
             doc.assignedDoctor &&
               doctorsList &&
               doctorsList[doc.assignedDoctor] &&
-              doctorsList[doc.assignedDoctor].name,
+              doctorsList[doc.assignedDoctor].firstName &&
+              doctorsList[doc.assignedDoctor].lastName,
             <FlagIcon
               className={
                 doc.flaggedPriority === "0"
