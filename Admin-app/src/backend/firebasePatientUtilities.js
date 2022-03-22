@@ -1,11 +1,5 @@
-import patientData from "../data/patients.json";
-import { db } from "./firebase";
-import {
-  getTableData,
-  getTableDataItem,
-  populateTable,
-} from "./firebaseUtilities";
-import { doc, updateDoc, deleteField } from "firebase/firestore";
+import { getTableData, getTableDataItem, getDocRef } from "./firebaseUtilities";
+import { updateDoc, deleteField } from "firebase/firestore";
 
 const tableName = "Client";
 
@@ -13,19 +7,19 @@ const getPatients = async () => {
   return getTableData(tableName);
 };
 
-const getPatient = async (id) => {
-  return getTableDataItem(tableName, id);
+const getPatient = async (key) => {
+  return getTableDataItem(tableName, key);
 };
 
-const isValidPatientId = async (id) => {
-  return getPatient(id) != null;
+const isValidPatientId = async (key) => {
+  return getPatient(key) != null;
 };
 
-const togglePriorityFlag = async (id) => {
+const togglePriorityFlag = async (patientKey) => {
   try {
     // Get Patient
-    const docRef = doc(db, tableName, id);
-    let patientInfo = await getPatient(id);
+    const docRef = getDocRef(tableName, patientKey);
+    let patientInfo = await getPatient(patientKey);
 
     // Set priorityFlag value
     let priorityFlag;
@@ -45,7 +39,7 @@ const togglePriorityFlag = async (id) => {
     docRef && (await updateDoc(docRef, "flaggedPriority", priorityFlag));
 
     // Get updated patient
-    patientInfo = await getPatient(id);
+    patientInfo = await getPatient(patientKey);
 
     return patientInfo;
   } catch (error) {
@@ -53,11 +47,11 @@ const togglePriorityFlag = async (id) => {
   }
 };
 
-const toggleReviewed = async (id) => {
+const toggleReviewed = async (patientKey) => {
   try {
     // Get Patient
-    const docRef = doc(db, tableName, id);
-    let patientInfo = await getPatient(id);
+    const docRef = getDocRef(tableName, patientKey);
+    let patientInfo = await getPatient(patientKey);
 
     // Set reviewed value
     let reviewed;
@@ -77,29 +71,29 @@ const toggleReviewed = async (id) => {
     docRef && (await updateDoc(docRef, "statusReview", reviewed));
 
     // Get updated patient
-    patientInfo = await getPatient(id);
+    patientInfo = await getPatient(patientKey);
 
     return patientInfo;
   } catch (error) {
     console.log("[toggleReviewed]" + error);
   }
 };
-const setAssignedDoctor = async (patientId, doctorId) => {
+const setAssignedDoctor = async (patientKey, doctorKey) => {
   try {
     // Get Patient
-    const docRef = doc(db, tableName, patientId);
-    let patientInfo = await getPatient(patientId);
+    const docRef = getDocRef(tableName, patientKey);
+    let patientInfo = await getPatient(patientKey);
 
-    if (doctorId != null) {
+    if (doctorKey != null) {
       // Update Assigned Doctor field in Patient
-      docRef && (await updateDoc(docRef, "assignedDoctor", doctorId));
+      docRef && (await updateDoc(docRef, "assignedDoctor", doctorKey));
     } else {
       // Delete Assigned Doctor field in Patient
       docRef && (await updateDoc(docRef, { assignedDoctor: deleteField() }));
     }
 
     // Get updated patient
-    patientInfo = await getPatient(patientId);
+    patientInfo = await getPatient(patientKey);
 
     return patientInfo;
   } catch (error) {
@@ -111,7 +105,7 @@ const setStatus = async (patientKey, status) => {
   console.log("[setStatus]" + patientKey);
   try {
     // Get Patient
-    const docRef = doc(db, tableName, patientKey);
+    const docRef = getDocRef(tableName, patientKey);
     let patientInfo = await getPatient(patientKey);
 
     if (patientInfo) {
@@ -128,18 +122,9 @@ const setStatus = async (patientKey, status) => {
   }
 };
 
-/**
- * This function populates the Patient table in firebase given a JSON file
- * imported at the beginning of this file
- */
-const populatePatients = () => {
-  populateTable(tableName, patientData);
-};
-
 export {
   getPatients,
   getPatient,
-  populatePatients,
   togglePriorityFlag,
   setAssignedDoctor,
   isValidPatientId,
