@@ -3,9 +3,9 @@ import { db } from "./firebase";
 import { getTableData, getTableDataItem, getDocRef } from "./firebaseUtilities";
 
 /**
- * Obtains all of the items in the "Admin Collection" (and NOT just for role Admin)
+ * Obtains all of the items in the "Admin Collection" (and NOT just for role 'Administrator')
  *
- * @returns all tuples in collection Admim
+ * @returns all tuples in collection Admin
  */
 const getAdmins = async () => {
   return getTableData(getTableName());
