@@ -85,7 +85,7 @@ const Dashboard = () => {
             {patientList != null ? patientList.map((row) => (
               <TableRow key={row.id}>
                 <TableCell
-                  sx={{ borderColor: "transparent", color: "var(--text-primary)"}}
+                  sx={{ borderColor: "transparent"}}
                   component="th"
                   scope="row"
                   align="left">
@@ -93,7 +93,7 @@ const Dashboard = () => {
                   <Link
               className="PATIENT__table__name"
               to={`/patientprofile/${row.id}`}
-            >{row.name}
+            >{`${row.firstName} ${row.lastName}`}
             </Link>
                    {/* getting the patient name */}
                   </TableCell>
@@ -104,7 +104,7 @@ const Dashboard = () => {
                   align="right">
                   <span className={row.status === "POSITIVE" ? "PATIENT__label-positive" : row.status === "NEGATIVE"
                   ? "PATIENT__label-negative"
-                  : "PATIENT__label-unconfirmed"}>{row.status}</span>{/* getting the patient name */}
+                  : "PATIENT__label-unconfirmed"}>{row.status ? row.status : "UNCONFIRMED"}</span>{/* getting the patient name */}
                   </TableCell>
                 </TableRow>
             )): ""}
