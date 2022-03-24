@@ -1,6 +1,15 @@
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "./firebase";
-import { getTableDataItem, getDocRef } from "./firebaseUtilities";
+import { getTableData, getTableDataItem, getDocRef } from "./firebaseUtilities";
+
+/**
+ * Obtains all of the items in the "Admin Collection" (and NOT just for role Admin)
+ *
+ * @returns all tuples in collection Admim
+ */
+const getAdmins = async () => {
+  return getTableData(getTableName());
+};
 
 const getAdminsByRole = async (roleName) => {
   try {
@@ -30,4 +39,4 @@ const getAdminRef = (key) => {
   return getDocRef(getTableName(), key);
 };
 
-export { getAdminsByRole, getAdminByRoleAndKey, getAdminRef };
+export { getAdminsByRole, getAdminByRoleAndKey, getAdminRef, getAdmins };
