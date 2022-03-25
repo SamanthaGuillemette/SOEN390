@@ -11,6 +11,16 @@ const getAdmins = async () => {
   return getTableData(getTableName());
 };
 
+/**
+ * Obtains an item in the "Admin Collection" specified by key (and NOT just for role 'Administrator')
+ *
+ * @param {string} key
+ * @returns a tuple in collection Admin
+ */
+const getAdmin = async (key) => {
+  return getTableDataItem(getTableName(), key);
+};
+
 const getAdminsByRole = async (roleName) => {
   try {
     const queryForRole = getQueryForRole(roleName);
@@ -39,4 +49,10 @@ const getAdminRef = (key) => {
   return getDocRef(getTableName(), key);
 };
 
-export { getAdminsByRole, getAdminByRoleAndKey, getAdminRef, getAdmins };
+export {
+  getAdminsByRole,
+  getAdminByRoleAndKey,
+  getAdminRef,
+  getAdmins,
+  getAdmin,
+};
