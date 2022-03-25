@@ -135,8 +135,7 @@ export default function SignUp(props) {
         .then(async () => {
           // Needs to be in the "Short Date" format if we're using slashes
           // Required to be in either ISO, Short or Long format in order to convert to a Date object
-          const dobValue = dob.$M + "/" + (dob.$D + 1) + "/" + dob.$y;
-          // const dobValue = dob.$D + "/" + (dob.$M + 1) + "/" + dob.$y;
+          const dobValue = dob.$M + "/" + dob.$D + "/" + dob.$y;
 
           await setDoc(doc(db, "Client", email), {
             firstName: firstName,
