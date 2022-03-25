@@ -124,17 +124,29 @@ const Calendar = () => {
   const handleCreateAppointment = async (event) => {
     event.preventDefault();
 
-    // Submit appointment to database
+    // Submit basic appointment info to database
     await setDoc(doc(db, `Appointment/${doctorEmail}&${clientEmail}`), {
-      startDate: startDate,
-      endDate: endDate,
-      title: title,
-      description: description,
-      location: location,
-      note: note,
-      confirmation: false,
-      finish: false,
+      doctor: doctorEmail,
+      patient: clientEmail,
     });
+
+    // Submit appointment details into Appointment History queue (sub-collection)
+    await addDoc(
+      collection(
+        db,
+        `Appointment/${doctorEmail}&${clientEmail}/AppointmentHistory`
+      ),
+      {
+        startDate: startDate,
+        endDate: endDate,
+        title: title,
+        description: description,
+        location: location,
+        note: note,
+        confirmation: false,
+        finish: false,
+      }
+    );
 
     // Close the modal after user create the event
     setModalOpen(false);
