@@ -5,6 +5,9 @@ This project is a part of SOEN 390 - Software Engineering Team Design Project - 
 # Running Current Version
 - [ Running Admin portal prototype ](https://admin-covidtracker.web.app/)
 - [ Running Client portal prototype ](https://client-covidtracker.web.app/)
+For patients, plase scan it with your camera 
+![frame (2)](https://user-images.githubusercontent.com/55549554/160156149-1b917f5d-ef37-46b4-845f-1e26286950af.png)
+
 
 <br />
 
