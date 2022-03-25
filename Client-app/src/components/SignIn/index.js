@@ -223,7 +223,7 @@ export default function SignIn() {
                   {error2 &&
                     "Your password or email is incorrect. Please try again!"}
                   {emailError && 
-                    "Wrong email format entered. Please enter a proper email address"}
+                    "Wrong email format entered. Please enter a proper email address!"}
                 </Typography>
               </Box>
             </Modal>
