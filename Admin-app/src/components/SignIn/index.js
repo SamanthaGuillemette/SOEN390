@@ -25,6 +25,7 @@ import Modal from "@mui/material/Modal";
 import { createTheme } from "@material-ui/core/styles";
 import { inputLabelClasses } from "@mui/material/InputLabel";
 import "./../SignUp/SignUp.css";
+import validator from "validator";
 
 const styleForModal = {
   position: "absolute",
@@ -77,6 +78,16 @@ export default function SignIn() {
   const [open, setOpen] = useState(false);
   const [error1, setError1] = useState(false);
   const [error2, setError2] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+
+  const validateEmail = (e) => {
+    if (validator.isEmail(email)) {
+      setEmailError(false)
+    } else {
+      setEmailError(true)
+    }
+  }
+
   // const [open2, setOpen2] = React.useState(false);
   const handleClose = () => {
     setOpen(false);
@@ -147,7 +158,7 @@ export default function SignIn() {
               autoComplete="email"
               autoFocus
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {setEmail(e.target.value); validateEmail(e)}}
               InputLabelProps={{
                 sx: {
                   color: "var(--text-primary)",
@@ -211,10 +222,12 @@ export default function SignIn() {
                   Error
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  {error1 &&
-                    "This email is registered with the Client application."}
+                {(error1) && (emailError === false) ?
+                  "This email is registered with the Client application." :""}
                   {error2 &&
                     "Your password or email is incorrect. Please try again!"}
+                  {emailError &&
+                      "Wrong email format entered. Please enter a proper email address"}
                 </Typography>
               </Box>
             </Modal>
