@@ -32,6 +32,7 @@
  import Modal from "@mui/material/Modal";
  import { getAdmin } from "../../backend/firebaseAdminUtilities";
  import { getPatient } from "../../backend/firebasePatientUtilities";
+ import { makeStyles } from "@material-ui/core/styles";
  import "./SignUp.css";
  
  const styleForModal = {
@@ -65,6 +66,18 @@
    );
  }
  
+ const useStyles = value =>
+ makeStyles(theme => ({
+   root: {
+     "& .Mui-error": {
+       color: "yellow",
+     },
+     "& .MuiFormHelperText-root": {
+       color: "orange",
+     }
+   }
+ }));
+
  const theme = createTheme({
    palette: {
      background: {
@@ -73,6 +86,9 @@
      text: {
        primary: "#ffffff",
      },
+     error: {
+       main: "#ffffff",
+     }
    },
    components: {
      MuiIconButton: {
@@ -84,7 +100,16 @@
      },
    },
  });
- 
+
+ // This const does styling of the empty input field helper text
+ const helperTextStyles = makeStyles(theme => ({
+  root: {
+    "&.MuiFormHelperText-root.Mui-error": {
+      color: "#f44336"
+    }
+  }
+}));
+
  /**
   * This function is responsible for the signup component which also communicates with the server and displays relevent error messages if necessary.
   * Next, it will make a document in the collection of admin on the server with all the necessary information
@@ -100,6 +125,7 @@
    const [open, setOpen] = useState(false);
    const [errorMsg, setErrorMsg] = useState("");
    const [emptyFields, setEmptyFields] = useState(false);
+   const helperTestClasses = helperTextStyles();
 
    const handleClose = () => {
      setOpen(false);
@@ -135,7 +161,6 @@
     }
     else if (firstName === "" || lastName === "" || role === "" || dob === null || email === "" || password === "") { // if empty fields
       setEmptyFields(true);
-      console.log(emptyFields);
     }
     else if (dobValue !== null) { // if its not null
       if (dobValue > formattedCurrentDate) { // if future date
@@ -213,8 +238,9 @@
                    value={firstName}
                    autoFocus
                    onChange={(e) => setFirstName(e.target.value)}
-                   helperText={emptyFields ? "This field is required." : ""}
-                   error={emptyFields}
+                   helperText={firstName === "" && emptyFields ? "This field is required." : ""}
+                   error={firstName === "" && emptyFields}
+                   FormHelperTextProps={{ classes: helperTestClasses }}
                    InputLabelProps={{
                      sx: {
                        color: "var(--text-primary)",
@@ -235,8 +261,9 @@
                    autoComplete="family-name"
                    value={lastName}
                    onChange={(e) => setLastName(e.target.value)}
-                   helperText={lastName === "" ? "This field is required." : ""}
-                   error={lastName === ""}
+                   helperText={lastName === "" && emptyFields ? "This field is required." : ""}
+                   error={lastName === "" && emptyFields}
+                   FormHelperTextProps={{ classes: helperTestClasses }}
                    InputLabelProps={{
                      sx: {
                        color: "var(--text-primary)",
@@ -261,8 +288,9 @@
                          <TextField
                            {...params}
                            required
-                           helperText={dob === null ? "This field is required." : ""}
-                           error={dob === null}
+                           helperText={dob === null && emptyFields ? "This field is required." : ""}
+                           error={dob === null && emptyFields}
+                           FormHelperTextProps={{ classes: helperTestClasses }}
                            InputLabelProps={{
                              sx: {
                                color: "var(--text-primary)",
@@ -286,8 +314,9 @@
                      label="Role"
                      value={role}
                      onChange={(e) => setRole(e.target.value)}
-                     helperText={role === "" ? "This field is required." : ""}
-                     error={role === ""}
+                     helperText={role === "" && emptyFields ? "This field is required." : ""}
+                     error={role === "" && emptyFields}
+                     FormHelperTextProps={{ classes: helperTestClasses }}
                      InputLabelProps={{
                        sx: {
                          color: "var(--text-primary)",
@@ -331,8 +360,9 @@
                    autoComplete="email"
                    value={email}
                    onChange={(e) => setEmail(e.target.value)}
-                   helperText={email === "" ? "This field is required." : ""}
-                   error={email === ""}
+                   helperText={email === "" && emptyFields ? "This field is required." : ""}
+                   error={email === "" && emptyFields}
+                   FormHelperTextProps={{ classes: helperTestClasses }}
                    InputLabelProps={{
                      sx: {
                        color: "var(--text-primary)",
@@ -354,8 +384,9 @@
                    autoComplete="new-password"
                    value={password}
                    onChange={(e) => setPassword(e.target.value)}
-                   helperText={password === "" ? "This field is required." : ""}
-                   error={password === ""}
+                   helperText={password === "" && emptyFields ? "This field is required." : ""}
+                   error={password === "" && emptyFields}
+                   FormHelperTextProps={{ classes: helperTestClasses }}
                    InputLabelProps={{
                      sx: {
                        color: "var(--text-primary)",
