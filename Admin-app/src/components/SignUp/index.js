@@ -33,6 +33,7 @@
  import { getAdmin } from "../../backend/firebaseAdminUtilities";
  import { getPatient } from "../../backend/firebasePatientUtilities";
  import { makeStyles } from "@material-ui/core/styles";
+ import validator from "validator";
  import "./SignUp.css";
  
  const styleForModal = {
@@ -121,9 +122,6 @@
      setErrorMsg("");
    };
 
-   const currentDate = new Date();
-   const formattedCurrentDate = currentDate.getMonth() + 1 + "/" + currentDate.getDate() + "/" + currentDate.getFullYear();
- 
    const [user, loading] = useAuthState(auth);
  
    /**
@@ -136,10 +134,14 @@
     event.preventDefault();
     const adminDoc = await getAdmin(email);
     const clientDoc = await getPatient(email);
-    let dobValue = null;
+    let dobValue, dobWithoutSlash = null;
+    const currentDate = new Date(); // getting todays date
+    const todaysDate = currentDate.getMonth() + "" + currentDate.getDate() + "" + currentDate.getFullYear(); // formatting
+
 
     if (dob !== null) {
       dobValue = dob.$M + 1 + "/" + dob.$D + "/" + dob.$y; // Required to add + 1 for the month
+      dobWithoutSlash = dob.$M + 1 + "" + dob.$D + "" + dob.$y; // Adding without slashes
     }
 
     if (adminDoc || clientDoc) { // if email already in use
@@ -150,7 +152,8 @@
       setEmptyFields(true);
     }
     else if (dobValue !== null) { // if its not null
-      if (dobValue > formattedCurrentDate) { // if future date
+      // if its a future date
+      if (Number(dobWithoutSlash) >= Number(todaysDate)) { // comparing dates as integer
         setErrorMsg("You've selected an invalid date. Please try again.");
         setOpen(true);
       }
