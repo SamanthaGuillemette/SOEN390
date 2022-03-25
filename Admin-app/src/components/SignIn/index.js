@@ -77,7 +77,8 @@
   const helperTextStyles = makeStyles(theme => ({
     root: {
       "&.MuiFormHelperText-root.Mui-error": {
-        color: "#f44336"
+        color: "#d93025",
+        fontSize: "12px",
       }
     }
   }));

@@ -105,7 +105,8 @@
  const helperTextStyles = makeStyles(theme => ({
   root: {
     "&.MuiFormHelperText-root.Mui-error": {
-      color: "#f44336"
+      color: "#d93025",
+      fontSize: "12px",
     }
   }
 }));
@@ -133,9 +134,7 @@
    };
 
    const currentDate = new Date();
-   const todaysDay = currentDate.getDate() < 10 ? `0${currentDate.getDate()}` : currentDate.getDate();
-   const todaysMonth = currentDate.getMonth() < 10 ? `0${currentDate.getMonth()}` : currentDate.getMonth();
-   const formattedCurrentDate = todaysMonth + "/" + todaysDay + "/" + currentDate.getFullYear();
+   const formattedCurrentDate = currentDate.getMonth() + 1 + "/" + currentDate.getDate() + "/" + currentDate.getFullYear();
  
    const [user, loading] = useAuthState(auth);
  
