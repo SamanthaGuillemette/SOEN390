@@ -123,23 +123,26 @@
     event.preventDefault();
     const adminDoc = await getAdmin(email);
     const clientDoc = await getPatient(email);
-    const dobValue = dob.$M + 1 + "/" + dob.$D + "/" + dob.$y; // Required to add + 1 for the month
+    let dobValue = null;
+
+    if (dob !== null) {
+      dobValue = dob.$M + 1 + "/" + dob.$D + "/" + dob.$y; // Required to add + 1 for the month
+    }
 
     if (adminDoc || clientDoc) { // if email already in use
       setErrorMsg("This email has already been used for the Admin or Client Application. Please use another email.")
       setOpen(true);
     }
-    
     else if (firstName === "" || lastName === "" || role === "" || dob === null || email === "" || password === "") { // if empty fields
       setEmptyFields(true);
+      console.log(emptyFields);
     }
-    
-    else if (dobValue > formattedCurrentDate) { // if future date
+    else if (dobValue !== null) { // if its not null
+      if (dobValue > formattedCurrentDate) { // if future date
         setErrorMsg("You've selected an invalid date. Please try again.");
         setOpen(true);
-    }
-    
-    else {
+      }
+      else { // if valid date
        createUserWithEmailAndPassword(auth, email, password)
          .then(async () => {
 
@@ -155,8 +158,9 @@
            setErrorMsg(error.message);
            setOpen(true);
          });
-     }
-   };
+      }
+    }
+  };
 
    if (loading) {
      return <p>Loading...</p>;
