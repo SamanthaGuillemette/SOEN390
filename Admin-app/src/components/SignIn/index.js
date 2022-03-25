@@ -25,6 +25,7 @@
  import Modal from "@mui/material/Modal";
  import { createTheme } from "@material-ui/core/styles";
  import { inputLabelClasses } from "@mui/material/InputLabel";
+ import { makeStyles } from "@material-ui/core/styles";
  import "./../SignUp/SignUp.css";
  
  const styleForModal = {
@@ -66,8 +67,20 @@
      text: {
        primary: "#ffffff",
      },
+     error: {
+      main: "#ffffff",
+    }
    },
  });
+
+  // This const does styling of the empty input field helper text
+  const helperTextStyles = makeStyles(theme => ({
+    root: {
+      "&.MuiFormHelperText-root.Mui-error": {
+        color: "#f44336"
+      }
+    }
+  }));
  
  /**
   * This function is responsible for the signin component which also communicates with the server and displays relevent error messages if necessary.
@@ -77,6 +90,8 @@
    const [password, setPassword] = useState("");
    const [open, setOpen] = useState(false);
    const [errorMessage, setErrorMessage] = useState("");
+   const [emptyFields, setEmptyFields] = useState(false);
+   const helperTestClasses = helperTextStyles();
  
    const handleClose = () => {
      setOpen(false);
@@ -95,7 +110,10 @@
      const adminDoc = await getAdmin(email);
      const clientDoc = await getPatient(email);
  
-     if (adminDoc) {
+     if (email === "" || password === "") {
+      setEmptyFields(true);
+     }
+     else if (adminDoc) {
        signInWithEmailAndPassword(auth, email, password).catch((error) => { // incorrect password
          setErrorMessage("Incorrect password, please try again");
          setOpen(true);
@@ -152,6 +170,9 @@
                autoFocus
                value={email}
                onChange={(e) => setEmail(e.target.value)}
+               helperText={email === "" && emptyFields ? "This field is required." : ""}
+               error={email === "" && emptyFields}
+               FormHelperTextProps={{ classes: helperTestClasses }}
                InputLabelProps={{
                  sx: {
                    color: "var(--text-primary)",
@@ -172,6 +193,9 @@
                autoComplete="current-password"
                value={password}
                onChange={(e) => setPassword(e.target.value)}
+               helperText={password === "" && emptyFields ? "This field is required." : ""}
+               error={password === "" && emptyFields}
+               FormHelperTextProps={{ classes: helperTestClasses }}
                InputLabelProps={{
                  sx: {
                    color: "var(--text-primary)",
