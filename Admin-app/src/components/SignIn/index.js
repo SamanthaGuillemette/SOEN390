@@ -78,13 +78,13 @@ export default function SignIn() {
   const [open, setOpen] = useState(false);
   const [error1, setError1] = useState(false);
   const [error2, setError2] = useState(false);
-  const [emailError, setEmailError] = useState(false);
+  const [error3, setError3] = useState(false);
 
   const validateEmail = (e) => {
     if (validator.isEmail(email)) {
-      setEmailError(false)
+      setError3(false)
     } else {
-      setEmailError(true)
+      setError3(true)
     }
   }
 
@@ -222,12 +222,12 @@ export default function SignIn() {
                   Error
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                {(error1) && (emailError === false) ?
+                {(error1) && (error3 === false) ?
                   "This email is registered with the Client application." :""}
                   {error2 &&
                     "Your password or email is incorrect. Please try again!"}
-                  {emailError &&
-                      "Wrong email format entered. Please enter a proper email address"}
+                  {error3 &&
+                      "Wrong email format entered, please enter a proper email address!"}
                 </Typography>
               </Box>
             </Modal>
