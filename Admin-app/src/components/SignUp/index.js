@@ -115,14 +115,26 @@
    const [open, setOpen] = useState(false);
    const [errorMsg, setErrorMsg] = useState("");
    const [emptyFields, setEmptyFields] = useState(false);
+   const [checked, setChecked] = useState(false);
+   const [user, loading] = useAuthState(auth);
    const helperTestClasses = helperTextStyles();
 
+  /**
+    * This function is responsible for setting const attributes if modal is closed
+    * @param  {} event
+    */
    const handleClose = () => {
      setOpen(false);
      setErrorMsg("");
    };
 
-   const [user, loading] = useAuthState(auth);
+   /**
+    * This function is responsible for setting checked to be true or false depending on whether clicked or not
+    * @param  {} event
+    */
+   const handleChange = (event) => {
+     setChecked(event.target.checked);
+   };
  
    /**
     * This function is responsible for creating a new document in the admin collection with the information of the user who has signed up.
@@ -136,8 +148,7 @@
     const clientDoc = await getPatient(email);
     let dobValue, dobWithoutSlash = null;
     const currentDate = new Date(); // getting todays date
-    const todaysDate = currentDate.getMonth() + "" + currentDate.getDate() + "" + currentDate.getFullYear(); // formatting
-
+    const todaysDate = currentDate.getMonth() +  1 + "" + currentDate.getDate() + "" + currentDate.getFullYear(); // formatting
 
     if (dob !== null) {
       dobValue = dob.$M + 1 + "/" + dob.$D + "/" + dob.$y; // Required to add + 1 for the month
@@ -157,7 +168,11 @@
         setErrorMsg("You've selected an invalid date. Please try again.");
         setOpen(true);
       }
-      else { // if valid date
+      else if (!checked) {
+        setErrorMsg("Please confirm your data is correct.");
+        setOpen(true);
+      }
+      else { // if valid date && checked
        createUserWithEmailAndPassword(auth, email, password)
          .then(async () => {
 
@@ -335,6 +350,8 @@
                      <Checkbox
                        className="SIGN-UP__checkbox"
                        value="allowExtraEmails"
+                       checked={checked}
+                       onChange={handleChange}
                      />
                    }
                    label="I confirm my data above is correct."

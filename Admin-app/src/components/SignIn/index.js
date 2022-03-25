@@ -206,15 +206,6 @@
                  },
                }}
              />
-             <FormControlLabel
-               control={
-                 <Checkbox
-                   style={{ color: "var(--text-primary)" }}
-                   value="remember"
-                 />
-               }
-               label="Remember me"
-             />
              <Button
                type="submit"
                fullWidth
