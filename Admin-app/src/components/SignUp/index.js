@@ -65,18 +65,6 @@
      </Typography>
    );
  }
- 
- const useStyles = value =>
- makeStyles(theme => ({
-   root: {
-     "& .Mui-error": {
-       color: "yellow",
-     },
-     "& .MuiFormHelperText-root": {
-       color: "orange",
-     }
-   }
- }));
 
  const theme = createTheme({
    palette: {
