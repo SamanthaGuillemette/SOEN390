@@ -1,3 +1,7 @@
+.doctorInfo-warning__noDoctor {
+  color: var(--text-primary);
+}
+
 .doctorInfo-box__container {
   height: 105vh;
   background: var(--background-secondary);

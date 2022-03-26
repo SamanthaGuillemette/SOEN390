@@ -19,7 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   fetchDoctorInfo,
   fetchUserInfo,
-  selectDoctorInfoDetails,
+  // selectDoctorInfoDetails,
   selectUserInfoDetails,
 } from "./store/userInfoSlice";
 import { onAuthStateChanged } from "firebase/auth";
@@ -35,9 +35,9 @@ function App() {
   const userInfoDetails = useSelector(selectUserInfoDetails);
   const assignedDoctor = userInfoDetails?.assignedDoctor;
 
-  // FIXME: Test if user has 'assignedDoctor' property
-  console.log("===> Assigned doctor email: ", assignedDoctor);
-  console.log("===> Doctor info: ", useSelector(selectDoctorInfoDetails));
+  // DEBUG: Test if user has 'assignedDoctor' property
+  // console.log("===> Assigned doctor email: ", assignedDoctor);
+  // console.log("===> Doctor info: ", useSelector(selectDoctorInfoDetails));
 
   // Create reference to the 'dispatch' function --> to send away an action to the 'Store'
   const dispatch = useDispatch();
