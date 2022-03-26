@@ -1,3 +1,6 @@
+/**
+ * @fileoverview This file is the central storage to hold "states" of our application
+ */
 import { createSlice } from "@reduxjs/toolkit";
 import { auth } from "../backend/firebase";
 
