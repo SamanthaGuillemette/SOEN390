@@ -40,9 +40,9 @@ function DropdownStatus(props) {
       target: { value },
     } = event;
 
-    if (patientInfo != null && patientInfo.status) {
+    if (patientInfo != null) {
       // if status and patient exists
-      setStatus(patientInfo.id, value).then((newPatientInfo) =>
+      setStatus(patientInfo.email, value).then((newPatientInfo) =>
         setPatientInfo(newPatientInfo)
       ); // then setting
     }
@@ -54,7 +54,9 @@ function DropdownStatus(props) {
       {/* removing the shrinking of the form title */}
       <Select
         data-testid="select3"
-        value={patientInfo && patientInfo.status} // setting value to be the new status
+        value={
+          patientInfo && patientInfo.status ? patientInfo.status : "UNCONFIRMED"
+        } // setting value to be the new status
         onChange={handleChange} // changing the text to the chosen
         inputProps={{
           classes: {

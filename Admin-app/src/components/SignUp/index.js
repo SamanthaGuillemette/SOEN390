@@ -39,7 +39,7 @@ const styleForModal = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "var(--background-main)",
-  borderRadius: '10px',
+  borderRadius: "10px",
   border: "1px solid var(--info-border)",
   boxShadow: 24,
   color: "var(--info-main)",
@@ -124,7 +124,8 @@ export default function SignUp(props) {
     } else {
       createUserWithEmailAndPassword(auth, email, password)
         .then(async () => {
-          const dobValue = dob.$D + "/" + (dob.$M + 1) + "/" + dob.$y;
+          // Required to add + 1 for the month
+          const dobValue = dob.$M + 1 + "/" + dob.$D + "/" + dob.$y;
           await setDoc(doc(db, "Admin", email), {
             firstName: firstName,
             lastName: lastName,

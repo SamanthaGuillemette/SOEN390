@@ -53,7 +53,8 @@
 }
 
 .PATIENT__table__name {
-  color: var(--text-primary) !important;
+  color: var(--primary-main) !important;
+  text-decoration: underline !important;
   font-weight: 500 !important;
   font-size: 1rem !important;
 }
