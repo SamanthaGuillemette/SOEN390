@@ -32,40 +32,9 @@
  import Modal from "@mui/material/Modal";
  import { getAdmin } from "../../backend/firebaseAdminUtilities";
  import { getPatient } from "../../backend/firebasePatientUtilities";
+ import { styleForModal, Copyright } from "../SignIn";
  import { makeStyles } from "@material-ui/core/styles";
- import validator from "validator";
  import "./SignUp.css";
- 
- const styleForModal = {
-   position: "absolute",
-   top: "50%",
-   left: "50%",
-   transform: "translate(-50%, -50%)",
-   width: 400,
-   bgcolor: "var(--background-main)",
-   borderRadius: "10px",
-   border: "1px solid var(--info-border)",
-   boxShadow: 24,
-   color: "var(--info-main)",
-   p: 4,
- };
- 
- function Copyright(props) {
-   return (
-     <Typography variant="body2" align="center" {...props}>
-       {"Copyright © "}
-       <Link
-         className="SIGN-UP__link"
-         sx={{ fontSize: "12px", textDecoration: "none" }}
-         color="inherit"
-       >
-         Your Website
-       </Link>{" "}
-       {new Date().getFullYear()}
-       {"."}
-     </Typography>
-   );
- }
 
  const theme = createTheme({
    palette: {
@@ -90,15 +59,15 @@
    },
  });
 
- // This const does styling of the empty input field helper text
- const helperTextStyles = makeStyles(theme => ({
-  root: {
-    "&.MuiFormHelperText-root.Mui-error": {
-      color: "#d93025",
-      fontSize: "12px",
+  // This const does styling of the empty input field helper text
+  const helperTextStyles = makeStyles(theme => ({
+    root: {
+      "&.MuiFormHelperText-root.Mui-error": {
+        color: "#d93025",
+        fontSize: "12px",
+      }
     }
-  }
-}));
+  }));
 
  /**
   * This function is responsible for the signup component which also communicates with the server and displays relevent error messages if necessary.
@@ -155,12 +124,11 @@
       dobWithoutSlash = dob.$M + 1 + "" + dob.$D + "" + dob.$y; // Adding without slashes
     }
 
-    if (adminDoc || clientDoc) { // if email already in use
+    if (firstName === "" || lastName === "" || role === "" || dob === null || email === "" || password === "") { // if empty fields
+      setEmptyFields(true);
+    } else if (adminDoc || clientDoc) { // if email already in use
       setErrorMsg("This email has already been used for the Admin or Client Application. Please use another email.")
       setOpen(true);
-    }
-    else if (firstName === "" || lastName === "" || role === "" || dob === null || email === "" || password === "") { // if empty fields
-      setEmptyFields(true);
     }
     else if (dobValue !== null) { // if its not null
       // if its a future date

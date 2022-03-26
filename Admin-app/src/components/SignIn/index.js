@@ -7,8 +7,6 @@
  import Button from "@mui/material/Button";
  import CssBaseline from "@mui/material/CssBaseline";
  import TextField from "@mui/material/TextField";
- import FormControlLabel from "@mui/material/FormControlLabel";
- import Checkbox from "@mui/material/Checkbox";
  import Link from "@mui/material/Link";
  import Grid from "@mui/material/Grid";
  import Box from "@mui/material/Box";
@@ -28,7 +26,7 @@
  import { makeStyles } from "@material-ui/core/styles";
  import "./../SignUp/SignUp.css";
  
- const styleForModal = {
+export const styleForModal = {
    position: "absolute",
    top: "50%",
    left: "50%",
@@ -42,7 +40,7 @@
    p: 4,
  };
  
- function Copyright(props) {
+export function Copyright(props) {
    return (
      <Typography variant="body2" align="center" {...props}>
        {"Copyright © "}
@@ -59,7 +57,7 @@
    );
  }
  
- const theme = createTheme({
+const theme = createTheme({
    palette: {
      background: {
        default: "var(--background-secondary)",
@@ -74,7 +72,7 @@
  });
 
   // This const does styling of the empty input field helper text
-  const helperTextStyles = makeStyles(theme => ({
+const helperTextStyles = makeStyles(theme => ({
     root: {
       "&.MuiFormHelperText-root.Mui-error": {
         color: "#d93025",
