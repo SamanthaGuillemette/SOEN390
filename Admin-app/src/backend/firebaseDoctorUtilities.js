@@ -1,31 +1,34 @@
-import { getTableData, getTableDataItem } from "./firebaseUtilities";
-import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
-import { db } from "./firebase";
+import { updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+import {
+  getAdminsByRole,
+  getAdminByRoleAndKey,
+  getAdminRef,
+} from "./firebaseAdminUtilities";
 
-const tableName = "Doctors";
+const role = "Doctor";
 const patientLimit = 3;
 
 const getDoctors = async () => {
-  return getTableData(tableName);
+  return getAdminsByRole(role);
 };
 
-const getDoctor = async (id) => {
-  return getTableDataItem(tableName, id);
+const getDoctor = async (key) => {
+  return getAdminByRoleAndKey(role, key);
 };
 
-const addPatientToDoctor = async (doctorId, patientId) => {
+const addPatientToDoctor = async (doctorKey, patientKey) => {
   try {
     // Get Doctor
-    const docRef = doc(db, tableName, doctorId);
-    let doctorInfo = await getDoctor(doctorId);
+    const docRef = getAdminRef(doctorKey);
+    let doctorInfo = await getDoctor(doctorKey);
 
     if (doctorInfo) {
       // Update Assigned Doctor field in Patient
-      docRef && (await updateDoc(docRef, { treats: arrayUnion(patientId) }));
+      docRef && (await updateDoc(docRef, { treats: arrayUnion(patientKey) }));
     }
 
     // Get updated patient
-    doctorInfo = await getDoctor(doctorId);
+    doctorInfo = await getDoctor(doctorKey);
 
     return doctorInfo;
   } catch (error) {
@@ -33,19 +36,19 @@ const addPatientToDoctor = async (doctorId, patientId) => {
   }
 };
 
-const removePatientFromDoctor = async (doctorId, patientId) => {
+const removePatientFromDoctor = async (doctorKey, patientKey) => {
   try {
     // Get Doctor
-    const docRef = doc(db, tableName, doctorId);
-    let doctorInfo = await getDoctor(doctorId);
+    const docRef = getAdminRef(doctorKey);
+    let doctorInfo = await getDoctor(doctorKey);
 
     if (doctorInfo) {
       // Update Assigned Doctor field in Patient
-      docRef && (await updateDoc(docRef, { treats: arrayRemove(patientId) }));
+      docRef && (await updateDoc(docRef, { treats: arrayRemove(patientKey) }));
     }
 
     // Get updated patient
-    doctorInfo = await getDoctor(doctorId);
+    doctorInfo = await getDoctor(doctorKey);
 
     return doctorInfo;
   } catch (error) {
