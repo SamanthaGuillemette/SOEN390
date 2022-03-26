@@ -1,4 +1,4 @@
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, query, where, updateDoc } from "firebase/firestore";
 import { db } from "./firebase";
 import { getTableData, getTableDataItem, getDocRef } from "./firebaseUtilities";
 
@@ -47,6 +47,28 @@ const getQueryForRole = (roleName) => {
 
 const getAdminRef = (key) => {
   return getDocRef(getTableName(), key);
+};
+
+const setRole = async (patientKey) => {
+  console.log("[setStatus]" + patientKey);
+  try {
+
+    // Get Admin
+    const docRef = getDocRef("Admin", patientKey);
+    let adminInfo = await getAdmin(patientKey);
+
+    if (adminInfo) {
+      // Update role field in admin account
+      docRef && (await updateDoc(docRef, "role", "disabled"));
+    }
+
+    // Get updated adminn account
+    adminInfo = await getAdmin(patientKey);
+
+    return adminInfo;
+  } catch (error) {
+    console.log("[setRole]" + error);
+  }
 };
 
 export {

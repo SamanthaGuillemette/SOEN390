@@ -1,10 +1,10 @@
-.PATIENT__table, .DOC__table {
+.PATIENT__table, .DOC__table, .ADMIN__table {
   margin-top: 30px;
   background-color: var(--background-main) !important;
   border-radius: 20px !important;
 }
 
-.PATIENT__table__label, .DOC__table__label {
+.PATIENT__table__label, .DOC__table__label, .ADMIN__table__label {
   background: inherit;
   width: 100%;
   height: 6.5vh;
@@ -16,14 +16,14 @@
   padding-left: 40px;
 }
 
-.PATIENT__table__icon, .DOC__table__icon {
+.PATIENT__table__icon, .DOC__table__icon, .ADMIN__table__icon {
   position: relative;
   top: 4px;
   right: 10px;
 }
 
 .PATIENT__table__header, .DOC__table__header, .ASSIGNED-DOC__header,
- .STATUS-CARD__header, .PATIENT-STATUS-REVIEW__header, .PATIENT-SYMPTOMS__table__header{
+ .STATUS-CARD__header, .PATIENT-STATUS-REVIEW__header, .PATIENT-SYMPTOMS__table__header, .ADMIN__table__header{
   color: var(--text-inactive) !important;
   text-transform: uppercase;
   opacity: 0.7;
@@ -41,7 +41,7 @@
   font-weight: 500 !important;
 }
 
-.PATIENT__table__data, .DOC__table__data, .PATIENT-SYMPTOMS__table__data {
+.PATIENT__table__data, .DOC__table__data, .PATIENT-SYMPTOMS__table__data, .ADMIN__table__data {
   color: var(--text-primary) !important;
   font-weight: 500 !important;
   font-size: 1rem !important;
