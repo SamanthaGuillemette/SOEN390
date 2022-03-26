@@ -59,7 +59,7 @@ export const userInfoSlice = createSlice({
   },
 });
 
-// --------------- Actions -------------------
-// export const {} = userInfoSlice.actions;
+// --------------- Selectors -------------------
+export const selectUserInfoDetails = (state) => state.userInfo.userInfoDetails;
 
 export default userInfoSlice.reducer;

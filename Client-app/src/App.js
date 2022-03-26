@@ -17,7 +17,7 @@ import SymptomsTable from "./components/SymptomsTable";
 import Diary from "./components/Diary";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserInfo } from "./store/userInfoSlice";
+import { fetchUserInfo, selectUserInfoDetails } from "./store/userInfoSlice";
 import { onAuthStateChanged } from "firebase/auth";
 import { saveUser } from "./store/authSlice";
 import DoctorInfo from "./components/DoctorInfo";
@@ -66,17 +66,17 @@ function App() {
       {user && (
         <AppBody>
           <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="*" element={<Dashboard />} />
-              <Route path="/qr" element={<QR />} />
-              <Route path="/clientprofile" element={<ClientProfile />} />
-              <Route path="/symptoms" element={<SymptomsTable />} />
-              <Route path="/notifications" element={<Notifications />} />
-              <Route path="clientinbox" element={<Chat />} />
-              <Route path="/mydoctor" element={<DoctorInfo />} />
-              <Route path="/status" element={<UpdateStatus />} />
-              <Route path="/appointment" element={<Appointment />} />
-              <Route path="/diary" element={<Diary />} />
+            <Route path="/" element={<Dashboard />} />
+            <Route path="*" element={<Dashboard />} />
+            <Route path="/qr" element={<QR />} />
+            <Route path="/clientprofile" element={<ClientProfile />} />
+            <Route path="/symptoms" element={<SymptomsTable />} />
+            <Route path="/notifications" element={<Notifications />} />
+            <Route path="clientinbox" element={<Chat />} />
+            <Route path="/mydoctor" element={<DoctorInfo />} />
+            <Route path="/status" element={<UpdateStatus />} />
+            <Route path="/appointment" element={<Appointment />} />
+            <Route path="/diary" element={<Diary />} />
           </Routes>
         </AppBody>
       )}

@@ -29,4 +29,8 @@ export const authSlice = createSlice({
 // --------------- Actions -------------------
 export const { saveUser } = authSlice.actions;
 
+// --------------- Selectors -------------------
+export const selectUserToken = (state) => state.auth.userToken;
+export const selectUserEmail = (state) => state.auth.userEmail;
+
 export default authSlice.reducer;
