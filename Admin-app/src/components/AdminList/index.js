@@ -1,0 +1,252 @@
+/**
+ * @fileoverview This component takes care of the DoctorList function.
+ *
+ */
+ import { useTheme } from "@mui/material/styles";
+ import Box from "@mui/material/Box";
+ import Table from "@mui/material/Table";
+ import TableBody from "@mui/material/TableBody";
+ import TableCell from "@mui/material/TableCell";
+ import TableContainer from "@mui/material/TableContainer";
+ import TableFooter from "@mui/material/TableFooter";
+ import TablePagination from "@mui/material/TablePagination";
+ import TableRow from "@mui/material/TableRow";
+ import HealingIcon from "@mui/icons-material/Healing";
+ import IconButton from "@mui/material/IconButton";
+ import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+ import { makeStyles } from "@material-ui/core/styles";
+ import TableHead from "@mui/material/TableHead";
+ import { useEffect, useState } from "react";
+ import { getAdmins } from "../../backend/firebaseAdminUtilities";
+ 
+ // Styling the list
+ const dropdownStyle = makeStyles({
+   paper: {
+     background: "var(--background-main)", // background color
+     color: "var(--text-inactive)", // text color of pagination dropdown
+     borderRadius: "10px", // making corners rounded
+   },
+   color: {
+     color: "var(--text-inactive)", // pagination text color
+   },
+   select: {
+     "&:after": {
+       borderBottomColor: "var(--text-inactive)",
+     },
+     "& .MuiSvgIcon-root": {
+       color: "var(--text-inactive)", // pagination button color
+     },
+   },
+ });
+ 
+ /**
+  * This component is used to create data using the doctorName and numOfPatients.
+  *
+  * @param  {} doctorName
+  * @param  {} numOfPatients
+  */
+ function createData(adminName, email, dob, role) {
+   return { adminName, email, dob, role };
+ }
+ 
+ /**
+  * This function is used to create pagination
+  * @param  {} props
+  */
+ function TablePaginationActions(props) {
+   const theme = useTheme(); // adding styling
+   const { count, page, rowsPerPage, onPageChange } = props;
+ 
+   const handleBackButtonClick = (event) => {
+     onPageChange(event, page - 1); // changing page back
+   };
+ 
+   const handleNextButtonClick = (event) => {
+     onPageChange(event, page + 1); // changing to next page
+   };
+ 
+   return (
+     // making box for paignation
+     <Box sx={{ flexShrink: 0, ml: 2.5 }}>
+       <IconButton
+         onClick={handleBackButtonClick} // change on click
+         disabled={page === 0}
+         aria-label="previous page"
+       >
+         {theme.direction === "rtl" ? (
+           <KeyboardArrowRight />
+         ) : (
+           <KeyboardArrowLeft />
+         )}
+       </IconButton>
+       <IconButton
+         onClick={handleNextButtonClick} // change on click
+         disabled={page >= Math.ceil(count / rowsPerPage) - 1} // calculating the number of pages
+         aria-label="next page"
+       >
+         {theme.direction === "rtl" ? (
+           <KeyboardArrowLeft />
+         ) : (
+           <KeyboardArrowRight />
+         )}
+       </IconButton>
+     </Box>
+   );
+ }
+ 
+ /**
+  * This component is what allows the DoctorList feature to be displayed. Below are many consts and
+  * useEffect hooks that communicate with the database in order to recieve or send information.
+  *
+  * @returns {JSX.Element}
+  */
+ function AdminList() {
+   const classes = dropdownStyle(); // adding styling
+   const [page, setPage] = useState(0);
+   const [rowsPerPage, setRowsPerPage] = useState(5);
+   const [adminsList, setAdminsList] = useState(null);
+ 
+   const handleChangePage = (event, newPage) => {
+     setPage(newPage); // creating new page
+   };
+ 
+   const handleChangeRowsPerPage = (event) => {
+     setRowsPerPage(parseInt(event.target.value, 10)); // setting the page with data
+     setPage(0);
+   };
+ 
+   useEffect(() => {
+    getAdmins().then((data) => {
+       let results = [];
+       data.forEach((doc) => {
+         results.push(
+           createData(
+             `${doc.firstName} ${doc.lastName}`,
+             doc.email, 
+             doc.dob,
+            doc.role,
+           )
+         );
+       });
+       setAdminsList(results);
+     });
+   }, []);
+ 
+   return (
+     // Creating table
+     <TableContainer data-testid="table-container1" className="DOC__table">
+       <Box className="DOC__table__label">
+         <HealingIcon
+           data-testid="health-icon"
+           className="DOC__table__icon"
+         ></HealingIcon>
+         Doctor List
+       </Box>
+       <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+         <TableHead>
+           <TableRow>
+             {" "}
+             {/* adding table header */}
+             <TableCell
+               className="DOC__table__header"
+               sx={{ borderColor: "var(--secondary-light)" }}
+             >
+              Admin Name
+             </TableCell>
+             <TableCell
+               className="DOC__table__header"
+               sx={{ borderColor: "var(--secondary-light)" }}
+               align="left"
+             >
+               Email
+             </TableCell>
+             <TableCell
+               className="DOC__table__header"
+               sx={{ borderColor: "var(--secondary-light)" }}
+               align="left"
+             >
+               Date of Birth
+             </TableCell>
+           </TableRow>
+         </TableHead>
+         <TableBody>
+           {/* adding rows in table */}
+           {adminsList &&
+             (rowsPerPage > 0
+               ? adminsList.slice(
+                   page * rowsPerPage,
+                   page * rowsPerPage + rowsPerPage
+                 ) // calculating how many items to display per page
+               : adminsList
+             ).map((row) => (
+               // getting the data of each row
+               <TableRow key={row.name}>
+                 <TableCell
+                   className="DOC__table__data"
+                   sx={{ borderColor: "var(--primary-light)" }}
+                   component="th"
+                   scope="row"
+                 >
+                   {row.adminName} {/* getting the admin name */}
+                 </TableCell>
+                 <TableCell
+                   className="DOC__table__data"
+                   sx={{ borderColor: "var(--primary-light)" }}
+                   component="th"
+                   scope="row"
+                   align="left"
+                 >
+                   {row.email} {/* getting the admin email */}
+                 </TableCell>
+                 <TableCell
+                   className="DOC__table__data"
+                   sx={{ borderColor: "var(--primary-light)" }}
+                   component="th"
+                   scope="row"
+                   align="left"
+                 >
+                   {row.dob} {/* getting the admin dob */}
+                 </TableCell>
+               </TableRow>
+             ))}
+         </TableBody>
+         <TableFooter>
+           <TableRow>
+             {adminsList && (
+               <TablePagination // adding table pagination
+                 sx={{ borderColor: "transparent" }}
+                 classes={{
+                   root: classes.color,
+                 }}
+                 rowsPerPageOptions={[5, 10, { label: "All", value: -1 }]} // adding options dropdown pagination to choose from
+                 colSpan={3}
+                 count={adminsList.length} // getting how many rows there are in total
+                 rowsPerPage={rowsPerPage} // how many to display per page
+                 page={page} // how many pages
+                 className={classes.select} // adding design
+                 SelectProps={{
+                   inputProps: { "aria-label": "rows per page" },
+                   MenuProps: {
+                     classes: { paper: classes.paper },
+                     sx: {
+                       "&& .Mui-selected": {
+                         backgroundColor: "var(--background-secondary)", // changing background color of selected pagination
+                       },
+                     },
+                   },
+                 }}
+                 onPageChange={handleChangePage} // handling page change
+                 onRowsPerPageChange={handleChangeRowsPerPage} // handling how many rows to display per page
+                 ActionsComponent={TablePaginationActions}
+               />
+             )}
+           </TableRow>
+         </TableFooter>
+       </Table>
+     </TableContainer>
+   );
+ }
+ 
+ export default AdminList;
+ 
