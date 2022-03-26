@@ -16,7 +16,12 @@ import SymptomsTable from "./components/SymptomsTable";
 import Diary from "./components/Diary";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserInfo } from "./store/userInfoSlice";
+import {
+  fetchDoctorInfo,
+  fetchUserInfo,
+  selectDoctorInfoDetails,
+  selectUserInfoDetails,
+} from "./store/userInfoSlice";
 import { onAuthStateChanged } from "firebase/auth";
 import { saveUser, selectUserEmail, selectUserToken } from "./store/authSlice";
 import DoctorInfo from "./components/DoctorInfo";
@@ -25,10 +30,16 @@ import AppBody from "./components/AppBody";
 import UpdateStatus from "./components/UpdateStatus";
 
 function App() {
-  // const [user, loading] = useAuthState(auth);
-
   const user = useSelector(selectUserToken);
   const userEmail = useSelector(selectUserEmail);
+  const userInfoDetails = useSelector(selectUserInfoDetails);
+  const assignedDoctor = userInfoDetails?.assignedDoctor;
+
+  // FIXME: Test if user has 'assignedDoctor' property
+  console.log("===> Assigned doctor email: ", assignedDoctor);
+  console.log("===> Doctor info: ", useSelector(selectDoctorInfoDetails));
+
+  // Create reference to the 'dispatch' function --> to send away an action to the 'Store'
   const dispatch = useDispatch();
 
   /**
@@ -47,7 +58,14 @@ function App() {
 
     // Fetch user info from database to store using his/her email
     dispatch(fetchUserInfo(userEmail));
-  }, [dispatch, userEmail]);
+
+    // If user has 'assignedDoctor', fetch the Doctor's info
+    if (assignedDoctor) {
+      dispatch(fetchDoctorInfo(assignedDoctor));
+    }
+
+    // The array below means whenever any of those values changes, this useEffect() will re-run
+  }, [dispatch, userEmail, assignedDoctor]);
 
   // Added setTimeout() to show loading screen for 500ms, ottherise it'll keep loading
   if (userEmail == null) {
