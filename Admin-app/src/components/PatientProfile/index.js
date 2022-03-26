@@ -28,7 +28,7 @@ import { useParams } from "react-router-dom";
 import {
   getPatient,
   togglePriorityFlag,
-  toggleReviewed
+  toggleReviewed,
 } from "../../backend/firebasePatientUtilities";
 import DropdownStatus from "./../DropdownStatus";
 import DropdownDoctor from "./../DropdownDoctor";
@@ -71,7 +71,7 @@ function getAge(dobStr) {
 
 /**
  * This component is what allows the chatting feature to work. Below are many consts and
- * useEffect hooks that communicate with the database in order to recieve or send 
+ * useEffect hooks that communicate with the database in order to recieve or send
  * information about the patient profile.
  */
 function PatientProfile() {
@@ -99,8 +99,7 @@ function PatientProfile() {
   }
 
   // reviewed status with DB
-  function onReviewedClick(id)
-  {
+  function onReviewedClick(id) {
     if (checked === true) {
       setReviewingStatus("Not Completed");
       setChecked(false);
@@ -109,9 +108,8 @@ function PatientProfile() {
       setChecked(true);
     }
     //{patientInfo && patientInfo.statusReview}
-    toggleReviewed(id)
-    .then((newPatientInfo) => newPatientInfo);
-  }  
+    toggleReviewed(id).then((newPatientInfo) => newPatientInfo);
+  }
 
   // priority flag with DB
   function onFlagClick(id) {
@@ -126,32 +124,34 @@ function PatientProfile() {
     createData("Jan 25", "No", "Yes", "No", "Yes", "Yes", "No", "No"),
     createData("Jan 26", "No", "Yes", "No", "No", "No", "No", "No"),
   ];
-  
-  const { id } = useParams();
+
+  const { key } = useParams();
   const [priorityFlag, setPriorityFlag] = useState(false);
   const [patientInfo, setPatientInfo] = useState(null);
-  const [checked, setChecked] = useState('');
-  const [reviewingStatus, setReviewingStatus] = useState('');
+  const [checked, setChecked] = useState("");
+  const [reviewingStatus, setReviewingStatus] = useState("");
 
   // Get Patient Info each time page refreshes
   useEffect(() => {
-    //console.log("id" + id);
-    getPatient(id)
+    getPatient(key)
       .then((data) => {
         setPatientInfo(data);
         setPriorityFlag(data.flaggedPriority === "1");
-        if (data.statusReview === "Not Completed") {
-          setChecked(false); 
-          setReviewingStatus("Not Completed");     
+        if (
+          data.statusReview == null ||
+          data.statusReview === "Not Completed"
+        ) {
+          setChecked(false);
+          setReviewingStatus("Not Completed");
         } else {
-          setChecked(true); 
+          setChecked(true);
           setReviewingStatus("Status Reviewed");
         }
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [id]);
+  }, [key]);
 
   return (
     <Grid container spacing={2} maxWidth="lg" alignItems="flex-end">
@@ -174,12 +174,19 @@ function PatientProfile() {
                 fontSize="1.2rem"
                 component="div"
               >
-                {patientInfo && patientInfo.name}
+                {patientInfo &&
+                  `${patientInfo.firstName} ${patientInfo.lastName}`}
               </Typography>
               <Typography className="PATIENT-profile__info" variant="body2">
                 <br></br>Age: {patientInfo && getAge(patientInfo.dob)}
                 <br></br>Birthday: {patientInfo && patientInfo.dob}
-                <br></br>Address: {patientInfo && patientInfo.address}
+                <br></br>Address:{" "}
+                {patientInfo &&
+                  patientInfo.address &&
+                  patientInfo.city &&
+                  patientInfo.province &&
+                  patientInfo.postalCode &&
+                  `${patientInfo.address}, ${patientInfo.city}, ${patientInfo.province}, ${patientInfo.postalCode}`}
               </Typography>
             </CardContent>
           </CardActionArea>
@@ -200,7 +207,9 @@ function PatientProfile() {
           <Card
             data-testid="card-2"
             sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }}
-            className={priorityFlag ? "PATIENT__status clicked" : "PATIENT__status__card"}
+            className={
+              priorityFlag ? "PATIENT__status clicked" : "PATIENT__status__card"
+            }
           >
             <CardActionArea>
               <CardContent>
@@ -214,10 +223,12 @@ function PatientProfile() {
                   Status{" "}
                   <FlagIcon
                     onClick={() => {
-                      onFlagClick(id);
+                      onFlagClick(key);
                     }}
                     className={
-                      priorityFlag ? "PATIENT__priority-flag clicked" : "PATIENT__priority-flag"
+                      priorityFlag
+                        ? "PATIENT__priority-flag clicked"
+                        : "PATIENT__priority-flag"
                     }
                   ></FlagIcon>
                   <br></br>
@@ -290,10 +301,18 @@ function PatientProfile() {
                   >
                     Status Review
                   </Typography>
-                  <Typography className="PATIENT-STATUS-REVIEW__data" variant="body2">
+                  <Typography
+                    className="PATIENT-STATUS-REVIEW__data"
+                    variant="body2"
+                  >
                     Review Completed: {reviewingStatus}
-                    <Checkbox checked={checked} size="small" style={{ color: "var(--text-primary)" }}
-                    onClick={() => {( onReviewedClick(id));}}
+                    <Checkbox
+                      checked={checked}
+                      size="small"
+                      style={{ color: "var(--text-primary)" }}
+                      onClick={() => {
+                        onReviewedClick(key);
+                      }}
                     />
                   </Typography>
                 </CardContent>

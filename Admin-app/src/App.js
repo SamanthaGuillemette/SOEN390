@@ -35,8 +35,8 @@ function App() {
     });
   }, [dispatch]);
 
-  if(loading){
-    return ('loading')
+  if (loading) {
+    return "loading";
   }
   return (
     <BrowserRouter>
@@ -46,7 +46,7 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/appointments" element={<Appointments />} />
             <Route path="/patients" element={<Patients />} />
-            <Route path="/patientprofile/:id" element={<PatientProfile />} />
+            <Route path="/patientprofile/:key" element={<PatientProfile />} />
             <Route path="/inbox" element={<Inbox />} />
             <Route path="/notifications" element={<Notifications />} />
             <Route path="/qr" element={<QR />} />
