@@ -99,7 +99,7 @@ function PatientProfile() {
   }
 
   // reviewed status with DB
-  function onReviewedClick(id) {
+  function onReviewedClick() {
     toggleReviewed(key).then((newPatientInfo) => setPatientInfo(newPatientInfo));
   }
 
@@ -279,7 +279,7 @@ function PatientProfile() {
                       size="small"
                       style={{ color: "var(--text-primary)" }}
                       onClick={() => {
-                        onReviewedClick(key);
+                        onReviewedClick();
                       }}
                     />
                   </Typography>
