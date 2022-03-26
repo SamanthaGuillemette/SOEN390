@@ -3,9 +3,10 @@
 This project is a part of SOEN 390 - Software Engineering Team Design Project - at Concordia University. The project aims to build a system that could facilitate the tracking of COVID-19 patients' status in Canada. In addition, the system also allow healthcare professionals to give advice to patients regarding the status of their symptoms.
 
 # Running Current Version
-- [ Running Admin portal prototype ](https://admin-covidtracker.web.app/)
-- [ Running Client portal prototype ](https://client-covidtracker.web.app/)
-For patients, plase scan it with your camera 
+- [ Running Admin portal prototype ](https://admin-covidtracker.web.app/) (running on desktop for Doctor/Health Offical/Immagration Officer/Administrator)
+
+- [ Running Client portal prototype ](https://client-covidtracker.web.app/) (running on mobile phone for Patient)
+
 ![frame (2)](https://user-images.githubusercontent.com/55549554/160156149-1b917f5d-ef37-46b4-845f-1e26286950af.png)
 
 
