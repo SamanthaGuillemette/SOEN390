@@ -7,7 +7,6 @@ import Dashboard from "./components/Dashboard";
 import Chat from "./components/Chat";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./backend/firebase";
 import Loading from "./components/Loading";
 import Notifications from "./components/Notifications";
@@ -17,9 +16,9 @@ import SymptomsTable from "./components/SymptomsTable";
 import Diary from "./components/Diary";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserInfo, selectUserInfoDetails } from "./store/userInfoSlice";
+import { fetchUserInfo } from "./store/userInfoSlice";
 import { onAuthStateChanged } from "firebase/auth";
-import { saveUser } from "./store/authSlice";
+import { saveUser, selectUserEmail, selectUserToken } from "./store/authSlice";
 import DoctorInfo from "./components/DoctorInfo";
 import Appointment from "./screens/Appointment";
 import AppBody from "./components/AppBody";
@@ -28,8 +27,8 @@ import UpdateStatus from "./components/UpdateStatus";
 function App() {
   // const [user, loading] = useAuthState(auth);
 
-  const user = useSelector((state) => state.auth.userToken);
-  const userEmail = useSelector((state) => state.auth.userEmail);
+  const user = useSelector(selectUserToken);
+  const userEmail = useSelector(selectUserEmail);
   const dispatch = useDispatch();
 
   /**

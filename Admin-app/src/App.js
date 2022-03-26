@@ -7,7 +7,6 @@ import SignUp from "./components/SignUp";
 import Appointments from "./screens/Appointments";
 import Patients from "./screens/Patients";
 import Inbox from "./screens/Inbox";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./backend/firebase";
 import Notifications from "./components/Notifications";
 import QR from "./components/QR";
@@ -15,15 +14,15 @@ import News from "./components/News";
 import NewsDetails from "./components/News/NewsDetails";
 import { useDispatch, useSelector } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
-import { saveUser } from "./store/authSlice";
+import { saveUser, selectUserEmail, selectUserToken } from "./store/authSlice";
 import { useEffect } from "react";
 import Event from "./components/Event";
 import EventDetails from "./components/Event/EventDetails";
 import { fetchUserInfo } from "./store/userInfoSlice";
 
 function App() {
-  const user = useSelector((state) => state.auth.userToken);
-  const userEmail = useSelector((state) => state.auth.userEmail);
+  const user = useSelector(selectUserToken);
+  const userEmail = useSelector(selectUserEmail);
   const dispatch = useDispatch();
 
   /**
