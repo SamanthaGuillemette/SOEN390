@@ -50,7 +50,6 @@ const getAdminRef = (key) => {
 };
 
 const setDisabled = async (patientKey) => {
-  console.log("[setStatus]" + patientKey);
   try {
 
     // Get Admin
