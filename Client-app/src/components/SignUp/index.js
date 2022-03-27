@@ -333,6 +333,7 @@ export default function SignUp(props) {
                   label="Postal Code"
                   name="Postal Code"
                   autoComplete="postal-code"
+                  // InputProps={{ pattern: "[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z][ ]\d[ABCEGHJ-NPRSTV-Z]\d$/i" }}
                   value={postalCode}
                   onChange={(e) => setPostalCode(e.target.value)}
                   InputLabelProps={{
