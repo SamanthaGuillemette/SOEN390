@@ -126,6 +126,7 @@ const setStatus = async (patientKey, status) => {
  * Obtain the tuples from the Status subcollection of a Client
  *
  * @param {*} patientKey
+ * @returns Status tuples
  */
 const getStatuses = async (patientKey) => {
   console.log("[getStatuses]: " + patientKey);
