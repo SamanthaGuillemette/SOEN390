@@ -93,7 +93,7 @@ export default function SignIn() {
    */
   const login = async (e) => {
     e.preventDefault();
-    const docRef = doc(db, "Admin", email);
+    const docRef = doc(db, "Admin", email.toLowerCase());
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {

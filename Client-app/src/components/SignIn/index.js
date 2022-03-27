@@ -85,7 +85,7 @@ export default function SignIn() {
   // The signInWithEmailAndPassword function from firebase is what allows to authenticate the user.
   const login = async (e) => {
     e.preventDefault();
-    const docRef = doc(db, "Client", email);
+    const docRef = doc(db, "Client", email.toLowerCase());
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
