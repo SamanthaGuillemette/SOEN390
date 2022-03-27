@@ -123,7 +123,7 @@ const setStatus = async (patientKey, status) => {
 };
 
 /**
- * Obtain the 1st level subcollection
+ * Obtain the tuples from the Status subcollection of a Client
  *
  * @param {*} patientKey
  */
