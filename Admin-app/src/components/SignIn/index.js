@@ -83,6 +83,7 @@
      setOpen(false);
      setError1(false);
      setError2(false);
+     setError3(false);
    };
    const [user, loading] = useAuthState(auth);
  
