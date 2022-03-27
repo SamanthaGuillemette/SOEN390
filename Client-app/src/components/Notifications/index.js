@@ -22,17 +22,26 @@ const Notifications = () => {
   const [value] = useDocumentOnce(doc(db, "Client", user?.email));
 
   const [displayUpdateNotif, setDisplayUpdateNotif] = useState(false);
+  const [displayReviewedNotif, setDisplayReviewedNotif] = useState(false);
 
   useEffect(() => {
     console.log("worked!");
     if (value && value.data().status === "POSITIVE") {
       setDisplayUpdateNotif(true);
     }
-  }, []);
+    if (value && value.data().statusReview === "Status Reviewed") {
+      setDisplayReviewedNotif(true);
+    }
+  }, [value]);
 
   // closing the notification method
-  const handleClose = () => {
+  const handleCloseUpdateStatus = () => {
     setDisplayUpdateNotif(false);
+  };
+
+  // closing the notification method
+  const handleCloseReviewedStatus = () => {
+    setDisplayReviewedNotif(false);
   };
 
   return (
@@ -78,7 +87,7 @@ const Notifications = () => {
                   </Typography>
                   <CloseIcon
                     className="notifications-closeIcon"
-                    onClick={handleClose}
+                    onClick={handleCloseUpdateStatus}
                   />
                 </Box>
                 <Typography
@@ -90,6 +99,53 @@ const Notifications = () => {
                 >
                   How are you feeling today? Please update your symptoms list
                   for today.
+                </Typography>
+                <Typography
+                  style={{
+                    marginLeft: "50px",
+                    marginBottom: "30px",
+                  }}
+                  color="#949be2"
+                >
+                  1 January, 2022. At 3:20 pm.
+                </Typography>
+                <Divider color="#949be2" />
+              </Box>
+            )}
+            {displayReviewedNotif && (
+              <Box>
+                <Box
+                  style={{
+                    marginTop: "20px",
+                    display: "flex",
+                    alignItems: "center",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <CheckCircleIcon color="success" sx={{ fontSize: 40 }} />
+                  <Typography
+                    style={{
+                      marginLeft: "10px",
+                    }}
+                    color="var(--text-primary)"
+                  >
+                    <b>Status Reviewed</b>
+                  </Typography>
+                  <CloseIcon
+                    className="notifications-closeIcon"
+                    onClick={handleCloseReviewedStatus}
+                  />
+                </Box>
+                <Typography
+                  style={{
+                    marginLeft: "50px",
+                    marginBottom: "30px",
+                  }}
+                  color="var(--text-primary)"
+                >
+                  Your status has been reviewed by your doctor{" "}
+                  {value && value.data().assignedDoctor}, please check your
+                  inbox for more information.
                 </Typography>
                 <Typography
                   style={{
