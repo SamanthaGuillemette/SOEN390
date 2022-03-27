@@ -135,10 +135,9 @@ function PatientProfile() {
         setPatientInfo(data);
         setPriorityFlag(data.flaggedPriority === "1");
         getStatuses(key).then((statuses) => {
-          let rows = [];
           statuses &&
-            statuses.forEach((status) => {
-              rows.push(
+            setPatientInfoStatuses(
+              statuses.map((status) =>
                 createData(
                   status?.timestamp?.toDate()?.toLocaleString() || "",
                   status.fever || "No",
@@ -149,9 +148,8 @@ function PatientProfile() {
                   status.smellLoss || "No",
                   status.tasteLoss || "No"
                 )
-              );
-            });
-          setPatientInfoStatuses(rows);
+              )
+            );
         });
 
         if (
