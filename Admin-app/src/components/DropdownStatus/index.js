@@ -77,17 +77,17 @@ function DropdownStatus(props) {
         <MenuItem value="POSITIVE">
           {" "}
           {/* dropdown option 1 */}
-          <span class="PATIENT__label-positive">positive</span>
+          <span className="PATIENT__label-positive">positive</span>
         </MenuItem>
         <MenuItem value="NEGATIVE">
           {" "}
           {/* dropdown option 2 */}
-          <span class="PATIENT__label-negative">negative</span>
+          <span className="PATIENT__label-negative">negative</span>
         </MenuItem>
         <MenuItem value="UNCONFIRMED">
           {" "}
           {/* dropdown option 3 */}
-          <span class="PATIENT__label-unconfirmed">unconfirmed</span>
+          <span className="PATIENT__label-unconfirmed">unconfirmed</span>
         </MenuItem>
       </Select>
     </FormControl>
