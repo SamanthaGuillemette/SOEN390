@@ -7,8 +7,6 @@
  import Button from "@mui/material/Button";
  import CssBaseline from "@mui/material/CssBaseline";
  import TextField from "@mui/material/TextField";
- import FormControlLabel from "@mui/material/FormControlLabel";
- import Checkbox from "@mui/material/Checkbox";
  import Link from "@mui/material/Link";
  import Grid from "@mui/material/Grid";
  import Box from "@mui/material/Box";
@@ -18,8 +16,7 @@
  import { ThemeProvider } from "@mui/material/styles";
  import { signInWithEmailAndPassword } from "firebase/auth";
  import { auth } from "../../backend/firebase";
- import { getAdmin } from "../../backend/firebaseAdminUtilities";
- import { getPatient } from "../../backend/firebasePatientUtilities";
+ import { getPatient, getAdmin } from "../../backend/firebaseUtilities";
  import { useAuthState } from "react-firebase-hooks/auth";
  import { Navigate } from "react-router-dom";
  import Modal from "@mui/material/Modal";
@@ -28,7 +25,7 @@
  import { makeStyles } from "@material-ui/core/styles";
  import "./../SignUp/SignUp.css";
  
- const styleForModal = {
+export const styleForModal = {
    position: "absolute",
    top: "50%",
    left: "50%",
@@ -42,7 +39,7 @@
    p: 4,
  };
  
- function Copyright(props) {
+export function Copyright(props) {
    return (
      <Typography variant="body2" align="center" {...props}>
        {"Copyright © "}
@@ -59,7 +56,7 @@
    );
  }
  
- const theme = createTheme({
+const theme = createTheme({
    palette: {
      background: {
        default: "var(--background-secondary)",
@@ -74,7 +71,7 @@
  });
 
   // This const does styling of the empty input field helper text
-  const helperTextStyles = makeStyles(theme => ({
+const helperTextStyles = makeStyles(theme => ({
     root: {
       "&.MuiFormHelperText-root.Mui-error": {
         color: "#d93025",
@@ -114,14 +111,14 @@
      if (email === "" || password === "") {
       setEmptyFields(true);
      }
-     else if (adminDoc) {
+     else if (clientDoc) {
        signInWithEmailAndPassword(auth, email, password).catch((error) => { // incorrect password
          setErrorMessage("Incorrect password, please try again");
          setOpen(true);
        });
      }
-     else if (!adminDoc && clientDoc) { // exists only on client app
-       setErrorMessage("This account is registered on the Client application.");
+     else if (adminDoc && !clientDoc) { // exists only on admin app
+       setErrorMessage("This account is registered on the Admin application.");
        setOpen(true);
      }
      else if (!adminDoc && !clientDoc) { // account doesn't exist
@@ -206,15 +203,6 @@
                  },
                }}
              />
-             <FormControlLabel
-               control={
-                 <Checkbox
-                   style={{ color: "var(--text-primary)" }}
-                   value="remember"
-                 />
-               }
-               label="Remember me"
-             />
              <Button
                type="submit"
                fullWidth
@@ -272,4 +260,4 @@
        </Container>
      </ThemeProvider>
    );
- }
+ } 

@@ -251,7 +251,6 @@
                  <LocalizationProvider dateAdapter={AdapterDateFns}>
                    <Stack spacing={3}>
                      <DatePicker
-                      
                        label="Date of Birth"
                        value={dob}
                        onChange={(e) => {
