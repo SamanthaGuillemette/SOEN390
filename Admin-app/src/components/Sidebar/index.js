@@ -2,7 +2,7 @@
  * @fileoverview This component takes care of the Sidebar function.
  *
  */
-import { mainListItems, secondaryListItems } from "../SidebarItems";
+import { mainListItems, secondaryListItems, SecondMainListItems} from "../SidebarItems";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import Divider from "@mui/material/Divider";
@@ -72,6 +72,8 @@ function Sidebar() {
       </Toolbar>
       <Divider />
       <List>{mainListItems}</List>
+      <Divider />
+      <SecondMainListItems/>
       <Divider />
       <List>{secondaryListItems}</List>
     </Drawer>

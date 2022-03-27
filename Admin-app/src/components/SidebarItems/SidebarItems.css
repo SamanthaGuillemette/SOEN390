@@ -15,6 +15,12 @@
 }
 
 .SIDEBAR__button:hover .SIDEBAR__icon,
-.SIDEBAR__button:hover .SIDEBAR__text {
+.SIDEBAR__button:hover .SIDEBAR__text, .SIDEBAR__subheader:hover  {
     color: var(--text-primary) !important;
+}
+
+.SIDEBAR__subheader {
+    background-color: transparent !important;
+    color: var(--text-inactive) !important;
+    font-size: 1rem !important;
 }

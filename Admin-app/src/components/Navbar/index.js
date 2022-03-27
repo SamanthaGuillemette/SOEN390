@@ -209,53 +209,6 @@ function Navbar() {
   );
 
   const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      id={mobileMenuId}
-      keepMounted
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem  onClick={handleMessagesMenuOpen}>
-        <IconButton 
-          size="large" 
-          aria-label="show 4 new mails" 
-          aria-controls="primary-search-msg-menu"
-          color="inherit"
-          >
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
-  );
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -290,55 +243,6 @@ function Navbar() {
           >
             Admin Dashboard
           </Typography>
-          <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <IconButton
-              size="large"
-              aria-label="show 4 new mails"
-              color="inherit"
-              onClick={handleMessagesMenuOpen}
-            >
-              <Badge
-                badgeContent={4}
-                sx={{
-                  "& .MuiBadge-badge": {
-                    color: "var(--background-secondary)",
-                    backgroundColor: "var(--primary-main)"
-                  }
-                }}
-              >
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge
-                badgeContent={17}
-                sx={{
-                  "& .MuiBadge-badge": {
-                    color: 'var(--background-secondary)',
-                    backgroundColor: "var(--primary-main)"
-                  }
-                }}
-              >
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-          </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -353,7 +257,6 @@ function Navbar() {
           </Box>
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
       {renderMessages}
       {renderMenu}
     </Box>
