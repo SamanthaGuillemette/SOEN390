@@ -29,6 +29,7 @@ import {
   getPatient,
   togglePriorityFlag,
   toggleReviewed,
+  getStatuses,
 } from "../../backend/firebasePatientUtilities";
 import DropdownStatus from "./../DropdownStatus";
 import DropdownDoctor from "./../DropdownDoctor";
@@ -120,10 +121,12 @@ function PatientProfile() {
     );
   }
 
-  const rows = [
+  const rows = [];
+  /*   const rows = [
     createData("Jan 25", "No", "Yes", "No", "Yes", "Yes", "No", "No"),
     createData("Jan 26", "No", "Yes", "No", "No", "No", "No", "No"),
   ];
+ */
 
   const { key } = useParams();
   const [priorityFlag, setPriorityFlag] = useState(false);
@@ -137,6 +140,16 @@ function PatientProfile() {
       .then((data) => {
         setPatientInfo(data);
         setPriorityFlag(data.flaggedPriority === "1");
+        getStatuses(key).then((statuses) => {
+          statuses &&
+            statuses.forEach((doc) => {
+              console.log(doc.data());
+            });
+        });
+
+        // Set the symptoms
+        data && data.Status && console.log(`status: ${data.Status}`);
+
         if (
           data.statusReview == null ||
           data.statusReview === "Not Completed"

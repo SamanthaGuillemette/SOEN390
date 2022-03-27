@@ -47,4 +47,26 @@ const populateTable = (tableName, jsonStr) => {
   }
 };
 
-export { getTableData, getTableDataItem, populateTable, getDocRef };
+/**
+ * Obtains a 1st level subcollection
+ *
+ * @param {*} patientKey
+ */
+const getFirstLevelSubcollection = async (
+  tableName,
+  key,
+  subCollectionName
+) => {
+  const dbString = `${tableName}/${key}/${subCollectionName}`;
+  const docsSnapshot = await getDocs(collection(db, dbString));
+
+  return docsSnapshot;
+};
+
+export {
+  getTableData,
+  getTableDataItem,
+  populateTable,
+  getDocRef,
+  getFirstLevelSubcollection,
+};

@@ -1,4 +1,9 @@
-import { getTableData, getTableDataItem, getDocRef } from "./firebaseUtilities";
+import {
+  getTableData,
+  getTableDataItem,
+  getDocRef,
+  getFirstLevelSubcollection,
+} from "./firebaseUtilities";
 import { updateDoc, deleteField } from "firebase/firestore";
 
 const tableName = "Client";
@@ -122,6 +127,28 @@ const setStatus = async (patientKey, status) => {
   }
 };
 
+/**
+ * Obtain the 1st level subcollection
+ *
+ * @param {*} patientKey
+ */
+const getStatuses = async (patientKey) => {
+  console.log("[getStatuses]: " + patientKey);
+  const statusCollectionName = "Status";
+
+  const statuses = await getFirstLevelSubcollection(
+    getTableName(),
+    patientKey,
+    statusCollectionName
+  );
+
+  return statuses;
+};
+
+const getTableName = () => {
+  return tableName;
+};
+
 export {
   getPatients,
   getPatient,
@@ -130,4 +157,5 @@ export {
   isValidPatientId,
   toggleReviewed,
   setStatus,
+  getStatuses,
 };
