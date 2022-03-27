@@ -75,38 +75,43 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [open, setOpen] = useState(false);
-  const [error1, setError1] = useState(false);
-  const [error2, setError2] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
   // const [open2, setOpen2] = React.useState(false);
   const handleClose = () => {
     setOpen(false);
-    setError1(false);
-    setError2(false);
+    setErrorMessage("");
   };
   const [user, loading] = useAuthState(auth);
+   /**
+    * This asynchronus function is responsible for the login communication with the server
+    * If any errors occur, the modals in the return statement below will show the relevent messages
+    * The signInWithEmailAndPassword function from firebase is what allows to authenticate the user.
+    * @param  {} e
+    */
+    const login = async (e) => {
+      e.preventDefault();
+      const adminDocSnap = await getDoc(doc(db, "Admin", email));
+      const clientDocSnap = await getDoc(doc(db, "Client", email));
 
-  /**
-   * This asynchronus function is responsible for the login communication with the server
-   * If any errors occur, the modals in the return statement below will show the relevent messages
-   * The signInWithEmailAndPassword function from firebase is what allows to authenticate the user.
-   * @param  {} e
-   */
-  const login = async (e) => {
-    e.preventDefault();
-    const docRef = doc(db, "Admin", email);
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-      signInWithEmailAndPassword(auth, email, password).catch((error) => {
-        setError2(true);
+      if (adminDocSnap.data().disabled === "true") {
+        setErrorMessage("Your account has been disabled.");
         setOpen(true);
-      });
-    } else {
-      setError1(true);
-      setOpen(true);
-    }
-  };
-
+      }
+      else if (adminDocSnap.exists()) {
+        signInWithEmailAndPassword(auth, email, password).catch((error) => { // incorrect password
+          setErrorMessage("Incorrect password, please try again");
+          setOpen(true);
+        });
+      }
+      else if (!adminDocSnap.exists() && clientDocSnap.exists()) { // exists only on client app
+        setErrorMessage("This account is registered on the Client application.");
+        setOpen(true);
+      }
+      else if (!adminDocSnap.exists() && !clientDocSnap.exists()) { // account doesn't exist
+        setErrorMessage("Couldn't find your account.");
+        setOpen(true);
+      }
+    };
   if (user) {
     return <Navigate to="/" replace={true} />;
   }
@@ -177,15 +182,6 @@ export default function SignIn() {
                 },
               }}
             />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  style={{ color: "var(--text-primary)" }}
-                  value="remember"
-                />
-              }
-              label="Remember me"
-            />
             <Button
               type="submit"
               fullWidth
@@ -211,10 +207,7 @@ export default function SignIn() {
                   Error
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  {error1 &&
-                    "This email is registered with the Client application."}
-                  {error2 &&
-                    "Your password or email is incorrect. Please try again!"}
+                  {errorMessage}
                 </Typography>
               </Box>
             </Modal>

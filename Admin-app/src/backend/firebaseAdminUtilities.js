@@ -49,7 +49,7 @@ const getAdminRef = (key) => {
   return getDocRef(getTableName(), key);
 };
 
-const setRole = async (patientKey) => {
+const setDisabled = async (patientKey) => {
   console.log("[setStatus]" + patientKey);
   try {
 
@@ -57,17 +57,30 @@ const setRole = async (patientKey) => {
     const docRef = getDocRef("Admin", patientKey);
     let adminInfo = await getAdmin(patientKey);
 
-    if (adminInfo) {
-      // Update role field in admin account
-      docRef && (await updateDoc(docRef, "role", "disabled"));
+    // Set new disabled value
+    let newDisabledValue;
+
+    if (adminInfo) { // if account exists
+      if (
+        adminInfo.disabled == null ||
+        adminInfo.disabled === "false"  // if the value stored is false or null
+      ) {
+        newDisabledValue = "true"; // new value to be replace is true
+      } else {
+        newDisabledValue = "false"; // esle false
+      }
     }
 
-    // Get updated adminn account
+    // Update disabled field in admin account
+    docRef && (await updateDoc(docRef, "disabled", newDisabledValue));
+
+    // Get updated admin account
     adminInfo = await getAdmin(patientKey);
 
-    return adminInfo;
+    return adminInfo.disabled; // returning new disabled value
+
   } catch (error) {
-    console.log("[setRole]" + error);
+    console.log("[setDisabled]" + error);
   }
 };
 
@@ -77,4 +90,5 @@ export {
   getAdminRef,
   getAdmins,
   getAdmin,
+  setDisabled,
 };

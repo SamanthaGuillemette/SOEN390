@@ -10,13 +10,12 @@
  import TableHead from "@mui/material/TableHead";
  import TableRow from "@mui/material/TableRow";
  import TablePagination from "@mui/material/TablePagination";
- import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
+ import AccountBoxIcon from '@mui/icons-material/AccountBox';
  import { makeStyles } from "@material-ui/core/styles";
  import { useEffect, useState } from "react";
  import { getAdmins } from "../../backend/firebaseAdminUtilities";
- import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
- 
+ import EachRow from "./EachRow";
+
  // adding styling
  const dropdownStyle = makeStyles({
    paper: {
@@ -38,8 +37,8 @@ import Checkbox from "@mui/material/Checkbox";
  });
  
  // function to create data
- function createData( adminName, id, dob, role) {
-   return {adminName, id, dob, role};
+ function createData( adminName, id, dob, role, disabled) {
+   return {adminName, id, dob, role, disabled};
  }
  
  function AdminList() {
@@ -57,7 +56,8 @@ import Checkbox from "@mui/material/Checkbox";
              `${doc.firstName} ${doc.lastName}`,
              doc.email, 
              doc.dob, 
-             doc.role
+             doc.role,
+             doc.disabled
            )
          );
        });
@@ -82,14 +82,14 @@ import Checkbox from "@mui/material/Checkbox";
      setRowsPerPage(parseInt(event.target.value, 10));
      setPage(0);
    };
- 
+
    return (
      <TableContainer className="ADMIN__table">
        <Box className="ADMIN__table__label">
          {" "}
          {/* Creating label*/}
-         <HealthAndSafetyIcon className="ADMIN__table__icon"></HealthAndSafetyIcon>
-         Admin List
+         <AccountBoxIcon className="ADMIN__table__icon"/>
+         Accounts List
        </Box>
        <Table aria-label="collapsible table">
          {/* Start of table headers */}
@@ -142,56 +142,7 @@ import Checkbox from "@mui/material/Checkbox";
                    page * rowsPerPage + rowsPerPage
                  )
                : adminsList
-             ).map((row) => (
-              // getting the data of each row
-              <TableRow key={row.name}>
-                <TableCell
-                  className="ADMIN__table__data"
-                  sx={{ borderColor: "var(--primary-light)" }}
-                  component="th"
-                  scope="row"
-                  >
-                  {row.adminName} {/* getting the admin name */}
-                </TableCell>
-                <TableCell
-                  className="ADMIN__table__data"
-                  sx={{ borderColor: "var(--primary-light)" }}
-                  component="th"
-                  scope="row"
-                  >
-                  {row.id} {/* getting the admin id */}
-                </TableCell>
-                <TableCell
-                  className="ADMIN__table__data"
-                  sx={{ borderColor: "var(--primary-light)" }}
-                  component="th"
-                  scope="row"
-                  align="center"
-                  >
-                  {row.dob} {/* getting the admin date of birth */}
-                </TableCell>
-                <TableCell
-                  className="ADMIN__table__data"
-                  sx={{ borderColor: "var(--primary-light)" }}
-                  component="th"
-                  scope="row"
-                  align="center"
-                  >
-                  {row.role} {/* getting the admin role */}
-                </TableCell>
-                <TableCell sx={{ borderColor: "var(--primary-light)" }} align="center">
-                <FormControlLabel
-                  required
-                  control={
-                    <Checkbox
-                      className="__checkbox"
-                      value="allowExtraEmails"
-                    />
-                  }
-                  label=""
-                />
-                </TableCell>
-              </TableRow>))}
+             ).map((row) => <EachRow key={row.id} row={row} />)}
          </TableBody>
        </Table>
        {adminsList && (
