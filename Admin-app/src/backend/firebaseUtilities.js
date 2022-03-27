@@ -59,8 +59,9 @@ const getFirstLevelSubcollection = async (
 ) => {
   const dbString = `${tableName}/${key}/${subCollectionName}`;
   const docsSnapshot = await getDocs(collection(db, dbString));
+  const returnValue = docsSnapshot.docs.map((item) => item.data());
 
-  return docsSnapshot;
+  return returnValue;
 };
 
 export {
