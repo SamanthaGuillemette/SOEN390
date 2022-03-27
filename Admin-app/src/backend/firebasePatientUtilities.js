@@ -1,9 +1,4 @@
-import {
-  getTableData,
-  getTableDataItem,
-  getDocRef,
-  getFirstLevelSubcollection,
-} from "./firebaseUtilities";
+import { getTableData, getTableDataItem, getDocRef } from "./firebaseUtilities";
 import { updateDoc, deleteField } from "firebase/firestore";
 
 const tableName = "Client";
@@ -135,12 +130,9 @@ const setStatus = async (patientKey, status) => {
 const getStatuses = async (patientKey) => {
   console.log("[getStatuses]: " + patientKey);
   const statusCollectionName = "Status";
+  const dbString = `${getTableName()}/${patientKey}/${statusCollectionName}`;
 
-  const statuses = await getFirstLevelSubcollection(
-    getTableName(),
-    patientKey,
-    statusCollectionName
-  );
+  const statuses = await getTableData(dbString);
 
   return statuses;
 };

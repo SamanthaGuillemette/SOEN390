@@ -1,9 +1,9 @@
 import { collection, doc, getDocs, getDoc, setDoc } from "firebase/firestore";
 import { db } from "./firebase";
 
-const getTableData = async (tableName) => {
+const getTableData = async (collectionPath) => {
   try {
-    const querySnapshot = await getDocs(collection(db, tableName));
+    const querySnapshot = await getDocs(collection(db, collectionPath));
     const returnValue = querySnapshot.docs.map((patient) => patient.data());
     return returnValue;
   } catch (error) {
@@ -47,27 +47,4 @@ const populateTable = (tableName, jsonStr) => {
   }
 };
 
-/**
- * Obtains a 1st level subcollection
- *
- * @param {*} patientKey
- */
-const getFirstLevelSubcollection = async (
-  tableName,
-  key,
-  subCollectionName
-) => {
-  const dbString = `${tableName}/${key}/${subCollectionName}`;
-  const docsSnapshot = await getDocs(collection(db, dbString));
-  const returnValue = docsSnapshot.docs.map((item) => item.data());
-
-  return returnValue;
-};
-
-export {
-  getTableData,
-  getTableDataItem,
-  populateTable,
-  getDocRef,
-  getFirstLevelSubcollection,
-};
+export { getTableData, getTableDataItem, populateTable, getDocRef };
