@@ -24,16 +24,16 @@ function EachRow(props) {
   return (
       <TableRow>
         {/* Displaying row of data */}
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="ADMIN__table__data" component="th" scope="row" align="left">
+        <TableCell sx={{ borderColor: "var(--background-secondary)", color: disabledValue === "true" ? "var(--text-inactive)" : "var(--text-primary)"}} className="ADMIN__table__data" component="th" scope="row" align="left">
          {row.adminName}
         </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="ADMIN__table__data" align="left" >
+        <TableCell sx={{ borderColor: "var(--background-secondary)", color: disabledValue === "true" ? "var(--text-inactive)" : "var(--text-primary)"}} className="ADMIN__table__data" align="left" >
           {row.id}
         </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="PATIENT__table__data" align="center" >
+        <TableCell sx={{ borderColor: "var(--background-secondary)", color: disabledValue === "true" ? "var(--text-inactive)" : "var(--text-primary)"}} className="ADMIN__table__data" align="center" >
           {row.dob}
         </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)"}} className={row.role === "Administrator" ? "ROLE__label-admin" : row.role === "Health Official" ? "ROLE__label-health-off" : row.role === "Immigration Officer" ? "ROLE__label-immigration-off" : "ROLE__label-doctor"} align="center" >
+        <TableCell sx={{ borderColor: "var(--background-secondary)", color: disabledValue === "true" ? "var(--text-inactive)" : "var(--text-primary)"}} className={row.role === "Administrator" && disabledValue !== "true"? "ROLE__label-admin" : row.role === "Health Official" && disabledValue !== "true" ? "ROLE__label-health-off" : row.role === "Immigration Officer" && disabledValue !=="true" ? "ROLE__label-immigration-off" : disabledValue !== "true" ? "ROLE__label-doctor" : "ADMIN__table__data"} align="center" >
           {row.role}
         </TableCell>
         <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="ADMIN__table__data" align="center">
