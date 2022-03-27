@@ -12,7 +12,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 // import AccountCircle from "@mui/icons-material/AccountCircle";
 // import MenuItem from "@mui/material/MenuItem";
 // import Menu from "@mui/material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
 import "./Navbar.css";
 import {
   Drawer,
@@ -27,7 +26,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
   MuiDrawer: {
-    background: "rgba(15, 15, 15, 0.8)",
+    background: "rgba(15, 15, 15, 0.8) !important",
     borderRight: "1px solid rgba(74, 207, 248, 0.3)",
     borderRadius: "10px",
   },
@@ -113,10 +112,6 @@ const MenuAppBar = () => {
           >
             Covid-19 App
           </Typography>
-
-          <IconButton sx={{ color: "var(--text-inactive)" }}>
-            <SearchIcon />
-          </IconButton>
         </Toolbar>
       </AppBar>
     </Box>
