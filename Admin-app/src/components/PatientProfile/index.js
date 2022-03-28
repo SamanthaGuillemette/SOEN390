@@ -20,8 +20,6 @@ import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import Checkbox from "@mui/material/Checkbox";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import Button from "@mui/material/Button";
 import FlagIcon from "@mui/icons-material/Flag";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -33,13 +31,6 @@ import {
 } from "../../backend/firebasePatientUtilities";
 import DropdownStatus from "./../DropdownStatus";
 import DropdownDoctor from "./../DropdownDoctor";
-
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(0.5),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
 
 /**
  * setAge function works for setting the age of the patient
@@ -85,7 +76,9 @@ function PatientProfile() {
     MuscleAche,
     Tiredness,
     SmellLoss,
-    TasteLoss
+    TasteLoss,
+    Temperature,
+    Weight
   ) {
     return {
       Date,
@@ -96,6 +89,8 @@ function PatientProfile() {
       Tiredness,
       SmellLoss,
       TasteLoss,
+      Temperature,
+      Weight,
     };
   }
 
@@ -144,9 +139,11 @@ function PatientProfile() {
                   status.cough || "No",
                   status.runnyNose || "No",
                   status.muscleAche || "No",
-                  status.tiredness || "No",
+                  status.soreThroat || "No",
                   status.smellLoss || "No",
-                  status.tasteLoss || "No"
+                  status.tasteLoss || "No",
+                  status.temperature || "",
+                  status.weight || ""
                 )
               )
             );
@@ -256,18 +253,6 @@ function PatientProfile() {
                   alignItems="baseline"
                 >
                   <DropdownStatus patientInfo={patientInfo} />
-                  <Item
-                    className="PATIENT-PROFILE__data"
-                    sx={{ bgcolor: "inherit", boxShadow: "none" }}
-                  >
-                    Temperature: {patientInfo && patientInfo.temperature} °C
-                  </Item>
-                  <Item
-                    className="PATIENT-PROFILE__data"
-                    sx={{ bgcolor: "inherit", boxShadow: "none" }}
-                  >
-                    Weight: {patientInfo && patientInfo.weight} lbs
-                  </Item>
                 </Stack>
               </CardContent>
             </CardActionArea>
@@ -346,12 +331,10 @@ function PatientProfile() {
         >
           <h5 className="PATIENT-SYMPTOMS__table__label">
             <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SYMPTOM DETAILS
-            <Button id="addButton">
-              <AddCircleIcon
-                sx={{ color: "var(--text-primary)" }}
-              ></AddCircleIcon>
-            </Button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STATUS DETAILS{" "}
+            {patientInfoStatuses &&
+              patientInfoStatuses.length === 0 &&
+              `(No Symptoms Entered Yet)`}
           </h5>
           <Table sx={{ minWidth: 650 }} aria-label="collapsable table">
             <TableHead>
@@ -395,7 +378,7 @@ function PatientProfile() {
                   sx={{ borderColor: "var(--background-secondary)" }}
                   align="center"
                 >
-                  Tiredness
+                  Sore Throat
                 </TableCell>
                 <TableCell
                   className="PATIENT-SYMPTOMS__table__header"
@@ -410,6 +393,20 @@ function PatientProfile() {
                   align="center"
                 >
                   Taste Loss
+                </TableCell>
+                <TableCell
+                  className="PATIENT-SYMPTOMS__table__header"
+                  sx={{ borderColor: "var(--background-secondary)" }}
+                  align="center"
+                >
+                  Temperature (&deg;C)
+                </TableCell>
+                <TableCell
+                  className="PATIENT-SYMPTOMS__table__header"
+                  sx={{ borderColor: "var(--background-secondary)" }}
+                  align="center"
+                >
+                  Weight (lb)
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -476,6 +473,20 @@ function PatientProfile() {
                       align="center"
                     >
                       {row.TasteLoss}
+                    </TableCell>
+                    <TableCell
+                      className="PATIENT-SYMPTOMS__table__data"
+                      sx={{ borderColor: "var(--background-secondary)" }}
+                      align="center"
+                    >
+                      {row.Temperature}
+                    </TableCell>
+                    <TableCell
+                      className="PATIENT-SYMPTOMS__table__data"
+                      sx={{ borderColor: "var(--background-secondary)" }}
+                      align="center"
+                    >
+                      {row.Weight}
                     </TableCell>
                   </TableRow>
                 ))}
