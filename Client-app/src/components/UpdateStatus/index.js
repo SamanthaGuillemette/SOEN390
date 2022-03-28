@@ -90,14 +90,14 @@ function UpdateStatus() {
                   sx={{ borderColor: "var(--secondary-light)" }}
                   align="center"
                 >
-                  {clientInfo && clientInfo[0].data.temperature}
+                  {}
                 </TableCell>
                 <TableCell
                     className="data"
                     sx={{ borderColor: "var(--secondary-light)" }}
                     align="right"
                   >
-                    {clientInfo && clientInfo[0].data.weight}
+                    {}
                   </TableCell>
               </TableRow>
           </TableBody>

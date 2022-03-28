@@ -93,7 +93,7 @@ function SymptomsTable() {
                             sx={{ borderColor: "var(--secondary-light)" }}
                             align="right"
                           >
-                            {clientInfo && clientInfo[0].data.fever}
+                            {}
                         </TableCell>
                       </TableRow>
                       <TableRow>
@@ -109,7 +109,7 @@ function SymptomsTable() {
                             sx={{ borderColor: "var(--primary-light)" }}
                             align="right"
                           >
-                            {clientInfo && clientInfo[0].data.soreThroat}
+                            {}
                         </TableCell>
                       </TableRow>
                       <TableRow>
@@ -125,7 +125,7 @@ function SymptomsTable() {
                             sx={{ borderColor: "var(--secondary-light)" }}
                             align="right"
                           >
-                            {clientInfo && clientInfo[0].data.cough}
+                            {}
                         </TableCell>
                       </TableRow>
                       <TableRow>
@@ -141,7 +141,7 @@ function SymptomsTable() {
                             sx={{ borderColor: "var(--primary-light)" }}
                             align="right"
                           >
-                            {clientInfo && clientInfo[0].data.runnyNose}
+                            {}
                         </TableCell>
                       </TableRow>
                       <TableRow>
@@ -157,7 +157,7 @@ function SymptomsTable() {
                             sx={{ borderColor: "var(--primary-light)" }}
                             align="right"
                           >
-                            {clientInfo && clientInfo[0].data.muscleAche}
+                            {}
                         </TableCell>
                       </TableRow>
                       <TableRow>
@@ -173,7 +173,7 @@ function SymptomsTable() {
                             sx={{ borderColor: "var(--secondary-light)" }}
                             align="right"
                           >
-                            {clientInfo && clientInfo[0].data.smellLoss}
+                            {}
                         </TableCell>
                       </TableRow>
                       <TableRow>
@@ -189,7 +189,7 @@ function SymptomsTable() {
                             sx={{ borderColor: "transparent" }}
                             align="right"
                           >
-                            {clientInfo && clientInfo[0].data.tasteLoss}
+                            {}
                         </TableCell>
                       </TableRow>
                     </TableBody>

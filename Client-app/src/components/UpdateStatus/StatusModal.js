@@ -131,7 +131,7 @@ export default function SimpleModal() {
           noValidate
           onSubmit={handleSymptomsSubmit}
         >
-          <Typography className="header-statusModal" variant="h6" component="h2" sx={{ mb: 1.8 }}>
+          <Typography className="header-statusModal" variant="h6" component="h2" sx={{ mb: 2.5 }}>
             ADD STATUS
           </Typography>
           <Grid container minWidth={285} spacing={1}>
@@ -189,7 +189,7 @@ export default function SimpleModal() {
             type="submit"
             variant="contained"
             className="updateStatus__save-btn"
-            sx={{ mt: 3, mb: 2}}
+            sx={{ mt: 4, mb: 2}}
           >
             SAVE
           </Button>
