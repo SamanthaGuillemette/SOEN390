@@ -91,7 +91,7 @@ export const mainListItems = (
       </ListItem>
     </Link>
 
-    <Link className="SIDEBAR__link" to="testing">
+    <Link className="SIDEBAR__link" to="updates">
       <ListItem button className="SIDEBAR__button">
         <ListItemIcon>
           <NotificationsIcon className="SIDEBAR__icon"/>
@@ -135,7 +135,7 @@ export const mainListItems = (
         </ListItemIcon>
         <ListItemText className="SIDEBAR__text" primary={userFullName} />
       </ListItem>
-      <Link className="SIDEBAR__link" to="patients">
+      <Link className="SIDEBAR__link" to="signin">
       <ListSubheader button onClick={logout} className="SIDEBAR__subheader" inset>Sign Out</ListSubheader> 
     </Link>
   </div>
