@@ -95,13 +95,15 @@ export default function SignIn() {
    */
   const login = async (e) => {
     e.preventDefault();
-    const docRef = doc(db, "Admin", email);
+    const docRef = doc(db, "Client", email.toLowerCase());
     const docSnap = await getDoc(docRef);
+    const adminDocRef = doc(db, "Admin", email.toLowerCase());
+    const adminDocSnap = await getDoc(adminDocRef);
 
-    if (docSnap.data().newAccount) {
+    if (adminDocSnap.exists() && adminDocSnap.data().newAccount) {
       setError3(true);
       setOpen(true);
-    } else if (docSnap.exists()) {
+    } else if (!docSnap.exists()) {
       signInWithEmailAndPassword(auth, email, password).catch((error) => {
         setError2(true);
         setOpen(true);

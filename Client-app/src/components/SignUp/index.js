@@ -127,6 +127,7 @@ export default function SignUp(props) {
     const docRef = doc(db, "Admin", email);
     const docSnap = await getDoc(docRef);
 
+
     if (docSnap.exists()) {
       setError1(true);
       setOpen(true);
@@ -138,7 +139,7 @@ export default function SignUp(props) {
           // Also required to add + 1 for the month
           const dobValue = dob.$M + 1 + "/" + dob.$D + "/" + dob.$y;
 
-          await setDoc(doc(db, "Client", email), {
+          await setDoc(doc(db, "Client", email.toLowerCase()), {
             firstName: firstName,
             lastName: lastName,
             address: address,
@@ -146,7 +147,7 @@ export default function SignUp(props) {
             city: city,
             province: province,
             dob: dobValue,
-            email: email,
+            email: email.toLowerCase(),
           });
         })
         .catch((error) => {
