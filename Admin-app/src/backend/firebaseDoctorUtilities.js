@@ -1,9 +1,18 @@
-import { updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+import {
+  updateDoc,
+  arrayUnion,
+  arrayRemove,
+  getDocs,
+  collection,
+  getDoc,
+  setDoc,
+} from "firebase/firestore";
 import {
   getAdminsByRole,
   getAdminByRoleAndKey,
   getAdminRef,
 } from "./firebaseAdminUtilities";
+import { db } from "./firebase";
 
 const role = "Doctor";
 const patientLimit = 3;
@@ -58,7 +67,9 @@ const removePatientFromDoctor = async (doctorKey, patientKey) => {
 
 const getStatusNotificationsTable = async (doctorKey) => {
   try {
-    const querySnapshot = await getDocs(collection(db, `Admin/${doctorKey}/StatusNotifications`));
+    const querySnapshot = await getDocs(
+      collection(db, `Admin/${doctorKey}/StatusNotifications`)
+    );
     const returnValue = querySnapshot.docs.map((patient) => patient.data());
     return returnValue;
   } catch (error) {
