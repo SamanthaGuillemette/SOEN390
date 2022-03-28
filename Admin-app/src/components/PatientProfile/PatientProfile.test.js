@@ -24,7 +24,7 @@ test("PatientProfile should render without errors", () => {
   // Symptom details table element
   const symptomDetailsElement = screen.getByTestId("table-1");
   expect(symptomDetailsElement).toBeInTheDocument();
-  expect(symptomDetailsElement).toHaveTextContent("SYMPTOM DETAILS");
+  expect(symptomDetailsElement).toHaveTextContent("STATUS DETAILS");
 });
 
 afterEach(() => {
