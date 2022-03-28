@@ -25,7 +25,8 @@ import { signOut } from 'firebase/auth';
 import { auth } from '../../backend/firebase';
 import { makeStyles } from "@material-ui/core/styles";
 import ChatList from '../ChatList/ChatList.js';
-import RoomIcon from '@material-ui/icons/Room';
+import LogoutIcon from '@mui/icons-material/Logout';
+
 
 const dropdownStyle = makeStyles(() => ({
   menu: {
@@ -272,7 +273,7 @@ function Navbar() {
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
           
              
-            <RoomIcon
+            <LogoutIcon
               size="large"
               edge="end"
               aria-label="account of current user"
@@ -282,7 +283,7 @@ function Navbar() {
               color="inherit"
             >
               <AccountCircle />
-            </RoomIcon>
+            </LogoutIcon>
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
