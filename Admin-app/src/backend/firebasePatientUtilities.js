@@ -1,6 +1,5 @@
 import { getTableData, getTableDataItem, getDocRef } from "./firebaseUtilities";
-import { updateDoc, deleteField, doc } from "firebase/firestore";
-import { db } from "./firebase";
+import { updateDoc, deleteField } from "firebase/firestore";
 
 const tableName = "Client";
 
@@ -123,11 +122,11 @@ const setStatus = async (patientKey, status) => {
   }
 };
 
-const setRecovered = async (patientId, recovered) => {
+const setRecovered = async (patientKey, recovered) => {
   try {
     // Get Patient
-    const docRef = doc(db, tableName, patientId);
-    let patientInfo = await getPatient(patientId);
+    const docRef = getDocRef(tableName, patientKey);
+    let patientInfo = await getPatient(patientKey);
 
     if (patientInfo) {
       if (recovered != null) {
@@ -137,20 +136,12 @@ const setRecovered = async (patientId, recovered) => {
     }
 
     // Get updated patient
-    patientInfo = await getPatient(patientId);
+    patientInfo = await getPatient(patientKey);
 
     return patientInfo;
   } catch (error) {
     console.log("[setRecovered]" + error);
   }
-};
-
-/**
- * This function populates the Patient table in firebase given a JSON file
- * imported at the beginning of this file
- */
-const populatePatients = () => {
-  populateTable(tableName, patientData);
 };
 
 export {
