@@ -135,16 +135,6 @@ export default function SimpleModal() {
             ADD STATUS
           </Typography>
           <Grid container minWidth={285} spacing={1}>
-            {/* Date TextField */}
-            <Grid item xs={12}>
-              <TextField
-                id="statusModal-standardBasic"
-                value={formattedDate}
-                variant="standard"
-                color="grey"
-                inputProps={{readOnly: true}}
-              />
-            </Grid>
              {/* Temperature TextField */}
             <Grid item xs={12}>
               <TextField
