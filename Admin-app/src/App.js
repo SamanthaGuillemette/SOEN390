@@ -19,6 +19,7 @@ import { useEffect } from "react";
 import Event from "./components/Event";
 import EventDetails from "./components/Event/EventDetails";
 import { fetchUserInfo } from "./store/userInfoSlice";
+import AdminList from "./components/AdminList";
 
 function App() {
   const user = useSelector(selectUserToken);
@@ -59,8 +60,9 @@ function App() {
             <Route path="/appointments" element={<Appointments />} />
             <Route path="/patients" element={<Patients />} />
             <Route path="/patientprofile/:key" element={<PatientProfile />} />
+            <Route path="/admin" element={<AdminList />} />
             <Route path="/inbox" element={<Inbox />} />
-            <Route path="/testing" element={<Notifications />} />
+            <Route path="/updates" element={<Notifications />} />
             <Route path="/qr" element={<QR />} />
             <Route path="/news" element={<News />} />
             <Route path="/news/:id" element={<NewsDetails />} />{" "}

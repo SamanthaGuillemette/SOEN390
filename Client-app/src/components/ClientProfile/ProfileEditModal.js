@@ -119,7 +119,7 @@ export default function BasicModal() {
    * @param {Object} date
    */
   const handleUpdateDOB = (newDate) => {
-    setDOB(`${newDate?.$D}/${newDate?.$M + 1}/${newDate?.$y}`);
+    setDOB(`${newDate?.$M + 1}/${newDate?.$D}/${newDate?.$y}`);
   };
 
   /**

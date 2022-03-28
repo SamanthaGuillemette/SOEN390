@@ -1,13 +1,14 @@
 #messagesReceived {
   padding: 10px;
-  max-width: 100vw; 
-  height: 75vh; 
+  max-width: 100vw;
+  height: 68vh;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
 }
 
-ul, li {
+ul,
+li {
   text-align: left;
   list-style: none;
 }
