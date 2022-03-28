@@ -66,3 +66,9 @@
 .BOTTOM-NAV__popover__text:hover {
   color: var(--text-primary) !important;
 }
+
+@media (max-height: 520px) {
+  .BOTTOM-NAV__container {
+    display: none;
+  }
+}
