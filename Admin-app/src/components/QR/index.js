@@ -11,8 +11,10 @@ import Box from "@mui/material/Box";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../backend/firebase";
 import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
 import Stack from "@mui/material/Stack";
 import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
 // Source: https://reactjsexample.com/react-component-for-reading-qr-codes-from-webcam/
 
 const useStyles = makeStyles({
@@ -33,10 +35,10 @@ const useStyles = makeStyles({
 const Scanner = () => {
   const classes = useStyles();
   const [scanned, setScanned] = useState("Not scanned yet!");
-  const [displayQR, setDisplay] = useState(false);
+  const [displayProfile, setDisplay] = useState(false);
   const [patient, setPatient] = useState(false);
   const [notPatient, setNotPatient] = useState(false);
-  const [qr, setQR] = useState("");
+  const [patientDoc, setPatientDoc] = useState();
 
   /**
    * handling error function
@@ -60,10 +62,11 @@ const Scanner = () => {
         setScanned("Scanned successfully!");
         const docRef = doc(db, "Client", `${QRScan}`);
         const docSnap = await getDoc(docRef);
+        console.log(docRef);
         if (docSnap.exists()) {
-          setQR(`http://api.qrserver.com/v1/create-qr-code/?data=${QRScan}`);
           setDisplay(true);
           setPatient(true);
+          setPatientDoc(`${QRScan}`);
         } else {
           setNotPatient(true);
         }
@@ -104,7 +107,7 @@ const Scanner = () => {
             }}
             variant="h6"
           >
-            Scan a QR Code to Generate User's Profile
+            Scan a QR Code to Generate Patients's Profile
           </Typography>
           <QrReader
             facingMode={"environment"}
@@ -114,12 +117,14 @@ const Scanner = () => {
             style={{ width: "300px" }}
           />
           <br />
-          <p>{scanned}</p>
-          {displayQR && (
-            <Box sx={{ mx: "300px", mb: "30px" }}>
-              <img alt="QRCode" src={qr} />
-            </Box>
-          )}
+          <Typography
+            sx={{
+              mb: "20px",
+              color: "var(--text-primary)",
+            }}
+          >
+            {scanned}
+          </Typography>
           {notPatient && (
             <Stack sx={{ width: "100%" }} spacing={2}>
               <Alert
@@ -132,6 +137,9 @@ const Scanner = () => {
                   borderRadius: "2rem",
                 }}
               >
+                <AlertTitle>
+                  <strong>No Results</strong>
+                </AlertTitle>
                 The patient is not registered, no profile was found.
               </Alert>
             </Stack>
@@ -148,7 +156,13 @@ const Scanner = () => {
                   borderRadius: "2rem",
                 }}
               >
+                <AlertTitle>
+                  <strong>Success</strong>
+                </AlertTitle>
                 The patient profile was found successfully!
+                <Link to={`/patientprofile/${patientDoc}`}>
+                  <strong> Click to display the profile! </strong>
+                </Link>
               </Alert>
             </Stack>
           )}
