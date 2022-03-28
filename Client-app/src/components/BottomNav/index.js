@@ -41,7 +41,7 @@ const BottomNav = () => {
           </p>
         </IconButton>
       </Link>
-      <Link to="../notifications">
+      <Link to="../updates">
         <IconButton size="large" className="BOTTOM-NAV__btn">
           <NotificationsIcon sx={{ color: "white" }} />
           <p className="BOTTOM-NAV__btn__title">Updates</p>
