@@ -2,7 +2,11 @@
  * @fileoverview This component takes care of the Sidebar function.
  *
  */
-import { mainListItems, secondaryListItems, SecondMainListItems} from "../SidebarItems";
+import {
+  mainListItems,
+  secondaryListItems,
+  SecondMainListItems,
+} from "../SidebarItems";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import Divider from "@mui/material/Divider";
@@ -44,7 +48,7 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 /**
- * This component is what allows the Sidebar feature to be displayed. 
+ * This component is what allows the Sidebar feature to be displayed.
  */
 function Sidebar() {
   // const [open, setOpen] = useState(true);
@@ -66,14 +70,17 @@ function Sidebar() {
         }}
       >
         {/* <IconButton onClick={toggleDrawer}> */}
-        <IconButton sx={{color: "var(--text-inactive)"}} onClick={() => dispatch(openDrawer())}>
+        <IconButton
+          sx={{ color: "var(--text-inactive)" }}
+          onClick={() => dispatch(openDrawer())}
+        >
           {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
         </IconButton>
       </Toolbar>
       <Divider />
       <List>{mainListItems}</List>
       <Divider />
-      <SecondMainListItems/>
+      <SecondMainListItems />
       <Divider />
       <List>{secondaryListItems}</List>
     </Drawer>

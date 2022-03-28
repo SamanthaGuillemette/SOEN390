@@ -46,13 +46,13 @@ const MenuAppBar = () => {
    */
   const list = () => (
     <Box
-      sx={{ width: 250, pt: 5, pl: 2}}
+      sx={{ width: 250, pt: 5, pl: 2 }}
       role="presentation"
       onClick={toggleDrawer}
     >
       <List>
         {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem className="sidebar-button"button key={text}>
+          <ListItem className="sidebar-button" button key={text}>
             <ListItemIcon className="sidebar-icon">
               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
             </ListItemIcon>

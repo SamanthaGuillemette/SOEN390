@@ -9,11 +9,11 @@ import ListSubheader from "@mui/material/ListSubheader";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import MailIcon from "@mui/icons-material/Mail";
 import PeopleIcon from "@mui/icons-material/People";
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import NotificationsIcon from "@mui/icons-material/Notifications";
 import EventIcon from "@mui/icons-material/Event";
 import { Link } from "react-router-dom";
-import QrCodeIcon from '@mui/icons-material/QrCode';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import QrCodeIcon from "@mui/icons-material/QrCode";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { getAdmin } from "../../backend/firebaseAdminUtilities";
 import { auth } from "../../backend/firebase";
 import { useState } from "react";
@@ -27,22 +27,22 @@ export async function getUserFullName() {
 
   if (userEmail) {
     const responseData = await getAdmin(userEmail); // getting Admin tuple
-    const fullName = `${responseData.firstName} ${responseData.lastName}`
+    const fullName = `${responseData.firstName} ${responseData.lastName}`;
     return fullName; // returning the user's role
   }
 }
 
 /**
-  * Handle logging user out.
-  * @param  {ClickEvent} e
-  */
+ * Handle logging user out.
+ * @param  {ClickEvent} e
+ */
 const logout = async (e) => {
   e.preventDefault();
   signOut(auth);
 };
 
 /**
- * This component is what allows the mainListItems feature to be displayed. 
+ * This component is what allows the mainListItems feature to be displayed.
  * @returns {JSX.Element}
  */
 export const mainListItems = (
@@ -50,7 +50,7 @@ export const mainListItems = (
     <Link className="SIDEBAR__link" to="/">
       <ListItem button className="SIDEBAR__button">
         <ListItemIcon>
-          <DashboardIcon className="SIDEBAR__icon"/>
+          <DashboardIcon className="SIDEBAR__icon" />
         </ListItemIcon>
         <ListItemText className="SIDEBAR__text" primary="Dashboard" />
       </ListItem>
@@ -59,7 +59,7 @@ export const mainListItems = (
     <Link className="SIDEBAR__link" to="/appointments">
       <ListItem button className="SIDEBAR__button">
         <ListItemIcon>
-          <EventIcon className="SIDEBAR__icon"/>
+          <EventIcon className="SIDEBAR__icon" />
         </ListItemIcon>
         <ListItemText className="SIDEBAR__text" primary="Appointments" />
       </ListItem>
@@ -68,7 +68,7 @@ export const mainListItems = (
     <Link className="SIDEBAR__link" to="/patients">
       <ListItem button className="SIDEBAR__button">
         <ListItemIcon>
-          <PeopleIcon className="SIDEBAR__icon"/>
+          <PeopleIcon className="SIDEBAR__icon" />
         </ListItemIcon>
         <ListItemText className="SIDEBAR__text" primary="Patients" />
       </ListItem>
@@ -77,15 +77,16 @@ export const mainListItems = (
     <Link className="SIDEBAR__link" to="inbox">
       <ListItem button className="SIDEBAR__button">
         <ListItemIcon>
-          <MailIcon className="SIDEBAR__icon"/>
+          <MailIcon className="SIDEBAR__icon" />
           <Badge
             badgeContent={4}
             sx={{
               "& .MuiBadge-badge": {
-                color: 'var(--background-secondary)',
-                backgroundColor: "var(--primary-main)"
-                }
-              }}/>
+                color: "var(--background-secondary)",
+                backgroundColor: "var(--primary-main)",
+              },
+            }}
+          />
         </ListItemIcon>
         <ListItemText className="SIDEBAR__text" primary="Inbox" />
       </ListItem>
@@ -94,15 +95,16 @@ export const mainListItems = (
     <Link className="SIDEBAR__link" to="updates">
       <ListItem button className="SIDEBAR__button">
         <ListItemIcon>
-          <NotificationsIcon className="SIDEBAR__icon"/>
+          <NotificationsIcon className="SIDEBAR__icon" />
           <Badge
             badgeContent={17}
             sx={{
               "& .MuiBadge-badge": {
-                color: 'var(--background-secondary)',
-                backgroundColor: "var(--primary-main)"
-                }
-              }}/>
+                color: "var(--background-secondary)",
+                backgroundColor: "var(--primary-main)",
+              },
+            }}
+          />
         </ListItemIcon>
         <ListItemText className="SIDEBAR__text" primary="Updates" />
       </ListItem>
@@ -111,7 +113,7 @@ export const mainListItems = (
     <Link className="SIDEBAR__link" to="QR">
       <ListItem button className="SIDEBAR__button">
         <ListItemIcon>
-          <QrCodeIcon className="SIDEBAR__icon"/>
+          <QrCodeIcon className="SIDEBAR__icon" />
         </ListItemIcon>
         <ListItemText className="SIDEBAR__text" primary="QR Code" />
       </ListItem>
@@ -120,26 +122,34 @@ export const mainListItems = (
 );
 
 /**
- * This component is what allows the mainListItems feature to be displayed. 
+ * This component is what allows the mainListItems feature to be displayed.
  * @returns {JSX.Element}
  */
- export function SecondMainListItems() {
+export function SecondMainListItems() {
   const [userFullName, setUserFullName] = useState("");
   getUserFullName().then((fullName) => setUserFullName(fullName)); // setting role
-  
+
   return (
-  <div>
+    <div>
       <ListItem>
         <ListItemIcon>
-          <AccountCircleIcon className="SIDEBAR__icon"/>
+          <AccountCircleIcon className="SIDEBAR__icon" />
         </ListItemIcon>
         <ListItemText className="SIDEBAR__text" primary={userFullName} />
       </ListItem>
       <Link className="SIDEBAR__link" to="signin">
-      <ListSubheader button onClick={logout} className="SIDEBAR__subheader" inset>Sign Out</ListSubheader> 
-    </Link>
-  </div>
-)};
+        <ListSubheader
+          button
+          onClick={logout}
+          className="SIDEBAR__subheader"
+          inset
+        >
+          Sign Out
+        </ListSubheader>
+      </Link>
+    </div>
+  );
+}
 
 export const secondaryListItems = (
   <div>

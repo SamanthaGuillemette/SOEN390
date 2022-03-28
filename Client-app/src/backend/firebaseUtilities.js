@@ -30,7 +30,4 @@ const getAdmin = async (key) => {
   return getTableDataItem("Admin", key);
 };
 
-export {
-  getAdmin,
-  getPatient,
-};
+export { getAdmin, getPatient };

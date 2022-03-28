@@ -2,7 +2,7 @@
  * @fileoverview This component takes care of the Navbar function.
  *
  */
-import { styled} from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import MuiAppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -15,10 +15,10 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useSelector, useDispatch } from "react-redux";
 import { openDrawer, openState } from "../../store/drawerSlice";
 import { useState } from "react";
-import { signOut } from 'firebase/auth';
-import { auth } from '../../backend/firebase';
+import { signOut } from "firebase/auth";
+import { auth } from "../../backend/firebase";
 import { makeStyles } from "@material-ui/core/styles";
-import ChatList from '../ChatList/ChatList.js';
+import ChatList from "../ChatList/ChatList.js";
 
 const dropdownStyle = makeStyles(() => ({
   menu: {
@@ -26,8 +26,8 @@ const dropdownStyle = makeStyles(() => ({
       backgroundColor: "var(--background-main)",
       color: "var(--text-inactive)",
       borderRadius: "10px",
-    }
-  }
+    },
+  },
 }));
 
 const drawerWidth = 240;
@@ -66,7 +66,6 @@ function Navbar() {
   const open = useSelector(openState);
   const dispatch = useDispatch();
 
-
   /**
    * Function to handle messages menu close
    * @param  {} event
@@ -82,7 +81,7 @@ function Navbar() {
     setMobileMoreAnchorEl(null);
   };
 
-   /**
+  /**
    * Function to handle menu open
    */
   const handleMenuClose = () => {
@@ -90,7 +89,7 @@ function Navbar() {
     handleMobileMenuClose();
   };
 
-   /**
+  /**
    * Function to handle mobile menu open
    * @param  {} event
    */
@@ -100,12 +99,12 @@ function Navbar() {
 
   const menuId = "primary-search-account-menu";
 
-  const logout = async(e) => {
+  const logout = async (e) => {
     e.preventDefault();
     signOut(auth);
     setAnchorEl(null);
     handleMobileMenuClose();
-  }
+  };
 
   const renderMenu = (
     <Menu
@@ -116,20 +115,28 @@ function Navbar() {
       onClose={handleMenuClose}
       className={classes.menu}
     >
-      <MenuItem 
-      onMouseEnter={(e) => e.target.style.color = 'var(--text-primary)'}
-      onMouseLeave={(e) => e.target.style.color = 'var(--text-inactive)'}
-      onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem 
-      onMouseEnter={(e) => e.target.style.color = 'var(--text-primary)'}
-      onMouseLeave={(e) => e.target.style.color = 'var(--text-inactive)'}
-      onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem 
-      onMouseEnter={(e) => e.target.style.color = 'var(--text-primary)'}
-      onMouseLeave={(e) => e.target.style.color = 'var(--text-inactive)'}
-      onClick={logout}>Signout</MenuItem>
+      <MenuItem
+        onMouseEnter={(e) => (e.target.style.color = "var(--text-primary)")}
+        onMouseLeave={(e) => (e.target.style.color = "var(--text-inactive)")}
+        onClick={handleMenuClose}
+      >
+        Profile
+      </MenuItem>
+      <MenuItem
+        onMouseEnter={(e) => (e.target.style.color = "var(--text-primary)")}
+        onMouseLeave={(e) => (e.target.style.color = "var(--text-inactive)")}
+        onClick={handleMenuClose}
+      >
+        My account
+      </MenuItem>
+      <MenuItem
+        onMouseEnter={(e) => (e.target.style.color = "var(--text-primary)")}
+        onMouseLeave={(e) => (e.target.style.color = "var(--text-inactive)")}
+        onClick={logout}
+      >
+        Signout
+      </MenuItem>
     </Menu>
-
   );
 
   const msgId = "primary-search-msg-menu";
@@ -150,14 +157,11 @@ function Navbar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar
-        position="absolute"
-        open={open}
-      >
+      <AppBar position="absolute" open={open}>
         <Toolbar
           sx={{
             pr: "24px", // keep right padding when drawer closed
-            backgroundColor: "var(--background-secondary)"
+            backgroundColor: "var(--background-secondary)",
           }}
         >
           <IconButton

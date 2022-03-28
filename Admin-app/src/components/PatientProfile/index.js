@@ -100,12 +100,16 @@ function PatientProfile() {
 
   // reviewed status with DB
   function onReviewedClick() {
-    toggleReviewed(key).then((newPatientInfo) => setPatientInfo(newPatientInfo));
+    toggleReviewed(key).then((newPatientInfo) =>
+      setPatientInfo(newPatientInfo)
+    );
   }
 
   // priority flag with DB
   function onFlagClick() {
-    togglePriorityFlag(key).then((newPatientInfo) => setPatientInfo(newPatientInfo));
+    togglePriorityFlag(key).then((newPatientInfo) =>
+      setPatientInfo(newPatientInfo)
+    );
   }
 
   const rows = [
@@ -182,7 +186,9 @@ function PatientProfile() {
             data-testid="card-2"
             sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }}
             className={
-              patientInfo && patientInfo.flaggedPriority === "1" ? "PATIENT__status clicked" : "PATIENT__status__card"
+              patientInfo && patientInfo.flaggedPriority === "1"
+                ? "PATIENT__status clicked"
+                : "PATIENT__status__card"
             }
           >
             <CardActionArea>
@@ -279,9 +285,20 @@ function PatientProfile() {
                     className="PATIENT-STATUS-REVIEW__data"
                     variant="body2"
                   >
-                    Review Completed: {patientInfo && (patientInfo.statusReview === null || patientInfo.statusReview === "Not Completed") ? "Not Completed" : "Status Reviewed"}
+                    Review Completed:{" "}
+                    {patientInfo &&
+                    (patientInfo.statusReview === null ||
+                      patientInfo.statusReview === "Not Completed")
+                      ? "Not Completed"
+                      : "Status Reviewed"}
                     <Checkbox
-                      checked={patientInfo && (patientInfo.statusReview === null || patientInfo.statusReview === "Not Completed") ? false : true}
+                      checked={
+                        patientInfo &&
+                        (patientInfo.statusReview === null ||
+                          patientInfo.statusReview === "Not Completed")
+                          ? false
+                          : true
+                      }
                       size="small"
                       style={{ color: "var(--text-primary)" }}
                       onClick={() => {

@@ -45,7 +45,7 @@ const theme = createTheme({
     },
     error: {
       main: "#ffffff",
-    }
+    },
   },
   components: {
     MuiIconButton: {
@@ -58,15 +58,15 @@ const theme = createTheme({
   },
 });
 
-  // This const does styling of the empty input field helper text
-  const helperTextStyles = makeStyles(theme => ({
-    root: {
-      "&.MuiFormHelperText-root.Mui-error": {
-        color: "#d93025",
-        fontSize: "12px",
-      }
-    }
-  }));
+// This const does styling of the empty input field helper text
+const helperTextStyles = makeStyles((theme) => ({
+  root: {
+    "&.MuiFormHelperText-root.Mui-error": {
+      color: "#d93025",
+      fontSize: "12px",
+    },
+  },
+}));
 
 /**
  * This function is responsible for the signup component which also communicates with the server and displays relevent error messages if necessary.
@@ -96,13 +96,13 @@ export default function SignUp(props) {
     setErrorMsg("");
   };
 
-   /**
-    * This function is responsible for setting checked to be true or false depending on whether clicked or not
-    * @param  {} event
-    */
-    const handleChange = (event) => {
-      setChecked(event.target.checked);
-    };
+  /**
+   * This function is responsible for setting checked to be true or false depending on whether clicked or not
+   * @param  {} event
+   */
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+  };
 
   /**
    * This function is responsible for creating a new document in the admin collection with the information of the user who has signed up.
@@ -113,57 +113,75 @@ export default function SignUp(props) {
    */
   const handleSubmit = async (event) => {
     event.preventDefault();
-    let dobValue, dobWithoutSlash = null;
+    let dobValue,
+      dobWithoutSlash = null;
     const currentDate = new Date(); // getting todays date
-    const todaysDate = currentDate.getMonth() +  1 + "" + currentDate.getDate() + "" + currentDate.getFullYear(); // formatting
+    const todaysDate =
+      currentDate.getMonth() +
+      1 +
+      "" +
+      currentDate.getDate() +
+      "" +
+      currentDate.getFullYear(); // formatting
 
     if (dob !== null) {
       dobValue = dob.$M + 1 + "/" + dob.$D + "/" + dob.$y; // Required to add + 1 for the month
       dobWithoutSlash = dob.$M + 1 + "" + dob.$D + "" + dob.$y; // Adding without slashes
     }
-  
-    if (firstName === "" || lastName === "" || address === "" || city === "" || province === "" || postalCode === "" || dob === null || email === "" || password === "") { // if empty fields
+
+    if (
+      firstName === "" ||
+      lastName === "" ||
+      address === "" ||
+      city === "" ||
+      province === "" ||
+      postalCode === "" ||
+      dob === null ||
+      email === "" ||
+      password === ""
+    ) {
+      // if empty fields
       setEmptyFields(true);
     } else {
       const docRef = doc(db, "Admin", email.toLowerCase());
       const docSnap = await getDoc(docRef);
-      
-      if (dobValue !== null) { // if its not null
+
+      if (dobValue !== null) {
+        // if its not null
         // if its a future date
-        if (Number(dobWithoutSlash) >= Number(todaysDate)) { // comparing dates as integer
+        if (Number(dobWithoutSlash) >= Number(todaysDate)) {
+          // comparing dates as integer
           setErrorMsg("You've selected an invalid date. Please try again.");
           setOpen(true);
-        }
-        else if (!checked) {
+        } else if (!checked) {
           setErrorMsg("Please confirm your data is correct.");
           setOpen(true);
+        } else if (!docSnap.exists()) {
+          // if valid date && checked
+          createUserWithEmailAndPassword(auth, email, password)
+            .then(async () => {
+              await setDoc(doc(db, "Client", email.toLowerCase()), {
+                firstName: firstName,
+                lastName: lastName,
+                address: address,
+                city: city,
+                province: province,
+                postalCode: postalCode,
+                dob: dobValue,
+                email: email.toLowerCase(),
+              });
+            })
+            .catch((error) => {
+              setErrorMsg(error.message);
+              setOpen(true);
+            });
+        } else {
+          setErrorMsg("This email is registered with the Admin application.");
+          setOpen(true);
         }
-        else if (!docSnap.exists()){ // if valid date && checked
-        createUserWithEmailAndPassword(auth, email, password)
-         .then(async () => {
-
-          await setDoc(doc(db, "Client", email.toLowerCase()), {
-            firstName: firstName,
-            lastName: lastName,
-            address: address,
-            city: city,
-            province: province,
-            postalCode: postalCode,
-            dob: dobValue,
-            email: email.toLowerCase(),
-           });
-         })
-         .catch((error) => {
-           setErrorMsg(error.message);
-           setOpen(true);
-         });
-      } else {
-        setErrorMsg("This email is registered with the Admin application.");
-        setOpen(true);
       }
     }
-  }
-};
+  };
 
   /**
    * Check if the page is still loading
@@ -226,7 +244,11 @@ export default function SignUp(props) {
                   value={firstName}
                   autoFocus
                   onChange={(e) => setFirstName(e.target.value)}
-                  helperText={firstName === "" && emptyFields ? "This field is required." : ""}
+                  helperText={
+                    firstName === "" && emptyFields
+                      ? "This field is required."
+                      : ""
+                  }
                   error={firstName === "" && emptyFields}
                   FormHelperTextProps={{ classes: helperTestClasses }}
                   InputLabelProps={{
@@ -249,7 +271,11 @@ export default function SignUp(props) {
                   autoComplete="family-name"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
-                  helperText={lastName === "" && emptyFields ? "This field is required." : ""}
+                  helperText={
+                    lastName === "" && emptyFields
+                      ? "This field is required."
+                      : ""
+                  }
                   error={lastName === "" && emptyFields}
                   FormHelperTextProps={{ classes: helperTestClasses }}
                   InputLabelProps={{
@@ -272,7 +298,11 @@ export default function SignUp(props) {
                   autoComplete="street-address"
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
-                  helperText={address === "" && emptyFields ? "This field is required." : ""}
+                  helperText={
+                    address === "" && emptyFields
+                      ? "This field is required."
+                      : ""
+                  }
                   error={address === "" && emptyFields}
                   FormHelperTextProps={{ classes: helperTestClasses }}
                   InputLabelProps={{
@@ -295,7 +325,9 @@ export default function SignUp(props) {
                   autoComplete="address-level3"
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
-                  helperText={city === "" && emptyFields ? "This field is required." : ""}
+                  helperText={
+                    city === "" && emptyFields ? "This field is required." : ""
+                  }
                   error={city === "" && emptyFields}
                   FormHelperTextProps={{ classes: helperTestClasses }}
                   InputLabelProps={{
@@ -316,7 +348,11 @@ export default function SignUp(props) {
                     label="Province"
                     value={province}
                     onChange={(e) => setProvince(e.target.value)}
-                    helperText={province === "" && emptyFields ? "This field is required." : ""}
+                    helperText={
+                      province === "" && emptyFields
+                        ? "This field is required."
+                        : ""
+                    }
                     error={province === "" && emptyFields}
                     FormHelperTextProps={{ classes: helperTestClasses }}
                     InputLabelProps={{
@@ -358,7 +394,11 @@ export default function SignUp(props) {
                   autoComplete="postal-code"
                   value={postalCode}
                   onChange={(e) => setPostalCode(e.target.value)}
-                  helperText={postalCode === "" && emptyFields ? "This field is required." : ""}
+                  helperText={
+                    postalCode === "" && emptyFields
+                      ? "This field is required."
+                      : ""
+                  }
                   error={postalCode === "" && emptyFields}
                   FormHelperTextProps={{ classes: helperTestClasses }}
                   InputLabelProps={{
@@ -384,7 +424,11 @@ export default function SignUp(props) {
                         <TextField
                           {...params}
                           required
-                          helperText={dob === null && emptyFields ? "This field is required." : ""}
+                          helperText={
+                            dob === null && emptyFields
+                              ? "This field is required."
+                              : ""
+                          }
                           error={dob === null && emptyFields}
                           FormHelperTextProps={{ classes: helperTestClasses }}
                           InputLabelProps={{
@@ -425,7 +469,9 @@ export default function SignUp(props) {
                   autoComplete="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  helperText={email === "" && emptyFields ? "This field is required." : ""}
+                  helperText={
+                    email === "" && emptyFields ? "This field is required." : ""
+                  }
                   error={email === "" && emptyFields}
                   FormHelperTextProps={{ classes: helperTestClasses }}
                   InputLabelProps={{
@@ -449,7 +495,11 @@ export default function SignUp(props) {
                   autoComplete="new-password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  helperText={password === "" && emptyFields ? "This field is required." : ""}
+                  helperText={
+                    password === "" && emptyFields
+                      ? "This field is required."
+                      : ""
+                  }
                   error={password === "" && emptyFields}
                   FormHelperTextProps={{ classes: helperTestClasses }}
                   InputLabelProps={{
