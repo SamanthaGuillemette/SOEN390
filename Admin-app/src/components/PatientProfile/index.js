@@ -330,11 +330,12 @@ function PatientProfile() {
           component={Paper}
         >
           <h5 className="PATIENT-SYMPTOMS__table__label">
-            <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STATUS DETAILS{" "}
-            {patientInfoStatuses &&
-              patientInfoStatuses.length === 0 &&
-              `(No Symptoms Entered Yet)`}
+            <h5 className="PATIENT-SYMPTOMS__table__label__no-data">
+              {patientInfoStatuses &&
+                patientInfoStatuses.length === 0 &&
+                `(NO SYMPTOMS ENTERED YET)`}
+            </h5>
           </h5>
           <Table sx={{ minWidth: 650 }} aria-label="collapsable table">
             <TableHead>
