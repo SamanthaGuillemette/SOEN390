@@ -93,6 +93,8 @@ export default function SimpleModal() {
     event.preventDefault();
 
     if (temperature !== "" && weight !== "") {
+      const timestamp = serverTimestamp();
+
       // if they are filled
       // then only adding new doc
       await addDoc(collection(clientDoc, "Status"), {
@@ -105,7 +107,7 @@ export default function SimpleModal() {
         smellLoss: !smellLoss ? "No" : "Yes",
         muscleAche: !muscleAche ? "No" : "Yes",
         tasteLoss: !tasteLoss ? "No" : "Yes",
-        timestamp: serverTimestamp(),
+        timestamp: timestamp,
       });
 
       await addDoc(collection(adminDoc, "StatusNotifications"), {
@@ -113,7 +115,7 @@ export default function SimpleModal() {
           userInfoDetails?.firstName + " " + userInfoDetails?.lastName,
         patientID: userInfoDetails?.email,
         viewed: "false",
-        timestamp: serverTimestamp(),
+        timestamp: timestamp,
       });
 
       // Close the popup after user submit the form
