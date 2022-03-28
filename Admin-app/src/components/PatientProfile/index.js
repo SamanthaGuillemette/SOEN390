@@ -47,13 +47,15 @@ const Item = styled(Paper)(({ theme }) => ({
 function getAge(dobStr) {
   // First get today's date
   var todaysDate = new Date();
+  console.log(todaysDate);
 
   // Convert date of birth string to a date objects
   var dob = new Date(dobStr);
+  console.log(dob);
 
   // Calculate age based on year alone
-  var returnValue = todaysDate.getYear() - dob.getYear();
-
+  var returnValue = todaysDate.getFullYear() - dob.getFullYear();
+  console.log(returnValue);
   // Check month in case it has an effect on the age
   if (dob.getMonth() > todaysDate.getMonth()) {
     returnValue += 1;
