@@ -22,6 +22,8 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { createTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@mui/material/styles";
 import { makeStyles } from "@material-ui/core/styles";
+import { selectUserEmail } from "../../store/authSlice";
+import { selectUserInfoDetails } from "../../store/userInfoSlice";
 
 const useStyles = makeStyles({
   root: {
@@ -72,7 +74,7 @@ export default function BasicModal() {
   const classes = useStyles();
 
   // Pull 'userEmail' out from the centralized store
-  const userEmail = useSelector((state) => state.auth.userEmail);
+  const userEmail = useSelector(selectUserEmail);
 
   // Get the client's reference via the userEmail (query the database)
   const clientDoc = doc(db, `Client/${userEmail}`);
@@ -80,9 +82,7 @@ export default function BasicModal() {
   // const dispatch = useDispatch();
 
   // Pull 'userInfoDetails' out from the centralized store
-  const userInfoDetails = useSelector(
-    (state) => state.userInfo.userInfoDetails
-  );
+  const userInfoDetails = useSelector(selectUserInfoDetails);
 
   const [openPopup, setOpenPopup] = useState(false);
   const [firstName, setFirstName] = useState(userInfoDetails?.firstName);

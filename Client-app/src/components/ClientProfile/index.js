@@ -18,6 +18,7 @@ import FlagIcon from "@mui/icons-material/Flag";
 import { useState } from "react";
 import EditModal from "./ProfileEditModal";
 import { useSelector } from "react-redux";
+import { selectUserInfoDetails } from "../../store/userInfoSlice";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -32,9 +33,7 @@ function ClientProfile() {
   /**
    * Pull 'userInfoDetails' from the store (Redux centralized store)
    */
-  const userInfoDetails = useSelector(
-    (state) => state.userInfo.userInfoDetails
-  );
+  const userInfoDetails = useSelector(selectUserInfoDetails);
 
   return (
     <Box className="clientProfile-container">
@@ -122,8 +121,17 @@ function ClientProfile() {
                     marginBottom={2}
                     alignItems="baseline"
                   >
-                    <span className={userInfoDetails?.status === "POSITIVE" ? "PATIENT__label-positive" : userInfoDetails?.status === "NEGATIVE" ? "PATIENT__label-negative" : "PATIENT__label-unconfirmed"}>
-                      {userInfoDetails?.status}</span>
+                    <span
+                      className={
+                        userInfoDetails?.status === "POSITIVE"
+                          ? "PATIENT__label-positive"
+                          : userInfoDetails?.status === "NEGATIVE"
+                          ? "PATIENT__label-negative"
+                          : "PATIENT__label-unconfirmed"
+                      }
+                    >
+                      {userInfoDetails?.status}
+                    </span>
                   </Stack>
                   <Box />
                   <Stack spacing={2}>
