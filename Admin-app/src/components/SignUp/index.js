@@ -126,12 +126,12 @@ export default function SignUp(props) {
         .then(async () => {
           // Required to add + 1 for the month
           const dobValue = dob.$M + 1 + "/" + dob.$D + "/" + dob.$y;
-          await setDoc(doc(db, "Admin", email), {
+          await setDoc(doc(db, "Admin", email.toLowerCase()), {
             firstName: firstName,
             lastName: lastName,
             role: role,
             dob: dobValue,
-            email: email,
+            email: email.toLowerCase(),
           });
         })
         .catch((error) => {
