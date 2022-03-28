@@ -15,18 +15,34 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
+import { doc, collection, query, orderBy, onSnapshot, limit } from "firebase/firestore";
+import { db } from "../../backend/firebase";
+import { useEffect, useState} from "react";
 
 /**
  * Renders the symptoms table function
  * @returns SymptomsTable function
  */
 function SymptomsTable() {
-    // Pull 'userInfoDetails' from the store (Redux centralized store)
-  const userInfoDetails = useSelector(
-    (state) => state.userInfo.userInfoDetails
-  );
+  // Pull 'userEmail' out from the centralized store
+  const userEmail = useSelector((state) => state.auth.userEmail);
 
+  // Get the client's reference via the userEmail (query the database)
+  const clientDoc = doc(db, `Client/${userEmail}`);
+  const statusRef = collection(clientDoc, "Status");
+  const q = query(statusRef, orderBy("timestamp", 'desc'), limit(1));
+  const [clientInfo, setClientInfo] = useState("");
   const [open, setOpen] = React.useState(false);
+
+  useEffect(() => {
+    onSnapshot(q, (doc) => {
+      if (statusRef.converter !== null) {
+        setClientInfo(doc.docs.map(doc=> ({
+            data: doc.data(),
+        })))
+      }
+    })
+  }, )
 
   return (
     <TableContainer sx={{mt: 2}}>
@@ -79,7 +95,7 @@ function SymptomsTable() {
                             sx={{ borderColor: "var(--secondary-light)" }}
                             align="right"
                           >
-                            {userInfoDetails?.fever}
+                            {clientInfo && clientInfo[0].data.fever}
                         </TableCell>
                       </TableRow>
                       <TableRow>
@@ -95,7 +111,7 @@ function SymptomsTable() {
                             sx={{ borderColor: "var(--primary-light)" }}
                             align="right"
                           >
-                            {userInfoDetails?.soreThroat}
+                            {clientInfo && clientInfo[0].data.soreThroat}
                         </TableCell>
                       </TableRow>
                       <TableRow>
@@ -111,7 +127,7 @@ function SymptomsTable() {
                             sx={{ borderColor: "var(--secondary-light)" }}
                             align="right"
                           >
-                            {userInfoDetails?.cough}
+                            {clientInfo && clientInfo[0].data.cough}
                         </TableCell>
                       </TableRow>
                       <TableRow>
@@ -127,7 +143,7 @@ function SymptomsTable() {
                             sx={{ borderColor: "var(--primary-light)" }}
                             align="right"
                           >
-                            {userInfoDetails?.runnyNose}
+                            {clientInfo && clientInfo[0].data.runnyNose}
                         </TableCell>
                       </TableRow>
                       <TableRow>
@@ -136,14 +152,14 @@ function SymptomsTable() {
                           sx={{ borderColor: "var(--primary-light)" }}
                           align="left"
                         >
-                          Muscle pain
+                          Muscle Ache
                         </TableCell>
                         <TableCell
                             className="data"
                             sx={{ borderColor: "var(--primary-light)" }}
                             align="right"
                           >
-                            {userInfoDetails?.musclePain}
+                            {clientInfo && clientInfo[0].data.muscleAche}
                         </TableCell>
                       </TableRow>
                       <TableRow>
@@ -159,7 +175,7 @@ function SymptomsTable() {
                             sx={{ borderColor: "var(--secondary-light)" }}
                             align="right"
                           >
-                            {userInfoDetails?.smellLoss}
+                            {clientInfo && clientInfo[0].data.smellLoss}
                         </TableCell>
                       </TableRow>
                       <TableRow>
@@ -175,7 +191,7 @@ function SymptomsTable() {
                             sx={{ borderColor: "transparent" }}
                             align="right"
                           >
-                            {userInfoDetails?.tasteLoss}
+                            {clientInfo && clientInfo[0].data.tasteLoss}
                         </TableCell>
                       </TableRow>
                     </TableBody>
