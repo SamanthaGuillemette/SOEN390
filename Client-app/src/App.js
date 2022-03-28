@@ -71,7 +71,7 @@ function App() {
               <Route path="/qr" element={<QR />} />
               <Route path="/clientprofile" element={<ClientProfile />} />
               <Route path="/symptoms" element={<SymptomsTable />} />
-              <Route path="/notifications" element={<Notifications />} />
+              <Route path="/updates" element={<Notifications />} />
               <Route path="clientinbox" element={<Chat />} />
               <Route path="/mydoctor" element={<DoctorInfo />} />
               <Route path="/status" element={<UpdateStatus />} />

@@ -79,7 +79,7 @@ it('QA Test', function() {
   cy.get('[data-testid="profile"]').click();
   cy.get('[data-testid="EditIcon"]').click();
   cy.get('#firstName').clear();
-  cy.get('#firstName').type('QA');
+  cy.get('#firstName').type('Mohammad Ali');
   cy.get('.update-button').click();
 
  /**
