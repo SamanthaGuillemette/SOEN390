@@ -55,7 +55,12 @@ function getAge(dobStr) {
     ageNow -= 1; // decreasing age
   }
 
-  return ageNow; // returning
+  if (ageNow < 0) {
+    // if negative value
+    return 0; // return 0
+  } else {
+    return ageNow; // returning
+  }
 }
 
 /**
