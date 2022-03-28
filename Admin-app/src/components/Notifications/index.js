@@ -2,6 +2,7 @@
  * @fileoverview This component takes care of the Notifications function.
  *
  */
+import "./Notifications.css";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
@@ -12,7 +13,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ReportIcon from '@mui/icons-material/Report';
 import { Divider } from '@mui/material';
 import ReplayIcon from '@mui/icons-material/Replay';
-import "./Notifications.css";
+import { getStatusNotificationsTable } from "../../backend/firebaseDoctorUtilities";
 
 /**
  * This component is what allows the Notifications feature to work.

@@ -56,10 +56,21 @@ const removePatientFromDoctor = async (doctorKey, patientKey) => {
   }
 };
 
+const getStatusNotificationsTable = async (doctorKey) => {
+  try {
+    const querySnapshot = await getDocs(collection(db, `Admin/${doctorKey}/StatusNotifications`));
+    const returnValue = querySnapshot.docs.map((patient) => patient.data());
+    return returnValue;
+  } catch (error) {
+    console.error("[getTableData]" + error);
+  }
+};
+
 export {
   getDoctors,
   getDoctor,
   patientLimit,
   addPatientToDoctor,
   removePatientFromDoctor,
+  getStatusNotificationsTable,
 };
