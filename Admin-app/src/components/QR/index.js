@@ -7,7 +7,6 @@ import QrReader from "modern-react-qr-reader";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../backend/firebase";
 import Alert from "@mui/material/Alert";
@@ -35,10 +34,9 @@ const useStyles = makeStyles({
 const Scanner = () => {
   const classes = useStyles();
   const [scanned, setScanned] = useState("Not scanned yet!");
-  const [displayProfile, setDisplay] = useState(false);
   const [patient, setPatient] = useState(false);
   const [notPatient, setNotPatient] = useState(false);
-  const [patientDoc, setPatientDoc] = useState();
+  const [patientDoc, setPatientDoc] = useState("");
 
   /**
    * handling error function
@@ -55,16 +53,12 @@ const Scanner = () => {
   async function handleScan(QRScan) {
     try {
       if (QRScan) {
-        console.log(QRScan);
         setPatient(false);
         setNotPatient(false);
-        setDisplay(false);
         setScanned("Scanned successfully!");
         const docRef = doc(db, "Client", `${QRScan}`);
         const docSnap = await getDoc(docRef);
-        console.log(docRef);
         if (docSnap.exists()) {
-          setDisplay(true);
           setPatient(true);
           setPatientDoc(`${QRScan}`);
         } else {
