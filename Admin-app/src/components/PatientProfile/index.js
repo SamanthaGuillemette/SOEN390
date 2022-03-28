@@ -55,15 +55,14 @@ function getAge(dobStr) {
 
   // Calculate age based on year alone
   var returnValue = todaysDate.getFullYear() - dob.getFullYear();
-  console.log(returnValue);
-  // Check month in case it has an effect on the age
+
   if (dob.getMonth() > todaysDate.getMonth()) {
     returnValue += 1;
   }
   // If dob same month as today, check day in case it has an effect on the age
   else if (
     dob.getMonth() === todaysDate.getMonth() &&
-    dob.getDay() > todaysDate.getDay()
+    dob.getDay() < todaysDate.getDay()
   ) {
     returnValue += 1;
   }
