@@ -141,6 +141,16 @@ const Dashboard = () => {
         </TableContainer>
         {/* The following is the Upcoming Events which appears on the dashboard
       and the buttons for events and covid news.*/}
+        <DashboardCards />
+        {/* Displaying DashbordCards */}
+      </Grid>
+    </Container>
+  );
+};
+
+export default Dashboard;
+
+/* TO BE USED LATER
         <Grid container>
           <Grid xs={6}>
             <UpcomingEvents
@@ -153,12 +163,4 @@ const Dashboard = () => {
           </Grid>
           <EventButton />
           <COVID19Button />
-        </Grid>
-        <DashboardCards />
-        {/* Displaying DashbordCards */}
-      </Grid>
-    </Container>
-  );
-};
-
-export default Dashboard;
+        </Grid>; */
