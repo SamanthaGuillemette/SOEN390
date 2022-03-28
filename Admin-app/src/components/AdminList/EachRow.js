@@ -18,7 +18,7 @@ function EachRow(props) {
   const [authorized, setAuthorized] = useState(props.row.newAccount);
 
   function onClickAuthorize() {
-    setNewAccount(row.id).then((newAccountValue) =>
+    setNewAccount(row.email).then((newAccountValue) =>
       setAuthorized(newAccountValue)
     );
   }
@@ -44,7 +44,7 @@ function EachRow(props) {
         className="ADMIN__table__data"
         align="left"
       >
-        {row.id}
+        {row.email}
       </TableCell>
       <TableCell
         sx={{

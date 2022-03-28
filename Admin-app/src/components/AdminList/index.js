@@ -37,8 +37,8 @@ const dropdownStyle = makeStyles({
 });
 
 // function to create data
-function createData(adminName, id, dob, role, newAccount) {
-  return { adminName, id, dob, role, newAccount };
+function createData(adminName, email, dob, role, newAccount) {
+  return { adminName, email, dob, role, newAccount };
 }
 
 function AdminList() {
@@ -114,7 +114,7 @@ function AdminList() {
               className="ADMIN__table__header"
               align="left"
             >
-              ID
+              Email
             </TableCell>
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}
