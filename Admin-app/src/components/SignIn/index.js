@@ -111,8 +111,13 @@ export default function SignIn() {
     } else {
       const docRef = doc(db, "Client", email.toLowerCase());
       const docSnap = await getDoc(docRef);
+      const adminDocRef = doc(db, "Admin", email.toLowerCase());
+      const adminDocSnap = await getDoc(adminDocRef);
 
-      if (!docSnap.exists()) {
+      if (adminDocSnap.exists() && adminDocSnap.data().newAccount) {
+        setErrorMessage("Sorry, your account hasn't been authorized yet.");
+        setOpen(true);
+      } else if (!docSnap.exists()) {
         signInWithEmailAndPassword(auth, email, password).catch((error) => {
           setErrorMessage(
             "Your password or email is incorrect. Please try again!"

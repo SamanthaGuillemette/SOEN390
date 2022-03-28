@@ -10,6 +10,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import MailIcon from "@mui/icons-material/Mail";
 import PeopleIcon from "@mui/icons-material/People";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import EventIcon from "@mui/icons-material/Event";
 import { Link } from "react-router-dom";
 import QrCodeIcon from "@mui/icons-material/QrCode";
@@ -71,6 +72,15 @@ export const mainListItems = (
           <PeopleIcon className="SIDEBAR__icon" />
         </ListItemIcon>
         <ListItemText className="SIDEBAR__text" primary="Patients" />
+      </ListItem>
+    </Link>
+
+    <Link className="SIDEBAR__link" to="/admin">
+      <ListItem button className="SIDEBAR__button">
+        <ListItemIcon>
+          <ManageAccountsIcon className="SIDEBAR__icon" />
+        </ListItemIcon>
+        <ListItemText className="SIDEBAR__text" primary="Manage Accounts" />
       </ListItem>
     </Link>
 

@@ -19,6 +19,7 @@ import { saveUser } from "./store/authSlice";
 import { useEffect } from "react";
 import Event from "./components/Event";
 import EventDetails from "./components/Event/EventDetails";
+import AdminList from "./components/AdminList";
 
 function App() {
   const [user, loading] = useAuthState(auth);
@@ -47,6 +48,7 @@ function App() {
             <Route path="/appointments" element={<Appointments />} />
             <Route path="/patients" element={<Patients />} />
             <Route path="/patientprofile/:key" element={<PatientProfile />} />
+            <Route path="/admin" element={<AdminList />} />
             <Route path="/inbox" element={<Inbox />} />
             <Route path="/updates" element={<Notifications />} />
             <Route path="/qr" element={<QR />} />

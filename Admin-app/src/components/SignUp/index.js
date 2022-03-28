@@ -157,12 +157,13 @@ export default function SignUp(props) {
           // if valid date && checked
           createUserWithEmailAndPassword(auth, email, password)
             .then(async () => {
-              await setDoc(doc(db, "Client", email.toLowerCase()), {
+              await setDoc(doc(db, "Admin", email.toLowerCase()), {
                 firstName: firstName,
                 lastName: lastName,
                 role: role,
                 dob: dobValue,
                 email: email.toLowerCase(),
+                newAccount: role !== "Administrator",
               });
             })
             .catch((error) => {
