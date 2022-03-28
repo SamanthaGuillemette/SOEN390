@@ -52,7 +52,6 @@ function AdminList() {
       let results = [];
       data.forEach((doc) => {
         if (
-          doc.newAccount &&
           doc.role !== "Administrator" &&
           doc.role !== "Super Administrator"
         ) {
