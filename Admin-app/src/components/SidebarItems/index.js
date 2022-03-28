@@ -32,15 +32,14 @@ export async function getUserFullName() {
   }
 }
 
-  /**
-   * Handle logging user out.
-   * @param  {ClickEvent} e
-   */
-   const logout = async (e) => {
-    e.preventDefault();
-    signOut(auth);
-  };
-
+/**
+  * Handle logging user out.
+  * @param  {ClickEvent} e
+  */
+const logout = async (e) => {
+  e.preventDefault();
+  signOut(auth);
+};
 
 /**
  * This component is what allows the mainListItems feature to be displayed. 
