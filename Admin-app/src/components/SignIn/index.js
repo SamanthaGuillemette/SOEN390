@@ -98,7 +98,7 @@ export default function SignIn() {
     const docRef = doc(db, "Admin", email);
     const docSnap = await getDoc(docRef);
 
-    if (docSnap.data().disabled === "true") {
+    if (docSnap.data().newAccount) {
       setError3(true);
       setOpen(true);
     } else if (docSnap.exists()) {
@@ -220,7 +220,7 @@ export default function SignIn() {
                     "This email is registered with the Client application."}
                   {error2 &&
                     "Your password or email is incorrect. Please try again!"}
-                  {error3 && "Your account has been disabled."}
+                  {error3 && "Sorry, your account hasn't been authorized yet."}
                 </Typography>
               </Box>
             </Modal>

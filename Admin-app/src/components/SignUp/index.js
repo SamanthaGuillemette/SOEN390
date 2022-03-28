@@ -132,6 +132,7 @@ export default function SignUp(props) {
             role: role,
             dob: dobValue,
             email: email,
+            newAccount: true,
           });
         })
         .catch((error) => {

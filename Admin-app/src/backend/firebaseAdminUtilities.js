@@ -1,4 +1,10 @@
-import { collection, getDocs, query, where, updateDoc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "./firebase";
 import { getTableData, getTableDataItem, getDocRef } from "./firebaseUtilities";
 
@@ -49,37 +55,35 @@ const getAdminRef = (key) => {
   return getDocRef(getTableName(), key);
 };
 
-const setDisabled = async (patientKey) => {
+const setNewAccount = async (patientKey) => {
   try {
-
     // Get Admin
     const docRef = getDocRef("Admin", patientKey);
     let adminInfo = await getAdmin(patientKey);
 
     // Set new disabled value
-    let newDisabledValue;
+    let newAccountValue;
 
-    if (adminInfo) { // if account exists
+    if (adminInfo) {
+      // if account exists
       if (
-        adminInfo.disabled == null ||
-        adminInfo.disabled === "false"  // if the value stored is false or null
+        adminInfo.newAccount === true // if the value stored is false or null
       ) {
-        newDisabledValue = "true"; // new value to be replace is true
+        newAccountValue = false; // new value to be replace is true
       } else {
-        newDisabledValue = "false"; // esle false
+        newAccountValue = true; // esle false
       }
     }
 
     // Update disabled field in admin account
-    docRef && (await updateDoc(docRef, "disabled", newDisabledValue));
+    docRef && (await updateDoc(docRef, "newAccount", newAccountValue));
 
     // Get updated admin account
     adminInfo = await getAdmin(patientKey);
 
-    return adminInfo.disabled; // returning new disabled value
-
+    return adminInfo.newAccount; // returning new disabled value
   } catch (error) {
-    console.log("[setDisabled]" + error);
+    console.log("[setNewAccount]" + error);
   }
 };
 
@@ -89,5 +93,5 @@ export {
   getAdminRef,
   getAdmins,
   getAdmin,
-  setDisabled,
+  setNewAccount,
 };
