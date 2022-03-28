@@ -132,7 +132,7 @@ export default function SignUp(props) {
             role: role,
             dob: dobValue,
             email: email,
-            newAccount: true,
+            newAccount: role !== "Administrator",
           });
         })
         .catch((error) => {
@@ -276,7 +276,7 @@ export default function SignUp(props) {
                     <MenuItem value={"Immigration Officer"}>
                       Immigration Officer
                     </MenuItem>
-                    <MenuItem value={"Adminstrator"}>Adminstrator</MenuItem>
+                    <MenuItem value={"Administrator"}>Administrator</MenuItem>
                   </TextField>
                 </FormControl>
               </Grid>
