@@ -11,6 +11,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ReportIcon from '@mui/icons-material/Report';
 import { Divider } from '@mui/material';
+import ReplayIcon from '@mui/icons-material/Replay';
 import "./Notifications.css";
 
 /**
@@ -40,6 +41,48 @@ const Notifications = () => {
                         >
                             Notifications
                         </Typography>
+                        <Box>
+                            <Box>
+                                <Box style={{
+                                    marginTop: '20px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    flexWrap: 'wrap',
+                                }}
+                                >
+                                    <ReplayIcon color="success" sx={{ fontSize: 40 }} />
+                                    <Typography
+                                        style={{
+                                            marginLeft: '10px',
+                                        }}
+                                        color="var(--text-primary)"
+                                    >
+                                        <b>Status Re-Update</b>
+                                    </Typography>
+                                    <CloseIcon className="NOTIFICATIONS__closingIcon"/>
+                                </Box>
+                                <Typography
+                                    style={{
+                                        marginLeft: '50px',
+                                        marginBottom: '20px'
+                                    }}
+                                    color="var(--text-primary)"
+                                >
+                                    Shakira re-updated her status. Please check the status update for more information.
+                                </Typography>
+                                <Typography
+                                    style={{
+                                        marginLeft: '50px',
+                                        marginBottom: '30px'
+                                    }}
+                                    color="#949be2"
+                                    data-testid="notification-statusUpdate"
+                                >
+                                    22 March, 2022. At 6:30 pm.
+                                </Typography>
+                                <Divider color="#949be2" />
+                            </Box>
+                        </Box>
                         <Box>
                             <Box>
                                 <Box style={{
