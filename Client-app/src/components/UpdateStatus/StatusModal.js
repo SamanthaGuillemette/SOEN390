@@ -49,11 +49,18 @@ const helperTextStyles = makeStyles(theme => ({
 }));
 
 export default function SimpleModal() {
+  
+  const userInfoDetails = useSelector((state) => state.userInfo.userInfoDetails);
+
   // Pull 'userEmail' out from the centralized store
   const userEmail = useSelector((state) => state.auth.userEmail);
 
   // Get the client's reference via the userEmail (query the database)
   const clientDoc = doc(db, `Client/${userEmail}`);
+
+  // Get the doctor's reference via the assigned doctor (query the database)
+  const adminDoc = doc(db, `Admin/${userInfoDetails?.assignedDoctor}`);
+
 
   const [openModal, setOpenModal] = useState(false);
   const [emptyFields, setEmptyFields] = useState(false);
@@ -90,6 +97,13 @@ export default function SimpleModal() {
         smellLoss: !smellLoss ? "No" : "Yes",
         muscleAche: !muscleAche ? "No" : "Yes",
         tasteLoss: !tasteLoss ? "No" : "Yes",
+        timestamp: serverTimestamp(),
+      });
+
+      await addDoc(collection(adminDoc, "StatusNotifications"), {
+        patientName: userInfoDetails?.firstName + " " + userInfoDetails?.lastName,
+        patientID: userInfoDetails?.userEmail,
+        viewed: false,
         timestamp: serverTimestamp(),
       });
 
