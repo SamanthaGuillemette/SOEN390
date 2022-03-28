@@ -32,7 +32,7 @@ import { createTheme } from "@material-ui/core/styles";
 import { inputLabelClasses } from "@mui/material/InputLabel";
 import { styleForModal, Copyright } from "../SignIn";
 import { makeStyles } from "@material-ui/core/styles";
-import { getPatient, getAdmin } from "../../backend/firebaseUtilities";
+import { getDoc } from "firebase/firestore";
 import "./SignUp.css";
 
 const theme = createTheme({
@@ -113,8 +113,6 @@ export default function SignUp(props) {
    */
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const adminDoc = await getAdmin(email);
-    const clientDoc = await getPatient(email);
     let dobValue, dobWithoutSlash = null;
     const currentDate = new Date(); // getting todays date
     const todaysDate = currentDate.getMonth() +  1 + "" + currentDate.getDate() + "" + currentDate.getFullYear(); // formatting
@@ -123,45 +121,50 @@ export default function SignUp(props) {
       dobValue = dob.$M + 1 + "/" + dob.$D + "/" + dob.$y; // Required to add + 1 for the month
       dobWithoutSlash = dob.$M + 1 + "" + dob.$D + "" + dob.$y; // Adding without slashes
     }
-
+  
     if (firstName === "" || lastName === "" || address === "" || city === "" || province === "" || postalCode === "" || dob === null || email === "" || password === "") { // if empty fields
       setEmptyFields(true);
-    } else if (adminDoc || clientDoc) { // if email already in use
-      setErrorMsg("This email has already been used for the Admin or Client Application. Please use another email.")
-      setOpen(true);
-    }
-    else if (dobValue !== null) { // if its not null
-      // if its a future date
-      if (Number(dobWithoutSlash) >= Number(todaysDate)) { // comparing dates as integer
-        setErrorMsg("You've selected an invalid date. Please try again.");
-        setOpen(true);
-      }
-      else if (!checked) {
-        setErrorMsg("Please confirm your data is correct.");
-        setOpen(true);
-      }
-      else { // if valid date && checked
-       createUserWithEmailAndPassword(auth, email, password)
+    } else {
+      const docRef = doc(db, "Admin", email.toLowerCase());
+      const docSnap = await getDoc(docRef);
+      
+      if (dobValue !== null) { // if its not null
+        // if its a future date
+        if (Number(dobWithoutSlash) >= Number(todaysDate)) { // comparing dates as integer
+          setErrorMsg("You've selected an invalid date. Please try again.");
+          setOpen(true);
+        }
+        else if (!checked) {
+          setErrorMsg("Please confirm your data is correct.");
+          setOpen(true);
+        }
+        else if (!docSnap.exists()){ // if valid date && checked
+        createUserWithEmailAndPassword(auth, email, password)
          .then(async () => {
 
           await setDoc(doc(db, "Client", email.toLowerCase()), {
-             firstName: firstName,
-             lastName: lastName,
-             address: address,
-             city: city,
-             province: province,
-             postalCode: postalCode,
-             dob: dobValue,
-             email: email.toLowerCase(),
+            firstName: firstName,
+            lastName: lastName,
+            address: address,
+            city: city,
+            province: province,
+            postalCode: postalCode,
+            dob: dobValue,
+            email: email.toLowerCase(),
            });
          })
          .catch((error) => {
            setErrorMsg(error.message);
            setOpen(true);
          });
+      } else {
+        setErrorMsg("This email is registered with the Admin application.");
+        setOpen(true);
       }
     }
-  };
+  }
+};
+
   /**
    * Check if the page is still loading
    * @param  {boolean} loading

@@ -30,10 +30,9 @@
  import { inputLabelClasses } from "@mui/material/InputLabel";
  import { Navigate } from "react-router-dom";
  import Modal from "@mui/material/Modal";
- import { getAdmin } from "../../backend/firebaseAdminUtilities";
- import { getPatient } from "../../backend/firebasePatientUtilities";
  import { styleForModal, Copyright } from "../SignIn";
  import { makeStyles } from "@material-ui/core/styles";
+ import { getDoc } from "firebase/firestore";
  import "./SignUp.css";
 
  const theme = createTheme({
@@ -105,16 +104,15 @@
      setChecked(event.target.checked);
    };
  
-   /**
-    * This function is responsible for creating a new document in the admin collection with the information of the user who has signed up.
-    * This also ensures that the email is not being reused by the client or admin collection
-    * Lastly, the createUserWithEmailAndPassword function will create the database authentication
-    * @param  {} event
-    */
+  /**
+   * This function is responsible for creating a new document in the admin collection with the information of the user who has signed up.
+   * This also ensures that the email is not being reused by the client or admin collection
+   * Lastly, the createUserWithEmailAndPassword function will create the database authentication
+   *
+   * @param  {clickEvent} event
+   */
    const handleSubmit = async (event) => {
     event.preventDefault();
-    const adminDoc = await getAdmin(email);
-    const clientDoc = await getPatient(email);
     let dobValue, dobWithoutSlash = null;
     const currentDate = new Date(); // getting todays date
     const todaysDate = currentDate.getMonth() +  1 + "" + currentDate.getDate() + "" + currentDate.getFullYear(); // formatting
@@ -123,42 +121,46 @@
       dobValue = dob.$M + 1 + "/" + dob.$D + "/" + dob.$y; // Required to add + 1 for the month
       dobWithoutSlash = dob.$M + 1 + "" + dob.$D + "" + dob.$y; // Adding without slashes
     }
-
+  
     if (firstName === "" || lastName === "" || role === "" || dob === null || email === "" || password === "") { // if empty fields
       setEmptyFields(true);
-    } else if (adminDoc || clientDoc) { // if email already in use
-      setErrorMsg("This email has already been used for the Admin or Client Application. Please use another email.")
-      setOpen(true);
-    }
-    else if (dobValue !== null) { // if its not null
-      // if its a future date
-      if (Number(dobWithoutSlash) >= Number(todaysDate)) { // comparing dates as integer
-        setErrorMsg("You've selected an invalid date. Please try again.");
-        setOpen(true);
-      }
-      else if (!checked) {
-        setErrorMsg("Please confirm your data is correct.");
-        setOpen(true);
-      }
-      else { // if valid date && checked
-       createUserWithEmailAndPassword(auth, email, password)
+    } else {
+      const docRef = doc(db, "Client", email.toLowerCase());
+      const docSnap = await getDoc(docRef);
+      
+      if (dobValue !== null) { // if its not null
+        // if its a future date
+        if (Number(dobWithoutSlash) >= Number(todaysDate)) { // comparing dates as integer
+          setErrorMsg("You've selected an invalid date. Please try again.");
+          setOpen(true);
+        }
+        else if (!checked) {
+          setErrorMsg("Please confirm your data is correct.");
+          setOpen(true);
+        }
+        else if (!docSnap.exists()){ // if valid date && checked
+        createUserWithEmailAndPassword(auth, email, password)
          .then(async () => {
 
-          await setDoc(doc(db, "Admin", email.toLowerCase()), {
-             firstName: firstName,
-             lastName: lastName,
-             role: role,
-             dob: dobValue,
-             email: email.toLowerCase(),
+          await setDoc(doc(db, "Client", email.toLowerCase()), {
+            firstName: firstName,
+            lastName: lastName,
+            role: role,
+            dob: dobValue,
+            email: email.toLowerCase(),
            });
          })
          .catch((error) => {
            setErrorMsg(error.message);
            setOpen(true);
          });
+      } else {
+        setErrorMsg("This email is registered with the Client application.");
+        setOpen(true);
       }
     }
-  };
+  }
+};
 
    if (loading) {
      return <p>Loading...</p>;

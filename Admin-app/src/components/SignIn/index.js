@@ -105,22 +105,24 @@ const helperTextStyles = makeStyles(theme => ({
    */
    const login = async (e) => {
     e.preventDefault();
-    const docRef = doc(db, "Client", email.toLowerCase());
-    const docSnap = await getDoc(docRef);
 
     if (email === "" || password === "") {
       setEmptyFields(true);
-    }
-    else if (!docSnap.exists()) {
-      signInWithEmailAndPassword(auth, email, password).catch((error) => {
-        setErrorMessage("Your password or email is incorrect. Please try again!");
-        setOpen(true);
-      });
     } else {
-      setErrorMessage("This email is registered with the Client application.");
-      setOpen(true);
+      const docRef = doc(db, "Client", email.toLowerCase());
+      const docSnap = await getDoc(docRef);
+
+      if (!docSnap.exists()) {
+        signInWithEmailAndPassword(auth, email, password).catch((error) => {
+          setErrorMessage("Your password or email is incorrect. Please try again!");
+          setOpen(true);
+        });
+      } else {
+        setErrorMessage("This email is registered with the Client application.");
+        setOpen(true);
+      }
     }
-   };
+  };
  
    if (user) {
      return <Navigate to="/" replace={true} />;

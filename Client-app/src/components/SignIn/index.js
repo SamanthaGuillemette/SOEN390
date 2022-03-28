@@ -103,22 +103,25 @@ const helperTextStyles = makeStyles(theme => ({
     * The signInWithEmailAndPassword function from firebase is what allows to authenticate the user.
     * @param  {} e
     */
-   const login = async (e) => {
-     e.preventDefault();
-     const docRef = doc(db, "Admin", email.toLowerCase());
-     const docSnap = await getDoc(docRef);
- 
-     if (email === "" || password === "") {
+  const login = async (e) => {
+    e.preventDefault();
+  
+    if (email === "" || password === "") {
       setEmptyFields(true);
-     } else if (!docSnap.exists()) {
-      signInWithEmailAndPassword(auth, email, password).catch((error) => {
-        setErrorMessage(true);
-        setOpen(true);
-      });
     } else {
-      setErrorMessage(true);
-      setOpen(true);
-   }
+      const docRef = doc(db, "Admin", email.toLowerCase());
+      const docSnap = await getDoc(docRef);
+  
+      if (!docSnap.exists()) {
+        signInWithEmailAndPassword(auth, email, password).catch((error) => {
+          setErrorMessage("Your password or email is incorrect. Please try again!");
+          setOpen(true);
+        });
+      } else {
+        setErrorMessage("This email is registered with the Admin application.");
+        setOpen(true);
+      }
+    }
   };
  
    if (user) {
