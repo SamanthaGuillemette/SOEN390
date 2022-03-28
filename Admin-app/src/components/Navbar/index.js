@@ -183,14 +183,6 @@ function Navbar() {
       <MenuItem 
       onMouseEnter={(e) => e.target.style.color = 'var(--text-primary)'}
       onMouseLeave={(e) => e.target.style.color = 'var(--text-inactive)'}
-      onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem 
-      onMouseEnter={(e) => e.target.style.color = 'var(--text-primary)'}
-      onMouseLeave={(e) => e.target.style.color = 'var(--text-inactive)'}
-      onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem 
-      onMouseEnter={(e) => e.target.style.color = 'var(--text-primary)'}
-      onMouseLeave={(e) => e.target.style.color = 'var(--text-inactive)'}
       onClick={logout}>Signout</MenuItem>
     </Menu>
 
