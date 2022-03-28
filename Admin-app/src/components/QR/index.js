@@ -58,7 +58,7 @@ const Scanner = () => {
         setNotPatient(false);
         setDisplay(false);
         setScanned("Scanned successfully!");
-        const docRef = doc(db, "Patients", `${QRScan}`);
+        const docRef = doc(db, "Client", `${QRScan}`);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
           setQR(`http://api.qrserver.com/v1/create-qr-code/?data=${QRScan}`);
