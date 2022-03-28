@@ -33,14 +33,6 @@
   margin-top: 4px !important;
 }
 
-.more-dropdown {
-  color: var(--text-inactive) !important;
-}
-
-.more-dropdown:hover {
-  color: var(--text-primary) !important;
-}
-
 .bottomNav-button:hover {
   transition: all .3s;
   opacity: 0.9;
@@ -49,19 +41,10 @@
 
 .BOTTOM-NAV__btn:hover .BOTTOM-NAV__btn__title {
   color: var(--text-primary);
+  background-color: transparent !important;
 }
 
 .MuiPopover-paper {
   background-color: var(--background-main) !important;
   border-radius: 10px !important;
-}
-
-.BOTTOM-NAV__popover__text {
-  color: var(--text-inactive) !important;
-  font-size: 0.9rem;
-  text-transform: uppercase !important;
-}
-
-.BOTTOM-NAV__popover__text:hover {
-  color: var(--text-primary) !important;
 }
