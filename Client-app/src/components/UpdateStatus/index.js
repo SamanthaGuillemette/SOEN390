@@ -35,11 +35,9 @@ function UpdateStatus() {
 
   useEffect(() => {
     onSnapshot(q, (doc) => {
-      if (statusRef.converter !== null) {
-        setClientInfo(doc.docs.map(doc=> ({
-            data: doc.data(),
-        })))
-      }
+      setClientInfo(doc.docs.map(doc=> ({
+          data: doc.data(),
+      })))
     })
   }, )
 
