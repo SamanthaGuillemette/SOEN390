@@ -154,7 +154,13 @@ function PatientProfile() {
               <Typography className="PATIENT-profile__info" variant="body2">
                 <br></br>Age: {patientInfo && getAge(patientInfo.dob)}
                 <br></br>Birthday: {patientInfo && patientInfo.dob}
-                <br></br>Address: {patientInfo && patientInfo.address}
+                <br></br>Address:{" "}
+                {patientInfo &&
+                  patientInfo.address &&
+                  patientInfo.city &&
+                  patientInfo.province &&
+                  patientInfo.postalCode &&
+                  `${patientInfo.address}, ${patientInfo.city}, ${patientInfo.province}, ${patientInfo.postalCode}`}
               </Typography>
             </CardContent>
           </CardActionArea>

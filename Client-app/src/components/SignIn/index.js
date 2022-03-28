@@ -15,8 +15,8 @@
  import Container from "@mui/material/Container";
  import { ThemeProvider } from "@mui/material/styles";
  import { signInWithEmailAndPassword } from "firebase/auth";
- import { auth } from "../../backend/firebase";
- import { getPatient, getAdmin } from "../../backend/firebaseUtilities";
+ import { db, auth } from "../../backend/firebase";
+ import { doc, getDoc } from "firebase/firestore";
  import { useAuthState } from "react-firebase-hooks/auth";
  import { Navigate } from "react-router-dom";
  import Modal from "@mui/material/Modal";
@@ -105,27 +105,21 @@ const helperTextStyles = makeStyles(theme => ({
     */
    const login = async (e) => {
      e.preventDefault();
-     const adminDoc = await getAdmin(email);
-     const clientDoc = await getPatient(email);
+     const docRef = doc(db, "Admin", email.toLowerCase());
+     const docSnap = await getDoc(docRef);
  
      if (email === "" || password === "") {
       setEmptyFields(true);
-     }
-     else if (clientDoc) {
-       signInWithEmailAndPassword(auth, email, password).catch((error) => { // incorrect password
-         setErrorMessage("Incorrect password, please try again");
-         setOpen(true);
-       });
-     }
-     else if (adminDoc && !clientDoc) { // exists only on admin app
-       setErrorMessage("This account is registered on the Admin application.");
-       setOpen(true);
-     }
-     else if (!adminDoc && !clientDoc) { // account doesn't exist
-       setErrorMessage("Couldn't find your account.");
-       setOpen(true);
-     }
-   };
+     } else if (!docSnap.exists()) {
+      signInWithEmailAndPassword(auth, email, password).catch((error) => {
+        setErrorMessage(true);
+        setOpen(true);
+      });
+    } else {
+      setErrorMessage(true);
+      setOpen(true);
+   }
+  };
  
    if (user) {
      return <Navigate to="/" replace={true} />;

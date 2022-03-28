@@ -144,7 +144,7 @@ export default function SignUp(props) {
        createUserWithEmailAndPassword(auth, email, password)
          .then(async () => {
 
-          await setDoc(doc(db, "Admin", email), {
+          await setDoc(doc(db, "Client", email.toLowerCase()), {
              firstName: firstName,
              lastName: lastName,
              address: address,
@@ -152,7 +152,7 @@ export default function SignUp(props) {
              province: province,
              postalCode: postalCode,
              dob: dobValue,
-             email: email,
+             email: email.toLowerCase(),
            });
          })
          .catch((error) => {

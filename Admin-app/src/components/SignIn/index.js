@@ -14,10 +14,9 @@
  import Typography from "@mui/material/Typography";
  import Container from "@mui/material/Container";
  import { ThemeProvider } from "@mui/material/styles";
+ import { doc, getDoc } from "firebase/firestore";
  import { signInWithEmailAndPassword } from "firebase/auth";
- import { auth } from "../../backend/firebase";
- import { getAdmin } from "../../backend/firebaseAdminUtilities";
- import { getPatient } from "../../backend/firebasePatientUtilities";
+ import { db, auth } from "../../backend/firebase";
  import { useAuthState } from "react-firebase-hooks/auth";
  import { Navigate } from "react-router-dom";
  import Modal from "@mui/material/Modal";
@@ -80,52 +79,47 @@ const helperTextStyles = makeStyles(theme => ({
       }
     }
   }));
- 
- /**
-  * This function is responsible for the signin component which also communicates with the server and displays relevent error messages if necessary.
-  */
+
+/**
+ * This function is responsible for the signin component which also communicates with the server and displays relevent error messages if necessary.
+ */
  export default function SignIn() {
-   const [email, setEmail] = useState("");
-   const [password, setPassword] = useState("");
-   const [open, setOpen] = useState(false);
-   const [errorMessage, setErrorMessage] = useState("");
-   const [emptyFields, setEmptyFields] = useState(false);
-   const helperTestClasses = helperTextStyles();
- 
-   const handleClose = () => {
-     setOpen(false);
-     setErrorMessage("");
-   };
-   const [user, loading] = useAuthState(auth);
- 
-   /**
-    * This asynchronus function is responsible for the login communication with the server
-    * If any errors occur, the modals in the return statement below will show the relevent messages
-    * The signInWithEmailAndPassword function from firebase is what allows to authenticate the user.
-    * @param  {} e
-    */
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [open, setOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [emptyFields, setEmptyFields] = useState(false);
+  const helperTestClasses = helperTextStyles();
+
+  const handleClose = () => {
+    setOpen(false);
+    setErrorMessage(false);
+  };
+  const [user, loading] = useAuthState(auth);
+
+  /**
+   * This asynchronus function is responsible for the login communication with the server
+   * If any errors occur, the modals in the return statement below will show the relevent messages
+   * The signInWithEmailAndPassword function from firebase is what allows to authenticate the user.
+   * @param  {} e
+   */
    const login = async (e) => {
-     e.preventDefault();
-     const adminDoc = await getAdmin(email);
-     const clientDoc = await getPatient(email);
- 
-     if (email === "" || password === "") {
+    e.preventDefault();
+    const docRef = doc(db, "Client", email.toLowerCase());
+    const docSnap = await getDoc(docRef);
+
+    if (email === "" || password === "") {
       setEmptyFields(true);
-     }
-     else if (adminDoc) {
-       signInWithEmailAndPassword(auth, email, password).catch((error) => { // incorrect password
-         setErrorMessage("Incorrect password, please try again");
-         setOpen(true);
-       });
-     }
-     else if (!adminDoc && clientDoc) { // exists only on client app
-       setErrorMessage("This account is registered on the Client application.");
-       setOpen(true);
-     }
-     else if (!adminDoc && !clientDoc) { // account doesn't exist
-       setErrorMessage("Couldn't find your account.");
-       setOpen(true);
-     }
+    }
+    else if (!docSnap.exists()) {
+      signInWithEmailAndPassword(auth, email, password).catch((error) => {
+        setErrorMessage("Your password or email is incorrect. Please try again!");
+        setOpen(true);
+      });
+    } else {
+      setErrorMessage("This email is registered with the Client application.");
+      setOpen(true);
+    }
    };
  
    if (user) {

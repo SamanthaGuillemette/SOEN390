@@ -144,12 +144,12 @@
        createUserWithEmailAndPassword(auth, email, password)
          .then(async () => {
 
-          await setDoc(doc(db, "Admin", email), {
+          await setDoc(doc(db, "Admin", email.toLowerCase()), {
              firstName: firstName,
              lastName: lastName,
              role: role,
              dob: dobValue,
-             email: email,
+             email: email.toLowerCase(),
            });
          })
          .catch((error) => {
