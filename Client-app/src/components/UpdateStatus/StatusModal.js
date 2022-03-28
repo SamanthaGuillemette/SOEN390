@@ -125,6 +125,10 @@ export default function SimpleModal() {
     }
   };
 
+  function close() {
+    setTimeout(() => handleClose(), 3000);
+  }
+
   // once modal is closed creating setting back to old values
   const handleClose = () => {
     setOpenModal(false);
@@ -312,6 +316,7 @@ export default function SimpleModal() {
               </Grid>
             </Grid>
             <Button
+              onClick={close}
               type="submit"
               variant="contained"
               className="updateStatus__save-btn"
