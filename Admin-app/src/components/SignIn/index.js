@@ -93,10 +93,10 @@ export default function SignIn() {
    */
   const login = async (e) => {
     e.preventDefault();
-    const docRef = doc(db, "Admin", email.toLowerCase());
+    const docRef = doc(db, "Client", email.toLowerCase());
     const docSnap = await getDoc(docRef);
 
-    if (docSnap.exists()) {
+    if (!docSnap.exists()) {
       signInWithEmailAndPassword(auth, email, password).catch((error) => {
         setError2(true);
         setOpen(true);
