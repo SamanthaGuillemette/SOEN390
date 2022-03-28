@@ -13,7 +13,7 @@ import Checkbox from '@mui/material/Checkbox';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useSelector } from "react-redux";
 import { db } from "../../backend/firebase";
-import { doc, collection, addDoc } from "firebase/firestore";
+import { doc, collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
@@ -90,6 +90,7 @@ export default function SimpleModal() {
         smellLoss: !smellLoss ? "No" : "Yes",
         muscleAche: !muscleAche ? "No" : "Yes",
         tasteLoss: !tasteLoss ? "No" : "Yes",
+        timestamp: serverTimestamp(),
       });
 
       // Close the popup after user submit the form
