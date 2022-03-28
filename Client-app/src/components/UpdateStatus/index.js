@@ -21,7 +21,8 @@ import TableHead from "@mui/material/TableHead";
  * @returns UpdateStatus function
  */
 function UpdateStatus() {
-    // Pull 'userInfoDetails' from the store (Redux centralized store)
+  
+  // Pull 'userInfoDetails' from the store (Redux centralized store)
   const userInfoDetails = useSelector(
     (state) => state.userInfo.userInfoDetails
   );

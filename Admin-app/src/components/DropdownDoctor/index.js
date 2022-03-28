@@ -42,7 +42,7 @@ function DropdownDoctor(props) {
     getDoctors().then((data) => {
       let results = [];
       data.forEach((doc) => {
-        results[doc.id] = doc;
+        results[doc.email] = doc;
       });
       setDoctorsList(results);
     });
@@ -69,23 +69,23 @@ function DropdownDoctor(props) {
               // Remove patient from old doctor's list
               const oldDoctor = removePatientFromDoctor(
                 patientInfo.assignedDoctor,
-                patientInfo.id
+                patientInfo.email
               );
-              doctorsList[oldDoctor.id] = oldDoctor;
+              doctorsList[oldDoctor.email] = oldDoctor;
               setDoctorsList(doctorsList);
             }
 
             // Add new doctor to patient table
-            setAssignedDoctor(patientInfo.id, value).then((newPatientInfo) =>
+            setAssignedDoctor(patientInfo.email, value).then((newPatientInfo) =>
               setPatientInfo(newPatientInfo)
             );
 
             // Add patient to new doctor table
             const newDoctor = addPatientToDoctor(
-              selectedDoctor.id,
-              patientInfo.id
+              selectedDoctor.email,
+              patientInfo.email
             );
-            doctorsList[newDoctor.id] = newDoctor;
+            doctorsList[newDoctor.email] = newDoctor;
             setDoctorsList(doctorsList);
           }
         });
@@ -94,20 +94,20 @@ function DropdownDoctor(props) {
         // Remove patient from doctor's list
         const doctor = removePatientFromDoctor(
           patientInfo.assignedDoctor,
-          patientInfo.id
+          patientInfo.email
         );
-        doctorsList[doctor.id] = doctor;
+        doctorsList[doctor.email] = doctor;
         setDoctorsList(doctorsList);
 
         // Remove doctor from patient
-        setAssignedDoctor(patientInfo.id, null).then((newPatientInfo) =>
+        setAssignedDoctor(patientInfo.email, null).then((newPatientInfo) =>
           setPatientInfo(newPatientInfo)
         );
       }
     }
 
     patientInfo &&
-      setAssignedDoctor(patientInfo.id, value === "0" ? null : value).then(
+      setAssignedDoctor(patientInfo.email, value === "0" ? null : value).then(
         (newPatientInfo) => setPatientInfo(newPatientInfo)
       );
   };
@@ -148,10 +148,10 @@ function DropdownDoctor(props) {
             Object.values(doctorsList).map((doctor) => (
               <MenuItem
                 className="PATIENT__table__data"
-                value={doctor.id}
+                value={doctor.email}
                 disabled={isDoctorAtFullCapacity(doctor)}
               >
-                {doctor.name}
+                {`${doctor.firstName} ${doctor.lastName}`}
               </MenuItem>
             ))}
         </Select>

@@ -124,7 +124,12 @@ function DoctorList() {
       let results = [];
       data.forEach((doc) => {
         const size = doc.treats ? Object.keys(doc.treats).length : 0;
-        results.push(createData(doc.name, `${size}/${patientLimit}`));
+        results.push(
+          createData(
+            `${doc.firstName} ${doc.lastName}`,
+            `${size}/${patientLimit}`
+          )
+        );
       });
       setDoctorsList(results);
     });
