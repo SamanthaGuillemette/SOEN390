@@ -18,6 +18,7 @@ import { getAdmin } from "../../backend/firebaseAdminUtilities";
 import { auth } from "../../backend/firebase";
 import { useState } from "react";
 import Badge from "@mui/material/Badge";
+import { signOut } from "firebase/auth";
 import "./SidebarItems.css";
 
 // Functon to get Logged in User's full name
@@ -30,6 +31,16 @@ export async function getUserFullName() {
     return fullName; // returning the user's role
   }
 }
+
+  /**
+   * Handle logging user out.
+   * @param  {ClickEvent} e
+   */
+   const logout = async (e) => {
+    e.preventDefault();
+    signOut(auth);
+  };
+
 
 /**
  * This component is what allows the mainListItems feature to be displayed. 
@@ -126,7 +137,7 @@ export const mainListItems = (
         <ListItemText className="SIDEBAR__text" primary={userFullName} />
       </ListItem>
       <Link className="SIDEBAR__link" to="patients">
-      <ListSubheader button className="SIDEBAR__subheader" inset>Sign Out</ListSubheader> 
+      <ListSubheader button onClick={logout} className="SIDEBAR__subheader" inset>Sign Out</ListSubheader> 
     </Link>
   </div>
 )};
