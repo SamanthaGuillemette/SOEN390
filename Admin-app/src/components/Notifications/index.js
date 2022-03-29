@@ -29,9 +29,8 @@ const Notifications = () => {
     getStatusNotifications(userEmail).then((data) => {
       let results = [];
       data.forEach((doc) => {
-        results[doc.email] = doc;
+        results.push(doc);
       });
-      console.log(data);
       setStatusNotifications(results);
     });
   }, [userEmail]);
@@ -98,7 +97,7 @@ const Notifications = () => {
                     color="#949be2"
                     data-testid="notification-statusUpdate"
                   >
-                    {notification.timestamp}
+                    {/*notification.timestamp*/}
                   </Typography>
                   <Divider color="#949be2" />
                 </Box>
