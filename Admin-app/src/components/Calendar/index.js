@@ -25,6 +25,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
 import { selectUserEmail } from "../../store/authSlice";
 import { selectUserInfoDetails } from "../../store/userInfoSlice";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 const useStyles = makeStyles({
   root: {
@@ -98,6 +102,8 @@ const events = [
  */
 
 const Calendar = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -112,15 +118,22 @@ const Calendar = () => {
   const classes = useStyles();
 
   const doctorEmail = useSelector(selectUserEmail);
-  // const doctorInfo = useSelector(selectUserInfoDetails);
-
-  const [modalOpen, setModalOpen] = useState(false);
+  const doctorInfo = useSelector(selectUserInfoDetails);
+  const patientList = doctorInfo?.treats;
 
   // const handleDateClick = (event) => {
   //   console.log("Date clicked: ", event);
   // };
 
-  // console.log("==> Patients: ", doctorInfo.treats);
+  const renderPatientList = () => {
+    return patientList.map((patient) => {
+      return (
+        <MenuItem key={patient} value={patient}>
+          {patient}
+        </MenuItem>
+      );
+    });
+  };
 
   const handleSelectedDate = (event) => {
     // console.log("Selected date: ", event);
@@ -309,8 +322,29 @@ const Calendar = () => {
                   }}
                 />
               </Grid>
+              <Grid item xs={12}>
+                <FormControl sx={{ m: 1, minWidth: 200 }}>
+                  <InputLabel>Select Patient</InputLabel>
+                  <Select
+                    value={selectedPatient}
+                    onChange={(e) => {
+                      setSelectedPatient(e.target.value);
+                    }}
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    {renderPatientList()}
+                  </Select>
+                </FormControl>
+              </Grid>
             </Grid>
-            <Button type="submit" variant="contained" className="update-button">
+            <Button
+              type="submit"
+              variant="contained"
+              className="update-button"
+              disabled={selectedPatient === ""}
+            >
               CREATE APPOINTMENT
             </Button>
             <Button
