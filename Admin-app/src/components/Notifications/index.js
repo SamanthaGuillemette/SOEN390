@@ -86,9 +86,10 @@ const Notifications = () => {
                       marginBottom: "20px",
                     }}
                     color="var(--text-primary)"
-                  ></Typography>
-                  {`${notification.patientName} updated their status. Please check
+                  >
+                    {`${notification.patientName} updated their status. Please check
                   the status update for more information.`}
+                  </Typography>
                   <Typography
                     style={{
                       marginLeft: "50px",
@@ -97,7 +98,7 @@ const Notifications = () => {
                     color="#949be2"
                     data-testid="notification-statusUpdate"
                   >
-                    {/*notification.timestamp*/}
+                    {notification.timestamp.toDate().toLocaleString()}
                   </Typography>
                   <Divider color="#949be2" />
                 </Box>
