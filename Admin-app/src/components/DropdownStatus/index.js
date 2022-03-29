@@ -8,7 +8,10 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { makeStyles } from "@material-ui/core/styles";
 import { useEffect, useState } from "react";
-import { setStatus } from "../../backend/firebasePatientUtilities";
+import {
+  setStatus,
+  setRecovered,
+} from "../../backend/firebasePatientUtilities";
 import "./DropdownStatus.css";
 
 // adding styling
@@ -40,11 +43,22 @@ function DropdownStatus(props) {
       target: { value },
     } = event;
 
-    if (patientInfo != null && patientInfo.status) {
+    if (patientInfo != null) {
       // if status and patient exists
-      setStatus(patientInfo.id, value).then((newPatientInfo) =>
+      setStatus(patientInfo.email, value).then((newPatientInfo) =>
         setPatientInfo(newPatientInfo)
       ); // then setting
+      /* IF patient goes from Positive to Negative, then setting attribute recover as "true" */
+      if (patientInfo.status === "POSITIVE" && value === "NEGATIVE") {
+        setRecovered(patientInfo.email, "true").then((newPatientInfo) =>
+          setPatientInfo(newPatientInfo)
+        );
+      } else {
+        /* else setting to false */
+        setRecovered(patientInfo.email, "false").then((newPatientInfo) =>
+          setPatientInfo(newPatientInfo)
+        );
+      }
     }
   };
 
@@ -54,7 +68,9 @@ function DropdownStatus(props) {
       {/* removing the shrinking of the form title */}
       <Select
         data-testid="select3"
-        value={patientInfo && patientInfo.status} // setting value to be the new status
+        value={
+          patientInfo && patientInfo.status ? patientInfo.status : "UNCONFIRMED"
+        } // setting value to be the new status
         onChange={handleChange} // changing the text to the chosen
         inputProps={{
           classes: {

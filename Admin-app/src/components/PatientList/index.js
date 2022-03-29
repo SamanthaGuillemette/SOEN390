@@ -43,7 +43,7 @@ const dropdownStyle = makeStyles({
 // function to create data
 function createData(
   patientname,
-  id,
+  email,
   status,
   appointment,
   doctor,
@@ -55,7 +55,7 @@ function createData(
 ) {
   return {
     patientname,
-    id,
+    email,
     status,
     appointment,
     doctor,
@@ -82,7 +82,7 @@ function PatientList() {
     getDoctors().then((data) => {
       let results = [];
       data.forEach((doc) => {
-        results[doc.id] = doc;
+        results[doc.email] = doc;
       });
       setDoctorsList(results);
     });
@@ -96,32 +96,38 @@ function PatientList() {
           createData(
             <Link
               className="PATIENT__table__name"
-              to={`/patientprofile/${doc.id}`}
+              to={`/patientprofile/${doc.email}`}
             >
-              {doc.name}
+              {`${doc.firstName} ${doc.lastName}`}
             </Link>,
-            doc.id,
+            doc.email,
             <span
               className={
-                doc.status === "POSITIVE"
+                doc.status == null
+                  ? "PATIENT__label-unconfirmed"
+                  : doc.status === "POSITIVE"
                   ? "PATIENT__label-positive"
                   : doc.status === "NEGATIVE"
                   ? "PATIENT__label-negative"
                   : "PATIENT__label-unconfirmed"
               }
             >
-              {doc.status}
+              {doc.status ? doc.status : "UNCONFIRMED"}
             </span>,
             doc.upcomingAppointment,
             doc.assignedDoctor &&
               doctorsList &&
               doctorsList[doc.assignedDoctor] &&
-              doctorsList[doc.assignedDoctor].name,
+              doctorsList[doc.assignedDoctor].firstName &&
+              doctorsList[doc.assignedDoctor].lastName &&
+              `${doctorsList[doc.assignedDoctor].firstName} ${
+                doctorsList[doc.assignedDoctor].lastName
+              }`,
             <FlagIcon
               className={
-                doc.flaggedPriority === "0"
-                  ? "PATIENT__priority-flag"
-                  : "PATIENT__priority-flag clicked"
+                doc.flaggedPriority != null && doc.flaggedPriority === "1"
+                  ? "PATIENT__priority-flag clicked"
+                  : "PATIENT__priority-flag"
               }
             ></FlagIcon>,
             doc.statusReview,
@@ -178,7 +184,7 @@ function PatientList() {
               className="PATIENT__table__header"
               align="left"
             >
-              ID
+              Email
             </TableCell>
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}

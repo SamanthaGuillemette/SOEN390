@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "covid-tracking-cfa70"
+  },
+  "targets": {
+    "covid-tracking-cfa70": {
+      "hosting": {
+        "admin": [
+          "admin-covidtracker"
+        ]
+      }
+    }
   }
 }

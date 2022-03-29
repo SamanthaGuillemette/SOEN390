@@ -15,30 +15,40 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import SymptomsTable from "./SymptomsTable";
 import TableHead from "@mui/material/TableHead";
+import { selectUserInfoDetails } from "../../store/userInfoSlice";
 
 /**
  * Renders function to update a client's status'
  * @returns UpdateStatus function
  */
 function UpdateStatus() {
-    // Pull 'userInfoDetails' from the store (Redux centralized store)
-  const userInfoDetails = useSelector(
-    (state) => state.userInfo.userInfoDetails
-  );
+  // Pull 'userInfoDetails' from the store (Redux centralized store)
+  const userInfoDetails = useSelector(selectUserInfoDetails);
 
   return (
-    <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center">
+    <Grid
+      container
+      spacing={0}
+      direction="column"
+      alignItems="center"
+      justifyContent="center"
+    >
       <Box className="STATUS__box">
-      <TableContainer>
-        <StatusModal></StatusModal>
-        <Typography className="updateStatus-label" align="center" sx={{mt: 1}} style={{ paddingBottom: 8 }}>
-          STATUS
-        </Typography>
-        {/* Table for displaying date, temperature and weight */}
-        <Table sx={{ width: 350 }} aria-label="spanning table">
-          <TableHead>
-            <TableRow>
-              <TableCell
+        <TableContainer>
+          <StatusModal></StatusModal>
+          <Typography
+            className="updateStatus-label"
+            align="center"
+            sx={{ mt: 1 }}
+            style={{ paddingBottom: 8 }}
+          >
+            STATUS
+          </Typography>
+          {/* Table for displaying date, temperature and weight */}
+          <Table sx={{ width: 350 }} aria-label="spanning table">
+            <TableHead>
+              <TableRow>
+                <TableCell
                   className="header"
                   sx={{ borderColor: "var(--primary-light)" }}
                   align="left"
@@ -53,13 +63,13 @@ function UpdateStatus() {
                   Temperature
                 </TableCell>
                 <TableCell
-                    className="header"
-                    sx={{ borderColor: "var(--primary-light)"}}
-                    align="right"
-                  >
-                    Weight
-                  </TableCell>
-                  </TableRow>
+                  className="header"
+                  sx={{ borderColor: "var(--primary-light)" }}
+                  align="right"
+                >
+                  Weight
+                </TableCell>
+              </TableRow>
             </TableHead>
             <TableBody>
               <TableRow>
@@ -70,7 +80,7 @@ function UpdateStatus() {
                 >
                   {userInfoDetails?.dos}
                 </TableCell>
-              <TableCell
+                <TableCell
                   className="data"
                   sx={{ borderColor: "var(--secondary-light)" }}
                   align="center"
@@ -78,17 +88,17 @@ function UpdateStatus() {
                   {userInfoDetails?.temperature}
                 </TableCell>
                 <TableCell
-                    className="data"
-                    sx={{ borderColor: "var(--secondary-light)" }}
-                    align="right"
-                  >
-                    {userInfoDetails?.weight}
-                  </TableCell>
+                  className="data"
+                  sx={{ borderColor: "var(--secondary-light)" }}
+                  align="right"
+                >
+                  {userInfoDetails?.weight}
+                </TableCell>
               </TableRow>
-          </TableBody>
-        </Table>
+            </TableBody>
+          </Table>
         </TableContainer>
-        <SymptomsTable/>
+        <SymptomsTable />
       </Box>
     </Grid>
   );
