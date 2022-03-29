@@ -146,8 +146,18 @@ const getStatuses = async (patientKey) => {
   console.log("[getStatuses]: " + patientKey);
   const statusCollectionName = "Status";
   const dbString = `${getTableName()}/${patientKey}/${statusCollectionName}`;
+
+  // Set time to today @ 0:00 hrs
+  const tempDate = new Date();
+  const todayDate = new Date(
+    tempDate.getFullYear(),
+    tempDate.getMonth(),
+    tempDate.getDate()
+  );
+
   const queryStatuses = query(
     collection(db, dbString),
+    where("timestamp", ">", todayDate),
     orderBy("timestamp", "desc")
   );
 
