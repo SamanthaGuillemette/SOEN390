@@ -9,7 +9,6 @@ import {
   deleteField,
   query,
   where,
-  limit,
   collection,
   orderBy,
 } from "firebase/firestore";
