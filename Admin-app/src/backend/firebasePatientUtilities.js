@@ -152,13 +152,14 @@ const setRecovered = async (patientKey, recovered) => {
 
     // Get updated patient
     patientInfo = await getPatient(patientKey);
-
-const getTableName = () => {
-  return tableName;
     return patientInfo;
   } catch (error) {
     console.log("[setRecovered]" + error);
   }
+};
+
+const getTableName = () => {
+  return tableName;
 };
 
 export {
