@@ -22,22 +22,21 @@ import { getStatusNotifications } from "../../backend/firebaseDoctorUtilities";
  */
 
 const Notifications = () => {
-    const [statusNotifications, setStatusNotifications] = useState(null);
-    const userEmail = useSelector((state) => state.auth.userEmail);
+  const [statusNotifications, setStatusNotifications] = useState([]);
+  const userEmail = useSelector((state) => state.auth.userEmail);
 
-    useEffect(() => {
-        getStatusNotifications(userEmail).then((data) => {
-          let results = [];
-          data.forEach((doc) => {
-            results[doc.email] = doc;
-          });
-          console.log(results)
-          setStatusNotifications(results);
-        });
-    }, [userEmail]);
+  useEffect(() => {
+    getStatusNotifications(userEmail).then((data) => {
+      let results = [];
+      data.forEach((doc) => {
+        results[doc.email] = doc;
+      });
+      console.log(data);
+      setStatusNotifications(results);
+    });
+  }, [userEmail]);
 
-    
-    return (
+  return (
     <>
       <div className="ADMIN-NOTIFICATIONS__container">
         <Card className="ADMIN-NOTIFICATIONS__box">
@@ -60,50 +59,51 @@ const Notifications = () => {
             >
               Notifications
             </Typography>
-            <Box>
+            {statusNotifications.map((notification) => (
               <Box>
-                <Box
-                  style={{
-                    marginTop: "20px",
-                    display: "flex",
-                    alignItems: "center",
-                    flexWrap: "wrap",
-                  }}
-                >
-                  <ReplayIcon color="success" sx={{ fontSize: 40 }} />
+                <Box>
+                  <Box
+                    style={{
+                      marginTop: "20px",
+                      display: "flex",
+                      alignItems: "center",
+                      flexWrap: "wrap",
+                    }}
+                  >
+                    <ReplayIcon color="success" sx={{ fontSize: 40 }} />
+                    <Typography
+                      style={{
+                        marginLeft: "10px",
+                      }}
+                      color="var(--text-primary)"
+                    >
+                      <b>Status Re-Update</b>
+                    </Typography>
+                    <CloseIcon className="NOTIFICATIONS__closingIcon" />
+                  </Box>
                   <Typography
                     style={{
-                      marginLeft: "10px",
+                      marginLeft: "50px",
+                      marginBottom: "20px",
                     }}
                     color="var(--text-primary)"
+                  ></Typography>
+                  {`${notification.patientName} updated their status. Please check
+                  the status update for more information.`}
+                  <Typography
+                    style={{
+                      marginLeft: "50px",
+                      marginBottom: "30px",
+                    }}
+                    color="#949be2"
+                    data-testid="notification-statusUpdate"
                   >
-                    <b>Status Re-Update</b>
+                    {notification.timestamp}
                   </Typography>
-                  <CloseIcon className="NOTIFICATIONS__closingIcon" />
+                  <Divider color="#949be2" />
                 </Box>
-                <Typography
-                  style={{
-                    marginLeft: "50px",
-                    marginBottom: "20px",
-                  }}
-                  color="var(--text-primary)"
-                >
-                  Shakira re-updated her status. Please check the status update
-                  for more information.
-                </Typography>
-                <Typography
-                  style={{
-                    marginLeft: "50px",
-                    marginBottom: "30px",
-                  }}
-                  color="#949be2"
-                  data-testid="notification-statusUpdate"
-                >
-                  22 March, 2022. At 6:30 pm.
-                </Typography>
-                <Divider color="#949be2" />
               </Box>
-            </Box>
+            ))}
             <Box>
               <Box>
                 <Box
