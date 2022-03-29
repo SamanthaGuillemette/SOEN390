@@ -5,6 +5,7 @@ import { db } from "../backend/firebase";
 // --------------- States -------------------
 const initialState = {
   userInfoDetails: null,
+  doctorInfoDetails: null,
   // userInfoStatus: "idle",
 };
 
@@ -22,6 +23,19 @@ export const fetchUserInfo = createAsyncThunk(
   }
 );
 
+export const fetchDoctorInfo = createAsyncThunk(
+  "userInfo/fetchDoctorInfo",
+  async (doctorEmail) => {
+    const responseData = await getDoc(doc(db, `Admin/${doctorEmail}`));
+
+    if (responseData) {
+      return responseData.data();
+    } else {
+      console.log("Doctor info does not exist");
+      return initialState;
+    }
+  }
+);
 // export const updateUserInfo = createAsyncThunk(
 //   "userInfo/updateUserInfo",
 //   async (userEmail, newlyUpdatedInfo) => {
@@ -48,6 +62,9 @@ export const userInfoSlice = createSlice({
       state.userInfoDetails = action.payload;
     });
 
+    builder.addCase(fetchDoctorInfo.fulfilled, (state, action) => {
+      state.doctorInfoDetails = action.payload;
+    });
     // builder.addCase(updateUserInfo.pending, (state) => {
     //   state.userInfoStatus = "pending";
     // });
@@ -59,7 +76,9 @@ export const userInfoSlice = createSlice({
   },
 });
 
-// --------------- Actions -------------------
-// export const {} = userInfoSlice.actions;
+// --------------- Selectors -------------------
+export const selectUserInfoDetails = (state) => state.userInfo.userInfoDetails;
+export const selectDoctorInfoDetails = (state) =>
+  state.userInfo.doctorInfoDetails;
 
 export default userInfoSlice.reducer;

@@ -2,6 +2,14 @@
 
 This project is a part of SOEN 390 - Software Engineering Team Design Project - at Concordia University. The project aims to build a system that could facilitate the tracking of COVID-19 patients' status in Canada. In addition, the system also allow healthcare professionals to give advice to patients regarding the status of their symptoms.
 
+# Running Current Version
+- [ Running Admin portal prototype ](https://admin-covidtracker.web.app/) (running on desktop for Doctor/Health Offical/Immagration Officer/Administrator)
+
+- [ Running Client portal prototype ](https://client-covidtracker.web.app/) (running on mobile phone for Patient)
+
+![frame (2)](https://user-images.githubusercontent.com/55549554/160156149-1b917f5d-ef37-46b4-845f-1e26286950af.png)
+
+
 <br />
 
 # Sprint 1
@@ -10,14 +18,14 @@ This project is a part of SOEN 390 - Software Engineering Team Design Project - 
 
 1. [ User Stories Backlog (USB) ](https://github.com/SamanthaGuillemette/SOEN390/blob/main/wiki_docs/USB/Team14_User%20Story%20Backlog.xlsx)
 
-3. [ Release Plan (Sprint #2 planning) ](https://github.com/SamanthaGuillemette/SOEN390/blob/main/wiki_docs/Release_Plan/Release%20Plan%20-%20Spint%202%20Planning.xlsx)
+3. [ Release Plan (Sprint 2 planning) ](https://github.com/SamanthaGuillemette/SOEN390/blob/main/wiki_docs/Release_Plan/Release%20Plan%20-%20Spint%202%20Planning.xlsx)
 
    
 4. Software Architecture Document (SAD) (See Sprint 1 Report)
 
 5. Risk Assessment & Risk Management Plan (RMP) (See Sprint 1 Report)
-6. [ UI prototypes for Sprint #1 user stories ](https://github.com/SamanthaGuillemette/SOEN390/tree/main/wiki_docs/UI_Prototypes/Sprint%201/Admin)
-7. [ UI prototypes for Sprint #2 user stories ](https://github.com/SamanthaGuillemette/SOEN390/tree/main/wiki_docs/UI_Prototypes/Sprint%202)
+6. [ UI prototypes for Sprint 1 user stories ](https://github.com/SamanthaGuillemette/SOEN390/tree/main/wiki_docs/UI_Prototypes/Sprint%201/Admin)
+7. [ UI prototypes for Sprint 2 user stories ](https://github.com/SamanthaGuillemette/SOEN390/tree/main/wiki_docs/UI_Prototypes/Sprint%202)
 8. Testing Plan (See Sprint 1 Report)
 
 9. Running prototype
@@ -32,18 +40,39 @@ This project is a part of SOEN 390 - Software Engineering Team Design Project - 
 
 1. User Stories Backlog (USB) 
 
-3. Release Plan (Sprint #3 planning) 
+3. Release Plan (Sprint 3 planning) 
    
 4. Software Architecture Document (SAD) (See Sprint 2 Report)
 
 5. Risk Assessment & Risk Management Plan (RMP) (See Sprint 2 Report)
-6. [ UI prototypes for Sprint #3 user stories ](https://github.com/SamanthaGuillemette/SOEN390/tree/main/wiki_docs/UI_Prototypes/Sprint%203)
+6. [ UI prototypes for Sprint 3 user stories ](https://github.com/SamanthaGuillemette/SOEN390/tree/main/wiki_docs/UI_Prototypes/Sprint%203)
 7. Testing Plan (See Sprint 2 Report)
 
 9. Running prototype
 10. Short sprint retrospective
 
 <br/>
+
+
+# Sprint 3
+
+[Sprint 3 Report](https://docs.google.com/document/d/1sTb3VUBFREMWVwaTKdlWZqT0LWoCZqBmOrlwcJNOAyc/edit?usp=sharing)
+
+1. User Stories Backlog (USB) (See Sprint 3 Report)
+
+3. Release Plan (Sprint 4 planning) 
+   
+4. Software Architecture Document (SAD) (See Sprint 3 Report)
+
+5. Risk Assessment & Risk Management Plan (RMP) (See Sprint 3 Report)
+6. UI prototypes for Sprint 4 user stories (See Sprint 3 Report)
+7. Testing Plan (See Sprint 3 Report)
+8. [ Running Admin portal prototype ](https://admin-covidtracker.web.app/)
+9. [ Running Client portal prototype ](https://client-covidtracker.web.app/)
+10. Short sprint retrospective (See Sprint 3 Report)
+
+<br/>
+
 
 ## Team 14 - members:
 
