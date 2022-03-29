@@ -1,5 +1,19 @@
-import { getTableData, getTableDataItem, getDocRef } from "./firebaseUtilities";
-import { updateDoc, deleteField } from "firebase/firestore";
+import {
+  getTableData,
+  getTableDataByQuery,
+  getTableDataItem,
+  getDocRef,
+} from "./firebaseUtilities";
+import {
+  updateDoc,
+  deleteField,
+  query,
+  where,
+  limit,
+  collection,
+  orderBy,
+} from "firebase/firestore";
+import { db } from "./firebase";
 
 const tableName = "Client";
 
@@ -132,8 +146,12 @@ const getStatuses = async (patientKey) => {
   console.log("[getStatuses]: " + patientKey);
   const statusCollectionName = "Status";
   const dbString = `${getTableName()}/${patientKey}/${statusCollectionName}`;
+  const queryStatuses = query(
+    collection(db, dbString),
+    orderBy("timestamp", "desc")
+  );
 
-  const statuses = await getTableData(dbString);
+  const statuses = await getTableDataByQuery(queryStatuses);
 
   return statuses;
 };
