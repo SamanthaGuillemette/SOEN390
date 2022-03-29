@@ -141,29 +141,40 @@ const setStatus = async (patientKey, status) => {
  * @param {*} patientKey
  * @returns Status tuples
  */
-const getStatuses = async (patientKey) => {
+const getStatuses = async (patientKey, isTodayOnly = false) => {
   console.log("[getStatuses]: " + patientKey);
   const statusCollectionName = "Status";
   const dbString = `${getTableName()}/${patientKey}/${statusCollectionName}`;
 
-  // Set time to today @ 0:00 hrs
-  const tempDate = new Date();
-  const todayDate = new Date(
-    tempDate.getFullYear(),
-    tempDate.getMonth(),
-    tempDate.getDate()
-  );
-
-  const queryStatuses = query(
-    collection(db, dbString),
-    where("timestamp", ">", todayDate),
-    orderBy("timestamp", "desc")
-  );
+  const queryStatuses = await getStatusesQuery(dbString, isTodayOnly);
 
   const statuses = await getTableDataByQuery(queryStatuses);
 
   return statuses;
 };
+
+const getStatusesQuery = async (dbString, isTodayOnly) => {
+  console.log("[isTodayOnly]: " + isTodayOnly);
+
+  if (isTodayOnly === true) {
+    // Set time to today @ 0:00 hrs
+    const tempDate = new Date();
+    const todayDate = new Date(
+      tempDate.getFullYear(),
+      tempDate.getMonth(),
+      tempDate.getDate()
+    );
+
+    return query(
+      collection(db, dbString),
+      where("timestamp", ">", todayDate),
+      orderBy("timestamp", "desc")
+    );
+  } else {
+    return query(collection(db, dbString), orderBy("timestamp", "desc"));
+  }
+};
+
 const setRecovered = async (patientKey, recovered) => {
   try {
     // Get Patient

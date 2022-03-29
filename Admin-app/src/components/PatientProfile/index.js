@@ -118,7 +118,7 @@ function PatientProfile() {
     getPatient(key)
       .then((data) => {
         setPatientInfo(data);
-        getStatuses(key).then((statuses) => {
+        getStatuses(key, true).then((statuses) => {
           statuses &&
             setPatientInfoStatuses(
               statuses.map((status) =>
