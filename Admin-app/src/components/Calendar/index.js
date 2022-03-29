@@ -9,14 +9,16 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import resourceTimeGridPlugin from "@fullcalendar/resource-timegrid";
 import "./Calendar.css";
 import { useRef, useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, db } from "../../backend/firebase";
+import { db } from "../../backend/firebase";
 import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 import { Button, Grid, Modal, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { createTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@mui/material/styles";
 import { makeStyles } from "@material-ui/core/styles";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUserEmail } from "../../store/authSlice";
+import { fetchClientInfo } from "../../store/userInfoSlice";
 
 const useStyles = makeStyles({
   root: {
@@ -100,8 +102,7 @@ const Calendar = () => {
   const calendarRef = useRef();
   const classes = useStyles();
 
-  const [user] = useAuthState(auth);
-  const doctorEmail = user?.email;
+  const doctorEmail = useSelector(selectUserEmail);
   const clientEmail = "client.quang@gmail.com";
 
   const [modalOpen, setModalOpen] = useState(false);
