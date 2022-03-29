@@ -13,12 +13,18 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ReportIcon from '@mui/icons-material/Report';
 import { Divider } from '@mui/material';
 import ReplayIcon from '@mui/icons-material/Replay';
+import { useSelector } from "react-redux";
 import { getStatusNotificationsTable } from "../../backend/firebaseDoctorUtilities";
 
 /**
  * This component is what allows the Notifications feature to work.
  */
+
+
 const Notifications = () => {
+    
+    const userInfoDetails = useSelector((state) => state.userInfo.userInfoDetails);
+
     return (
         <>
             <div className="ADMIN-NOTIFICATIONS__container">

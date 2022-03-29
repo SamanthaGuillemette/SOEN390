@@ -4,8 +4,6 @@ import {
   arrayRemove,
   getDocs,
   collection,
-  getDoc,
-  setDoc,
 } from "firebase/firestore";
 import {
   getAdminsByRole,
