@@ -8,6 +8,10 @@ const initialState = {
   clientInfoDetails: null,
 };
 
+/**
+ * Fetch (& save) basic info of the current logged in user
+ * @param {string} userEmail
+ */
 export const fetchUserInfo = createAsyncThunk(
   "userInfo/fetchUserInfo",
   async (userEmail) => {
@@ -22,6 +26,10 @@ export const fetchUserInfo = createAsyncThunk(
   }
 );
 
+/**
+ * Fetch (& save) client info based on client email
+ * @param {string} clientEmail
+ */
 export const fetchClientInfo = createAsyncThunk(
   "userInfo/fetchClientInfo",
   async (clientEmail) => {
@@ -52,6 +60,6 @@ export const userInfoSlice = createSlice({
 // --------------- Selectors -------------------
 export const selectUserInfoDetails = (state) => state.userInfo.userInfoDetails;
 export const selectClientInfoDetails = (state) =>
-  state.userInfo.userInfoDetails;
+  state.userInfo.clientInfoDetails;
 
 export default userInfoSlice.reducer;

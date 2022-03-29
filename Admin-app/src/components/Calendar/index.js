@@ -10,15 +10,21 @@ import resourceTimeGridPlugin from "@fullcalendar/resource-timegrid";
 import "./Calendar.css";
 import { useRef, useState } from "react";
 import { db } from "../../backend/firebase";
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  serverTimestamp,
+  setDoc,
+} from "firebase/firestore";
 import { Button, Grid, Modal, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { createTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@mui/material/styles";
 import { makeStyles } from "@material-ui/core/styles";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectUserEmail } from "../../store/authSlice";
-import { fetchClientInfo } from "../../store/userInfoSlice";
+import { selectUserInfoDetails } from "../../store/userInfoSlice";
 
 const useStyles = makeStyles({
   root: {
@@ -98,18 +104,23 @@ const Calendar = () => {
   const [endDate, setEndDate] = useState("");
   const [location, setLocation] = useState("");
   const [note, setNote] = useState("");
+  const [selectedPatient, setSelectedPatient] = useState(
+    "client.quang@gmail.com"
+  );
 
   const calendarRef = useRef();
   const classes = useStyles();
 
   const doctorEmail = useSelector(selectUserEmail);
-  const clientEmail = "client.quang@gmail.com";
+  // const doctorInfo = useSelector(selectUserInfoDetails);
 
   const [modalOpen, setModalOpen] = useState(false);
 
   // const handleDateClick = (event) => {
   //   console.log("Date clicked: ", event);
   // };
+
+  // console.log("==> Patients: ", doctorInfo.treats);
 
   const handleSelectedDate = (event) => {
     // console.log("Selected date: ", event);
@@ -126,16 +137,17 @@ const Calendar = () => {
     event.preventDefault();
 
     // Submit basic appointment info to database
-    await setDoc(doc(db, `Appointment/${doctorEmail}&${clientEmail}`), {
+    await setDoc(doc(db, `DoctorPatient/${doctorEmail}&${selectedPatient}`), {
       doctor: doctorEmail,
-      patient: clientEmail,
+      patient: selectedPatient,
+      createdOn: serverTimestamp(),
     });
 
     // Submit appointment details into Appointment History queue (sub-collection)
     await addDoc(
       collection(
         db,
-        `Appointment/${doctorEmail}&${clientEmail}/AppointmentHistory`
+        `DoctorPatient/${doctorEmail}&${selectedPatient}/AppointmentHistory`
       ),
       {
         startDate: startDate,
