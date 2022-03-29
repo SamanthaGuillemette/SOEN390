@@ -14,16 +14,30 @@ import ReportIcon from "@mui/icons-material/Report";
 import { Divider } from "@mui/material";
 import ReplayIcon from "@mui/icons-material/Replay";
 import { useSelector } from "react-redux";
-import { getStatusNotificationsTable } from "../../backend/firebaseDoctorUtilities";
+import { useEffect, useState } from "react";
+import { getStatusNotifications } from "../../backend/firebaseDoctorUtilities";
 
 /**
  * This component is what allows the Notifications feature to work.
  */
 
 const Notifications = () => {
-  const userEmail = useSelector((state) => state.auth.userEmail);
+    const [statusNotifications, setStatusNotifications] = useState(null);
+    const userEmail = useSelector((state) => state.auth.userEmail);
 
-  return (
+    useEffect(() => {
+        getStatusNotifications(userEmail).then((data) => {
+          let results = [];
+          data.forEach((doc) => {
+            results[doc.email] = doc;
+          });
+          console.log(results)
+          setStatusNotifications(results);
+        });
+    }, [userEmail]);
+
+    
+    return (
     <>
       <div className="ADMIN-NOTIFICATIONS__container">
         <Card className="ADMIN-NOTIFICATIONS__box">

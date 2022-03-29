@@ -63,7 +63,7 @@ const removePatientFromDoctor = async (doctorKey, patientKey) => {
   }
 };
 
-const getStatusNotificationsTable = async (doctorKey) => {
+const getStatusNotifications = async (doctorKey) => {
   try {
     const querySnapshot = await getDocs(
       collection(db, `Admin/${doctorKey}/StatusNotifications`)
@@ -81,5 +81,5 @@ export {
   patientLimit,
   addPatientToDoctor,
   removePatientFromDoctor,
-  getStatusNotificationsTable,
+  getStatusNotifications,
 };
