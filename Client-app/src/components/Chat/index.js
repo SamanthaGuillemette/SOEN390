@@ -119,11 +119,7 @@ const Chat = () => {
 
   return (
     <>
-      <Box
-        onSubmit={handleSubmit}
-        noValidate
-        component="form"
-      >
+      <Box onSubmit={handleSubmit} noValidate component="form">
         <Grid container spacing={2}>
           <Grid container>
             <Grid item xs={12}>
@@ -138,7 +134,7 @@ const Chat = () => {
           </Grid>
 
           <Grid container sx={{ mb: 5 }}>
-            <Grid item xs={1} sx={{ marginLeft: "20px" }}>
+            <Grid item xs={1} sx={{ marginLeft: "12px" }}>
               <Avatar {...stringAvatar(user?.email)} />
             </Grid>
             <Grid item xs={7}>
@@ -150,12 +146,12 @@ const Chat = () => {
                 placeholder="Type your message here..."
                 sx={{
                   input: {
-                    color: "white"
+                    color: "white",
                   },
                   bgcolor: "#262626",
                   borderRadius: "15px",
                   width: "90%",
-                  marginLeft: "10px",
+                  marginLeft: "15px",
                 }}
               />
             </Grid>
@@ -164,7 +160,7 @@ const Chat = () => {
                 type="submit"
                 variant="contained"
                 className="CHAT__send-button"
-                sx={{ mb: 1}}
+                sx={{ mb: 1 }}
                 endIcon={<SendIcon />}
                 disabled={!msgToSend}
               >
@@ -192,7 +188,7 @@ function ChatMessage(props) {
     <>
       <div className={`INBOX__message ${messageClass}`}>
         <ListItemAvatar
-          sx={{ marginBottom: "10px", marginLeft: "10px", marginRight: "10px" }}
+          sx={{ marginBottom: "10px", marginLeft: "8px", marginRight: "8px" }}
         >
           <Avatar {...stringAvatar(name)} />
         </ListItemAvatar>
