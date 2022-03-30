@@ -16,6 +16,7 @@ import ReplayIcon from "@mui/icons-material/Replay";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getStatusNotifications } from "../../backend/firebaseDoctorUtilities";
+import Checkbox from "@mui/material/Checkbox";
 
 /**
  * This component is what allows the Notifications feature to work.
@@ -69,16 +70,16 @@ const Notifications = () => {
                       flexWrap: "wrap",
                     }}
                   >
-                    <ReplayIcon color="success" sx={{ fontSize: 40 }} />
+                    <CheckCircleIcon color="success" sx={{ fontSize: 40 }} />
                     <Typography
                       style={{
                         marginLeft: "10px",
                       }}
                       color="var(--text-primary)"
                     >
-                      <b>Status Re-Update</b>
+                      <b>Status Update</b>
                     </Typography>
-                    <CloseIcon className="NOTIFICATIONS__closingIcon" />
+                    <Checkbox></Checkbox>
                   </Box>
                   <Typography
                     style={{
