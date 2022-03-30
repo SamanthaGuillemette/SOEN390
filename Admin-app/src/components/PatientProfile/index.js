@@ -45,28 +45,22 @@ const Item = styled(Paper)(({ theme }) => ({
  * @param  {} dobStr
  */
 function getAge(dobStr) {
-  // First get today's date
-  var todaysDate = new Date();
+  var todaysDate = new Date(); // First get today's date
+  var dob = new Date(dobStr); // Convert date of birth string to a date objects
 
-  // Convert date of birth string to a date objects
-  var dob = new Date(dobStr);
+  var ageNow = todaysDate.getFullYear() - dob.getFullYear(); // storing age
+  var m = todaysDate.getMonth() - dob.getMonth(); // storing month
 
-  // Calculate age based on year alone
-  var returnValue = todaysDate.getYear() - dob.getYear();
-
-  // Check month in case it has an effect on the age
-  if (dob.getMonth() > todaysDate.getMonth()) {
-    returnValue += 1;
-  }
-  // If dob same month as today, check day in case it has an effect on the age
-  else if (
-    dob.getMonth() === todaysDate.getMonth() &&
-    dob.getDay() > todaysDate.getDay()
-  ) {
-    returnValue += 1;
+  if (m < 0 || (m === 0 && todaysDate.getDate < dob.getDate())) {
+    ageNow -= 1; // decreasing age
   }
 
-  return returnValue;
+  if (ageNow < 0) {
+    // if negative value
+    return 0; // return 0
+  } else {
+    return ageNow; // returning
+  }
 }
 
 /**
@@ -99,24 +93,16 @@ function PatientProfile() {
   }
 
   // reviewed status with DB
-  function onReviewedClick(id) {
-    if (checked === true) {
-      setReviewingStatus("Not Completed");
-      setChecked(false);
-    } else {
-      setReviewingStatus("Status Reviewed");
-      setChecked(true);
-    }
-    //{patientInfo && patientInfo.statusReview}
-    toggleReviewed(id).then((newPatientInfo) => newPatientInfo);
+  function onReviewedClick() {
+    toggleReviewed(key).then((newPatientInfo) =>
+      setPatientInfo(newPatientInfo)
+    );
   }
 
   // priority flag with DB
-  function onFlagClick(id) {
-    togglePriorityFlag(id).then(
-      (newPatientInfo) =>
-        newPatientInfo &&
-        setPriorityFlag(newPatientInfo.flaggedPriority === "1")
+  function onFlagClick() {
+    togglePriorityFlag(key).then((newPatientInfo) =>
+      setPatientInfo(newPatientInfo)
     );
   }
 
@@ -126,27 +112,13 @@ function PatientProfile() {
   ];
 
   const { key } = useParams();
-  const [priorityFlag, setPriorityFlag] = useState(false);
   const [patientInfo, setPatientInfo] = useState(null);
-  const [checked, setChecked] = useState("");
-  const [reviewingStatus, setReviewingStatus] = useState("");
 
   // Get Patient Info each time page refreshes
   useEffect(() => {
     getPatient(key)
       .then((data) => {
         setPatientInfo(data);
-        setPriorityFlag(data.flaggedPriority === "1");
-        if (
-          data.statusReview == null ||
-          data.statusReview === "Not Completed"
-        ) {
-          setChecked(false);
-          setReviewingStatus("Not Completed");
-        } else {
-          setChecked(true);
-          setReviewingStatus("Status Reviewed");
-        }
       })
       .catch((err) => {
         console.log(err);
@@ -208,7 +180,9 @@ function PatientProfile() {
             data-testid="card-2"
             sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }}
             className={
-              priorityFlag ? "PATIENT__status clicked" : "PATIENT__status__card"
+              patientInfo && patientInfo.flaggedPriority === "1"
+                ? "PATIENT__status clicked"
+                : "PATIENT__status__card"
             }
           >
             <CardActionArea>
@@ -223,10 +197,10 @@ function PatientProfile() {
                   Status{" "}
                   <FlagIcon
                     onClick={() => {
-                      onFlagClick(key);
+                      onFlagClick();
                     }}
                     className={
-                      priorityFlag
+                      patientInfo && patientInfo.flaggedPriority === "1"
                         ? "PATIENT__priority-flag clicked"
                         : "PATIENT__priority-flag"
                     }
@@ -305,13 +279,24 @@ function PatientProfile() {
                     className="PATIENT-STATUS-REVIEW__data"
                     variant="body2"
                   >
-                    Review Completed: {reviewingStatus}
+                    Review Completed:{" "}
+                    {patientInfo &&
+                    (patientInfo.statusReview === null ||
+                      patientInfo.statusReview === "Not Completed")
+                      ? "Not Completed"
+                      : "Status Reviewed"}
                     <Checkbox
-                      checked={checked}
+                      checked={
+                        patientInfo &&
+                        (patientInfo.statusReview === null ||
+                          patientInfo.statusReview === "Not Completed")
+                          ? false
+                          : true
+                      }
                       size="small"
                       style={{ color: "var(--text-primary)" }}
                       onClick={() => {
-                        onReviewedClick(key);
+                        onReviewedClick();
                       }}
                     />
                   </Typography>

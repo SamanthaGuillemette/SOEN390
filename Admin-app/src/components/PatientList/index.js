@@ -43,7 +43,7 @@ const dropdownStyle = makeStyles({
 // function to create data
 function createData(
   patientname,
-  id,
+  email,
   status,
   appointment,
   doctor,
@@ -55,7 +55,7 @@ function createData(
 ) {
   return {
     patientname,
-    id,
+    email,
     status,
     appointment,
     doctor,
@@ -184,7 +184,7 @@ function PatientList() {
               className="PATIENT__table__header"
               align="left"
             >
-              ID
+              Email
             </TableCell>
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}

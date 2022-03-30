@@ -122,6 +122,28 @@ const setStatus = async (patientKey, status) => {
   }
 };
 
+const setRecovered = async (patientKey, recovered) => {
+  try {
+    // Get Patient
+    const docRef = getDocRef(tableName, patientKey);
+    let patientInfo = await getPatient(patientKey);
+
+    if (patientInfo) {
+      if (recovered != null) {
+        // Update status field in Patient
+        docRef && (await updateDoc(docRef, "recovered", recovered));
+      }
+    }
+
+    // Get updated patient
+    patientInfo = await getPatient(patientKey);
+
+    return patientInfo;
+  } catch (error) {
+    console.log("[setRecovered]" + error);
+  }
+};
+
 export {
   getPatients,
   getPatient,
@@ -130,4 +152,5 @@ export {
   isValidPatientId,
   toggleReviewed,
   setStatus,
+  setRecovered,
 };

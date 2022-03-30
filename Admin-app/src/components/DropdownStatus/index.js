@@ -8,7 +8,10 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { makeStyles } from "@material-ui/core/styles";
 import { useEffect, useState } from "react";
-import { setStatus } from "../../backend/firebasePatientUtilities";
+import {
+  setStatus,
+  setRecovered,
+} from "../../backend/firebasePatientUtilities";
 import "./DropdownStatus.css";
 
 // adding styling
@@ -45,6 +48,17 @@ function DropdownStatus(props) {
       setStatus(patientInfo.email, value).then((newPatientInfo) =>
         setPatientInfo(newPatientInfo)
       ); // then setting
+      /* IF patient goes from Positive to Negative, then setting attribute recover as "true" */
+      if (patientInfo.status === "POSITIVE" && value === "NEGATIVE") {
+        setRecovered(patientInfo.email, "true").then((newPatientInfo) =>
+          setPatientInfo(newPatientInfo)
+        );
+      } else {
+        /* else setting to false */
+        setRecovered(patientInfo.email, "false").then((newPatientInfo) =>
+          setPatientInfo(newPatientInfo)
+        );
+      }
     }
   };
 
