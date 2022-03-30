@@ -20,18 +20,18 @@ import EachRow from "./EachRow";
 const dropdownStyle = makeStyles({
   paper: {
     background: "var(--background-main)", // giving background color to dropdown
-    color: "var(--text-inactive)", // color of text in the dropdown
+    color: "var(--text-inactive) !important", // color of text in the dropdown
     borderRadius: "10px",
   },
   color: {
-    color: "var(--text-inactive)", // color of text in pasgination
+    color: "var(--text-inactive) !important", // color of text in pasgination
   },
   select: {
     "&:after": {
-      borderBottomColor: "var(--text-inactive)",
+      borderBottomColor: "var(--text-inactive) !important",
     },
     "& .MuiSvgIcon-root": {
-      color: "var(--text-inactive)", // color of pagination button
+      color: "var(--text-inactive) !important", // color of pagination button
     },
   },
 });
