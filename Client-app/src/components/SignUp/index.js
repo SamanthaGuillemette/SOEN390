@@ -2,11 +2,13 @@
  * @fileoverview This component displays & handles the login/signup form.
  *
  */
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
+import Input from "@mui/material/Input";
+import InputLabel from "@mui/material/InputLabel";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
@@ -34,6 +36,8 @@ import { styleForModal, Copyright } from "../SignIn";
 import { makeStyles } from "@material-ui/core/styles";
 import { getDoc } from "firebase/firestore";
 import "./SignUp.css";
+import PropTypes from "prop-types";
+import { IMaskInput } from "react-imask";
 
 const theme = createTheme({
   palette: {
@@ -67,6 +71,29 @@ const helperTextStyles = makeStyles((theme) => ({
     },
   },
 }));
+// This function is used to set the postal code in a proper Canadian Format
+const TextMaskCustom = forwardRef(function TextMaskCustom(props, ref) {
+  const { onChange, ...other } = props;
+  return (
+    <IMaskInput
+      {...other}
+      mask="{#}0{@} 0{@}0"
+      definitions={{
+        "#": /[ABCEGHJ-NPRSTVXY, abceghj-nprstvxy]/,
+        "@": /[ABCEGHJ-NPRSTV-Z, abceghj-nprstv-z]/
+      }}
+      lazy="false"
+      inputRef={ref}
+      onAccept={(value) => onChange({ target: { name: props.name, value } })}
+      overwrite
+    />
+  );
+});
+
+TextMaskCustom.propTypes = {
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired
+};
 
 /**
  * This function is responsible for the signup component which also communicates with the server and displays relevent error messages if necessary.
@@ -385,6 +412,37 @@ export default function SignUp(props) {
                 </FormControl>
               </Grid>
               <Grid item xs={12} sm={6}>
+                <FormControl fullWidth variant='outlined'>
+                  <InputLabel >
+                    Postal Code *
+                  </InputLabel>
+                  <Input
+                    required
+                    fullWidth
+                    id="postalCode"
+                    label="Postal Code"
+                    name="Postal Code"
+                    autoComplete="postal-code"
+                    value={postalCode}
+                    onChange={(e) => setPostalCode(e.target.value)}
+                    helperText={
+                      postalCode === "" && emptyFields
+                        ? "This field is required."
+                        : ""
+                    }
+                    error={postalCode === "" && emptyFields}
+                    FormHelperTextProps={{ classes: helperTestClasses }}
+                    inputProps={{
+                      sx: {
+                        color: "var(--text-primary)",
+                        [`&.${inputLabelClasses.shrink}`]: {
+                          color: "var(--primary-main)",
+                        },
+                      },
+                    }}
+                    inputComponent={TextMaskCustom}
+                  />
+                </FormControl>
                 <TextField
                   required
                   fullWidth
@@ -392,7 +450,6 @@ export default function SignUp(props) {
                   label="Postal Code"
                   name="Postal Code"
                   autoComplete="postal-code"
-                  // InputProps={{ pattern: "[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z][ ]\d[ABCEGHJ-NPRSTV-Z]\d$/i" }}
                   value={postalCode}
                   onChange={(e) => setPostalCode(e.target.value)}
                   helperText={
