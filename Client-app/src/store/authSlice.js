@@ -1,3 +1,6 @@
+/**
+ * @fileoverview This file is the central storage to hold "states" of our application
+ */
 import { createSlice } from "@reduxjs/toolkit";
 import { auth } from "../backend/firebase";
 
@@ -25,5 +28,9 @@ export const authSlice = createSlice({
 
 // --------------- Actions -------------------
 export const { saveUser } = authSlice.actions;
+
+// --------------- Selectors -------------------
+export const selectUserToken = (state) => state.auth.userToken;
+export const selectUserEmail = (state) => state.auth.userEmail;
 
 export default authSlice.reducer;
