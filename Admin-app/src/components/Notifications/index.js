@@ -79,7 +79,7 @@ const Notifications = () => {
                     >
                       <b>Status Update</b>
                     </Typography>
-                    <Checkbox></Checkbox>
+                    <Checkbox className="NOTIFICATIONS__checkboxIcon"></Checkbox>
                   </Box>
                   <Typography
                     style={{
@@ -105,50 +105,6 @@ const Notifications = () => {
                 </Box>
               </Box>
             ))}
-            <Box>
-              <Box>
-                <Box
-                  style={{
-                    marginTop: "20px",
-                    display: "flex",
-                    alignItems: "center",
-                    flexWrap: "wrap",
-                  }}
-                >
-                  <CheckCircleIcon color="success" sx={{ fontSize: 40 }} />
-                  <Typography
-                    style={{
-                      marginLeft: "10px",
-                    }}
-                    color="var(--text-primary)"
-                  >
-                    <b>Status Update</b>
-                  </Typography>
-                  <CloseIcon className="NOTIFICATIONS__closingIcon" />
-                </Box>
-                <Typography
-                  style={{
-                    marginLeft: "50px",
-                    marginBottom: "20px",
-                  }}
-                  color="var(--text-primary)"
-                >
-                  Shakira updated her status. Please check the status update for
-                  more information.
-                </Typography>
-                <Typography
-                  style={{
-                    marginLeft: "50px",
-                    marginBottom: "30px",
-                  }}
-                  color="#949be2"
-                  data-testid="notification-statusUpdate"
-                >
-                  22 March, 2022. At 5:50 pm.
-                </Typography>
-                <Divider color="#949be2" />
-              </Box>
-            </Box>
             <Box>
               <Box>
                 <Box
