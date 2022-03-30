@@ -1,5 +1,18 @@
-import { getTableData, getTableDataItem, getDocRef } from "./firebaseUtilities";
-import { updateDoc, deleteField } from "firebase/firestore";
+import {
+  getTableData,
+  getTableDataByQuery,
+  getTableDataItem,
+  getDocRef,
+} from "./firebaseUtilities";
+import {
+  updateDoc,
+  deleteField,
+  query,
+  where,
+  collection,
+  orderBy,
+} from "firebase/firestore";
+import { db } from "./firebase";
 
 const tableName = "Client";
 
@@ -122,6 +135,46 @@ const setStatus = async (patientKey, status) => {
   }
 };
 
+/**
+ * Obtain the tuples from the Status subcollection of a Client
+ *
+ * @param {*} patientKey
+ * @returns Status tuples
+ */
+const getStatuses = async (patientKey, isTodayOnly = false) => {
+  console.log("[getStatuses]: " + patientKey);
+  const statusCollectionName = "Status";
+  const dbString = `${getTableName()}/${patientKey}/${statusCollectionName}`;
+
+  const queryStatuses = await getStatusesQuery(dbString, isTodayOnly);
+
+  const statuses = await getTableDataByQuery(queryStatuses);
+
+  return statuses;
+};
+
+const getStatusesQuery = async (dbString, isTodayOnly) => {
+  console.log("[isTodayOnly]: " + isTodayOnly);
+
+  if (isTodayOnly === true) {
+    // Set time to today @ 0:00 hrs
+    const tempDate = new Date();
+    const todayDate = new Date(
+      tempDate.getFullYear(),
+      tempDate.getMonth(),
+      tempDate.getDate()
+    );
+
+    return query(
+      collection(db, dbString),
+      where("timestamp", ">", todayDate),
+      orderBy("timestamp", "desc")
+    );
+  } else {
+    return query(collection(db, dbString), orderBy("timestamp", "desc"));
+  }
+};
+
 const setRecovered = async (patientKey, recovered) => {
   try {
     // Get Patient
@@ -137,11 +190,14 @@ const setRecovered = async (patientKey, recovered) => {
 
     // Get updated patient
     patientInfo = await getPatient(patientKey);
-
     return patientInfo;
   } catch (error) {
     console.log("[setRecovered]" + error);
   }
+};
+
+const getTableName = () => {
+  return tableName;
 };
 
 export {
@@ -152,5 +208,6 @@ export {
   isValidPatientId,
   toggleReviewed,
   setStatus,
+  getStatuses,
   setRecovered,
 };

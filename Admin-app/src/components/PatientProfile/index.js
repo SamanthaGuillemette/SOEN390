@@ -20,8 +20,6 @@ import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import Checkbox from "@mui/material/Checkbox";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import Button from "@mui/material/Button";
 import FlagIcon from "@mui/icons-material/Flag";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -29,6 +27,7 @@ import {
   getPatient,
   togglePriorityFlag,
   toggleReviewed,
+  getStatuses,
 } from "../../backend/firebasePatientUtilities";
 import DropdownStatus from "./../DropdownStatus";
 import DropdownDoctor from "./../DropdownDoctor";
@@ -78,7 +77,9 @@ function PatientProfile() {
     MuscleAche,
     Tiredness,
     SmellLoss,
-    TasteLoss
+    TasteLoss,
+    Temperature,
+    Weight
   ) {
     return {
       Date,
@@ -89,6 +90,8 @@ function PatientProfile() {
       Tiredness,
       SmellLoss,
       TasteLoss,
+      Temperature,
+      Weight,
     };
   }
 
@@ -106,19 +109,34 @@ function PatientProfile() {
     );
   }
 
-  const rows = [
-    createData("Jan 25", "No", "Yes", "No", "Yes", "Yes", "No", "No"),
-    createData("Jan 26", "No", "Yes", "No", "No", "No", "No", "No"),
-  ];
-
   const { key } = useParams();
   const [patientInfo, setPatientInfo] = useState(null);
+  const [patientInfoStatuses, setPatientInfoStatuses] = useState([]);
 
   // Get Patient Info each time page refreshes
   useEffect(() => {
     getPatient(key)
       .then((data) => {
         setPatientInfo(data);
+        getStatuses(key, true).then((statuses) => {
+          statuses &&
+            setPatientInfoStatuses(
+              statuses.map((status) =>
+                createData(
+                  status?.timestamp?.toDate()?.toLocaleString() || "",
+                  status.fever || "No",
+                  status.cough || "No",
+                  status.runnyNose || "No",
+                  status.muscleAche || "No",
+                  status.soreThroat || "No",
+                  status.smellLoss || "No",
+                  status.tasteLoss || "No",
+                  status.temperature || "",
+                  status.weight || ""
+                )
+              )
+            );
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -215,18 +233,6 @@ function PatientProfile() {
                   alignItems="baseline"
                 >
                   <DropdownStatus patientInfo={patientInfo} />
-                  <Item
-                    className="PATIENT-PROFILE__data"
-                    sx={{ bgcolor: "inherit", boxShadow: "none" }}
-                  >
-                    Temperature: {patientInfo && patientInfo.temperature} °C
-                  </Item>
-                  <Item
-                    className="PATIENT-PROFILE__data"
-                    sx={{ bgcolor: "inherit", boxShadow: "none" }}
-                  >
-                    Weight: {patientInfo && patientInfo.weight} lbs
-                  </Item>
                 </Stack>
               </CardContent>
             </CardActionArea>
@@ -315,13 +321,12 @@ function PatientProfile() {
           component={Paper}
         >
           <h5 className="PATIENT-SYMPTOMS__table__label">
-            <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SYMPTOM DETAILS
-            <Button id="addButton">
-              <AddCircleIcon
-                sx={{ color: "var(--text-primary)" }}
-              ></AddCircleIcon>
-            </Button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STATUS DETAILS{" "}
+            <h5 className="PATIENT-SYMPTOMS__table__label__no-data">
+              {patientInfoStatuses &&
+                patientInfoStatuses.length === 0 &&
+                `(NO SYMPTOMS ENTERED YET)`}
+            </h5>
           </h5>
           <Table sx={{ minWidth: 650 }} aria-label="collapsable table">
             <TableHead>
@@ -335,119 +340,148 @@ function PatientProfile() {
                 <TableCell
                   className="PATIENT-SYMPTOMS__table__header"
                   sx={{ borderColor: "var(--background-secondary)" }}
-                  align="right"
+                  align="center"
                 >
                   Fever
                 </TableCell>
                 <TableCell
                   className="PATIENT-SYMPTOMS__table__header"
                   sx={{ borderColor: "var(--background-secondary)" }}
-                  align="right"
+                  align="center"
                 >
                   Cough
                 </TableCell>
                 <TableCell
                   className="PATIENT-SYMPTOMS__table__header"
                   sx={{ borderColor: "var(--background-secondary)" }}
-                  align="right"
+                  align="center"
                 >
                   Runny Nose
                 </TableCell>
                 <TableCell
                   className="PATIENT-SYMPTOMS__table__header"
                   sx={{ borderColor: "var(--background-secondary)" }}
-                  align="right"
+                  align="center"
                 >
                   Muscle Ache
                 </TableCell>
                 <TableCell
                   className="PATIENT-SYMPTOMS__table__header"
                   sx={{ borderColor: "var(--background-secondary)" }}
-                  align="right"
+                  align="center"
                 >
-                  Tiredness
+                  Sore Throat
                 </TableCell>
                 <TableCell
                   className="PATIENT-SYMPTOMS__table__header"
                   sx={{ borderColor: "var(--background-secondary)" }}
-                  align="right"
+                  align="center"
                 >
                   Smell Loss
                 </TableCell>
                 <TableCell
                   className="PATIENT-SYMPTOMS__table__header"
                   sx={{ borderColor: "var(--background-secondary)" }}
-                  align="right"
+                  align="center"
                 >
                   Taste Loss
+                </TableCell>
+                <TableCell
+                  className="PATIENT-SYMPTOMS__table__header"
+                  sx={{ borderColor: "var(--background-secondary)" }}
+                  align="center"
+                >
+                  Temperature (&deg;C)
+                </TableCell>
+                <TableCell
+                  className="PATIENT-SYMPTOMS__table__header"
+                  sx={{ borderColor: "var(--background-secondary)" }}
+                  align="center"
+                >
+                  Weight (lb)
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
-                <TableRow
-                  key={row.Date}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell
-                    className="PATIENT-SYMPTOMS__table__data"
-                    sx={{ borderColor: "var(--background-secondary)" }}
-                    component="th"
-                    scope="row"
+              {patientInfoStatuses &&
+                patientInfoStatuses.map((row) => (
+                  <TableRow
+                    key={row.Date}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
-                    {row.Date}
-                  </TableCell>
-                  <TableCell
-                    className="PATIENT-SYMPTOMS__table__data"
-                    sx={{ borderColor: "var(--background-secondary)" }}
-                    align="right"
-                  >
-                    {row.Fever}
-                  </TableCell>
-                  <TableCell
-                    className="PATIENT-SYMPTOMS__table__data"
-                    sx={{ borderColor: "var(--background-secondary)" }}
-                    align="right"
-                  >
-                    {row.Cough}
-                  </TableCell>
-                  <TableCell
-                    className="PATIENT-SYMPTOMS__table__data"
-                    sx={{ borderColor: "var(--background-secondary)" }}
-                    align="right"
-                  >
-                    {row.RunnyNose}
-                  </TableCell>
-                  <TableCell
-                    className="PATIENT-SYMPTOMS__table__data"
-                    sx={{ borderColor: "var(--background-secondary)" }}
-                    align="right"
-                  >
-                    {row.MuscleAche}
-                  </TableCell>
-                  <TableCell
-                    className="PATIENT-SYMPTOMS__table__data"
-                    sx={{ borderColor: "var(--background-secondary)" }}
-                    align="right"
-                  >
-                    {row.Tiredness}
-                  </TableCell>
-                  <TableCell
-                    className="PATIENT-SYMPTOMS__table__data"
-                    sx={{ borderColor: "var(--background-secondary)" }}
-                    align="right"
-                  >
-                    {row.SmellLoss}
-                  </TableCell>
-                  <TableCell
-                    className="PATIENT-SYMPTOMS__table__data"
-                    sx={{ borderColor: "var(--background-secondary)" }}
-                    align="right"
-                  >
-                    {row.TasteLoss}
-                  </TableCell>
-                </TableRow>
-              ))}
+                    <TableCell
+                      className="PATIENT-SYMPTOMS__table__data"
+                      sx={{ borderColor: "var(--background-secondary)" }}
+                      component="th"
+                      scope="row"
+                    >
+                      {row.Date}
+                    </TableCell>
+                    <TableCell
+                      className="PATIENT-SYMPTOMS__table__data"
+                      sx={{ borderColor: "var(--background-secondary)" }}
+                      align="center"
+                    >
+                      {row.Fever}
+                    </TableCell>
+                    <TableCell
+                      className="PATIENT-SYMPTOMS__table__data"
+                      sx={{ borderColor: "var(--background-secondary)" }}
+                      align="center"
+                    >
+                      {row.Cough}
+                    </TableCell>
+                    <TableCell
+                      className="PATIENT-SYMPTOMS__table__data"
+                      sx={{ borderColor: "var(--background-secondary)" }}
+                      align="center"
+                    >
+                      {row.RunnyNose}
+                    </TableCell>
+                    <TableCell
+                      className="PATIENT-SYMPTOMS__table__data"
+                      sx={{ borderColor: "var(--background-secondary)" }}
+                      align="center"
+                    >
+                      {row.MuscleAche}
+                    </TableCell>
+                    <TableCell
+                      className="PATIENT-SYMPTOMS__table__data"
+                      sx={{ borderColor: "var(--background-secondary)" }}
+                      align="center"
+                    >
+                      {row.Tiredness}
+                    </TableCell>
+                    <TableCell
+                      className="PATIENT-SYMPTOMS__table__data"
+                      sx={{ borderColor: "var(--background-secondary)" }}
+                      align="center"
+                    >
+                      {row.SmellLoss}
+                    </TableCell>
+                    <TableCell
+                      className="PATIENT-SYMPTOMS__table__data"
+                      sx={{ borderColor: "var(--background-secondary)" }}
+                      align="center"
+                    >
+                      {row.TasteLoss}
+                    </TableCell>
+                    <TableCell
+                      className="PATIENT-SYMPTOMS__table__data"
+                      sx={{ borderColor: "var(--background-secondary)" }}
+                      align="center"
+                    >
+                      {row.Temperature}
+                    </TableCell>
+                    <TableCell
+                      className="PATIENT-SYMPTOMS__table__data"
+                      sx={{ borderColor: "var(--background-secondary)" }}
+                      align="center"
+                    >
+                      {row.Weight}
+                    </TableCell>
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
         </TableContainer>
