@@ -13,7 +13,13 @@ import Checkbox from "@mui/material/Checkbox";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { useSelector } from "react-redux";
 import { db } from "../../backend/firebase";
-import { doc, collection, addDoc, serverTimestamp } from "firebase/firestore";
+import {
+  doc,
+  collection,
+  addDoc,
+  serverTimestamp,
+  setDoc,
+} from "firebase/firestore";
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
@@ -59,9 +65,6 @@ export default function SimpleModal() {
   // Get the client's reference via the userEmail (query the database)
   const clientDoc = doc(db, `Client/${userEmail}`);
 
-  // Get the doctor's reference via the assigned doctor (query the database)
-  const adminDoc = doc(db, `Admin/${userInfoDetails?.assignedDoctor}`);
-
   const [openModal, setOpenModal] = useState(false);
   const [emptyFields, setEmptyFields] = useState(false);
   const [temperature, setTemperature] = useState("");
@@ -77,17 +80,6 @@ export default function SimpleModal() {
 
   // Handle the popup open/close state
   const handleOpen = () => setOpenModal(true);
-  const currentDate = new Date();
-  const formattedMonth =
-    currentDate.getMonth() + 1 < 10
-      ? `0${currentDate.getMonth()}`
-      : currentDate.getMonth();
-  const formattedDay =
-    currentDate.getDate() + 1 < 10
-      ? `0${currentDate.getDate()}`
-      : currentDate.getDate();
-  const formattedDate =
-    formattedMonth + "/" + formattedDay + "/" + currentDate.getFullYear();
 
   const handleSymptomsSubmit = async (event) => {
     event.preventDefault();
@@ -110,13 +102,20 @@ export default function SimpleModal() {
         timestamp: timestamp,
       });
 
-      await addDoc(collection(adminDoc, "StatusNotifications"), {
-        patientName:
-          userInfoDetails?.firstName + " " + userInfoDetails?.lastName,
-        patientID: userInfoDetails?.email,
-        viewed: "false",
-        timestamp: timestamp,
-      });
+      await setDoc(
+        doc(
+          db,
+          `Admin/${userInfoDetails?.assignedDoctor}/StatusNotifications`,
+          timestamp.toDate().toLocaleString()
+        ),
+        {
+          patientName:
+            userInfoDetails?.firstName + " " + userInfoDetails?.lastName,
+          patientID: userInfoDetails?.email,
+          viewed: "false",
+          timestamp: timestamp,
+        }
+      );
 
       // Close the popup after user submit the form
       handleClose();
