@@ -65,6 +65,9 @@ export default function SimpleModal() {
   // Get the client's reference via the userEmail (query the database)
   const clientDoc = doc(db, `Client/${userEmail}`);
 
+  // Get the doctor's reference via the assigned doctor (query the database)
+  const adminDoc = doc(db, `Admin/${userInfoDetails?.assignedDoctor}`);
+
   const [openModal, setOpenModal] = useState(false);
   const [emptyFields, setEmptyFields] = useState(false);
   const [temperature, setTemperature] = useState("");
@@ -84,11 +87,11 @@ export default function SimpleModal() {
   const handleSymptomsSubmit = async (event) => {
     event.preventDefault();
 
+    // if neither are empty
     if (temperature !== "" && weight !== "") {
       const timestamp = serverTimestamp();
 
-      // if they are filled
-      // then only adding new doc
+      // adding status doc by UID
       await addDoc(collection(clientDoc, "Status"), {
         temperature: temperature,
         weight: weight,
@@ -102,20 +105,21 @@ export default function SimpleModal() {
         timestamp: timestamp,
       });
 
-      await setDoc(
-        doc(
-          db,
-          `Admin/${userInfoDetails?.assignedDoctor}/StatusNotifications`,
-          timestamp.toDate().toLocaleString()
-        ),
-        {
-          patientName:
-            userInfoDetails?.firstName + " " + userInfoDetails?.lastName,
-          patientID: userInfoDetails?.email,
-          viewed: "false",
-          timestamp: timestamp,
-        }
+      // adding empty doc into StatusNotifications
+      var docRef = await addDoc(
+        collection(adminDoc, "StatusNotifications"),
+        {}
       );
+
+      // using the document reference to add id
+      await setDoc(docRef, {
+        patientName:
+          userInfoDetails?.firstName + " " + userInfoDetails?.lastName,
+        patientID: userInfoDetails?.email,
+        viewed: "false",
+        timestamp: timestamp,
+        id: docRef.id,
+      });
 
       // Close the popup after user submit the form
       handleClose();
