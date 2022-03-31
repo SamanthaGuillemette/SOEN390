@@ -18,15 +18,20 @@ import { setSeen } from "../../backend/firebasePatientUtilities.js";
 import { useDocumentOnce } from "react-firebase-hooks/firestore";
 import { doc, collection, query, where, onSnapshot } from "firebase/firestore";
 import "./Notifications.css";
-
+/**
+ * This function will display the notifications for the client
+ * if their status is reviewed or if they have been tested positive.
+ */
 const Notifications = () => {
   const user = auth.currentUser;
   const [value] = useDocumentOnce(doc(db, "Client", user?.email));
 
+  // Querying the unseen notifications
   const clientRef = doc(db, `Client/${user?.email}`);
   const statusNotifRef = collection(clientRef, "reviewNotification");
   const q = query(statusNotifRef, where("seen", "==", "False"));
 
+  // Declaring constants to display notifications
   const [displayUpdateNotif, setDisplayUpdateNotif] = useState(false);
   const [displayReviewedNotif, setDisplayReviewedNotif] = useState([]);
 
@@ -34,6 +39,7 @@ const Notifications = () => {
     if (value && value.data().status === "POSITIVE") {
       setDisplayUpdateNotif(true);
     }
+    // Getting all notifications
     onSnapshot(q, (doc) => {
       setDisplayReviewedNotif(
         doc.docs.map((doc) => ({
