@@ -31,6 +31,8 @@ import {
 } from "../../backend/firebasePatientUtilities";
 import DropdownStatus from "./../DropdownStatus";
 import DropdownDoctor from "./../DropdownDoctor";
+import { db } from "../../backend/firebase";
+import { doc, serverTimestamp, addDoc, collection } from "firebase/firestore";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -100,6 +102,9 @@ function PatientProfile() {
     toggleReviewed(key).then((newPatientInfo) =>
       setPatientInfo(newPatientInfo)
     );
+    if (patientInfo.statusReview === "Not Completed") {
+      addStatusReviewedNotif();
+    }
   }
 
   // priority flag with DB
@@ -142,6 +147,17 @@ function PatientProfile() {
         console.log(err);
       });
   }, [key]);
+
+  // This function will add notifications to the client's doc if status is reviewed
+  const addStatusReviewedNotif = async () => {
+    const clientRef = doc(db, `Client/${key}`);
+    const notifRef = collection(clientRef, "reviewNotification");
+    await addDoc(notifRef, {
+      notif: "Status Reviewed",
+      timestamp: serverTimestamp(),
+      seen: "False",
+    });
+  };
 
   return (
     <Grid container spacing={2} maxWidth="lg" alignItems="flex-end">
