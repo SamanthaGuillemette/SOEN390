@@ -8,7 +8,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { makeStyles } from "@material-ui/core/styles";
 import { useEffect, useState } from "react";
-import { setStatus } from "../../backend/firebasePatientUtilities";
+import { setStatus, setNewCase } from "../../backend/firebasePatientUtilities";
 import "./DropdownStatus.css";
 
 // adding styling
@@ -45,6 +45,14 @@ function DropdownStatus(props) {
       setStatus(patientInfo.email, value).then((newPatientInfo) =>
         setPatientInfo(newPatientInfo)
       ); // then setting
+    }
+
+    /* IF patient goes from non positive to positive, then setting attribute newCase as "true" */
+    if (patientInfo.status !== "POSITIVE" && value === "POSITIVE") {
+      setNewCase(patientInfo.email, true);
+    } else {
+      /* else setting to false */
+      setNewCase(patientInfo.email, false);
     }
   };
 
