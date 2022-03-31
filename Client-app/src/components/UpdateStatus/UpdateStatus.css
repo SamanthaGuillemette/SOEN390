@@ -10,7 +10,7 @@
   color: var(--text-primary) !important;
 }
 
-.save-button {
+.updateStatus__save-btn {
   background-color: var(--primary-main) !important;
   color: var(--text-primary) !important;
   left: 38%;

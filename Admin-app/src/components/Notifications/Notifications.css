@@ -20,6 +20,24 @@
   height: 25px !important;
 }
 
+.NOTIFICATIONS__checkboxIcon {
+  color: #949be2 !important;
+  /* position: absolute !important;
+    right: 400px; */
+}
+
 .NOTIFICATIONS__closingIcon:hover {
+  color: var(--text-primary) !important;
+}
+
+.NOTIFICATIONS__viewed {
+  margin-left: 800px !important;
+  margin-top: 40px !important;
+  color: var(--text-primary) !important;
+  font-weight: bold !important;
+}
+
+.NOTIFICATIONS__newCase {
+  margin-left: 760px !important;
   color: var(--text-primary) !important;
 }

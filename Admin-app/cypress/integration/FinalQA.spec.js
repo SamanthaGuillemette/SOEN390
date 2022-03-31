@@ -28,9 +28,9 @@ it('QA Test', function() {
  /**
   * Adding the email and password to the test
   */
- cy.get('#email').type('QA-Admin@gmail.com');
+ cy.get('#email').type('ali_4z@hotmail.com');
  cy.get('#password').clear();
- cy.get('#password').type('admin12345{enter}');
+ cy.get('#password').type('Admin123{enter}');
  cy.get('.MuiButton-root').click();
 
  /**
@@ -42,20 +42,21 @@ it('QA Test', function() {
  cy.get(':nth-child(7) > .MuiBackdrop-root').click({force: true});
  cy.get('.COVID-NEWS__text').click({force: true});
  cy.get('[href="/"] > .MuiButtonBase-root').click();
- cy.get('.EVENT-BTN__text').click(); 
- 
+ cy.get('.EVENT-BTN__text').click();
+
  /**
   * Back to dashboard
   */
 
  cy.get('[href="/"] > .MuiButtonBase-root').click();
 
-/**
- * To the patients page
- */
+ /**
+  * To the patients page
+  */
 
  cy.get('[href="/patients"] > .MuiButtonBase-root > .MuiListItemText-root > .MuiTypography-root').click();
- cy.get('[tabindex="0"] > [data-testid="KeyboardArrowRightIcon"]').click();
+ cy.get(':nth-child(1) > th.MuiTableCell-root > .PATIENT__table__name').click({force:true});
+ cy.get('[data-testid="FlagIcon"] > path').click({force:true});
 
  /**
   * To the QR page
@@ -76,8 +77,8 @@ it('QA Test', function() {
 
  cy.get('.MuiGrid-grid-xs-4 > .MuiList-root').click();
  cy.get('[href="/"] > .MuiButtonBase-root').click();
- cy.get('.MuiIconButton-edgeEnd > [data-testid="AccountCircleIcon"]').click();
- cy.get('.MuiIconButton-edgeEnd').click({force: true});
- cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > [tabindex="-1"]').click({multiple:true});
+ cy.get('[data-testid="LogoutIcon"]').click();
+ cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .MuiMenuItem-root').click();
  /* ==== End Cypress Studio ==== */
+
 });

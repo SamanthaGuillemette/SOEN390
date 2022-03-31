@@ -27,9 +27,7 @@ import Grid from "@mui/material/Grid";
             <MenuAppBar/>
             <BottomNav/>
             <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-                <Grid spacing={3} padding={2}>
                 {props.children}
-                </Grid>
             </Container>
             </Box>
         </Box>

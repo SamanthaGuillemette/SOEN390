@@ -2,31 +2,61 @@
  * @fileoverview This component takes care of the Notifications function.
  *
  */
+import "./Notifications.css";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import CoronavirusIcon from "@mui/icons-material/Coronavirus";
-import CloseIcon from "@mui/icons-material/Close";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import ReportIcon from "@mui/icons-material/Report";
 import { Divider } from "@mui/material";
-import "./Notifications.css";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import {
+  getStatusNotifications,
+  toggleViewedCheckbox,
+} from "../../backend/firebaseDoctorUtilities";
+import {
+  getPatients,
+  viewedNewCase,
+} from "../../backend/firebasePatientUtilities";
+import Checkbox from "@mui/material/Checkbox";
+import { Link } from "react-router-dom";
 
 /**
  * This component is what allows the Notifications feature to work.
  */
+
 const Notifications = () => {
-  const schedule = require("node-schedule");
-  const rule = new schedule.RecurrenceRule();
+  const [statusNotifications, setStatusNotifications] = useState([]);
+  const [newCasePatients, setNewCasePatients] = useState([]);
+  const userEmail = useSelector((state) => state.auth.userEmail);
 
-  rule.dayOfWeek = [0, new schedule.Range(0, 7)];
-  rule.hour = 23;
-  rule.minute = 59;
+  useEffect(() => {
+    getStatusNotifications(userEmail).then((data) => {
+      let results = [];
+      data.forEach((doc) => {
+        if (doc.viewed === "false") {
+          results.push(doc);
+        }
+      });
+      setStatusNotifications(results);
+    });
+  }, [userEmail]);
 
-  const job = schedule.scheduleJob(rule, function () {
-    console.log("The time is 11:59");
-  });
+  // getting the patient's with new case
+  useEffect(() => {
+    getPatients().then((data) => {
+      let results = [];
+      data.forEach((doc) => {
+        // if newCase is true and viewCase is not true
+        if (doc.newCase && !doc.viewedCase) {
+          results.push(doc);
+        }
+      });
+      setNewCasePatients(results);
+    });
+  }, []);
 
   return (
     <>
@@ -51,136 +81,118 @@ const Notifications = () => {
             >
               Notifications
             </Typography>
-            <Box>
+            {statusNotifications.map((notification) => (
               <Box>
-                <Box
-                  style={{
-                    marginTop: "20px",
-                    display: "flex",
-                    alignItems: "center",
-                    flexWrap: "wrap",
-                  }}
-                >
-                  <CheckCircleIcon color="success" sx={{ fontSize: 40 }} />
+                <Box>
+                  <Box
+                    style={{
+                      marginTop: "20px",
+                      display: "flex",
+                      alignItems: "center",
+                      flexWrap: "wrap",
+                    }}
+                  >
+                    <CheckCircleIcon color="success" sx={{ fontSize: 40 }} />
+                    <Typography
+                      style={{
+                        marginLeft: "10px",
+                      }}
+                      color="var(--text-primary)"
+                    >
+                      <b>Status Update</b>
+                    </Typography>
+                    <Typography>
+                      <b class="NOTIFICATIONS__viewed">Viewed:</b>
+                    </Typography>
+                    <Checkbox
+                      className="NOTIFICATIONS__checkboxIcon"
+                      onClick={(e) =>
+                        toggleViewedCheckbox(userEmail, notification.id)
+                      }
+                    ></Checkbox>
+                  </Box>
                   <Typography
                     style={{
-                      marginLeft: "10px",
+                      marginLeft: "50px",
+                      marginBottom: "20px",
                     }}
                     color="var(--text-primary)"
                   >
-                    <b>Status Update</b>
+                    {`${notification.patientName} updated their status. Please check
+                  the status update for more information.`}
                   </Typography>
-                  <CloseIcon className="NOTIFICATIONS__closingIcon" />
-                </Box>
-                <Typography
-                  style={{
-                    marginLeft: "50px",
-                    marginBottom: "20px",
-                  }}
-                  color="var(--text-primary)"
-                >
-                  Shakira updated her status. Please check the status update for
-                  more information.
-                </Typography>
-                <Typography
-                  style={{
-                    marginLeft: "50px",
-                    marginBottom: "30px",
-                  }}
-                  color="#949be2"
-                  data-testid="notification-statusUpdate"
-                >
-                  22 March, 2022. At 5:50 pm.
-                </Typography>
-                <Divider color="#949be2" />
-              </Box>
-            </Box>
-            <Box>
-              <Box>
-                <Box
-                  style={{
-                    marginTop: "20px",
-                    display: "flex",
-                    alignItems: "center",
-                    flexWrap: "wrap",
-                  }}
-                >
-                  <CoronavirusIcon color="error" sx={{ fontSize: 40 }} />
                   <Typography
                     style={{
-                      marginLeft: "10px",
+                      marginLeft: "50px",
+                      marginBottom: "30px",
+                    }}
+                    color="#949be2"
+                    data-testid="notification-statusUpdate"
+                  >
+                    {notification.timestamp.toDate().toLocaleString()}
+                  </Typography>
+                  <Divider color="#949be2" />
+                </Box>
+              </Box>
+            ))}{" "}
+            {newCasePatients.map((patient) => (
+              <Box>
+                <Box>
+                  <Box
+                    style={{
+                      marginTop: "20px",
+                      display: "flex",
+                      alignItems: "center",
+                      flexWrap: "wrap",
+                    }}
+                  >
+                    <CoronavirusIcon color="error" sx={{ fontSize: 40 }} />
+                    <Typography
+                      style={{
+                        marginLeft: "10px",
+                      }}
+                      color="var(--text-primary)"
+                    >
+                      <b>New Case Reported</b>
+                    </Typography>
+                    <Typography>
+                      <b class="NOTIFICATIONS__newCase">Viewed:</b>
+                    </Typography>
+                    <Checkbox
+                      className="NOTIFICATIONS__checkboxIcon"
+                      onClick={(e) => viewedNewCase(patient.email)}
+                    ></Checkbox>
+                  </Box>
+                  <Typography
+                    style={{
+                      marginLeft: "50px",
+                      marginBottom: "30px",
                     }}
                     color="var(--text-primary)"
                   >
-                    <b>New Case Reported</b>
+                    {`${patient.firstName} ${patient.lastName} was tested positive, please check the
+                    patient's information and status for more information.`}
                   </Typography>
-                  <CloseIcon className="NOTIFICATIONS__closingIcon " />
-                </Box>
-                <Typography
-                  style={{
-                    marginLeft: "50px",
-                    marginBottom: "30px",
-                  }}
-                  color="var(--text-primary)"
-                >
-                  A new patient was tested positive, please check the patient's
-                  information and status for more information.
-                </Typography>
-                <Typography
-                  style={{
-                    marginLeft: "50px",
-                    marginBottom: "30px",
-                  }}
-                  color="#949be2"
-                >
-                  22 January, 2022. At 4:20 pm.
-                </Typography>
-                <Divider color="#949be2" />
-              </Box>
-            </Box>
-            <Box>
-              <Box>
-                <Box
-                  style={{
-                    marginTop: "20px",
-                    display: "flex",
-                    alignItems: "center",
-                    flexWrap: "wrap",
-                  }}
-                >
-                  <ReportIcon color="error" sx={{ fontSize: 40 }} />
+                  <Link
+                    style={{
+                      marginLeft: "50px",
+                      marginBottom: "30px",
+                    }}
+                    to={`/patientprofile/${patient.email}`}
+                  >
+                    <strong> Click here to display the profile. </strong>
+                  </Link>
                   <Typography
                     style={{
-                      marginLeft: "10px",
+                      marginLeft: "50px",
+                      marginBottom: "30px",
                     }}
-                    color="var(--text-primary)"
-                  >
-                    <b>Urgent Case</b>
-                  </Typography>
-                  <CloseIcon className="NOTIFICATIONS__closingIcon" />
+                    color="#949be2"
+                  ></Typography>
+                  <Divider color="#949be2" />
                 </Box>
-                <Typography
-                  style={{
-                    marginLeft: "50px",
-                    marginBottom: "30px",
-                  }}
-                  color="var(--text-primary)"
-                >
-                  Your patient Micheal Kors is requesting an urgent status
-                  review. Please check the inbox messages for more information.
-                </Typography>
-                <Typography
-                  style={{
-                    marginLeft: "50px",
-                    marginBottom: "30px",
-                  }}
-                  color="#949be2"
-                >
-                  1 January, 2022. At 3:20 pm.
-                </Typography>
-                <Divider color="#949be2" />
               </Box>
-            </Box>
+            ))}
           </CardContent>
         </Card>
       </div>

@@ -44,26 +44,6 @@
   margin-bottom: 15px;
 }
 
-.clientProfile-priority-flag {
-  color: var(--text-primary);
-  padding-left: 5px;
-  margin-bottom: -5px;
-}
-
-.clientProfile-priority-flag.clicked {
-  color: var(--info-main);
-  padding-left: 5px;
-  margin-bottom: -5px;
-}
-
-.status-card {
-  border-style: none;
-  background: var(--background-main) !important;
-}
-
-.status-card.clicked {
-  border: 1px solid var(--info-border);
-}
 ::selection {
   color: var(--primary-main);
   background: transparent;

@@ -10,22 +10,37 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import { useSelector } from "react-redux";
-import IconButton from "@mui/material/IconButton";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import Box from "@mui/material/Box";
-import Collapse from "@mui/material/Collapse";
-import { selectUserInfoDetails } from "../../store/userInfoSlice";
+import IconButton from '@mui/material/IconButton';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import Box from '@mui/material/Box';
+import Collapse from '@mui/material/Collapse';
+import { doc, collection, query, orderBy, onSnapshot, limit } from "firebase/firestore";
+import { db } from "../../backend/firebase";
+import { useEffect, useState} from "react";
 
 /**
  * Renders the symptoms table function
  * @returns SymptomsTable function
  */
 function SymptomsTable() {
-  // Pull 'userInfoDetails' from the store (Redux centralized store)
-  const userInfoDetails = useSelector(selectUserInfoDetails);
+  // Pull 'userEmail' out from the centralized store
+  const userEmail = useSelector((state) => state.auth.userEmail);
 
+  // Get the client's reference via the userEmail (query the database)
+  const clientDoc = doc(db, `Client/${userEmail}`);
+  const statusRef = collection(clientDoc, "Status");
+  const q = query(statusRef, orderBy("timestamp", 'desc'), limit(1));
+  const [clientInfo, setClientInfo] = useState("");
   const [open, setOpen] = React.useState(false);
+
+  useEffect(() => {
+    onSnapshot(q, (doc) => {
+      setClientInfo(doc.docs.map(doc=> ({
+        data: doc.data(),
+      })))
+    })
+  }, )
 
   return (
     <TableContainer sx={{ mt: 2 }}>
@@ -73,11 +88,11 @@ function SymptomsTable() {
                           Fever
                         </TableCell>
                         <TableCell
-                          className="data"
-                          sx={{ borderColor: "var(--secondary-light)" }}
-                          align="right"
-                        >
-                          {userInfoDetails?.fever}
+                            className="data"
+                            sx={{ borderColor: "var(--secondary-light)" }}
+                            align="right"
+                          >
+                            {}
                         </TableCell>
                       </TableRow>
                       <TableRow>
@@ -89,11 +104,11 @@ function SymptomsTable() {
                           Sore Throat
                         </TableCell>
                         <TableCell
-                          className="data"
-                          sx={{ borderColor: "var(--primary-light)" }}
-                          align="right"
-                        >
-                          {userInfoDetails?.soreThroat}
+                            className="data"
+                            sx={{ borderColor: "var(--primary-light)" }}
+                            align="right"
+                          >
+                            {}
                         </TableCell>
                       </TableRow>
                       <TableRow>
@@ -105,11 +120,11 @@ function SymptomsTable() {
                           Cough
                         </TableCell>
                         <TableCell
-                          className="data"
-                          sx={{ borderColor: "var(--secondary-light)" }}
-                          align="right"
-                        >
-                          {userInfoDetails?.cough}
+                            className="data"
+                            sx={{ borderColor: "var(--secondary-light)" }}
+                            align="right"
+                          >
+                            {}
                         </TableCell>
                       </TableRow>
                       <TableRow>
@@ -121,11 +136,11 @@ function SymptomsTable() {
                           Runny Nose
                         </TableCell>
                         <TableCell
-                          className="data"
-                          sx={{ borderColor: "var(--primary-light)" }}
-                          align="right"
-                        >
-                          {userInfoDetails?.runnyNose}
+                            className="data"
+                            sx={{ borderColor: "var(--primary-light)" }}
+                            align="right"
+                          >
+                            {}
                         </TableCell>
                       </TableRow>
                       <TableRow>
@@ -134,14 +149,14 @@ function SymptomsTable() {
                           sx={{ borderColor: "var(--primary-light)" }}
                           align="left"
                         >
-                          Muscle pain
+                          Muscle Ache
                         </TableCell>
                         <TableCell
-                          className="data"
-                          sx={{ borderColor: "var(--primary-light)" }}
-                          align="right"
-                        >
-                          {userInfoDetails?.musclePain}
+                            className="data"
+                            sx={{ borderColor: "var(--primary-light)" }}
+                            align="right"
+                          >
+                            {}
                         </TableCell>
                       </TableRow>
                       <TableRow>
@@ -153,11 +168,11 @@ function SymptomsTable() {
                           Smell Loss
                         </TableCell>
                         <TableCell
-                          className="data"
-                          sx={{ borderColor: "var(--secondary-light)" }}
-                          align="right"
-                        >
-                          {userInfoDetails?.smellLoss}
+                            className="data"
+                            sx={{ borderColor: "var(--secondary-light)" }}
+                            align="right"
+                          >
+                            {}
                         </TableCell>
                       </TableRow>
                       <TableRow>
@@ -169,11 +184,11 @@ function SymptomsTable() {
                           Taste Loss
                         </TableCell>
                         <TableCell
-                          className="data"
-                          sx={{ borderColor: "transparent" }}
-                          align="right"
-                        >
-                          {userInfoDetails?.tasteLoss}
+                            className="data"
+                            sx={{ borderColor: "transparent" }}
+                            align="right"
+                          >
+                            {}
                         </TableCell>
                       </TableRow>
                     </TableBody>

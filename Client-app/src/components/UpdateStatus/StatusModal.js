@@ -8,16 +8,21 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { useState } from "react";
 import { Grid, TextField } from "@mui/material";
-import { inputLabelClasses } from "@mui/material/InputLabel";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { useSelector } from "react-redux";
 import { db } from "../../backend/firebase";
-import { doc, updateDoc } from "firebase/firestore";
+import {
+  doc,
+  collection,
+  addDoc,
+  serverTimestamp,
+  setDoc,
+} from "firebase/firestore";
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@material-ui/core/styles";
-import { selectUserInfoDetails } from "../../store/userInfoSlice";
+import { makeStyles } from "@material-ui/core/styles";
 import { selectUserEmail } from "../../store/authSlice";
 
 const style = {
@@ -40,55 +45,107 @@ const theme = createTheme({
   },
 });
 
+// This const does styling of the empty input field helper text
+const helperTextStyles = makeStyles((theme) => ({
+  root: {
+    "&.MuiFormHelperText-root.Mui-error": {
+      color: "#d93025",
+      fontSize: "12px",
+    },
+  },
+}));
+
 export default function SimpleModal() {
+  const userInfoDetails = useSelector(
+    (state) => state.userInfo.userInfoDetails
+  );
+
   // Pull 'userEmail' out from the centralized store
   const userEmail = useSelector(selectUserEmail);
 
   // Get the client's reference via the userEmail (query the database)
   const clientDoc = doc(db, `Client/${userEmail}`);
 
-  // Pull 'userInfoDetails' out from the centralized store
-  const userInfoDetails = useSelector(selectUserInfoDetails);
+  // Get the doctor's reference via the assigned doctor (query the database)
+  const adminDoc = doc(db, `Admin/${userInfoDetails?.assignedDoctor}`);
 
   const [openModal, setOpenModal] = useState(false);
-  const [checked, setChecked] = useState(true);
-  const [dos, setDOS] = useState(userInfoDetails?.dos);
-  const [temperature, setTemperature] = useState(userInfoDetails?.temperature);
-  const [weight, setWeight] = useState(userInfoDetails?.weight);
-  const [fever] = useState(userInfoDetails?.fever);
-  const [soreThroat] = useState(userInfoDetails?.soreThroat);
-  const [cough] = useState(`${userInfoDetails?.setCough}`);
-  const [runnyNose] = useState(userInfoDetails?.runnyNose);
-  const [smellLoss] = useState(`${userInfoDetails?.smellLoss}`);
-  const [muscleAche] = useState(userInfoDetails?.muscleAche);
-  const [tasteLoss] = useState(userInfoDetails?.tastleLoss);
+  const [emptyFields, setEmptyFields] = useState(false);
+  const [temperature, setTemperature] = useState("");
+  const [weight, setWeight] = useState("");
+  const [fever, setFever] = useState(false);
+  const [soreThroat, setSoreThroat] = useState(false);
+  const [cough, setCough] = useState(false);
+  const [runnyNose, setRunnyNose] = useState(false);
+  const [smellLoss, setSmellLoss] = useState(false);
+  const [muscleAche, setMuscleAche] = useState(false);
+  const [tasteLoss, setTasteLoss] = useState(false);
+  const helperTestClasses = helperTextStyles();
 
   // Handle the popup open/close state
   const handleOpen = () => setOpenModal(true);
-  const handleClose = () => setOpenModal(false);
 
   const handleSymptomsSubmit = async (event) => {
     event.preventDefault();
 
-    await updateDoc(clientDoc, {
-      dos: dos,
-      temperature: temperature,
-      weight: weight,
-      fever: fever,
-      soreThroat: soreThroat,
-      cough: cough,
-      runnyNose: runnyNose,
-      smellLoss: smellLoss,
-      muscleAche: muscleAche,
-      tasteLoss: tasteLoss,
-    });
+    // if neither are empty
+    if (temperature !== "" && weight !== "") {
+      const timestamp = serverTimestamp();
 
-    // Close the popup after user submit the form
-    handleClose();
+      // adding status doc by UID
+      await addDoc(collection(clientDoc, "Status"), {
+        temperature: temperature,
+        weight: weight,
+        fever: !fever ? "No" : "Yes",
+        soreThroat: !soreThroat ? "No" : "Yes",
+        cough: !cough ? "No" : "Yes",
+        runnyNose: !runnyNose ? "No" : "Yes",
+        smellLoss: !smellLoss ? "No" : "Yes",
+        muscleAche: !muscleAche ? "No" : "Yes",
+        tasteLoss: !tasteLoss ? "No" : "Yes",
+        timestamp: timestamp,
+      });
+
+      // adding empty doc into StatusNotifications
+      var docRef = await addDoc(
+        collection(adminDoc, "StatusNotifications"),
+        {}
+      );
+
+      // using the document reference to add id
+      await setDoc(docRef, {
+        patientName:
+          userInfoDetails?.firstName + " " + userInfoDetails?.lastName,
+        patientID: userInfoDetails?.email,
+        viewed: "false",
+        timestamp: timestamp,
+        id: docRef.id,
+      });
+
+      // Close the popup after user submit the form
+      handleClose();
+    } else {
+      setEmptyFields(true);
+    }
   };
 
-  const handleChange = (event) => {
-    setChecked(event.target.checked);
+  function close() {
+    setTimeout(() => handleClose(), 3000);
+  }
+
+  // once modal is closed creating setting back to old values
+  const handleClose = () => {
+    setOpenModal(false);
+    setEmptyFields(false);
+    setTemperature("");
+    setWeight("");
+    setFever(false);
+    setSoreThroat(false);
+    setCough(false);
+    setRunnyNose(false);
+    setSmellLoss(false);
+    setMuscleAche(false);
+    setTasteLoss(false);
   };
 
   return (
@@ -113,63 +170,43 @@ export default function SimpleModal() {
               className="header-statusModal"
               variant="h6"
               component="h2"
-              sx={{ mb: 1.8 }}
+              sx={{ mb: 2.5 }}
             >
               ADD STATUS
             </Typography>
             <Grid container minWidth={285} spacing={1}>
-              {/* Date TextField */}
-              <Grid item xs={12}>
-                <TextField
-                  id="statusModal-standardBasic"
-                  placeholder="Date*"
-                  variant="standard"
-                  color="grey"
-                  onChange={(e) => setDOS(e.target.value)}
-                  InputLabelProps={{
-                    sx: {
-                      color: "var(--text-primary)",
-                      [`&.${inputLabelClasses.shrink}`]: {
-                        color: "#e0e4e4",
-                      },
-                    },
-                  }}
-                />
-              </Grid>
               {/* Temperature TextField */}
               <Grid item xs={12}>
                 <TextField
                   id="statusModal-standardBasic"
-                  placeholder="Temperature*"
+                  placeholder="Temperature (°C)"
                   variant="standard"
                   color="grey"
                   onChange={(e) => setTemperature(e.target.value)}
-                  InputLabelProps={{
-                    sx: {
-                      color: "var(--text-primary)",
-                      [`&.${inputLabelClasses.shrink}`]: {
-                        color: "#e0e4e4",
-                      },
-                    },
-                  }}
+                  helperText={
+                    temperature === "" && emptyFields
+                      ? "This field is required."
+                      : ""
+                  }
+                  error={temperature === "" && emptyFields}
+                  FormHelperTextProps={{ classes: helperTestClasses }}
                 />
               </Grid>
               {/* Weight TextField */}
               <Grid item xs={12}>
                 <TextField
                   id="statusModal-standardBasic"
-                  placeholder="Weight*"
+                  placeholder="Weight (lbs)"
                   variant="standard"
                   color="grey"
                   onChange={(e) => setWeight(e.target.value)}
-                  InputLabelProps={{
-                    sx: {
-                      color: "var(--text-primary)",
-                      [`&.${inputLabelClasses.shrink}`]: {
-                        color: "#e0e4e4",
-                      },
-                    },
-                  }}
+                  helperText={
+                    weight === "" && emptyFields
+                      ? "This field is required."
+                      : ""
+                  }
+                  error={weight === "" && emptyFields}
+                  FormHelperTextProps={{ classes: helperTestClasses }}
                 />
               </Grid>
 
@@ -180,8 +217,7 @@ export default function SimpleModal() {
                   control={
                     <Checkbox
                       style={{ color: "lightskyblue" }}
-                      checked={checked}
-                      onChange={handleChange}
+                      onChange={(e) => setFever(e.target.checked)}
                     />
                   }
                   label={
@@ -197,8 +233,7 @@ export default function SimpleModal() {
                   control={
                     <Checkbox
                       style={{ color: "lightskyblue" }}
-                      checked={checked}
-                      onChange={handleChange}
+                      onChange={(e) => setSoreThroat(e.target.checked)}
                     />
                   }
                   label={
@@ -213,8 +248,7 @@ export default function SimpleModal() {
                   control={
                     <Checkbox
                       style={{ color: "lightskyblue" }}
-                      checked={checked}
-                      onChange={handleChange}
+                      onChange={(e) => setCough(e.target.checked)}
                     />
                   }
                   label={
@@ -229,8 +263,7 @@ export default function SimpleModal() {
                   control={
                     <Checkbox
                       style={{ color: "lightskyblue" }}
-                      checked={checked}
-                      onChange={handleChange}
+                      onChange={(e) => setRunnyNose(e.target.checked)}
                     />
                   }
                   label={
@@ -245,8 +278,7 @@ export default function SimpleModal() {
                   control={
                     <Checkbox
                       style={{ color: "lightskyblue" }}
-                      checked={checked}
-                      onChange={handleChange}
+                      onChange={(e) => setSmellLoss(e.target.checked)}
                     />
                   }
                   label={
@@ -261,8 +293,7 @@ export default function SimpleModal() {
                   control={
                     <Checkbox
                       style={{ color: "lightskyblue" }}
-                      checked={checked}
-                      onChange={handleChange}
+                      onChange={(e) => setMuscleAche(e.target.checked)}
                     />
                   }
                   label={
@@ -277,8 +308,7 @@ export default function SimpleModal() {
                   control={
                     <Checkbox
                       style={{ color: "lightskyblue" }}
-                      checked={checked}
-                      onChange={handleChange}
+                      onChange={(e) => setTasteLoss(e.target.checked)}
                     />
                   }
                   label={
@@ -290,10 +320,11 @@ export default function SimpleModal() {
               </Grid>
             </Grid>
             <Button
+              onClick={close}
               type="submit"
               variant="contained"
-              className="save-button"
-              sx={{ mt: 3, mb: 2 }}
+              className="updateStatus__save-btn"
+              sx={{ mt: 4, mb: 2 }}
             >
               SAVE
             </Button>
