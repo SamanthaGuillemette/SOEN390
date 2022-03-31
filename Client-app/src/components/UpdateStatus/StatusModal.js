@@ -23,6 +23,7 @@ import {
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
+import { selectUserEmail } from "../../store/authSlice";
 
 const style = {
   position: "absolute",
