@@ -31,6 +31,7 @@ import {
 } from "../../backend/firebasePatientUtilities";
 import DropdownStatus from "./../DropdownStatus";
 import DropdownDoctor from "./../DropdownDoctor";
+import DiaryList from "./../DiaryList";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -488,6 +489,9 @@ function PatientProfile() {
         <br />
         <br />
         <br />
+      </Grid>
+      <Grid item xs={12} lg={10.51}>
+        <DiaryList></DiaryList>
       </Grid>
     </Grid>
   );
