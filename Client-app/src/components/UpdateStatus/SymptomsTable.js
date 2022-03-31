@@ -43,7 +43,7 @@ function SymptomsTable() {
   }, )
 
   return (
-    <TableContainer sx={{mt: 2}}>
+    <TableContainer sx={{ mt: 2 }}>
       <Table sx={{ width: 350 }} aria-label="spanning table">
         <TableBody>
           <TableRow>
@@ -53,25 +53,24 @@ function SymptomsTable() {
               align="center"
               sx={{ borderColor: "var(--background-secondary)" }}
             >
-            <IconButton
-              aria-label="expand row"
-              size="small"
-              style={{ color: "var(--primary-light)" }}
-              onClick={() => setOpen(!open)}
-            >
-              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-            </IconButton>
-            Symptoms
+              <IconButton
+                aria-label="expand row"
+                size="small"
+                style={{ color: "var(--primary-light)" }}
+                onClick={() => setOpen(!open)}
+              >
+                {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+              </IconButton>
+              Symptoms
             </TableCell>
             <TableCell
-             sx={{ borderColor: "var(--background-secondary)" }}
-            >
-            </TableCell>
+              sx={{ borderColor: "var(--background-secondary)" }}
+            ></TableCell>
           </TableRow>
           <TableRow>
-            <TableCell 
-              style={{ paddingBottom: 0, paddingTop: 0 }} 
-              sx={{ borderColor: "var(--background-secondary)" }} 
+            <TableCell
+              style={{ paddingBottom: 0, paddingTop: 0 }}
+              sx={{ borderColor: "var(--background-secondary)" }}
               colSpan={6}
             >
               <Collapse in={open} timeout="auto" unmountOnExit>
@@ -80,7 +79,7 @@ function SymptomsTable() {
                   <Table size="small" aria-label="symptoms">
                     <TableBody>
                       <TableRow>
-                        <TableCell 
+                        <TableCell
                           className="updateStatus-symptomsHeader"
                           sx={{ borderColor: "var(--secondary-light)" }}
                           style={{ width: 120 }}
@@ -97,7 +96,7 @@ function SymptomsTable() {
                         </TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell 
+                        <TableCell
                           className="updateStatus-symptomsHeader"
                           sx={{ borderColor: "var(--primary-light)" }}
                           align="left"
@@ -113,7 +112,7 @@ function SymptomsTable() {
                         </TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell 
+                        <TableCell
                           className="updateStatus-symptomsHeader"
                           sx={{ borderColor: "var(--secondary-light)" }}
                           align="left"
@@ -129,7 +128,7 @@ function SymptomsTable() {
                         </TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell 
+                        <TableCell
                           className="updateStatus-symptomsHeader"
                           sx={{ borderColor: "var(--primary-light)" }}
                           align="left"
@@ -145,7 +144,7 @@ function SymptomsTable() {
                         </TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell 
+                        <TableCell
                           className="updateStatus-symptomsHeader"
                           sx={{ borderColor: "var(--primary-light)" }}
                           align="left"
@@ -161,7 +160,7 @@ function SymptomsTable() {
                         </TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell 
+                        <TableCell
                           className="updateStatus-symptomsHeader"
                           sx={{ borderColor: "var(--secondary-light)" }}
                           align="left"
@@ -177,7 +176,7 @@ function SymptomsTable() {
                         </TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell 
+                        <TableCell
                           className="updateStatus-symptomsHeader"
                           sx={{ borderColor: "transparent" }}
                           align="left"

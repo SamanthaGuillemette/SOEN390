@@ -60,7 +60,7 @@ export default function SimpleModal() {
   );
 
   // Pull 'userEmail' out from the centralized store
-  const userEmail = useSelector((state) => state.auth.userEmail);
+  const userEmail = useSelector(selectUserEmail);
 
   // Get the client's reference via the userEmail (query the database)
   const clientDoc = doc(db, `Client/${userEmail}`);

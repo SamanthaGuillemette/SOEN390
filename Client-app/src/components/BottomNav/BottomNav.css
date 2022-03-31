@@ -9,6 +9,7 @@
   background-color: var(--background-main);
   margin-bottom: -8px;
   padding-top: 5px;
+  z-index: 100;
 }
 
 .BOTTOM-NAV__btn {
@@ -34,7 +35,7 @@
 }
 
 .bottomNav-button:hover {
-  transition: all .3s;
+  transition: all 0.3s;
   opacity: 0.9;
   transform: translateY(2px);
 }
@@ -47,4 +48,20 @@
 .MuiPopover-paper {
   background-color: var(--background-main) !important;
   border-radius: 10px !important;
+}
+
+.BOTTOM-NAV__popover__text {
+  color: var(--text-inactive) !important;
+  font-size: 0.9rem;
+  text-transform: uppercase !important;
+}
+
+.BOTTOM-NAV__popover__text:hover {
+  color: var(--text-primary) !important;
+}
+
+@media (max-height: 520px) {
+  .BOTTOM-NAV__container {
+    display: none;
+  }
 }

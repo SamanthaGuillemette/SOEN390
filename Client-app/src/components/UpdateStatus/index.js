@@ -42,18 +42,29 @@ function UpdateStatus() {
   }, )
 
   return (
-    <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center">
+    <Grid
+      container
+      spacing={0}
+      direction="column"
+      alignItems="center"
+      justifyContent="center"
+    >
       <Box className="STATUS__box">
-      <TableContainer>
-        <StatusModal></StatusModal>
-        <Typography className="updateStatus-label" align="center" sx={{mt: 1}} style={{ paddingBottom: 8 }}>
-          STATUS
-        </Typography>
-        {/* Table for displaying date, temperature and weight */}
-        <Table sx={{ width: 350 }} aria-label="spanning table">
-          <TableHead>
-            <TableRow>
-              <TableCell
+        <TableContainer>
+          <StatusModal></StatusModal>
+          <Typography
+            className="updateStatus-label"
+            align="center"
+            sx={{ mt: 1 }}
+            style={{ paddingBottom: 8 }}
+          >
+            STATUS
+          </Typography>
+          {/* Table for displaying date, temperature and weight */}
+          <Table sx={{ width: 350 }} aria-label="spanning table">
+            <TableHead>
+              <TableRow>
+                <TableCell
                   className="header"
                   sx={{ borderColor: "var(--primary-light)" }}
                   align="left"
@@ -68,13 +79,13 @@ function UpdateStatus() {
                   Temperature
                 </TableCell>
                 <TableCell
-                    className="header"
-                    sx={{ borderColor: "var(--primary-light)"}}
-                    align="right"
-                  >
-                    Weight
-                  </TableCell>
-                  </TableRow>
+                  className="header"
+                  sx={{ borderColor: "var(--primary-light)" }}
+                  align="right"
+                >
+                  Weight
+                </TableCell>
+              </TableRow>
             </TableHead>
             <TableBody>
               <TableRow>
@@ -85,7 +96,7 @@ function UpdateStatus() {
                 >
                   {}
                 </TableCell>
-              <TableCell
+                <TableCell
                   className="data"
                   sx={{ borderColor: "var(--secondary-light)" }}
                   align="center"
@@ -100,10 +111,10 @@ function UpdateStatus() {
                     {}
                   </TableCell>
               </TableRow>
-          </TableBody>
-        </Table>
+            </TableBody>
+          </Table>
         </TableContainer>
-        <SymptomsTable/>
+        <SymptomsTable />
       </Box>
     </Grid>
   );

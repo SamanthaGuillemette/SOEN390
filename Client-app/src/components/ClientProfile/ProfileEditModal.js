@@ -22,14 +22,16 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { createTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@mui/material/styles";
 import { makeStyles } from "@material-ui/core/styles";
+import { selectUserEmail } from "../../store/authSlice";
+import { selectUserInfoDetails } from "../../store/userInfoSlice";
 
 const useStyles = makeStyles({
   root: {
     // input label when focused
     "& label.Mui-focused": {
-      color: "var(--primary-main)"
+      color: "var(--primary-main)",
     },
-  }
+  },
 });
 
 const style = {
@@ -60,9 +62,9 @@ const theme = createTheme({
         },
         root: {
           "&.Mui-focused": {
-            color: 'yellow',
+            color: "yellow",
           },
-        }
+        },
       },
     },
   },
@@ -72,7 +74,7 @@ export default function BasicModal() {
   const classes = useStyles();
 
   // Pull 'userEmail' out from the centralized store
-  const userEmail = useSelector((state) => state.auth.userEmail);
+  const userEmail = useSelector(selectUserEmail);
 
   // Get the client's reference via the userEmail (query the database)
   const clientDoc = doc(db, `Client/${userEmail}`);
@@ -80,9 +82,7 @@ export default function BasicModal() {
   // const dispatch = useDispatch();
 
   // Pull 'userInfoDetails' out from the centralized store
-  const userInfoDetails = useSelector(
-    (state) => state.userInfo.userInfoDetails
-  );
+  const userInfoDetails = useSelector(selectUserInfoDetails);
 
   const [openPopup, setOpenPopup] = useState(false);
   const [firstName, setFirstName] = useState(userInfoDetails?.firstName);
@@ -119,7 +119,7 @@ export default function BasicModal() {
    * @param {Object} date
    */
   const handleUpdateDOB = (newDate) => {
-    setDOB(`${newDate?.$D}/${newDate?.$M + 1}/${newDate?.$y}`);
+    setDOB(`${newDate?.$M + 1}/${newDate?.$D}/${newDate?.$y}`);
   };
 
   /**
@@ -214,7 +214,7 @@ export default function BasicModal() {
                   input: {
                     background: "#262626",
                     borderRadius: "5px",
-                  }
+                  },
                 }}
                 InputLabelProps={{
                   sx: {
@@ -237,7 +237,7 @@ export default function BasicModal() {
                   input: {
                     background: "#262626",
                     borderRadius: "5px",
-                  }
+                  },
                 }}
                 InputLabelProps={{
                   sx: {
@@ -260,7 +260,7 @@ export default function BasicModal() {
                   input: {
                     background: "#262626",
                     borderRadius: "5px",
-                  }
+                  },
                 }}
                 InputLabelProps={{
                   sx: {
@@ -283,7 +283,7 @@ export default function BasicModal() {
                   input: {
                     background: "#262626",
                     borderRadius: "5px",
-                  }
+                  },
                 }}
                 InputLabelProps={{
                   sx: {
@@ -299,20 +299,23 @@ export default function BasicModal() {
                     label="Date of Birth"
                     value={dob}
                     onChange={handleUpdateDOB}
-                    renderInput={(params) => <TextField 
-                      className={classes.root}
-                      sx={{
-                        input: {
-                          background: "#262626",
-                          borderRadius: "5px",
-                        }
-                      }}
-                      InputLabelProps={{
-                        sx: {
-                          color: "var(--text-primary)",
-                        },
-                      }}
-                      {...params} />}
+                    renderInput={(params) => (
+                      <TextField
+                        className={classes.root}
+                        sx={{
+                          input: {
+                            background: "#262626",
+                            borderRadius: "5px",
+                          },
+                        }}
+                        InputLabelProps={{
+                          sx: {
+                            color: "var(--text-primary)",
+                          },
+                        }}
+                        {...params}
+                      />
+                    )}
                   />
                 </Stack>
               </LocalizationProvider>
@@ -331,7 +334,7 @@ export default function BasicModal() {
                   input: {
                     background: "#262626",
                     borderRadius: "5px",
-                  }
+                  },
                 }}
                 InputLabelProps={{
                   sx: {
@@ -351,10 +354,10 @@ export default function BasicModal() {
                   onChange={(e) => setProvince(e.target.value)}
                   select
                   SelectProps={{
-                      sx: {
-                        background: "#262626",
-                        color: "var(--text-primary)"
-                    }
+                    sx: {
+                      background: "#262626",
+                      color: "var(--text-primary)",
+                    },
                   }}
                   InputLabelProps={{
                     sx: {
@@ -395,7 +398,7 @@ export default function BasicModal() {
                   input: {
                     background: "#262626",
                     borderRadius: "5px",
-                  }
+                  },
                 }}
                 InputLabelProps={{
                   sx: {
