@@ -14,7 +14,7 @@ import ReportIcon from "@mui/icons-material/Report";
 import { Divider } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { getStatusNotifications } from "../../backend/firebaseDoctorUtilities";
+import { getStatusNotifications, toggleViewedCheckbox } from "../../backend/firebaseDoctorUtilities";
 import Checkbox from "@mui/material/Checkbox";
 
 /**
@@ -80,7 +80,7 @@ const Notifications = () => {
                     >
                       <b>Status Update</b>
                     </Typography>
-                    <Checkbox className="NOTIFICATIONS__checkboxIcon"></Checkbox>
+                    <Checkbox className="NOTIFICATIONS__checkboxIcon" onClick={toggleViewedCheckbox(userEmail, notification.id)}></Checkbox>
                   </Box>
                   <Typography
                     style={{
@@ -125,7 +125,7 @@ const Notifications = () => {
                   >
                     <b>New Case Reported</b>
                   </Typography>
-                  <CloseIcon className="NOTIFICATIONS__closingIcon " />
+                  <CloseIcon className="NOTIFICATIONS__closingIcon" />
                 </Box>
                 <Typography
                   style={{

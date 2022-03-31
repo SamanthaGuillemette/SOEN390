@@ -11,6 +11,7 @@ import {
   getAdminByRoleAndKey,
   getAdminRef,
 } from "./firebaseAdminUtilities";
+import { getDocRef } from "./firebaseUtilities";
 import { db } from "./firebase";
 
 const role = "Doctor";
@@ -95,6 +96,37 @@ const getStatusNotificationsItem = async (docRef) => {
   }
 };
 
+const toggleViewedCheckbox = async (doctorKey, docID) => {
+  try {
+    // Get status notification
+    const docRef = getDocRef(`Admin/${doctorKey}/StatusNotifications`, docID);
+    let statusNotificationInfo = await getStatusNotificationsItem(docRef);
+
+    // Set viewedCheckbox value
+    let viewedCheckbox;
+
+    if (statusNotificationInfo) {
+      if (
+        statusNotificationInfo.viewed === "false"
+      ) {
+        viewedCheckbox = "true";
+      } else {
+        viewedCheckbox = "false";
+      }
+    }
+
+    // Update DB with new value
+    docRef && (await updateDoc(docRef, "viewed", viewedCheckbox));
+
+    // Get updated status notification
+    statusNotificationInfo = await getStatusNotificationsItem(docRef);
+
+    return statusNotificationInfo;
+  } catch (error) {
+    console.log("[toggleViewedCheckbox]" + error);
+  }
+};
+
 export {
   getDoctors,
   getDoctor,
@@ -102,4 +134,5 @@ export {
   addPatientToDoctor,
   removePatientFromDoctor,
   getStatusNotifications,
+  toggleViewedCheckbox,
 };
