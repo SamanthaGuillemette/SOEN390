@@ -83,6 +83,9 @@ const Notifications = () => {
                     >
                       <b>Status Update</b>
                     </Typography>
+                    <Typography>
+                      <b class="NOTIFICATIONS__viewed">Viewed:</b>
+                    </Typography>
                     <Checkbox
                       className="NOTIFICATIONS__checkboxIcon"
                       onClick={(e) =>
