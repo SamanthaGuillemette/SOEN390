@@ -148,11 +148,11 @@ function PatientProfile() {
       });
   }, [key]);
 
-  const clientRef = doc(db, "Client", key);
-  const notifRef = collection(clientRef, "reviewNotification");
-
   // This function will add notifications to the client's doc if status is reviewed
   const addStatusReviewedNotif = async () => {
+    //const notifRef = doc(`Client/${key}/reviewNotification`);
+    const clientRef = doc(db, `Client/${key}`);
+    const notifRef = collection(clientRef, "reviewNotification");
     await addDoc(notifRef, {
       notif: "Status Reviewed",
       timestamp: serverTimestamp(),
