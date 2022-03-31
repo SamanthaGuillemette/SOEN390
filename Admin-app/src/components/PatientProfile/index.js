@@ -31,7 +31,7 @@ import {
 } from "../../backend/firebasePatientUtilities";
 import DropdownStatus from "./../DropdownStatus";
 import DropdownDoctor from "./../DropdownDoctor";
-import DiaryList from "./../DiaryList";
+import DiaryList from "../DiaryList";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
