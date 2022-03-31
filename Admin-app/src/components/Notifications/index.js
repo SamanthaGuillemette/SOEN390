@@ -12,7 +12,6 @@ import CloseIcon from "@mui/icons-material/Close";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ReportIcon from "@mui/icons-material/Report";
 import { Divider } from "@mui/material";
-import ReplayIcon from "@mui/icons-material/Replay";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getStatusNotifications } from "../../backend/firebaseDoctorUtilities";
