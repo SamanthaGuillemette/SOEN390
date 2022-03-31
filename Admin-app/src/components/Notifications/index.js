@@ -30,7 +30,9 @@ const Notifications = () => {
     getStatusNotifications(userEmail).then((data) => {
       let results = [];
       data.forEach((doc) => {
-        results.push(doc);
+        if (doc.viewed === "false") {
+          results.push(doc);
+        }
       });
       setStatusNotifications(results);
     });
