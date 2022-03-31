@@ -14,14 +14,9 @@ import PushPinIcon from "@mui/icons-material/PushPin";
 import { Divider } from "@mui/material";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { db, auth } from "../../backend/firebase";
+import { setSeen } from "../../backend/firebasePatientUtilities.js";
 import { useDocumentOnce } from "react-firebase-hooks/firestore";
-import {
-  doc,
-  collection,
-  query,
-  orderBy,
-  onSnapshot,
-} from "firebase/firestore";
+import { doc, collection, query, where, onSnapshot } from "firebase/firestore";
 import "./Notifications.css";
 
 const Notifications = () => {
@@ -30,7 +25,7 @@ const Notifications = () => {
 
   const clientRef = doc(db, `Client/${user?.email}`);
   const statusNotifRef = collection(clientRef, "reviewNotification");
-  const q = query(statusNotifRef);
+  const q = query(statusNotifRef, where("seen", "==", "False"));
 
   const [displayUpdateNotif, setDisplayUpdateNotif] = useState(false);
   const [displayReviewedNotif, setDisplayReviewedNotif] = useState([]);
@@ -42,19 +37,15 @@ const Notifications = () => {
     onSnapshot(q, (doc) => {
       setDisplayReviewedNotif(
         doc.docs.map((doc) => ({
+          id: doc.id,
           notif: doc.data().notif,
           seen: doc.data().seen,
           timestamp: doc.data().timestamp,
         }))
       );
     });
-    console.log(displayReviewedNotif);
+    console.log(setDisplayReviewedNotif);
   }, [value]);
-
-  // closing the notification method
-  const handleCloseReviewedStatus = () => {
-    setDisplayReviewedNotif(false);
-  };
 
   return (
     <>
@@ -134,7 +125,7 @@ const Notifications = () => {
                     </Typography>
                     <CloseIcon
                       className="notifications-closeIcon"
-                      onClick={handleCloseReviewedStatus}
+                      onClick={(e) => setSeen(user?.email, notification.id)}
                     />
                   </Box>
                   <Typography
@@ -146,7 +137,7 @@ const Notifications = () => {
                   >
                     Your status has been reviewed by your doctor{" "}
                     {value && value.data().assignedDoctor}, please check your
-                    inbox for more information.
+                    inbox for more information. {notification.id}
                   </Typography>
                   <Typography
                     style={{
