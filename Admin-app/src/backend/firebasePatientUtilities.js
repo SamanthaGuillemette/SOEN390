@@ -91,6 +91,7 @@ const toggleReviewed = async (patientKey) => {
     console.log("[toggleReviewed]" + error);
   }
 };
+
 const setAssignedDoctor = async (patientKey, doctorKey) => {
   try {
     // Get Patient
@@ -115,7 +116,6 @@ const setAssignedDoctor = async (patientKey, doctorKey) => {
 };
 
 const setStatus = async (patientKey, status) => {
-  console.log("[setStatus]" + patientKey);
   try {
     // Get Patient
     const docRef = getDocRef(tableName, patientKey);
@@ -132,6 +132,56 @@ const setStatus = async (patientKey, status) => {
     return patientInfo;
   } catch (error) {
     console.log("[setStatus]" + error);
+  }
+};
+
+const setNewCase = async (patientKey, newValue) => {
+  try {
+    // Get Patient
+    const docRef = getDocRef(tableName, patientKey);
+    let patientInfo = await getPatient(patientKey);
+
+    // if patient exists
+    if (patientInfo) {
+      // Update newCase field in Patient
+      docRef && (await updateDoc(docRef, "newCase", newValue));
+    }
+
+    // Get updated patient
+    patientInfo = await getPatient(patientKey);
+
+    return patientInfo; // returning new info
+  } catch (error) {
+    console.log("[setNewCase]" + error);
+  }
+};
+
+const viewedNewCase = async (patientKey) => {
+  try {
+    // Get Patient
+    const docRef = getDocRef(tableName, patientKey);
+    let patientInfo = await getPatient(patientKey);
+
+    // Set viewed value
+    let viewed;
+
+    if (patientInfo) {
+      if (patientInfo.viewedCase == null || patientInfo.viewedCase === false) {
+        viewed = true;
+      } else {
+        viewed = false;
+      }
+    }
+
+    // Update DB with new value
+    docRef && (await updateDoc(docRef, "viewedCase", viewed));
+
+    // Get updated patient
+    patientInfo = await getPatient(patientKey);
+
+    return patientInfo;
+  } catch (error) {
+    console.log("[viewedNewCase]" + error);
   }
 };
 
@@ -196,6 +246,26 @@ const setRecovered = async (patientKey, recovered) => {
   }
 };
 
+const setViewedCaseFalse = async (patientKey) => {
+  try {
+    // Get Patient
+    const docRef = getDocRef(tableName, patientKey);
+    let patientInfo = await getPatient(patientKey);
+
+    if (patientInfo) {
+      // Update DB with new value
+      docRef && (await updateDoc(docRef, "viewedCase", false));
+    }
+
+    // Get updated patient
+    patientInfo = await getPatient(patientKey);
+
+    return patientInfo;
+  } catch (error) {
+    console.log("[setViewedCase]" + error);
+  }
+};
+
 const getTableName = () => {
   return tableName;
 };
@@ -208,6 +278,9 @@ export {
   isValidPatientId,
   toggleReviewed,
   setStatus,
+  setNewCase,
+  viewedNewCase,
   getStatuses,
   setRecovered,
+  setViewedCaseFalse,
 };
