@@ -50,7 +50,6 @@ const Notifications = () => {
         }))
       );
     });
-    console.log(setDisplayReviewedNotif);
   }, [value]);
 
   return (
