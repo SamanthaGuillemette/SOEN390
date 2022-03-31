@@ -37,8 +37,8 @@ const dropdownStyle = makeStyles({
 });
 
 // function to create data
-function createData(adminName, email, dob, role, newAccount) {
-  return { adminName, email, dob, role, newAccount };
+function createData(adminName, email, dob, role, authorized) {
+  return { adminName, email, dob, role, authorized };
 }
 
 function AdminList() {
@@ -52,18 +52,17 @@ function AdminList() {
       let results = [];
       data.forEach((doc) => {
         if (
-          doc.newAccount &&
           doc.role !== "Administrator" &&
           doc.role !== "Super Administrator"
         ) {
-          // if its a new account and its not an administrator not super administrator
+          // if its not an administrator not super administrator
           results.push(
             createData(
               `${doc.firstName} ${doc.lastName}`,
               doc.email,
               doc.dob,
               doc.role,
-              doc.newAccount
+              doc.authorized
             )
           );
         }

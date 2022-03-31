@@ -6,7 +6,7 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import { setNewAccount } from "../../backend/firebaseAdminUtilities";
+import { setAuthorized } from "../../backend/firebaseAdminUtilities";
 import { useState } from "react";
 import "./AdminList.css";
 
@@ -15,11 +15,11 @@ import "./AdminList.css";
  * */
 function EachRow(props) {
   const { row } = props;
-  const [authorized, setAuthorized] = useState(props.row.newAccount);
+  const [authorizedValue, setAuthorizedValue] = useState(props.row.authorized);
 
   function onClickAuthorize() {
-    setNewAccount(row.email).then((newAccountValue) =>
-      setAuthorized(newAccountValue)
+    setAuthorized(row.email).then((newAuthorizedValue) =>
+      setAuthorizedValue(newAuthorizedValue)
     );
   }
 
@@ -29,6 +29,9 @@ function EachRow(props) {
       <TableCell
         sx={{
           borderColor: "var(--background-secondary)",
+          color: !authorizedValue
+            ? "var(--text-inactive)"
+            : "var(--text-primary)",
         }}
         className="ADMIN__table__data"
         component="th"
@@ -40,6 +43,9 @@ function EachRow(props) {
       <TableCell
         sx={{
           borderColor: "var(--background-secondary)",
+          color: !authorizedValue
+            ? "var(--text-inactive)"
+            : "var(--text-primary)",
         }}
         className="ADMIN__table__data"
         align="left"
@@ -49,6 +55,9 @@ function EachRow(props) {
       <TableCell
         sx={{
           borderColor: "var(--background-secondary)",
+          color: !authorizedValue
+            ? "var(--text-inactive)"
+            : "var(--text-primary)",
         }}
         className="ADMIN__table__data"
         align="center"
@@ -58,13 +67,16 @@ function EachRow(props) {
       <TableCell
         sx={{
           borderColor: "var(--background-secondary)",
+          color: !authorizedValue
+            ? "var(--text-inactive)"
+            : "var(--text-primary)",
         }}
         className={
-          row.role === "Health Official" && !authorized
+          row.role === "Health Official" && authorizedValue
             ? "ROLE__label-health-off"
-            : row.role === "Immigration Officer" && !authorized
+            : row.role === "Immigration Officer" && authorizedValue
             ? "ROLE__label-immigration-off"
-            : !authorized
+            : authorizedValue
             ? "ROLE__label-doctor"
             : "ADMIN__table__data"
         }
@@ -82,13 +94,13 @@ function EachRow(props) {
           control={
             <Checkbox
               sx={{
-                color: !authorized ? "#d32f2f !important" : "white",
+                color: authorizedValue ? "#d32f2f !important" : "white",
               }}
               value="allowExtraEmails"
               onClick={() => {
                 onClickAuthorize();
               }}
-              checked={!authorized}
+              checked={authorizedValue}
             />
           }
         />
