@@ -7,7 +7,6 @@ import {
 import {
   updateDoc,
   deleteField,
-  serverTimestamp,
   query,
   where,
   collection,
@@ -182,7 +181,7 @@ const viewedNewCase = async (patientKey) => {
 
     return patientInfo;
   } catch (error) {
-    console.log("[toggleReviewed]" + error);
+    console.log("[viewedNewCase]" + error);
   }
 };
 
@@ -247,6 +246,26 @@ const setRecovered = async (patientKey, recovered) => {
   }
 };
 
+const setViewedCaseFalse = async (patientKey) => {
+  try {
+    // Get Patient
+    const docRef = getDocRef(tableName, patientKey);
+    let patientInfo = await getPatient(patientKey);
+
+    if (patientInfo) {
+      // Update DB with new value
+      docRef && (await updateDoc(docRef, "viewedCase", false));
+    }
+
+    // Get updated patient
+    patientInfo = await getPatient(patientKey);
+
+    return patientInfo;
+  } catch (error) {
+    console.log("[setViewedCase]" + error);
+  }
+};
+
 const getTableName = () => {
   return tableName;
 };
@@ -263,4 +282,5 @@ export {
   viewedNewCase,
   getStatuses,
   setRecovered,
+  setViewedCaseFalse,
 };
