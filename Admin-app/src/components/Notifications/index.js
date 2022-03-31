@@ -156,7 +156,7 @@ const Notifications = () => {
                       <b>New Case Reported</b>
                     </Typography>
                     <Typography>
-                      <b class="NOTIFICATIONS__viewed">Viewed:</b>
+                      <b class="NOTIFICATIONS__newCase">Viewed:</b>
                     </Typography>
                     <Checkbox
                       className="NOTIFICATIONS__checkboxIcon"

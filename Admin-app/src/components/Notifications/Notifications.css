@@ -14,7 +14,6 @@
   color: #949be2 !important;
   /* position: absolute !important;
     right: 400px; */
-  transform: scale(1.2) !important;
 }
 
 .NOTIFICATIONS__closingIcon:hover {
@@ -25,6 +24,10 @@
   margin-left: 800px !important;
   margin-top: 40px !important;
   color: var(--text-primary) !important;
-  font-size: 20px !important;
   font-weight: bold !important;
+}
+
+.NOTIFICATIONS__newCase {
+  margin-left: 755px !important;
+  color: var(--text-primary) !important;
 }
