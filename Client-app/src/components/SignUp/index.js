@@ -71,6 +71,7 @@ const helperTextStyles = makeStyles((theme) => ({
     },
   },
 }));
+
 // This function is used to set the postal code in a proper Canadian Format
 const TextMaskCustom = forwardRef(function TextMaskCustom(props, ref) {
   const { onChange, ...other } = props;
@@ -140,20 +141,10 @@ export default function SignUp(props) {
    */
   const handleSubmit = async (event) => {
     event.preventDefault();
-    let dobValue,
-      dobWithoutSlash = null;
-    const currentDate = new Date(); // getting todays date
-    const todaysDate =
-      currentDate.getMonth() +
-      1 +
-      "" +
-      currentDate.getDate() +
-      "" +
-      currentDate.getFullYear(); // formatting
+    let dobValue = null;
 
     if (dob !== null) {
       dobValue = dob.$M + 1 + "/" + dob.$D + "/" + dob.$y; // Required to add + 1 for the month
-      dobWithoutSlash = dob.$M + 1 + "" + dob.$D + "" + dob.$y; // Adding without slashes
     }
 
     if (
@@ -173,40 +164,32 @@ export default function SignUp(props) {
       const docRef = doc(db, "Admin", email.toLowerCase());
       const docSnap = await getDoc(docRef);
 
-      if (dobValue !== null) {
-        // if its not null
-        // if its a future date
-        if (Number(dobWithoutSlash) >= Number(todaysDate)) {
-          // comparing dates as integer
-          setErrorMsg("You've selected an invalid date. Please try again.");
-          setOpen(true);
-        } else if (!checked) {
-          setErrorMsg("Please confirm your data is correct.");
-          setOpen(true);
-        } else if (!docSnap.exists()) {
-          // if valid date && checked
-          createUserWithEmailAndPassword(auth, email, password)
-            .then(async () => {
-              await setDoc(doc(db, "Client", email.toLowerCase()), {
-                firstName: firstName,
-                lastName: lastName,
-                address: address,
-                city: city,
-                province: province,
-                postalCode: postalCode,
-                dob: dobValue,
-                email: email.toLowerCase(),
-              });
-            })
-            .catch((error) => {
-              setErrorMsg(error.message);
-              setOpen(true);
+      if (!checked) {
+        setErrorMsg("Please confirm your data is correct.");
+        setOpen(true);
+      } else if (!docSnap.exists()) {
+        createUserWithEmailAndPassword(auth, email, password)
+          .then(async () => {
+            await setDoc(doc(db, "Client", email.toLowerCase()), {
+              firstName: firstName,
+              lastName: lastName,
+              address: address,
+              city: city,
+              province: province,
+              postalCode: postalCode.toUpperCase(),
+              dob: dobValue,
+              email: email.toLowerCase(),
             });
-        } else {
-          setErrorMsg("This email is registered with the Admin application.");
-          setOpen(true);
-        }
+          })
+          .catch((error) => {
+            setErrorMsg(error.message);
+            setOpen(true);
+          });
+      } else {
+        setErrorMsg("This email is registered with the Admin application.");
+        setOpen(true);
       }
+
     }
   };
 
@@ -412,24 +395,6 @@ export default function SignUp(props) {
                 </FormControl>
               </Grid>
               <Grid item xs={12} sm={6}>
-                <FormControl fullWidth variant="outlined">
-                  <InputLabel>Postal Code *</InputLabel>
-                  <Input
-                    required
-                    fullWidth
-                    id="postalCode"
-                    label="Postal Code"
-                    name="Postal Code"
-                    autoComplete="postal-code"
-                    value={postalCode}
-                    onChange={(e) => setPostalCode(e.target.value)}
-                    disableUnderline={true}
-                    inputComponent={TextMaskCustom}
-                    inputProps={{
-                      color: "var(--text-primary)",
-                    }}
-                  />
-                </FormControl>
                 <TextField
                   required
                   fullWidth
@@ -465,6 +430,7 @@ export default function SignUp(props) {
                     <DatePicker
                       label="Date of Birth"
                       value={dob}
+                      disableFuture={true}
                       onChange={(e) => {
                         setDOB(e);
                       }}

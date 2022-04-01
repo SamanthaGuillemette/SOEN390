@@ -113,20 +113,10 @@ export default function SignUp(props) {
    */
   const handleSubmit = async (event) => {
     event.preventDefault();
-    let dobValue,
-      dobWithoutSlash = null;
-    const currentDate = new Date(); // getting todays date
-    const todaysDate =
-      currentDate.getMonth() +
-      1 +
-      "" +
-      currentDate.getDate() +
-      "" +
-      currentDate.getFullYear(); // formatting
+    let dobValue = null;
 
     if (dob !== null) {
       dobValue = dob.$M + 1 + "/" + dob.$D + "/" + dob.$y; // Required to add + 1 for the month
-      dobWithoutSlash = dob.$M + 1 + "" + dob.$D + "" + dob.$y; // Adding without slashes
     }
 
     if (
@@ -143,41 +133,30 @@ export default function SignUp(props) {
       const docRef = doc(db, "Client", email.toLowerCase());
       const docSnap = await getDoc(docRef);
 
-      if (dobValue !== null) {
-        // if its not null
-        // if its a future date
-        if (Number(dobWithoutSlash) >= Number(todaysDate)) {
-          // comparing dates as integer
-          setErrorMsg("You've selected an invalid date. Please try again.");
-          setOpen(true);
-        } else if (!checked) {
-          setErrorMsg("Please confirm your data is correct.");
-          setOpen(true);
-        } else if (!docSnap.exists()) {
-          // if valid date && checked
-          createUserWithEmailAndPassword(auth, email, password)
-            .then(async () => {
-              await setDoc(doc(db, "Admin", email.toLowerCase()), {
-                firstName: firstName,
-                lastName: lastName,
-                role: role,
-                dob: dobValue,
-                email: email.toLowerCase(),
-                authorized:
-                  role !== "Administrator" && role !== "Super Administrator"
-                    ? false
-                    : true,
-              });
-            })
-            .catch((error) => {
-              setErrorMsg(error.message);
-              setOpen(true);
+      if (!docSnap.exists()) {
+        createUserWithEmailAndPassword(auth, email, password)
+          .then(async () => {
+            await setDoc(doc(db, "Admin", email.toLowerCase()), {
+              firstName: firstName,
+              lastName: lastName,
+              role: role,
+              dob: dobValue,
+              email: email.toLowerCase(),
+              authorized:
+                role !== "Administrator" && role !== "Super Administrator"
+                  ? false
+                  : true,
             });
-        } else {
-          setErrorMsg("This email is registered with the Client application.");
-          setOpen(true);
-        }
+          })
+          .catch((error) => {
+            setErrorMsg(error.message);
+            setOpen(true);
+          });
+      } else {
+        setErrorMsg("This email is registered with the Client application.");
+        setOpen(true);
       }
+
     }
   };
 
@@ -282,6 +261,7 @@ export default function SignUp(props) {
                     <DatePicker
                       label="Date of Birth"
                       value={dob}
+                      disableFuture={true}
                       onChange={(e) => {
                         setDOB(e);
                       }}
