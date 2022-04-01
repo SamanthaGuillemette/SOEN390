@@ -80,7 +80,7 @@ const TextMaskCustom = forwardRef(function TextMaskCustom(props, ref) {
       mask="{#}0{@} 0{@}0"
       definitions={{
         "#": /[ABCEGHJ-NPRSTVXY, abceghj-nprstvxy]/,
-        "@": /[ABCEGHJ-NPRSTV-Z, abceghj-nprstv-z]/
+        "@": /[ABCEGHJ-NPRSTV-Z, abceghj-nprstv-z]/,
       }}
       lazy="false"
       inputRef={ref}
@@ -92,7 +92,7 @@ const TextMaskCustom = forwardRef(function TextMaskCustom(props, ref) {
 
 TextMaskCustom.propTypes = {
   name: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
 };
 
 /**
@@ -412,10 +412,8 @@ export default function SignUp(props) {
                 </FormControl>
               </Grid>
               <Grid item xs={12} sm={6}>
-                <FormControl fullWidth variant='outlined'>
-                  <InputLabel >
-                    Postal Code *
-                  </InputLabel>
+                <FormControl fullWidth variant="outlined">
+                  <InputLabel>Postal Code *</InputLabel>
                   <Input
                     required
                     fullWidth
@@ -425,22 +423,11 @@ export default function SignUp(props) {
                     autoComplete="postal-code"
                     value={postalCode}
                     onChange={(e) => setPostalCode(e.target.value)}
-                    helperText={
-                      postalCode === "" && emptyFields
-                        ? "This field is required."
-                        : ""
-                    }
-                    error={postalCode === "" && emptyFields}
-                    FormHelperTextProps={{ classes: helperTestClasses }}
-                    inputProps={{
-                      sx: {
-                        color: "var(--text-primary)",
-                        [`&.${inputLabelClasses.shrink}`]: {
-                          color: "var(--primary-main)",
-                        },
-                      },
-                    }}
+                    disableUnderline={true}
                     inputComponent={TextMaskCustom}
+                    inputProps={{
+                      color: "var(--text-primary)",
+                    }}
                   />
                 </FormControl>
                 <TextField
@@ -459,6 +446,9 @@ export default function SignUp(props) {
                   }
                   error={postalCode === "" && emptyFields}
                   FormHelperTextProps={{ classes: helperTestClasses }}
+                  InputProps={{
+                    inputComponent: TextMaskCustom,
+                  }}
                   InputLabelProps={{
                     sx: {
                       color: "var(--text-primary)",
