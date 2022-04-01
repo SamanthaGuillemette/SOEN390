@@ -8,35 +8,13 @@ import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { Link } from "react-router-dom";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Popover from "@mui/material/Popover";
-import PopupState from "material-ui-popup-state";
-import MoreHorizRoundedIcon from "@mui/icons-material/MoreHorizRounded";
+import LogoutIcon from '@mui/icons-material/Logout';
 import { useState } from "react";
+import Button from '@mui/material/Button';
 import { signOut } from "firebase/auth";
 import { auth } from "../../backend/firebase";
 
 const BottomNav = () => {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const setMobileMoreAnchorEl = useState(null);
-
-  /**
-   * Handle click event on bottom nav.
-   * @param  {ClickEvent} event
-   */
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-  const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
 
   /**
    * Handle logging user out.
@@ -45,8 +23,6 @@ const BottomNav = () => {
   const logout = async (e) => {
     e.preventDefault();
     signOut(auth);
-    setAnchorEl(null);
-    handleMobileMenuClose();
   };
 
   return (
@@ -65,50 +41,16 @@ const BottomNav = () => {
           </p>
         </IconButton>
       </Link>
-      <Link to="../notifications">
+      <Link to="../updates">
         <IconButton size="large" className="BOTTOM-NAV__btn">
           <NotificationsIcon sx={{ color: "white" }} />
-          <p className="BOTTOM-NAV__btn__title">Notifications</p>
+          <p className="BOTTOM-NAV__btn__title">Updates</p>
         </IconButton>
       </Link>
-      <PopupState variant="popover" popupId="demo-popup-popover">
-        {(popupState) => (
-          <div>
-            <Button
-              aria-describedby={id}
-              variant="contained"
-              onClick={handleClick}
-              className="BOTTOM-NAV__btn"
-            >
-              <MoreHorizRoundedIcon sx={{ color: "white" }} />
-              <p className="BOTTOM-NAV__btn__title">More</p>
-            </Button>
-            <Popover
-              id={id}
-              open={open}
-              anchorEl={anchorEl}
-              onClose={handleClose}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "center",
-              }}
-              transformOrigin={{
-                vertical: "bottom",
-                horizontal: "center",
-              }}
-            >
-              <Typography
-                data-testid="signout"
-                className="BOTTOM-NAV__popover__text"
-                onClick={logout}
-                sx={{ p: 2 }}
-              >
-                Signout
-              </Typography>
-            </Popover>
-          </div>
-        )}
-      </PopupState>
+        <IconButton size="large" className="BOTTOM-NAV__btn" onClick={logout}>
+          <LogoutIcon sx={{ color: "white" }} />
+          <p className="BOTTOM-NAV__btn__title">Sign out</p>
+        </IconButton>
     </div>
   );
 };

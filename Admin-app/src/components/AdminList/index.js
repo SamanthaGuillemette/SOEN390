@@ -20,25 +20,25 @@ import EachRow from "./EachRow";
 const dropdownStyle = makeStyles({
   paper: {
     background: "var(--background-main)", // giving background color to dropdown
-    color: "var(--text-inactive)", // color of text in the dropdown
+    color: "var(--text-inactive) !important", // color of text in the dropdown
     borderRadius: "10px",
   },
   color: {
-    color: "var(--text-inactive)", // color of text in pasgination
+    color: "var(--text-inactive) !important", // color of text in pasgination
   },
   select: {
     "&:after": {
-      borderBottomColor: "var(--text-inactive)",
+      borderBottomColor: "var(--text-inactive) !important",
     },
     "& .MuiSvgIcon-root": {
-      color: "var(--text-inactive)", // color of pagination button
+      color: "var(--text-inactive) !important", // color of pagination button
     },
   },
 });
 
 // function to create data
-function createData(adminName, email, dob, role, newAccount) {
-  return { adminName, email, dob, role, newAccount };
+function createData(adminName, email, dob, role, authorized) {
+  return { adminName, email, dob, role, authorized };
 }
 
 function AdminList() {
@@ -52,18 +52,17 @@ function AdminList() {
       let results = [];
       data.forEach((doc) => {
         if (
-          doc.newAccount &&
           doc.role !== "Administrator" &&
           doc.role !== "Super Administrator"
         ) {
-          // if its a new account and its not an administrator not super administrator
+          // if its not an administrator not super administrator
           results.push(
             createData(
               `${doc.firstName} ${doc.lastName}`,
               doc.email,
               doc.dob,
               doc.role,
-              doc.newAccount
+              doc.authorized
             )
           );
         }

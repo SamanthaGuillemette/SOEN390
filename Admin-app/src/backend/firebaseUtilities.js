@@ -1,10 +1,20 @@
 import { collection, doc, getDocs, getDoc, setDoc } from "firebase/firestore";
 import { db } from "./firebase";
 
-const getTableData = async (tableName) => {
+const getTableData = async (collectionPath) => {
   try {
-    const querySnapshot = await getDocs(collection(db, tableName));
-    const returnValue = querySnapshot.docs.map((patient) => patient.data());
+    const querySnapshot = await getDocs(collection(db, collectionPath));
+    const returnValue = querySnapshot.docs.map((doc) => doc.data());
+    return returnValue;
+  } catch (error) {
+    console.error("[getTableData]" + error);
+  }
+};
+
+const getTableDataByQuery = async (queryVal) => {
+  try {
+    const documents = await getDocs(queryVal);
+    const returnValue = documents.docs.map((doc) => doc.data());
     return returnValue;
   } catch (error) {
     console.error("[getTableData]" + error);
@@ -47,4 +57,10 @@ const populateTable = (tableName, jsonStr) => {
   }
 };
 
-export { getTableData, getTableDataItem, populateTable, getDocRef };
+export {
+  getTableData,
+  getTableDataByQuery,
+  getTableDataItem,
+  populateTable,
+  getDocRef,
+};

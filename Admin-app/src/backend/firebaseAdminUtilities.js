@@ -55,35 +55,35 @@ const getAdminRef = (key) => {
   return getDocRef(getTableName(), key);
 };
 
-const setNewAccount = async (patientKey) => {
+const setAuthorized = async (patientKey) => {
   try {
     // Get Admin
     const docRef = getDocRef("Admin", patientKey);
     let adminInfo = await getAdmin(patientKey);
 
-    // Set new disabled value
-    let newAccountValue;
+    // Set new authorized value
+    let newAuthorizedValue;
 
     if (adminInfo) {
       // if account exists
       if (
-        adminInfo.newAccount === true // if the value stored is false or null
+        adminInfo.authorized === true // if the value stored is false or null
       ) {
-        newAccountValue = false; // new value to be replace is true
+        newAuthorizedValue = false; // new value to be replace is true
       } else {
-        newAccountValue = true; // esle false
+        newAuthorizedValue = true; // esle false
       }
     }
 
-    // Update disabled field in admin account
-    docRef && (await updateDoc(docRef, "newAccount", newAccountValue));
+    // Update authorized field in admin account
+    docRef && (await updateDoc(docRef, "authorized", newAuthorizedValue));
 
     // Get updated admin account
     adminInfo = await getAdmin(patientKey);
 
-    return adminInfo.newAccount; // returning new disabled value
+    return adminInfo.authorized; // returning new authorized value
   } catch (error) {
-    console.log("[setNewAccount]" + error);
+    console.log("[setAuthorized]" + error);
   }
 };
 
@@ -93,5 +93,5 @@ export {
   getAdminRef,
   getAdmins,
   getAdmin,
-  setNewAccount,
+  setAuthorized,
 };

@@ -54,8 +54,7 @@
 
 .PATIENT__table__data,
 .DOC__table__data,
-.PATIENT-SYMPTOMS__table__data,
-.ADMIN__table__data {
+.PATIENT-SYMPTOMS__table__data {
   color: var(--text-primary) !important;
   font-weight: 500 !important;
   font-size: 1rem !important;

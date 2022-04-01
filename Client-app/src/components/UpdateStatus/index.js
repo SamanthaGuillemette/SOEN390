@@ -15,15 +15,31 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import SymptomsTable from "./SymptomsTable";
 import TableHead from "@mui/material/TableHead";
-import { selectUserInfoDetails } from "../../store/userInfoSlice";
+import { doc, collection, query, orderBy, onSnapshot, limit } from "firebase/firestore";
+import { db } from "../../backend/firebase";
+import { useEffect, useState} from "react";
 
 /**
  * Renders function to update a client's status'
  * @returns UpdateStatus function
  */
 function UpdateStatus() {
-  // Pull 'userInfoDetails' from the store (Redux centralized store)
-  const userInfoDetails = useSelector(selectUserInfoDetails);
+  // Pull 'userEmail' out from the centralized store
+  const userEmail = useSelector((state) => state.auth.userEmail);
+
+  // Get the client's reference via the userEmail (query the database)
+  const clientDoc = doc(db, `Client/${userEmail}`);
+  const statusRef = collection(clientDoc, "Status");
+  const q = query(statusRef, orderBy("timestamp", 'desc'), limit(1));
+  const [clientInfo, setClientInfo] = useState("");
+
+  useEffect(() => {
+    onSnapshot(q, (doc) => {
+      setClientInfo(doc.docs.map(doc=> ({
+          data: doc.data(),
+      })))
+    })
+  }, )
 
   return (
     <Grid
@@ -78,22 +94,22 @@ function UpdateStatus() {
                   sx={{ borderColor: "var(--secondary-light)" }}
                   align="left"
                 >
-                  {userInfoDetails?.dos}
+                  {}
                 </TableCell>
                 <TableCell
                   className="data"
                   sx={{ borderColor: "var(--secondary-light)" }}
                   align="center"
                 >
-                  {userInfoDetails?.temperature}
+                  {}
                 </TableCell>
                 <TableCell
-                  className="data"
-                  sx={{ borderColor: "var(--secondary-light)" }}
-                  align="right"
-                >
-                  {userInfoDetails?.weight}
-                </TableCell>
+                    className="data"
+                    sx={{ borderColor: "var(--secondary-light)" }}
+                    align="right"
+                  >
+                    {}
+                  </TableCell>
               </TableRow>
             </TableBody>
           </Table>
