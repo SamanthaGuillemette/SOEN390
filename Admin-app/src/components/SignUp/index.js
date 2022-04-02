@@ -163,7 +163,10 @@ export default function SignUp(props) {
                 role: role,
                 dob: dobValue,
                 email: email.toLowerCase(),
-                newAccount: role !== "Administrator",
+                authorized:
+                  role !== "Administrator" && role !== "Super Administrator"
+                    ? false
+                    : true,
               });
             })
             .catch((error) => {
