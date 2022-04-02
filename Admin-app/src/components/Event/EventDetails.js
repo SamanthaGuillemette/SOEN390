@@ -4,22 +4,24 @@
  */
 import { useParams } from "react-router-dom";
 import useFetchData from "../../useFetchData";
+import "./Event.css";
 
 const EventDetails = () => {
-    const { id } = useParams();
-    const { data: event } = useFetchData('https://jsonplaceholder.typicode.com/posts/' + id);
+  const { id } = useParams();
+  const { data: event } = useFetchData(
+    "https://jsonplaceholder.typicode.com/posts/" + id
+  );
 
+  return (
+    <div className="Event__Main__Content">
+      {event && (
+        <article>
+          <h1>{event.title}</h1>
+          <div>{event.body}</div>
+        </article>
+      )}
+    </div>
+  );
+};
 
-    return (
-        <div className="EventDetails">
-            { event && (
-                <article>
-                    <h1>{ event.title }</h1>
-                    <div>{ event.body }</div>
-                </article>
-            ) }
-        </div>
-      );
-}
- 
 export default EventDetails;
