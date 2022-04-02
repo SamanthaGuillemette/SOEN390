@@ -141,6 +141,7 @@ const Dashboard = () => {
         </TableContainer>
         {/* The following is the Upcoming Events which appears on the dashboard
       and the buttons for events and covid news.*/}
+        <UpcomingEvents />
         <DashboardCards />
         {/* Displaying DashbordCards */}
       </Grid>
