@@ -15,9 +15,16 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import SymptomsTable from "./SymptomsTable";
 import TableHead from "@mui/material/TableHead";
-import { doc, collection, query, orderBy, onSnapshot, limit } from "firebase/firestore";
+import {
+  doc,
+  collection,
+  query,
+  orderBy,
+  onSnapshot,
+  limit,
+} from "firebase/firestore";
 import { db } from "../../backend/firebase";
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
 /**
  * Renders function to update a client's status'
@@ -30,16 +37,19 @@ function UpdateStatus() {
   // Get the client's reference via the userEmail (query the database)
   const clientDoc = doc(db, `Client/${userEmail}`);
   const statusRef = collection(clientDoc, "Status");
-  const q = query(statusRef, orderBy("timestamp", 'desc'), limit(1));
+  const q = query(statusRef, orderBy("timestamp", "desc"), limit(1));
   const [clientInfo, setClientInfo] = useState("");
 
   useEffect(() => {
     onSnapshot(q, (doc) => {
-      setClientInfo(doc.docs.map(doc=> ({
+      setClientInfo(
+        doc.docs.map((doc) => ({
           data: doc.data(),
-      })))
-    })
-  }, )
+        }))
+      );
+    });
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <Grid
@@ -104,12 +114,12 @@ function UpdateStatus() {
                   {}
                 </TableCell>
                 <TableCell
-                    className="data"
-                    sx={{ borderColor: "var(--secondary-light)" }}
-                    align="right"
-                  >
-                    {}
-                  </TableCell>
+                  className="data"
+                  sx={{ borderColor: "var(--secondary-light)" }}
+                  align="right"
+                >
+                  {}
+                </TableCell>
               </TableRow>
             </TableBody>
           </Table>

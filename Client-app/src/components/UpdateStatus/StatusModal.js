@@ -112,8 +112,6 @@ export default function SimpleModal() {
       });
   }, [userEmail]);
 
-  //console.log(todaysStatusExists);
-
   // Handle the popup open/close state
   const handleOpen = () => setOpenModal(true);
 
@@ -141,6 +139,7 @@ export default function SimpleModal() {
         timestamp: timestamp,
         reviewed: false,
         id: docRef.id,
+        reupdate: todaysStatusExists === true,
       });
 
       // Close the popup after user submit the form
