@@ -18,26 +18,17 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
-import { styled } from "@mui/material/styles";
-import Checkbox from "@mui/material/Checkbox";
 import FlagIcon from "@mui/icons-material/Flag";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {
   getPatient,
   togglePriorityFlag,
-  toggleReviewed,
   getStatuses,
 } from "../../backend/firebasePatientUtilities";
 import DropdownStatus from "./../DropdownStatus";
 import DropdownDoctor from "./../DropdownDoctor";
-
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(0.5),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
+import SymptomsRow from "./SymptomsRow";
 
 /**
  * setAge function works for setting the age of the patient
@@ -79,7 +70,9 @@ function PatientProfile() {
     SmellLoss,
     TasteLoss,
     Temperature,
-    Weight
+    Weight,
+    reviewed,
+    docID
   ) {
     return {
       Date,
@@ -92,14 +85,9 @@ function PatientProfile() {
       TasteLoss,
       Temperature,
       Weight,
+      reviewed,
+      docID,
     };
-  }
-
-  // reviewed status with DB
-  function onReviewedClick() {
-    toggleReviewed(key).then((newPatientInfo) =>
-      setPatientInfo(newPatientInfo)
-    );
   }
 
   // priority flag with DB
@@ -132,7 +120,9 @@ function PatientProfile() {
                   status.smellLoss || "No",
                   status.tasteLoss || "No",
                   status.temperature || "",
-                  status.weight || ""
+                  status.weight || "",
+                  status.reviewed,
+                  status.id
                 )
               )
             );
@@ -265,51 +255,6 @@ function PatientProfile() {
               </CardActionArea>
             </Card>
           </Grid>
-
-          {/* Status review grid */}
-          <Grid item xs={6}>
-            <Card
-              sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }}
-            >
-              <CardActionArea>
-                <CardContent>
-                  <Typography
-                    className="PATIENT-STATUS-REVIEW__header"
-                    gutterBottom
-                    variant="button"
-                    component="div"
-                  >
-                    Status Review
-                  </Typography>
-                  <Typography
-                    className="PATIENT-STATUS-REVIEW__data"
-                    variant="body2"
-                  >
-                    Review Completed:{" "}
-                    {patientInfo &&
-                    (patientInfo.statusReview === null ||
-                      patientInfo.statusReview === "Not Completed")
-                      ? "Not Completed"
-                      : "Status Reviewed"}
-                    <Checkbox
-                      checked={
-                        patientInfo &&
-                        (patientInfo.statusReview === null ||
-                          patientInfo.statusReview === "Not Completed")
-                          ? false
-                          : true
-                      }
-                      size="small"
-                      style={{ color: "var(--text-primary)" }}
-                      onClick={() => {
-                        onReviewedClick();
-                      }}
-                    />
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </Grid>
         </Grid>
       </Grid>
 
@@ -325,7 +270,7 @@ function PatientProfile() {
             <h5 className="PATIENT-SYMPTOMS__table__label__no-data">
               {patientInfoStatuses &&
                 patientInfoStatuses.length === 0 &&
-                `(NO SYMPTOMS ENTERED YET)`}
+                `(NO STATUSES ENTERED YET)`}
             </h5>
           </h5>
           <Table sx={{ minWidth: 650 }} aria-label="collapsable table">
@@ -400,87 +345,19 @@ function PatientProfile() {
                 >
                   Weight (lb)
                 </TableCell>
+                <TableCell
+                  sx={{ borderColor: "var(--background-secondary)" }}
+                  className="PATIENT__table__header"
+                  align="center"
+                >
+                  Reviewed
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {patientInfoStatuses &&
                 patientInfoStatuses.map((row) => (
-                  <TableRow
-                    key={row.Date}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell
-                      className="PATIENT-SYMPTOMS__table__data"
-                      sx={{ borderColor: "var(--background-secondary)" }}
-                      component="th"
-                      scope="row"
-                    >
-                      {row.Date}
-                    </TableCell>
-                    <TableCell
-                      className="PATIENT-SYMPTOMS__table__data"
-                      sx={{ borderColor: "var(--background-secondary)" }}
-                      align="center"
-                    >
-                      {row.Fever}
-                    </TableCell>
-                    <TableCell
-                      className="PATIENT-SYMPTOMS__table__data"
-                      sx={{ borderColor: "var(--background-secondary)" }}
-                      align="center"
-                    >
-                      {row.Cough}
-                    </TableCell>
-                    <TableCell
-                      className="PATIENT-SYMPTOMS__table__data"
-                      sx={{ borderColor: "var(--background-secondary)" }}
-                      align="center"
-                    >
-                      {row.RunnyNose}
-                    </TableCell>
-                    <TableCell
-                      className="PATIENT-SYMPTOMS__table__data"
-                      sx={{ borderColor: "var(--background-secondary)" }}
-                      align="center"
-                    >
-                      {row.MuscleAche}
-                    </TableCell>
-                    <TableCell
-                      className="PATIENT-SYMPTOMS__table__data"
-                      sx={{ borderColor: "var(--background-secondary)" }}
-                      align="center"
-                    >
-                      {row.Tiredness}
-                    </TableCell>
-                    <TableCell
-                      className="PATIENT-SYMPTOMS__table__data"
-                      sx={{ borderColor: "var(--background-secondary)" }}
-                      align="center"
-                    >
-                      {row.SmellLoss}
-                    </TableCell>
-                    <TableCell
-                      className="PATIENT-SYMPTOMS__table__data"
-                      sx={{ borderColor: "var(--background-secondary)" }}
-                      align="center"
-                    >
-                      {row.TasteLoss}
-                    </TableCell>
-                    <TableCell
-                      className="PATIENT-SYMPTOMS__table__data"
-                      sx={{ borderColor: "var(--background-secondary)" }}
-                      align="center"
-                    >
-                      {row.Temperature}
-                    </TableCell>
-                    <TableCell
-                      className="PATIENT-SYMPTOMS__table__data"
-                      sx={{ borderColor: "var(--background-secondary)" }}
-                      align="center"
-                    >
-                      {row.Weight}
-                    </TableCell>
-                  </TableRow>
+                  <SymptomsRow key={row.id} row={row} />
                 ))}
             </TableBody>
           </Table>

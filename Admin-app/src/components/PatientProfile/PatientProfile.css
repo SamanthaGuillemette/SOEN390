@@ -69,3 +69,7 @@ h5.PATIENT-SYMPTOMS__table__label {
   margin-top: 18px !important;
   display: inline-block !important;
 }
+
+.PATIENT__reviewed-status {
+  background: rgb(148, 155, 226, 0.2);
+}

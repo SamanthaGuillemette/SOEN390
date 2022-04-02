@@ -93,7 +93,10 @@ export default function SimpleModal() {
       const timestamp = serverTimestamp();
 
       // adding status doc by UID
-      await addDoc(collection(clientDoc, "Status"), {
+      var docRef = await addDoc(collection(clientDoc, "Status"), {});
+
+      // using the document reference to add id
+      await setDoc(docRef, {
         temperature: temperature,
         weight: weight,
         fever: !fever ? "No" : "Yes",
@@ -104,21 +107,8 @@ export default function SimpleModal() {
         muscleAche: !muscleAche ? "No" : "Yes",
         tasteLoss: !tasteLoss ? "No" : "Yes",
         timestamp: timestamp,
-      });
-
-      // adding empty doc into StatusNotifications
-      var docRef = await addDoc(
-        collection(adminDoc, "StatusNotifications"),
-        {}
-      );
-
-      // using the document reference to add id
-      await setDoc(docRef, {
-        patientName:
-          userInfoDetails?.firstName + " " + userInfoDetails?.lastName,
-        patientID: userInfoDetails?.email,
-        viewed: "false",
-        timestamp: timestamp,
+        reviewed: false,
+        notifyDoctor: true,
         id: docRef.id,
       });
 
@@ -128,10 +118,6 @@ export default function SimpleModal() {
       setEmptyFields(true);
     }
   };
-
-  function close() {
-    setTimeout(() => handleClose(), 3000);
-  }
 
   // once modal is closed creating setting back to old values
   const handleClose = () => {
@@ -320,7 +306,6 @@ export default function SimpleModal() {
               </Grid>
             </Grid>
             <Button
-              onClick={close}
               type="submit"
               variant="contained"
               className="updateStatus__save-btn"
