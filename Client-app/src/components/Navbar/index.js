@@ -23,6 +23,9 @@ import {
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { makeStyles } from "@material-ui/core/styles";
+import { useDispatch, useSelector } from "react-redux";
+import { openDrawer, selectDrawerState } from "../../store/drawerSlice";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
 
 const useStyles = makeStyles({
   MuiDrawer: {
@@ -34,10 +37,15 @@ const useStyles = makeStyles({
 
 const MenuAppBar = () => {
   const classes = useStyles();
-  const [state, setState] = useState(false);
+
+  // Global 'drawerState' being pulled from Redux store
+  const drawerState = useSelector(selectDrawerState);
+
+  // Dispatch function to call global 'openDrawer()' action from the store
+  const dispatch = useDispatch();
 
   const toggleDrawer = () => {
-    setState(!state);
+    dispatch(openDrawer());
   };
 
   /**
@@ -51,30 +59,18 @@ const MenuAppBar = () => {
       onClick={toggleDrawer}
     >
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem className="sidebar-button" button key={text}>
-            <ListItemIcon className="sidebar-icon">
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText className="sidebar-text" primary={text} />
-          </ListItem>
-        ))}
+        <ListItem className="sidebar-button" button>
+          <ListItemIcon className="sidebar-icon">
+            <MailIcon />
+          </ListItemIcon>
+          <ListItemText className="sidebar-text">Hello</ListItemText>
+        </ListItem>
       </List>
-      {/* <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List> */}
     </Box>
   );
 
   return (
+    // <ClickAwayListener onClickAway={toggleDrawer}>
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar
@@ -92,16 +88,8 @@ const MenuAppBar = () => {
             onClick={toggleDrawer}
           >
             <MenuIcon />
-
-            <Drawer
-              classes={{ paper: classes.MuiDrawer }}
-              anchor="left"
-              open={state}
-              onClose={toggleDrawer}
-            >
-              {list()}
-            </Drawer>
           </IconButton>
+
           <Typography
             data-testid="title"
             variant="h6"
@@ -112,9 +100,19 @@ const MenuAppBar = () => {
           >
             Covid-19 App
           </Typography>
+
+          <Drawer
+            classes={{ paper: classes.MuiDrawer }}
+            anchor="left"
+            open={drawerState}
+            onClose={toggleDrawer}
+          >
+            {list()}
+          </Drawer>
         </Toolbar>
       </AppBar>
     </Box>
+    // </ClickAwayListener>
   );
 };
 export default MenuAppBar;

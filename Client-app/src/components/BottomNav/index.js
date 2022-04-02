@@ -8,21 +8,27 @@ import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { Link } from "react-router-dom";
-import LogoutIcon from '@mui/icons-material/Logout';
-import { useState } from "react";
-import Button from '@mui/material/Button';
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { signOut } from "firebase/auth";
 import { auth } from "../../backend/firebase";
+import { useDispatch } from "react-redux";
+import { openDrawer } from "../../store/drawerSlice";
 
 const BottomNav = () => {
-
   /**
    * Handle logging user out.
    * @param  {ClickEvent} e
    */
-  const logout = async (e) => {
-    e.preventDefault();
-    signOut(auth);
+  // const logout = async (e) => {
+  //   e.preventDefault();
+  //   signOut(auth);
+  // };
+
+  // Dispatch function to call global 'openDrawer()' action from the store
+  const dispatch = useDispatch();
+
+  const handleDrawerMenu = () => {
+    dispatch(openDrawer());
   };
 
   return (
@@ -47,10 +53,14 @@ const BottomNav = () => {
           <p className="BOTTOM-NAV__btn__title">Updates</p>
         </IconButton>
       </Link>
-        <IconButton size="large" className="BOTTOM-NAV__btn" onClick={logout}>
-          <LogoutIcon sx={{ color: "white" }} />
-          <p className="BOTTOM-NAV__btn__title">Sign out</p>
-        </IconButton>
+      <IconButton
+        size="large"
+        className="BOTTOM-NAV__btn"
+        onClick={handleDrawerMenu}
+      >
+        <MoreHorizIcon sx={{ color: "white" }} />
+        <p className="BOTTOM-NAV__btn__title">More</p>
+      </IconButton>
     </div>
   );
 };
