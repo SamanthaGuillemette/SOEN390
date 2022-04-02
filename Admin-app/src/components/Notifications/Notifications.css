@@ -26,8 +26,3 @@
   color: var(--text-primary) !important;
   font-weight: bold !important;
 }
-
-.NOTIFICATIONS__newCase {
-  margin-left: 760px !important;
-  color: var(--text-primary) !important;
-}

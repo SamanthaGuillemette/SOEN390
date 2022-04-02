@@ -13,35 +13,53 @@ import { Divider } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import {
-  getStatusNotifications,
-  toggleViewedCheckbox,
-} from "../../backend/firebaseDoctorUtilities";
-import {
   getPatients,
   viewedNewCase,
+  getStatuses,
+  getPatient,
 } from "../../backend/firebasePatientUtilities";
-import Checkbox from "@mui/material/Checkbox";
+import { getDoctor } from "../../backend/firebaseDoctorUtilities";
 import { Link } from "react-router-dom";
+
+/**
+ * This component is what makes the data for each notification
+ */
+// Creating data for symptom details table
+function createData(email, patientName, timestamp) {
+  return { email, patientName, timestamp };
+}
 
 /**
  * This component is what allows the Notifications feature to work.
  */
-
 const Notifications = () => {
   const [statusNotifications, setStatusNotifications] = useState([]);
   const [newCasePatients, setNewCasePatients] = useState([]);
   const userEmail = useSelector((state) => state.auth.userEmail);
 
   useEffect(() => {
-    getStatusNotifications(userEmail).then((data) => {
-      let results = [];
-      data.forEach((doc) => {
-        if (doc.viewed === "false") {
-          results.push(doc);
-        }
+    getDoctor(userEmail)
+      .then((patientInfo) => {
+        patientInfo.treats.map((patientEmail) =>
+          getPatient(patientEmail).then((patient) =>
+            getStatuses(patientEmail, false).then((statuses) => {
+              statuses &&
+                setStatusNotifications(
+                  statuses.map((status) =>
+                    createData(
+                      patientEmail,
+                      patient.firstName + " " + patient.lastName,
+                      status?.timestamp?.toDate()?.toLocaleString() || ""
+                    )
+                  )
+                );
+            })
+          )
+        );
+      })
+      .catch((err) => {
+        console.log(err);
       });
-      setStatusNotifications(results);
-    });
   }, [userEmail]);
 
   // getting the patient's with new case
@@ -81,7 +99,7 @@ const Notifications = () => {
             >
               Notifications
             </Typography>
-            {statusNotifications.map((notification) => (
+            {statusNotifications.map((patient) => (
               <Box>
                 <Box>
                   <Box
@@ -101,15 +119,6 @@ const Notifications = () => {
                     >
                       <b>Status Update</b>
                     </Typography>
-                    <Typography>
-                      <b class="NOTIFICATIONS__viewed">Viewed:</b>
-                    </Typography>
-                    <Checkbox
-                      className="NOTIFICATIONS__checkboxIcon"
-                      onClick={(e) =>
-                        toggleViewedCheckbox(userEmail, notification.id)
-                      }
-                    ></Checkbox>
                   </Box>
                   <Typography
                     style={{
@@ -118,7 +127,7 @@ const Notifications = () => {
                     }}
                     color="var(--text-primary)"
                   >
-                    {`${notification.patientName} updated their status. Please check
+                    {`${patient.patientName} updated their status. Please check
                   the status update for more information.`}
                   </Typography>
                   <Typography
@@ -129,8 +138,23 @@ const Notifications = () => {
                     color="#949be2"
                     data-testid="notification-statusUpdate"
                   >
-                    {notification.timestamp.toDate().toLocaleString()}
+                    {patient.timestamp}
                   </Typography>
+                  <Link
+                    style={{
+                      marginLeft: "50px",
+                    }}
+                    to={`/patientprofile/${patient.email}`}
+                  >
+                    <strong> Click here to display the profile. </strong>
+                  </Link>
+                  <Typography
+                    style={{
+                      marginLeft: "50px",
+                      marginBottom: "30px",
+                    }}
+                    color="#949be2"
+                  ></Typography>
                   <Divider color="#949be2" />
                 </Box>
               </Box>
@@ -155,13 +179,6 @@ const Notifications = () => {
                     >
                       <b>New Case Reported</b>
                     </Typography>
-                    <Typography>
-                      <b class="NOTIFICATIONS__newCase">Viewed:</b>
-                    </Typography>
-                    <Checkbox
-                      className="NOTIFICATIONS__checkboxIcon"
-                      onClick={(e) => viewedNewCase(patient.email)}
-                    ></Checkbox>
                   </Box>
                   <Typography
                     style={{
@@ -176,8 +193,8 @@ const Notifications = () => {
                   <Link
                     style={{
                       marginLeft: "50px",
-                      marginBottom: "30px",
                     }}
+                    onClick={(e) => viewedNewCase(patient.email)}
                     to={`/patientprofile/${patient.email}`}
                   >
                     <strong> Click here to display the profile. </strong>

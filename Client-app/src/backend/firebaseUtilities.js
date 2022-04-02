@@ -1,4 +1,4 @@
-import { getDoc, doc } from "firebase/firestore";
+import { getDoc, doc, getDocs } from "firebase/firestore";
 import { db } from "./firebase";
 
 const getTableDataItem = async (tableName, key) => {
@@ -30,4 +30,14 @@ const getAdmin = async (key) => {
   return getTableDataItem("Admin", key);
 };
 
-export { getAdmin, getPatient };
+const getTableDataByQuery = async (queryVal) => {
+  try {
+    const documents = await getDocs(queryVal);
+    const returnValue = documents.docs.map((doc) => doc.data());
+    return returnValue;
+  } catch (error) {
+    console.error("[getTableData]" + error);
+  }
+};
+
+export { getAdmin, getPatient, getTableDataByQuery };

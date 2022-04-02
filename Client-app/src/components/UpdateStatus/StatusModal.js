@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Grid, TextField } from "@mui/material";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
@@ -24,6 +24,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
 import { selectUserEmail } from "../../store/authSlice";
+import { getStatuses } from "../../backend/firebasePatientUtilities";
 
 const style = {
   position: "absolute",
@@ -55,6 +56,26 @@ const helperTextStyles = makeStyles((theme) => ({
   },
 }));
 
+function StatusOfDayExists(patientKey) {
+  const [patientInfoStatuses, setPatientInfoStatuses] = useState([]);
+
+  // Get Patient Info each time page refreshes
+  useEffect(() => {
+    getStatuses(patientKey, true)
+      .then((statuses) => {
+        statuses &&
+          setPatientInfoStatuses(
+            statuses.map((status) => console.log(statuses))
+          );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [patientKey]);
+
+  return;
+}
+
 export default function SimpleModal() {
   const userInfoDetails = useSelector(
     (state) => state.userInfo.userInfoDetails
@@ -65,9 +86,6 @@ export default function SimpleModal() {
 
   // Get the client's reference via the userEmail (query the database)
   const clientDoc = doc(db, `Client/${userEmail}`);
-
-  // Get the doctor's reference via the assigned doctor (query the database)
-  const adminDoc = doc(db, `Admin/${userInfoDetails?.assignedDoctor}`);
 
   const [openModal, setOpenModal] = useState(false);
   const [emptyFields, setEmptyFields] = useState(false);
@@ -81,6 +99,20 @@ export default function SimpleModal() {
   const [muscleAche, setMuscleAche] = useState(false);
   const [tasteLoss, setTasteLoss] = useState(false);
   const helperTestClasses = helperTextStyles();
+  const [todaysStatusExists, setTodaysStatusExists] = useState(false);
+
+  // Get Patient Info each time page refreshes
+  useEffect(() => {
+    getStatuses(userEmail, true)
+      .then((statuses) => {
+        statuses && setTodaysStatusExists(statuses.length > 0);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [userEmail]);
+
+  //console.log(todaysStatusExists);
 
   // Handle the popup open/close state
   const handleOpen = () => setOpenModal(true);
@@ -95,7 +127,7 @@ export default function SimpleModal() {
       // adding status doc by UID
       var docRef = await addDoc(collection(clientDoc, "Status"), {});
 
-      // using the document reference to add id
+      // using the document reference to add id & other fields
       await setDoc(docRef, {
         temperature: temperature,
         weight: weight,
@@ -108,7 +140,6 @@ export default function SimpleModal() {
         tasteLoss: !tasteLoss ? "No" : "Yes",
         timestamp: timestamp,
         reviewed: false,
-        notifyDoctor: true,
         id: docRef.id,
       });
 
