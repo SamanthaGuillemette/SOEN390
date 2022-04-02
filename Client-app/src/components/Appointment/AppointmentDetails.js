@@ -2,28 +2,8 @@ import Box from "@mui/material/Box";
 import "./Appointment.css";
 import { Button } from "@mui/material";
 import DoctorIcon from "../../assets/doctor-icon.svg";
-import { useSelector } from "react-redux";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../backend/firebase";
 
-const Appointment = () => {
-  const clientEmail = useSelector((state) => state.auth.userEmail);
-  const assignedDoctorEmail = "admin.quang@gmail.com";
-
-  const appointmentRef = doc(
-    db,
-    `Appointment/${assignedDoctorEmail}&${clientEmail}`
-  );
-
-  // Check if patient has any appointment with the doctor
-  getDoc(appointmentRef).then((doc) => {
-    if (doc.exists()) {
-      alert("You have appointments in the past!");
-    } else {
-      alert("You never made an appointment with this doctor!");
-    }
-  });
-
+const AppointmentDetails = ({ item }) => {
   return (
     <Box sx={{ flexGrow: 1, color: "var(--text-primary)" }}>
       <div className="appointment-topContainer">
@@ -75,4 +55,4 @@ const Appointment = () => {
   );
 };
 
-export default Appointment;
+export default AppointmentDetails;

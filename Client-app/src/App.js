@@ -25,7 +25,7 @@ import {
 import { onAuthStateChanged } from "firebase/auth";
 import { saveUser, selectUserEmail, selectUserToken } from "./store/authSlice";
 import DoctorInfo from "./components/DoctorInfo";
-import Appointment from "./screens/Appointment";
+import Appointment from "./components/Appointment";
 import AppBody from "./components/AppBody";
 import UpdateStatus from "./components/UpdateStatus";
 

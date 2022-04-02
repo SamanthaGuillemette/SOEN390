@@ -110,9 +110,7 @@ const Calendar = () => {
   const [endDate, setEndDate] = useState("");
   const [location, setLocation] = useState("");
   const [note, setNote] = useState("");
-  const [selectedPatient, setSelectedPatient] = useState(
-    "client.quang@gmail.com"
-  );
+  const [selectedPatient, setSelectedPatient] = useState("");
 
   const calendarRef = useRef();
   const classes = useStyles();

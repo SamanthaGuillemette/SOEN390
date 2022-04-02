@@ -66,3 +66,26 @@
 .appointment-acceptButton {
   margin-right: 10px !important;
 }
+
+.appointment-listItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--text-inactive);
+  height: 50px;
+  margin-bottom: 5px;
+}
+
+.appointment-appointmentHistory {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.appointment-listItem_active {
+  margin: 0 !important;
+}
+
+.appointment-listItem_finished {
+  color: var(--text-inactive);
+  margin: 0 !important;
+}
