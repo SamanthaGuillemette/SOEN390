@@ -48,10 +48,3 @@ fieldset {
 .SIGN-IN__link:hover {
   color: var(--text-primary) !important;
 }
-
-.css-nosrnw {
-  margin-top: 0 !important;
-  margin-bottom: 100px;
-  padding: 50px 10%;
-  height: 100vh;
-}
