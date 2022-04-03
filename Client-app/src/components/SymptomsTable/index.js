@@ -80,7 +80,7 @@ function SymptomsTable() {
     <TableContainer className="Symptoms-list">
       <h5 className="Symptoms-list__title">
         <img className="Symptoms-list__icon" src={VirusIcon} alt="Symptoms" />{" "}
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Symptoms List{" "}
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Status List{" "}
         {patientStatuses && patientStatuses.length === 0 ? (
           <h5 className="SYMPTOMS-list__no-data">(NO SYMPTOMS ENTERED YET)</h5>
         ) : (
