@@ -25,8 +25,8 @@ import { Link } from "react-router-dom";
  * This component is what makes the data for each notification
  */
 // Creating data for symptom details table
-function createData(email, patientName, timestamp) {
-  return { email, patientName, timestamp };
+function createData(email, patientName, timestamp, reviewed) {
+  return { email, patientName, timestamp, reviewed };
 }
 
 /**
@@ -49,7 +49,8 @@ const Notifications = () => {
                     createData(
                       patientEmail,
                       patient.firstName + " " + patient.lastName,
-                      status?.timestamp?.toDate()?.toLocaleString() || ""
+                      status?.timestamp?.toDate()?.toLocaleString() || "",
+                      status.reviewed
                     )
                   )
                 );
@@ -99,66 +100,70 @@ const Notifications = () => {
             >
               Notifications
             </Typography>
-            {statusNotifications.map((patient) => (
-              <Box>
+            {statusNotifications.map((notification) =>
+              notification.reviewed !== true ? (
                 <Box>
-                  <Box
-                    style={{
-                      marginTop: "20px",
-                      display: "flex",
-                      alignItems: "center",
-                      flexWrap: "wrap",
-                    }}
-                  >
-                    <CheckCircleIcon color="success" sx={{ fontSize: 40 }} />
+                  <Box>
+                    <Box
+                      style={{
+                        marginTop: "20px",
+                        display: "flex",
+                        alignItems: "center",
+                        flexWrap: "wrap",
+                      }}
+                    >
+                      <CheckCircleIcon color="success" sx={{ fontSize: 40 }} />
+                      <Typography
+                        style={{
+                          marginLeft: "10px",
+                        }}
+                        color="var(--text-primary)"
+                      >
+                        <b>Status Update</b>
+                      </Typography>
+                    </Box>
                     <Typography
                       style={{
-                        marginLeft: "10px",
+                        marginLeft: "50px",
+                        marginBottom: "20px",
                       }}
                       color="var(--text-primary)"
                     >
-                      <b>Status Update</b>
-                    </Typography>
-                  </Box>
-                  <Typography
-                    style={{
-                      marginLeft: "50px",
-                      marginBottom: "20px",
-                    }}
-                    color="var(--text-primary)"
-                  >
-                    {`${patient.patientName} updated their status. Please check
+                      {`${notification.patientName} updated their status. Please check
                   the status update for more information.`}
-                  </Typography>
-                  <Typography
-                    style={{
-                      marginLeft: "50px",
-                      marginBottom: "30px",
-                    }}
-                    color="#949be2"
-                    data-testid="notification-statusUpdate"
-                  >
-                    {patient.timestamp}
-                  </Typography>
-                  <Link
-                    style={{
-                      marginLeft: "50px",
-                    }}
-                    to={`/patientprofile/${patient.email}`}
-                  >
-                    <strong> Click here to display the profile. </strong>
-                  </Link>
-                  <Typography
-                    style={{
-                      marginLeft: "50px",
-                      marginBottom: "30px",
-                    }}
-                    color="#949be2"
-                  ></Typography>
-                  <Divider color="#949be2" />
+                    </Typography>
+                    <Typography
+                      style={{
+                        marginLeft: "50px",
+                        marginBottom: "30px",
+                      }}
+                      color="#949be2"
+                      data-testid="notification-statusUpdate"
+                    >
+                      {notification.timestamp}
+                    </Typography>
+                    <Link
+                      style={{
+                        marginLeft: "50px",
+                      }}
+                      to={`/patientprofile/${notification.email}`}
+                    >
+                      <strong> Click here to display the profile. </strong>
+                    </Link>
+                    <Typography
+                      style={{
+                        marginLeft: "50px",
+                        marginBottom: "30px",
+                      }}
+                      color="#949be2"
+                    ></Typography>
+                    <Divider color="#949be2" />
+                  </Box>
                 </Box>
-              </Box>
-            ))}{" "}
+              ) : (
+                ""
+              )
+            )}{" "}
             {newCasePatients.map((patient) => (
               <Box>
                 <Box>

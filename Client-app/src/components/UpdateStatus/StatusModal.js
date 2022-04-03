@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Grid, TextField } from "@mui/material";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
@@ -24,7 +24,6 @@ import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
 import { selectUserEmail } from "../../store/authSlice";
-import { getStatuses } from "../../backend/firebasePatientUtilities";
 
 const style = {
   position: "absolute",
@@ -56,31 +55,7 @@ const helperTextStyles = makeStyles((theme) => ({
   },
 }));
 
-function StatusOfDayExists(patientKey) {
-  const [patientInfoStatuses, setPatientInfoStatuses] = useState([]);
-
-  // Get Patient Info each time page refreshes
-  useEffect(() => {
-    getStatuses(patientKey, true)
-      .then((statuses) => {
-        statuses &&
-          setPatientInfoStatuses(
-            statuses.map((status) => console.log(statuses))
-          );
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [patientKey]);
-
-  return;
-}
-
 export default function SimpleModal() {
-  const userInfoDetails = useSelector(
-    (state) => state.userInfo.userInfoDetails
-  );
-
   // Pull 'userEmail' out from the centralized store
   const userEmail = useSelector(selectUserEmail);
 
@@ -99,18 +74,6 @@ export default function SimpleModal() {
   const [muscleAche, setMuscleAche] = useState(false);
   const [tasteLoss, setTasteLoss] = useState(false);
   const helperTestClasses = helperTextStyles();
-  const [todaysStatusExists, setTodaysStatusExists] = useState(false);
-
-  // Get Patient Info each time page refreshes
-  useEffect(() => {
-    getStatuses(userEmail, true)
-      .then((statuses) => {
-        statuses && setTodaysStatusExists(statuses.length > 0);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [userEmail]);
 
   // Handle the popup open/close state
   const handleOpen = () => setOpenModal(true);
@@ -139,7 +102,6 @@ export default function SimpleModal() {
         timestamp: timestamp,
         reviewed: false,
         id: docRef.id,
-        reupdate: todaysStatusExists === true,
       });
 
       // Close the popup after user submit the form

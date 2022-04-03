@@ -25,6 +25,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../../backend/firebase";
 import { useEffect, useState } from "react";
+import { getStatuses } from "../../backend/firebasePatientUtilities";
 
 /**
  * Renders function to update a client's status'
