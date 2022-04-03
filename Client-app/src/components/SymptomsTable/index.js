@@ -30,11 +30,15 @@ const rows = [
 
 function SymptomsTable() {
   return (
-    <TableContainer className="symptoms-list">
-      <Box className="label">
+    <TableContainer className="Symptoms-list">
+      <Box className="Symptoms-list__title">
         {" "}
         {/* Making Label Box */}
-        <img className="symptoms__icon" src={VirusIcon} alt="Symptoms" />{" "}
+        <img
+          className="Symptoms-list__icon"
+          src={VirusIcon}
+          alt="Symptoms"
+        />{" "}
         {/* Adding Label */}
         Symptoms List {/* Adding text */}
       </Box>
@@ -45,14 +49,14 @@ function SymptomsTable() {
           <TableRow>
             {/* First column header */}
             <TableCell
-              className="SYMPTOMS__table__header"
+              className="Symptoms-list__header"
               sx={{ borderColor: "var(--secondary-light)" }}
             >
               Date of Symptoms
             </TableCell>
             {/* Second column header */}
             <TableCell
-              className="SYMPTOMS__table__header"
+              className="Symptoms-list__header"
               sx={{ borderColor: "var(--secondary-light)" }}
               align="right"
             >
@@ -65,7 +69,7 @@ function SymptomsTable() {
           {rows.map((row, index) => (
             <TableRow key={index}>
               <TableCell
-                className="SYMPTOMS__table__data"
+                className="Symptoms-list__data"
                 sx={{ borderColor: "var(--primary-light)" }}
                 component="th"
                 scope="row"
@@ -73,7 +77,7 @@ function SymptomsTable() {
                 {row.symptomDate}
               </TableCell>
               <TableCell
-                className="SYMPTOMS__table__data"
+                className="Symptoms-list__data"
                 sx={{ borderColor: "var(--primary-light)" }}
                 style={{ width: 160 }}
                 align="right"
