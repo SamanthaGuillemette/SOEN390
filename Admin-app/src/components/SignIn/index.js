@@ -114,7 +114,7 @@ export default function SignIn() {
       const adminDocRef = doc(db, "Admin", email.toLowerCase());
       const adminDocSnap = await getDoc(adminDocRef);
 
-      if (adminDocSnap.exists() && adminDocSnap.data().newAccount) {
+      if (adminDocSnap.exists() && adminDocSnap.data().authorized === false) {
         setErrorMessage("Sorry, your account hasn't been authorized yet.");
         setOpen(true);
       } else if (!docSnap.exists()) {

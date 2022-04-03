@@ -29,6 +29,8 @@ import {
 import DropdownStatus from "./../DropdownStatus";
 import DropdownDoctor from "./../DropdownDoctor";
 import SymptomsRow from "./SymptomsRow";
+import { db } from "../../backend/firebase";
+import { doc, serverTimestamp, addDoc, collection } from "firebase/firestore";
 
 /**
  * setAge function works for setting the age of the patient
@@ -90,6 +92,13 @@ function PatientProfile() {
     };
   }
 
+  // reviewed status with DB
+  function onReviewedClick() {
+    if (patientInfo.reviewed !== false) {
+      addStatusReviewedNotif();
+    }
+  }
+
   // priority flag with DB
   function onFlagClick() {
     togglePriorityFlag(key).then((newPatientInfo) =>
@@ -132,6 +141,17 @@ function PatientProfile() {
         console.log(err);
       });
   }, [key]);
+
+  // This function will add notifications to the client's doc if status is reviewed
+  const addStatusReviewedNotif = async () => {
+    const clientRef = doc(db, `Client/${key}`);
+    const notifRef = collection(clientRef, "reviewNotification");
+    await addDoc(notifRef, {
+      notif: "Status Reviewed",
+      timestamp: serverTimestamp(),
+      seen: "False",
+    });
+  };
 
   return (
     <Grid container spacing={2} maxWidth="lg" alignItems="flex-end">

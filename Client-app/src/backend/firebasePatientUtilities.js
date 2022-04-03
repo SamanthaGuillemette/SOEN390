@@ -1,51 +1,49 @@
-import { getTableDataByQuery } from "./firebaseUtilities";
-import { query, where, collection, orderBy } from "firebase/firestore";
-import { db } from "./firebase";
+import {
+  getDocRef,
+  getReviewNotification,
+  getTableDataItem,
+} from "./firebaseUtilities";
+import { updateDoc } from "firebase/firestore";
 
 const tableName = "Client";
 
-/**
- * Obtain the tuples from the Status subcollection of a Client
- *
- * @param {*} patientKey
- * @returns Status tuples
- */
-const getStatuses = async (patientKey, isTodayOnly = false) => {
-  console.log("[getStatuses]: " + patientKey);
-  const statusCollectionName = "Status";
-  const dbString = `${getTableName()}/${patientKey}/${statusCollectionName}`;
-
-  const queryStatuses = await getStatusesQuery(dbString, isTodayOnly);
-
-  const statuses = await getTableDataByQuery(queryStatuses);
-
-  return statuses;
+const getPatient = async (key) => {
+  return getTableDataItem(tableName, key);
 };
 
-const getStatusesQuery = async (dbString, isTodayOnly) => {
-  console.log("[isTodayOnly]: " + isTodayOnly);
-
-  if (isTodayOnly === true) {
-    // Set time to today @ 0:00 hrs
-    const tempDate = new Date();
-    const todayDate = new Date(
-      tempDate.getFullYear(),
-      tempDate.getMonth(),
-      tempDate.getDate()
+const setSeen = async (patientKey, documentID) => {
+  try {
+    // Get review notifications
+    const docRef = getDocRef(
+      `Client/${patientKey}/reviewNotification`,
+      documentID
     );
+    let reviewNotification = await getReviewNotification(docRef);
 
-    return query(
-      collection(db, dbString),
-      where("timestamp", ">", todayDate),
-      orderBy("timestamp", "desc")
-    );
-  } else {
-    return query(collection(db, dbString), orderBy("timestamp", "desc"));
+    // Set reviewed value
+    let seen;
+
+    if (reviewNotification) {
+      if (
+        reviewNotification.seen === null ||
+        reviewNotification.seen === "False"
+      ) {
+        seen = "True";
+      } else {
+        seen = "False";
+      }
+    }
+
+    // Update DB with new value
+    docRef && (await updateDoc(docRef, "seen", seen));
+
+    // Get updated notification
+    reviewNotification = await getReviewNotification(docRef);
+
+    return reviewNotification;
+  } catch (error) {
+    console.log("[setSeen]" + error);
   }
 };
 
-const getTableName = () => {
-  return tableName;
-};
-
-export { getStatuses };
+export { setSeen };

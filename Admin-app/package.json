@@ -25,6 +25,7 @@
     "firebase": "^9.6.3",
     "firebaseui": "^6.0.0",
     "modern-react-qr-reader": "^1.0.12",
+    "node-schedule": "^2.1.0",
     "react": "^17.0.2",
     "react-chartjs-2": "^4.0.1",
     "react-dom": "^17.0.2",
