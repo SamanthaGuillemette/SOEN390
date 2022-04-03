@@ -1,0 +1,27 @@
+.DASHBOARD__chart__label-avail, .DASHBOARD__chart__label-unavail {
+    color: #e0e4e4;
+    font-size: .875rem !important;
+    font-weight: 2px !important;
+    text-transform: uppercase;
+    letter-spacing: .0625rem;
+    display: inline-block !important;
+}
+
+.DASHBOARD__chart__label-avail {
+    margin-left: 1vh !important;
+}
+
+.DASHBOARD__chart__label-avail::before, .DASHBOARD__chart__label-unavail::before{
+    content: '';
+    display: inline-block !important;
+    width: 1.25rem;
+    height: 0.4rem;
+    margin-right: 0.6rem;
+    padding: 0 1rem 0 0.5rem;
+    border-radius: 0.25rem;
+    background: var(--primary-main);
+}
+
+.DASHBOARD__chart__label-unavail::before {
+    background: var(--primary-dark) !important;
+}

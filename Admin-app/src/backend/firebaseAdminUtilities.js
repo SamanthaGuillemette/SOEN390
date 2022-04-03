@@ -1,4 +1,10 @@
-import { collection, getDocs, query, where } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "./firebase";
 import { getTableData, getTableDataItem, getDocRef } from "./firebaseUtilities";
 
@@ -49,10 +55,43 @@ const getAdminRef = (key) => {
   return getDocRef(getTableName(), key);
 };
 
+const setAuthorized = async (patientKey) => {
+  try {
+    // Get Admin
+    const docRef = getDocRef("Admin", patientKey);
+    let adminInfo = await getAdmin(patientKey);
+
+    // Set new authorized value
+    let newAuthorizedValue;
+
+    if (adminInfo) {
+      // if account exists
+      if (
+        adminInfo.authorized === true // if the value stored is false or null
+      ) {
+        newAuthorizedValue = false; // new value to be replace is true
+      } else {
+        newAuthorizedValue = true; // esle false
+      }
+    }
+
+    // Update authorized field in admin account
+    docRef && (await updateDoc(docRef, "authorized", newAuthorizedValue));
+
+    // Get updated admin account
+    adminInfo = await getAdmin(patientKey);
+
+    return adminInfo.authorized; // returning new authorized value
+  } catch (error) {
+    console.log("[setAuthorized]" + error);
+  }
+};
+
 export {
   getAdminsByRole,
   getAdminByRoleAndKey,
   getAdminRef,
   getAdmins,
   getAdmin,
+  setAuthorized,
 };

@@ -18,6 +18,12 @@
   color: var(--text-primary);
 }
 
+.PATIENT-SYMPTOMS__table__label__no-data {
+  color: #d93025;
+  font-weight: 900 !important;
+  display: inline-block;
+}
+
 #addButton {
   position: relative;
   bottom: 3px;
@@ -30,6 +36,7 @@
 }
 
 h5.PATIENT-SYMPTOMS__table__label {
+  margin-top: 3% !important;
   color: var(--text-primary);
   font-weight: 900 !important;
 }
@@ -50,7 +57,9 @@ h5.PATIENT-SYMPTOMS__table__label {
   border: 1px solid var(--info-border);
 }
 
-.PATIENT-PROFILE__data, .ASSIGNED-DOC__name, .PATIENT-STATUS-REVIEW__data {
+.PATIENT-PROFILE__data,
+.ASSIGNED-DOC__name,
+.PATIENT-STATUS-REVIEW__data {
   color: var(--text-primary) !important;
   font-weight: 500 !important;
   font-size: 0.96rem !important;

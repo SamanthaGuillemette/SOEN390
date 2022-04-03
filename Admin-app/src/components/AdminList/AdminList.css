@@ -1,0 +1,32 @@
+.ROLE__label-doctor {
+  text-transform: uppercase;
+  color: rgb(123, 211, 238) !important;
+  font-weight: 500 !important;
+  font-size: 0.9rem !important;
+}
+
+.ROLE__label-health-off {
+  text-transform: uppercase;
+  color: #b5f5aedc !important;
+  font-weight: 500 !important;
+  font-size: 0.9rem !important;
+}
+
+.ROLE__label-admin {
+  text-transform: uppercase;
+  color: #f0f883dc !important;
+  font-weight: 500 !important;
+  font-size: 0.9rem !important;
+}
+
+.ROLE__label-immigration-off {
+  text-transform: uppercase;
+  color: #e9b168dc !important;
+  font-weight: 500 !important;
+  font-size: 0.9rem !important;
+}
+
+.ADMIN__table__data {
+  font-weight: 500 !important;
+  font-size: 1rem !important;
+}

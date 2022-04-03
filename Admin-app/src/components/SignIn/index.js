@@ -7,8 +7,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -16,31 +14,32 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { ThemeProvider } from "@mui/material/styles";
+import { doc, getDoc } from "firebase/firestore";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { db, auth } from "../../backend/firebase";
-import { doc, getDoc } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Navigate } from "react-router-dom";
 import Modal from "@mui/material/Modal";
 import { createTheme } from "@material-ui/core/styles";
 import { inputLabelClasses } from "@mui/material/InputLabel";
+import { makeStyles } from "@material-ui/core/styles";
 import "./../SignUp/SignUp.css";
 
-const styleForModal = {
+export const styleForModal = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "var(--background-main)",
-  borderRadius: '10px',
+  borderRadius: "10px",
   border: "1px solid var(--info-border)",
   boxShadow: 24,
   color: "var(--info-main)",
   p: 4,
 };
 
-function Copyright(props) {
+export function Copyright(props) {
   return (
     <Typography variant="body2" align="center" {...props}>
       {"Copyright © "}
@@ -65,8 +64,21 @@ const theme = createTheme({
     text: {
       primary: "#ffffff",
     },
+    error: {
+      main: "#ffffff",
+    },
   },
 });
+
+// This const does styling of the empty input field helper text
+const helperTextStyles = makeStyles((theme) => ({
+  root: {
+    "&.MuiFormHelperText-root.Mui-error": {
+      color: "#d93025",
+      fontSize: "12px",
+    },
+  },
+}));
 
 /**
  * This function is responsible for the signin component which also communicates with the server and displays relevent error messages if necessary.
@@ -75,13 +87,13 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [open, setOpen] = useState(false);
-  const [error1, setError1] = useState(false);
-  const [error2, setError2] = useState(false);
-  // const [open2, setOpen2] = React.useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [emptyFields, setEmptyFields] = useState(false);
+  const helperTestClasses = helperTextStyles();
+
   const handleClose = () => {
     setOpen(false);
-    setError1(false);
-    setError2(false);
+    setErrorMessage(false);
   };
   const [user, loading] = useAuthState(auth);
 
@@ -93,17 +105,31 @@ export default function SignIn() {
    */
   const login = async (e) => {
     e.preventDefault();
-    const docRef = doc(db, "Admin", email);
-    const docSnap = await getDoc(docRef);
 
-    if (docSnap.exists()) {
-      signInWithEmailAndPassword(auth, email, password).catch((error) => {
-        setError2(true);
-        setOpen(true);
-      });
+    if (email === "" || password === "") {
+      setEmptyFields(true);
     } else {
-      setError1(true);
-      setOpen(true);
+      const docRef = doc(db, "Client", email.toLowerCase());
+      const docSnap = await getDoc(docRef);
+      const adminDocRef = doc(db, "Admin", email.toLowerCase());
+      const adminDocSnap = await getDoc(adminDocRef);
+
+      if (adminDocSnap.exists() && adminDocSnap.data().authorized === false) {
+        setErrorMessage("Sorry, your account hasn't been authorized yet.");
+        setOpen(true);
+      } else if (!docSnap.exists()) {
+        signInWithEmailAndPassword(auth, email, password).catch((error) => {
+          setErrorMessage(
+            "Your password or email is incorrect. Please try again!"
+          );
+          setOpen(true);
+        });
+      } else {
+        setErrorMessage(
+          "This email is registered with the Client application."
+        );
+        setOpen(true);
+      }
     }
   };
 
@@ -148,6 +174,11 @@ export default function SignIn() {
               autoFocus
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              helperText={
+                email === "" && emptyFields ? "This field is required." : ""
+              }
+              error={email === "" && emptyFields}
+              FormHelperTextProps={{ classes: helperTestClasses }}
               InputLabelProps={{
                 sx: {
                   color: "var(--text-primary)",
@@ -168,6 +199,11 @@ export default function SignIn() {
               autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              helperText={
+                password === "" && emptyFields ? "This field is required." : ""
+              }
+              error={password === "" && emptyFields}
+              FormHelperTextProps={{ classes: helperTestClasses }}
               InputLabelProps={{
                 sx: {
                   color: "var(--text-primary)",
@@ -176,15 +212,6 @@ export default function SignIn() {
                   },
                 },
               }}
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  style={{ color: "var(--text-primary)" }}
-                  value="remember"
-                />
-              }
-              label="Remember me"
             />
             <Button
               type="submit"
@@ -199,7 +226,7 @@ export default function SignIn() {
               Sign In
             </Button>
             {/* This model is used to display an error message for using the same email in the admin application as the client application. 
-            Also pertaining to the database such as wrong email or wrong password  */}
+             Also pertaining to the database such as wrong email or wrong password  */}
             <Modal
               open={open}
               onClose={handleClose}
@@ -211,10 +238,7 @@ export default function SignIn() {
                   Error
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  {error1 &&
-                    "This email is registered with the Client application."}
-                  {error2 &&
-                    "Your password or email is incorrect. Please try again!"}
+                  {errorMessage}
                 </Typography>
               </Box>
             </Modal>
