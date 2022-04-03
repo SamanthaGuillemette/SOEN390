@@ -28,6 +28,7 @@ import DoctorInfo from "./components/DoctorInfo";
 import Appointment from "./components/Appointment";
 import AppBody from "./components/AppBody";
 import UpdateStatus from "./components/UpdateStatus";
+import AppointmentDetails from "./components/Appointment/AppointmentDetails";
 
 function App() {
   const user = useSelector(selectUserToken);
@@ -93,6 +94,10 @@ function App() {
             <Route path="/mydoctor" element={<DoctorInfo />} />
             <Route path="/status" element={<UpdateStatus />} />
             <Route path="/appointment" element={<Appointment />} />
+            <Route
+              path="/appointment/:appointmentId"
+              element={<AppointmentDetails />}
+            />
             <Route path="/diary" element={<Diary />} />
           </Routes>
         </AppBody>

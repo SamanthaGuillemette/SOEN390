@@ -1,6 +1,17 @@
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { useNavigate } from "react-router-dom";
 
 const AppointmentList = ({ appointments }) => {
+  let navigate = useNavigate();
+
+  /**
+   * Handle single appointment click (navigates to detail page)
+   * @param  {Ojbect} item
+   */
+  const handleAppointmentClick = (item) => {
+    navigate(`/appointment/${item.id}`);
+  };
+
   // Render a list of appointments from 'AppointmentHistory'
   const renderListItem = () => {
     return appointments.map((item) => (
@@ -13,6 +24,7 @@ const AppointmentList = ({ appointments }) => {
               ? "appointment-listItem_finished"
               : "appointment-listItem_active"
           }
+          onClick={() => handleAppointmentClick(item)}
         >
           {item.title}
         </h3>
