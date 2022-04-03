@@ -19,15 +19,13 @@ function AppBody(props) {
         component="main"
         sx={{
           flexGrow: 1,
-          height: "100vh",
-          overflow: "auto",
         }}
       >
         <MenuAppBar />
-        <BottomNav />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           {props.children}
         </Container>
+        <BottomNav />
       </Box>
     </Box>
   );
