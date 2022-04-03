@@ -399,15 +399,15 @@ export default function SignUp(props) {
                   required
                   fullWidth
                   id="postalCode"
-                  label="Postal Code"
+                  label="Postal Code (H0H 0H0)"
                   name="Postal Code"
                   autoComplete="postal-code"
                   value={postalCode}
                   onChange={(e) => setPostalCode(e.target.value)}
                   helperText={
-                    postalCode === "" && emptyFields
+                    (postalCode === "" && emptyFields
                       ? "This field is required."
-                      : ""
+                      : "")
                   }
                   error={postalCode === "" && emptyFields}
                   FormHelperTextProps={{ classes: helperTestClasses }}
