@@ -13,7 +13,6 @@ import EditModal from "./ProfileEditModal";
 import { useSelector } from "react-redux";
 
 function ClientProfile() {
-
   /**
    * Pull 'userInfoDetails' from the store (Redux centralized store)
    */
@@ -66,6 +65,22 @@ function ClientProfile() {
                   <p className="clientProfile-textDetail">
                     Address: {userInfoDetails?.address}
                   </p>
+                  <br />
+                  <span
+                    className={
+                      userInfoDetails?.status === null
+                        ? "PATIENT__label-unconfirmed"
+                        : userInfoDetails?.status === "POSITIVE"
+                        ? "PATIENT__label-positive"
+                        : userInfoDetails?.status === "NEGATIVE"
+                        ? "PATIENT__label-negative"
+                        : "PATIENT__label-unconfirmed"
+                    }
+                  >
+                    {userInfoDetails?.status
+                      ? userInfoDetails?.status
+                      : "UNCONFIRMED"}
+                  </span>
                 </Box>
               </CardContent>
             </Box>
