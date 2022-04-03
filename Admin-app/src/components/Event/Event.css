@@ -4,7 +4,7 @@
   font-weight: normal !important;
   font-size: 20px !important;
   text-align: left !important;
-  color: blue;
+  color: var(--text-primary);
   background: none;
   border: 1px solid;
   border-color: white;
@@ -14,13 +14,18 @@
   margin-bottom: 20px;
 }
 
+/* .Event__Main__Content:hover {
+  color: red;
+  background-color: var(--text-inactive);
+} */
+
 .Event__Header {
   font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell",
     "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-weight: bold !important;
   font-size: 40px !important;
   text-align: left !important;
-  color: var(--text-primary) !important;
+  color: var(--text-inactive) !important;
   background: none;
   width: 100%;
   padding: 10px 10px 10px 10px;
@@ -32,10 +37,14 @@
   font-weight: bold !important;
   font-size: 24px !important;
   text-align: left !important;
-  color: var(--text-inactive) !important;
+  color: var(--text-primary) !important;
   background: none;
   width: 100%;
   padding: 10px 10px 10px 10px;
+}
+
+.Event__Details__Title:hover {
+  color: blue !important;
 }
 
 .Event__Details__Body {
@@ -48,4 +57,8 @@
   background: none;
   width: 100%;
   padding: 10px 10px 10px 10px;
+}
+
+.Event__Details__Body:hover {
+  color: blue !important;
 }
