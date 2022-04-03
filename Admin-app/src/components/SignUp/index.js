@@ -133,7 +133,11 @@ export default function SignUp(props) {
       const docRef = doc(db, "Client", email.toLowerCase());
       const docSnap = await getDoc(docRef);
 
-      if (!docSnap.exists()) {
+      // if user hasnt confirmed
+      if (!checked) {
+        setErrorMsg("Please confirm your data is correct.");
+        setOpen(true);
+      } else if (!docSnap.exists()) {
         createUserWithEmailAndPassword(auth, email, password)
           .then(async () => {
             await setDoc(doc(db, "Admin", email.toLowerCase()), {
@@ -156,7 +160,6 @@ export default function SignUp(props) {
         setErrorMsg("This email is registered with the Client application.");
         setOpen(true);
       }
-
     }
   };
 

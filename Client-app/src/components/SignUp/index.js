@@ -164,6 +164,7 @@ export default function SignUp(props) {
       const docRef = doc(db, "Admin", email.toLowerCase());
       const docSnap = await getDoc(docRef);
 
+      // if user hasnt confirmed
       if (!checked) {
         setErrorMsg("Please confirm your data is correct.");
         setOpen(true);
@@ -189,7 +190,6 @@ export default function SignUp(props) {
         setErrorMsg("This email is registered with the Admin application.");
         setOpen(true);
       }
-
     }
   };
 
@@ -405,9 +405,9 @@ export default function SignUp(props) {
                   value={postalCode}
                   onChange={(e) => setPostalCode(e.target.value)}
                   helperText={
-                    (postalCode === "" && emptyFields
+                    postalCode === "" && emptyFields
                       ? "This field is required."
-                      : "")
+                      : ""
                   }
                   error={postalCode === "" && emptyFields}
                   FormHelperTextProps={{ classes: helperTestClasses }}
