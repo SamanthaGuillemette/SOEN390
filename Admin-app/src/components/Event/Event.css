@@ -2,11 +2,13 @@
   font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell",
     "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-weight: normal !important;
-  font-size: 30px !important;
+  font-size: 20px !important;
   text-align: left !important;
-  color: var(--text-primary) !important;
-  background: var(--background-main) !important;
-  border-radius: 20px;
+  color: blue;
+  background: none;
+  border: 1px solid;
+  border-color: white;
+  border-radius: 10px;
   width: 100%;
   padding: 10px 10px 10px 10px;
   margin-bottom: 20px;
@@ -19,8 +21,31 @@
   font-size: 40px !important;
   text-align: left !important;
   color: var(--text-primary) !important;
-  background: var(--background-main) !important;
-  border-radius: 20px;
+  background: none;
+  width: 100%;
+  padding: 10px 10px 10px 10px;
+}
+
+.Event__Details__Title {
+  font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-weight: bold !important;
+  font-size: 24px !important;
+  text-align: left !important;
+  color: var(--text-inactive) !important;
+  background: none;
+  width: 100%;
+  padding: 10px 10px 10px 10px;
+}
+
+.Event__Details__Body {
+  font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-weight: normal !important;
+  font-size: 20px !important;
+  text-align: left !important;
+  color: var(--text-primary) !important;
+  background: none;
   width: 100%;
   padding: 10px 10px 10px 10px;
 }

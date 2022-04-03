@@ -22,9 +22,9 @@ const EventList = ({ events = [] }) => {
       {events.map((eventItem) => (
         <div className="Event__Main__Content" key={eventItem.id}>
           <Link to={`/event/${eventItem.id}`}>
-            <h2>{eventItem.title}</h2>
+            <h1 className="Event__Details__Title">{eventItem.title}</h1>
             <p>{date}</p>
-            <p> {eventItem.body}</p>
+            <p className="Event__Details__Body"> {eventItem.body}</p>
             <br />
           </Link>
         </div>
