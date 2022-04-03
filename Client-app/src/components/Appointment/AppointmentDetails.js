@@ -3,7 +3,7 @@ import "./Appointment.css";
 import { Button } from "@mui/material";
 import DoctorIcon from "../../assets/doctor-icon.svg";
 import { Link, useParams } from "react-router-dom";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../backend/firebase";
 import { useSelector } from "react-redux";
 import { selectUserEmail } from "../../store/authSlice";
@@ -12,15 +12,21 @@ import { selectDoctorInfoDetails } from "../../store/userInfoSlice";
 
 const AppointmentDetails = () => {
   let params = useParams();
+
+  // Get information of the assigned Doctor from Redux store
   const doctorInfoDetails = useSelector(selectDoctorInfoDetails);
+
+  // Get currently logged in user info from Redux store
   const clientEmail = useSelector(selectUserEmail);
   const [appointment, setAppointment] = useState(null);
 
+  // Create a reference to the 'AppointmentHistory' collection
   const appointmentRef = doc(
     db,
     `DoctorPatient/${doctorInfoDetails?.email}&${clientEmail}/AppointmentHistory/${params.appointmentId}`
   );
 
+  // This lifecycle function will get the appointment details from the database
   useEffect(() => {
     const getAppointment = async () => {
       const response = await getDoc(appointmentRef);
@@ -30,6 +36,36 @@ const AppointmentDetails = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  /**
+   * Send "Accept" to confirm appointment
+   * @param {ClickEvent} event
+   */
+  const handleAccept = async (e) => {
+    e.preventDefault();
+
+    await updateDoc(appointmentRef, {
+      confirmation: true,
+    });
+
+    // Refresh page after user submit the form
+    window.location.reload();
+  };
+
+  /**
+   * Send "Decline" to refuse appointment
+   * @param {ClickEvent} event
+   */
+  const handleDecline = async (e) => {
+    e.preventDefault();
+
+    await updateDoc(appointmentRef, {
+      confirmation: false,
+    });
+
+    // Refresh page after user submit the form
+    window.location.reload();
+  };
 
   return (
     <Box sx={{ flexGrow: 1, color: "var(--text-primary)" }}>
@@ -77,10 +113,11 @@ const AppointmentDetails = () => {
             type="submit"
             variant="contained"
             className="appointment-acceptButton"
+            onClick={handleAccept}
           >
             ACCEPT
           </Button>
-          <Button type="submit" variant="outlined">
+          <Button type="submit" variant="outlined" onClick={handleDecline}>
             DECLINE
           </Button>
         </div>
