@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import "./Appointment.css";
 import { Button } from "@mui/material";
 import DoctorIcon from "../../assets/doctor-icon.svg";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../backend/firebase";
 import { useSelector } from "react-redux";
@@ -40,7 +40,12 @@ const AppointmentDetails = () => {
             <img src={DoctorIcon} alt="Doctor Icon" width="50" />
           </div>
           <div className="appointment-quickAccess_InboxButton">
-            <Button type="submit" variant="contained" to="/clientinbox">
+            <Button
+              type="submit"
+              variant="contained"
+              LinkComponent={Link}
+              to="/clientinbox"
+            >
               Talk to doctor
             </Button>
           </div>
