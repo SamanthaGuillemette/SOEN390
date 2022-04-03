@@ -14,11 +14,6 @@
   margin-bottom: 20px;
 }
 
-/* .Event__Main__Content:hover {
-  color: red;
-  background-color: var(--text-inactive);
-} */
-
 .Event__Header {
   font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell",
     "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;

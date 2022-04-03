@@ -21,9 +21,9 @@ const NewsList = ({ news = [] }) => {
       {news.map((newsItem) => (
         <div className="News__Main__Content" key={newsItem.id}>
           <Link to={`/news/${newsItem.id}`}>
-            <h2>{newsItem.title}</h2>
-            <p>{date}</p>
-            <p> {newsItem.body}</p>
+            <h2 className="News__Details__Title">{newsItem.title}</h2>
+            <p className="News__Details__Body">{date}</p>
+            <p className="News__Details__Body"> {newsItem.body}</p>
             <br />
           </Link>
         </div>
