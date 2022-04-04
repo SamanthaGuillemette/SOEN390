@@ -15,6 +15,8 @@ import "./DiaryTable.css";
 import { Grid } from "@material-ui/core";
 import { useState } from "react";
 import DiaryEntryModal from "./DiaryEntryModal";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import DiaryAddModal from "./DirayAddModal";
 
 /**
  * Create hardcoded data for the table
@@ -39,6 +41,7 @@ function DiaryTable() {
 
   return (
     <TableContainer className="diary__list">
+      <DiaryAddModal></DiaryAddModal>
       <Grid className="diary__label" container spacing={2}>
         <Grid item xs={8}>
           <img
