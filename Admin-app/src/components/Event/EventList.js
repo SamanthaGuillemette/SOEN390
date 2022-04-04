@@ -4,6 +4,7 @@
  */
 
 import { Link } from "react-router-dom";
+import { Divider } from "@mui/material";
 import "./Event.css";
 
 const EventList = ({ events = [] }) => {
@@ -26,6 +27,7 @@ const EventList = ({ events = [] }) => {
             <p className="Event__Details__Body">{date}</p>
             <p className="Event__Details__Body"> {eventItem.body}</p>
             <br />
+            <Divider color="#949be2" />
           </Link>
         </div>
       ))}

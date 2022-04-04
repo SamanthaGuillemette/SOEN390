@@ -6,9 +6,6 @@
   text-align: left !important;
   color: var(--text-primary);
   background: none;
-  border: 1px solid;
-  border-color: white;
-  border-radius: 10px;
   width: 100%;
   padding: 10px 10px 10px 10px;
   margin-bottom: 20px;
@@ -39,7 +36,7 @@
 }
 
 .News__Details__Title:hover {
-  color: blue !important;
+  color: var(--primary-main) !important;
 }
 
 .News__Details__Body {
@@ -55,5 +52,5 @@
 }
 
 .News__Details__Body:hover {
-  color: blue !important;
+  color: var(--primary-main) !important;
 }

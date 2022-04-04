@@ -3,6 +3,7 @@
  *
  */
 import { Link } from "react-router-dom";
+import { Divider } from "@mui/material";
 import "./News.css";
 
 const NewsList = ({ news = [] }) => {
@@ -25,6 +26,7 @@ const NewsList = ({ news = [] }) => {
             <p className="News__Details__Body">{date}</p>
             <p className="News__Details__Body"> {newsItem.body}</p>
             <br />
+            <Divider color="#949be2" />
           </Link>
         </div>
       ))}
