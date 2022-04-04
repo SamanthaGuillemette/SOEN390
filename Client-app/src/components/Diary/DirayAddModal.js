@@ -67,7 +67,7 @@ export default function DiaryAddModal() {
   const clientDoc = doc(db, `Client/${userEmail}`);
 
   // Get the doctor's reference via the assigned doctor (query the database)
-  const adminDoc = doc(db, `Admin/${userInfoDetails?.assignedDoctor}`);
+  // const adminDoc = doc(db, `Admin/${userInfoDetails?.assignedDoctor}`);
 
   const [openModal, setOpenModal] = useState(false);
   const [emptyFields, setEmptyFields] = useState(false);
@@ -87,26 +87,13 @@ export default function DiaryAddModal() {
     if (contactFullName !== "") {
       const timestamp = serverTimestamp();
 
-      // adding status doc by UID
+      // adding diary doc by UID
       await addDoc(collection(clientDoc, "Diary"), {
         contactFullName: contactFullName,
         contactPhoneNumber: contactPhoneNumber,
         contactEmail: contactEmail,
         contactLocation: contactLocation,
         timestamp: timestamp,
-      });
-
-      // adding empty doc into DiaryNotifications
-      var docRef = await addDoc(collection(adminDoc, "DiaryNotifications"), {});
-
-      // using the document reference to add id
-      await setDoc(docRef, {
-        patientName:
-          userInfoDetails?.firstName + " " + userInfoDetails?.lastName,
-        patientID: userInfoDetails?.email,
-        viewed: "false",
-        timestamp: timestamp,
-        id: docRef.id,
       });
 
       // Close the popup after user submit the form
