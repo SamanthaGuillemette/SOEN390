@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import drawerReducer from "./store/drawerSlice";
 import authSlice from "./store/authSlice";
+import userInfoSlice from "./store/userInfoSlice";
 
 // For get a about the <React.StrictMode> for now. All you need to think about is
 // 'ReactDOM.render()' will squeeze all the content of <App /> in to the 'div'
@@ -30,6 +31,7 @@ const store = configureStore({
   reducer: {
     drawer: drawerReducer,
     auth: authSlice,
+    userInfo: userInfoSlice,
   },
 });
 
