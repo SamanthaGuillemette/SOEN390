@@ -23,7 +23,13 @@ const modalStyle = {
   p: 4,
 };
 
-const UpcomingEvents = ({eventTitle, eventMonth, eventDay, eventTime, eventDesc}) => {
+const UpcomingEvents = ({
+  eventTitle,
+  eventMonth,
+  eventDay,
+  eventTime,
+  eventDesc,
+}) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -37,7 +43,9 @@ const UpcomingEvents = ({eventTitle, eventMonth, eventDay, eventTime, eventDesc}
           <div className="UPCOMING-EVENTS__month">{eventMonth}</div>
           <div className="UPCOMING-EVENTS__day">{eventDay}</div>
         </div>
-        <div data-testid="up-events" className="UPCOMING-EVENTS__title">{eventTitle}</div>
+        <div data-testid="up-events" className="UPCOMING-EVENTS__title">
+          {eventTitle}
+        </div>
         <div className="UPCOMING-EVENTS__time">{eventTime}</div>
         <div>
           <Button className="UPCOMING-EVENTS__viewMore" onClick={handleOpen}>
@@ -72,6 +80,6 @@ const UpcomingEvents = ({eventTitle, eventMonth, eventDay, eventTime, eventDesc}
       </div>
     </div>
   );
-}
+};
 
 export default UpcomingEvents;
