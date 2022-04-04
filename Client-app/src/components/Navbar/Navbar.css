@@ -1,21 +1,22 @@
 .sidebar-text {
-    color: var(--primary-main) !important;
+  color: var(--primary-main) !important;
 }
 
 .sidebar-icon {
-    color: var(--primary-main) !important; 
+  color: var(--primary-main) !important;
 }
 
-.sidebar-button:hover .sidebar-icon{
-    color: var(--text-primary) !important;
+.sidebar-logout {
+  margin-top: 30px;
 }
 
-.sidebar-button:hover .sidebar-text{
-    color: var(--text-primary) !important;
+.sidebar-divider {
+  height: 1px;
+  background: var(--text-inactive);
+  margin-top: 15px;
 }
 
-.sidebar-button {
-    background-color: rgba(15, 15, 15, 0.8) !important;
-    border-radius: 5px !important;
-    border: 1px solid var(--background-main) !important;
+.sidebar-logout_text {
+  color: var(--primary-main);
+  font-weight: bold;
 }

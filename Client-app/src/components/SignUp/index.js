@@ -2,11 +2,13 @@
  * @fileoverview This component displays & handles the login/signup form.
  *
  */
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
+import Input from "@mui/material/Input";
+import InputLabel from "@mui/material/InputLabel";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
@@ -34,6 +36,8 @@ import { styleForModal, Copyright } from "../SignIn";
 import { makeStyles } from "@material-ui/core/styles";
 import { getDoc } from "firebase/firestore";
 import "./SignUp.css";
+import PropTypes from "prop-types";
+import { IMaskInput } from "react-imask";
 
 const theme = createTheme({
   palette: {
@@ -67,6 +71,30 @@ const helperTextStyles = makeStyles((theme) => ({
     },
   },
 }));
+
+// This function is used to set the postal code in a proper Canadian Format
+const TextMaskCustom = forwardRef(function TextMaskCustom(props, ref) {
+  const { onChange, ...other } = props;
+  return (
+    <IMaskInput
+      {...other}
+      mask="{#}0{@} 0{@}0"
+      definitions={{
+        "#": /[ABCEGHJ-NPRSTVXY, abceghj-nprstvxy]/,
+        "@": /[ABCEGHJ-NPRSTV-Z, abceghj-nprstv-z]/,
+      }}
+      lazy="false"
+      inputRef={ref}
+      onAccept={(value) => onChange({ target: { name: props.name, value } })}
+      overwrite
+    />
+  );
+});
+
+TextMaskCustom.propTypes = {
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
 /**
  * This function is responsible for the signup component which also communicates with the server and displays relevent error messages if necessary.
@@ -113,20 +141,10 @@ export default function SignUp(props) {
    */
   const handleSubmit = async (event) => {
     event.preventDefault();
-    let dobValue,
-      dobWithoutSlash = null;
-    const currentDate = new Date(); // getting todays date
-    const todaysDate =
-      currentDate.getMonth() +
-      1 +
-      "" +
-      currentDate.getDate() +
-      "" +
-      currentDate.getFullYear(); // formatting
+    let dobValue = null;
 
     if (dob !== null) {
       dobValue = dob.$M + 1 + "/" + dob.$D + "/" + dob.$y; // Required to add + 1 for the month
-      dobWithoutSlash = dob.$M + 1 + "" + dob.$D + "" + dob.$y; // Adding without slashes
     }
 
     if (
@@ -146,39 +164,31 @@ export default function SignUp(props) {
       const docRef = doc(db, "Admin", email.toLowerCase());
       const docSnap = await getDoc(docRef);
 
-      if (dobValue !== null) {
-        // if its not null
-        // if its a future date
-        if (Number(dobWithoutSlash) >= Number(todaysDate)) {
-          // comparing dates as integer
-          setErrorMsg("You've selected an invalid date. Please try again.");
-          setOpen(true);
-        } else if (!checked) {
-          setErrorMsg("Please confirm your data is correct.");
-          setOpen(true);
-        } else if (!docSnap.exists()) {
-          // if valid date && checked
-          createUserWithEmailAndPassword(auth, email, password)
-            .then(async () => {
-              await setDoc(doc(db, "Client", email.toLowerCase()), {
-                firstName: firstName,
-                lastName: lastName,
-                address: address,
-                city: city,
-                province: province,
-                postalCode: postalCode,
-                dob: dobValue,
-                email: email.toLowerCase(),
-              });
-            })
-            .catch((error) => {
-              setErrorMsg(error.message);
-              setOpen(true);
+      // if user hasnt confirmed
+      if (!checked) {
+        setErrorMsg("Please confirm your data is correct.");
+        setOpen(true);
+      } else if (!docSnap.exists()) {
+        createUserWithEmailAndPassword(auth, email, password)
+          .then(async () => {
+            await setDoc(doc(db, "Client", email.toLowerCase()), {
+              firstName: firstName,
+              lastName: lastName,
+              address: address,
+              city: city,
+              province: province,
+              postalCode: postalCode.toUpperCase(),
+              dob: dobValue,
+              email: email.toLowerCase(),
             });
-        } else {
-          setErrorMsg("This email is registered with the Admin application.");
-          setOpen(true);
-        }
+          })
+          .catch((error) => {
+            setErrorMsg(error.message);
+            setOpen(true);
+          });
+      } else {
+        setErrorMsg("This email is registered with the Admin application.");
+        setOpen(true);
       }
     }
   };
@@ -389,7 +399,7 @@ export default function SignUp(props) {
                   required
                   fullWidth
                   id="postalCode"
-                  label="Postal Code"
+                  label="Postal Code (H0H 0H0)"
                   name="Postal Code"
                   autoComplete="postal-code"
                   value={postalCode}
@@ -401,6 +411,9 @@ export default function SignUp(props) {
                   }
                   error={postalCode === "" && emptyFields}
                   FormHelperTextProps={{ classes: helperTestClasses }}
+                  InputProps={{
+                    inputComponent: TextMaskCustom,
+                  }}
                   InputLabelProps={{
                     sx: {
                       color: "var(--text-primary)",
@@ -417,6 +430,7 @@ export default function SignUp(props) {
                     <DatePicker
                       label="Date of Birth"
                       value={dob}
+                      disableFuture={true}
                       onChange={(e) => {
                         setDOB(e);
                       }}
