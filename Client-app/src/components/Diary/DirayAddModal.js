@@ -191,23 +191,6 @@ export default function DiaryAddModal() {
                   FormHelperTextProps={{ classes: helperTestClasses }}
                 />
               </Grid>
-              {/* Contact Phone Number TextField */}
-              <Grid item xs={12}>
-                <TextField
-                  id="diaryAddModal-standardBasic"
-                  placeholder="Contact Phone Number"
-                  variant="standard"
-                  color="grey"
-                  onChange={(e) => setContactPhoneNumber(e.target.value)}
-                  helperText={
-                    contactPhoneNumber === "" && emptyFields
-                      ? "This field is required."
-                      : ""
-                  }
-                  error={contactPhoneNumber === "" && emptyFields}
-                  FormHelperTextProps={{ classes: helperTestClasses }}
-                />
-              </Grid>
               {/* Contact Email TextField */}
               <Grid item xs={12}>
                 <TextField
@@ -229,7 +212,7 @@ export default function DiaryAddModal() {
               <Grid item xs={12}>
                 <TextField
                   id="diaryAddModal-standardBasic"
-                  placeholder="Contact Email"
+                  placeholder="Contact Location"
                   variant="standard"
                   color="grey"
                   onChange={(e) => setContactLocation(e.target.value)}
