@@ -75,9 +75,9 @@ export default function DiaryAddModal() {
   const [contactPhoneNumber, setContactPhoneNumber] = useState("");
   const [contactEmail, setContactEmail] = useState("");
   const [contactLocation, setContactLocation] = useState("");
+  const [contactMessage, setContactMessage] = useState("");
   const helperTestClasses = helperTextStyles();
 
-  // Handle the popup open/close state
   const handleOpen = () => setOpenModal(true);
 
   const handleDiarySubmit = async (event) => {
@@ -93,6 +93,7 @@ export default function DiaryAddModal() {
         contactPhoneNumber: contactPhoneNumber,
         contactEmail: contactEmail,
         contactLocation: contactLocation,
+        contactMessage: contactMessage,
         timestamp: timestamp,
       });
 
@@ -115,6 +116,7 @@ export default function DiaryAddModal() {
     setContactPhoneNumber("");
     setContactEmail("");
     setContactLocation("");
+    setContactMessage("");
   };
 
   return (
@@ -147,6 +149,7 @@ export default function DiaryAddModal() {
               {/* Contact Full Name TextField */}
               <Grid item xs={12}>
                 <TextField
+                  className="diary__contactMessage"
                   id="diaryAddModal-standardBasic"
                   placeholder="Contact Full Name"
                   variant="standard"
@@ -209,6 +212,25 @@ export default function DiaryAddModal() {
                       : ""
                   }
                   error={contactLocation === "" && emptyFields}
+                  FormHelperTextProps={{ classes: helperTestClasses }}
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  className="diary__contactMessage"
+                  id="diaryAddModal-standardBasic"
+                  placeholder="Contact Message"
+                  variant="standard"
+                  color="grey"
+                  multiline
+                  onChange={(e) => setContactMessage(e.target.value)}
+                  helperText={
+                    contactLocation === "" && emptyFields
+                      ? "This field is required."
+                      : ""
+                  }
+                  error={contactMessage === "" && emptyFields}
                   FormHelperTextProps={{ classes: helperTestClasses }}
                 />
               </Grid>

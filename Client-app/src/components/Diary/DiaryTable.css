@@ -14,6 +14,12 @@
   color: var(--text-primary) !important;
 }
 
+.diary__contactMessage {
+  width: 75% !important;
+  border: 1px solid !important;
+  border-color: var(--text-inactive) !important;
+}
+
 .diary__list {
   width: 45vh !important;
   background-color: var(--background-main) !important;
@@ -110,4 +116,8 @@
 
 .MuiDialogContent-dividers {
   border-color: var(--primary-light) !important;
+}
+
+.header-diaryAddModal {
+  color: var(--text-primary) !important;
 }
