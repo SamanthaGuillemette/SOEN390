@@ -89,7 +89,7 @@ function App() {
             <Route path="/clientprofile" element={<ClientProfile />} />
             <Route path="/symptoms" element={<SymptomsTable />} />
             <Route path="/updates" element={<Notifications />} />
-            <Route path="clientinbox" element={<Chat />} />
+            <Route path="/clientinbox" element={<Chat />} />
             <Route path="/mydoctor" element={<DoctorInfo />} />
             <Route path="/status" element={<UpdateStatus />} />
             <Route path="/appointment" element={<Appointment />} />
