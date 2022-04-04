@@ -25,7 +25,6 @@ import {
 } from "firebase/firestore";
 import { db } from "../../backend/firebase";
 import { useEffect, useState } from "react";
-import { getStatuses } from "../../backend/firebasePatientUtilities";
 
 /**
  * Renders function to update a client's status'
@@ -39,11 +38,11 @@ function UpdateStatus() {
   const clientDoc = doc(db, `Client/${userEmail}`);
   const statusRef = collection(clientDoc, "Status");
   const q = query(statusRef, orderBy("timestamp", "desc"), limit(1));
-  const [clientInfo, setClientInfo] = useState("");
+  const [lastStatus, setLastStatus] = useState("");
 
   useEffect(() => {
     onSnapshot(q, (doc) => {
-      setClientInfo(
+      setLastStatus(
         doc.docs.map((doc) => ({
           data: doc.data(),
         }))
@@ -60,11 +59,11 @@ function UpdateStatus() {
       alignItems="center"
       justifyContent="center"
     >
-      <Box className="STATUS__box">
+      <Box className="Update-Status__box">
         <TableContainer>
           <StatusModal></StatusModal>
           <Typography
-            className="updateStatus-label"
+            className="Update-Status__title"
             align="center"
             sx={{ mt: 1 }}
             style={{ paddingBottom: 8 }}
@@ -76,21 +75,21 @@ function UpdateStatus() {
             <TableHead>
               <TableRow>
                 <TableCell
-                  className="header"
+                  className="Update-Status__header"
                   sx={{ borderColor: "var(--primary-light)" }}
                   align="left"
                 >
                   Date
                 </TableCell>
                 <TableCell
-                  className="header"
+                  className="Update-Status__header"
                   sx={{ borderColor: "var(--primary-light)" }}
                   align="center"
                 >
                   Temperature
                 </TableCell>
                 <TableCell
-                  className="header"
+                  className="Update-Status__header"
                   sx={{ borderColor: "var(--primary-light)" }}
                   align="right"
                 >
@@ -101,31 +100,36 @@ function UpdateStatus() {
             <TableBody>
               <TableRow>
                 <TableCell
-                  className="data"
+                  className="Update-Status__data"
                   sx={{ borderColor: "var(--secondary-light)" }}
                   align="left"
                 >
-                  {}
+                  {lastStatus.length > 0 &&
+                  lastStatus[0].data.timestamp !== null
+                    ? lastStatus[0].data.timestamp.toDate().toLocaleString()
+                    : "N/A"}
                 </TableCell>
                 <TableCell
-                  className="data"
+                  className="Update-Status__data"
                   sx={{ borderColor: "var(--secondary-light)" }}
                   align="center"
                 >
-                  {}
+                  {lastStatus.length > 0
+                    ? lastStatus[0].data.temperature
+                    : "N/A"}
                 </TableCell>
                 <TableCell
-                  className="data"
+                  className="Update-Status__data"
                   sx={{ borderColor: "var(--secondary-light)" }}
                   align="right"
                 >
-                  {}
+                  {lastStatus.length > 0 ? lastStatus[0].data.weight : "N/A"}
                 </TableCell>
               </TableRow>
             </TableBody>
           </Table>
         </TableContainer>
-        <SymptomsTable />
+        <SymptomsTable lastStatus={lastStatus} />
       </Box>
     </Grid>
   );
