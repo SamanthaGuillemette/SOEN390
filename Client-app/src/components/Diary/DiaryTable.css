@@ -10,6 +10,10 @@
   padding-left: 27px;
 }
 
+.diary_text {
+  color: var(--text-primary) !important;
+}
+
 .diary__list {
   width: 45vh !important;
   background-color: var(--background-main) !important;
