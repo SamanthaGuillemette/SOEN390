@@ -150,7 +150,7 @@ const Calendar = () => {
     event.preventDefault();
 
     // Submit basic appointment info to database
-    await setDoc(doc(db, `DoctorPatient/${doctorEmail}&${selectedPatient}`), {
+    await setDoc(doc(db, `DoctorPatient/${doctorEmail};${selectedPatient}`), {
       doctor: doctorEmail,
       patient: selectedPatient,
       createdOn: serverTimestamp(),
@@ -160,7 +160,7 @@ const Calendar = () => {
     await addDoc(
       collection(
         db,
-        `DoctorPatient/${doctorEmail}&${selectedPatient}/AppointmentHistory`
+        `DoctorPatient/${doctorEmail};${selectedPatient}/AppointmentHistory`
       ),
       {
         startDate: startDate,
