@@ -18,13 +18,17 @@ import { saveUser, selectUserEmail, selectUserToken } from "./store/authSlice";
 import { useEffect } from "react";
 import Event from "./components/Event";
 import EventDetails from "./components/Event/EventDetails";
-import { fetchUserInfo } from "./store/userInfoSlice";
+import { fetchUserInfo, selectUserInfoDetails } from "./store/userInfoSlice";
 import AdminList from "./components/AdminList";
 
 function App() {
   const user = useSelector(selectUserToken);
   const userEmail = useSelector(selectUserEmail);
+  const userInfoDetails = useSelector(selectUserInfoDetails);
   const dispatch = useDispatch();
+
+  // For Doctor's visibility
+  const doctorRole = userInfoDetails?.role === "Doctor";
 
   /**
    * This function will run as soon as the App loads
@@ -57,7 +61,9 @@ function App() {
         <AppBody>
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/appointments" element={<Appointments />} />
+            {doctorRole && (
+              <Route path="/appointments" element={<Appointments />} />
+            )}
             <Route path="/patients" element={<Patients />} />
             <Route path="/patientprofile/:key" element={<PatientProfile />} />
             <Route path="/admin" element={<AdminList />} />
