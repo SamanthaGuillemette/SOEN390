@@ -52,13 +52,13 @@ export const data = {
   labels,
   datasets: [
     {
-      label: "Dataset 1",
+      label: "New cases",
       data: [400, 800, 520, 1200, 620, 210, 870, 590, 330, 100, 970, 590],
       borderColor: "#949be2",
       backgroundColor: "#949be2",
     },
     {
-      label: "Dataset 2",
+      label: "Active cases",
       data: [330, 200, 100, 800, 400, 120, 990, 850, 500, 200, 340, 500],
       borderColor: "#8bc3eb",
       backgroundColor: "#8bc3eb",
@@ -67,7 +67,7 @@ export const data = {
 };
 
 /**
- * This component will allow the LineChart feature to work. Below is the function LineChart that will return the 
+ * This component will allow the LineChart feature to work. Below is the function LineChart that will return the
  * Line component that is imported from react-chartjs-2.
  *
  * @returns {JSX.Element}
