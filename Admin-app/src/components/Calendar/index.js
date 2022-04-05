@@ -176,16 +176,6 @@ const Calendar = () => {
     }
   };
 
-  // const renderAppointmentList = () => {
-  //     return appointmentList?.map((appointment) => {
-  //       return (
-  //         <MenuItem key={appointment.id} value={appointment.id}>
-  //           {appointment.start}
-  //         </MenuItem>
-  //       );
-  //   });
-  // };
-
   const handleSelectedDate = (event) => {
     // console.log("Selected date: ", event);
 
@@ -269,16 +259,20 @@ const Calendar = () => {
           onClose={() => {
             setModalOpen(false);
           }}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
         >
           <Box
             sx={style}
             component="form"
             noValidate
             onSubmit={handleCreateAppointment}
+            color="var(--text-primary)"
+            maxWidth={600}
           >
-            <Typography variant="h4" component="h2">
+            <Typography
+              variant="h4"
+              component="h2"
+              className="calendar-createAppointmentTitle"
+            >
               Create new appointment
             </Typography>
             <Grid container spacing={2}>
@@ -375,8 +369,22 @@ const Calendar = () => {
                 />
               </Grid>
               <Grid item xs={12}>
-                <FormControl sx={{ m: 1, minWidth: 200 }}>
-                  <InputLabel>Select Patient</InputLabel>
+                <FormControl
+                  sx={{
+                    m: 1,
+                    minWidth: 200,
+                    background: "#262626",
+                    borderRadius: "5px",
+                    marginBottom: "25px",
+                  }}
+                >
+                  <InputLabel
+                    sx={{
+                      color: "var(--text-primary)",
+                    }}
+                  >
+                    Select Patient
+                  </InputLabel>
                   <Select
                     value={selectedPatient}
                     onChange={(e) => {
@@ -394,7 +402,7 @@ const Calendar = () => {
             <Button
               type="submit"
               variant="contained"
-              className="update-button"
+              className="calendar-updateButton"
               disabled={selectedPatient === ""}
             >
               CREATE APPOINTMENT
@@ -402,7 +410,7 @@ const Calendar = () => {
             <Button
               type="submit"
               variant="outlined"
-              className="cancel-button"
+              className="calendar-cancelButton"
               onClick={() => {
                 setModalOpen(false);
               }}

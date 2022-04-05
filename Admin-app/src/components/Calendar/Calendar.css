@@ -42,3 +42,13 @@
 .fc-theme-standard td {
   border: 1px solid #595959 !important;
 }
+
+.calendar-createAppointmentTitle {
+  margin-bottom: 35px !important;
+  text-align: center;
+}
+
+.calendar-updateButton {
+  margin-right: 15px !important;
+  border: 1px solid var(--secondary-light) !important;
+}
