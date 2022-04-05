@@ -8,12 +8,15 @@ import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import resourceTimeGridPlugin from "@fullcalendar/resource-timegrid";
 import "./Calendar.css";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { db } from "../../backend/firebase";
 import {
   addDoc,
   collection,
   doc,
+  getDocs,
+  onSnapshot,
+  query,
   serverTimestamp,
   setDoc,
 } from "firebase/firestore";
@@ -75,24 +78,24 @@ const style = {
   borderRadius: "10px",
 };
 
-const events = [
-  {
-    title: "event 1",
-    start: "2022-03-21",
-    end: "2022-03-22",
-    allDay: true,
-    description: "event 1 description",
-    note: "event 1 note",
-  },
-  {
-    title: "test event",
-    start: "2022-03-13",
-    end: "2022-03-14",
-    allDay: true,
-    description: "test event description",
-    note: "test event note",
-  },
-];
+// const events = [
+//   {
+//     title: "event 1",
+//     start: "2022-03-21",
+//     end: "2022-03-22",
+//     allDay: true,
+//     description: "event 1 description",
+//     note: "event 1 note",
+//   },
+//   {
+//     title: "test event",
+//     start: "2022-03-13",
+//     end: "2022-03-14",
+//     allDay: true,
+//     description: "test event description",
+//     note: "test event note",
+//   },
+// ];
 
 /**
  * This component is what allows the Calender feature to work. Below are many consts and
@@ -123,6 +126,41 @@ const Calendar = () => {
   //   console.log("Date clicked: ", event);
   // };
 
+  const [appointmentList, setAppointmentList] = useState([]);
+
+  useEffect(() => {
+    // If the patientList of this doctor is not empty,
+    if (patientList) {
+      // Go through each patient email, create a collection ref, & get all the appointments
+      patientList.forEach((patientEmail) => {
+        const appointmentRef = collection(
+          db,
+          `DoctorPatient/${doctorEmail};${patientEmail}/AppointmentHistory`
+        );
+        const getAppointmentList = async () => {
+          const querySnapshot = await getDocs(appointmentRef);
+          querySnapshot?.forEach((doc) => {
+            // console.log(doc.id, doc.data());
+            setAppointmentList({
+              id: doc.id,
+              start: doc.data().startDate,
+              end: doc.data().endDate,
+              confirmation: doc.data().confirmation,
+              description: doc.data().description,
+              finish: doc.data().finish,
+              location: doc.data().location,
+              note: doc.data().note,
+            });
+          });
+        };
+        getAppointmentList();
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  console.log(appointmentList);
+
+  // Render list of available patients that are assigned to this doctor
   const renderPatientList = () => {
     if (patientList) {
       return patientList.map((patient) => {
@@ -134,6 +172,16 @@ const Calendar = () => {
       });
     }
   };
+
+  // const renderAppointmentList = () => {
+  //     return appointmentList?.map((appointment) => {
+  //       return (
+  //         <MenuItem key={appointment.id} value={appointment.id}>
+  //           {appointment.start}
+  //         </MenuItem>
+  //       );
+  //   });
+  // };
 
   const handleSelectedDate = (event) => {
     // console.log("Selected date: ", event);
@@ -205,7 +253,8 @@ const Calendar = () => {
         schedulerLicenseKey="GPL-My-Project-Is-Open-Source"
         ref={calendarRef}
         selectable={true}
-        events={events}
+        events={appointmentList}
+        // events={events}
         eventClick={handleEventClick}
         // dateClick={handleDateClick}
         select={handleSelectedDate}
