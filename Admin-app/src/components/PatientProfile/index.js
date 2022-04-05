@@ -297,7 +297,7 @@ function PatientProfile() {
       </Grid>
 
       {/* Symptom details table */}
-      <Grid item xs={12} lg={12}>
+      <Grid item xs={12} lg={10.51}>
         <TableContainer
           data-testid="table-1"
           sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }}
