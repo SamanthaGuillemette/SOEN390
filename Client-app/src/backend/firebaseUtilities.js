@@ -49,10 +49,10 @@ const getExposureNotification = async (docRef) => {
       return docSnapShot.data();
     } else {
       // If not found, write to console.
-      console.error(`[getReviewNotification] Document not found`);
+      console.error(`[getExposureNotification] Document not found`);
     }
   } catch (error) {
-    console.log(`[getReviewNotification] ${error}`);
+    console.log(`[getExposureNotification] ${error}`);
     console.trace();
   }
 };

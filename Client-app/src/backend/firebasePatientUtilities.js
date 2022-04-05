@@ -130,14 +130,14 @@ const setSeen = async (patientKey, documentID) => {
 
 const setSeenExposure = async (patientKey, documentID) => {
   try {
-    // Get review notifications
+    // Get exposure notifications
     const docRef = getDocRef(
       `Client/${patientKey}/exposureNotification`,
       documentID
     );
     let exposureNotification = await getExposureNotification(docRef);
 
-    // Set reviewed value
+    // Set seen value
     let seen;
 
     if (exposureNotification) {
@@ -153,12 +153,12 @@ const setSeenExposure = async (patientKey, documentID) => {
 
     docRef && (await updateDoc(docRef, "seen", seen));
 
-    // Get updated notification
+    // Get updated exposure notification
     exposureNotification = await getExposureNotification(docRef);
 
     return exposureNotification;
   } catch (error) {
-    console.log("[setSeen]" + error);
+    console.log("[setSeenExposure]" + error);
   }
 };
 
