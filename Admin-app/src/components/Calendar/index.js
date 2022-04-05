@@ -124,13 +124,15 @@ const Calendar = () => {
   // };
 
   const renderPatientList = () => {
-    return patientList.map((patient) => {
-      return (
-        <MenuItem key={patient} value={patient}>
-          {patient}
-        </MenuItem>
-      );
-    });
+    if (patientList) {
+      return patientList.map((patient) => {
+        return (
+          <MenuItem key={patient} value={patient}>
+            {patient}
+          </MenuItem>
+        );
+      });
+    }
   };
 
   const handleSelectedDate = (event) => {
