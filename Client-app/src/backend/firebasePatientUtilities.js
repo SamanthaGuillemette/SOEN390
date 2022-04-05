@@ -4,7 +4,6 @@ import {
   getTableDataItem,
   getDocRef,
   getReviewNotification,
-  getExposureNotification,
 } from "./firebaseUtilities";
 import {
   updateDoc,
@@ -123,40 +122,6 @@ const setSeen = async (patientKey, documentID) => {
     reviewNotification = await getReviewNotification(docRef);
 
     return reviewNotification;
-  } catch (error) {
-    console.log("[setSeen]" + error);
-  }
-};
-
-const setSeenExposure = async (patientKey, documentID) => {
-  try {
-    // Get review notifications
-    const docRef = getDocRef(
-      `Client/${patientKey}/exposureNotification`,
-      documentID
-    );
-    let exposureNotification = await getExposureNotification(docRef);
-
-    // Set reviewed value
-    let seen;
-
-    if (exposureNotification) {
-      if (
-        exposureNotification.seen === null ||
-        exposureNotification.seen === "False"
-      ) {
-        seen = "True";
-      } else {
-        seen = "False";
-      }
-    }
-
-    docRef && (await updateDoc(docRef, "seen", seen));
-
-    // Get updated notification
-    exposureNotification = await getExposureNotification(docRef);
-
-    return exposureNotification;
   } catch (error) {
     console.log("[setSeen]" + error);
   }
@@ -282,5 +247,4 @@ export {
   getStatuses,
   setRecovered,
   setSeen,
-  setSeenExposure,
 };
