@@ -62,12 +62,17 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             {doctorRole && (
-              <Route path="/appointments" element={<Appointments />} />
+              <>
+                <Route path="/appointments" element={<Appointments />} />
+                <Route path="/inbox" element={<Inbox />} />
+                <Route path="/patients" element={<Patients />} />
+                <Route
+                  path="/patientprofile/:key"
+                  element={<PatientProfile />}
+                />
+              </>
             )}
-            <Route path="/patients" element={<Patients />} />
-            <Route path="/patientprofile/:key" element={<PatientProfile />} />
             <Route path="/admin" element={<AdminList />} />
-            <Route path="/inbox" element={<Inbox />} />
             <Route path="/updates" element={<Notifications />} />
             <Route path="/qr" element={<QR />} />
             <Route path="/news" element={<News />} />

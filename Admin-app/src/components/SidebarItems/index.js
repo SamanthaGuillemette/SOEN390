@@ -77,14 +77,16 @@ export function MainListItems() {
           </Link>
         )}
 
-        <Link className="SIDEBAR__link" to="/patients">
-          <ListItem button className="SIDEBAR__button">
-            <ListItemIcon>
-              <PeopleIcon className="SIDEBAR__icon" />
-            </ListItemIcon>
-            <ListItemText className="SIDEBAR__text" primary="Patients" />
-          </ListItem>
-        </Link>
+        {doctorRole && (
+          <Link className="SIDEBAR__link" to="/patients">
+            <ListItem button className="SIDEBAR__button">
+              <ListItemIcon>
+                <PeopleIcon className="SIDEBAR__icon" />
+              </ListItemIcon>
+              <ListItemText className="SIDEBAR__text" primary="Patients" />
+            </ListItem>
+          </Link>
+        )}
 
         <Link className="SIDEBAR__link" to="/admin">
           <ListItem button className="SIDEBAR__button">
@@ -95,23 +97,25 @@ export function MainListItems() {
           </ListItem>
         </Link>
 
-        <Link className="SIDEBAR__link" to="inbox">
-          <ListItem button className="SIDEBAR__button">
-            <ListItemIcon>
-              <MailIcon className="SIDEBAR__icon" />
-              <Badge
-                badgeContent={4}
-                sx={{
-                  "& .MuiBadge-badge": {
-                    color: "var(--background-secondary)",
-                    backgroundColor: "var(--primary-main)",
-                  },
-                }}
-              />
-            </ListItemIcon>
-            <ListItemText className="SIDEBAR__text" primary="Inbox" />
-          </ListItem>
-        </Link>
+        {doctorRole && (
+          <Link className="SIDEBAR__link" to="inbox">
+            <ListItem button className="SIDEBAR__button">
+              <ListItemIcon>
+                <MailIcon className="SIDEBAR__icon" />
+                <Badge
+                  badgeContent={4}
+                  sx={{
+                    "& .MuiBadge-badge": {
+                      color: "var(--background-secondary)",
+                      backgroundColor: "var(--primary-main)",
+                    },
+                  }}
+                />
+              </ListItemIcon>
+              <ListItemText className="SIDEBAR__text" primary="Inbox" />
+            </ListItem>
+          </Link>
+        )}
 
         <Link className="SIDEBAR__link" to="updates">
           <ListItem button className="SIDEBAR__button">
@@ -155,7 +159,7 @@ export function MainListItems() {
             <ListItemIcon>
               <LogoutIcon className="SIDEBAR__icon" />
             </ListItemIcon>
-            <div button onClick={logout} className="SIDEBAR__subheader">
+            <div onClick={logout} className="SIDEBAR__subheader">
               SIGN OUT
             </div>
           </ListItem>
