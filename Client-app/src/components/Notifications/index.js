@@ -14,7 +14,10 @@ import PushPinIcon from "@mui/icons-material/PushPin";
 import { Divider } from "@mui/material";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { db, auth } from "../../backend/firebase";
-import { setSeen } from "../../backend/firebasePatientUtilities.js";
+import {
+  setSeen,
+  setSeenExposure,
+} from "../../backend/firebasePatientUtilities.js";
 import { useDocumentOnce } from "react-firebase-hooks/firestore";
 import { doc, collection, query, where, onSnapshot } from "firebase/firestore";
 import "./Notifications.css";
@@ -31,17 +34,33 @@ const Notifications = () => {
   const statusNotifRef = collection(clientRef, "reviewNotification");
   const q = query(statusNotifRef, where("seen", "==", "False"));
 
+  const exposureNotifRef = collection(clientRef, "exposureNotification");
+  const qExposure = query(exposureNotifRef, where("seen", "==", "False"));
+
   // Declaring constants to display notifications
   const [displayUpdateNotif, setDisplayUpdateNotif] = useState(false);
   const [displayReviewedNotif, setDisplayReviewedNotif] = useState([]);
+
+  const [exposeNotif, setExposeNotif] = useState([]);
 
   useEffect(() => {
     if (value && value.data().status === "POSITIVE") {
       setDisplayUpdateNotif(true);
     }
-    // Getting all notifications
+    // Getting all reviewed notifications
     onSnapshot(q, (doc) => {
       setDisplayReviewedNotif(
+        doc.docs.map((doc) => ({
+          id: doc.id,
+          notif: doc.data().notif,
+          seen: doc.data().seen,
+          timestamp: doc.data().timestamp,
+        }))
+      );
+    });
+    // Getting all exposure notifications
+    onSnapshot(qExposure, (doc) => {
+      setExposeNotif(
         doc.docs.map((doc) => ({
           id: doc.id,
           notif: doc.data().notif,
@@ -154,6 +173,58 @@ const Notifications = () => {
                     {notification.timestamp.toDate().toLocaleString()}
                   </Typography>
                   <Divider color="#949be2" />
+                </Box>
+              ))}
+            {exposeNotif &&
+              exposeNotif.map((notification) => (
+                <Box>
+                  <Box key={notification.id}>
+                    <Box
+                      style={{
+                        marginTop: "20px",
+                        display: "flex",
+                        alignItems: "center",
+                        flexWrap: "wrap",
+                      }}
+                    >
+                      <CoronavirusIcon color="error" sx={{ fontSize: 40 }} />
+                      <Typography
+                        style={{
+                          marginLeft: "10px",
+                        }}
+                        color="var(--text-primary)"
+                      >
+                        <b>Potential Exposures</b>
+                      </Typography>
+                      <CloseIcon
+                        className="notifications-closeIcon"
+                        onClick={(e) =>
+                          setSeenExposure(user?.email, notification.id)
+                        }
+                      />
+                    </Box>
+                    <Typography
+                      style={{
+                        marginLeft: "50px",
+                        marginBottom: "20px",
+                      }}
+                      color="var(--text-primary)"
+                    >
+                      Based on the address information you have provied, you
+                      have been near someone in the past 14 days who tested
+                      positive for COVID-19.
+                    </Typography>
+                    <Typography
+                      style={{
+                        marginLeft: "50px",
+                        marginBottom: "30px",
+                      }}
+                      color="#949be2"
+                    >
+                      {notification.timestamp.toDate().toLocaleString()}
+                    </Typography>
+                    <Divider color="#949be2" />
+                  </Box>
                 </Box>
               ))}
           </CardContent>
