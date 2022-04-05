@@ -17,7 +17,6 @@ import QrCodeIcon from "@mui/icons-material/QrCode";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { getAdmin } from "../../backend/firebaseAdminUtilities";
 import { auth } from "../../backend/firebase";
-import { useState } from "react";
 import Badge from "@mui/material/Badge";
 import { signOut } from "firebase/auth";
 import "./SidebarItems.css";
@@ -51,43 +50,24 @@ const logout = async (e) => {
 export function MainListItems() {
   const userInfoDetails = useSelector(selectUserInfoDetails);
 
-  // For Doctor's visibility
+  // Different roles for differennt visibilities. Boolean types.
   const doctorRole = userInfoDetails?.role === "Doctor";
+  const healthOfficialRole = userInfoDetails?.role === "Health Official";
+  const immOfficerRole = userInfoDetails?.role === "Immigration Officer";
+  const superAdmin = userInfoDetails?.role === "Administrator";
 
   return (
     <>
-      <div>
-        <Link className="SIDEBAR__link" to="/">
-          <ListItem button className="SIDEBAR__button">
-            <ListItemIcon>
-              <DashboardIcon className="SIDEBAR__icon" />
-            </ListItemIcon>
-            <ListItemText className="SIDEBAR__text" primary="Dashboard" />
-          </ListItem>
-        </Link>
+      <Link className="SIDEBAR__link" to="/">
+        <ListItem button className="SIDEBAR__button">
+          <ListItemIcon>
+            <DashboardIcon className="SIDEBAR__icon" />
+          </ListItemIcon>
+          <ListItemText className="SIDEBAR__text" primary="Dashboard" />
+        </ListItem>
+      </Link>
 
-        {doctorRole && (
-          <Link className="SIDEBAR__link" to="/appointments">
-            <ListItem button className="SIDEBAR__button">
-              <ListItemIcon>
-                <EventIcon className="SIDEBAR__icon" />
-              </ListItemIcon>
-              <ListItemText className="SIDEBAR__text" primary="Appointments" />
-            </ListItem>
-          </Link>
-        )}
-
-        {doctorRole && (
-          <Link className="SIDEBAR__link" to="/patients">
-            <ListItem button className="SIDEBAR__button">
-              <ListItemIcon>
-                <PeopleIcon className="SIDEBAR__icon" />
-              </ListItemIcon>
-              <ListItemText className="SIDEBAR__text" primary="Patients" />
-            </ListItem>
-          </Link>
-        )}
-
+      {superAdmin && (
         <Link className="SIDEBAR__link" to="/admin">
           <ListItem button className="SIDEBAR__button">
             <ListItemIcon>
@@ -96,33 +76,37 @@ export function MainListItems() {
             <ListItemText className="SIDEBAR__text" primary="Manage Accounts" />
           </ListItem>
         </Link>
+      )}
 
-        {doctorRole && (
-          <Link className="SIDEBAR__link" to="inbox">
-            <ListItem button className="SIDEBAR__button">
-              <ListItemIcon>
-                <MailIcon className="SIDEBAR__icon" />
-                <Badge
-                  badgeContent={4}
-                  sx={{
-                    "& .MuiBadge-badge": {
-                      color: "var(--background-secondary)",
-                      backgroundColor: "var(--primary-main)",
-                    },
-                  }}
-                />
-              </ListItemIcon>
-              <ListItemText className="SIDEBAR__text" primary="Inbox" />
-            </ListItem>
-          </Link>
-        )}
-
-        <Link className="SIDEBAR__link" to="updates">
+      {doctorRole | superAdmin | healthOfficialRole | immOfficerRole && (
+        <Link className="SIDEBAR__link" to="/patients">
           <ListItem button className="SIDEBAR__button">
             <ListItemIcon>
-              <NotificationsIcon className="SIDEBAR__icon" />
+              <PeopleIcon className="SIDEBAR__icon" />
+            </ListItemIcon>
+            <ListItemText className="SIDEBAR__text" primary="Patients" />
+          </ListItem>
+        </Link>
+      )}
+
+      {doctorRole && (
+        <Link className="SIDEBAR__link" to="/appointments">
+          <ListItem button className="SIDEBAR__button">
+            <ListItemIcon>
+              <EventIcon className="SIDEBAR__icon" />
+            </ListItemIcon>
+            <ListItemText className="SIDEBAR__text" primary="Appointments" />
+          </ListItem>
+        </Link>
+      )}
+
+      {doctorRole && (
+        <Link className="SIDEBAR__link" to="inbox">
+          <ListItem button className="SIDEBAR__button">
+            <ListItemIcon>
+              <MailIcon className="SIDEBAR__icon" />
               <Badge
-                badgeContent={17}
+                badgeContent={4}
                 sx={{
                   "& .MuiBadge-badge": {
                     color: "var(--background-secondary)",
@@ -131,40 +115,58 @@ export function MainListItems() {
                 }}
               />
             </ListItemIcon>
-            <ListItemText className="SIDEBAR__text" primary="Updates" />
+            <ListItemText className="SIDEBAR__text" primary="Inbox" />
           </ListItem>
         </Link>
+      )}
 
-        <Link className="SIDEBAR__link" to="QR">
-          <ListItem button className="SIDEBAR__button">
-            <ListItemIcon>
-              <QrCodeIcon className="SIDEBAR__icon" />
-            </ListItemIcon>
-            <ListItemText className="SIDEBAR__text" primary="QR Code" />
-          </ListItem>
-        </Link>
-
+      <Link className="SIDEBAR__link" to="updates">
         <ListItem button className="SIDEBAR__button">
           <ListItemIcon>
-            <AccountCircleIcon className="SIDEBAR__icon" />
+            <NotificationsIcon className="SIDEBAR__icon" />
+            <Badge
+              badgeContent={17}
+              sx={{
+                "& .MuiBadge-badge": {
+                  color: "var(--background-secondary)",
+                  backgroundColor: "var(--primary-main)",
+                },
+              }}
+            />
           </ListItemIcon>
-          <ListItemText
-            className="SIDEBAR__text"
-            primary={`${userInfoDetails?.firstName} ${userInfoDetails?.lastName}`}
-          />
+          <ListItemText className="SIDEBAR__text" primary="Updates" />
         </ListItem>
+      </Link>
 
-        <Link className="SIDEBAR__link" to="signin">
-          <ListItem button className="SIDEBAR__button">
-            <ListItemIcon>
-              <LogoutIcon className="SIDEBAR__icon" />
-            </ListItemIcon>
-            <div onClick={logout} className="SIDEBAR__subheader">
-              SIGN OUT
-            </div>
-          </ListItem>
-        </Link>
-      </div>
+      <Link className="SIDEBAR__link" to="QR">
+        <ListItem button className="SIDEBAR__button">
+          <ListItemIcon>
+            <QrCodeIcon className="SIDEBAR__icon" />
+          </ListItemIcon>
+          <ListItemText className="SIDEBAR__text" primary="QR Code" />
+        </ListItem>
+      </Link>
+
+      <ListItem button className="SIDEBAR__button">
+        <ListItemIcon>
+          <AccountCircleIcon className="SIDEBAR__icon" />
+        </ListItemIcon>
+        <ListItemText
+          className="SIDEBAR__text"
+          primary={`${userInfoDetails?.firstName} ${userInfoDetails?.lastName}`}
+        />
+      </ListItem>
+
+      <Link className="SIDEBAR__link" to="signin">
+        <ListItem button className="SIDEBAR__button">
+          <ListItemIcon>
+            <LogoutIcon className="SIDEBAR__icon" />
+          </ListItemIcon>
+          <div onClick={logout} className="SIDEBAR__subheader">
+            SIGN OUT
+          </div>
+        </ListItem>
+      </Link>
     </>
   );
 }
