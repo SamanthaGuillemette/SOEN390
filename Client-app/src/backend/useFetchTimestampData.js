@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { getTimestampTableData, getTableData } from "./firebaseUtilities";
+import { getTimestampTableData } from "./firebaseUtilities";
 
-const useFetchData = (tableName, isTodayOnly) => {
+const useFetchTimeStampData = (tableName, isTodayOnly) => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    getTableData(tableName, isTodayOnly)
+    getTimestampTableData(tableName, isTodayOnly)
       .then((res) => {
         return res;
       })
@@ -17,4 +17,4 @@ const useFetchData = (tableName, isTodayOnly) => {
   return { data };
 };
 
-export { useFetchData };
+export { useFetchTimeStampData };

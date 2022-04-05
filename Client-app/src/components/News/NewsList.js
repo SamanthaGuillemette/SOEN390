@@ -7,13 +7,6 @@ import { Divider } from "@mui/material";
 import "./News.css";
 
 const NewsList = ({ news = [] }) => {
-  console.log(`[NewsList]: ${JSON.stringify(news)}`);
-
-  news.forEach((doc) => {
-    //news.push(doc.data());
-    console.log(`[doc.id]: ${doc.id}`);
-  });
-
   return (
     <div className="news-list">
       {news.map((newsItem) => (

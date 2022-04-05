@@ -26,7 +26,6 @@ const getTimestampTableData = async (tableName, isTodayOnly) => {
   const queryItems = await getTimestampTableQuery(dbString, isTodayOnly);
 
   const items = await getTableDataByQuery(queryItems);
-  console.log(`[getTimestampTableData Items]: ${items}`);
 
   return items;
 };
@@ -45,11 +44,11 @@ const getTimestampTableQuery = async (dbString, isTodayOnly) => {
 
     return query(
       collection(db, dbString),
-      where("postedDate", ">", todayDate),
-      orderBy("postedDate", "desc")
+      where("timestamp", ">=", todayDate),
+      orderBy("timestamp", "desc")
     );
   } else {
-    return query(collection(db, dbString), orderBy("postedDate", "desc"));
+    return query(collection(db, dbString), orderBy("timestamp", "desc"));
   }
 };
 

@@ -9,8 +9,6 @@ import "./News.css";
 const News = () => {
   const { data: news } = useFetchNewsData();
 
-  console.log(`[News Index id]: ${JSON.stringify(news)}`);
-
   return (
     <div>
       <h1 className="News__Header">News page</h1>

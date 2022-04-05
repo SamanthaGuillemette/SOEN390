@@ -233,7 +233,7 @@ const getStatusesQuery = async (dbString, isTodayOnly) => {
 
     return query(
       collection(db, dbString),
-      where("timestamp", ">", todayDate),
+      where("timestamp", ">=", todayDate),
       orderBy("timestamp", "desc")
     );
   } else {
