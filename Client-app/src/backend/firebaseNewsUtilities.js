@@ -1,24 +1,25 @@
-import { getTableData, getTableDataByQuery } from "./firebaseUtilities";
-import { query, where, collection, orderBy } from "firebase/firestore";
-import { db } from "./firebase";
+import { useFetchData } from "./useFetchData";
+import { useFetchDataItem } from "./useFetchDataItem";
 
 const tableName = "News";
 
-const getNews = async (isTodayOnly = false) => {
-  console.log(`[getNews]: `);
-  const returnValue = await getTableData(tableName);
-  console.log(`[getNews id]: ${JSON.stringify(returnValue)}`);
-  return returnValue;
+const useFetchNewsData = (isTodayOnly = false) => {
+  return useFetchData(tableName, isTodayOnly);
+};
 
-  /*
+const useFetchNewsDataItem = (key) => {
+  return useFetchDataItem(tableName, key);
+};
+
+/* const getNews = async (isTodayOnly = false) => {
+  console.log(`[getNews]: `);
   const dbString = `${tableName}`;
-   const queryItems = await getNewsQuery(dbString, isTodayOnly);
+  const queryItems = await getNewsQuery(dbString, isTodayOnly);
 
   const items = await getTableDataByQuery(queryItems);
   console.log(`[getNews Items]: ${items}`);
 
   return items;
- */
 };
 
 const getNewsQuery = async (dbString, isTodayOnly) => {
@@ -35,12 +36,16 @@ const getNewsQuery = async (dbString, isTodayOnly) => {
 
     return query(
       collection(db, dbString),
-      where("timestamp", ">", todayDate),
-      orderBy("timestamp", "desc")
+      where("postedDate", ">", todayDate),
+      orderBy("postedDate", "desc")
     );
   } else {
-    return query(collection(db, dbString), orderBy("PostedDate", "desc"));
+    return query(collection(db, dbString), orderBy("postedDate", "desc"));
   }
 };
 
-export { getNews };
+const getNewsItem = async (key) => {
+  return getTableDataItem(tableName, key);
+}; */
+
+export { useFetchNewsData, useFetchNewsDataItem };

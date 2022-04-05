@@ -3,13 +3,13 @@
  *
  */
 import NewsList from "./NewsList";
-import useFetchData from "../../useFetchData";
+import { useFetchNewsData } from "../../backend/firebaseNewsUtilities";
 import "./News.css";
 
 const News = () => {
-  const { data: news } = useFetchData(
-    "https://jsonplaceholder.typicode.com/posts"
-  );
+  const { data: news } = useFetchNewsData();
+
+  console.log(`[News Index id]: ${JSON.stringify(news)}`);
 
   return (
     <div>
