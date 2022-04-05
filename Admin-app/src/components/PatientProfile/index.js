@@ -174,6 +174,7 @@ function PatientProfile() {
         xs={12}
         xl={10.2}
         item
+        data-testid="profile-info"
       >
         {/* Avatar grid */}
         <Avatar id="avatar" src={patientInfo && patientInfo.profileImage} />
@@ -185,7 +186,7 @@ function PatientProfile() {
           direction="column"
           xs={6.51}
         >
-          {/* Changing status card color according to priority flag */}
+          {/* Patient Information */}
           <CardContent>
             <Typography
               className="PATIENT-profile__name"
@@ -233,10 +234,11 @@ function PatientProfile() {
         {/* Assigned doctor grid */}
         <Grid item xs={6} xl={5.25}>
           <Card
-            data-testid="card-3"
+            data-testid="card-2"
             sx={{
               bgcolor: "var(--background-main)",
               borderRadius: "20px",
+              height: "100%",
             }}
           >
             <CardContent>
