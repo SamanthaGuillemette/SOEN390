@@ -172,7 +172,6 @@ function PatientProfile() {
         }}
         className="PATIENT-profile__info__grid"
         xs={12}
-        xl={10.2}
         item
         data-testid="profile-info"
       >
@@ -232,7 +231,7 @@ function PatientProfile() {
         justifyContent="center"
       >
         {/* Assigned doctor grid */}
-        <Grid item xs={6} xl={5.25}>
+        <Grid item xs={6}>
           <Card
             data-testid="card-2"
             sx={{
@@ -260,7 +259,7 @@ function PatientProfile() {
         </Grid>
 
         {/* Status grid */}
-        <Grid item xs={6} xl={5.25}>
+        <Grid item xs={6}>
           <Card
             data-testid="card-3"
             sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }}
