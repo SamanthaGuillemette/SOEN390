@@ -448,9 +448,7 @@ const Calendar = () => {
                 </Typography>
 
                 <h4>Title: {clickedEvent.title}</h4>
-                <h4>
-                  Date: {new Date(clickedEvent.range.start).toDateString()}
-                </h4>
+                <h4>Date: {new Date(clickedEvent.range.end).toDateString()}</h4>
                 <h4>
                   Confirmed:{" "}
                   {clickedEvent.extendedProps.confirmation ? "No" : "Yes"}
