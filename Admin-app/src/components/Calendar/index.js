@@ -126,7 +126,7 @@ const Calendar = () => {
   //   console.log("Date clicked: ", event);
   // };
 
-  const [appointmentList, setAppointmentList] = useState([]);
+  const [appointmentList, setAppointmentList] = useState([{}]);
 
   useEffect(() => {
     // If the patientList of this doctor is not empty,
@@ -141,16 +141,20 @@ const Calendar = () => {
           const querySnapshot = await getDocs(appointmentRef);
           querySnapshot?.forEach((doc) => {
             // console.log(doc.id, doc.data());
-            setAppointmentList({
-              id: doc.id,
-              start: doc.data().startDate,
-              end: doc.data().endDate,
-              confirmation: doc.data().confirmation,
-              description: doc.data().description,
-              finish: doc.data().finish,
-              location: doc.data().location,
-              note: doc.data().note,
-            });
+            setAppointmentList((appointmentList) => [
+              ...appointmentList,
+              {
+                id: doc.id,
+                title: doc.data().title,
+                start: doc.data().startDate,
+                end: doc.data().endDate,
+                confirmation: doc.data().confirmation,
+                description: doc.data().description,
+                finish: doc.data().finish,
+                location: doc.data().location,
+                note: doc.data().note,
+              },
+            ]);
           });
         };
         getAppointmentList();
@@ -158,7 +162,6 @@ const Calendar = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log(appointmentList);
 
   // Render list of available patients that are assigned to this doctor
   const renderPatientList = () => {
