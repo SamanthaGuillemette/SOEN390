@@ -228,7 +228,6 @@ const Calendar = () => {
     setClickedEvent({ ...event.event._def, ...event.event._instance });
     setEventModalOpen(true);
   };
-  console.log(clickedEvent);
 
   return (
     <>

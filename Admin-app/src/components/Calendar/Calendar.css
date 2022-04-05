@@ -6,7 +6,7 @@
 }
 
 .fc-day-today {
-  background: var(--background-secondary) !important;
+  background: rgba(139, 195, 235, 0.15) !important;
 }
 
 .fc-day-today:hover,
@@ -23,6 +23,7 @@
   background-color: transparent !important;
   border-color: transparent !important;
   box-shadow: none !important;
+  background-color: var(--primary-dark) !important;
 }
 
 .fc-button:focus {
