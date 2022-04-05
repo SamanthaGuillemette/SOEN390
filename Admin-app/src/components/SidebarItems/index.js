@@ -23,17 +23,6 @@ import "./SidebarItems.css";
 import { useSelector } from "react-redux";
 import { selectUserInfoDetails } from "../../store/userInfoSlice";
 
-// Functon to get Logged in User's full name
-export async function getUserFullName() {
-  const userEmail = auth.currentUser?.email; // getting user's email
-
-  if (userEmail) {
-    const responseData = await getAdmin(userEmail); // getting Admin tuple
-    const fullName = `${responseData.firstName} ${responseData.lastName}`;
-    return fullName; // returning the user's role
-  }
-}
-
 /**
  * Handle logging user out.
  * @param  {ClickEvent} e
