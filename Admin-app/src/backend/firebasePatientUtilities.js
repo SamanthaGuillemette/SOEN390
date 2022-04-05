@@ -12,7 +12,11 @@ import {
   collection,
   orderBy,
   getDoc,
+  addDoc,
+  serverTimestamp,
+  doc,
 } from "firebase/firestore";
+import { useState } from "react";
 import { db } from "./firebase";
 
 const tableName = "Client";
@@ -286,6 +290,35 @@ const getTableName = () => {
   return tableName;
 };
 
+const notifyExposure = async (patientKey) => {
+  try {
+    const patient = await getPatient(patientKey);
+    const patientPostal = patient.postalCode.slice(0, -3);
+    let allPatients = await getPatients();
+
+    function filterByPostal(prop) {
+      return (
+        prop.postalCode.includes(patientPostal) && prop.email !== patient.email
+      );
+    }
+
+    let filteredPatients = allPatients.filter(filterByPostal);
+
+    filteredPatients.forEach(async (patient) => {
+      const clientRef = doc(db, `Client/${patient.email}`);
+      const notifRef = collection(clientRef, "exposureNotification");
+
+      await addDoc(notifRef, {
+        notif: "Someone near you has gotten covid.",
+        timestamp: serverTimestamp(),
+        seen: "False",
+      });
+    });
+  } catch (error) {
+    console.log("[notifyExposure]" + error);
+  }
+};
+
 export {
   getPatients,
   getPatient,
@@ -299,4 +332,5 @@ export {
   setRecovered,
   setViewedCaseFalse,
   setReviewed,
+  notifyExposure,
 };
