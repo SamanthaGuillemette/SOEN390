@@ -15,8 +15,6 @@ import {
   collection,
   doc,
   getDocs,
-  onSnapshot,
-  query,
   serverTimestamp,
   setDoc,
 } from "firebase/firestore";
@@ -106,6 +104,7 @@ const style = {
 
 const Calendar = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [eventModalOpen, setEventModalOpen] = useState(false);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -114,6 +113,10 @@ const Calendar = () => {
   const [location, setLocation] = useState("");
   const [note, setNote] = useState("");
   const [selectedPatient, setSelectedPatient] = useState("");
+  const [clickedEvent, setClickedEvent] = useState(null);
+
+  // Needs the empty object {} ==> or it will fail fo push new object to array
+  const [appointmentList, setAppointmentList] = useState([{}]);
 
   const calendarRef = useRef();
   const classes = useStyles();
@@ -125,8 +128,6 @@ const Calendar = () => {
   // const handleDateClick = (event) => {
   //   console.log("Date clicked: ", event);
   // };
-
-  const [appointmentList, setAppointmentList] = useState([{}]);
 
   useEffect(() => {
     // If the patientList of this doctor is not empty,
@@ -223,9 +224,11 @@ const Calendar = () => {
   };
 
   const handleEventClick = (event) => {
-    console.log("Event clicked: ", event);
-    console.log("==> ", event.event._def.extendedProps.note);
+    console.log("Event clicked: ", event.event);
+    setClickedEvent({ ...event.event._def, ...event.event._instance });
+    setEventModalOpen(true);
   };
+  console.log(clickedEvent);
 
   return (
     <>
@@ -420,6 +423,50 @@ const Calendar = () => {
           </Box>
         </Modal>
       </ThemeProvider>
+
+      {clickedEvent && (
+        <>
+          <ThemeProvider theme={theme}>
+            <Modal
+              open={eventModalOpen}
+              onClose={() => {
+                setEventModalOpen(false);
+              }}
+            >
+              <Box
+                sx={style}
+                component="form"
+                noValidate
+                color="var(--text-primary)"
+                maxWidth={600}
+              >
+                <Typography
+                  variant="h4"
+                  component="h2"
+                  className="calendar-createAppointmentTitle"
+                >
+                  Selected event info
+                </Typography>
+
+                <h4>Title: {clickedEvent.title}</h4>
+                <h4>
+                  Date: {new Date(clickedEvent.range.start).toDateString()}
+                </h4>
+                <h4>
+                  Confirmed:{" "}
+                  {clickedEvent.extendedProps.confirmation ? "No" : "Yes"}
+                </h4>
+                <h4>
+                  Finished: {clickedEvent.extendedProps.finish ? "No" : "Yes"}
+                </h4>
+                <h4>Description: {clickedEvent.extendedProps.description}</h4>
+                <h4>Location: {clickedEvent.extendedProps.location}</h4>
+                <h4>Note: {clickedEvent.extendedProps.note}</h4>
+              </Box>
+            </Modal>
+          </ThemeProvider>
+        </>
+      )}
     </>
   );
 };
