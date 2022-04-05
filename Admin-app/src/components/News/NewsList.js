@@ -13,8 +13,11 @@ const NewsList = ({ news = [] }) => {
         <div className="News__Main__Content" key={newsItem?.id}>
           <Link to={`/news/${newsItem.id}`}>
             <h2 className="News__Details__Title">{newsItem?.title}</h2>
-            <h3>by {newsItem?.author}</h3>
-            <h3>{newsItem?.timestamp?.toDate()?.toLocaleString()}</h3>
+            <h3 className="News__Details__Author_Date">
+              by {newsItem?.author}
+              <br />
+              {newsItem?.timestamp?.toDate()?.toLocaleString()}
+            </h3>
             <br />
             <Divider color="#949be2" />
           </Link>

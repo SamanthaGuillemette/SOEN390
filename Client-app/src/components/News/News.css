@@ -39,6 +39,18 @@
   color: var(--primary-main) !important;
 }
 
+.News__Details__Author_Date {
+  font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-weight: normal !important;
+  font-size: 20px !important;
+  text-align: left !important;
+  color: var(--text-primary) !important;
+  background: none;
+  width: 100%;
+  padding: 10px 10px 10px 10px;
+}
+
 .News__Details__Body {
   font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell",
     "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
