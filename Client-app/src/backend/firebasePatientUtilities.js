@@ -4,6 +4,7 @@ import {
   getTableDataItem,
   getDocRef,
   getReviewNotification,
+  getExposureNotification,
 } from "./firebaseUtilities";
 import {
   updateDoc,
@@ -127,6 +128,40 @@ const setSeen = async (patientKey, documentID) => {
   }
 };
 
+const setSeenExposure = async (patientKey, documentID) => {
+  try {
+    // Get exposure notifications
+    const docRef = getDocRef(
+      `Client/${patientKey}/exposureNotification`,
+      documentID
+    );
+    let exposureNotification = await getExposureNotification(docRef);
+
+    // Set seen value
+    let seen;
+
+    if (exposureNotification) {
+      if (
+        exposureNotification.seen === null ||
+        exposureNotification.seen === "False"
+      ) {
+        seen = "True";
+      } else {
+        seen = "False";
+      }
+    }
+
+    docRef && (await updateDoc(docRef, "seen", seen));
+
+    // Get updated exposure notification
+    exposureNotification = await getExposureNotification(docRef);
+
+    return exposureNotification;
+  } catch (error) {
+    console.log("[setSeenExposure]" + error);
+  }
+};
+
 const setAssignedDoctor = async (patientKey, doctorKey) => {
   try {
     // Get Patient
@@ -247,4 +282,5 @@ export {
   getStatuses,
   setRecovered,
   setSeen,
+  setSeenExposure,
 };
