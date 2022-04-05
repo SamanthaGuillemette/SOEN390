@@ -13,6 +13,7 @@ import {
   setNewCase,
   setRecovered,
   setViewedCaseFalse,
+  notifyExposure,
 } from "../../backend/firebasePatientUtilities";
 import "./DropdownStatus.css";
 
@@ -68,6 +69,7 @@ function DropdownStatus(props) {
     if (patientInfo.status !== "POSITIVE" && value === "POSITIVE") {
       setNewCase(patientInfo.email, true);
       setViewedCaseFalse(patientInfo.email);
+      notifyExposure(patientInfo.email);
     } else {
       /* else setting to false */
       setNewCase(patientInfo.email, false);
