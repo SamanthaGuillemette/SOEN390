@@ -11,6 +11,10 @@ import {
   where,
   collection,
   orderBy,
+  getDoc,
+  addDoc,
+  serverTimestamp,
+  doc,
 } from "firebase/firestore";
 import { db } from "./firebase";
 
@@ -39,7 +43,7 @@ const togglePriorityFlag = async (patientKey) => {
 
     if (patientInfo) {
       if (
-        patientInfo.flaggedPriority == null ||
+        patientInfo.flaggedPriority === null ||
         patientInfo.flaggedPriority === "0"
       ) {
         priorityFlag = "1";
@@ -60,35 +64,50 @@ const togglePriorityFlag = async (patientKey) => {
   }
 };
 
-const toggleReviewed = async (patientKey) => {
+const setReviewed = async (patientKey, docID) => {
   try {
     // Get Patient
-    const docRef = getDocRef(tableName, patientKey);
-    let patientInfo = await getPatient(patientKey);
+    const docRef = getDocRef(`${tableName}/${patientKey}/Status`, docID);
+    let statusInfo = await getStatus(docRef);
 
     // Set reviewed value
     let reviewed;
 
-    if (patientInfo) {
-      if (
-        patientInfo.statusReview == null ||
-        patientInfo.statusReview === "Not Completed"
-      ) {
-        reviewed = "Status Reviewed";
+    if (statusInfo) {
+      if (statusInfo.reviewed === null || statusInfo.reviewed === false) {
+        reviewed = true;
       } else {
-        reviewed = "Not Completed";
+        reviewed = false;
       }
     }
 
     // Update DB with new value
-    docRef && (await updateDoc(docRef, "statusReview", reviewed));
+    docRef && (await updateDoc(docRef, "reviewed", reviewed));
 
     // Get updated patient
-    patientInfo = await getPatient(patientKey);
+    statusInfo = await getStatus(docRef);
 
-    return patientInfo;
+    return statusInfo.reviewed; // returning reviewed value
   } catch (error) {
-    console.log("[toggleReviewed]" + error);
+    console.log("[setReviewed]" + error);
+  }
+};
+
+const getStatus = async (docRef) => {
+  try {
+    const docSnapShot = await getDoc(docRef);
+
+    // If file exists, return it
+    if (docSnapShot.exists()) {
+      console.log("Table Data Item Found!");
+      return docSnapShot.data();
+    } else {
+      // If not found, write to console.
+      console.error(`[getStatus] Document not found`);
+    }
+  } catch (error) {
+    console.log(`[getStatus] ${error}`);
+    console.trace();
   }
 };
 
@@ -166,7 +185,7 @@ const viewedNewCase = async (patientKey) => {
     let viewed;
 
     if (patientInfo) {
-      if (patientInfo.viewedCase == null || patientInfo.viewedCase === false) {
+      if (patientInfo.viewedCase === null || patientInfo.viewedCase === false) {
         viewed = true;
       } else {
         viewed = false;
@@ -270,17 +289,47 @@ const getTableName = () => {
   return tableName;
 };
 
+const notifyExposure = async (patientKey) => {
+  try {
+    const patient = await getPatient(patientKey);
+    const patientPostal = patient.postalCode.slice(0, -3);
+    let allPatients = await getPatients();
+
+    function filterByPostal(prop) {
+      return (
+        prop.postalCode.includes(patientPostal) && prop.email !== patient.email
+      );
+    }
+
+    let filteredPatients = allPatients.filter(filterByPostal);
+
+    filteredPatients.forEach(async (patient) => {
+      const clientRef = doc(db, `Client/${patient.email}`);
+      const notifRef = collection(clientRef, "exposureNotification");
+
+      await addDoc(notifRef, {
+        notif: "Someone near you has gotten covid.",
+        timestamp: serverTimestamp(),
+        seen: "False",
+      });
+    });
+  } catch (error) {
+    console.log("[notifyExposure]" + error);
+  }
+};
+
 export {
   getPatients,
   getPatient,
   togglePriorityFlag,
   setAssignedDoctor,
   isValidPatientId,
-  toggleReviewed,
   setStatus,
   setNewCase,
   viewedNewCase,
   getStatuses,
   setRecovered,
   setViewedCaseFalse,
+  setReviewed,
+  notifyExposure,
 };

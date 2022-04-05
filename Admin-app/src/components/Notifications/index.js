@@ -13,35 +13,54 @@ import { Divider } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import {
-  getStatusNotifications,
-  toggleViewedCheckbox,
-} from "../../backend/firebaseDoctorUtilities";
-import {
   getPatients,
   viewedNewCase,
+  getStatuses,
+  getPatient,
 } from "../../backend/firebasePatientUtilities";
-import Checkbox from "@mui/material/Checkbox";
+import { getDoctor } from "../../backend/firebaseDoctorUtilities";
 import { Link } from "react-router-dom";
+
+/**
+ * This component is what makes the data for each notification
+ */
+// Creating data for symptom details table
+function createData(email, patientName, timestamp, reviewed) {
+  return { email, patientName, timestamp, reviewed };
+}
 
 /**
  * This component is what allows the Notifications feature to work.
  */
-
 const Notifications = () => {
   const [statusNotifications, setStatusNotifications] = useState([]);
   const [newCasePatients, setNewCasePatients] = useState([]);
   const userEmail = useSelector((state) => state.auth.userEmail);
 
   useEffect(() => {
-    getStatusNotifications(userEmail).then((data) => {
-      let results = [];
-      data.forEach((doc) => {
-        if (doc.viewed === "false") {
-          results.push(doc);
-        }
+    getDoctor(userEmail)
+      .then((patientInfo) => {
+        patientInfo.treats.map((patientEmail) =>
+          getPatient(patientEmail).then((patient) =>
+            getStatuses(patientEmail, false).then((statuses) => {
+              statuses &&
+                setStatusNotifications(
+                  statuses.map((status) =>
+                    createData(
+                      patientEmail,
+                      patient.firstName + " " + patient.lastName,
+                      status?.timestamp?.toDate()?.toLocaleString() || "",
+                      status.reviewed
+                    )
+                  )
+                );
+            })
+          )
+        );
+      })
+      .catch((err) => {
+        console.log(err);
       });
-      setStatusNotifications(results);
-    });
   }, [userEmail]);
 
   // getting the patient's with new case
@@ -81,60 +100,70 @@ const Notifications = () => {
             >
               Notifications
             </Typography>
-            {statusNotifications.map((notification) => (
-              <Box>
+            {statusNotifications.map((notification) =>
+              notification.reviewed !== true ? (
                 <Box>
-                  <Box
-                    style={{
-                      marginTop: "20px",
-                      display: "flex",
-                      alignItems: "center",
-                      flexWrap: "wrap",
-                    }}
-                  >
-                    <CheckCircleIcon color="success" sx={{ fontSize: 40 }} />
+                  <Box>
+                    <Box
+                      style={{
+                        marginTop: "20px",
+                        display: "flex",
+                        alignItems: "center",
+                        flexWrap: "wrap",
+                      }}
+                    >
+                      <CheckCircleIcon color="success" sx={{ fontSize: 40 }} />
+                      <Typography
+                        style={{
+                          marginLeft: "10px",
+                        }}
+                        color="var(--text-primary)"
+                      >
+                        <b>Status Update</b>
+                      </Typography>
+                    </Box>
                     <Typography
                       style={{
-                        marginLeft: "10px",
+                        marginLeft: "50px",
+                        marginBottom: "20px",
                       }}
                       color="var(--text-primary)"
                     >
-                      <b>Status Update</b>
-                    </Typography>
-                    <Typography>
-                      <b class="NOTIFICATIONS__viewed">Viewed:</b>
-                    </Typography>
-                    <Checkbox
-                      className="NOTIFICATIONS__checkboxIcon"
-                      onClick={(e) =>
-                        toggleViewedCheckbox(userEmail, notification.id)
-                      }
-                    ></Checkbox>
-                  </Box>
-                  <Typography
-                    style={{
-                      marginLeft: "50px",
-                      marginBottom: "20px",
-                    }}
-                    color="var(--text-primary)"
-                  >
-                    {`${notification.patientName} updated their status. Please check
+                      {`${notification.patientName} updated their status. Please check
                   the status update for more information.`}
-                  </Typography>
-                  <Typography
-                    style={{
-                      marginLeft: "50px",
-                      marginBottom: "30px",
-                    }}
-                    color="#949be2"
-                    data-testid="notification-statusUpdate"
-                  >
-                    {notification.timestamp.toDate().toLocaleString()}
-                  </Typography>
-                  <Divider color="#949be2" />
+                    </Typography>
+                    <Typography
+                      style={{
+                        marginLeft: "50px",
+                        marginBottom: "30px",
+                      }}
+                      color="#949be2"
+                      data-testid="notification-statusUpdate"
+                    >
+                      {notification.timestamp}
+                    </Typography>
+                    <Link
+                      style={{
+                        marginLeft: "50px",
+                      }}
+                      to={`/patientprofile/${notification.email}`}
+                    >
+                      <strong> Click here to display the profile. </strong>
+                    </Link>
+                    <Typography
+                      style={{
+                        marginLeft: "50px",
+                        marginBottom: "30px",
+                      }}
+                      color="#949be2"
+                    ></Typography>
+                    <Divider color="#949be2" />
+                  </Box>
                 </Box>
-              </Box>
-            ))}{" "}
+              ) : (
+                ""
+              )
+            )}{" "}
             {newCasePatients.map((patient) => (
               <Box>
                 <Box>
@@ -155,13 +184,6 @@ const Notifications = () => {
                     >
                       <b>New Case Reported</b>
                     </Typography>
-                    <Typography>
-                      <b class="NOTIFICATIONS__newCase">Viewed:</b>
-                    </Typography>
-                    <Checkbox
-                      className="NOTIFICATIONS__checkboxIcon"
-                      onClick={(e) => viewedNewCase(patient.email)}
-                    ></Checkbox>
                   </Box>
                   <Typography
                     style={{
@@ -176,8 +198,8 @@ const Notifications = () => {
                   <Link
                     style={{
                       marginLeft: "50px",
-                      marginBottom: "30px",
                     }}
+                    onClick={(e) => viewedNewCase(patient.email)}
                     to={`/patientprofile/${patient.email}`}
                   >
                     <strong> Click here to display the profile. </strong>
