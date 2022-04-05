@@ -16,7 +16,6 @@ import {
   serverTimestamp,
   doc,
 } from "firebase/firestore";
-import { useState } from "react";
 import { db } from "./firebase";
 
 const tableName = "Client";
