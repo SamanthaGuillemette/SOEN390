@@ -154,33 +154,62 @@ function PatientProfile() {
   };
 
   return (
-    <Grid container spacing={2} maxWidth="lg" alignItems="flex-end">
-      {/* Avatar grid */}
-      <Grid item xs={8} lg={4}>
-        <Card
-          data-testid="card-1"
-          sx={{
-            background: "var(--gradient-to-right-btm)",
-            borderRadius: "20px",
-          }}
+    <Grid
+      container
+      spacing={2}
+      maxWidth="lg"
+      alignItems="flex-end"
+      justifyContent="center"
+    >
+      <Grid
+        container
+        spacing={2}
+        sx={{
+          backgroundColor: "var(--background-main)",
+          mt: 4,
+          ml: 2,
+          borderRadius: "20px",
+        }}
+        className="PATIENT-profile__info__grid"
+        xs={12}
+        xl={10.2}
+        item
+      >
+        {/* Avatar grid */}
+        <Avatar id="avatar" src={patientInfo && patientInfo.profileImage} />
+        <Grid
+          container
+          spacing={2}
+          item
+          rowSpacing={2}
+          direction="column"
+          xs={6.51}
         >
-          <CardActionArea>
-            <Avatar id="avatar" src={patientInfo && patientInfo.profileImage} />
-            <CardContent>
-              <Typography
-                className="PATIENT-profile__name"
-                gutterBottom
-                variant="button"
-                fontSize="1.2rem"
-                component="div"
-              >
-                {patientInfo &&
-                  `${patientInfo.firstName} ${patientInfo.lastName}`}
+          {/* Changing status card color according to priority flag */}
+          <CardContent>
+            <Typography
+              className="PATIENT-profile__name"
+              gutterBottom
+              variant="button"
+              fontSize="1.2rem"
+              component="div"
+            >
+              {patientInfo &&
+                `${patientInfo.firstName} ${patientInfo.lastName}`}
+            </Typography>
+            <Typography className="PATIENT-profile__info" variant="body2">
+              Age:{" "}
+              <Typography className="PATIENT-profile__info__data">
+                {patientInfo && getAge(patientInfo.dob)}
               </Typography>
-              <Typography className="PATIENT-profile__info" variant="body2">
-                <br></br>Age: {patientInfo && getAge(patientInfo.dob)}
-                <br></br>Birthday: {patientInfo && patientInfo.dob}
-                <br></br>Address:{" "}
+              <br />
+              <br></br>Birthday:{" "}
+              <Typography className="PATIENT-profile__info__data">
+                {patientInfo && patientInfo.dob}
+              </Typography>
+              <br />
+              <br></br>Address:{" "}
+              <Typography className="PATIENT-profile__info__data">
                 {patientInfo &&
                   patientInfo.address &&
                   patientInfo.city &&
@@ -188,9 +217,9 @@ function PatientProfile() {
                   patientInfo.postalCode &&
                   `${patientInfo.address}, ${patientInfo.city}, ${patientInfo.province}, ${patientInfo.postalCode}`}
               </Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card>
+            </Typography>
+          </CardContent>
+        </Grid>
       </Grid>
 
       <Grid
@@ -198,14 +227,40 @@ function PatientProfile() {
         spacing={2}
         item
         rowSpacing={2}
-        direction="column"
-        xs={6.51}
+        direction="row"
+        justifyContent="center"
       >
-        {/* Status grid */}
-        <Grid item>
-          {/* Changing status card color according to priority flag */}
+        {/* Assigned doctor grid */}
+        <Grid item xs={6} xl={5.25}>
           <Card
-            data-testid="card-2"
+            data-testid="card-3"
+            sx={{
+              bgcolor: "var(--background-main)",
+              borderRadius: "20px",
+            }}
+          >
+            <CardContent>
+              <Typography
+                className="ASSIGNED-DOC__header"
+                gutterBottom
+                variant="button"
+                component="div"
+              >
+                Assigned Doctor
+              </Typography>
+              <Typography className="ASSIGNED-DOC__name" variant="body2">
+                {" "}
+                Name:{" "}
+              </Typography>
+              <DropdownDoctor patientInfo={patientInfo} />
+            </CardContent>
+          </Card>
+        </Grid>
+
+        {/* Status grid */}
+        <Grid item xs={6} xl={5.25}>
+          <Card
+            data-testid="card-3"
             sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }}
             className={
               patientInfo && patientInfo.flaggedPriority === "1"
@@ -213,68 +268,29 @@ function PatientProfile() {
                 : "PATIENT__status__card"
             }
           >
-            <CardActionArea>
-              <CardContent>
-                <Typography
-                  className="STATUS-CARD__header"
-                  gutterBottom
-                  variant="button"
-                  component="div"
-                >
-                  {/* Changing flag color when clicked */}
-                  Status{" "}
-                  <FlagIcon
-                    onClick={() => {
-                      onFlagClick();
-                    }}
-                    className={
-                      patientInfo && patientInfo.flaggedPriority === "1"
-                        ? "PATIENT__priority-flag clicked"
-                        : "PATIENT__priority-flag"
-                    }
-                  ></FlagIcon>
-                  <br></br>
-                  <br></br>
-                </Typography>
-                <Stack
-                  direction="row"
-                  divider={<Divider orientation="vertical" />}
-                  spacing={1}
-                  alignItems="baseline"
-                >
-                  <DropdownStatus patientInfo={patientInfo} />
-                </Stack>
-              </CardContent>
-            </CardActionArea>
+            <CardContent>
+              <Typography
+                className="STATUS-CARD__header"
+                gutterBottom
+                variant="button"
+                component="div"
+              >
+                {/* Changing flag color when clicked */}
+                Status{" "}
+                <FlagIcon
+                  onClick={() => {
+                    onFlagClick();
+                  }}
+                  className={
+                    patientInfo && patientInfo.flaggedPriority === "1"
+                      ? "PATIENT__priority-flag clicked"
+                      : "PATIENT__priority-flag"
+                  }
+                />
+              </Typography>
+              <DropdownStatus patientInfo={patientInfo} />
+            </CardContent>
           </Card>
-        </Grid>
-
-        <Grid container spacing={2} item rowSpacing={2} direction="row">
-          {/* Assigned doctor grid */}
-          <Grid item xs={6}>
-            <Card
-              data-testid="card-3"
-              sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }}
-            >
-              <CardActionArea>
-                <CardContent>
-                  <Typography
-                    className="ASSIGNED-DOC__header"
-                    gutterBottom
-                    variant="button"
-                    component="div"
-                  >
-                    Assigned Doctor
-                  </Typography>
-                  <Typography className="ASSIGNED-DOC__name" variant="body2">
-                    {" "}
-                    Name:{" "}
-                  </Typography>
-                  <DropdownDoctor patientInfo={patientInfo} />
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </Grid>
         </Grid>
       </Grid>
 
