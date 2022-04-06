@@ -1,19 +1,16 @@
 #avatar {
-  width: 200px;
-  height: 233px;
-  margin: auto;
-  margin-top: 15px;
-  border: 1px solid inherit;
+  width: 150px;
+  height: 150px;
 }
 
-.PATIENT-profile__info {
-  text-align: center;
+.PATIENT-profile__info,
+.PATIENT-profile__info__data {
   font-size: 13px !important;
-  color: var(--text-primary);
+  font-size: 0.96rem !important;
+  color: #eee7e7 !important;
 }
 
 .PATIENT-profile__name {
-  text-align: center;
   font-weight: bold !important;
   color: var(--text-primary);
 }
@@ -43,6 +40,7 @@ h5.PATIENT-SYMPTOMS__table__label {
 
 .PATIENT__priority-flag {
   color: var(--text-primary);
+  font-size: 1.2rem !important;
 }
 
 .PATIENT__priority-flag.clicked {
@@ -72,4 +70,10 @@ h5.PATIENT-SYMPTOMS__table__label {
 
 .PATIENT__reviewed-status {
   background: rgb(148, 155, 226, 0.2);
+}
+
+.PATIENT-profile__info__data {
+  display: inline !important;
+  font-weight: 600 !important;
+  color: var(--text-primary);
 }
