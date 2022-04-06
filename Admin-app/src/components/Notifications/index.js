@@ -24,58 +24,74 @@ import { Link } from "react-router-dom";
 /**
  * This component is what makes the data for each notification
  */
-// Creating data for symptom details table
-function createData(email, patientName, timestamp, reviewed) {
-  return { email, patientName, timestamp, reviewed };
+function createData(email, patientName, timestamp, reviewed, newCase) {
+  return { email, patientName, timestamp, reviewed, newCase };
 }
 
 /**
  * This component is what allows the Notifications feature to work.
  */
 const Notifications = () => {
-  const [statusNotifications, setStatusNotifications] = useState([]);
-  const [newCasePatients, setNewCasePatients] = useState([]);
+  const [notifications, setNotifications] = useState([]);
   const userEmail = useSelector((state) => state.auth.userEmail);
 
   useEffect(() => {
+    /* This portion of code gets the status notifications and appends to the const notifications */
     getDoctor(userEmail)
       .then((patientInfo) => {
-        patientInfo.treats.map((patientEmail) =>
-          getPatient(patientEmail).then((patient) =>
-            getStatuses(patientEmail, false).then((statuses) => {
-              statuses &&
-                setStatusNotifications(
-                  statuses.map((status) =>
-                    createData(
-                      patientEmail,
-                      patient.firstName + " " + patient.lastName,
-                      status?.timestamp?.toDate()?.toLocaleString() || "",
-                      status.reviewed
-                    )
-                  )
-                );
-            })
-          )
+        patientInfo.treats.map(
+          (
+            patientEmail // mapping through the doctor's patients
+          ) =>
+            getPatient(patientEmail).then(
+              (
+                patient // getting the data per patient
+              ) =>
+                getStatuses(patientEmail, false).then((statuses) => {
+                  // getting the status per patient
+                  statuses &&
+                    statuses.map((status) =>
+                      status.reviewed !== true // if it hasnt been reviewed
+                        ? setNotifications((state) => [
+                            // then appending
+                            ...state,
+                            createData(
+                              patientEmail,
+                              patient.firstName + " " + patient.lastName,
+                              status?.timestamp || "",
+                              status.reviewed,
+                              false
+                            ),
+                          ])
+                        : ""
+                    );
+                })
+            )
         );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    /* This portion of code gets the new case notifications and appends to the const notifications */
+    getPatients()
+      .then((data) => {
+        data.forEach((doc) => {
+          // if newCase is true and viewCase is not true
+          if (doc.newCase && !doc.viewedCase) {
+            setNotifications((state) => [...state, doc]);
+          }
+        });
       })
       .catch((err) => {
         console.log(err);
       });
   }, [userEmail]);
 
-  // getting the patient's with new case
-  useEffect(() => {
-    getPatients().then((data) => {
-      let results = [];
-      data.forEach((doc) => {
-        // if newCase is true and viewCase is not true
-        if (doc.newCase && !doc.viewedCase) {
-          results.push(doc);
-        }
-      });
-      setNewCasePatients(results);
-    });
-  }, []);
+  // sorting based on increasing timestamp
+  notifications.sort((a, b) =>
+    a.timestamp < b.timestamp ? 1 : b.timestamp < a.timestamp ? -1 : 0
+  );
 
   return (
     <>
@@ -100,8 +116,8 @@ const Notifications = () => {
             >
               Notifications
             </Typography>
-            {statusNotifications.map((notification) =>
-              notification.reviewed !== true ? (
+            {notifications.map((notification) =>
+              notification.newCase === false ? (
                 <Box>
                   <Box>
                     <Box
@@ -140,7 +156,7 @@ const Notifications = () => {
                       color="#949be2"
                       data-testid="notification-statusUpdate"
                     >
-                      {notification.timestamp}
+                      {notification.timestamp?.toDate()?.toLocaleString()}
                     </Typography>
                     <Link
                       style={{
@@ -161,60 +177,67 @@ const Notifications = () => {
                   </Box>
                 </Box>
               ) : (
-                ""
-              )
-            )}{" "}
-            {newCasePatients.map((patient) => (
-              <Box>
                 <Box>
-                  <Box
-                    style={{
-                      marginTop: "20px",
-                      display: "flex",
-                      alignItems: "center",
-                      flexWrap: "wrap",
-                    }}
-                  >
-                    <CoronavirusIcon color="error" sx={{ fontSize: 40 }} />
+                  <Box>
+                    <Box
+                      style={{
+                        marginTop: "20px",
+                        display: "flex",
+                        alignItems: "center",
+                        flexWrap: "wrap",
+                      }}
+                    >
+                      <CoronavirusIcon color="error" sx={{ fontSize: 40 }} />
+                      <Typography
+                        style={{
+                          marginLeft: "10px",
+                        }}
+                        color="var(--text-primary)"
+                      >
+                        <b>New Case Reported</b>
+                      </Typography>
+                    </Box>
                     <Typography
                       style={{
-                        marginLeft: "10px",
+                        marginLeft: "50px",
+                        marginBottom: "30px",
                       }}
                       color="var(--text-primary)"
                     >
-                      <b>New Case Reported</b>
-                    </Typography>
-                  </Box>
-                  <Typography
-                    style={{
-                      marginLeft: "50px",
-                      marginBottom: "30px",
-                    }}
-                    color="var(--text-primary)"
-                  >
-                    {`${patient.firstName} ${patient.lastName} was tested positive, please check the
+                      {`${notification.firstName} ${notification.lastName} was tested positive, please check the
                     patient's information and status for more information.`}
-                  </Typography>
-                  <Link
-                    style={{
-                      marginLeft: "50px",
-                    }}
-                    onClick={(e) => viewedNewCase(patient.email)}
-                    to={`/patientprofile/${patient.email}`}
-                  >
-                    <strong> Click here to display the profile. </strong>
-                  </Link>
-                  <Typography
-                    style={{
-                      marginLeft: "50px",
-                      marginBottom: "30px",
-                    }}
-                    color="#949be2"
-                  ></Typography>
-                  <Divider color="#949be2" />
+                    </Typography>
+                    <Typography
+                      style={{
+                        marginLeft: "50px",
+                        marginBottom: "30px",
+                      }}
+                      color="#949be2"
+                      data-testid="notification-statusUpdate"
+                    >
+                      {notification.timestamp?.toDate()?.toLocaleString()}
+                    </Typography>
+                    <Link
+                      style={{
+                        marginLeft: "50px",
+                      }}
+                      onClick={(e) => viewedNewCase(notification.email)}
+                      to={`/patientprofile/${notification.email}`}
+                    >
+                      <strong> Click here to display the profile. </strong>
+                    </Link>
+                    <Typography
+                      style={{
+                        marginLeft: "50px",
+                        marginBottom: "30px",
+                      }}
+                      color="#949be2"
+                    ></Typography>
+                    <Divider color="#949be2" />
+                  </Box>
                 </Box>
-              </Box>
-            ))}
+              )
+            )}
           </CardContent>
         </Card>
       </div>
