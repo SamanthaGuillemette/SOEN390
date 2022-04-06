@@ -3,7 +3,7 @@ import { db } from "./firebase";
 
 const getUpcomingQuery = async (dbString, isUpcomingOnly) => {
   console.log("[isTodayOnly]: " + isUpcomingOnly);
-  const startDateAttr = "startDate2";
+  const startDateAttr = "startDate";
 
   if (isUpcomingOnly === true) {
     // Set time to today @ 0:00 hrs
