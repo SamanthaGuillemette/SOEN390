@@ -19,7 +19,14 @@ import {
   setSeenExposure,
 } from "../../backend/firebasePatientUtilities.js";
 import { useDocumentOnce } from "react-firebase-hooks/firestore";
-import { doc, collection, query, where, onSnapshot } from "firebase/firestore";
+import {
+  doc,
+  collection,
+  query,
+  where,
+  onSnapshot,
+  orderBy,
+} from "firebase/firestore";
 import "./Notifications.css";
 /**
  * This function will display the notifications for the client
@@ -32,10 +39,18 @@ const Notifications = () => {
   // Querying the unseen notifications
   const clientRef = doc(db, `Client/${user?.email}`);
   const statusNotifRef = collection(clientRef, "reviewNotification");
-  const q = query(statusNotifRef, where("seen", "==", "False"));
+  const q = query(
+    statusNotifRef,
+    where("seen", "==", "False"),
+    orderBy("timestamp", "desc")
+  );
 
   const exposureNotifRef = collection(clientRef, "exposureNotification");
-  const qExposure = query(exposureNotifRef, where("seen", "==", "False"));
+  const qExposure = query(
+    exposureNotifRef,
+    where("seen", "==", "False"),
+    orderBy("timestamp", "desc")
+  );
 
   // Declaring constants to display notifications
   const [displayUpdateNotif, setDisplayUpdateNotif] = useState(false);
@@ -161,7 +176,7 @@ const Notifications = () => {
                   >
                     Your status has been reviewed by your doctor{" "}
                     {value && value.data().assignedDoctor}, please check your
-                    inbox for more information. {notification.id}
+                    inbox for more information.
                   </Typography>
                   <Typography
                     style={{
