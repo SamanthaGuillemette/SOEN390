@@ -2,7 +2,6 @@
  * @fileoverview This component displays the symptoms table.
  *
  */
-import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -80,7 +79,7 @@ function SymptomsTable() {
     <TableContainer className="Symptoms-list">
       <h5 className="Symptoms-list__title">
         <img className="Symptoms-list__icon" src={VirusIcon} alt="Symptoms" />{" "}
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Status List{" "}
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Status History{" "}
         {patientStatuses && patientStatuses.length === 0 ? (
           <h5 className="SYMPTOMS-list__no-data">(NO SYMPTOMS ENTERED YET)</h5>
         ) : (

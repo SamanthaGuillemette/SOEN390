@@ -50,7 +50,7 @@ const Dashboard = () => {
                   src={VirusIcon}
                   alt="Symptoms"
                 />
-                <p className="dashboard-card__title">Symptoms</p>
+                <p className="dashboard-card__title">Status History</p>
               </div>
             </Link>
           </Grid>
