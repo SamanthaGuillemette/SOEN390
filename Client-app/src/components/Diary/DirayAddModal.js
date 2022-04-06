@@ -23,6 +23,9 @@ import {
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
+import { TextMaskCustom } from "../SignUp/index";
+import { inputLabelClasses } from "@mui/material/InputLabel";
 import { selectUserEmail } from "../../store/authSlice";
 
 const style = {
@@ -55,6 +58,11 @@ const helperTextStyles = makeStyles((theme) => ({
   },
 }));
 
+TextMaskCustom.propTypes = {
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
+
 export default function DiaryAddModal() {
   const userInfoDetails = useSelector(
     (state) => state.userInfo.userInfoDetails
@@ -71,6 +79,7 @@ export default function DiaryAddModal() {
 
   const [openModal, setOpenModal] = useState(false);
   const [emptyFields, setEmptyFields] = useState(false);
+  const [contactDescription, setContactDescription] = useState("");
   const [contactLocation, setContactLocation] = useState("");
   const [contactPostalCode, setContactPostalCode] = useState("");
   const helperTestClasses = helperTextStyles();
@@ -81,13 +90,18 @@ export default function DiaryAddModal() {
     event.preventDefault();
 
     // if neither are empty
-    if (contactLocation !== "" && contactPostalCode !== "") {
+    if (
+      contactDescription !== "" &&
+      contactLocation !== "" &&
+      contactPostalCode !== ""
+    ) {
       const timestamp = serverTimestamp();
 
       // adding diary doc by UID
       await addDoc(collection(clientDoc, "Diary"), {
+        contactDescription: contactDescription,
         contactLocation: contactLocation,
-        contactPostalCode: contactPostalCode,
+        contactPostalCode: contactPostalCode.toUpperCase(),
         timestamp: timestamp,
       });
 
@@ -106,6 +120,7 @@ export default function DiaryAddModal() {
   const handleClose = () => {
     setOpenModal(false);
     setEmptyFields(false);
+    setContactDescription("");
     setContactLocation("");
     setContactPostalCode("");
   };
@@ -141,7 +156,23 @@ export default function DiaryAddModal() {
               <Grid item xs={12}>
                 <TextField
                   id="diaryAddModal-standardBasic"
-                  placeholder="Contact Location"
+                  placeholder="Description"
+                  variant="standard"
+                  color="grey"
+                  onChange={(e) => setContactLocation(e.target.value)}
+                  helperText={
+                    contactDescription === "" && emptyFields
+                      ? "This field is required."
+                      : ""
+                  }
+                  error={contactLocation === "" && emptyFields}
+                  FormHelperTextProps={{ classes: helperTestClasses }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  id="diaryAddModal-standardBasic"
+                  placeholder="Location"
                   variant="standard"
                   color="grey"
                   onChange={(e) => setContactLocation(e.target.value)}
@@ -156,8 +187,10 @@ export default function DiaryAddModal() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  required
                   id="diaryAddModal-standardBasic"
-                  placeholder="Contact Postal Code"
+                  placeholder="Postal Code"
+                  value={contactPostalCode}
                   variant="standard"
                   color="grey"
                   onChange={(e) => setContactPostalCode(e.target.value)}
@@ -168,6 +201,17 @@ export default function DiaryAddModal() {
                   }
                   error={contactPostalCode === "" && emptyFields}
                   FormHelperTextProps={{ classes: helperTestClasses }}
+                  InputProps={{
+                    inputComponent: TextMaskCustom,
+                  }}
+                  InputLabelProps={{
+                    sx: {
+                      color: "var(--text-primary)",
+                      [`&.${inputLabelClasses.shrink}`]: {
+                        color: "var(--primary-main)",
+                      },
+                    },
+                  }}
                 />
               </Grid>
             </Grid>
