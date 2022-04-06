@@ -71,9 +71,6 @@ export default function DiaryAddModal() {
 
   const [openModal, setOpenModal] = useState(false);
   const [emptyFields, setEmptyFields] = useState(false);
-  const [contactFullName, setContactFullName] = useState("");
-  const [contactPhoneNumber, setContactPhoneNumber] = useState("");
-  const [contactEmail, setContactEmail] = useState("");
   const [contactLocation, setContactLocation] = useState("");
   const [contactPostalCode, setContactPostalCode] = useState("");
   const helperTestClasses = helperTextStyles();
@@ -84,14 +81,11 @@ export default function DiaryAddModal() {
     event.preventDefault();
 
     // if neither are empty
-    if (contactFullName !== "") {
+    if (contactLocation !== "" && contactPostalCode !== "") {
       const timestamp = serverTimestamp();
 
       // adding diary doc by UID
       await addDoc(collection(clientDoc, "Diary"), {
-        contactFullName: contactFullName,
-        contactPhoneNumber: contactPhoneNumber,
-        contactEmail: contactEmail,
         contactLocation: contactLocation,
         contactPostalCode: contactPostalCode,
         timestamp: timestamp,
@@ -112,9 +106,6 @@ export default function DiaryAddModal() {
   const handleClose = () => {
     setOpenModal(false);
     setEmptyFields(false);
-    setContactFullName("");
-    setContactPhoneNumber("");
-    setContactEmail("");
     setContactLocation("");
     setContactPostalCode("");
   };
@@ -146,57 +137,6 @@ export default function DiaryAddModal() {
               ADD DIARY
             </Typography>
             <Grid container minWidth={285} spacing={1}>
-              {/* Contact Full Name TextField */}
-              <Grid item xs={12}>
-                <TextField
-                  id="diaryAddModal-standardBasic"
-                  placeholder="Contact Full Name"
-                  variant="standard"
-                  color="grey"
-                  onChange={(e) => setContactFullName(e.target.value)}
-                  helperText={
-                    contactFullName === "" && emptyFields
-                      ? "This field is required."
-                      : ""
-                  }
-                  error={contactFullName === "" && emptyFields}
-                  FormHelperTextProps={{ classes: helperTestClasses }}
-                />
-              </Grid>
-              {/* Contact Phone Number TextField */}
-              <Grid item xs={12}>
-                <TextField
-                  id="diaryAddModal-standardBasic"
-                  placeholder="Contact Phone Number"
-                  variant="standard"
-                  color="grey"
-                  onChange={(e) => setContactPhoneNumber(e.target.value)}
-                  helperText={
-                    contactPhoneNumber === "" && emptyFields
-                      ? "This field is required."
-                      : ""
-                  }
-                  error={contactPhoneNumber === "" && emptyFields}
-                  FormHelperTextProps={{ classes: helperTestClasses }}
-                />
-              </Grid>
-              {/* Contact Email TextField */}
-              <Grid item xs={12}>
-                <TextField
-                  id="diaryAddModal-standardBasic"
-                  placeholder="Contact Email"
-                  variant="standard"
-                  color="grey"
-                  onChange={(e) => setContactEmail(e.target.value)}
-                  helperText={
-                    contactEmail === "" && emptyFields
-                      ? "This field is required."
-                      : ""
-                  }
-                  error={contactEmail === "" && emptyFields}
-                  FormHelperTextProps={{ classes: helperTestClasses }}
-                />
-              </Grid>
               {/* Contact Location TextField */}
               <Grid item xs={12}>
                 <TextField
