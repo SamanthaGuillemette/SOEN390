@@ -75,7 +75,7 @@ export default function DiaryAddModal() {
   const [contactPhoneNumber, setContactPhoneNumber] = useState("");
   const [contactEmail, setContactEmail] = useState("");
   const [contactLocation, setContactLocation] = useState("");
-  const [contactMessage, setContactMessage] = useState("");
+  const [contactPostalCode, setContactPostalCode] = useState("");
   const helperTestClasses = helperTextStyles();
 
   const handleOpen = () => setOpenModal(true);
@@ -93,7 +93,7 @@ export default function DiaryAddModal() {
         contactPhoneNumber: contactPhoneNumber,
         contactEmail: contactEmail,
         contactLocation: contactLocation,
-        contactMessage: contactMessage,
+        contactPostalCode: contactPostalCode,
         timestamp: timestamp,
       });
 
@@ -116,7 +116,7 @@ export default function DiaryAddModal() {
     setContactPhoneNumber("");
     setContactEmail("");
     setContactLocation("");
-    setContactMessage("");
+    setContactPostalCode("");
   };
 
   return (
@@ -149,7 +149,6 @@ export default function DiaryAddModal() {
               {/* Contact Full Name TextField */}
               <Grid item xs={12}>
                 <TextField
-                  className="diary__contactMessage"
                   id="diaryAddModal-standardBasic"
                   placeholder="Contact Full Name"
                   variant="standard"
@@ -215,22 +214,19 @@ export default function DiaryAddModal() {
                   FormHelperTextProps={{ classes: helperTestClasses }}
                 />
               </Grid>
-
               <Grid item xs={12}>
                 <TextField
-                  className="diary__contactMessage"
                   id="diaryAddModal-standardBasic"
-                  placeholder="Contact Message"
+                  placeholder="Contact Postal Code"
                   variant="standard"
                   color="grey"
-                  multiline
-                  onChange={(e) => setContactMessage(e.target.value)}
+                  onChange={(e) => setContactPostalCode(e.target.value)}
                   helperText={
-                    contactLocation === "" && emptyFields
+                    contactPostalCode === "" && emptyFields
                       ? "This field is required."
                       : ""
                   }
-                  error={contactMessage === "" && emptyFields}
+                  error={contactPostalCode === "" && emptyFields}
                   FormHelperTextProps={{ classes: helperTestClasses }}
                 />
               </Grid>
