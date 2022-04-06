@@ -79,9 +79,9 @@ export default function DiaryAddModal() {
 
   const [openModal, setOpenModal] = useState(false);
   const [emptyFields, setEmptyFields] = useState(false);
-  const [contactDescription, setContactDescription] = useState("");
-  const [contactLocation, setContactLocation] = useState("");
-  const [contactPostalCode, setContactPostalCode] = useState("");
+  const [description, setDescription] = useState("");
+  const [location, setLocation] = useState("");
+  const [postalCode, setPostalCode] = useState("");
   const helperTestClasses = helperTextStyles();
 
   const handleOpen = () => setOpenModal(true);
@@ -90,18 +90,14 @@ export default function DiaryAddModal() {
     event.preventDefault();
 
     // if neither are empty
-    if (
-      contactDescription !== "" &&
-      contactLocation !== "" &&
-      contactPostalCode !== ""
-    ) {
+    if (description !== "" && location !== "" && postalCode !== "") {
       const timestamp = serverTimestamp();
 
       // adding diary doc by UID
       await addDoc(collection(clientDoc, "Diary"), {
-        contactDescription: contactDescription,
-        contactLocation: contactLocation,
-        contactPostalCode: contactPostalCode.toUpperCase(),
+        description: description,
+        location: location,
+        postalCode: postalCode.toUpperCase(),
         timestamp: timestamp,
       });
 
@@ -120,9 +116,9 @@ export default function DiaryAddModal() {
   const handleClose = () => {
     setOpenModal(false);
     setEmptyFields(false);
-    setContactDescription("");
-    setContactLocation("");
-    setContactPostalCode("");
+    setDescription("");
+    setLocation("");
+    setPostalCode("");
   };
 
   return (
@@ -152,20 +148,20 @@ export default function DiaryAddModal() {
               ADD DIARY
             </Typography>
             <Grid container minWidth={285} spacing={1}>
-              {/* Contact Location TextField */}
+              {/* Contact Desciption TextField */}
               <Grid item xs={12}>
                 <TextField
                   id="diaryAddModal-standardBasic"
                   placeholder="Description"
                   variant="standard"
                   color="grey"
-                  onChange={(e) => setContactLocation(e.target.value)}
+                  onChange={(e) => setDescription(e.target.value)}
                   helperText={
-                    contactDescription === "" && emptyFields
+                    description === "" && emptyFields
                       ? "This field is required."
                       : ""
                   }
-                  error={contactLocation === "" && emptyFields}
+                  error={description === "" && emptyFields}
                   FormHelperTextProps={{ classes: helperTestClasses }}
                 />
               </Grid>
@@ -175,13 +171,13 @@ export default function DiaryAddModal() {
                   placeholder="Location"
                   variant="standard"
                   color="grey"
-                  onChange={(e) => setContactLocation(e.target.value)}
+                  onChange={(e) => setLocation(e.target.value)}
                   helperText={
-                    contactLocation === "" && emptyFields
+                    location === "" && emptyFields
                       ? "This field is required."
                       : ""
                   }
-                  error={contactLocation === "" && emptyFields}
+                  error={location === "" && emptyFields}
                   FormHelperTextProps={{ classes: helperTestClasses }}
                 />
               </Grid>
@@ -190,16 +186,16 @@ export default function DiaryAddModal() {
                   required
                   id="diaryAddModal-standardBasic"
                   placeholder="Postal Code"
-                  value={contactPostalCode}
+                  value={postalCode}
                   variant="standard"
                   color="grey"
-                  onChange={(e) => setContactPostalCode(e.target.value)}
+                  onChange={(e) => setPostalCode(e.target.value)}
                   helperText={
-                    contactPostalCode === "" && emptyFields
+                    postalCode === "" && emptyFields
                       ? "This field is required."
                       : ""
                   }
-                  error={contactPostalCode === "" && emptyFields}
+                  error={postalCode === "" && emptyFields}
                   FormHelperTextProps={{ classes: helperTestClasses }}
                   InputProps={{
                     inputComponent: TextMaskCustom,
