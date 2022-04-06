@@ -161,7 +161,7 @@ const Notifications = () => {
                   >
                     Your status has been reviewed by your doctor{" "}
                     {value && value.data().assignedDoctor}, please check your
-                    inbox for more information. {notification.id}
+                    inbox for more information.
                   </Typography>
                   <Typography
                     style={{

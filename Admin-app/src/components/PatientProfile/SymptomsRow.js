@@ -9,7 +9,6 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { setReviewed } from "../../backend/firebasePatientUtilities";
 import { doc, serverTimestamp, addDoc, collection } from "firebase/firestore";
-
 import { db } from "../../backend/firebase";
 
 /**
