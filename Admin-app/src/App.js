@@ -18,13 +18,20 @@ import { saveUser, selectUserEmail, selectUserToken } from "./store/authSlice";
 import { useEffect } from "react";
 import Event from "./components/Event";
 import EventDetails from "./components/Event/EventDetails";
-import { fetchUserInfo } from "./store/userInfoSlice";
+import { fetchUserInfo, selectUserInfoDetails } from "./store/userInfoSlice";
 import AdminList from "./components/AdminList";
 
 function App() {
   const user = useSelector(selectUserToken);
   const userEmail = useSelector(selectUserEmail);
+  const userInfoDetails = useSelector(selectUserInfoDetails);
   const dispatch = useDispatch();
+
+  // Different roles for differennt visibilities. Boolean types.
+  const doctorRole = userInfoDetails?.role === "Doctor";
+  const healthOfficialRole = userInfoDetails?.role === "Health Official";
+  const immOfficerRole = userInfoDetails?.role === "Immigration Officer";
+  const superAdmin = userInfoDetails?.role === "Administrator";
 
   /**
    * This function will run as soon as the App loads
@@ -57,11 +64,26 @@ function App() {
         <AppBody>
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/appointments" element={<Appointments />} />
-            <Route path="/patients" element={<Patients />} />
-            <Route path="/patientprofile/:key" element={<PatientProfile />} />
-            <Route path="/admin" element={<AdminList />} />
-            <Route path="/inbox" element={<Inbox />} />
+            {doctorRole && (
+              <>
+                <Route path="/appointments" element={<Appointments />} />
+                <Route path="/inbox" element={<Inbox />} />
+                <Route path="/patients" element={<Patients />} />
+                <Route
+                  path="/patientprofile/:key"
+                  element={<PatientProfile />}
+                />
+              </>
+            )}
+            {healthOfficialRole | immOfficerRole && (
+              <Route path="/patients" element={<Patients />} />
+            )}
+            {superAdmin && (
+              <>
+                <Route path="/patients" element={<Patients />} />
+                <Route path="/admin" element={<AdminList />} />
+              </>
+            )}
             <Route path="/updates" element={<Notifications />} />
             <Route path="/qr" element={<QR />} />
             <Route path="/news" element={<News />} />

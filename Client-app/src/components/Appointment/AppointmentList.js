@@ -36,7 +36,7 @@ const AppointmentList = ({ appointments }) => {
               : "appointment-listItem_active"
           }
         >
-          {item.startDate}
+          {new Date(item.startDate).toDateString()}
         </p>
       </div>
     ));

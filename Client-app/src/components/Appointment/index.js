@@ -1,6 +1,6 @@
 import "./Appointment.css";
 import { useSelector } from "react-redux";
-import { collection, doc, getDoc, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../../backend/firebase";
 import { useEffect, useState } from "react";
 import { selectUserEmail } from "../../store/authSlice";
@@ -16,7 +16,7 @@ const Appointment = () => {
   // Reference to the 'AppointmentHistory' collection
   const appointmentRef = collection(
     db,
-    `DoctorPatient/${doctorInfoDetails?.email}&${clientEmail}/AppointmentHistory`
+    `DoctorPatient/${doctorInfoDetails?.email};${clientEmail}/AppointmentHistory`
   );
 
   // Save the list of appointments to 'AppointmentList' in real-time

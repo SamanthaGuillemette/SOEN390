@@ -73,7 +73,7 @@
   justify-content: space-between;
   border-bottom: 1px solid var(--text-inactive);
   height: 50px;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
 }
 
 .appointment-appointmentHistory {
@@ -83,6 +83,7 @@
 
 .appointment-listItem_active {
   margin: 0 !important;
+  width: 130px;
 }
 
 .appointment-listItem_finished {
