@@ -132,6 +132,7 @@ export default function SimpleModal() {
         <AddCircleIcon></AddCircleIcon>
       </Button>
       <ThemeProvider theme={theme}>
+        {/* Add Status Modal */}
         <Modal
           open={openModal}
           onClose={handleClose}

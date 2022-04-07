@@ -129,6 +129,7 @@ function UpdateStatus() {
             </TableBody>
           </Table>
         </TableContainer>
+        {/* Collapsible Symptoms Table */}
         <SymptomsTable lastStatus={lastStatus} />
       </Box>
     </Grid>
