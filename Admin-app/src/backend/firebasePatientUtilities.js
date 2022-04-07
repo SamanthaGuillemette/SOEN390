@@ -164,6 +164,8 @@ const setNewCase = async (patientKey, newValue) => {
     if (patientInfo) {
       // Update newCase field in Patient
       docRef && (await updateDoc(docRef, "newCase", newValue));
+      // Add timestamp
+      docRef && (await updateDoc(docRef, "timestamp", serverTimestamp()));
     }
 
     // Get updated patient

@@ -39,23 +39,14 @@ const Notifications = () => {
   // Querying the unseen notifications
   const clientRef = doc(db, `Client/${user?.email}`);
   const statusNotifRef = collection(clientRef, "reviewNotification");
-  const q = query(
-    statusNotifRef,
-    where("seen", "==", "False"),
-    orderBy("timestamp", "desc")
-  );
+  const q = query(statusNotifRef, where("seen", "==", "False"));
 
   const exposureNotifRef = collection(clientRef, "exposureNotification");
-  const qExposure = query(
-    exposureNotifRef,
-    where("seen", "==", "False"),
-    orderBy("timestamp", "desc")
-  );
+  const qExposure = query(exposureNotifRef, where("seen", "==", "False"));
 
   // Declaring constants to display notifications
   const [displayUpdateNotif, setDisplayUpdateNotif] = useState(false);
   const [displayReviewedNotif, setDisplayReviewedNotif] = useState([]);
-
   const [exposeNotif, setExposeNotif] = useState([]);
 
   useEffect(() => {
@@ -85,6 +76,14 @@ const Notifications = () => {
       );
     });
   }, [value]);
+
+  // sorting based on increasing timestamp
+  displayReviewedNotif.sort((a, b) =>
+    a.timestamp < b.timestamp ? 1 : b.timestamp < a.timestamp ? -1 : 0
+  );
+  exposeNotif.sort((a, b) =>
+    a.timestamp < b.timestamp ? 1 : b.timestamp < a.timestamp ? -1 : 0
+  );
 
   return (
     <>
