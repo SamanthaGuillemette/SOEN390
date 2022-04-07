@@ -10,7 +10,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useEffect, useState } from "react";
 import {
   setStatus,
+  setNewCase,
   setRecovered,
+  setViewedCaseFalse,
+  notifyExposure,
 } from "../../backend/firebasePatientUtilities";
 import "./DropdownStatus.css";
 
@@ -48,6 +51,7 @@ function DropdownStatus(props) {
       setStatus(patientInfo.email, value).then((newPatientInfo) =>
         setPatientInfo(newPatientInfo)
       ); // then setting
+
       /* IF patient goes from Positive to Negative, then setting attribute recover as "true" */
       if (patientInfo.status === "POSITIVE" && value === "NEGATIVE") {
         setRecovered(patientInfo.email, "true").then((newPatientInfo) =>
@@ -59,6 +63,17 @@ function DropdownStatus(props) {
           setPatientInfo(newPatientInfo)
         );
       }
+    }
+
+    /* IF patient goes from non positive to positive, then setting attribute newCase as true */
+    if (patientInfo.status !== "POSITIVE" && value === "POSITIVE") {
+      setNewCase(patientInfo.email, true);
+      setViewedCaseFalse(patientInfo.email);
+      notifyExposure(patientInfo.email);
+    } else {
+      /* else setting to false */
+      setNewCase(patientInfo.email, false);
+      setViewedCaseFalse(patientInfo.email);
     }
   };
 
@@ -91,17 +106,17 @@ function DropdownStatus(props) {
         <MenuItem value="POSITIVE">
           {" "}
           {/* dropdown option 1 */}
-          <span class="PATIENT__label-positive">positive</span>
+          <span className="PATIENT__label-positive">positive</span>
         </MenuItem>
         <MenuItem value="NEGATIVE">
           {" "}
           {/* dropdown option 2 */}
-          <span class="PATIENT__label-negative">negative</span>
+          <span className="PATIENT__label-negative">negative</span>
         </MenuItem>
         <MenuItem value="UNCONFIRMED">
           {" "}
           {/* dropdown option 3 */}
-          <span class="PATIENT__label-unconfirmed">unconfirmed</span>
+          <span className="PATIENT__label-unconfirmed">unconfirmed</span>
         </MenuItem>
       </Select>
     </FormControl>

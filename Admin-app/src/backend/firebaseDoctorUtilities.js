@@ -1,9 +1,18 @@
-import { updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+import {
+  updateDoc,
+  arrayUnion,
+  arrayRemove,
+  getDoc,
+  getDocs,
+  collection,
+} from "firebase/firestore";
 import {
   getAdminsByRole,
   getAdminByRoleAndKey,
   getAdminRef,
 } from "./firebaseAdminUtilities";
+import { getDocRef } from "./firebaseUtilities";
+import { db } from "./firebase";
 
 const role = "Doctor";
 const patientLimit = 3;

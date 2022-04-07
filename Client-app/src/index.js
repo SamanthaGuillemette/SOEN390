@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import authSlice from "./store/authSlice";
 import userInfoSlice from "./store/userInfoSlice";
+import drawerSlice from "./store/drawerSlice";
 import { createTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -19,6 +20,7 @@ const store = configureStore({
   reducer: {
     auth: authSlice,
     userInfo: userInfoSlice,
+    drawer: drawerSlice,
   },
 });
 
@@ -33,7 +35,7 @@ const theme = createTheme({
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-    <CssBaseline />
+      <CssBaseline />
       <Provider store={store}>
         <App />
       </Provider>

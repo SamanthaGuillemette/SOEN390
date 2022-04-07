@@ -3,15 +3,19 @@
  *
  */
 import AppBar from "@mui/material/AppBar";
-import { useState } from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-// import AccountCircle from "@mui/icons-material/AccountCircle";
-// import MenuItem from "@mui/material/MenuItem";
-// import Menu from "@mui/material/Menu";
+import EventIcon from "@mui/icons-material/Event";
+import CoronavirusIcon from "@mui/icons-material/Coronavirus";
+import NoteAltIcon from "@mui/icons-material/NoteAlt";
+import MailIcon from "@mui/icons-material/Mail";
+import QrCodeIcon from "@mui/icons-material/QrCode";
+import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
+import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import "./Navbar.css";
 import {
   Drawer,
@@ -20,24 +24,41 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import { makeStyles } from "@material-ui/core/styles";
+import { useDispatch, useSelector } from "react-redux";
+import { openDrawer, selectDrawerState } from "../../store/drawerSlice";
+import { Link } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { auth } from "../../backend/firebase";
 
 const useStyles = makeStyles({
   MuiDrawer: {
-    background: "rgba(15, 15, 15, 0.8) !important",
-    borderRight: "1px solid rgba(74, 207, 248, 0.3)",
-    borderRadius: "10px",
+    background: "rgba(23, 23, 23, 0.95) !important",
+    borderRight: "1px solid rgb(80, 80, 80)",
+    borderRadius: "0 20px 20px 0",
   },
 });
 
 const MenuAppBar = () => {
   const classes = useStyles();
-  const [state, setState] = useState(false);
+
+  // Global 'drawerState' being pulled from Redux store
+  const drawerState = useSelector(selectDrawerState);
+
+  // Dispatch function to call global 'openDrawer()' action from the store
+  const dispatch = useDispatch();
 
   const toggleDrawer = () => {
-    setState(!state);
+    dispatch(openDrawer());
+  };
+
+  /**
+   * Handle logging user out.
+   * @param  {ClickEvent} e
+   */
+  const logout = async (e) => {
+    e.preventDefault();
+    signOut(auth);
   };
 
   /**
@@ -46,35 +67,88 @@ const MenuAppBar = () => {
    */
   const list = () => (
     <Box
-      sx={{ width: 250, pt: 5, pl: 2 }}
-      role="presentation"
+      sx={{ width: 230, pt: 5, px: 2 }}
+      // role="presentation"
       onClick={toggleDrawer}
     >
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem className="sidebar-button" button key={text}>
+        <Link to="/appointment">
+          <ListItem>
             <ListItemIcon className="sidebar-icon">
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              <EventIcon />
             </ListItemIcon>
-            <ListItemText className="sidebar-text" primary={text} />
+            <ListItemText className="sidebar-text">Appointment</ListItemText>
           </ListItem>
-        ))}
+        </Link>
+
+        <Link to="/symptoms">
+          <ListItem>
+            <ListItemIcon className="sidebar-icon">
+              <CoronavirusIcon />
+            </ListItemIcon>
+            <ListItemText className="sidebar-text">Symptoms</ListItemText>
+          </ListItem>
+        </Link>
+
+        <Link to="/diary">
+          <ListItem>
+            <ListItemIcon className="sidebar-icon">
+              <NoteAltIcon />
+            </ListItemIcon>
+            <ListItemText className="sidebar-text">Diary</ListItemText>
+          </ListItem>
+        </Link>
+
+        <Link to="/clientinbox">
+          <ListItem>
+            <ListItemIcon className="sidebar-icon">
+              <MailIcon />
+            </ListItemIcon>
+            <ListItemText className="sidebar-text">Inbox</ListItemText>
+          </ListItem>
+        </Link>
+
+        <Link to="/qr">
+          <ListItem>
+            <ListItemIcon className="sidebar-icon">
+              <QrCodeIcon />
+            </ListItemIcon>
+            <ListItemText className="sidebar-text">QR Code</ListItemText>
+          </ListItem>
+        </Link>
+
+        <Link to="/mydoctor">
+          <ListItem>
+            <ListItemIcon className="sidebar-icon">
+              <LocalHospitalIcon />
+            </ListItemIcon>
+            <ListItemText className="sidebar-text">My Doctor</ListItemText>
+          </ListItem>
+        </Link>
+
+        <Link to="/status">
+          <ListItem>
+            <ListItemIcon className="sidebar-icon">
+              <MonitorHeartIcon />
+            </ListItemIcon>
+            <ListItemText className="sidebar-text">Update Status</ListItemText>
+          </ListItem>
+        </Link>
+
+        <div className="sidebar-divider" />
+
+        <ListItem onClick={logout} className="sidebar-logout">
+          <ListItemIcon className="sidebar-icon">
+            <ExitToAppIcon />
+          </ListItemIcon>
+          <p className="sidebar-logout_text">SIGN OUT</p>
+        </ListItem>
       </List>
-      {/* <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List> */}
     </Box>
   );
 
   return (
+    // <ClickAwayListener onClickAway={toggleDrawer}>
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar
@@ -92,16 +166,8 @@ const MenuAppBar = () => {
             onClick={toggleDrawer}
           >
             <MenuIcon />
-
-            <Drawer
-              classes={{ paper: classes.MuiDrawer }}
-              anchor="left"
-              open={state}
-              onClose={toggleDrawer}
-            >
-              {list()}
-            </Drawer>
           </IconButton>
+
           <Typography
             data-testid="title"
             variant="h6"
@@ -112,9 +178,19 @@ const MenuAppBar = () => {
           >
             Covid-19 App
           </Typography>
+
+          <Drawer
+            classes={{ paper: classes.MuiDrawer }}
+            anchor="left"
+            open={drawerState}
+            onClose={toggleDrawer}
+          >
+            {list()}
+          </Drawer>
         </Toolbar>
       </AppBar>
     </Box>
+    // </ClickAwayListener>
   );
 };
 export default MenuAppBar;

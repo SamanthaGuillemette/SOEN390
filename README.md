@@ -38,7 +38,7 @@ This project is a part of SOEN 390 - Software Engineering Team Design Project - 
 
 [Sprint 2 Report](https://docs.google.com/document/d/14unTftGvLbxCVN173bsorxm2BUaxr3SabFkWFxGsgWs/edit?usp=sharing)
 
-1. User Stories Backlog (USB) 
+1. [User Stories Backlog (USB)](https://github.com/SamanthaGuillemette/SOEN390/blob/develop/wiki_docs/USB/Team14_User%20Story%20Backlog.xlsx)
 
 3. Release Plan (Sprint 3 planning) 
    
@@ -58,7 +58,7 @@ This project is a part of SOEN 390 - Software Engineering Team Design Project - 
 
 [Sprint 3 Report](https://docs.google.com/document/d/1sTb3VUBFREMWVwaTKdlWZqT0LWoCZqBmOrlwcJNOAyc/edit?usp=sharing)
 
-1. User Stories Backlog (USB) (See Sprint 3 Report)
+1. [User Stories Backlog (USB](https://github.com/SamanthaGuillemette/SOEN390/blob/develop/wiki_docs/USB/Team14_User_Story_Backlog_Sprint_3.xlsx)
 
 3. Release Plan (Sprint 4 planning) 
    
@@ -73,6 +73,24 @@ This project is a part of SOEN 390 - Software Engineering Team Design Project - 
 
 <br/>
 
+# Sprint 4
+
+[Sprint 4 Report](https://docs.google.com/document/d/1N8vQAoo4THZH5aZURqRhy_oyISD4u-EX/edit#heading=h.lnxbz9)
+
+1. [User Stories Backlog (USB)](https://github.com/SamanthaGuillemette/SOEN390/blob/develop/wiki_docs/USB/Team14_User_Story_Backlog_Sprint_4.xlsx)
+
+3. Release Plan (Sprint 4 planning) 
+   
+4. Software Architecture Document (SAD) (See Sprint 4 Report)
+
+5. Risk Assessment & Risk Management Plan (RMP) (See Sprint 4 Report)
+6. UI prototypes for Sprint 5 user stories (See Sprint 4 Report)
+7. Testing Plan (See Sprint 4 Report)
+8. [ Running Admin portal prototype ](https://admin-covidtracker.web.app/)
+9. [ Running Client portal prototype ](https://client-covidtracker.web.app/)
+10. Short sprint retrospective (See Sprint 4 Report)
+
+<br/>
 
 ## Team 14 - members:
 

@@ -44,6 +44,7 @@ fieldset {
   color: var(--text-primary) !important;
 }
 
-.SIGN-UP__link:hover, .SIGN-IN__link:hover {
+.SIGN-UP__link:hover,
+.SIGN-IN__link:hover {
   color: var(--text-primary) !important;
 }

@@ -35,14 +35,17 @@
   margin-bottom: 10px;
 }
 
-.header {
+.Symptoms-list__header,
+.Update-Status__header {
   color: var(--text-inactive) !important;
   text-transform: uppercase;
   opacity: 0.7;
   font-weight: 900 !important;
 }
 
-.data {
+.Latest-Status__data,
+.Symptoms-list__data,
+.Update-Status__data {
   color: var(--text-primary) !important;
   font-weight: 500 !important;
   font-size: 1rem !important;

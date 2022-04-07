@@ -54,8 +54,7 @@
 
 .PATIENT__table__data,
 .DOC__table__data,
-.PATIENT-SYMPTOMS__table__data,
-.ADMIN__table__data {
+.PATIENT-SYMPTOMS__table__data {
   color: var(--text-primary) !important;
   font-weight: 500 !important;
   font-size: 1rem !important;
@@ -75,8 +74,4 @@
 
 .PATIENT__table__name:hover {
   color: var(--primary-main) !important;
-}
-
-.PATIENT__reviewed-status {
-  background: rgb(148, 155, 226, 0.2);
 }
