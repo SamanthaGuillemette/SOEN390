@@ -23,7 +23,7 @@ const AppointmentDetails = () => {
   // Create a reference to the 'AppointmentHistory' collection
   const appointmentRef = doc(
     db,
-    `DoctorPatient/${doctorInfoDetails?.email}&${clientEmail}/AppointmentHistory/${params.appointmentId}`
+    `DoctorPatient/${doctorInfoDetails?.email};${clientEmail}/AppointmentHistory/${params.appointmentId}`
   );
 
   // This lifecycle function will get the appointment details from the database
@@ -102,7 +102,9 @@ const AppointmentDetails = () => {
           {appointment?.description}
         </div>
         <h4 className="appointment-subTitle">Time: </h4>
-        <div className="appointment-textContent">{appointment?.startDate}</div>
+        <div className="appointment-textContent">
+          {new Date(appointment?.startDate).toDateString()}
+        </div>
         <h4 className="appointment-subTitle">Location:</h4>
         <div className="appointment-textContent">{appointment?.location}</div>
         <h4 className="appointment-subTitle">Note: </h4>
