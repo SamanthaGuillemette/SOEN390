@@ -8,7 +8,7 @@ import { auth, db } from "../../backend/firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { useDocument } from "react-firebase-hooks/firestore";
 import { makeStyles } from "@material-ui/core/styles";
-import NoteIcon from "../../assets/note.svg";
+import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import "./DiaryTable.css";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -65,7 +65,7 @@ const DiaryEntryModal = () => {
             id="diary-entry-dialog-title"
             className="header-diaryEntry-dialog"
           >
-            <img className="diaryEntry__icon" src={NoteIcon} alt="Diary" />
+            <NoteAltIcon className="diaryEntry__icon" alt="Diary" />
             Diary Entry
           </DialogTitle>
           <DialogContent dividers>

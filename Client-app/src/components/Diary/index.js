@@ -39,16 +39,18 @@ function DiaryTable() {
 
   return (
     <TableContainer className="diary__list">
-      <DiaryAddModal></DiaryAddModal>
       <Grid className="diary__label" container spacing={2}>
         <Grid item xs={8}>
-          <img
+          <NoteAltIcon
             className="diary__header__icon"
-            src={NoteAltIcon}
             alt="Diary"
             onClick={() => handleEntryOpen()}
           />
           Diary List
+        </Grid>
+        <Grid item xs={2}></Grid>
+        <Grid item xs={2}>
+          <DiaryAddModal></DiaryAddModal>
         </Grid>
       </Grid>
       {/* Making Table */}

@@ -121,3 +121,10 @@
 .header-diaryAddModal {
   color: var(--text-primary) !important;
 }
+
+.addDiary-button {
+  top: 10px !important;
+  width: 35px !important;
+  height: 35px !important;
+  color: var(--text-primary) !important;
+}
