@@ -11,24 +11,10 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { doc, collection, query, onSnapshot, orderBy, limit, setDoc } from "firebase/firestore";
+import { doc, collection, query, onSnapshot, orderBy, limit } from "firebase/firestore";
 import { db, auth } from "../../backend/firebase";
 import { useEffect, useState } from "react";
-import FlagIcon from "@mui/icons-material/Flag";
-import { red } from '@mui/material/colors';
-import {
-    togglePriorityFlag
-} from "../../backend/firebasePatientUtilities";
 import './ChatList.css'
-
-// priority flag with DB
-// function onFlagClick(id) {
-//     togglePriorityFlag(id).then(
-//       (newPatientInfo) =>
-//         newPatientInfo &&
-//         setPriorityFlag(newPatientInfo.flaggedPriority === "1")
-//     );
-//   }
 
 function stringToColor(string) {
     let hash = 0;
@@ -66,9 +52,6 @@ export default function ChatList(props) {
     const [user] = useAuthState(auth);
     const [clients, setClients] = useState('');
     const adminRef = doc(db, `Admin/${user?.email}`)
-    const messageRef = collection(adminRef, "Clients")
-    const q = query(messageRef)
-    const [priorityFlag, setPriorityFlag] = useState(false);
 
     // This hook shows all the clients that belong to the doctor as a list. 
     useEffect(() => {
@@ -98,12 +81,8 @@ function PatientsList(props) {
 
     const clientRef = doc(db, "Client", name)
     const messageRef = collection(clientRef, "Messages")
-    // const countCol = collection(clientRef, "Counter")
-    // const countRef = doc(countCol, "counter")
     const q = query(messageRef, orderBy('timestamp', 'desc'), limit(1));
     const [lastMessage, setLastMessage] = useState('');
-    const [flag, setFlag] = useState(false);
-    // const [messageCount, setMessageCount] = useState(0);
 
     // This hook is used to show the lastest message sent on the database. 
     useEffect(() => {
@@ -113,30 +92,8 @@ function PatientsList(props) {
                 message: doc.data()?.message,
             })))
         })
-
-        onSnapshot(clientRef, (doc) => {
-            setFlag(doc.data()?.flag)
-        })
-
-        // onSnapshot(countRef, (doc) => {
-        //     setMessageCount(doc.data()?.counterDoc)
-        // })
         // eslint-disable-next-line
     }, [])
-
-    const handleClick = async (event) => {
-        // event.preventDefault();
-        // if(flag){
-        //     await updateDoc(clientRef, {
-        //         flag: false,
-        //     })
-        // }else{
-        //     await updateDoc(clientRef, {
-        //         flag: true,
-        //     })
-        // }
-    }
-
     if (!lastMessage[0]) {
         return (
             <>
@@ -148,14 +105,6 @@ function PatientsList(props) {
                         primary={
                             <Fragment>
                                 <Typography style={{ maxWidth: '100px', }} color="var(--text-primary)"> {name} </Typography>
-                                {<FlagIcon label="primary" color="primary" variant="outlined"
-                                // onClick={() => {
-                                //     onFlagClick(id);
-                                //   }}
-                                //   className={
-                                //     priorityFlag ? "priority-flag clicked" : "priority-flag"
-                                //   } 
-                                />}
                             </Fragment>}
                         secondary={
                             <Fragment>
@@ -178,14 +127,11 @@ function PatientsList(props) {
                         <Fragment>
                             <Typography color="var(--text-primary)">
                                 {name}
-                                <FlagIcon style={{ marginLeft: '10px', }} label="error" color="error" variant="outlined"
-                                    onClick={() => { handleClick() }} className={flag ? "priority-flag clicked" : "priority-flag"} />
-                                {/* <Avatar sx={{ width: 24, height: 24, bgcolor: red[500]}} >{messageCount}</Avatar> */}
                             </Typography>
                         </Fragment>}
                     secondary={
                         <Fragment>
-                            <Typography style={{ maxWidth: '100px', }} color="var(--text-inactive)"> {lastMessage && lastMessage[0].message} </Typography>
+                            <Typography style={{ maxWidth: '100px', }} color="var(--text-inactive)"> {lastMessage && lastMessage[0].message.slice(0, 9).concat("...")} </Typography>
                         </Fragment>
                     }
                 />
