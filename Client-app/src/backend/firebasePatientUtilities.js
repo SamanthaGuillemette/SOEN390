@@ -246,6 +246,20 @@ const getStatusesQuery = async (dbString, isTodayOnly) => {
   }
 };
 
+const getDiary = async (patientKey, isTodayOnly = false) => {
+  console.log("[getDiary]: " + patientKey);
+  const statusCollectionName = "Diary";
+  const dbString = `${getTableName()}/${patientKey}/${statusCollectionName}`;
+
+  const queryDiaries = await getDiariesQuery(dbString, isTodayOnly);
+
+  const diaries = await getTableDataByQuery(queryDiaries);
+
+  return diaries;
+};
+
+const getDiariesQuery = async (dbString, isTodayOnly) => {};
+
 const setRecovered = async (patientKey, recovered) => {
   try {
     // Get Patient
