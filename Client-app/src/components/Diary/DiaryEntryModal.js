@@ -2,7 +2,6 @@
  * @fileoverview This component displays the modal for adding a new diary entry.
  *
  */
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../../backend/firebase";
@@ -78,28 +77,22 @@ const DiaryEntryModal = () => {
                 <p className="diaryEntry-data">2022-02-02</p>
               </Grid>
               <Grid item xs={6}>
-                <p className="diaryEntry-contactFullName">Contact Full Name:</p>
+                <p className="diaryEntry-contactFullName">Desciption:</p>
               </Grid>
               <Grid item xs={6}>
-                <p className="diaryEntry-data">Julie Doe</p>
+                <p className="diaryEntry-data">Family Reunion</p>
               </Grid>
               <Grid item xs={6}>
-                <p className="diaryEntry-phoneNumber">Phone Number:</p>
+                <p className="diaryEntry-phoneNumber">Location:</p>
               </Grid>
               <Grid item xs={6}>
-                <p className="diaryEntry-data">555-555-5555</p>
+                <p className="diaryEntry-data">Mcdonalds</p>
               </Grid>
               <Grid item xs={6}>
-                <p className="diaryEntry-email">Email:</p>
+                <p className="diaryEntry-email">Postal Code</p>
               </Grid>
               <Grid item xs={6}>
-                <p className="diaryEntry-data">email@email.com</p>
-              </Grid>
-              <Grid item xs={6}>
-                <p className="diaryEntry-contactLocation">Contact Location:</p>
-              </Grid>
-              <Grid item xs={6}>
-                <p className="diaryEntry-data">Concordia Hall Building</p>
+                <p className="diaryEntry-data">H2K 3E3</p>
               </Grid>
             </Grid>
           </DialogContent>

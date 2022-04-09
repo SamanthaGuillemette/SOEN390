@@ -8,18 +8,10 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { useState } from "react";
 import { Grid, TextField } from "@mui/material";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { useSelector } from "react-redux";
 import { db } from "../../backend/firebase";
-import {
-  doc,
-  collection,
-  addDoc,
-  serverTimestamp,
-  setDoc,
-} from "firebase/firestore";
+import { doc, collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
@@ -27,6 +19,7 @@ import PropTypes from "prop-types";
 import { TextMaskCustom } from "../SignUp/index";
 import { inputLabelClasses } from "@mui/material/InputLabel";
 import { selectUserEmail } from "../../store/authSlice";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
 const style = {
   position: "absolute",
@@ -85,6 +78,8 @@ export default function DiaryAddModal() {
   const helperTestClasses = helperTextStyles();
 
   const handleOpen = () => setOpenModal(true);
+  const [buttonColor, setButtonColor] = useState("var(--primary-main)");
+  const [icon, setIcon] = useState(false);
 
   const handleDiarySubmit = async (event) => {
     event.preventDefault();
@@ -108,17 +103,27 @@ export default function DiaryAddModal() {
     }
   };
 
-  function close() {
-    setTimeout(() => handleClose(), 3000);
-  }
-
-  // once modal is closed creating setting back to old values
+  /**
+   * Handle the modal close state setting back to old values
+   * @returns {void}
+   */
   const handleClose = () => {
     setOpenModal(false);
     setEmptyFields(false);
     setDescription("");
     setLocation("");
     setPostalCode("");
+    setButtonColor("var(--primary-main)");
+    setIcon(false);
+  };
+
+  /**
+   * Display the update button color & icon after submit
+   * @returns {void}
+   */
+  const displaySuccessCheckmark = () => {
+    setButtonColor("#27ae60");
+    setIcon(true);
   };
 
   return (
@@ -212,13 +217,20 @@ export default function DiaryAddModal() {
               </Grid>
             </Grid>
             <Button
-              onClick={close}
               type="submit"
               variant="contained"
+              style={{ backgroundColor: buttonColor }}
               className="addDiary__save-btn"
               sx={{ mt: 4, mb: 2 }}
+              onClick={displaySuccessCheckmark}
             >
-              SAVE
+              {icon && !emptyFields ? (
+                <CheckCircleOutlineIcon
+                  sx={{ fontSize: "175%" }}
+                ></CheckCircleOutlineIcon>
+              ) : (
+                "SAVE"
+              )}
             </Button>
           </Box>
         </Modal>

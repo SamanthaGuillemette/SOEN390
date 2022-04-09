@@ -2,7 +2,6 @@
  * @fileoverview This component displays the Diary table for patient
  *
  */
-import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -10,27 +9,26 @@ import TableContainer from "@mui/material/TableContainer";
 import TableFooter from "@mui/material/TableFooter";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import NoteIcon from "../../assets/note.svg";
+import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import "./DiaryTable.css";
 import { Grid } from "@material-ui/core";
 import { useState } from "react";
 import DiaryEntryModal from "./DiaryEntryModal";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import DiaryAddModal from "./DirayAddModal";
+import DiaryAddModal from "./DiaryAddModal";
 
 /**
  * Create hardcoded data for the table
  * @param  {string} diaryDate
- * @param  {string} contactName
+ * @param  {string} postalCode
  */
-function createData(diaryDate, contactName) {
-  return { diaryDate, contactName };
+function createData(diaryDate, postalCode) {
+  return { diaryDate, postalCode };
 }
 
 // creating data
 const rows = [
-  createData("05/02/22", "Jane Doe"),
-  createData("22/03/22", "Wendy Gables"),
+  createData("05/02/22", "H3K 2Q2"),
+  createData("22/03/22", "H6J 1D7"),
 ];
 
 function DiaryTable() {
@@ -46,7 +44,7 @@ function DiaryTable() {
         <Grid item xs={8}>
           <img
             className="diary__header__icon"
-            src={NoteIcon}
+            src={NoteAltIcon}
             alt="Diary"
             onClick={() => handleEntryOpen()}
           />
@@ -70,7 +68,7 @@ function DiaryTable() {
               className="diary_text"
               sx={{ borderColor: "var(--secondary-light)" }}
             >
-              Contact Date
+              Date
             </TableCell>
             {/* Third column header */}
             <TableCell
@@ -78,7 +76,7 @@ function DiaryTable() {
               sx={{ borderColor: "var(--secondary-light)" }}
               align="right"
             >
-              Contact Name
+              Postal Code
             </TableCell>
           </TableRow>
         </TableHead>
@@ -108,7 +106,7 @@ function DiaryTable() {
                 style={{ width: 160 }}
                 align="right"
               >
-                {row.contactName}
+                {row.postalCode}
               </TableCell>
             </TableRow>
           ))}
