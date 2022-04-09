@@ -116,128 +116,132 @@ const Notifications = () => {
             >
               Notifications
             </Typography>
-            {notifications.map((notification) =>
-              notification.newCase === false ? (
-                <Box>
+            {notifications.length > 0 &&
+              notifications.map((notification) =>
+                notification.newCase === false ? (
                   <Box>
-                    <Box
-                      style={{
-                        marginTop: "20px",
-                        display: "flex",
-                        alignItems: "center",
-                        flexWrap: "wrap",
-                      }}
-                    >
-                      <CheckCircleIcon color="success" sx={{ fontSize: 40 }} />
+                    <Box>
+                      <Box
+                        style={{
+                          marginTop: "20px",
+                          display: "flex",
+                          alignItems: "center",
+                          flexWrap: "wrap",
+                        }}
+                      >
+                        <CheckCircleIcon
+                          color="success"
+                          sx={{ fontSize: 40 }}
+                        />
+                        <Typography
+                          style={{
+                            marginLeft: "10px",
+                          }}
+                          color="var(--text-primary)"
+                        >
+                          <b>Status Update</b>
+                        </Typography>
+                      </Box>
                       <Typography
                         style={{
-                          marginLeft: "10px",
+                          marginLeft: "50px",
+                          marginBottom: "20px",
                         }}
                         color="var(--text-primary)"
                       >
-                        <b>Status Update</b>
-                      </Typography>
-                    </Box>
-                    <Typography
-                      style={{
-                        marginLeft: "50px",
-                        marginBottom: "20px",
-                      }}
-                      color="var(--text-primary)"
-                    >
-                      {`${notification.patientName} updated their status. Please check
+                        {`${notification.patientName} updated their status. Please check
                   the status update for more information.`}
-                    </Typography>
-                    <Typography
-                      style={{
-                        marginLeft: "50px",
-                        marginBottom: "30px",
-                      }}
-                      color="#949be2"
-                      data-testid="notification-statusUpdate"
-                    >
-                      {notification.timestamp?.toDate()?.toLocaleString()}
-                    </Typography>
-                    <Link
-                      style={{
-                        marginLeft: "50px",
-                      }}
-                      to={`/patientprofile/${notification.email}`}
-                    >
-                      <strong> Click here to display the profile. </strong>
-                    </Link>
-                    <Typography
-                      style={{
-                        marginLeft: "50px",
-                        marginBottom: "30px",
-                      }}
-                      color="#949be2"
-                    ></Typography>
-                    <Divider color="#949be2" />
-                  </Box>
-                </Box>
-              ) : (
-                <Box>
-                  <Box>
-                    <Box
-                      style={{
-                        marginTop: "20px",
-                        display: "flex",
-                        alignItems: "center",
-                        flexWrap: "wrap",
-                      }}
-                    >
-                      <CoronavirusIcon color="error" sx={{ fontSize: 40 }} />
+                      </Typography>
                       <Typography
                         style={{
-                          marginLeft: "10px",
+                          marginLeft: "50px",
+                          marginBottom: "30px",
+                        }}
+                        color="#949be2"
+                        data-testid="notification-statusUpdate"
+                      >
+                        {notification.timestamp?.toDate()?.toLocaleString()}
+                      </Typography>
+                      <Link
+                        style={{
+                          marginLeft: "50px",
+                        }}
+                        to={`/patientprofile/${notification.email}`}
+                      >
+                        <strong> Click here to display the profile. </strong>
+                      </Link>
+                      <Typography
+                        style={{
+                          marginLeft: "50px",
+                          marginBottom: "30px",
+                        }}
+                        color="#949be2"
+                      ></Typography>
+                      <Divider color="#949be2" />
+                    </Box>
+                  </Box>
+                ) : (
+                  <Box>
+                    <Box>
+                      <Box
+                        style={{
+                          marginTop: "20px",
+                          display: "flex",
+                          alignItems: "center",
+                          flexWrap: "wrap",
+                        }}
+                      >
+                        <CoronavirusIcon color="error" sx={{ fontSize: 40 }} />
+                        <Typography
+                          style={{
+                            marginLeft: "10px",
+                          }}
+                          color="var(--text-primary)"
+                        >
+                          <b>New Case Reported</b>
+                        </Typography>
+                      </Box>
+                      <Typography
+                        style={{
+                          marginLeft: "50px",
+                          marginBottom: "30px",
                         }}
                         color="var(--text-primary)"
                       >
-                        <b>New Case Reported</b>
-                      </Typography>
-                    </Box>
-                    <Typography
-                      style={{
-                        marginLeft: "50px",
-                        marginBottom: "30px",
-                      }}
-                      color="var(--text-primary)"
-                    >
-                      {`${notification.firstName} ${notification.lastName} was tested positive, please check the
+                        {`${notification.firstName} ${notification.lastName} was tested positive, please check the
                     patient's information and status for more information.`}
-                    </Typography>
-                    <Typography
-                      style={{
-                        marginLeft: "50px",
-                        marginBottom: "30px",
-                      }}
-                      color="#949be2"
-                      data-testid="notification-statusUpdate"
-                    >
-                      {notification.timestamp?.toDate()?.toLocaleString()}
-                    </Typography>
-                    <Link
-                      style={{
-                        marginLeft: "50px",
-                      }}
-                      onClick={(e) => viewedNewCase(notification.email)}
-                      to={`/patientprofile/${notification.email}`}
-                    >
-                      <strong> Click here to display the profile. </strong>
-                    </Link>
-                    <Typography
-                      style={{
-                        marginLeft: "50px",
-                        marginBottom: "30px",
-                      }}
-                      color="#949be2"
-                    ></Typography>
-                    <Divider color="#949be2" />
+                      </Typography>
+                      <Typography
+                        style={{
+                          marginLeft: "50px",
+                          marginBottom: "30px",
+                        }}
+                        color="#949be2"
+                        data-testid="notification-statusUpdate"
+                      >
+                        {notification.timestamp?.toDate()?.toLocaleString()}
+                      </Typography>
+                      <Link
+                        style={{
+                          marginLeft: "50px",
+                        }}
+                        onClick={(e) => viewedNewCase(notification.email)}
+                        to={`/patientprofile/${notification.email}`}
+                      >
+                        <strong> Click here to display the profile. </strong>
+                      </Link>
+                      <Typography
+                        style={{
+                          marginLeft: "50px",
+                          marginBottom: "30px",
+                        }}
+                        color="#949be2"
+                      ></Typography>
+                      <Divider color="#949be2" />
+                    </Box>
                   </Box>
-                </Box>
-              )
-            )}
+                )
+              )}
           </CardContent>
         </Card>
       </div>
