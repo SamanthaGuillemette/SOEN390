@@ -27,12 +27,12 @@ import { selectUserEmail } from "../../store/authSlice";
 
 const style = {
   position: "absolute",
-  top: "49%",
+  top: "375px",
   left: "50%",
-  transform: "translate(-50%, -50%)",
+  transform: "translate(-50%, -62%)",
   bgcolor: "var(--background-secondary)",
-  width: "51vh",
-  height: "76vh",
+  width: "320px",
+  height: "485px",
   p: 4,
   borderRadius: "10px",
 };
@@ -302,7 +302,7 @@ export default function SimpleModal() {
               type="submit"
               variant="contained"
               className="updateStatus__save-btn"
-              sx={{ mt: 4, mb: 2 }}
+              sx={{ mt: 3.8, mb: 2 }}
             >
               SAVE
             </Button>
