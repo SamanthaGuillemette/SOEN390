@@ -2,7 +2,6 @@
  * @fileoverview This component takes care of the Dashboard function.
  *
  */
-import Typography from "@mui/material/Typography";
 import { useState, useEffect } from "react";
 import { getPatients } from "../../backend/firebasePatientUtilities";
 import TableBody from "@mui/material/TableBody";
@@ -11,6 +10,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import Table from "@mui/material/Table";
 import { Link } from "react-router-dom";
+import TableHead from "@mui/material/TableHead";
 
 /**
  * Main function which will render the dashboard
@@ -32,72 +32,74 @@ const FlaggedPatients = () => {
 
   return (
     // The following is the Patient List which appears on the dashboard. Here we have the styling.
+    // Creating table
     <TableContainer
-      sx={{
-        bgcolor: "var(--background-main)",
-        overflow: "auto",
-        maxHeight: "35vh",
-        "& ul": { padding: 0 },
-        borderRadius: "20px",
-      }}
-      subheader={<li />}
+      data-testid="table-container1"
+      className="FLAGGED-PATIENTS__table"
+      sx={{ maxHeight: 382 }}
     >
-      <Typography
-        data-testid="patientlist"
-        textAlign="center"
-        variant="h6"
-        sx={{
-          color: "var(--text-primary)",
-          borderColor: "transparent",
-          mt: 2,
-          mb: 2,
-        }}
-      >
-        Flagged Patient's List
-      </Typography>
-      <Table>
-        {/* While here is the implementation*/}
+      <Table aria-label="custom pagination table">
+        <TableHead>
+          <TableRow>
+            {" "}
+            {/* adding table header */}
+            <TableCell
+              className="FLAGGED-PATIENTS__table__data"
+              sx={{
+                borderColor: "var(--background-secondary)",
+                backgroundColor: "#3a3a3a",
+              }}
+            >
+              Patient Name
+            </TableCell>
+            <TableCell
+              className="FLAGGED-PATIENTS__table__data"
+              sx={{
+                borderColor: "var(--background-secondary)",
+                backgroundColor: "#3a3a3a",
+              }}
+              align="right"
+            >
+              Status
+            </TableCell>
+          </TableRow>
+        </TableHead>
         <TableBody>
-          {patientList != null
-            ? patientList.map((row) => (
-                <TableRow key={row.email}>
-                  <TableCell
-                    sx={{ borderColor: "transparent" }}
-                    component="th"
-                    scope="row"
-                    align="left"
+          {/* adding rows in table */}
+          {patientList != null &&
+            patientList.map((row) => (
+              <TableRow key={row.email}>
+                <TableCell
+                  sx={{ borderColor: "var(--background-secondary)" }}
+                  component="th"
+                  scope="row"
+                >
+                  {/*Added the link to the table name */}
+                  <Link
+                    className="PATIENT__table__name"
+                    to={`/patientprofile/${row.email}`}
                   >
-                    {/*Added the link to the table name */}
-                    <Link
-                      className="PATIENT__table__name"
-                      to={`/patientprofile/${row.email}`}
-                    >
-                      {`${row.firstName} ${row.lastName}`}
-                    </Link>
-                    {/* getting the patient name */}
-                  </TableCell>
-                  <TableCell
-                    sx={{ borderColor: "transparent" }}
-                    component="th"
-                    scope="row"
-                    align="right"
+                    {`${row.firstName} ${row.lastName}`}
+                  </Link>
+                </TableCell>
+                <TableCell
+                  sx={{ borderColor: "var(--background-secondary)" }}
+                  align="right"
+                >
+                  <span
+                    className={
+                      row.status === "POSITIVE"
+                        ? "PATIENT__label-positive"
+                        : row.status === "NEGATIVE"
+                        ? "PATIENT__label-negative"
+                        : "PATIENT__label-unconfirmed"
+                    }
                   >
-                    <span
-                      className={
-                        row.status === "POSITIVE"
-                          ? "PATIENT__label-positive"
-                          : row.status === "NEGATIVE"
-                          ? "PATIENT__label-negative"
-                          : "PATIENT__label-unconfirmed"
-                      }
-                    >
-                      {row.status ? row.status : "UNCONFIRMED"}
-                    </span>
-                    {/* getting the patient name */}
-                  </TableCell>
-                </TableRow>
-              ))
-            : ""}
+                    {row.status ? row.status : "UNCONFIRMED"}
+                  </span>
+                </TableCell>
+              </TableRow>
+            ))}
         </TableBody>
       </Table>
     </TableContainer>

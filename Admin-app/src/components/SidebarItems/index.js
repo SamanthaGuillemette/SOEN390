@@ -16,11 +16,12 @@ import { Link } from "react-router-dom";
 import QrCodeIcon from "@mui/icons-material/QrCode";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { auth } from "../../backend/firebase";
-import Badge from "@mui/material/Badge";
 import { signOut } from "firebase/auth";
 import "./SidebarItems.css";
 import { useSelector } from "react-redux";
 import { selectUserInfoDetails } from "../../store/userInfoSlice";
+import NewspaperIcon from "@mui/icons-material/Newspaper";
+import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
 
 /**
  * Handle logging user out.
@@ -87,6 +88,24 @@ export function MainListItems() {
           </ListItem>
         </Link>
       )}
+
+      <Link className="SIDEBAR__link" to="/event">
+        <ListItem button className="SIDEBAR__button">
+          <ListItemIcon>
+            <AddLocationAltIcon className="SIDEBAR__icon" />
+          </ListItemIcon>
+          <ListItemText className="SIDEBAR__text" primary="Events" />
+        </ListItem>
+      </Link>
+
+      <Link className="SIDEBAR__link" to="/news">
+        <ListItem button className="SIDEBAR__button">
+          <ListItemIcon>
+            <NewspaperIcon className="SIDEBAR__icon" />
+          </ListItemIcon>
+          <ListItemText className="SIDEBAR__text" primary="News" />
+        </ListItem>
+      </Link>
 
       {doctorRole && (
         <Link className="SIDEBAR__link" to="inbox">
