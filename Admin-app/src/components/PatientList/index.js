@@ -45,27 +45,23 @@ function createData(
   patientname,
   email,
   status,
-  appointment,
   doctor,
   priority,
   statusReview,
-  temperature,
-  weight,
-  height
+  birthday,
+  address
 ) {
   return {
     patientname,
     email,
     status,
-    appointment,
     doctor,
     priority,
     statusReview,
-    symptoms: [
+    personalInfo: [
       {
-        temperature,
-        weight,
-        height,
+        birthday,
+        address,
       },
     ],
   };
@@ -114,7 +110,6 @@ function PatientList() {
             >
               {doc.status ? doc.status : "UNCONFIRMED"}
             </span>,
-            doc.upcomingAppointment,
             doc.assignedDoctor &&
               doctorsList &&
               doctorsList[doc.assignedDoctor] &&
@@ -131,9 +126,8 @@ function PatientList() {
               }
             ></FlagIcon>,
             doc.statusReview,
-            doc.temperature + "°C",
-            doc.weight + " lbs",
-            doc.heightFeet + "' " + doc.heightInches + '"'
+            doc.dob,
+            `${doc.address}, ${doc.city}, ${doc.province}, ${doc.postalCode}`
           )
         );
       });
@@ -192,13 +186,6 @@ function PatientList() {
               align="center"
             >
               status
-            </TableCell>
-            <TableCell
-              sx={{ borderColor: "var(--background-secondary)" }}
-              className="PATIENT__table__header"
-              align="center"
-            >
-              Upcoming Appointment
             </TableCell>
             <TableCell
               sx={{ borderColor: "var(--background-secondary)" }}

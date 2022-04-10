@@ -15,7 +15,7 @@ test("should get the dashboard", () => {
   // Checks text for patientlist
   const plist = screen.getByTestId("patientlist");
   expect(plist).toBeInTheDocument();
-  expect(plist).toHaveTextContent(/^Flagged Patient's List$/);
+  expect(plist).toHaveTextContent("Patient Name");
 });
 
 afterEach(() => {
