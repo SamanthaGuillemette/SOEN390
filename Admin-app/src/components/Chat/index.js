@@ -166,7 +166,7 @@ const Inbox = () => {
 //Then it returns the chating bubbles which are displayed above. 
 function ChatMessage(props) {
 
-    const { name, timestamp, message } = props.message
+    const { name, message } = props.message
     const [user] = useAuthState(auth);
     const messageClass = (name === user.email ? 'sent' : 'received')
 
