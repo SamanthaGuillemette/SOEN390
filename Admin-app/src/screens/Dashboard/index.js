@@ -108,7 +108,7 @@ const Dashboard = () => {
                         {/*Added the link to the table name */}
                         <Link
                           className="PATIENT__table__name"
-                          to={`/patientprofile/${row.id}`}
+                          to={`/patientprofile/${row.email}`}
                         >
                           {`${row.firstName} ${row.lastName}`}
                         </Link>
