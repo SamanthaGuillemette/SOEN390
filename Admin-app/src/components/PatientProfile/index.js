@@ -25,6 +25,7 @@ import {
   getPatient,
   togglePriorityFlag,
   getStatuses,
+  getDiary,
 } from "../../backend/firebasePatientUtilities";
 import DropdownStatus from "./../DropdownStatus";
 import DropdownDoctor from "./../DropdownDoctor";
@@ -101,6 +102,7 @@ function PatientProfile() {
   const { key } = useParams();
   const [patientInfo, setPatientInfo] = useState(null);
   const [patientInfoStatuses, setPatientInfoStatuses] = useState([]);
+  const [patientInfoDiaries, setPatientInfoDiaires] = useState([]);
 
   // Get Patient Info each time page refreshes
   useEffect(() => {
@@ -128,11 +130,26 @@ function PatientProfile() {
               )
             );
         });
+        getDiary(key, false).then((diaries) => {
+          diaries &&
+            setPatientInfoDiaires(
+              diaries.map((diary) =>
+                createData(
+                  diary?.timestamp?.toDate()?.toLocaleString() || "",
+                  diary.description || "",
+                  diary.location || "",
+                  diary.postalCode || ""
+                )
+              )
+            );
+        });
       })
       .catch((err) => {
         console.log(err);
       });
   }, [key]);
+
+  // Get Diary entries of Patient
 
   return (
     <Grid
@@ -384,8 +401,6 @@ function PatientProfile() {
         <br />
         <br />
       </Grid>
-
-      <DiaryList patientInfo={patientInfo}></DiaryList>
     </Grid>
   );
 }
