@@ -71,7 +71,7 @@ function UpdateStatus() {
             STATUS
           </Typography>
           {/* Table for displaying date, temperature and weight */}
-          <Table sx={{ width: 350 }} aria-label="spanning table">
+          <Table sx={{ width: 340 }} aria-label="spanning table">
             <TableHead>
               <TableRow>
                 <TableCell

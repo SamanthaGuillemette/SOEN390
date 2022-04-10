@@ -29,7 +29,7 @@ function SymptomsTable(props) {
 
   return (
     <TableContainer sx={{ mt: 2 }}>
-      <Table sx={{ width: 350 }} aria-label="spanning table">
+      <Table sx={{ width: 340 }} aria-label="spanning table">
         <TableBody>
           <TableRow>
             <TableCell
