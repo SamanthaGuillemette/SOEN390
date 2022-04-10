@@ -31,6 +31,7 @@ import DropdownStatus from "./../DropdownStatus";
 import DropdownDoctor from "./../DropdownDoctor";
 import DiaryList from "../DiaryList";
 import SymptomsRow from "./SymptomsRow";
+import DiaryRow from "./DiaryRow";
 
 /**
  * setAge function works for setting the age of the patient
@@ -400,6 +401,64 @@ function PatientProfile() {
         <br />
         <br />
         <br />
+      </Grid>
+      {/* Diary details table */}
+      <Grid item xs={12}>
+        <TableContainer
+          data-testid="table-container1"
+          className="DIARY__table"
+          sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }}
+          component={Paper}
+        >
+          <h5 className="DIARY__table__label">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DIARY DETAILS{" "}
+            <h5 className="DIARY__table__label__no-data">
+              {patientInfoDiaries &&
+                patientInfoDiaries.length === 0 &&
+                `(NO DIARIES ENTERED YET)`}
+            </h5>
+          </h5>
+          <Table sx={{ minWidth: 650 }} aria-label="custom table">
+            <TableHead>
+              <TableRow>
+                {/* adding table header */}
+                <TableCell
+                  className="DIARY__table__header"
+                  sx={{ borderColor: "var(--secondary-light)" }}
+                >
+                  Date
+                </TableCell>
+                <TableCell
+                  className="DIARY__table__header"
+                  sx={{ borderColor: "var(--secondary-light)" }}
+                  align="right"
+                >
+                  Description
+                </TableCell>
+                <TableCell
+                  className="DIARY__table__header"
+                  sx={{ borderColor: "var(--secondary-light)" }}
+                  align="right"
+                >
+                  Location
+                </TableCell>
+                <TableCell
+                  className="DIARY__table__header"
+                  sx={{ borderColor: "var(--secondary-light)" }}
+                  align="right"
+                >
+                  Postal Code
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {patientInfoDiaries &&
+                patientInfoDiaries.map((row) => (
+                  <DiaryRow key={row.id} row={row} />
+                ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </Grid>
     </Grid>
   );
