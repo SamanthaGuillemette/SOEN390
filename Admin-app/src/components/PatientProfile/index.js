@@ -443,6 +443,7 @@ function PatientProfile() {
                 <TableCell
                   className="PATIENT-DIARY__table__header"
                   sx={{ borderColor: "var(--background-secondary)" }}
+                  align="center"
                 >
                   Description
                 </TableCell>
