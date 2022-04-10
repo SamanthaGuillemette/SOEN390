@@ -8,16 +8,6 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import Divider from "@mui/material/Divider";
-import Stack from "@mui/material/Stack";
 import FlagIcon from "@mui/icons-material/Flag";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -29,9 +19,8 @@ import {
 } from "../../backend/firebasePatientUtilities";
 import DropdownStatus from "./../DropdownStatus";
 import DropdownDoctor from "./../DropdownDoctor";
-import DiaryList from "../DiaryList";
-import SymptomsRow from "./SymptomsRow";
-import DiaryRow from "./DiaryRow";
+import DiaryList from "./DiaryList";
+import StatusList from "./StatusList";
 
 /**
  * setAge function works for setting the age of the patient
@@ -114,8 +103,8 @@ function PatientProfile() {
 
   const { key } = useParams();
   const [patientInfo, setPatientInfo] = useState(null);
-  const [patientInfoStatuses, setPatientInfoStatuses] = useState([]);
-  const [patientInfoDiaries, setPatientInfoDiaires] = useState([]);
+  const [patientStatuses, setPatientStatuses] = useState([]);
+  const [patientDiaries, setPatientDiaries] = useState([]);
 
   // Get Patient Info each time page refreshes
   useEffect(() => {
@@ -124,7 +113,7 @@ function PatientProfile() {
         setPatientInfo(data);
         getStatuses(key, false).then((statuses) => {
           statuses &&
-            setPatientInfoStatuses(
+            setPatientStatuses(
               statuses.map((status) =>
                 createData(
                   status?.timestamp?.toDate()?.toLocaleString() || "",
@@ -145,7 +134,7 @@ function PatientProfile() {
         });
         getDiary(key, false).then((diaries) => {
           diaries &&
-            setPatientInfoDiaires(
+            setPatientDiaries(
               diaries.map((diary) =>
                 createDiaryData(
                   diary?.timestamp?.toDate()?.toLocaleString() || "",
@@ -308,169 +297,11 @@ function PatientProfile() {
 
       {/* Symptom details table */}
       <Grid item xs={12}>
-        <TableContainer
-          data-testid="table-1"
-          sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }}
-          component={Paper}
-        >
-          <h5 className="PATIENT-SYMPTOMS__table__label">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STATUS DETAILS{" "}
-            <h5 className="PATIENT-SYMPTOMS__table__label__no-data">
-              {patientInfoStatuses &&
-                patientInfoStatuses.length === 0 &&
-                `(NO STATUSES ENTERED YET)`}
-            </h5>
-          </h5>
-          <Table sx={{ minWidth: 650 }} aria-label="collapsable table">
-            <TableHead>
-              <TableRow>
-                <TableCell
-                  className="PATIENT-SYMPTOMS__table__header"
-                  sx={{ borderColor: "var(--background-secondary)" }}
-                >
-                  Date
-                </TableCell>
-                <TableCell
-                  className="PATIENT-SYMPTOMS__table__header"
-                  sx={{ borderColor: "var(--background-secondary)" }}
-                  align="center"
-                >
-                  Fever
-                </TableCell>
-                <TableCell
-                  className="PATIENT-SYMPTOMS__table__header"
-                  sx={{ borderColor: "var(--background-secondary)" }}
-                  align="center"
-                >
-                  Cough
-                </TableCell>
-                <TableCell
-                  className="PATIENT-SYMPTOMS__table__header"
-                  sx={{ borderColor: "var(--background-secondary)" }}
-                  align="center"
-                >
-                  Runny Nose
-                </TableCell>
-                <TableCell
-                  className="PATIENT-SYMPTOMS__table__header"
-                  sx={{ borderColor: "var(--background-secondary)" }}
-                  align="center"
-                >
-                  Muscle Ache
-                </TableCell>
-                <TableCell
-                  className="PATIENT-SYMPTOMS__table__header"
-                  sx={{ borderColor: "var(--background-secondary)" }}
-                  align="center"
-                >
-                  Sore Throat
-                </TableCell>
-                <TableCell
-                  className="PATIENT-SYMPTOMS__table__header"
-                  sx={{ borderColor: "var(--background-secondary)" }}
-                  align="center"
-                >
-                  Smell Loss
-                </TableCell>
-                <TableCell
-                  className="PATIENT-SYMPTOMS__table__header"
-                  sx={{ borderColor: "var(--background-secondary)" }}
-                  align="center"
-                >
-                  Taste Loss
-                </TableCell>
-                <TableCell
-                  className="PATIENT-SYMPTOMS__table__header"
-                  sx={{ borderColor: "var(--background-secondary)" }}
-                  align="center"
-                >
-                  Temperature (&deg;C)
-                </TableCell>
-                <TableCell
-                  className="PATIENT-SYMPTOMS__table__header"
-                  sx={{ borderColor: "var(--background-secondary)" }}
-                  align="center"
-                >
-                  Weight (lb)
-                </TableCell>
-                <TableCell
-                  sx={{ borderColor: "var(--background-secondary)" }}
-                  className="PATIENT__table__header"
-                  align="center"
-                >
-                  Reviewed
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {patientInfoStatuses &&
-                patientInfoStatuses.map((row) => (
-                  <SymptomsRow key={row.id} row={row} />
-                ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <br />
-        <br />
-        <br />
+        <StatusList patientStatuses={patientStatuses} />
       </Grid>
       {/* Diary details table */}
       <Grid item xs={12}>
-        <TableContainer
-          data-testid="table-container1"
-          className="DIARY__table"
-          sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }}
-          component={Paper}
-        >
-          <h5 className="PATIENT-DIARY__table__label">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DIARY DETAILS{" "}
-            <h5 className="PATIENT-DIARY__table__label__no-data">
-              {patientInfoDiaries &&
-                patientInfoDiaries.length === 0 &&
-                `(NO DIARIES ENTERED YET)`}
-            </h5>
-          </h5>
-          <Table sx={{ minWidth: 650 }} aria-label="custom table">
-            <TableHead>
-              <TableRow>
-                {/* adding table header */}
-                <TableCell
-                  className="PATIENT-DIARY__table__header"
-                  sx={{ borderColor: "var(--background-secondary)" }}
-                >
-                  Date
-                </TableCell>
-                <TableCell
-                  className="PATIENT-DIARY__table__header"
-                  sx={{ borderColor: "var(--background-secondary)" }}
-                  align="center"
-                >
-                  Description
-                </TableCell>
-                <TableCell
-                  className="PATIENT-DIARY__table__header"
-                  sx={{ borderColor: "var(--background-secondary)" }}
-                  align="center"
-                >
-                  Location
-                </TableCell>
-                <TableCell
-                  className="PATIENT-DIARY__table__header"
-                  sx={{ borderColor: "var(--background-secondary)" }}
-                  align="center"
-                >
-                  Postal Code
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {patientInfoDiaries &&
-                patientInfoDiaries.map((row) => (
-                  <DiaryRow key={row.id} row={row} />
-                ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <DiaryList patientDiaries={patientDiaries} />
       </Grid>
     </Grid>
   );

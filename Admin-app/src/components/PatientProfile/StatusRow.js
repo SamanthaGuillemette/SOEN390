@@ -15,7 +15,7 @@ import { db } from "../../backend/firebase";
  * SymptomsRow function works for setting & displaying the synptoms row of the patient
  * @param  {} props
  */
-function SymptomsRow(props) {
+function StatusRow(props) {
   const { row } = props;
   const { key } = useParams();
   const [reviewedStatus, setReviewedStatus] = useState(row.reviewed);
@@ -133,4 +133,4 @@ function SymptomsRow(props) {
   );
 }
 
-export default SymptomsRow;
+export default StatusRow;

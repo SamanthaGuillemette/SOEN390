@@ -1,6 +1,7 @@
 .PATIENT__table,
 .DOC__table,
-.ADMIN__table {
+.ADMIN__table,
+.PATIENT-DIARY__table {
   margin-top: 30px;
   background-color: var(--background-main) !important;
   border-radius: 20px !important;
