@@ -3,11 +3,6 @@
  *
  */
 import Button from "@mui/material/Button";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, db } from "../../backend/firebase";
-import { doc, setDoc } from "firebase/firestore";
-import { useDocument } from "react-firebase-hooks/firestore";
-import { makeStyles } from "@material-ui/core/styles";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import "./DiaryTable.css";
 import Dialog from "@mui/material/Dialog";

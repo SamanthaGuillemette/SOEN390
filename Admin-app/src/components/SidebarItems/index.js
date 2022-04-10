@@ -16,7 +16,6 @@ import { Link } from "react-router-dom";
 import QrCodeIcon from "@mui/icons-material/QrCode";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { auth } from "../../backend/firebase";
-import Badge from "@mui/material/Badge";
 import { signOut } from "firebase/auth";
 import "./SidebarItems.css";
 import { useSelector } from "react-redux";
