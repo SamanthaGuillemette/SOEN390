@@ -422,9 +422,9 @@ function PatientProfile() {
           sx={{ bgcolor: "var(--background-main)", borderRadius: "20px" }}
           component={Paper}
         >
-          <h5 className="DIARY__table__label">
+          <h5 className="PATIENT-DIARY__table__label">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DIARY DETAILS{" "}
-            <h5 className="DIARY__table__label__no-data">
+            <h5 className="PATIENT-DIARY__table__label__no-data">
               {patientInfoDiaries &&
                 patientInfoDiaries.length === 0 &&
                 `(NO DIARIES ENTERED YET)`}
@@ -435,29 +435,28 @@ function PatientProfile() {
               <TableRow>
                 {/* adding table header */}
                 <TableCell
-                  className="DIARY__table__header"
-                  sx={{ borderColor: "var(--secondary-light)" }}
+                  className="PATIENT-DIARY__table__header"
+                  sx={{ borderColor: "var(--background-secondary)" }}
                 >
                   Date
                 </TableCell>
                 <TableCell
-                  className="DIARY__table__header"
-                  sx={{ borderColor: "var(--secondary-light)" }}
-                  align="right"
+                  className="PATIENT-DIARY__table__header"
+                  sx={{ borderColor: "var(--background-secondary)" }}
                 >
                   Description
                 </TableCell>
                 <TableCell
-                  className="DIARY__table__header"
-                  sx={{ borderColor: "var(--secondary-light)" }}
-                  align="right"
+                  className="PATIENT-DIARY__table__header"
+                  sx={{ borderColor: "var(--background-secondary)" }}
+                  align="center"
                 >
                   Location
                 </TableCell>
                 <TableCell
-                  className="DIARY__table__header"
-                  sx={{ borderColor: "var(--secondary-light)" }}
-                  align="right"
+                  className="PATIENT-DIARY__table__header"
+                  sx={{ borderColor: "var(--background-secondary)" }}
+                  align="center"
                 >
                   Postal Code
                 </TableCell>

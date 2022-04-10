@@ -27,7 +27,7 @@ function DiaryRow(props) {
       }}
     >
       <TableCell
-        className="PATIENT-SYMPTOMS__table__data"
+        className="PATIENT-DIARY__table__data"
         sx={{ borderColor: "var(--background-secondary)" }}
         component="th"
         scope="row"
@@ -35,21 +35,21 @@ function DiaryRow(props) {
         {row.DateDiary}
       </TableCell>
       <TableCell
-        className="PATIENT-SYMPTOMS__table__data"
+        className="PATIENT-DIARY__table__data"
         sx={{ borderColor: "var(--background-secondary)" }}
         align="center"
       >
         {row.Description}
       </TableCell>
       <TableCell
-        className="PATIENT-SYMPTOMS__table__data"
+        className="PATIENT-DIARY__table__data"
         sx={{ borderColor: "var(--background-secondary)" }}
         align="center"
       >
         {row.Location}
       </TableCell>
       <TableCell
-        className="PATIENT-SYMPTOMS__table__data"
+        className="PATIENT-DIARY__table__data"
         sx={{ borderColor: "var(--background-secondary)" }}
         align="center"
       >

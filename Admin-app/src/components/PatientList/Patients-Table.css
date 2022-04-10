@@ -34,6 +34,7 @@
 .STATUS-CARD__header,
 .PATIENT-STATUS-REVIEW__header,
 .PATIENT-SYMPTOMS__table__header,
+.PATIENT-DIARY__table__header,
 .ADMIN__table__header {
   color: var(--text-inactive) !important;
   text-transform: uppercase;
@@ -54,7 +55,8 @@
 
 .PATIENT__table__data,
 .DOC__table__data,
-.PATIENT-SYMPTOMS__table__data {
+.PATIENT-SYMPTOMS__table__data,
+.PATIENT-DIARY__table__data {
   color: var(--text-primary) !important;
   font-weight: 500 !important;
   font-size: 1rem !important;
