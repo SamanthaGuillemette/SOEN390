@@ -94,14 +94,16 @@ const Dashboard = () => {
             </Link>
           </Grid>
           <Grid item xs={6}>
-            <div className="dashboard-card__container">
-              <img
-                className="dashboard-card__img"
-                src={NewspaperIcon}
-                alt="News"
-              />
-              <p className="dashboard-card__title">News</p>
-            </div>
+            <Link to="/news">
+              <div className="dashboard-card__container">
+                <img
+                  className="dashboard-card__img"
+                  src={NewspaperIcon}
+                  alt="News"
+                />
+                <p className="dashboard-card__title">News</p>
+              </div>
+            </Link>
           </Grid>
           <Grid item xs={12}>
             <Link to="/mydoctor">

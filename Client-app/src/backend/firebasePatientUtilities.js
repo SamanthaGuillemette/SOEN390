@@ -238,7 +238,41 @@ const getStatusesQuery = async (dbString, isTodayOnly) => {
 
     return query(
       collection(db, dbString),
-      where("timestamp", ">", todayDate),
+      where("timestamp", ">=", todayDate),
+      orderBy("timestamp", "desc")
+    );
+  } else {
+    return query(collection(db, dbString), orderBy("timestamp", "desc"));
+  }
+};
+
+const getDiary = async (patientKey, isTodayOnly = false) => {
+  console.log("[getDiary]: " + patientKey);
+  const diaryCollectionName = "Diary";
+  const dbString = `${getTableName()}/${patientKey}/${diaryCollectionName}`;
+
+  const queryDiaries = await getDiariesQuery(dbString, isTodayOnly);
+
+  const diaries = await getTableDataByQuery(queryDiaries);
+
+  return diaries;
+};
+
+const getDiariesQuery = async (dbString, isTodayOnly) => {
+  console.log("[isTodayOnly]: " + isTodayOnly);
+
+  if (isTodayOnly === true) {
+    // Set time to today @ 0:00 hrs
+    const tempDate = new Date();
+    const todayDate = new Date(
+      tempDate.getFullYear(),
+      tempDate.getMonth(),
+      tempDate.getDate()
+    );
+
+    return query(
+      collection(db, dbString),
+      where("timestamp", ">=", todayDate),
       orderBy("timestamp", "desc")
     );
   } else {
@@ -283,4 +317,5 @@ export {
   setRecovered,
   setSeen,
   setSeenExposure,
+  getDiary,
 };

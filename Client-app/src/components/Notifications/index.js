@@ -19,7 +19,14 @@ import {
   setSeenExposure,
 } from "../../backend/firebasePatientUtilities.js";
 import { useDocumentOnce } from "react-firebase-hooks/firestore";
-import { doc, collection, query, where, onSnapshot } from "firebase/firestore";
+import {
+  doc,
+  collection,
+  query,
+  where,
+  onSnapshot,
+  orderBy,
+} from "firebase/firestore";
 import "./Notifications.css";
 /**
  * This function will display the notifications for the client
@@ -40,7 +47,6 @@ const Notifications = () => {
   // Declaring constants to display notifications
   const [displayUpdateNotif, setDisplayUpdateNotif] = useState(false);
   const [displayReviewedNotif, setDisplayReviewedNotif] = useState([]);
-
   const [exposeNotif, setExposeNotif] = useState([]);
 
   useEffect(() => {
@@ -70,6 +76,14 @@ const Notifications = () => {
       );
     });
   }, [value]);
+
+  // sorting based on increasing timestamp
+  displayReviewedNotif.sort((a, b) =>
+    a.timestamp < b.timestamp ? 1 : b.timestamp < a.timestamp ? -1 : 0
+  );
+  exposeNotif.sort((a, b) =>
+    a.timestamp < b.timestamp ? 1 : b.timestamp < a.timestamp ? -1 : 0
+  );
 
   return (
     <>
@@ -161,7 +175,7 @@ const Notifications = () => {
                   >
                     Your status has been reviewed by your doctor{" "}
                     {value && value.data().assignedDoctor}, please check your
-                    inbox for more information. {notification.id}
+                    inbox for more information.
                   </Typography>
                   <Typography
                     style={{

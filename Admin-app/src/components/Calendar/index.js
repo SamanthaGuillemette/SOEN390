@@ -8,12 +8,13 @@ import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import resourceTimeGridPlugin from "@fullcalendar/resource-timegrid";
 import "./Calendar.css";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { db } from "../../backend/firebase";
 import {
   addDoc,
   collection,
   doc,
+  getDocs,
   serverTimestamp,
   setDoc,
 } from "firebase/firestore";
@@ -75,24 +76,24 @@ const style = {
   borderRadius: "10px",
 };
 
-const events = [
-  {
-    title: "event 1",
-    start: "2022-03-21",
-    end: "2022-03-22",
-    allDay: true,
-    description: "event 1 description",
-    note: "event 1 note",
-  },
-  {
-    title: "test event",
-    start: "2022-03-13",
-    end: "2022-03-14",
-    allDay: true,
-    description: "test event description",
-    note: "test event note",
-  },
-];
+// const events = [
+//   {
+//     title: "event 1",
+//     start: "2022-03-21",
+//     end: "2022-03-22",
+//     allDay: true,
+//     description: "event 1 description",
+//     note: "event 1 note",
+//   },
+//   {
+//     title: "test event",
+//     start: "2022-03-13",
+//     end: "2022-03-14",
+//     allDay: true,
+//     description: "test event description",
+//     note: "test event note",
+//   },
+// ];
 
 /**
  * This component is what allows the Calender feature to work. Below are many consts and
@@ -103,6 +104,7 @@ const events = [
 
 const Calendar = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [eventModalOpen, setEventModalOpen] = useState(false);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -111,6 +113,10 @@ const Calendar = () => {
   const [location, setLocation] = useState("");
   const [note, setNote] = useState("");
   const [selectedPatient, setSelectedPatient] = useState("");
+  const [clickedEvent, setClickedEvent] = useState(null);
+
+  // Needs the empty object {} ==> or it will fail fo push new object to array
+  const [appointmentList, setAppointmentList] = useState([{}]);
 
   const calendarRef = useRef();
   const classes = useStyles();
@@ -123,14 +129,52 @@ const Calendar = () => {
   //   console.log("Date clicked: ", event);
   // };
 
+  useEffect(() => {
+    // If the patientList of this doctor is not empty,
+    if (patientList) {
+      // Go through each patient email, create a collection ref, & get all the appointments
+      patientList.forEach((patientEmail) => {
+        const appointmentRef = collection(
+          db,
+          `DoctorPatient/${doctorEmail};${patientEmail}/AppointmentHistory`
+        );
+        const getAppointmentList = async () => {
+          const querySnapshot = await getDocs(appointmentRef);
+          querySnapshot?.forEach((doc) => {
+            // console.log(doc.id, doc.data());
+            setAppointmentList((appointmentList) => [
+              ...appointmentList,
+              {
+                id: doc.id,
+                title: doc.data().title,
+                start: doc.data().startDate,
+                end: doc.data().endDate,
+                confirmation: doc.data().confirmation,
+                description: doc.data().description,
+                finish: doc.data().finish,
+                location: doc.data().location,
+                note: doc.data().note,
+              },
+            ]);
+          });
+        };
+        getAppointmentList();
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Render list of available patients that are assigned to this doctor
   const renderPatientList = () => {
-    return patientList.map((patient) => {
-      return (
-        <MenuItem key={patient} value={patient}>
-          {patient}
-        </MenuItem>
-      );
-    });
+    if (patientList) {
+      return patientList.map((patient) => {
+        return (
+          <MenuItem key={patient} value={patient}>
+            {patient}
+          </MenuItem>
+        );
+      });
+    }
   };
 
   const handleSelectedDate = (event) => {
@@ -148,7 +192,7 @@ const Calendar = () => {
     event.preventDefault();
 
     // Submit basic appointment info to database
-    await setDoc(doc(db, `DoctorPatient/${doctorEmail}&${selectedPatient}`), {
+    await setDoc(doc(db, `DoctorPatient/${doctorEmail};${selectedPatient}`), {
       doctor: doctorEmail,
       patient: selectedPatient,
       createdOn: serverTimestamp(),
@@ -158,7 +202,7 @@ const Calendar = () => {
     await addDoc(
       collection(
         db,
-        `DoctorPatient/${doctorEmail}&${selectedPatient}/AppointmentHistory`
+        `DoctorPatient/${doctorEmail};${selectedPatient}/AppointmentHistory`
       ),
       {
         startDate: startDate,
@@ -180,8 +224,9 @@ const Calendar = () => {
   };
 
   const handleEventClick = (event) => {
-    console.log("Event clicked: ", event);
-    console.log("==> ", event.event._def.extendedProps.note);
+    console.log("Event clicked: ", event.event);
+    setClickedEvent({ ...event.event._def, ...event.event._instance });
+    setEventModalOpen(true);
   };
 
   return (
@@ -203,7 +248,8 @@ const Calendar = () => {
         schedulerLicenseKey="GPL-My-Project-Is-Open-Source"
         ref={calendarRef}
         selectable={true}
-        events={events}
+        events={appointmentList}
+        // events={events}
         eventClick={handleEventClick}
         // dateClick={handleDateClick}
         select={handleSelectedDate}
@@ -215,16 +261,20 @@ const Calendar = () => {
           onClose={() => {
             setModalOpen(false);
           }}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
         >
           <Box
             sx={style}
             component="form"
             noValidate
             onSubmit={handleCreateAppointment}
+            color="var(--text-primary)"
+            maxWidth={600}
           >
-            <Typography variant="h4" component="h2">
+            <Typography
+              variant="h4"
+              component="h2"
+              className="calendar-createAppointmentTitle"
+            >
               Create new appointment
             </Typography>
             <Grid container spacing={2}>
@@ -321,8 +371,22 @@ const Calendar = () => {
                 />
               </Grid>
               <Grid item xs={12}>
-                <FormControl sx={{ m: 1, minWidth: 200 }}>
-                  <InputLabel>Select Patient</InputLabel>
+                <FormControl
+                  sx={{
+                    m: 1,
+                    minWidth: 200,
+                    background: "#262626",
+                    borderRadius: "5px",
+                    marginBottom: "25px",
+                  }}
+                >
+                  <InputLabel
+                    sx={{
+                      color: "var(--text-primary)",
+                    }}
+                  >
+                    Select Patient
+                  </InputLabel>
                   <Select
                     value={selectedPatient}
                     onChange={(e) => {
@@ -340,7 +404,7 @@ const Calendar = () => {
             <Button
               type="submit"
               variant="contained"
-              className="update-button"
+              className="calendar-updateButton"
               disabled={selectedPatient === ""}
             >
               CREATE APPOINTMENT
@@ -348,7 +412,7 @@ const Calendar = () => {
             <Button
               type="submit"
               variant="outlined"
-              className="cancel-button"
+              className="calendar-cancelButton"
               onClick={() => {
                 setModalOpen(false);
               }}
@@ -358,6 +422,48 @@ const Calendar = () => {
           </Box>
         </Modal>
       </ThemeProvider>
+
+      {clickedEvent && (
+        <>
+          <ThemeProvider theme={theme}>
+            <Modal
+              open={eventModalOpen}
+              onClose={() => {
+                setEventModalOpen(false);
+              }}
+            >
+              <Box
+                sx={style}
+                component="form"
+                noValidate
+                color="var(--text-primary)"
+                maxWidth={600}
+              >
+                <Typography
+                  variant="h4"
+                  component="h2"
+                  className="calendar-createAppointmentTitle"
+                >
+                  Selected event info
+                </Typography>
+
+                <h4>Title: {clickedEvent.title}</h4>
+                <h4>Date: {new Date(clickedEvent.range.end).toDateString()}</h4>
+                <h4>
+                  Confirmed:{" "}
+                  {clickedEvent.extendedProps.confirmation ? "No" : "Yes"}
+                </h4>
+                <h4>
+                  Finished: {clickedEvent.extendedProps.finish ? "No" : "Yes"}
+                </h4>
+                <h4>Description: {clickedEvent.extendedProps.description}</h4>
+                <h4>Location: {clickedEvent.extendedProps.location}</h4>
+                <h4>Note: {clickedEvent.extendedProps.note}</h4>
+              </Box>
+            </Modal>
+          </ThemeProvider>
+        </>
+      )}
     </>
   );
 };

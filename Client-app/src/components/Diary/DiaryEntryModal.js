@@ -2,14 +2,13 @@
  * @fileoverview This component displays the modal for adding a new diary entry.
  *
  */
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../../backend/firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { useDocument } from "react-firebase-hooks/firestore";
 import { makeStyles } from "@material-ui/core/styles";
-import NoteIcon from "../../assets/note.svg";
+import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import "./DiaryTable.css";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -36,11 +35,11 @@ const style = {
   borderColor: "var(--primary-light)",
 };
 
-const DiaryEntryModal = () => {
+const DiaryEntryModal = (prop) => {
   //const [user] = useAuthState(auth);
   //const diaryDoc = doc(db, `Diary/${user?.email}`);
   const [openEntry, setOpenEntry] = useState(false);
-
+  const row = prop.row;
   const handleEntryOpen = () => setOpenEntry(true);
   const handleEntryClose = () => setOpenEntry(false);
   return (
@@ -66,40 +65,34 @@ const DiaryEntryModal = () => {
             id="diary-entry-dialog-title"
             className="header-diaryEntry-dialog"
           >
-            <img className="diaryEntry__icon" src={NoteIcon} alt="Diary" />
+            <NoteAltIcon className="diaryEntry__icon" alt="Diary" />
             Diary Entry
           </DialogTitle>
           <DialogContent dividers>
             <Grid container>
               <Grid item xs={6} className="diaryEntry-text">
-                <p className="diaryEntry-contactDate">Contact Date:</p>
+                <p className="diaryEntry-contactDate">Date:</p>
               </Grid>
               <Grid item xs={6}>
-                <p className="diaryEntry-data">2022-02-02</p>
+                <p className="diaryEntry-data">{row.Date}</p>
               </Grid>
               <Grid item xs={6}>
-                <p className="diaryEntry-contactFullName">Contact Full Name:</p>
+                <p className="diaryEntry-contactFullName">Desciption:</p>
               </Grid>
               <Grid item xs={6}>
-                <p className="diaryEntry-data">Julie Doe</p>
+                <p className="diaryEntry-data">{row.Description}</p>
               </Grid>
               <Grid item xs={6}>
-                <p className="diaryEntry-phoneNumber">Phone Number:</p>
+                <p className="diaryEntry-phoneNumber">Location:</p>
               </Grid>
               <Grid item xs={6}>
-                <p className="diaryEntry-data">555-555-5555</p>
+                <p className="diaryEntry-data">{row.Location}</p>
               </Grid>
               <Grid item xs={6}>
-                <p className="diaryEntry-email">Email:</p>
+                <p className="diaryEntry-email">Postal Code</p>
               </Grid>
               <Grid item xs={6}>
-                <p className="diaryEntry-data">email@email.com</p>
-              </Grid>
-              <Grid item xs={6}>
-                <p className="diaryEntry-contactLocation">Contact Location:</p>
-              </Grid>
-              <Grid item xs={6}>
-                <p className="diaryEntry-data">Concordia Hall Building</p>
+                <p className="diaryEntry-data">{row.PostalCode}</p>
               </Grid>
             </Grid>
           </DialogContent>

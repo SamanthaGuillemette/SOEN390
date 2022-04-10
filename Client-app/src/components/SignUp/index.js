@@ -73,7 +73,7 @@ const helperTextStyles = makeStyles((theme) => ({
 }));
 
 // This function is used to set the postal code in a proper Canadian Format
-const TextMaskCustom = forwardRef(function TextMaskCustom(props, ref) {
+export const TextMaskCustom = forwardRef(function TextMaskCustom(props, ref) {
   const { onChange, ...other } = props;
   return (
     <IMaskInput

@@ -6,7 +6,7 @@
 }
 
 .fc-day-today {
-  background: var(--background-secondary) !important;
+  background: rgba(139, 195, 235, 0.15) !important;
 }
 
 .fc-day-today:hover,
@@ -23,6 +23,7 @@
   background-color: transparent !important;
   border-color: transparent !important;
   box-shadow: none !important;
+  background-color: var(--primary-dark) !important;
 }
 
 .fc-button:focus {
@@ -41,4 +42,14 @@
 
 .fc-theme-standard td {
   border: 1px solid #595959 !important;
+}
+
+.calendar-createAppointmentTitle {
+  margin-bottom: 35px !important;
+  text-align: center;
+}
+
+.calendar-updateButton {
+  margin-right: 15px !important;
+  border: 1px solid var(--secondary-light) !important;
 }
