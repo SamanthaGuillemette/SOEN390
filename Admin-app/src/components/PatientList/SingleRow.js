@@ -5,12 +5,34 @@ import IconButton from "@mui/material/IconButton";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
-import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+
+/**
+ * setAge function works for setting the age of the patient
+ * @param  {} dobStr
+ */
+function getAge(dobStr) {
+  var todaysDate = new Date(); // First get today's date
+  var dob = new Date(dobStr); // Convert date of birth string to a date objects
+
+  var ageNow = todaysDate.getFullYear() - dob.getFullYear(); // storing age
+  var m = todaysDate.getMonth() - dob.getMonth(); // storing month
+
+  if (m < 0 || (m === 0 && todaysDate.getDate < dob.getDate())) {
+    ageNow -= 1; // decreasing age
+  }
+
+  if (ageNow < 0) {
+    // if negative value
+    return 0; // return 0
+  } else {
+    return ageNow; // returning
+  }
+}
 
 function SingleRow(props) {
   const { row } = props;
@@ -57,13 +79,6 @@ function SingleRow(props) {
         <TableCell
           sx={{ borderColor: "var(--background-secondary)" }}
           className="PATIENT__table__data"
-          align="center"
-        >
-          {row.appointment}
-        </TableCell>
-        <TableCell
-          sx={{ borderColor: "var(--background-secondary)" }}
-          className="PATIENT__table__data"
           align="left"
         >
           {row.doctor}
@@ -92,67 +107,41 @@ function SingleRow(props) {
                 component="div"
                 color="var(--text-inactive)"
               >
-                Symptoms
+                Personal Information
               </Typography>
-              <Table
-                className="SYMPTOMS__table"
-                size="small"
-                aria-label="purchases"
-              >
-                {/* Start of Table headers */}
-                <TableHead>
-                  <TableRow>
-                    <TableCell
-                      sx={{ borderColor: "var(--primary-light)" }}
-                      className="SYMPTOMS__table__data"
-                    >
-                      Temperature
-                    </TableCell>
-                    <TableCell
-                      sx={{ borderColor: "var(--primary-light)" }}
-                      className="SYMPTOMS__table__data"
-                    >
-                      Weight
-                    </TableCell>
-                    <TableCell
-                      sx={{ borderColor: "var(--primary-light)" }}
-                      className="SYMPTOMS__table__data"
-                      align="right"
-                    >
-                      Height
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                {/* End of Table Headers */}
+              <Table size="small" aria-label="purchases">
                 {/* Adding the body of collapsible table */}
-                <TableBody>
-                  {/* Displaying each row */}
-                  {row.symptoms.map((symptomsRow) => (
-                    <TableRow key={symptomsRow.date}>
+                {/* Displaying each row */}
+                {row.personalInfo.map((infoRow) => (
+                  <TableBody>
+                    <TableRow>
                       <TableCell
                         sx={{ borderColor: "transparent" }}
-                        className="SYMPTOMS__table__data"
+                        className="PERSONAL-INFO__table__data"
                         component="th"
                         scope="row"
                       >
-                        {symptomsRow.temperature}
-                      </TableCell>
-                      <TableCell
-                        sx={{ borderColor: "transparent" }}
-                        className="SYMPTOMS__table__data"
-                      >
-                        {symptomsRow.weight}
-                      </TableCell>
-                      <TableCell
-                        sx={{ borderColor: "transparent" }}
-                        className="SYMPTOMS__table__data"
-                        align="right"
-                      >
-                        {symptomsRow.height}
+                        {`Age: ${getAge(infoRow.birthday)}`}
                       </TableCell>
                     </TableRow>
-                  ))}
-                </TableBody>
+                    <TableRow>
+                      <TableCell
+                        sx={{ borderColor: "transparent" }}
+                        className="PERSONAL-INFO__table__data"
+                      >
+                        {`Birthday: ${infoRow.birthday}`}
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell
+                        sx={{ borderColor: "transparent" }}
+                        className="PERSONAL-INFO__table__data"
+                      >
+                        {`Address: ${infoRow.address}`}
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                ))}
               </Table>
             </Box>
           </Collapse>

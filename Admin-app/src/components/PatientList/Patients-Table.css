@@ -43,13 +43,7 @@
   font-weight: 900 !important;
 }
 
-.SYMPTOMS__table {
-  background: var(--background-secondary);
-  border-radius: 15px;
-  width: 55% !important;
-}
-
-.SYMPTOMS__table__data {
+.PERSONAL-INFO__table__data {
   color: var(--text-primary) !important;
   font-weight: 500 !important;
 }
