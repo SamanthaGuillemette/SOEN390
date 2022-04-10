@@ -93,15 +93,6 @@ export function MainListItems() {
           <ListItem button className="SIDEBAR__button">
             <ListItemIcon>
               <MailIcon className="SIDEBAR__icon" />
-              <Badge
-                badgeContent={4}
-                sx={{
-                  "& .MuiBadge-badge": {
-                    color: "var(--background-secondary)",
-                    backgroundColor: "var(--primary-main)",
-                  },
-                }}
-              />
             </ListItemIcon>
             <ListItemText className="SIDEBAR__text" primary="Inbox" />
           </ListItem>
@@ -112,15 +103,6 @@ export function MainListItems() {
         <ListItem button className="SIDEBAR__button">
           <ListItemIcon>
             <NotificationsIcon className="SIDEBAR__icon" />
-            <Badge
-              badgeContent={17}
-              sx={{
-                "& .MuiBadge-badge": {
-                  color: "var(--background-secondary)",
-                  backgroundColor: "var(--primary-main)",
-                },
-              }}
-            />
           </ListItemIcon>
           <ListItemText className="SIDEBAR__text" primary="Updates" />
         </ListItem>
