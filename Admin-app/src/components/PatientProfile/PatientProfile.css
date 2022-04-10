@@ -1,21 +1,25 @@
 #avatar {
-  width: 200px;
-  height: 233px;
-  margin: auto;
-  margin-top: 15px;
-  border: 1px solid inherit;
+  width: 150px;
+  height: 150px;
 }
 
-.PATIENT-profile__info {
-  text-align: center;
+.PATIENT-profile__info,
+.PATIENT-profile__info__data {
   font-size: 13px !important;
-  color: var(--text-primary);
+  font-size: 0.96rem !important;
+  color: #eee7e7 !important;
 }
 
 .PATIENT-profile__name {
-  text-align: center;
   font-weight: bold !important;
   color: var(--text-primary);
+}
+
+.PATIENT-SYMPTOMS__table__label__no-data,
+.PATIENT-DIARY__table__label__no-data {
+  color: #d93025;
+  font-weight: 900 !important;
+  display: inline-block;
 }
 
 #addButton {
@@ -29,13 +33,16 @@
   background-color: transparent;
 }
 
-h5.PATIENT-SYMPTOMS__table__label {
+h5.PATIENT-SYMPTOMS__table__label,
+h5.PATIENT-DIARY__table__label {
+  margin-top: 3% !important;
   color: var(--text-primary);
   font-weight: 900 !important;
 }
 
 .PATIENT__priority-flag {
   color: var(--text-primary);
+  font-size: 1.2rem !important;
 }
 
 .PATIENT__priority-flag.clicked {
@@ -50,7 +57,9 @@ h5.PATIENT-SYMPTOMS__table__label {
   border: 1px solid var(--info-border);
 }
 
-.PATIENT-PROFILE__data, .ASSIGNED-DOC__name, .PATIENT-STATUS-REVIEW__data {
+.PATIENT-PROFILE__data,
+.ASSIGNED-DOC__name,
+.PATIENT-STATUS-REVIEW__data {
   color: var(--text-primary) !important;
   font-weight: 500 !important;
   font-size: 0.96rem !important;
@@ -59,4 +68,14 @@ h5.PATIENT-SYMPTOMS__table__label {
 .ASSIGNED-DOC__name {
   margin-top: 18px !important;
   display: inline-block !important;
+}
+
+.PATIENT__reviewed-status {
+  background: rgb(148, 155, 226, 0.2);
+}
+
+.PATIENT-profile__info__data {
+  display: inline !important;
+  font-weight: 600 !important;
+  color: var(--text-primary);
 }

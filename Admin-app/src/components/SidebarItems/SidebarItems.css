@@ -1,20 +1,29 @@
 .SIDEBAR__link:hover {
-    color: var(--background-secondary) !important;
+  color: var(--background-secondary) !important;
 }
 
 .SIDEBAR__icon {
-    color: var(--text-inactive) !important;
+  color: var(--text-inactive) !important;
 }
 
 .SIDEBAR__text {
-    color: var(--text-inactive) !important;
+  color: var(--text-inactive) !important;
 }
 
 .SIDEBAR__button {
-    background-color: transparent !important;
+  background-color: transparent !important;
+  margin-left: 10px !important;
 }
 
 .SIDEBAR__button:hover .SIDEBAR__icon,
-.SIDEBAR__button:hover .SIDEBAR__text {
-    color: var(--text-primary) !important;
+.SIDEBAR__button:hover .SIDEBAR__text,
+.SIDEBAR__subheader:hover {
+  color: var(--text-primary) !important;
+}
+
+.SIDEBAR__subheader {
+  background-color: transparent !important;
+  color: var(--text-inactive) !important;
+  font-size: 1rem !important;
+  font-weight: 800;
 }

@@ -1,65 +1,71 @@
+/**
+ * @fileoverview This class takes care of the symptoms table component.
+ */
+
 import "./UpdateStatus.css";
-import * as React from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
-import { useSelector } from "react-redux";
-import IconButton from '@mui/material/IconButton';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
+import IconButton from "@mui/material/IconButton";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import Box from "@mui/material/Box";
+import Collapse from "@mui/material/Collapse";
+import { useState, useEffect } from "react";
 
+/**
+ * Renders the symptoms table function
+ * @returns SymptomsTable function
+ */
+function SymptomsTable(props) {
+  const [open, setOpen] = useState(false);
+  const [lastStatus, setLastStatus] = useState("");
 
-function SymptomsTable() {
-    // Pull 'userInfoDetails' from the store (Redux centralized store)
-  const userInfoDetails = useSelector(
-    (state) => state.userInfo.userInfoDetails
-  );
-
-  const [open, setOpen] = React.useState(false);
+  useEffect(() => {
+    props && props.lastStatus && setLastStatus(props.lastStatus);
+  }, [props, props.lastStatus]);
 
   return (
-    <TableContainer sx={{mt: 2}}>
-    <Table sx={{ width: 350 }} aria-label="spanning table">
-      <TableBody>
+    <TableContainer sx={{ mt: 2 }}>
+      <Table sx={{ width: 350 }} aria-label="spanning table">
+        <TableBody>
           <TableRow>
             <TableCell
-              className="header"
+              className="Update-Status__header"
               style={{ paddingBottom: 8, paddingTop: 0, paddingLeft: 40 }}
               align="center"
               sx={{ borderColor: "var(--background-secondary)" }}
             >
-            <IconButton
-              aria-label="expand row"
-              size="small"
-              style={{ color: "var(--primary-light)" }}
-              onClick={() => setOpen(!open)}
-            >
-              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-            </IconButton>
-            Symptoms
+              <IconButton
+                aria-label="expand row"
+                size="small"
+                style={{ color: "var(--primary-light)" }}
+                onClick={() => setOpen(!open)}
+              >
+                {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+              </IconButton>
+              Symptoms
             </TableCell>
             <TableCell
-             sx={{ borderColor: "var(--background-secondary)" }}
-            >
-            </TableCell>
+              sx={{ borderColor: "var(--background-secondary)" }}
+            ></TableCell>
           </TableRow>
           <TableRow>
-            <TableCell 
-              style={{ paddingBottom: 0, paddingTop: 0 }} 
-              sx={{ borderColor: "var(--background-secondary)" }} 
+            <TableCell
+              style={{ paddingBottom: 0, paddingTop: 0 }}
+              sx={{ borderColor: "var(--background-secondary)" }}
               colSpan={6}
             >
               <Collapse in={open} timeout="auto" unmountOnExit>
-                <Box className="updateStatus-symptomsBox">
-                  <Table size="small" aria-label="purchases">
+                <Box className="Update-Status__symptoms-box">
+                  {/* Collapsible symptoms table */}
+                  <Table size="small" aria-label="symptoms">
                     <TableBody>
                       <TableRow>
-                        <TableCell 
-                          className="updateStatus-symptomsHeader"
+                        <TableCell
+                          className="Update-Status__header"
                           sx={{ borderColor: "var(--secondary-light)" }}
                           style={{ width: 120 }}
                           align="left"
@@ -67,107 +73,121 @@ function SymptomsTable() {
                           Fever
                         </TableCell>
                         <TableCell
-                            className="data"
-                            sx={{ borderColor: "var(--secondary-light)" }}
-                            align="right"
-                          >
-                            {userInfoDetails?.fever}
+                          className="Update-Status__data"
+                          sx={{ borderColor: "var(--secondary-light)" }}
+                          align="right"
+                        >
+                          {lastStatus.length > 0
+                            ? lastStatus[0].data.fever
+                            : "N/A"}
                         </TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell 
-                          className="updateStatus-symptomsHeader"
+                        <TableCell
+                          className="Update-Status__header"
                           sx={{ borderColor: "var(--primary-light)" }}
                           align="left"
                         >
                           Sore Throat
                         </TableCell>
                         <TableCell
-                            className="data"
-                            sx={{ borderColor: "var(--primary-light)" }}
-                            align="right"
-                          >
-                            {userInfoDetails?.soreThroat}
+                          className="Update-Status__data"
+                          sx={{ borderColor: "var(--primary-light)" }}
+                          align="right"
+                        >
+                          {lastStatus.length > 0
+                            ? lastStatus[0].data.soreThroat
+                            : "N/A"}
                         </TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell 
-                          className="updateStatus-symptomsHeader"
+                        <TableCell
+                          className="Update-Status__header"
                           sx={{ borderColor: "var(--secondary-light)" }}
                           align="left"
                         >
                           Cough
                         </TableCell>
                         <TableCell
-                            className="data"
-                            sx={{ borderColor: "var(--secondary-light)" }}
-                            align="right"
-                          >
-                            {userInfoDetails?.cough}
+                          className="Update-Status__data"
+                          sx={{ borderColor: "var(--secondary-light)" }}
+                          align="right"
+                        >
+                          {lastStatus.length > 0
+                            ? lastStatus[0].data.cough
+                            : "N/A"}
                         </TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell 
-                          className="updateStatus-symptomsHeader"
+                        <TableCell
+                          className="Update-Status__header"
                           sx={{ borderColor: "var(--primary-light)" }}
                           align="left"
                         >
                           Runny Nose
                         </TableCell>
                         <TableCell
-                            className="data"
-                            sx={{ borderColor: "var(--primary-light)" }}
-                            align="right"
-                          >
-                            {userInfoDetails?.runnyNose}
+                          className="Update-Status__data"
+                          sx={{ borderColor: "var(--primary-light)" }}
+                          align="right"
+                        >
+                          {lastStatus.length > 0
+                            ? lastStatus[0].data.runnyNose
+                            : "N/A"}
                         </TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell 
-                          className="updateStatus-symptomsHeader"
+                        <TableCell
+                          className="Update-Status__header"
                           sx={{ borderColor: "var(--primary-light)" }}
                           align="left"
                         >
-                          Muscle pain
+                          Muscle Ache
                         </TableCell>
                         <TableCell
-                            className="data"
-                            sx={{ borderColor: "var(--primary-light)" }}
-                            align="right"
-                          >
-                            {userInfoDetails?.musclePain}
+                          className="Update-Status__data"
+                          sx={{ borderColor: "var(--primary-light)" }}
+                          align="right"
+                        >
+                          {lastStatus.length > 0
+                            ? lastStatus[0].data.muscleAche
+                            : "N/A"}
                         </TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell 
-                          className="updateStatus-symptomsHeader"
+                        <TableCell
+                          className="Update-Status__header"
                           sx={{ borderColor: "var(--secondary-light)" }}
                           align="left"
                         >
                           Smell Loss
                         </TableCell>
                         <TableCell
-                            className="data"
-                            sx={{ borderColor: "var(--secondary-light)" }}
-                            align="right"
-                          >
-                            {userInfoDetails?.smellLoss}
+                          className="Update-Status__data"
+                          sx={{ borderColor: "var(--secondary-light)" }}
+                          align="right"
+                        >
+                          {lastStatus.length > 0
+                            ? lastStatus[0].data.smellLoss
+                            : "N/A"}
                         </TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell 
-                          className="updateStatus-symptomsHeader"
+                        <TableCell
+                          className="Update-Status__header"
                           sx={{ borderColor: "transparent" }}
                           align="left"
                         >
                           Taste Loss
                         </TableCell>
                         <TableCell
-                            className="data"
-                            sx={{ borderColor: "transparent" }}
-                            align="right"
-                          >
-                            {userInfoDetails?.tasteLoss}
+                          className="Update-Status__data"
+                          sx={{ borderColor: "transparent" }}
+                          align="right"
+                        >
+                          {lastStatus.length > 0
+                            ? lastStatus[0].data.tasteLoss
+                            : "N/A"}
                         </TableCell>
                       </TableRow>
                     </TableBody>
@@ -176,9 +196,9 @@ function SymptomsTable() {
               </Collapse>
             </TableCell>
           </TableRow>
-      </TableBody>
-    </Table>
-  </TableContainer>
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 }
 

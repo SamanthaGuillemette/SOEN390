@@ -1,37 +1,51 @@
-import patientData from "../data/patients.json";
-import { db } from "./firebase";
 import {
   getTableData,
+  getTableDataByQuery,
   getTableDataItem,
-  populateTable,
+  getDocRef,
 } from "./firebaseUtilities";
-import { doc, updateDoc, deleteField } from "firebase/firestore";
+import {
+  updateDoc,
+  deleteField,
+  query,
+  where,
+  collection,
+  orderBy,
+  getDoc,
+  addDoc,
+  serverTimestamp,
+  doc,
+} from "firebase/firestore";
+import { db } from "./firebase";
 
-const tableName = "Patients";
+const tableName = "Client";
 
 const getPatients = async () => {
   return getTableData(tableName);
 };
 
-const getPatient = async (id) => {
-  return getTableDataItem(tableName, id);
+const getPatient = async (key) => {
+  return getTableDataItem(tableName, key);
 };
 
-const isValidPatientId = async (id) => {
-  return getPatient(id) != null;
+const isValidPatientId = async (key) => {
+  return getPatient(key) != null;
 };
 
-const togglePriorityFlag = async (id) => {
+const togglePriorityFlag = async (patientKey) => {
   try {
     // Get Patient
-    const docRef = doc(db, tableName, id);
-    let patientInfo = await getPatient(id);
+    const docRef = getDocRef(tableName, patientKey);
+    let patientInfo = await getPatient(patientKey);
 
     // Set priorityFlag value
     let priorityFlag;
 
     if (patientInfo) {
-      if (patientInfo.flaggedPriority === "0") {
+      if (
+        patientInfo.flaggedPriority === null ||
+        patientInfo.flaggedPriority === "0"
+      ) {
         priorityFlag = "1";
       } else {
         priorityFlag = "0";
@@ -42,7 +56,7 @@ const togglePriorityFlag = async (id) => {
     docRef && (await updateDoc(docRef, "flaggedPriority", priorityFlag));
 
     // Get updated patient
-    patientInfo = await getPatient(id);
+    patientInfo = await getPatient(patientKey);
 
     return patientInfo;
   } catch (error) {
@@ -50,59 +64,69 @@ const togglePriorityFlag = async (id) => {
   }
 };
 
-
-  const toggleReviewed = async (id) => {
-    try
-    {
-      // Get Patient
-      const docRef = doc(db, tableName, id);
-      let patientInfo = await getPatient(id);
-
-      // Set reviewed value 
-      let reviewed;
-
-      if (patientInfo)
-      {
-        if (patientInfo.statusReview === 'Not Completed')
-        {
-          reviewed = "Status Reviewed";
-        }
-        else
-        {
-          reviewed = "Not Completed";
-        }
-      }
-
-      // Update DB with new value
-      docRef && await updateDoc(docRef, "statusReview", reviewed);
-
-      // Get updated patient
-      patientInfo = await getPatient(id);      
-
-      return patientInfo;
-    }
-
-    catch(error)
-    {
-      console.log("[toggleReviewed]" + error);  
-    }
-  };
-const setAssignedDoctor = async (patientId, doctorId) => {
+const setReviewed = async (patientKey, docID) => {
   try {
     // Get Patient
-    const docRef = doc(db, tableName, patientId);
-    let patientInfo = await getPatient(patientId);
+    const docRef = getDocRef(`${tableName}/${patientKey}/Status`, docID);
+    let statusInfo = await getStatus(docRef);
 
-    if (doctorId != null) {
+    // Set reviewed value
+    let reviewed;
+
+    if (statusInfo) {
+      if (statusInfo.reviewed === null || statusInfo.reviewed === false) {
+        reviewed = true;
+      } else {
+        reviewed = false;
+      }
+    }
+
+    // Update DB with new value
+    docRef && (await updateDoc(docRef, "reviewed", reviewed));
+
+    // Get updated patient
+    statusInfo = await getStatus(docRef);
+
+    return statusInfo.reviewed; // returning reviewed value
+  } catch (error) {
+    console.log("[setReviewed]" + error);
+  }
+};
+
+const getStatus = async (docRef) => {
+  try {
+    const docSnapShot = await getDoc(docRef);
+
+    // If file exists, return it
+    if (docSnapShot.exists()) {
+      console.log("Table Data Item Found!");
+      return docSnapShot.data();
+    } else {
+      // If not found, write to console.
+      console.error(`[getStatus] Document not found`);
+    }
+  } catch (error) {
+    console.log(`[getStatus] ${error}`);
+    console.trace();
+  }
+};
+
+const setAssignedDoctor = async (patientKey, doctorKey) => {
+  try {
+    // Get Patient
+    const docRef = getDocRef(tableName, patientKey);
+    let patientInfo = await getPatient(patientKey);
+
+    if (doctorKey != null) {
       // Update Assigned Doctor field in Patient
-      docRef && (await updateDoc(docRef, "assignedDoctor", doctorId));
+      docRef && (await updateDoc(docRef, "assignedDoctor", doctorKey));
     } else {
       // Delete Assigned Doctor field in Patient
       docRef && (await updateDoc(docRef, { assignedDoctor: deleteField() }));
     }
 
     // Get updated patient
-    patientInfo = await getPatient(patientId);
+    patientInfo = await getPatient(patientKey);
 
     return patientInfo;
   } catch (error) {
@@ -110,48 +134,266 @@ const setAssignedDoctor = async (patientId, doctorId) => {
   }
 };
 
-const setStatus = async (patientId, status) => {
-
-  try 
-  {
+const setStatus = async (patientKey, status) => {
+  try {
     // Get Patient
-    const docRef = doc(db, tableName, patientId);
-    let patientInfo = await getPatient(patientId);
+    const docRef = getDocRef(tableName, patientKey);
+    let patientInfo = await getPatient(patientKey);
 
     if (patientInfo) {
-      if (status != null)
-      {
-        // Update status field in Patient
-        docRef && await updateDoc(docRef, "status", status);
-      }
+      // Update status field in Patient
+      docRef && (await updateDoc(docRef, "status", status));
     }
 
     // Get updated patient
-    patientInfo = await getPatient(patientId);      
+    patientInfo = await getPatient(patientKey);
 
     return patientInfo;
+  } catch (error) {
+    console.log("[setStatus]" + error);
   }
-  catch (error)
-  {
-    console.log("[setStatus]" + error);  
+};
+
+const setNewCase = async (patientKey, newValue) => {
+  try {
+    // Get Patient
+    const docRef = getDocRef(tableName, patientKey);
+    let patientInfo = await getPatient(patientKey);
+
+    // if patient exists
+    if (patientInfo) {
+      // Update newCase field in Patient
+      docRef && (await updateDoc(docRef, "newCase", newValue));
+      // Add timestamp
+      docRef && (await updateDoc(docRef, "timestamp", serverTimestamp()));
+    }
+
+    // Get updated patient
+    patientInfo = await getPatient(patientKey);
+
+    return patientInfo; // returning new info
+  } catch (error) {
+    console.log("[setNewCase]" + error);
+  }
+};
+
+const viewedNewCase = async (patientKey) => {
+  try {
+    // Get Patient
+    const docRef = getDocRef(tableName, patientKey);
+    let patientInfo = await getPatient(patientKey);
+
+    // Set viewed value
+    let viewed;
+
+    if (patientInfo) {
+      if (patientInfo.viewedCase === null || patientInfo.viewedCase === false) {
+        viewed = true;
+      } else {
+        viewed = false;
+      }
+    }
+
+    // Update DB with new value
+    docRef && (await updateDoc(docRef, "viewedCase", viewed));
+
+    // Get updated patient
+    patientInfo = await getPatient(patientKey);
+
+    return patientInfo;
+  } catch (error) {
+    console.log("[viewedNewCase]" + error);
   }
 };
 
 /**
- * This function populates the Patient table in firebase given a JSON file
- * imported at the beginning of this file
+ * Obtain the tuples from the Status subcollection of a Client
+ *
+ * @param {*} patientKey
+ * @returns Status tuples
  */
-const populatePatients = () => {
-  populateTable(tableName, patientData);
+const getStatuses = async (patientKey, isTodayOnly = false) => {
+  console.log("[getStatuses]: " + patientKey);
+  const statusCollectionName = "Status";
+  const dbString = `${getTableName()}/${patientKey}/${statusCollectionName}`;
+
+  const queryStatuses = await getStatusesQuery(dbString, isTodayOnly);
+
+  const statuses = await getTableDataByQuery(queryStatuses);
+
+  return statuses;
+};
+
+const getStatusesQuery = async (dbString, isTodayOnly) => {
+  console.log("[isTodayOnly]: " + isTodayOnly);
+
+  if (isTodayOnly === true) {
+    // Set time to today @ 0:00 hrs
+    const tempDate = new Date();
+    const todayDate = new Date(
+      tempDate.getFullYear(),
+      tempDate.getMonth(),
+      tempDate.getDate()
+    );
+
+    return query(
+      collection(db, dbString),
+      where("timestamp", ">=", todayDate),
+      orderBy("timestamp", "desc")
+    );
+  } else {
+    return query(collection(db, dbString), orderBy("timestamp", "desc"));
+  }
+};
+
+/**const setDiaryEntry = async (patientKey, diaryEntry) => {
+  console.log("[setDiaryEntry]" + patientKey);
+  try {
+    // Get Patient
+    const docRef = getDocRef(tableName, patientKey);
+    let patientInfo = await getPatient(patientKey);
+
+    if (patientInfo) {
+      // Update diary entry field in Patient
+      docRef && (await updateDoc(docRef, "diary", diaryEntry));
+    }
+
+    // Get updated patient
+    patientInfo = await getPatient(patientKey);
+
+    return patientInfo;
+  } catch (error) {
+    console.log("[setDiaryEntry]" + error);
+  }
+};**/
+
+/**
+ * Obtain the tuples from the Dairy subcollection of a Client
+ *
+ * @param {*} patientKey
+ * @returns Dairy tuples
+ */
+const getDiary = async (patientKey, isTodayOnly = false) => {
+  console.log("[getDiary]: " + patientKey);
+  const diaryCollectionName = "Diary";
+  const dbString = `${getTableName()}/${patientKey}/${diaryCollectionName}`;
+
+  const queryDiaries = await getDiariesQuery(dbString, isTodayOnly);
+
+  const diaries = await getTableDataByQuery(queryDiaries);
+
+  return diaries;
+};
+
+const getDiariesQuery = async (dbString, isTodayOnly) => {
+  console.log("[isTodayOnly]: " + isTodayOnly);
+
+  if (isTodayOnly === true) {
+    // Set time to today @ 0:00 hrs
+    const tempDate = new Date();
+    const todayDate = new Date(
+      tempDate.getFullYear(),
+      tempDate.getMonth(),
+      tempDate.getDate()
+    );
+
+    return query(
+      collection(db, dbString),
+      where("timestamp", ">=", todayDate),
+      orderBy("timestamp", "desc")
+    );
+  } else {
+    return query(collection(db, dbString), orderBy("timestamp", "desc"));
+  }
+};
+
+const setRecovered = async (patientKey, recovered) => {
+  try {
+    // Get Patient
+    const docRef = getDocRef(tableName, patientKey);
+    let patientInfo = await getPatient(patientKey);
+
+    if (patientInfo) {
+      if (recovered != null) {
+        // Update status field in Patient
+        docRef && (await updateDoc(docRef, "recovered", recovered));
+      }
+    }
+
+    // Get updated patient
+    patientInfo = await getPatient(patientKey);
+    return patientInfo;
+  } catch (error) {
+    console.log("[setRecovered]" + error);
+  }
+};
+
+const setViewedCaseFalse = async (patientKey) => {
+  try {
+    // Get Patient
+    const docRef = getDocRef(tableName, patientKey);
+    let patientInfo = await getPatient(patientKey);
+
+    if (patientInfo) {
+      // Update DB with new value
+      docRef && (await updateDoc(docRef, "viewedCase", false));
+    }
+
+    // Get updated patient
+    patientInfo = await getPatient(patientKey);
+
+    return patientInfo;
+  } catch (error) {
+    console.log("[setViewedCase]" + error);
+  }
+};
+
+const getTableName = () => {
+  return tableName;
+};
+
+const notifyExposure = async (patientKey) => {
+  try {
+    const patient = await getPatient(patientKey);
+    const patientPostal = patient.postalCode.slice(0, -3);
+    let allPatients = await getPatients();
+
+    function filterByPostal(prop) {
+      return (
+        prop.postalCode.includes(patientPostal) && prop.email !== patient.email
+      );
+    }
+
+    let filteredPatients = allPatients.filter(filterByPostal);
+
+    filteredPatients.forEach(async (patient) => {
+      const clientRef = doc(db, `Client/${patient.email}`);
+      const notifRef = collection(clientRef, "exposureNotification");
+
+      await addDoc(notifRef, {
+        notif: "Someone near you has gotten covid.",
+        timestamp: serverTimestamp(),
+        seen: "False",
+      });
+    });
+  } catch (error) {
+    console.log("[notifyExposure]" + error);
+  }
 };
 
 export {
   getPatients,
   getPatient,
-  populatePatients,
   togglePriorityFlag,
   setAssignedDoctor,
   isValidPatientId,
-  toggleReviewed,
-  setStatus
+  setStatus,
+  setNewCase,
+  viewedNewCase,
+  getStatuses,
+  getDiary,
+  setRecovered,
+  setViewedCaseFalse,
+  setReviewed,
+  notifyExposure,
 };

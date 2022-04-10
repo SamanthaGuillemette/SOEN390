@@ -10,9 +10,18 @@
   padding-left: 27px;
 }
 
+.diary_text {
+  color: var(--text-primary) !important;
+}
+
+.diary__contactMessage {
+  width: 75% !important;
+  border: 1px solid !important;
+  border-color: var(--text-inactive) !important;
+}
+
 .diary__list {
   width: 45vh !important;
-  margin-top: 30px !important;
   background-color: var(--background-main) !important;
   border-radius: 20px !important;
   padding: 1 !important;
@@ -36,14 +45,17 @@
   margin-bottom: 10px;
 }
 
-.header {
+.Symptoms-list__header,
+.Update-Status__header {
   color: var(--text-inactive) !important;
   text-transform: uppercase;
   opacity: 0.7;
   font-weight: 900 !important;
 }
 
-.data {
+.Latest-Status__data,
+.Symptoms-list__data,
+.Update-Status__data {
   color: var(--text-primary) !important;
   font-weight: 500 !important;
   font-size: 1rem !important;
@@ -104,4 +116,15 @@
 
 .MuiDialogContent-dividers {
   border-color: var(--primary-light) !important;
+}
+
+.header-diaryAddModal {
+  color: var(--text-primary) !important;
+}
+
+.addDiary-button {
+  top: 10px !important;
+  width: 35px !important;
+  height: 35px !important;
+  color: var(--text-primary) !important;
 }

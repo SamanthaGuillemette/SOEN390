@@ -23,43 +23,17 @@ import Stack from "@mui/material/Stack";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../../backend/firebase";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import { createTheme } from "@material-ui/core/styles";
 import { inputLabelClasses } from "@mui/material/InputLabel";
 import { Navigate } from "react-router-dom";
 import Modal from "@mui/material/Modal";
+import { styleForModal, Copyright } from "../SignIn";
+import { makeStyles } from "@material-ui/core/styles";
+import { getDoc } from "firebase/firestore";
 import "./SignUp.css";
-
-const styleForModal = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "var(--background-main)",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
-
-function Copyright(props) {
-  return (
-    <Typography variant="body2" align="center" {...props}>
-      {"Copyright © "}
-      <Link
-        className="SIGN-UP__link"
-        sx={{ fontSize: "12px", textDecoration: "none" }}
-        color="inherit"
-      >
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 const theme = createTheme({
   palette: {
@@ -68,6 +42,9 @@ const theme = createTheme({
     },
     text: {
       primary: "#ffffff",
+    },
+    error: {
+      main: "#ffffff",
     },
   },
   components: {
@@ -80,6 +57,16 @@ const theme = createTheme({
     },
   },
 });
+
+// This const does styling of the empty input field helper text
+const helperTextStyles = makeStyles((theme) => ({
+  root: {
+    "&.MuiFormHelperText-root.Mui-error": {
+      color: "#d93025",
+      fontSize: "12px",
+    },
+  },
+}));
 
 /**
  * This function is responsible for the signup component which also communicates with the server and displays relevent error messages if necessary.
@@ -94,48 +81,85 @@ export default function SignUp(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [open, setOpen] = useState(false);
-  const [error1, setError1] = useState(false);
-  const [error2, setError2] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [emptyFields, setEmptyFields] = useState(false);
+  const [checked, setChecked] = useState(false);
+  const [user, loading] = useAuthState(auth);
+  const helperTestClasses = helperTextStyles();
+
+  /**
+   * This function is responsible for setting const attributes if modal is closed
+   * @param  {} event
+   */
   const handleClose = () => {
     setOpen(false);
-    setError1(false);
-    setError2(false);
+    setErrorMsg("");
   };
 
-  const [user, loading] = useAuthState(auth);
+  /**
+   * This function is responsible for setting checked to be true or false depending on whether clicked or not
+   * @param  {} event
+   */
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+  };
 
   /**
    * This function is responsible for creating a new document in the admin collection with the information of the user who has signed up.
    * This also ensures that the email is not being reused by the client or admin collection
    * Lastly, the createUserWithEmailAndPassword function will create the database authentication
-   * @param  {} event
+   *
+   * @param  {clickEvent} event
    */
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const docRef = doc(db, "Client", email);
-    const docSnap = await getDoc(docRef);
+    let dobValue = null;
 
-    if (docSnap.exists()) {
-      setError1(true);
-      setOpen(true);
+    if (dob !== null) {
+      dobValue = dob.$M + 1 + "/" + dob.$D + "/" + dob.$y; // Required to add + 1 for the month
+    }
+
+    if (
+      firstName === "" ||
+      lastName === "" ||
+      role === "" ||
+      dob === null ||
+      email === "" ||
+      password === ""
+    ) {
+      // if empty fields
+      setEmptyFields(true);
     } else {
-      createUserWithEmailAndPassword(auth, email, password)
-        .then(async () => {
-          const dobValue = dob.$D + "/" + (dob.$M + 1) + "/" + dob.$y;
-          await setDoc(doc(db, "Admin", email), {
-            firstName: firstName,
-            lastName: lastName,
-            role: role,
-            dob: dobValue,
-            email: email,
+      const docRef = doc(db, "Client", email.toLowerCase());
+      const docSnap = await getDoc(docRef);
+
+      // if user hasnt confirmed
+      if (!checked) {
+        setErrorMsg("Please confirm your data is correct.");
+        setOpen(true);
+      } else if (!docSnap.exists()) {
+        createUserWithEmailAndPassword(auth, email, password)
+          .then(async () => {
+            await setDoc(doc(db, "Admin", email.toLowerCase()), {
+              firstName: firstName,
+              lastName: lastName,
+              role: role,
+              dob: dobValue,
+              email: email.toLowerCase(),
+              authorized:
+                role !== "Administrator" && role !== "Super Administrator"
+                  ? false
+                  : true,
+            });
+          })
+          .catch((error) => {
+            setErrorMsg(error.message);
+            setOpen(true);
           });
-        })
-        .catch((error) => {
-          setErrorMsg(error.message);
-          setError2(true);
-          setOpen(true);
-        });
+      } else {
+        setErrorMsg("This email is registered with the Client application.");
+        setOpen(true);
+      }
     }
   };
 
@@ -190,6 +214,13 @@ export default function SignUp(props) {
                   value={firstName}
                   autoFocus
                   onChange={(e) => setFirstName(e.target.value)}
+                  helperText={
+                    firstName === "" && emptyFields
+                      ? "This field is required."
+                      : ""
+                  }
+                  error={firstName === "" && emptyFields}
+                  FormHelperTextProps={{ classes: helperTestClasses }}
                   InputLabelProps={{
                     sx: {
                       color: "var(--text-primary)",
@@ -210,6 +241,13 @@ export default function SignUp(props) {
                   autoComplete="family-name"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
+                  helperText={
+                    lastName === "" && emptyFields
+                      ? "This field is required."
+                      : ""
+                  }
+                  error={lastName === "" && emptyFields}
+                  FormHelperTextProps={{ classes: helperTestClasses }}
                   InputLabelProps={{
                     sx: {
                       color: "var(--text-primary)",
@@ -226,12 +264,21 @@ export default function SignUp(props) {
                     <DatePicker
                       label="Date of Birth"
                       value={dob}
+                      disableFuture={true}
                       onChange={(e) => {
                         setDOB(e);
                       }}
                       renderInput={(params) => (
                         <TextField
                           {...params}
+                          required
+                          helperText={
+                            dob === null && emptyFields
+                              ? "This field is required."
+                              : ""
+                          }
+                          error={dob === null && emptyFields}
+                          FormHelperTextProps={{ classes: helperTestClasses }}
                           InputLabelProps={{
                             sx: {
                               color: "var(--text-primary)",
@@ -255,6 +302,13 @@ export default function SignUp(props) {
                     label="Role"
                     value={role}
                     onChange={(e) => setRole(e.target.value)}
+                    helperText={
+                      role === "" && emptyFields
+                        ? "This field is required."
+                        : ""
+                    }
+                    error={role === "" && emptyFields}
+                    FormHelperTextProps={{ classes: helperTestClasses }}
                     InputLabelProps={{
                       sx: {
                         color: "var(--text-primary)",
@@ -272,7 +326,7 @@ export default function SignUp(props) {
                     <MenuItem value={"Immigration Officer"}>
                       Immigration Officer
                     </MenuItem>
-                    <MenuItem value={"Adminstrator"}>Adminstrator</MenuItem>
+                    <MenuItem value={"Administrator"}>Administrator</MenuItem>
                   </TextField>
                 </FormControl>
               </Grid>
@@ -283,6 +337,8 @@ export default function SignUp(props) {
                     <Checkbox
                       className="SIGN-UP__checkbox"
                       value="allowExtraEmails"
+                      checked={checked}
+                      onChange={handleChange}
                     />
                   }
                   label="I confirm my data above is correct."
@@ -298,6 +354,11 @@ export default function SignUp(props) {
                   autoComplete="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  helperText={
+                    email === "" && emptyFields ? "This field is required." : ""
+                  }
+                  error={email === "" && emptyFields}
+                  FormHelperTextProps={{ classes: helperTestClasses }}
                   InputLabelProps={{
                     sx: {
                       color: "var(--text-primary)",
@@ -319,6 +380,13 @@ export default function SignUp(props) {
                   autoComplete="new-password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  helperText={
+                    password === "" && emptyFields
+                      ? "This field is required."
+                      : ""
+                  }
+                  error={password === "" && emptyFields}
+                  FormHelperTextProps={{ classes: helperTestClasses }}
                   InputLabelProps={{
                     sx: {
                       color: "var(--text-primary)",
@@ -343,7 +411,7 @@ export default function SignUp(props) {
               Sign Up
             </Button>
             {/* This model is used to display an error message for using the same email in the admin application as the client application 
-            and pertaining to the database such as wrong email or wrong password */}
+             and pertaining to the database such as wrong email or wrong password */}
             <Modal
               open={open}
               onClose={handleClose}
@@ -355,9 +423,7 @@ export default function SignUp(props) {
                   Error
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  {error1 &&
-                    "This email has already been used for the Client Application. Please use another email."}
-                  {error2 && errorMsg}
+                  {errorMsg}
                 </Typography>
               </Box>
             </Modal>

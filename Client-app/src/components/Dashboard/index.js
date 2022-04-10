@@ -14,14 +14,16 @@ import DoctorIcon from "../../assets/doctor.svg";
 import HealthCareIcon from "../../assets/health-care.svg";
 import { Link } from "react-router-dom";
 
+/**
+ * Main function which renders the dashboard
+ * @returns Dashboard object/component
+ */
 const Dashboard = () => {
   return (
     <>
       <Box
         sx={{
-          padding: 4,
           paddingBottom: "120px",
-          backgroundColor: "var(--background-secondary)",
         }}
       >
         <Grid container spacing={3}>
@@ -48,7 +50,7 @@ const Dashboard = () => {
                   src={VirusIcon}
                   alt="Symptoms"
                 />
-                <p className="dashboard-card__title">Symptoms</p>
+                <p className="dashboard-card__title">Status History</p>
               </div>
             </Link>
           </Grid>
@@ -92,14 +94,16 @@ const Dashboard = () => {
             </Link>
           </Grid>
           <Grid item xs={6}>
-            <div className="dashboard-card__container">
-              <img
-                className="dashboard-card__img"
-                src={NewspaperIcon}
-                alt="News"
-              />
-              <p className="dashboard-card__title">News</p>
-            </div>
+            <Link to="/news">
+              <div className="dashboard-card__container">
+                <img
+                  className="dashboard-card__img"
+                  src={NewspaperIcon}
+                  alt="News"
+                />
+                <p className="dashboard-card__title">News</p>
+              </div>
+            </Link>
           </Grid>
           <Grid item xs={12}>
             <Link to="/mydoctor">

@@ -8,78 +8,172 @@ import Card from "@mui/material/Card";
 import DoughnutChart from "../../components/Charts/DoughnutChart";
 import LineChart from "../../components/Charts/LineChart";
 import Typography from "@mui/material/Typography";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import ListSubheader from "@mui/material/ListSubheader";
 import "./Dashboard.css";
 import UpcomingEvents from "../../components/UpcomingEvents";
 import DashboardCards from "../../components/DashboardCards";
 import DashboardStats from "../../components/DashboardStats";
+import EventButton from "../../components/EventButton";
+import COVID19Button from "../../components/COVID-19Button";
+import { useState, useEffect } from "react";
+import { getPatients } from "../../backend/firebasePatientUtilities";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableRow from "@mui/material/TableRow";
+import Table from "@mui/material/Table";
+import { Link } from "react-router-dom";
 
 /**
  * Main function which will render the dashboard
  */
 const Dashboard = () => {
+  const [patientList, setPatientList] = useState(null);
+
+  useEffect(() => {
+    getPatients().then((data) => {
+      let patients_array = [];
+      data.forEach((patient) => {
+        if (patient.flaggedPriority === "1") {
+          patients_array.push(patient);
+        }
+      });
+      setPatientList(patients_array);
+    });
+  }, []);
+
   return (
     // This returns the buttons on the top which display the buttons on the top, this one is for the patients
     <Container maxWidth="xl">
       <Grid container spacing={2} className="STAT__container">
-      <DashboardStats/> {/* Displaying DashbordStats */}
-
-      {/* Here it displays the line and the doughnut charts*/}
+        <DashboardStats /> {/* Displaying DashbordStats */}
+        {/* Here it displays the line and the doughnut charts*/}
         <Grid container spacing={3} className="STAT__container">
           <Grid item xs={12} md={8}>
-            <Card className="STAT_item" sx={{backgroundColor: "inherit", boxShadow: "none"}}>
-              <LineChart/>
+            <Card
+              className="STAT_item"
+              sx={{ backgroundColor: "inherit", boxShadow: "none" }}
+            >
+              <LineChart />
             </Card>
           </Grid>
           <Grid item xs={12} md={4}>
-            <Card className="STAT_item" sx={{background: 'var(--gradient-to-right-btm)'}}>
+            <Card
+              className="STAT_item"
+              sx={{ background: "inherit", boxShadow: "none" }}
+            >
               <DoughnutChart />
             </Card>
           </Grid>
         </Grid>
-
-      {/* The following is the Patient List which appears on the dashboard
-          Here we have the styling.*/}  
-          <List
-            className="PATIENT-LIST"
+        {/* The following is the Patient List which appears on the dashboard
+          Here we have the styling.*/}
+        <TableContainer
+          className="PATIENT-LIST"
+          sx={{
+            width: "28vh",
+            maxWidth: "xl",
+            bgcolor: "var(--background-main)",
+            overflow: "auto",
+            maxHeight: "30vh",
+            marginTop: 3,
+            "& ul": { padding: 0 },
+          }}
+          subheader={<li />}
+        >
+          <Typography
+            data-testid="patientlist"
+            textAlign="center"
+            variant="h6"
             sx={{
-              width: "28vh",
-              maxWidth: "xl",
-              bgcolor: "var(--background-main)",
-              overflow: "auto",
-              maxHeight: "30vh",
-              marginTop: 3,
-              marginLeft: 5,
-              "& ul": { padding: 0 },
+              color: "var(--text-primary)",
+              borderColor: "transparent",
+              mt: 2,
+              mb: 2,
             }}
-            subheader={<li />}
           >
+            Flagged Patient's List
+          </Typography>
+          <Table>
             {/* While here is the implementation*/}
-            <Typography data-testid="patientlist" className="PATIENT-LIST__title" gutterBottom variant="h5" sx={{color: "var(--text-primary)", border: "transparent"}}>
-              Patient's list
-            </Typography>
-            {[0, 1, 2, 3, 4].map((sectionId) => (
-              <li key={`section-${sectionId}`}>
-                <ul>
-                  <ListSubheader sx={{bgcolor: "var(--background-main)", color: "var(--text-inactive)"}}>
-                    {`I'm sticky ${sectionId}`}</ListSubheader>
-                  {[0, 1, 2].map((item) => (
-                    <ListItem sx={{color: "var(--text-inactive)"}} key={`item-${sectionId}-${item}`}>
-                      <ListItemText primary={`Item ${item}`} />
-                    </ListItem>
-                  ))}
-                </ul>
-              </li>
-            ))}
-          </List>
-          <UpcomingEvents/>
-          <DashboardCards/>{/* Displaying DashbordCards */}
+            <TableBody>
+              {patientList != null
+                ? patientList.map((row) => (
+                    <TableRow key={row.id}>
+                      <TableCell
+                        sx={{ borderColor: "transparent" }}
+                        component="th"
+                        scope="row"
+                        align="left"
+                      >
+                        {/*Added the link to the table name */}
+                        <Link
+                          className="PATIENT__table__name"
+                          to={`/patientprofile/${row.email}`}
+                        >
+                          {`${row.firstName} ${row.lastName}`}
+                        </Link>
+                        {/* getting the patient name */}
+                      </TableCell>
+                      <TableCell
+                        sx={{ borderColor: "transparent" }}
+                        component="th"
+                        scope="row"
+                        align="right"
+                      >
+                        <span
+                          className={
+                            row.status === "POSITIVE"
+                              ? "PATIENT__label-positive"
+                              : row.status === "NEGATIVE"
+                              ? "PATIENT__label-negative"
+                              : "PATIENT__label-unconfirmed"
+                          }
+                        >
+                          {row.status ? row.status : "UNCONFIRMED"}
+                        </span>
+                        {/* getting the patient name */}
+                      </TableCell>
+                    </TableRow>
+                  ))
+                : ""}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        {/* The following is the Upcoming Events which appears on the dashboard
+      and the buttons for events and covid news.*/}
+        <Grid container>
+          <Grid xs={6}>
+            <UpcomingEvents
+              eventTitle="title"
+              eventMonth="month"
+              eventDay="day"
+              eventTime="time"
+              eventDesc="desc"
+            />
+          </Grid>
+          <EventButton />
+          <COVID19Button />
         </Grid>
+        <DashboardCards />
+        {/* Displaying DashbordCards */}
+      </Grid>
     </Container>
   );
 };
 
 export default Dashboard;
+
+/* TO BE USED LATER
+        <Grid container>
+          <Grid xs={6}>
+            <UpcomingEvents
+              eventTitle="title"
+              eventMonth="month"
+              eventDay="day"
+              eventTime="time"
+              eventDesc="desc"
+            />
+          </Grid>
+          <EventButton />
+          <COVID19Button />
+        </Grid>; */

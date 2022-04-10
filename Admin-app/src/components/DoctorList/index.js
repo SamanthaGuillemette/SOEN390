@@ -23,22 +23,22 @@ import {
   patientLimit,
 } from "../../backend/firebaseDoctorUtilities";
 
-// Styling the list
+// adding styling
 const dropdownStyle = makeStyles({
   paper: {
-    background: "var(--background-main)", // background color
-    color: "var(--text-inactive)", // text color of pagination dropdown
-    borderRadius: "10px", // making corners rounded
+    background: "var(--background-main)", // giving background color to dropdown
+    color: "var(--text-inactive) !important", // color of text in the dropdown
+    borderRadius: "10px",
   },
   color: {
-    color: "var(--text-inactive)", // pagination text color
+    color: "var(--text-inactive) !important", // color of text in pasgination
   },
   select: {
     "&:after": {
-      borderBottomColor: "var(--text-inactive)",
+      borderBottomColor: "var(--text-inactive) !important",
     },
     "& .MuiSvgIcon-root": {
-      color: "var(--text-inactive)", // pagination button color
+      color: "var(--text-inactive) !important", // color of pagination button
     },
   },
 });
@@ -124,7 +124,12 @@ function DoctorList() {
       let results = [];
       data.forEach((doc) => {
         const size = doc.treats ? Object.keys(doc.treats).length : 0;
-        results.push(createData(doc.name, `${size}/${patientLimit}`));
+        results.push(
+          createData(
+            `${doc.firstName} ${doc.lastName}`,
+            `${size}/${patientLimit}`
+          )
+        );
       });
       setDoctorsList(results);
     });

@@ -10,20 +10,36 @@ import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import authSlice from "./store/authSlice";
 import userInfoSlice from "./store/userInfoSlice";
+import drawerSlice from "./store/drawerSlice";
+import { createTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 
 // Configre the Centralized Store
 const store = configureStore({
   reducer: {
     auth: authSlice,
     userInfo: userInfoSlice,
+    drawer: drawerSlice,
+  },
+});
+
+const theme = createTheme({
+  palette: {
+    background: {
+      default: "var(--background-secondary)",
+    },
   },
 });
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

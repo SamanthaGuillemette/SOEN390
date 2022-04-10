@@ -3,8 +3,8 @@
   margin-left: 10px !important;
 }
 
-.MuiList-root {
-  background-color: var(--background-main) !important;
+fieldset {
+  border: none !important;
 }
 
 .Mui-selected {
@@ -44,6 +44,7 @@
   color: var(--text-primary) !important;
 }
 
-.SIGN-UP__link:hover, .SIGN-IN__link:hover {
+.SIGN-UP__link:hover,
+.SIGN-IN__link:hover {
   color: var(--text-primary) !important;
 }

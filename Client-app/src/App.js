@@ -3,32 +3,46 @@
  *
  */
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Dashboard from "./screens/Dashboard";
-import Chatting from "./screens/Chatting";
+import Dashboard from "./components/Dashboard";
+import Chat from "./components/Chat";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./backend/firebase";
 import Loading from "./components/Loading";
-import Notifications from "./screens/Notifications";
-import QR from "./screens/QR";
-import ClientProfile from "./screens/Profile";
-import Symptoms from "./screens/Symptoms";
-import Diary from "./screens/Diary";
+import Notifications from "./components/Notifications";
+import QR from "./components/QR";
+import ClientProfile from "./components/ClientProfile";
+import SymptomsTable from "./components/SymptomsTable";
+import Diary from "./components/Diary";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserInfo } from "./store/userInfoSlice";
+import {
+  fetchDoctorInfo,
+  fetchUserInfo,
+  // selectDoctorInfoDetails,
+  selectUserInfoDetails,
+} from "./store/userInfoSlice";
 import { onAuthStateChanged } from "firebase/auth";
-import { saveUser } from "./store/authSlice";
-import MyDoctor from "./screens/MyDoctor";
-import Status from "./screens/Status"
-import Appointment from "./screens/Appointment";
+import { saveUser, selectUserEmail, selectUserToken } from "./store/authSlice";
+import DoctorInfo from "./components/DoctorInfo";
+import Appointment from "./components/Appointment";
+import AppBody from "./components/AppBody";
+import UpdateStatus from "./components/UpdateStatus";
+import AppointmentDetails from "./components/Appointment/AppointmentDetails";
+import News from "./components/News";
+import NewsDetails from "./components/News/NewsDetails";
 
 function App() {
-  // const [user, loading] = useAuthState(auth);
+  const user = useSelector(selectUserToken);
+  const userEmail = useSelector(selectUserEmail);
+  const userInfoDetails = useSelector(selectUserInfoDetails);
+  const assignedDoctor = userInfoDetails?.assignedDoctor;
 
-  const user = useSelector((state) => state.auth.userToken);
-  const userEmail = useSelector((state) => state.auth.userEmail);
+  // DEBUG: Test if user has 'assignedDoctor' property
+  // console.log("===> Assigned doctor email: ", assignedDoctor);
+  // console.log("===> Doctor info: ", useSelector(selectDoctorInfoDetails));
+
+  // Create reference to the 'dispatch' function --> to send away an action to the 'Store'
   const dispatch = useDispatch();
 
   /**
@@ -47,7 +61,14 @@ function App() {
 
     // Fetch user info from database to store using his/her email
     dispatch(fetchUserInfo(userEmail));
-  }, [dispatch, userEmail]);
+
+    // If user has 'assignedDoctor', fetch the Doctor's info
+    if (assignedDoctor) {
+      dispatch(fetchDoctorInfo(assignedDoctor));
+    }
+
+    // The array below means whenever any of those values changes, this useEffect() will re-run
+  }, [dispatch, userEmail, assignedDoctor]);
 
   // Added setTimeout() to show loading screen for 500ms, ottherise it'll keep loading
   if (userEmail == null) {
@@ -63,19 +84,27 @@ function App() {
   return (
     <BrowserRouter>
       {user && (
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="*" element={<Dashboard />} />
-          <Route path="/qr" element={<QR />} />
-          <Route path="/clientprofile" element={<ClientProfile />} />
-          <Route path="/symptoms" element={<Symptoms />} />
-          <Route path="/notifications" element={<Notifications />} />
-          <Route path="clientinbox" element={<Chatting />} />
-          <Route path="/mydoctor" element={<MyDoctor />} />
-          <Route path="/status" element={<Status />} />
-          <Route path="/appointment" element={<Appointment />} />
-          <Route path="/diary" element={<Diary />} />
-        </Routes>
+        <AppBody>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="*" element={<Dashboard />} />
+            <Route path="/qr" element={<QR />} />
+            <Route path="/clientprofile" element={<ClientProfile />} />
+            <Route path="/symptoms" element={<SymptomsTable />} />
+            <Route path="/updates" element={<Notifications />} />
+            <Route path="/clientinbox" element={<Chat />} />
+            <Route path="/mydoctor" element={<DoctorInfo />} />
+            <Route path="/status" element={<UpdateStatus />} />
+            <Route path="/appointment" element={<Appointment />} />
+            <Route path="/news" element={<News />} />
+            <Route path="/news/:id" element={<NewsDetails />} />{" "}
+            <Route
+              path="/appointment/:appointmentId"
+              element={<AppointmentDetails />}
+            />
+            <Route path="/diary" element={<Diary />} />
+          </Routes>
+        </AppBody>
       )}
       {!user && (
         <Routes>

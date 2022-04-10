@@ -1,4 +1,4 @@
-import {Fragment} from "react";
+import { Fragment } from "react";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
@@ -8,7 +8,7 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
-import {useState} from "react";
+import { useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
@@ -18,7 +18,7 @@ function SingleRow(props) {
 
   return (
     <Fragment>
-      <TableRow className={ row.statusReview === "Status Reviewed" ? "PATIENT__reviewed-status" : "" }>
+      <TableRow>
         <TableCell sx={{ borderColor: "var(--background-secondary)" }}>
           <IconButton
             aria-label="expand row"
@@ -26,30 +26,57 @@ function SingleRow(props) {
             onClick={() => setOpen(!open)}
             sx={{ color: "var(--text-primary)" }}
           >
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />} {/* changing icon to up or down based on open or not */}
+            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}{" "}
+            {/* changing icon to up or down based on open or not */}
           </IconButton>
         </TableCell>
         {/* Displaying row of data */}
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="PATIENT__table__data" component="th" scope="row" align="left">
-         {row.patientname}
+        <TableCell
+          sx={{ borderColor: "var(--background-secondary)" }}
+          className="PATIENT__table__data"
+          component="th"
+          scope="row"
+          align="left"
+        >
+          {row.patientname}
         </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="PATIENT__table__data" align="left" >
-          {row.id}
+        <TableCell
+          sx={{ borderColor: "var(--background-secondary)" }}
+          className="PATIENT__table__data"
+          align="left"
+        >
+          {row.email}
         </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="PATIENT__table__data" align="center" >
+        <TableCell
+          sx={{ borderColor: "var(--background-secondary)" }}
+          className="PATIENT__table__data"
+          align="center"
+        >
           {row.status}
         </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="PATIENT__table__data" align="center" >
+        <TableCell
+          sx={{ borderColor: "var(--background-secondary)" }}
+          className="PATIENT__table__data"
+          align="center"
+        >
           {row.appointment}
         </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="PATIENT__table__data" align="left">
+        <TableCell
+          sx={{ borderColor: "var(--background-secondary)" }}
+          className="PATIENT__table__data"
+          align="left"
+        >
           {row.doctor}
         </TableCell>
-        <TableCell sx={{ borderColor: "var(--background-secondary)" }} className="PATIENT__table__data" align="center">
+        <TableCell
+          sx={{ borderColor: "var(--background-secondary)" }}
+          className="PATIENT__table__data"
+          align="center"
+        >
           {row.priority}
         </TableCell>
       </TableRow>
-      <TableRow >
+      <TableRow>
         <TableCell
           sx={{ borderColor: "var(--background-secondary)" }}
           style={{ paddingBottom: 0, paddingTop: 0 }}
@@ -72,7 +99,7 @@ function SingleRow(props) {
                 size="small"
                 aria-label="purchases"
               >
-              {/* Start of Table headers */}
+                {/* Start of Table headers */}
                 <TableHead>
                   <TableRow>
                     <TableCell

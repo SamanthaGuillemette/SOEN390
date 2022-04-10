@@ -7,25 +7,38 @@ import SignUp from "./components/SignUp";
 import Appointments from "./screens/Appointments";
 import Patients from "./screens/Patients";
 import Inbox from "./screens/Inbox";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./backend/firebase";
 import Notifications from "./components/Notifications";
 import QR from "./components/QR";
 import News from "./components/News";
 import NewsDetails from "./components/News/NewsDetails";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
-import { saveUser } from "./store/authSlice";
+import { saveUser, selectUserEmail, selectUserToken } from "./store/authSlice";
 import { useEffect } from "react";
 import Event from "./components/Event";
 import EventDetails from "./components/Event/EventDetails";
+import { fetchUserInfo, selectUserInfoDetails } from "./store/userInfoSlice";
+import AdminList from "./components/AdminList";
 
 function App() {
-  const [user, loading] = useAuthState(auth);
-  // const user = useSelector((state) => state.auth.userToken);
+  const user = useSelector(selectUserToken);
+  const userEmail = useSelector(selectUserEmail);
+  const userInfoDetails = useSelector(selectUserInfoDetails);
   const dispatch = useDispatch();
 
+  // Different roles for differennt visibilities. Boolean types.
+  const doctorRole = userInfoDetails?.role === "Doctor";
+  const healthOfficialRole = userInfoDetails?.role === "Health Official";
+  const immOfficerRole = userInfoDetails?.role === "Immigration Officer";
+  const superAdmin = userInfoDetails?.role === "Administrator";
+
+  /**
+   * This function will run as soon as the App loads
+   * @returns {void}
+   */
   useEffect(() => {
+    // Save user token & user email to redux store (for logged in user)
     onAuthStateChanged(auth, (userObj) => {
       if (userObj) {
         dispatch(saveUser(userObj.refreshToken));
@@ -33,22 +46,45 @@ function App() {
         dispatch(saveUser(undefined));
       }
     });
-  }, [dispatch]);
 
-  if(loading){
-    return ('loading')
+    // Fetch user info from database to store using his/her email
+    dispatch(fetchUserInfo(userEmail));
+  }, [dispatch, userEmail]);
+
+  // Added setTimeout() to show loading screen for 500ms, ottherise it'll keep loading
+  if (userEmail == null) {
+    setTimeout(() => {
+      return <h3>Loading</h3>;
+    }, 500);
   }
+
   return (
     <BrowserRouter>
       {user && (
         <AppBody>
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/appointments" element={<Appointments />} />
-            <Route path="/patients" element={<Patients />} />
-            <Route path="/patientprofile/:id" element={<PatientProfile />} />
-            <Route path="/inbox" element={<Inbox />} />
-            <Route path="/testing" element={<Notifications />} />
+            {doctorRole && (
+              <>
+                <Route path="/appointments" element={<Appointments />} />
+                <Route path="/inbox" element={<Inbox />} />
+                <Route path="/patients" element={<Patients />} />
+                <Route
+                  path="/patientprofile/:key"
+                  element={<PatientProfile />}
+                />
+              </>
+            )}
+            {healthOfficialRole | immOfficerRole && (
+              <Route path="/patients" element={<Patients />} />
+            )}
+            {superAdmin && (
+              <>
+                <Route path="/patients" element={<Patients />} />
+                <Route path="/admin" element={<AdminList />} />
+              </>
+            )}
+            <Route path="/updates" element={<Notifications />} />
             <Route path="/qr" element={<QR />} />
             <Route path="/news" element={<News />} />
             <Route path="/news/:id" element={<NewsDetails />} />{" "}

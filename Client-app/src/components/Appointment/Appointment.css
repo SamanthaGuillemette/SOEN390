@@ -1,0 +1,92 @@
+.appointment-topContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-dark);
+  padding: 60px 15%;
+  border-radius: 8px;
+  position: relative;
+}
+
+.appointment-quickAccessContainer {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 15%;
+  transform: translateY(50%);
+}
+
+.appointment-mainContainer {
+  padding: 50px 10%;
+}
+
+.appointment-buttonContainer {
+  margin-top: 50px;
+  margin-bottom: 60px;
+}
+
+.appointment-quickAccess_DoctorIcon {
+  margin-right: 20px;
+  border: 5px solid var(--background-secondary);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+}
+
+.appointment-quickAccess_InboxButton {
+  border: 5px solid var(--background-secondary);
+  border-radius: 5px;
+  background-color: var(--background-secondary);
+}
+
+.appointment-topTitle {
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.appointment-title {
+  font-weight: bold;
+  margin-top: 35px !important;
+  margin-bottom: 35px;
+}
+
+.appointment-subTitle {
+  font-weight: bold;
+  margin-bottom: 5px;
+  margin-top: 25px;
+}
+
+.appointment-textContent {
+  color: var(--text-inactive);
+}
+
+.appointment-acceptButton {
+  margin-right: 10px !important;
+}
+
+.appointment-listItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--text-inactive);
+  height: 50px;
+  margin-bottom: 20px;
+}
+
+.appointment-appointmentHistory {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.appointment-listItem_active {
+  margin: 0 !important;
+  width: 130px;
+}
+
+.appointment-listItem_finished {
+  color: var(--text-inactive);
+  margin: 0 !important;
+}

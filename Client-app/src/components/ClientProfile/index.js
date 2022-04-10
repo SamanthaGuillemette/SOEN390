@@ -9,26 +9,10 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
-import Paper from "@mui/material/Paper";
-import Divider from "@mui/material/Divider";
-import Stack from "@mui/material/Stack";
-import { styled } from "@mui/material/styles";
-import FlagIcon from "@mui/icons-material/Flag";
-import { useState } from "react";
 import EditModal from "./ProfileEditModal";
 import { useSelector } from "react-redux";
 
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(0.5),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
-
 function ClientProfile() {
-  const [priorityFlag, setPriorityFlag] = useState(false);
-
   /**
    * Pull 'userInfoDetails' from the store (Redux centralized store)
    */
@@ -38,7 +22,7 @@ function ClientProfile() {
 
   return (
     <Box className="clientProfile-container">
-      <Grid container spacing={3} padding={5}>
+      <Grid container spacing={5}>
         <Grid item xs={12}>
           <Card>
             <Box className="clientProfile-profileCard">
@@ -81,69 +65,26 @@ function ClientProfile() {
                   <p className="clientProfile-textDetail">
                     Address: {userInfoDetails?.address}
                   </p>
+                  <br />
+                  <span
+                    className={
+                      userInfoDetails?.status === null
+                        ? "PATIENT__label-unconfirmed"
+                        : userInfoDetails?.status === "POSITIVE"
+                        ? "PATIENT__label-positive"
+                        : userInfoDetails?.status === "NEGATIVE"
+                        ? "PATIENT__label-negative"
+                        : "PATIENT__label-unconfirmed"
+                    }
+                  >
+                    {userInfoDetails?.status
+                      ? userInfoDetails?.status
+                      : "UNCONFIRMED"}
+                  </span>
                 </Box>
               </CardContent>
             </Box>
           </Card>
-        </Grid>
-        <Grid item xs={12}>
-          <Grid item>
-            <Card
-              className={priorityFlag ? "status-card clicked" : "status-card"}
-            >
-              <CardActionArea>
-                <CardContent>
-                  <div className="clientProfile-statusBox">
-                    <Typography
-                      className="profile__header"
-                      gutterBottom
-                      variant="button"
-                      component="div"
-                    >
-                      Status
-                      <FlagIcon
-                        onClick={() => {
-                          priorityFlag
-                            ? setPriorityFlag(false)
-                            : setPriorityFlag(true);
-                        }}
-                        className={
-                          priorityFlag
-                            ? "clientProfile-priority-flag clicked"
-                            : "clientProfile-priority-flag"
-                        }
-                      ></FlagIcon>
-                    </Typography>
-                  </div>
-                  <Stack
-                    direction="row"
-                    divider={<Divider orientation="vertical" />}
-                    spacing={1}
-                    marginBottom={2}
-                    alignItems="baseline"
-                  >
-                    <span className={userInfoDetails?.status === "POSITIVE" ? "PATIENT__label-positive" : userInfoDetails?.status === "NEGATIVE" ? "PATIENT__label-negative" : "PATIENT__label-unconfirmed"}>
-                      {userInfoDetails?.status}</span>
-                  </Stack>
-                  <Box />
-                  <Stack spacing={2}>
-                    <Item
-                      className="profile-data"
-                      sx={{ bgcolor: "inherit", boxShadow: "none" }}
-                    >
-                      Temperature: 39 °C
-                    </Item>
-                    <Item
-                      className="profile-data"
-                      sx={{ bgcolor: "inherit", boxShadow: "none" }}
-                    >
-                      Weight: 150 lbs
-                    </Item>
-                  </Stack>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </Grid>
         </Grid>
       </Grid>
     </Box>

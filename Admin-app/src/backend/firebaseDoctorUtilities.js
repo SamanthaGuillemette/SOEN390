@@ -1,75 +1,74 @@
-import doctorData from "../data/doctors.json";
-import { getTableData, getTableDataItem, populateTable } from "./firebaseUtilities";
-import { getPatients } from "./firebasePatientUtilities";
-import { doc, updateDoc, deleteField, arrayUnion, arrayRemove } from "firebase/firestore";
+import {
+  updateDoc,
+  arrayUnion,
+  arrayRemove,
+  getDoc,
+  getDocs,
+  collection,
+} from "firebase/firestore";
+import {
+  getAdminsByRole,
+  getAdminByRoleAndKey,
+  getAdminRef,
+} from "./firebaseAdminUtilities";
+import { getDocRef } from "./firebaseUtilities";
 import { db } from "./firebase";
 
-const tableName = "Doctors";
+const role = "Doctor";
 const patientLimit = 3;
 
-
 const getDoctors = async () => {
-    return getTableData(tableName);
-  };
-
-const getDoctor = async (id) => {
-    return getTableDataItem(tableName, id);
+  return getAdminsByRole(role);
 };
 
-const addPatientToDoctor = async (doctorId, patientId) => {
-  try 
-  {
-    // Get Doctor
-    const docRef = doc(db, tableName, doctorId);
-    let doctorInfo = await getDoctor(doctorId);
+const getDoctor = async (key) => {
+  return getAdminByRoleAndKey(role, key);
+};
 
-    if (doctorInfo)
-    {
+const addPatientToDoctor = async (doctorKey, patientKey) => {
+  try {
+    // Get Doctor
+    const docRef = getAdminRef(doctorKey);
+    let doctorInfo = await getDoctor(doctorKey);
+
+    if (doctorInfo) {
       // Update Assigned Doctor field in Patient
-      docRef && await updateDoc(docRef, {treats: arrayUnion(patientId)});
+      docRef && (await updateDoc(docRef, { treats: arrayUnion(patientKey) }));
     }
 
     // Get updated patient
-    doctorInfo = await getDoctor(doctorId);
+    doctorInfo = await getDoctor(doctorKey);
 
     return doctorInfo;
+  } catch (error) {
+    console.log("[addPatientToDoctor]" + error);
   }
-  catch (error)
-  {
-    console.log("[addPatientToDoctor]" + error);  
-  }
-} 
+};
 
-const removePatientFromDoctor = async (doctorId, patientId) => {
-  try 
-  {
+const removePatientFromDoctor = async (doctorKey, patientKey) => {
+  try {
     // Get Doctor
-    const docRef = doc(db, tableName, doctorId);
-    let doctorInfo = await getDoctor(doctorId);
+    const docRef = getAdminRef(doctorKey);
+    let doctorInfo = await getDoctor(doctorKey);
 
-    if (doctorInfo)
-    {
+    if (doctorInfo) {
       // Update Assigned Doctor field in Patient
-      docRef && await updateDoc(docRef, {treats: arrayRemove(patientId)});
+      docRef && (await updateDoc(docRef, { treats: arrayRemove(patientKey) }));
     }
 
     // Get updated patient
-    doctorInfo = await getDoctor(doctorId);
+    doctorInfo = await getDoctor(doctorKey);
 
     return doctorInfo;
+  } catch (error) {
+    console.log("[removePatientFromDoctor]" + error);
   }
-  catch (error)
-  {
-    console.log("[removePatientFromDoctor]" + error);  
-  }
-} 
+};
 
-/**
- * This function populates the Patient table in firebase given a JSON file
- * imported at the beginning of this file
- */  
- const populateDoctors = () => {
-    populateTable(tableName, doctorData);
-  }
-
-export { getDoctors, getDoctor, populateDoctors, patientLimit, addPatientToDoctor, removePatientFromDoctor }
+export {
+  getDoctors,
+  getDoctor,
+  patientLimit,
+  addPatientToDoctor,
+  removePatientFromDoctor,
+};
