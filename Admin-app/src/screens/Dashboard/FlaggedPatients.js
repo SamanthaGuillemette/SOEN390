@@ -34,7 +34,7 @@ const FlaggedPatients = () => {
     // The following is the Patient List which appears on the dashboard. Here we have the styling.
     // Creating table
     <TableContainer
-      data-testid="table-container1"
+      data-testid="patientlist"
       className="FLAGGED-PATIENTS__table"
       sx={{ maxHeight: 382 }}
     >
