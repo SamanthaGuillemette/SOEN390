@@ -12,30 +12,54 @@ import TableRow from "@mui/material/TableRow";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import "./DiaryTable.css";
 import { Grid } from "@material-ui/core";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DiaryEntryModal from "./DiaryEntryModal";
 import DiaryAddModal from "./DiaryAddModal";
+import { useSelector } from "react-redux";
+import { getDiary } from "../../backend/firebasePatientUtilities";
 
 /**
  * Create hardcoded data for the table
- * @param  {string} diaryDate
- * @param  {string} postalCode
+ * @param  {string} Date
+ * @param  {string} PostalCode
  */
-function createData(diaryDate, postalCode) {
-  return { diaryDate, postalCode };
+function createData(Date, PostalCode) {
+  return { Date: Date, PostalCode: PostalCode };
 }
 
 // creating data
-const rows = [
-  createData("05/02/22", "H3K 2Q2"),
-  createData("22/03/22", "H6J 1D7"),
-];
 
 function DiaryTable() {
   const [openEntry, setOpenEntry] = useState(false);
 
   const handleEntryOpen = () => setOpenEntry(true);
   const handleEntryClose = () => setOpenEntry(false);
+
+  const [patientDiaries, setPatientDiaries] = useState([]);
+
+  // Pull 'userEmail' out from the centralized store
+  const userEmail = useSelector((state) => state.auth.userEmail);
+
+  // Get Patient Info each time page refreshes
+  useEffect(() => {
+    getDiary(userEmail, false)
+      .then((diaries) => {
+        diaries &&
+          setPatientDiaries(
+            diaries.map((diary) =>
+              createData(
+                diary?.timestamp?.toDate()?.toLocaleString() || "",
+                diary.postalCode || "",
+                diary.description || "",
+                diary.location || ""
+              )
+            )
+          );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [userEmail]);
 
   return (
     <TableContainer className="diary__list">
@@ -84,34 +108,35 @@ function DiaryTable() {
         </TableHead>
         {/* Displaying the data created */}
         <TableBody>
-          {rows.map((row, index) => (
-            <TableRow key={index}>
-              <TableCell
-                className="data"
-                sx={{ borderColor: "var(--primary-light)" }}
-                component="th"
-                scope="row"
-              >
-                <DiaryEntryModal />
-              </TableCell>
-              <TableCell
-                className="data diary_text"
-                sx={{ borderColor: "var(--primary-light)" }}
-                component="th"
-                scope="row"
-              >
-                {row.diaryDate}
-              </TableCell>
-              <TableCell
-                className="data diary_text"
-                sx={{ borderColor: "var(--primary-light)" }}
-                style={{ width: 160 }}
-                align="right"
-              >
-                {row.postalCode}
-              </TableCell>
-            </TableRow>
-          ))}
+          {patientDiaries &&
+            patientDiaries.map((row) => (
+              <TableRow key={row.date}>
+                <TableCell
+                  className="data"
+                  sx={{ borderColor: "var(--primary-light)" }}
+                  component="th"
+                  scope="row"
+                >
+                  <DiaryEntryModal row={row} />
+                </TableCell>
+                <TableCell
+                  className="data diary_text"
+                  sx={{ borderColor: "var(--primary-light)" }}
+                  component="th"
+                  scope="row"
+                >
+                  {row.Date}
+                </TableCell>
+                <TableCell
+                  className="data diary_text"
+                  sx={{ borderColor: "var(--primary-light)" }}
+                  style={{ width: 160 }}
+                  align="right"
+                >
+                  {row.PostalCode}
+                </TableCell>
+              </TableRow>
+            ))}
         </TableBody>
         <TableFooter>
           <TableRow>

@@ -35,11 +35,11 @@ const style = {
   borderColor: "var(--primary-light)",
 };
 
-const DiaryEntryModal = () => {
+const DiaryEntryModal = (prop) => {
   //const [user] = useAuthState(auth);
   //const diaryDoc = doc(db, `Diary/${user?.email}`);
   const [openEntry, setOpenEntry] = useState(false);
-
+  const row = prop.row;
   const handleEntryOpen = () => setOpenEntry(true);
   const handleEntryClose = () => setOpenEntry(false);
   return (
@@ -74,7 +74,7 @@ const DiaryEntryModal = () => {
                 <p className="diaryEntry-contactDate">Date:</p>
               </Grid>
               <Grid item xs={6}>
-                <p className="diaryEntry-data">2022-02-02</p>
+                <p className="diaryEntry-data">{row.date}</p>
               </Grid>
               <Grid item xs={6}>
                 <p className="diaryEntry-contactFullName">Desciption:</p>
