@@ -15,28 +15,9 @@ import { db } from "../../backend/firebase";
  * SymptomsRow function works for setting & displaying the synptoms row of the patient
  * @param  {} props
  */
-function SymptomsRow(props) {
+function DiaryRow(props) {
   const { row } = props;
   const { key } = useParams();
-  const [reviewedStatus, setReviewedStatus] = useState(row.reviewed);
-
-  function onClickReviewed(docID) {
-    setReviewed(key, docID).then((newReviewedValue) =>
-      setReviewedStatus(newReviewedValue)
-    );
-    addStatusReviewedNotif();
-  }
-
-  // This function will add notifications to the client's doc if status is reviewed
-  const addStatusReviewedNotif = async () => {
-    const clientRef = doc(db, `Client/${key}`);
-    const notifRef = collection(clientRef, "reviewNotification");
-    await addDoc(notifRef, {
-      notif: "Status Reviewed",
-      timestamp: serverTimestamp(),
-      seen: "False",
-    });
-  };
 
   return (
     <TableRow
@@ -44,7 +25,6 @@ function SymptomsRow(props) {
       sx={{
         "&:last-child td, &:last-child th": { border: 0 },
       }}
-      className={!reviewedStatus ? "PATIENT__reviewed-status" : ""}
     >
       <TableCell
         className="PATIENT-SYMPTOMS__table__data"
@@ -52,85 +32,31 @@ function SymptomsRow(props) {
         component="th"
         scope="row"
       >
-        {row.Date}
+        {row.DateDiary}
       </TableCell>
       <TableCell
         className="PATIENT-SYMPTOMS__table__data"
         sx={{ borderColor: "var(--background-secondary)" }}
         align="center"
       >
-        {row.Fever}
+        {row.Description}
       </TableCell>
       <TableCell
         className="PATIENT-SYMPTOMS__table__data"
         sx={{ borderColor: "var(--background-secondary)" }}
         align="center"
       >
-        {row.Cough}
+        {row.Location}
       </TableCell>
       <TableCell
         className="PATIENT-SYMPTOMS__table__data"
         sx={{ borderColor: "var(--background-secondary)" }}
         align="center"
       >
-        {row.RunnyNose}
-      </TableCell>
-      <TableCell
-        className="PATIENT-SYMPTOMS__table__data"
-        sx={{ borderColor: "var(--background-secondary)" }}
-        align="center"
-      >
-        {row.MuscleAche}
-      </TableCell>
-      <TableCell
-        className="PATIENT-SYMPTOMS__table__data"
-        sx={{ borderColor: "var(--background-secondary)" }}
-        align="center"
-      >
-        {row.Tiredness}
-      </TableCell>
-      <TableCell
-        className="PATIENT-SYMPTOMS__table__data"
-        sx={{ borderColor: "var(--background-secondary)" }}
-        align="center"
-      >
-        {row.SmellLoss}
-      </TableCell>
-      <TableCell
-        className="PATIENT-SYMPTOMS__table__data"
-        sx={{ borderColor: "var(--background-secondary)" }}
-        align="center"
-      >
-        {row.TasteLoss}
-      </TableCell>
-      <TableCell
-        className="PATIENT-SYMPTOMS__table__data"
-        sx={{ borderColor: "var(--background-secondary)" }}
-        align="center"
-      >
-        {row.Temperature}
-      </TableCell>
-      <TableCell
-        className="PATIENT-SYMPTOMS__table__data"
-        sx={{ borderColor: "var(--background-secondary)" }}
-        align="center"
-      >
-        {row.Weight}
-      </TableCell>
-      <TableCell
-        className="PATIENT-SYMPTOMS__table__data"
-        sx={{ borderColor: "var(--background-secondary)" }}
-        align="center"
-      >
-        <Checkbox
-          checked={reviewedStatus}
-          size="small"
-          style={{ color: "var(--text-primary)" }}
-          onClick={() => onClickReviewed(row.docID)}
-        />
+        {row.PostalCode}
       </TableCell>
     </TableRow>
   );
 }
 
-export default SymptomsRow;
+export default DiaryRow;

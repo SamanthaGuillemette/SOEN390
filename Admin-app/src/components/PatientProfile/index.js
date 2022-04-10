@@ -75,7 +75,11 @@ function PatientProfile() {
     Temperature,
     Weight,
     reviewed,
-    docID
+    docID,
+    DateDiary,
+    Description,
+    Location,
+    PostalCode
   ) {
     return {
       Date,
@@ -90,7 +94,15 @@ function PatientProfile() {
       Weight,
       reviewed,
       docID,
+      DateDiary,
+      Description,
+      Location,
+      PostalCode,
     };
+  }
+
+  function createDiaryData(DateDiary, Description, Location, PostalCode) {
+    return { DateDiary, Description, Location, PostalCode };
   }
 
   // priority flag with DB
@@ -135,7 +147,7 @@ function PatientProfile() {
           diaries &&
             setPatientInfoDiaires(
               diaries.map((diary) =>
-                createData(
+                createDiaryData(
                   diary?.timestamp?.toDate()?.toLocaleString() || "",
                   diary.description || "",
                   diary.location || "",
