@@ -67,7 +67,8 @@ function DoughnutChart() {
           fontSize: "18px",
           color: "var(--text-primary)",
           fontWeight: "bold",
-          textAlign: "center",
+          textAlign: "left",
+          mb: 2,
         }}
       >
         Doctors Available vs Unavailable
