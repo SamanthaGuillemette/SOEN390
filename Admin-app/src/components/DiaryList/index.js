@@ -16,11 +16,9 @@ import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import { makeStyles } from "@material-ui/core/styles";
 import TableHead from "@mui/material/TableHead";
+import { getDiary } from "../../backend/firebasePatientUtilities";
 import { useEffect, useState } from "react";
-import {
-  getPatient,
-  getDiaryEntries,
-} from "../../backend/firebasePatientUtilities";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import NoteIcon from "../../assets/note.svg";
 
@@ -47,25 +45,17 @@ const dropdownStyle = makeStyles({
 /**
  * This component is used to create data using the diaryDate, contactFullName, contactPhoneNumber, contactEmail and contactLocation.
  *
- * @param  {} diaryDate
- * @param  {} contactFullName
- * @param  {} contactPhoneNumber
- * @param  {} contactEmail
- * @param  {} contactLocation
+ * @param  {} Date
+ * @param  {} Description
+ * @param  {} Location
+ * @param  {} PostalCode
  */
-function createData(
-  diaryDate,
-  contactFullName,
-  contactPhoneNumber,
-  contactEmail,
-  contactLocation
-) {
+function createData(Date, Description, Location, PostalCode) {
   return {
-    diaryDate,
-    contactFullName,
-    contactPhoneNumber,
-    contactEmail,
-    contactLocation,
+    diaryDate: Date,
+    contactFullName: Description,
+    contactPhoneNumber: Location,
+    contactEmail: PostalCode,
   };
 }
 
@@ -120,13 +110,39 @@ function TablePaginationActions(props) {
  *
  * @returns {JSX.Element}
  */
-function DiaryList() {
+function DiaryList(props) {
   const classes = dropdownStyle(); // adding styling
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const { key } = useParams();
-  const [patientInfo, setPatientInfo] = useState(null);
-  const [patientDiaryEntries, setPatientDiaryEntries] = useState([]);
+  const [patientDiaries, setPatientDiaries] = useState([]);
+  const [patientInfo, setPatientInfo] = useState("");
+
+  // Pull 'userEmail' out from the centralized store
+  // const userEmail = useSelector((state) => state.auth.userEmail);
+  useEffect(() => {
+    props && props.patientInfo && setPatientInfo(props.patientInfo);
+  }, [props, props.patientInfo]);
+
+  // Get Diary entries of Patient
+  useEffect(() => {
+    getDiary(patientInfo, false)
+      .then((diaries) => {
+        diaries &&
+          setPatientDiaries(
+            diaries.map((diary) =>
+              createData(
+                diary?.timestamp?.toDate()?.toLocaleString() || "",
+                diary.description || "",
+                diary.location || "",
+                diary.postalCode || ""
+              )
+            )
+          );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [patientInfo]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage); // creating new page
@@ -136,30 +152,6 @@ function DiaryList() {
     setRowsPerPage(parseInt(event.target.value, 10)); // setting the page with data
     setPage(0);
   };
-
-  useEffect(() => {
-    getPatient(key)
-      .then((data) => {
-        setPatientInfo(data);
-        getDiaryEntries(key, true).then((diaryEntries) => {
-          diaryEntries &&
-            setPatientDiaryEntries(
-              diaryEntries.map((diaryEntry) =>
-                createData(
-                  diaryEntry?.timestamp?.toDate()?.toLocaleString() || "",
-                  diaryEntry.contactFullName || "",
-                  diaryEntry.contactPhoneNumber || "",
-                  diaryEntry.contactEmail || "",
-                  diaryEntry.contactLocation || ""
-                )
-              )
-            );
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [key]);
 
   return (
     // Creating table
@@ -186,50 +178,43 @@ function DiaryList() {
               sx={{ borderColor: "var(--secondary-light)" }}
               align="right"
             >
-              Contact Full Name
+              Description
             </TableCell>
             <TableCell
               className="DIARY__table__header"
               sx={{ borderColor: "var(--secondary-light)" }}
               align="right"
             >
-              Contact Phone Number
+              Location
             </TableCell>
             <TableCell
               className="DIARY__table__header"
               sx={{ borderColor: "var(--secondary-light)" }}
               align="right"
             >
-              Contact Email
-            </TableCell>
-            <TableCell
-              className="DIARY__table__header"
-              sx={{ borderColor: "var(--secondary-light)" }}
-              align="right"
-            >
-              Contact Location
+              Postal Code
             </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {/* adding rows in table */}
-          {patientDiaryEntries &&
+          {patientDiaries &&
             (rowsPerPage > 0
-              ? patientDiaryEntries.slice(
+              ? patientDiaries.slice(
                   page * rowsPerPage,
                   page * rowsPerPage + rowsPerPage
                 ) // calculating how many items to display per page
-              : patientDiaryEntries
+              : patientDiaries
             ).map((row) => (
               // getting the data of each row
-              <TableRow key={row.key}>
+              <TableRow key={row.Date}>
                 <TableCell
                   className="DIARY__table__data"
                   sx={{ borderColor: "var(--primary-light)" }}
                   component="th"
                   scope="row"
                 >
-                  {row.diaryDate} {/* getting the diary entry date */}
+                  {row.Date} {/* getting the diary entry date */}
                 </TableCell>
                 <TableCell
                   className="DIARY__table__data"
@@ -237,7 +222,7 @@ function DiaryList() {
                   style={{ width: 160 }}
                   align="right"
                 >
-                  {row.contactFullName} {/* getting the contact full name */}
+                  {row.Description} {/* getting the contact full name */}
                 </TableCell>
                 <TableCell
                   className="DIARY__table__data"
@@ -245,7 +230,7 @@ function DiaryList() {
                   style={{ width: 160 }}
                   align="right"
                 >
-                  {row.contactPhoneNumber}
+                  {row.Location}
                   {/* getting the contact phone number*/}
                 </TableCell>
                 <TableCell
@@ -254,22 +239,14 @@ function DiaryList() {
                   style={{ width: 160 }}
                   align="right"
                 >
-                  {row.contactEmail} {/* getting the contact email */}
-                </TableCell>
-                <TableCell
-                  className="DIARY__table__data"
-                  sx={{ borderColor: "var(--primary-light)" }}
-                  style={{ width: 160 }}
-                  align="right"
-                >
-                  {row.contactLocation} {/* getting the contact location */}
+                  {row.PostalCode} {/* getting the contact email */}
                 </TableCell>
               </TableRow>
             ))}
         </TableBody>
         <TableFooter>
           <TableRow>
-            {patientDiaryEntries && (
+            {patientDiaries && (
               <TablePagination // adding table pagination
                 sx={{ borderColor: "transparent" }}
                 classes={{
@@ -277,7 +254,7 @@ function DiaryList() {
                 }}
                 rowsPerPageOptions={[5, 10, { label: "All", value: -1 }]} // adding options dropdown pagination to choose from
                 colSpan={3}
-                count={patientDiaryEntries.length} // getting how many rows there are in total
+                count={patientDiaries.length} // getting how many rows there are in total
                 rowsPerPage={rowsPerPage} // how many to display per page
                 page={page} // how many pages
                 className={classes.select} // adding design

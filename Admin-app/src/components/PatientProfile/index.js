@@ -384,9 +384,8 @@ function PatientProfile() {
         <br />
         <br />
       </Grid>
-      <Grid item xs={12} lg={10.51}>
-        <DiaryList></DiaryList>
-      </Grid>
+
+      <DiaryList patientInfo={patientInfo}></DiaryList>
     </Grid>
   );
 }

@@ -246,7 +246,7 @@ const getStatusesQuery = async (dbString, isTodayOnly) => {
   }
 };
 
-const setDiaryEntry = async (patientKey, diaryEntry) => {
+/**const setDiaryEntry = async (patientKey, diaryEntry) => {
   console.log("[setDiaryEntry]" + patientKey);
   try {
     // Get Patient
@@ -265,7 +265,7 @@ const setDiaryEntry = async (patientKey, diaryEntry) => {
   } catch (error) {
     console.log("[setDiaryEntry]" + error);
   }
-};
+};**/
 
 /**
  * Obtain the tuples from the Dairy subcollection of a Client
@@ -273,19 +273,19 @@ const setDiaryEntry = async (patientKey, diaryEntry) => {
  * @param {*} patientKey
  * @returns Dairy tuples
  */
-const getDiaryEntries = async (patientKey, isTodayOnly = false) => {
-  console.log("[getDiaryEntries]: " + patientKey);
+const getDiary = async (patientKey, isTodayOnly = false) => {
+  console.log("[getDiary]: " + patientKey);
   const diaryCollectionName = "Diary";
   const dbString = `${getTableName()}/${patientKey}/${diaryCollectionName}`;
 
-  const queryDiaryEntries = await getDiaryEntryQuery(dbString, isTodayOnly);
+  const queryDiaries = await getDiariesQuery(dbString, isTodayOnly);
 
-  const diaryEntries = await getTableDataByQuery(queryDiaryEntries);
+  const diaries = await getTableDataByQuery(queryDiaries);
 
-  return diaryEntries;
+  return diaries;
 };
 
-const getDiaryEntryQuery = async (dbString, isTodayOnly) => {
+const getDiariesQuery = async (dbString, isTodayOnly) => {
   console.log("[isTodayOnly]: " + isTodayOnly);
 
   if (isTodayOnly === true) {
@@ -299,7 +299,7 @@ const getDiaryEntryQuery = async (dbString, isTodayOnly) => {
 
     return query(
       collection(db, dbString),
-      where("timestamp", ">", todayDate),
+      where("timestamp", ">=", todayDate),
       orderBy("timestamp", "desc")
     );
   } else {
@@ -391,8 +391,7 @@ export {
   setNewCase,
   viewedNewCase,
   getStatuses,
-  setDiaryEntry,
-  getDiaryEntries,
+  getDiary,
   setRecovered,
   setViewedCaseFalse,
   setReviewed,

@@ -71,7 +71,7 @@ const DiaryEntryModal = () => {
           <DialogContent dividers>
             <Grid container>
               <Grid item xs={6} className="diaryEntry-text">
-                <p className="diaryEntry-contactDate">Contact Date:</p>
+                <p className="diaryEntry-contactDate">Date:</p>
               </Grid>
               <Grid item xs={6}>
                 <p className="diaryEntry-data">2022-02-02</p>
