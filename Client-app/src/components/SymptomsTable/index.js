@@ -2,7 +2,6 @@
  * @fileoverview This component displays the symptoms table.
  *
  */
-import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";

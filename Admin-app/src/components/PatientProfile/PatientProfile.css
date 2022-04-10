@@ -15,7 +15,8 @@
   color: var(--text-primary);
 }
 
-.PATIENT-SYMPTOMS__table__label__no-data {
+.PATIENT-SYMPTOMS__table__label__no-data,
+.PATIENT-DIARY__table__label__no-data {
   color: #d93025;
   font-weight: 900 !important;
   display: inline-block;
@@ -32,7 +33,8 @@
   background-color: transparent;
 }
 
-h5.PATIENT-SYMPTOMS__table__label {
+h5.PATIENT-SYMPTOMS__table__label,
+h5.PATIENT-DIARY__table__label {
   margin-top: 3% !important;
   color: var(--text-primary);
   font-weight: 900 !important;
