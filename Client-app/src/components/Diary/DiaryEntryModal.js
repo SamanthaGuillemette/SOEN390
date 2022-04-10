@@ -74,25 +74,25 @@ const DiaryEntryModal = (prop) => {
                 <p className="diaryEntry-contactDate">Date:</p>
               </Grid>
               <Grid item xs={6}>
-                <p className="diaryEntry-data">{row.date}</p>
+                <p className="diaryEntry-data">{row.Date}</p>
               </Grid>
               <Grid item xs={6}>
                 <p className="diaryEntry-contactFullName">Desciption:</p>
               </Grid>
               <Grid item xs={6}>
-                <p className="diaryEntry-data">Family Reunion</p>
+                <p className="diaryEntry-data">{row.Description}</p>
               </Grid>
               <Grid item xs={6}>
                 <p className="diaryEntry-phoneNumber">Location:</p>
               </Grid>
               <Grid item xs={6}>
-                <p className="diaryEntry-data">Mcdonalds</p>
+                <p className="diaryEntry-data">{row.Location}</p>
               </Grid>
               <Grid item xs={6}>
                 <p className="diaryEntry-email">Postal Code</p>
               </Grid>
               <Grid item xs={6}>
-                <p className="diaryEntry-data">H2K 3E3</p>
+                <p className="diaryEntry-data">{row.PostalCode}</p>
               </Grid>
             </Grid>
           </DialogContent>

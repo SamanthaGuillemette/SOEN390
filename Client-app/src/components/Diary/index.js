@@ -21,10 +21,17 @@ import { getDiary } from "../../backend/firebasePatientUtilities";
 /**
  * Create hardcoded data for the table
  * @param  {string} Date
+ * @param  {string} Description
+ * @param  {string} Location
  * @param  {string} PostalCode
  */
-function createData(Date, PostalCode) {
-  return { Date: Date, PostalCode: PostalCode };
+function createData(Date, Description, Location, PostalCode) {
+  return {
+    Date: Date,
+    Description: Description,
+    Location: Location,
+    PostalCode: PostalCode,
+  };
 }
 
 // creating data
@@ -49,9 +56,9 @@ function DiaryTable() {
             diaries.map((diary) =>
               createData(
                 diary?.timestamp?.toDate()?.toLocaleString() || "",
-                diary.postalCode || "",
                 diary.description || "",
-                diary.location || ""
+                diary.location || "",
+                diary.postalCode || ""
               )
             )
           );
