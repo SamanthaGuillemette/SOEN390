@@ -86,7 +86,7 @@ const MenuAppBar = () => {
             <ListItemIcon className="sidebar-icon">
               <CoronavirusIcon />
             </ListItemIcon>
-            <ListItemText className="sidebar-text">Symptoms</ListItemText>
+            <ListItemText className="sidebar-text">Status History</ListItemText>
           </ListItem>
         </Link>
 
