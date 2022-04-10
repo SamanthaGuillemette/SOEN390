@@ -78,28 +78,28 @@ function DiaryList(props) {
         <TableHead>
           <TableRow>
             <TableCell
-              sx={{ borderColor: "var(--background-secondary)" }}
+              sx={{ borderColor: "var(--primary-light)" }}
               className="PATIENT-DIARY__table__header"
               align="left"
             >
               Date
             </TableCell>
             <TableCell
-              sx={{ borderColor: "var(--background-secondary)" }}
+              sx={{ borderColor: "var(--primary-light)" }}
               className="PATIENT-DIARY__table__header"
               align="left"
             >
               Description
             </TableCell>
             <TableCell
-              sx={{ borderColor: "var(--background-secondary)" }}
+              sx={{ borderColor: "var(--primary-light)" }}
               className="PATIENT-DIARY__table__header"
               align="center"
             >
               Location
             </TableCell>
             <TableCell
-              sx={{ borderColor: "var(--background-secondary)" }}
+              sx={{ borderColor: "var(--primary-light)" }}
               className="PATIENT-DIARY__table__header"
               align="right"
             >
@@ -121,7 +121,7 @@ function DiaryList(props) {
               <TableRow>
                 {/* Displaying row of data */}
                 <TableCell
-                  sx={{ borderColor: "var(--background-secondary)" }}
+                  sx={{ borderColor: "var(--primary-light)" }}
                   className="PATIENT-DIARY__table__data"
                   component="th"
                   scope="row"
@@ -130,21 +130,21 @@ function DiaryList(props) {
                   {row.DateDiary}
                 </TableCell>
                 <TableCell
-                  sx={{ borderColor: "var(--background-secondary)" }}
+                  sx={{ borderColor: "var(--primary-light)" }}
                   className="PATIENT-DIARY__table__data"
                   align="left"
                 >
                   {row.Description}
                 </TableCell>
                 <TableCell
-                  sx={{ borderColor: "var(--background-secondary)" }}
+                  sx={{ borderColor: "var(--primary-light)" }}
                   className="PATIENT-DIARY__table__data"
                   align="center"
                 >
                   {row.Location}
                 </TableCell>
                 <TableCell
-                  sx={{ borderColor: "var(--background-secondary)" }}
+                  sx={{ borderColor: "var(--primary-light)" }}
                   className="PATIENT-DIARY__table__data"
                   align="right"
                 >
