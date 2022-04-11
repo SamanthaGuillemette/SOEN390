@@ -246,6 +246,67 @@ const getStatusesQuery = async (dbString, isTodayOnly) => {
   }
 };
 
+/**const setDiaryEntry = async (patientKey, diaryEntry) => {
+  console.log("[setDiaryEntry]" + patientKey);
+  try {
+    // Get Patient
+    const docRef = getDocRef(tableName, patientKey);
+    let patientInfo = await getPatient(patientKey);
+
+    if (patientInfo) {
+      // Update diary entry field in Patient
+      docRef && (await updateDoc(docRef, "diary", diaryEntry));
+    }
+
+    // Get updated patient
+    patientInfo = await getPatient(patientKey);
+
+    return patientInfo;
+  } catch (error) {
+    console.log("[setDiaryEntry]" + error);
+  }
+};**/
+
+/**
+ * Obtain the tuples from the Dairy subcollection of a Client
+ *
+ * @param {*} patientKey
+ * @returns Dairy tuples
+ */
+const getDiary = async (patientKey, isTodayOnly = false) => {
+  console.log("[getDiary]: " + patientKey);
+  const diaryCollectionName = "Diary";
+  const dbString = `${getTableName()}/${patientKey}/${diaryCollectionName}`;
+
+  const queryDiaries = await getDiariesQuery(dbString, isTodayOnly);
+
+  const diaries = await getTableDataByQuery(queryDiaries);
+
+  return diaries;
+};
+
+const getDiariesQuery = async (dbString, isTodayOnly) => {
+  console.log("[isTodayOnly]: " + isTodayOnly);
+
+  if (isTodayOnly === true) {
+    // Set time to today @ 0:00 hrs
+    const tempDate = new Date();
+    const todayDate = new Date(
+      tempDate.getFullYear(),
+      tempDate.getMonth(),
+      tempDate.getDate()
+    );
+
+    return query(
+      collection(db, dbString),
+      where("timestamp", ">=", todayDate),
+      orderBy("timestamp", "desc")
+    );
+  } else {
+    return query(collection(db, dbString), orderBy("timestamp", "desc"));
+  }
+};
+
 const setRecovered = async (patientKey, recovered) => {
   try {
     // Get Patient
@@ -330,6 +391,7 @@ export {
   setNewCase,
   viewedNewCase,
   getStatuses,
+  getDiary,
   setRecovered,
   setViewedCaseFalse,
   setReviewed,

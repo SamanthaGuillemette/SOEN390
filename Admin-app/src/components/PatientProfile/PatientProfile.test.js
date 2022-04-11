@@ -23,10 +23,15 @@ test("PatientProfile should render without errors", () => {
   expect(statusCardElement).toBeInTheDocument();
   expect(statusCardElement).toHaveTextContent("Status");
 
-  // Symptom details table element
-  const symptomDetailsElement = screen.getByTestId("table-1");
-  expect(symptomDetailsElement).toBeInTheDocument();
-  expect(symptomDetailsElement).toHaveTextContent("STATUS DETAILS");
+  // Symptom history table element
+  const symptomHistoryElement = screen.getByTestId("table-1");
+  expect(symptomHistoryElement).toBeInTheDocument();
+  expect(symptomHistoryElement).toHaveTextContent("STATUS HISTORY");
+
+  // Diary history table element
+  const diaryHistoryElement = screen.getByTestId("table-2");
+  expect(diaryHistoryElement).toBeInTheDocument();
+  expect(diaryHistoryElement).toHaveTextContent("DIARY HISTORY");
 });
 
 afterEach(() => {

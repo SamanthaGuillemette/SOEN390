@@ -12,7 +12,7 @@ import Loading from "./components/Loading";
 import Notifications from "./components/Notifications";
 import QR from "./components/QR";
 import ClientProfile from "./components/ClientProfile";
-import SymptomsTable from "./components/SymptomsTable";
+import StatusHistory from "./components/StatusHistory";
 import Diary from "./components/Diary";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -90,7 +90,7 @@ function App() {
             <Route path="*" element={<Dashboard />} />
             <Route path="/qr" element={<QR />} />
             <Route path="/clientprofile" element={<ClientProfile />} />
-            <Route path="/symptoms" element={<SymptomsTable />} />
+            <Route path="/statusHistory" element={<StatusHistory />} />
             <Route path="/updates" element={<Notifications />} />
             <Route path="/clientinbox" element={<Chat />} />
             <Route path="/mydoctor" element={<DoctorInfo />} />

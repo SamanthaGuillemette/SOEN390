@@ -10,8 +10,17 @@
   padding-left: 27px;
 }
 
+.diary_text {
+  color: var(--text-primary) !important;
+}
+
+.diary__contactMessage {
+  width: 75% !important;
+  border: 1px solid !important;
+  border-color: var(--text-inactive) !important;
+}
+
 .diary__list {
-  width: 45vh !important;
   background-color: var(--background-main) !important;
   border-radius: 20px !important;
   padding: 1 !important;
@@ -106,4 +115,16 @@
 
 .MuiDialogContent-dividers {
   border-color: var(--primary-light) !important;
+}
+
+.header-diaryAddModal {
+  color: var(--text-primary) !important;
+}
+
+.addDiary-button {
+  position: relative !important;
+  top: 10px !important;
+  width: 0px !important;
+  height: 35px !important;
+  color: var(--text-primary) !important;
 }

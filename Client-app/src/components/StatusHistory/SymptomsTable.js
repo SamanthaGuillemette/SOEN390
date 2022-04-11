@@ -2,7 +2,8 @@
  * @fileoverview This class takes care of the symptoms table component.
  */
 
-import "./UpdateStatus.css";
+import "../UpdateStatus/UpdateStatus.css";
+import "./StatusHistory.css";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -13,27 +14,23 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 /**
  * Renders the symptoms table function
  * @returns SymptomsTable function
  */
-function SymptomsTable(props) {
+function SymptomsTable(prop) {
+  const row = prop.row;
   const [open, setOpen] = useState(false);
-  const [lastStatus, setLastStatus] = useState("");
-
-  useEffect(() => {
-    props && props.lastStatus && setLastStatus(props.lastStatus);
-  }, [props, props.lastStatus]);
 
   return (
     <TableContainer sx={{ mt: 2 }}>
-      <Table sx={{ width: 340 }} aria-label="spanning table">
+      <Table sx={{ width: 310 }} aria-label="spanning table">
         <TableBody>
           <TableRow>
             <TableCell
-              className="Update-Status__header"
+              className="Status__symptoms__header"
               style={{ paddingBottom: 8, paddingTop: 0, paddingLeft: 40 }}
               align="center"
               sx={{ borderColor: "var(--background-secondary)" }}
@@ -59,13 +56,13 @@ function SymptomsTable(props) {
               colSpan={6}
             >
               <Collapse in={open} timeout="auto" unmountOnExit>
-                <Box className="Update-Status__symptoms-box">
+                <Box className="Status__symptoms-box">
                   {/* Collapsible symptoms table */}
                   <Table size="small" aria-label="symptoms">
                     <TableBody>
                       <TableRow>
                         <TableCell
-                          className="Update-Status__header"
+                          className="Status__symptoms__header"
                           sx={{ borderColor: "var(--secondary-light)" }}
                           style={{ width: 120 }}
                           align="left"
@@ -73,121 +70,107 @@ function SymptomsTable(props) {
                           Fever
                         </TableCell>
                         <TableCell
-                          className="Update-Status__data"
+                          className="Status__symptoms__data"
                           sx={{ borderColor: "var(--secondary-light)" }}
                           align="right"
                         >
-                          {lastStatus.length > 0
-                            ? lastStatus[0].data.fever
-                            : "N/A"}
+                          {row.Fever}
                         </TableCell>
                       </TableRow>
                       <TableRow>
                         <TableCell
-                          className="Update-Status__header"
+                          className="Status__symptoms__header"
                           sx={{ borderColor: "var(--primary-light)" }}
                           align="left"
                         >
                           Sore Throat
                         </TableCell>
                         <TableCell
-                          className="Update-Status__data"
+                          className="Status__symptoms__data"
                           sx={{ borderColor: "var(--primary-light)" }}
                           align="right"
                         >
-                          {lastStatus.length > 0
-                            ? lastStatus[0].data.soreThroat
-                            : "N/A"}
+                          {row.SoreThroat}
                         </TableCell>
                       </TableRow>
                       <TableRow>
                         <TableCell
-                          className="Update-Status__header"
+                          className="Status__symptoms__header"
                           sx={{ borderColor: "var(--secondary-light)" }}
                           align="left"
                         >
                           Cough
                         </TableCell>
                         <TableCell
-                          className="Update-Status__data"
+                          className="Status__symptoms__data"
                           sx={{ borderColor: "var(--secondary-light)" }}
                           align="right"
                         >
-                          {lastStatus.length > 0
-                            ? lastStatus[0].data.cough
-                            : "N/A"}
+                          {row.Cough}
                         </TableCell>
                       </TableRow>
                       <TableRow>
                         <TableCell
-                          className="Update-Status__header"
+                          className="Status__symptoms__header"
                           sx={{ borderColor: "var(--primary-light)" }}
                           align="left"
                         >
                           Runny Nose
                         </TableCell>
                         <TableCell
-                          className="Update-Status__data"
+                          className="Status__symptoms__data"
                           sx={{ borderColor: "var(--primary-light)" }}
                           align="right"
                         >
-                          {lastStatus.length > 0
-                            ? lastStatus[0].data.runnyNose
-                            : "N/A"}
+                          {row.RunnyNose}
                         </TableCell>
                       </TableRow>
                       <TableRow>
                         <TableCell
-                          className="Update-Status__header"
-                          sx={{ borderColor: "var(--primary-light)" }}
+                          className="Status__symptoms__header"
+                          sx={{ borderColor: "var(--secondary-light)" }}
                           align="left"
                         >
                           Muscle Ache
                         </TableCell>
                         <TableCell
-                          className="Update-Status__data"
-                          sx={{ borderColor: "var(--primary-light)" }}
+                          className="Status__symptoms__data"
+                          sx={{ borderColor: "var(--secondary-light)" }}
                           align="right"
                         >
-                          {lastStatus.length > 0
-                            ? lastStatus[0].data.muscleAche
-                            : "N/A"}
+                          {row.MuscleAche}
                         </TableCell>
                       </TableRow>
                       <TableRow>
                         <TableCell
-                          className="Update-Status__header"
-                          sx={{ borderColor: "var(--secondary-light)" }}
+                          className="Status__symptoms__header"
+                          sx={{ borderColor: "var(--primary-light)" }}
                           align="left"
                         >
                           Smell Loss
                         </TableCell>
                         <TableCell
-                          className="Update-Status__data"
-                          sx={{ borderColor: "var(--secondary-light)" }}
+                          className="Status__symptoms__data"
+                          sx={{ borderColor: "var(--primary-light)" }}
                           align="right"
                         >
-                          {lastStatus.length > 0
-                            ? lastStatus[0].data.smellLoss
-                            : "N/A"}
+                          {row.SmellLoss}
                         </TableCell>
                       </TableRow>
                       <TableRow>
                         <TableCell
-                          className="Update-Status__header"
+                          className="Status__symptoms__header"
                           sx={{ borderColor: "transparent" }}
                           align="left"
                         >
                           Taste Loss
                         </TableCell>
                         <TableCell
-                          className="Update-Status__data"
+                          className="Status__symptoms__data"
                           sx={{ borderColor: "transparent" }}
                           align="right"
                         >
-                          {lastStatus.length > 0
-                            ? lastStatus[0].data.tasteLoss
-                            : "N/A"}
+                          {row ? row.TasteLoss : "N/A"}
                         </TableCell>
                       </TableRow>
                     </TableBody>
