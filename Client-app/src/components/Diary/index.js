@@ -69,7 +69,7 @@ function DiaryTable() {
   }, [userEmail]);
 
   return (
-    <TableContainer className="diary__list">
+    <TableContainer className="diary__list" data-testid="diary-list">
       <Grid className="diary__label" container spacing={2}>
         <Grid item xs={8}>
           <NoteAltIcon
