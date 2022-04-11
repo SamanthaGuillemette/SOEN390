@@ -1,13 +1,18 @@
 import { screen, render, cleanup } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
 import "@testing-library/jest-dom";
-import { Provider } from "react-redux";
+import * as redux from 'react-redux';
 import DiaryTable from "./index";
 
 test("should render the diary table", () => {
-  <Provider>
-    render(
-    <DiaryTable />
-    );
-  </Provider>;
+  const spy = jest.spyOn(redux, 'useSelector')
+  spy.mockReturnValue({ test:'test' })
+  render(
+  <DiaryTable />);
+  const diaryList = screen.getByTestId("diary-list");
+  expect(diaryList).toBeInTheDocument();
+  expect(diaryList).toHaveClass("diary__list");
+});
+
+afterEach(() => {
+  cleanup();
 });
