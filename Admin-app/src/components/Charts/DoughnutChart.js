@@ -61,17 +61,7 @@ function DoughnutChart() {
   };
 
   return (
-    <div style={{ maxWidth: "400px" }}>
-      <Typography
-        sx={{
-          fontSize: "18px",
-          color: "var(--text-primary)",
-          fontWeight: "bold",
-          textAlign: "center",
-        }}
-      >
-        Doctors Available vs Unavailable
-      </Typography>
+    <div style={{ maxWidth: "300px" }}>
       <Doughnut data={data} />
       <Typography sx={{ textAlign: "center", mt: 1 }}>
         <Typography className="DASHBOARD__chart__label-unavail">

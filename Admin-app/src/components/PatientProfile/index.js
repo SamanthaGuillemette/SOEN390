@@ -64,11 +64,7 @@ function PatientProfile() {
     Temperature,
     Weight,
     reviewed,
-    docID,
-    DateDiary,
-    Description,
-    Location,
-    PostalCode
+    docID
   ) {
     return {
       Date,
@@ -83,10 +79,6 @@ function PatientProfile() {
       Weight,
       reviewed,
       docID,
-      DateDiary,
-      Description,
-      Location,
-      PostalCode,
     };
   }
 

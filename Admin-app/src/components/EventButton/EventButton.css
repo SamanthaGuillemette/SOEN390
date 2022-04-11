@@ -1,9 +1,0 @@
-.EVENT-BTN__div {
-    margin-top:20px;
-    display: inline-block;
-}
-
-.EVENT-BTN__button {
-    background: var(--background-main) !important;
-    border-radius: 20px !important;
-}
