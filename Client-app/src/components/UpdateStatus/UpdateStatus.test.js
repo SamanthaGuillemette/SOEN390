@@ -1,12 +1,12 @@
 import { render, cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { Provider } from "react-redux";
 import UpdateStatus from "./index";
+import * as redux from 'react-redux'
 
 test("Update Status should render without errors", () => {
-<Provider>
+  const spy = jest.spyOn(redux, 'useSelector')
+  spy.mockReturnValue({ test:'test' })
   render(<UpdateStatus />);
-</Provider>
 });
 
 afterEach(() => {
