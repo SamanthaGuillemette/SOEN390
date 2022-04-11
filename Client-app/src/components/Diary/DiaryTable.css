@@ -122,8 +122,9 @@
 }
 
 .addDiary-button {
+  position: relative !important;
   top: 10px !important;
-  width: 35px !important;
+  width: 0px !important;
   height: 35px !important;
   color: var(--text-primary) !important;
 }
