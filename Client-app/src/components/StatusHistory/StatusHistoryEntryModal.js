@@ -1,14 +1,10 @@
-import "./SymptomsTable.css";
+import "./StatusHistory.css";
 import * as React from "react";
-import Grid from "@material-ui/core/Grid";
-//import StatusModal from "./StatusModal";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
-import { useSelector } from "react-redux";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import SymptomsTable from "./SymptomsTable";
 import TableHead from "@mui/material/TableHead";
@@ -21,64 +17,78 @@ import { DialogContent } from "@mui/material";
 import { DialogActions } from "@mui/material";
 import Button from "@mui/material/Button";
 
-function SymptomEntry() {
-  // Pull 'userInfoDetails' from the store (Redux centralized store)
-  const userInfoDetails = useSelector(
-    (state) => state.userInfo.userInfoDetails
-  );
-  const [openEntry, setOpenEntry] = useState(false);
+const style = {
+  //position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "80%",
+  height: "60vh",
+  color: "var(--text-main)",
+  backgroundColor: "var(--background-secondary)",
+  boxShadow: "0px 0px 2px 2px var(--background-secondary)",
+  p: 3,
+  overflowY: "scroll",
+  borderRadius: "20px",
+  borderColor: "var(--primary-light)",
+};
 
+function SymptomEntry(prop) {
+  const [openEntry, setOpenEntry] = useState(false);
+  const row = prop.row;
   const handleEntryOpen = () => setOpenEntry(true);
   const handleEntryClose = () => setOpenEntry(false);
 
   return (
-    <div>
+    <div sx={style}>
       <Fab
         sx={{ boxShadow: 3 }}
         onClick={handleEntryOpen}
         color="primary"
         aria-label="openEntry"
-        className="symptomsEntry-openIcon"
+        className="status-entry-openIcon"
       >
-        <img className="symptoms__icon" src={VirusIcon} alt="Symptoms" />
+        <img className="status__icon" src={VirusIcon} alt="Status" />
       </Fab>
-      <div className="symptomsEntry">
+      <div className="statusEntry">
         <Dialog
           //sx={{ borderColor: "var(--primary-light)", borderRadius: 3 }}
           open={openEntry}
           onClose={handleEntryClose}
-          aria-labelledby="diary-entry-title"
-          aria-describedby="diary-entry-description"
+          aria-labelledby="status-entry-title"
+          aria-describedby="status-entry-description"
         >
           <DialogTitle
-            id="diary-entry-dialog-title"
-            className="header-diaryEntry-dialog"
+            id="status-entry-dialog-title"
+            className="header-statusEntry-dialog"
           >
-            <img className="symptomsEntry__icon" src={VirusIcon} alt="Diary" />
-            Diary Entry
+            <img className="statusEntry__icon" src={VirusIcon} alt="Status" />
+            Status
           </DialogTitle>
           <DialogContent dividers>
             <Box className="STATUS__box">
               <TableContainer>
-                <Table sx={{ width: 350 }} aria-label="spanning table">
+                {" "}
+                {/* Table for displaying date, temperature and weight */}
+                <Table sx={{ width: 310 }} aria-label="spanning table">
                   <TableHead>
                     <TableRow>
                       <TableCell
-                        className="header"
+                        className="Status__header"
                         sx={{ borderColor: "var(--primary-light)" }}
                         align="left"
                       >
                         Date
                       </TableCell>
                       <TableCell
-                        className="header"
+                        className="Status__header"
                         sx={{ borderColor: "var(--primary-light)" }}
                         align="center"
                       >
                         Temperature
                       </TableCell>
                       <TableCell
-                        className="header"
+                        className="Status__header"
                         sx={{ borderColor: "var(--primary-light)" }}
                         align="right"
                       >
@@ -89,36 +99,37 @@ function SymptomEntry() {
                   <TableBody>
                     <TableRow>
                       <TableCell
-                        className="data"
+                        className="Update-Status__data"
                         sx={{ borderColor: "var(--secondary-light)" }}
                         align="left"
                       >
-                        {userInfoDetails?.dos}
+                        {row.Date}
                       </TableCell>
                       <TableCell
-                        className="data"
+                        className="Update-Status__data"
                         sx={{ borderColor: "var(--secondary-light)" }}
                         align="center"
                       >
-                        {userInfoDetails?.temperature}
+                        {row.Temperature}
                       </TableCell>
                       <TableCell
-                        className="data"
+                        className="Update-Status__data"
                         sx={{ borderColor: "var(--secondary-light)" }}
                         align="right"
                       >
-                        {userInfoDetails?.weight}
+                        {row.Weight}
                       </TableCell>
                     </TableRow>
                   </TableBody>
                 </Table>
               </TableContainer>
-              <SymptomsTable />
+              {/* Collapsible Symptoms Table */}
+              <SymptomsTable row={prop.row} />
             </Box>
           </DialogContent>
           <DialogActions>
             <Button
-              className="diaryEntry-cancel-button"
+              className="statusEntry-cancel-button"
               onClick={handleEntryClose}
             >
               Close

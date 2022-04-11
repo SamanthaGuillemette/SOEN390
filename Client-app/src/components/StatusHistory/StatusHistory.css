@@ -15,9 +15,11 @@
   padding-left: 27px;
 }
 
-.Symptoms-list__icon {
+.Symptoms-list__icon,
+.statusEntry__icon {
   position: relative;
   top: 13px;
+  right: 10px;
   width: 20px;
   margin-bottom: 10px;
 }
@@ -33,10 +35,10 @@
   display: inline-block;
 }
 
-.symptomsEntry-Icon {
+.status-entry-openIcon {
   left: 10px;
-  width: 35px !important;
-  height: 35px !important;
+  width: 45px !important;
+  height: 45px !important;
   color: rgba(218, 207, 250) !important;
   background: rgba(83, 25, 231, 0.18) !important;
   border: 1px solid rgba(218, 207, 250, 0.3) !important;
@@ -49,43 +51,57 @@
   color: var(--text-primary) !important;
 }
 
-.header-diaryEntry-dialog {
+.header-statusEntry-dialog {
   text-align: center;
   font-weight: bold !important;
   color: var(--text-primary) !important;
 }
 
-.symptoms__icon {
-  width: 50px;
+.status__icon {
+  position: relative !important;
+  top: 5px;
+  right: 0px;
+  width: 25px !important;
   margin-bottom: 10px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
 }
 
-.diaryEntry-cancel-button {
+.statusEntry-cancel-button {
   background-color: #e0e4e4 !important;
   color: var(--text-inactive) !important;
   margin-left: 10px !important;
 }
 
-.diaryEntry-cancel-button:hover {
+.statusEntry-cancel-button:hover {
   transition: all 0.3s;
   opacity: 0.9;
   transform: translateY(2px);
 }
 
-.diaryEntry-contactDate,
-.diaryEntry-contactFullName,
-.diaryEntry-phoneNumber,
-.diaryEntry-email,
-.diaryEntry-contactLocation {
-  color: var(--text-inactive) !important;
-}
-.diaryEntry-data {
+.data {
   color: var(--text-primary) !important;
 }
 
 .MuiDialogContent-dividers {
   border-color: var(--primary-light) !important;
+}
+
+.Symptoms-list__data,
+.Status__symptoms__data {
+  color: var(--text-primary) !important;
+  font-weight: 500 !important;
+  font-size: 1rem !important;
+}
+
+.Status__symptoms__header,
+.Status__header {
+  color: var(--text-inactive) !important;
+  text-transform: uppercase;
+  opacity: 0.7;
+  font-weight: 900 !important;
+}
+
+.Status__symptoms-box {
+  margin-top: 12px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
