@@ -1,4 +1,4 @@
-import { render, cleanup } from "@testing-library/react";
+import { render, screen, cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import * as redux from 'react-redux';
 import { MemoryRouter } from "react-router-dom";
@@ -12,6 +12,9 @@ spy.mockReturnValue({ test:'test' })
 test("Appointment should render without errors", () => {
     render(
     <Appointment />);
+    const appointmentBoxElement = screen.getByTestId("appointment-box");
+    expect(appointmentBoxElement).toBeInTheDocument();
+    expect(appointmentBoxElement).toHaveTextContent("You never had an appointment with your doctor");
 });
 
 test("Appointment Details should render without errors", () => {

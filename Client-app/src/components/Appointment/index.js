@@ -30,7 +30,7 @@ const Appointment = () => {
   }, []);
 
   return (
-    <Box sx={{ flexGrow: 1, p: 3, color: "var(--text-primary)" }}>
+    <Box sx={{ flexGrow: 1, p: 3, color: "var(--text-primary)" }}  data-testid="appointment-box">
       {appointmentList.length === 0 ? (
         <h3>You never had an appointment with your doctor</h3>
       ) : (

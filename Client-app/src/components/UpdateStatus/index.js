@@ -59,7 +59,7 @@ function UpdateStatus() {
       alignItems="center"
       justifyContent="center"
     >
-      <Box className="Update-Status__box">
+      <Box className="Update-Status__box" data-testid="status-box">
         <TableContainer>
           <StatusModal></StatusModal>
           <Typography
