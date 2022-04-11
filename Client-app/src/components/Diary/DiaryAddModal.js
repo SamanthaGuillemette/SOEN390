@@ -27,8 +27,8 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   bgcolor: "var(--background-secondary)",
-  width: "51vh",
-  height: "76vh",
+  width: "32vh",
+  height: "30vh",
   p: 4,
   borderRadius: "10px",
 };
@@ -57,10 +57,6 @@ TextMaskCustom.propTypes = {
 };
 
 export default function DiaryAddModal() {
-  const userInfoDetails = useSelector(
-    (state) => state.userInfo.userInfoDetails
-  );
-
   // Pull 'userEmail' out from the centralized store
   const userEmail = useSelector(selectUserEmail);
 
@@ -131,7 +127,7 @@ export default function DiaryAddModal() {
       <Button onClick={handleOpen} className="addDiary-button">
         <AddCircleIcon></AddCircleIcon>
       </Button>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme} style={style}>
         <Modal
           open={openModal}
           onClose={handleClose}
@@ -149,10 +145,11 @@ export default function DiaryAddModal() {
               variant="h6"
               component="h2"
               sx={{ mb: 2.5 }}
+              align="center"
             >
               ADD DIARY
             </Typography>
-            <Grid container minWidth={285} spacing={1}>
+            <Grid container minWidth={340} spacing={1}>
               {/* Contact Desciption TextField */}
               <Grid item xs={12}>
                 <TextField
@@ -215,23 +212,25 @@ export default function DiaryAddModal() {
                   }}
                 />
               </Grid>
+              <Grid item xs={12}>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  style={{ backgroundColor: buttonColor }}
+                  className="addDiary__save-btn"
+                  onClick={displaySuccessCheckmark}
+                  sx={{ mt: 2, mb: 2, ml: 10 }}
+                >
+                  {icon && !emptyFields ? (
+                    <CheckCircleOutlineIcon
+                      sx={{ fontSize: "175%" }}
+                    ></CheckCircleOutlineIcon>
+                  ) : (
+                    "SAVE"
+                  )}
+                </Button>
+              </Grid>
             </Grid>
-            <Button
-              type="submit"
-              variant="contained"
-              style={{ backgroundColor: buttonColor }}
-              className="addDiary__save-btn"
-              sx={{ mt: 4, mb: 2 }}
-              onClick={displaySuccessCheckmark}
-            >
-              {icon && !emptyFields ? (
-                <CheckCircleOutlineIcon
-                  sx={{ fontSize: "175%" }}
-                ></CheckCircleOutlineIcon>
-              ) : (
-                "SAVE"
-              )}
-            </Button>
           </Box>
         </Modal>
       </ThemeProvider>

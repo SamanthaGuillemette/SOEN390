@@ -13,16 +13,17 @@ import VirusIcon from "../../assets/virus.svg";
 import { getStatuses } from "../../backend/firebasePatientUtilities";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import "./SymptomsTable.css";
+import "./StatusHistory.css";
+import StatusHistoryEntryModal from "./StatusHistoryEntryModal";
 
 // Creating data for symptom details table
 function createData(
   Date,
   Fever,
+  SoreThroat,
   Cough,
   RunnyNose,
   MuscleAche,
-  Tiredness,
   SmellLoss,
   TasteLoss,
   Temperature,
@@ -31,10 +32,10 @@ function createData(
   return {
     Date,
     Fever,
+    SoreThroat,
     Cough,
     RunnyNose,
     MuscleAche,
-    Tiredness,
     SmellLoss,
     TasteLoss,
     Temperature,
@@ -94,71 +95,12 @@ function SymptomsTable() {
             <TableCell
               className="Symptoms-list__header"
               sx={{ borderColor: "var(--background-secondary)" }}
+            ></TableCell>
+            <TableCell
+              className="Symptoms-list__header"
+              sx={{ borderColor: "var(--background-secondary)" }}
             >
               Date
-            </TableCell>
-            <TableCell
-              className="Symptoms-list__header"
-              sx={{ borderColor: "var(--background-secondary)" }}
-              align="center"
-            >
-              Fever
-            </TableCell>
-            <TableCell
-              className="Symptoms-list__header"
-              sx={{ borderColor: "var(--background-secondary)" }}
-              align="center"
-            >
-              Cough
-            </TableCell>
-            <TableCell
-              className="Symptoms-list__header"
-              sx={{ borderColor: "var(--background-secondary)" }}
-              align="center"
-            >
-              Runny Nose
-            </TableCell>
-            <TableCell
-              className="Symptoms-list__header"
-              sx={{ borderColor: "var(--background-secondary)" }}
-              align="center"
-            >
-              Muscle Ache
-            </TableCell>
-            <TableCell
-              className="Symptoms-list__header"
-              sx={{ borderColor: "var(--background-secondary)" }}
-              align="center"
-            >
-              Sore Throat
-            </TableCell>
-            <TableCell
-              className="Symptoms-list__header"
-              sx={{ borderColor: "var(--background-secondary)" }}
-              align="center"
-            >
-              Smell Loss
-            </TableCell>
-            <TableCell
-              className="Symptoms-list__header"
-              sx={{ borderColor: "var(--background-secondary)" }}
-              align="center"
-            >
-              Taste Loss
-            </TableCell>
-            <TableCell
-              className="Symptoms-list__header"
-              sx={{ borderColor: "var(--background-secondary)" }}
-              align="center"
-            >
-              Temperature (&deg;C)
-            </TableCell>
-            <TableCell
-              className="Symptoms-list__header"
-              sx={{ borderColor: "var(--background-secondary)" }}
-              align="center"
-            >
-              Weight (lb)
             </TableCell>
           </TableRow>
         </TableHead>
@@ -176,70 +118,15 @@ function SymptomsTable() {
                   component="th"
                   scope="row"
                 >
+                  <StatusHistoryEntryModal row={row} />
+                </TableCell>
+                <TableCell
+                  className="Symptoms-list__data"
+                  sx={{ borderColor: "var(--background-secondary)" }}
+                  component="th"
+                  scope="row"
+                >
                   {row.Date}
-                </TableCell>
-                <TableCell
-                  className="Symptoms-list__data"
-                  sx={{ borderColor: "var(--background-secondary)" }}
-                  align="center"
-                >
-                  {row.Fever}
-                </TableCell>
-                <TableCell
-                  className="Symptoms-list__data"
-                  sx={{ borderColor: "var(--background-secondary)" }}
-                  align="center"
-                >
-                  {row.Cough}
-                </TableCell>
-                <TableCell
-                  className="Symptoms-list__data"
-                  sx={{ borderColor: "var(--background-secondary)" }}
-                  align="center"
-                >
-                  {row.RunnyNose}
-                </TableCell>
-                <TableCell
-                  className="Symptoms-list__data"
-                  sx={{ borderColor: "var(--background-secondary)" }}
-                  align="center"
-                >
-                  {row.MuscleAche}
-                </TableCell>
-                <TableCell
-                  className="Symptoms-list__data"
-                  sx={{ borderColor: "var(--background-secondary)" }}
-                  align="center"
-                >
-                  {row.Tiredness}
-                </TableCell>
-                <TableCell
-                  className="Symptoms-list__data"
-                  sx={{ borderColor: "var(--background-secondary)" }}
-                  align="center"
-                >
-                  {row.SmellLoss}
-                </TableCell>
-                <TableCell
-                  className="Symptoms-list__data"
-                  sx={{ borderColor: "var(--background-secondary)" }}
-                  align="center"
-                >
-                  {row.TasteLoss}
-                </TableCell>
-                <TableCell
-                  className="Symptoms-list__data"
-                  sx={{ borderColor: "var(--background-secondary)" }}
-                  align="center"
-                >
-                  {row.Temperature}
-                </TableCell>
-                <TableCell
-                  className="Symptoms-list__data"
-                  sx={{ borderColor: "var(--background-secondary)" }}
-                  align="center"
-                >
-                  {row.Weight}
                 </TableCell>
               </TableRow>
             ))}

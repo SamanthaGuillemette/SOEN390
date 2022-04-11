@@ -1,0 +1,107 @@
+.Symptoms-list {
+  background-color: var(--background-main) !important;
+  border-radius: 20px !important;
+  padding: 1 !important;
+  margin: auto;
+}
+
+.Symptoms-list__title {
+  background: inherit;
+  padding: 5px;
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-size: 18px;
+  font-weight: 700;
+  padding-left: 27px;
+}
+
+.Symptoms-list__icon,
+.statusEntry__icon {
+  position: relative;
+  top: 13px;
+  right: 10px;
+  width: 20px;
+  margin-bottom: 10px;
+}
+
+::selection {
+  color: var(--primary-main);
+  background: transparent;
+}
+
+.SYMPTOMS-list__no-data {
+  color: #d93025;
+  font-weight: 900 !important;
+  display: inline-block;
+}
+
+.status-entry-openIcon {
+  left: 10px;
+  width: 45px !important;
+  height: 45px !important;
+  color: rgba(218, 207, 250) !important;
+  background: rgba(83, 25, 231, 0.18) !important;
+  border: 1px solid rgba(218, 207, 250, 0.3) !important;
+}
+
+.MuiDialogTitle-root,
+.MuiDialogContent-root,
+.MuiDialogActions-root {
+  background: var(--background-secondary) !important;
+  color: var(--text-primary) !important;
+}
+
+.header-statusEntry-dialog {
+  text-align: center;
+  font-weight: bold !important;
+  color: var(--text-primary) !important;
+}
+
+.status__icon {
+  position: relative !important;
+  top: 5px;
+  right: 0px;
+  width: 25px !important;
+  margin-bottom: 10px;
+}
+
+.statusEntry-cancel-button {
+  background-color: #e0e4e4 !important;
+  color: var(--text-inactive) !important;
+  margin-left: 10px !important;
+}
+
+.statusEntry-cancel-button:hover {
+  transition: all 0.3s;
+  opacity: 0.9;
+  transform: translateY(2px);
+}
+
+.data {
+  color: var(--text-primary) !important;
+}
+
+.MuiDialogContent-dividers {
+  border-color: var(--primary-light) !important;
+}
+
+.Symptoms-list__data,
+.Status__symptoms__data {
+  color: var(--text-primary) !important;
+  font-weight: 500 !important;
+  font-size: 1rem !important;
+}
+
+.Status__symptoms__header,
+.Status__header {
+  color: var(--text-inactive) !important;
+  text-transform: uppercase;
+  opacity: 0.7;
+  font-weight: 900 !important;
+}
+
+.Status__symptoms-box {
+  margin-top: 12px;
+  margin-left: 20px;
+  margin-right: 20px;
+}

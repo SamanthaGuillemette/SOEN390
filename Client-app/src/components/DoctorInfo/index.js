@@ -72,15 +72,15 @@ function DoctorInfo() {
                     <p className="doctorInfo-card__profileTextDetail">
                       DOB: {assignedDoctor?.dob}
                     </p>
-                    <p className="doctorInfo-card__profileTextDetail">
+                    {/* <p className="doctorInfo-card__profileTextDetail">
                       [Hardcoded] Work Place: MUHC
-                    </p>
+                    </p> */}
                   </Box>
                 </CardContent>
               </Box>
             </Card>
           </Grid>
-          <Grid item xs={12}>
+          {/* <Grid item xs={12}>
             <Grid item>
               <Card className="doctorInfo-card__info">
                 <CardActionArea>
@@ -127,7 +127,7 @@ function DoctorInfo() {
                 </CardActionArea>
               </Card>
             </Grid>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Box>
     );
