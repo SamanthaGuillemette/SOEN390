@@ -21,7 +21,6 @@
 }
 
 .diary__list {
-  width: 45vh !important;
   background-color: var(--background-main) !important;
   border-radius: 20px !important;
   padding: 1 !important;
