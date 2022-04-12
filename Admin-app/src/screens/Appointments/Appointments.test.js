@@ -1,12 +1,13 @@
-import { render, screen, cleanup } from "@testing-library/react";
+import { render, cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { Provider } from "react-redux";
+import * as redux from "react-redux";
 import Appointments from ".";
 
-test("Appointments should render without errors", () => {
-<Provider>
+const spy = jest.spyOn(redux, "useSelector");
+spy.mockReturnValue({ test: "test" });
+
+test("should render Appointments", () => {
   render(<Appointments />);
-</Provider>
 });
 
 afterEach(() => {

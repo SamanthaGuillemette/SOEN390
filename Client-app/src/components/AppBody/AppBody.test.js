@@ -17,3 +17,7 @@ test("should render app body", () => {
     </MemoryRouter>
   );
 });
+
+afterEach(() => {
+  cleanup();
+});

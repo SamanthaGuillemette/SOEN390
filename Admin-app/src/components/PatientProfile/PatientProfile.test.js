@@ -1,6 +1,17 @@
 import { render, screen, cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import PatientProfile from ".";
+import StatusRow from "./StatusRow";
+
+describe("EachRow", () => {
+  const props = {
+    row: {},
+  };
+
+  it("should render successfully", () => {
+    render(<StatusRow {...props} />);
+  });
+});
 
 test("PatientProfile should render without errors", () => {
   render(<PatientProfile />);

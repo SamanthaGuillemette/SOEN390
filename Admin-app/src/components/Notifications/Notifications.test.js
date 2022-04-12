@@ -1,16 +1,13 @@
-import { render, screen, cleanup } from "@testing-library/react";
+import { render, cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import * as redux from "react-redux";
 import Notifications from ".";
-import { Provider } from "react-redux";
 
-// Unit and integration tests for notifications
-test("Notifications component renders on screen", () => {
-  <Provider>
-    render(
-    <Notifications />
-    const updatedStatus = screen.getByTestId("notify");
-    expect(updatedStatus).toBeInTheDocument();
-  </Provider>;
+const spy = jest.spyOn(redux, "useSelector");
+spy.mockReturnValue({ test: "test" });
+
+test("should render notifications", () => {
+  render(<Notifications />);
 });
 
 afterEach(() => {
