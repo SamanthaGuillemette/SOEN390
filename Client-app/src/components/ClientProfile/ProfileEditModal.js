@@ -14,7 +14,7 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
 import AdapterDateFns from "@mui/lab/AdapterDayjs";
 import { db } from "../../backend/firebase";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 import FormIcon from "../../assets/form.svg";
 import "./ClientProfile.css";
 import { useSelector } from "react-redux";
@@ -142,7 +142,7 @@ export default function BasicModal() {
     //   })
     // );
 
-    await setDoc(clientDoc, {
+    await updateDoc(clientDoc, {
       firstName: firstName,
       lastName: lastName,
       profileImage: profileImage,
