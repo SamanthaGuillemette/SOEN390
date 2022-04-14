@@ -41,7 +41,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --coverage --watchAll --silent --detectOpenHandles --forceExit",
+    "test": "react-scripts test --silent --detectOpenHandles --forceExit",
     "eject": "react-scripts eject",
     "e2e": "cypress open"
   },
