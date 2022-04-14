@@ -54,51 +54,6 @@ function createData(doctorName, numOfPatients) {
 }
 
 /**
- * This function is used to create pagination
- * @param  {} props
- */
-function TablePaginationActions(props) {
-  const theme = useTheme(); // adding styling
-  const { count, page, rowsPerPage, onPageChange } = props;
-
-  const handleBackButtonClick = (event) => {
-    onPageChange(event, page - 1); // changing page back
-  };
-
-  const handleNextButtonClick = (event) => {
-    onPageChange(event, page + 1); // changing to next page
-  };
-
-  return (
-    // making box for paignation
-    <Box sx={{ flexShrink: 0, ml: 2.5 }}>
-      <IconButton
-        onClick={handleBackButtonClick} // change on click
-        disabled={page === 0}
-        aria-label="previous page"
-      >
-        {theme.direction === "rtl" ? (
-          <KeyboardArrowRight />
-        ) : (
-          <KeyboardArrowLeft />
-        )}
-      </IconButton>
-      <IconButton
-        onClick={handleNextButtonClick} // change on click
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1} // calculating the number of pages
-        aria-label="next page"
-      >
-        {theme.direction === "rtl" ? (
-          <KeyboardArrowLeft />
-        ) : (
-          <KeyboardArrowRight />
-        )}
-      </IconButton>
-    </Box>
-  );
-}
-
-/**
  * This component is what allows the DoctorList feature to be displayed. Below are many consts and
  * useEffect hooks that communicate with the database in order to recieve or send information.
  *
@@ -196,39 +151,33 @@ function DoctorList() {
               </TableRow>
             ))}
         </TableBody>
-        <TableFooter>
-          <TableRow>
-            {doctorsList && (
-              <TablePagination // adding table pagination
-                sx={{ borderColor: "transparent" }}
-                classes={{
-                  root: classes.color,
-                }}
-                rowsPerPageOptions={[5, 10, { label: "All", value: -1 }]} // adding options dropdown pagination to choose from
-                colSpan={3}
-                count={doctorsList.length} // getting how many rows there are in total
-                rowsPerPage={rowsPerPage} // how many to display per page
-                page={page} // how many pages
-                className={classes.select} // adding design
-                SelectProps={{
-                  inputProps: { "aria-label": "rows per page" },
-                  MenuProps: {
-                    classes: { paper: classes.paper },
-                    sx: {
-                      "&& .Mui-selected": {
-                        backgroundColor: "var(--background-secondary)", // changing background color of selected pagination
-                      },
-                    },
-                  },
-                }}
-                onPageChange={handleChangePage} // handling page change
-                onRowsPerPageChange={handleChangeRowsPerPage} // handling how many rows to display per page
-                ActionsComponent={TablePaginationActions}
-              />
-            )}
-          </TableRow>
-        </TableFooter>
       </Table>
+      {doctorsList && (
+        <TablePagination // adding pagination
+          classes={{
+            root: classes.color,
+          }}
+          rowsPerPageOptions={[5, 10, { label: "All", value: -1 }]} // displaying options 5, 10, or ALL
+          component="div"
+          count={doctorsList.length} // setting how many rows there are in total
+          rowsPerPage={rowsPerPage} // setting the rows per page
+          page={page} // setting the page
+          onPageChange={handleChangePage} // changing page
+          onRowsPerPageChange={handleChangeRowsPerPage} // changing rows on page
+          className={classes.select} // styling
+          SelectProps={{
+            inputProps: { "aria-label": "rows per page" },
+            MenuProps: {
+              classes: { paper: classes.paper },
+              sx: {
+                "&& .Mui-selected": {
+                  backgroundColor: "var(--background-secondary)",
+                },
+              },
+            },
+          }}
+        />
+      )}
     </TableContainer>
   );
 }

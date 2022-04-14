@@ -318,4 +318,5 @@ export {
   setSeen,
   setSeenExposure,
   getDiary,
+  tableName,
 };
