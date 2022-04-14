@@ -2,17 +2,12 @@ import {
   updateDoc,
   arrayUnion,
   arrayRemove,
-  getDoc,
-  getDocs,
-  collection,
 } from "firebase/firestore";
 import {
   getAdminsByRole,
   getAdminByRoleAndKey,
   getAdminRef,
 } from "./firebaseAdminUtilities";
-import { getDocRef } from "./firebaseUtilities";
-import { db } from "./firebase";
 
 const role = "Doctor";
 const patientLimit = 3;
@@ -69,6 +64,7 @@ export {
   getDoctors,
   getDoctor,
   patientLimit,
+  role,
   addPatientToDoctor,
   removePatientFromDoctor,
 };
