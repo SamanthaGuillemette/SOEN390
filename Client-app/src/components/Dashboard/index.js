@@ -43,12 +43,12 @@ const Dashboard = () => {
           </Grid>
 
           <Grid item xs={6}>
-            <Link to="/symptoms">
+            <Link to="/statusHistory">
               <div className="dashboard-card__container">
                 <img
                   className="dashboard-card__img"
                   src={VirusIcon}
-                  alt="Symptoms"
+                  alt="Status History"
                 />
                 <p className="dashboard-card__title">Status History</p>
               </div>

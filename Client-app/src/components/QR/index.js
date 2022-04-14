@@ -22,7 +22,6 @@ const QR = () => {
 
   return (
     <>
-
       <div className="QR__container">
         <Card className="QR-box">
           <CardContent
@@ -48,7 +47,6 @@ const QR = () => {
             </Typography>
             <Typography
               sx={{
-                mx: "360px",
                 justifyContent: "center",
                 fontSize: 14,
                 color: "var(--text-primary)",
@@ -71,7 +69,7 @@ const QR = () => {
               <br />
             </Typography>
 
-            <Box sx={{ mx: "350px", mb: "30px" }}>
+            <Box sx={{ mb: "30px" }}>
               <img alt="QRCode" src={qrCode} />
             </Box>
 
