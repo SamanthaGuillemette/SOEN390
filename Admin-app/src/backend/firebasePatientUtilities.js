@@ -396,4 +396,6 @@ export {
   setViewedCaseFalse,
   setReviewed,
   notifyExposure,
+  getStatus,
+  tableName
 };
